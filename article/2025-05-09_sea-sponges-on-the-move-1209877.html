@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea Sponges on the Move - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Sea Sponges on the Move - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-W37U</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>On a frigid August day, 2,000 feet beneath the frozen surface of the North Atlantic, a remotely operated camera captured a faint pale smudge snaking across the seafloor. The footage seemed unremarkable to the untrained eye—mostly brown and gray seafloor, dark but for the illumination from the camera. But the biologists aboard the <em>Polarstern</em>—a research icebreaker above—were shocked: The smear in the upper left of the screen was the trace of a sea sponge on the move.1</p>
+<p>Sea sponges are not supposed to move. At least scientists didn’t think they were. But there, off the coast of Greenland, along the seamounts of Langseth Ridge, they were very much moving—slowly.</p>
+<p>Why, you might wonder, would anyone care about a bevy of brainless organisms crawling along the dark ocean bottom at the unremarkable pace of a few millimeters a year? For those who aren’t spongiologists—scientists who study sponges—the topic might seem distinctly esoteric. But sea sponges are in fact central engineers of ocean ecosystems; for over 600 million years they’ve been shaping the very nature of Earth’s seafloors. And the discovery of their unexpected mobility redefined these “sessile” animals as movers and shakers of the deep.</p>
+<blockquote>
+<p>Crawling at a fraction of a snail’s pace, sponges alter the seafloor in their wake.</p>
+</blockquote>
+<p>For centuries, scientists puzzled over a fundamental aspect of sponge biology: plant or animal? It’s easy to understand the confusion. Sponges vary widely in form—from cone-shaped to blob-like, branching to round—and many of them bear a striking resemblance to seaweed. More than <a href="https://oceanservice.noaa.gov/facts/sponge.html">8,500 species</a> make up the phylum Porifera—or pore-bearer. Despite their plant-like appearance, sponges are one of our oldest-living ancestors and among the simplest multicellular animals on the planet, lacking organs, tissues, or even a fixed body plan. This arrangement is so basic, in fact, that if broken down into its cellular components, a sponge can reassemble itself. Place a sea sponge in a blender and agitate it gently (or pass it through a sieve) to break apart its structure, and its cells will rejoin to create a “new,” fully functional sponge.2</p>
+<p>Before synthetic sponges became widely available in the 1940s, these nondescript animals augmented humans’ lives, serving as everything from body and kitchen cleaners to surgical dressings to (woefully ineffective) contraceptive devices. Sea sponges are perhaps best known in the Mediterranean, where their cultural influences trace back nearly 5,000 years.3 In Egyptian and Phoenician cultures, sponges appeared as decoration in the homes of royalty; in ancient Greece, where the term <em>spongos</em> originated, a lineage of tanned musclemen dove dozens of meters beneath the ocean surface to harvest them.</p>
+<p>In the wild, these unassuming animals have inserted themselves into just about every reach of the world’s seas and oceans.4 They’re found in habitats ranging from intertidal to abyssal, tropical to polar, blazing hot to icy cold. Many live in colonies while others are solitary. They attach themselves to a range of different substrates, from rock to sand to mud and even, occasionally, floating debris.</p>
+<p>Their life histories are nearly as varied as their habitats. Many sponges live just a few years, while some of their deep-sea counterparts rank among the oldest living things on Earth, with lifespans exceeding 10,000 years. They range in size from barely a centimeter to several meters across—from the size of a pencil eraser to that of a minivan. And through hundreds of millions of years of evolution, sponges have developed a simple form that functions remarkably well. Their porous skeletons, made up mostly of silica and calcium carbonate, are strong and light, lending to applications as diverse as improvised nose-guards for foraging dolphins and architectural inspiration for <a href="https://steemit.com/architecture/@snaves/biomimetic-architecture-the-gherkin">one of the most iconic buildings</a> in London.</p>
+<p><img alt="" src="../images/Hemert_BREAKER.png" /></p>
+<p><strong>SPONGE WORTHY:</strong> Mediterranean sea sponges, like these, have been utilized in human culture for at nearly 5,000 years. <em>Photo by Adam Ke / Shutterstock.</em></p>
+<p>As ecosystem engineers, sponges are among the best in their field. After they die, the remains of sponges’ skeletal parts help stabilize the seafloor and act as a welcome mat for colonizing benthic organisms. For instance, after the massive Ordovician extinction, which wiped out much of life on Earth 445 million years ago, sponges laid a foundation that helped marine ecosystems recover by leaving a textured substrate on which corals and other benthic animals could take hold.5 This, in turn, helped support reefs, kelp beds, and other key building blocks for ocean food webs. And before they die, live sponge beds, or aggregations, as they are often called, also provide habitat for fishes and other marine life by creating physical structures in which these animals can forage and hide.</p>
+<p>As filter feeders, sponges process enormous volumes of seawater—a single 2-pound sponge can churn through more than 5,000 gallons of water each day—in turn affecting ocean chemistry and creating nutrient-rich hotspots of biodiversity. In some coral reefs, sponges excrete a form of “sponge poop” that contains a biologically available form of carbon that other animals can use for growth. By taking up nitrogen, phosphorus, and carbon from the water, sponges also help to protect ecosystems from severe fluctuations in ocean chemistry. This capacity for extreme filtration also makes them bioremediators of our ever-more polluted waters: In the process of exchanging water, sponges hold onto the bad stuff, such as harmful bacteria and petroleum products, and leave the ocean cleaner. In ways we are only just beginning to appreciate, these creatures play a key role in shaping our watery blue planet.</p>
+<p>Sponges’ ability to move may make them even more broadly crucial across a range of marine ecosystems. Crawling—or perhaps more aptly, oozing—at a fraction of a snail’s pace, sponges alter the seafloor in their wake. As the sponges move, tiny skeletal extensions called spicules break off, leaving clear evidence of their passage; this was the smear that the <em>Polarstern’s</em> camera captured nearly 10 years ago.</p>
+<blockquote>
+<p>Our fate, one could argue, is closely linked to that of the lowly sponges.</p>
+</blockquote>
+<p>Previous laboratory experiments had indicated the potential for sponges to locomote via sequential remodeling of their entire bodies. By spreading onto a surface and repeatedly reassembling themselves in an end-over-end process, they could, in theory, propel themselves along the seafloor. However, evidence for such behavior had never been observed <em>in situ</em> or at such a large scale; in fact, this was the first time that sea sponges in the wild were confirmed to be on the move. In the Mediterranean, sponge marks resembling those found on the Langseth Ridge were thought to have resulted from sponges being tumbled along by undersea currents, not from their own directed locomotion.</p>
+<p>But something different seemed to be happening in the Arctic. Once the biologists on the <em>Polarstern</em> knew what to look for, they saw sponges on the move en masse. In fact, 69 percent of the sponge beds the team surveyed had “movement trails,” distinguishable from marks left by current-tumbled sponges because of the spicules they’d left behind. And when they reexamined 30-year-old records from the Canadian Arctic, the scientists noted similar signs, including evidence of directional change and uphill movement, suggesting that sponges have been crawling around on the Arctic seafloor for quite some time. Whether such behavior is widespread across sponges’ global range—and exactly how long they’ve been on the move—are among the spongiological mysteries yet to be solved.</p>
+<p>The why of locomotion is relatively easy to explain, at least in theory: Sponges likely move, as other animals do, in search of food or more-favorable environmental conditions or to escape overcrowding. In low-productivity environments such as the Arctic deeps, there’s not much food on offer and, according to some hypotheses that scientists put forth, moving may be one way to ensure tomorrow’s meal. But this movement could also reflect a unique reproductive strategy at work. Sponge trails like the ones the biologists aboard the <em>Polarstern</em> observed are thought to contain both asexual sponge buds (aka baby sponges) and the material these young animals need to grow. By leaving parts of themselves behind as they inch across the seabed, sponges could be laying the groundwork for the next generation.</p>
+<p>The philosopher-biologist-artist Ernst Haeckel wrote a treatise on sponges 150 years ago, arguing that humans and sponges share the same natural and material origins.6 By his definition, we are essentially no more and no less than sponges<em>.</em> Long before, many of Aristotle’s contemplations of the natural world were centered on his own careful observations of sponges, which he recognized as animals that possessed “a sort of sensation.” Today, if not recorded as poetically, the inferences are no less profound: Our fate, one could argue, is closely linked to that of the lowly sponges.</p>
+<p>Scientists are continuing to learn about the ways in which sponges help support both healthy oceans and healthy humans. Sponges are now used widely in biomedical applications, from experimental tissue regeneration to biomimetic models for artificial bone scaffolding. They also possess potent antibacterial and antiviral properties, with sponge-derived chemicals already hard at work in some <a href="https://app.box.com/s/1t87cbob4en2a8ndq18uchnwut7mgk9l">cancer-fighting drugs</a>.</p>
+<p><img alt="" src="../images/Hemert_BREAKER-2.png" /></p>
+<p><strong>HAPPY (SPONGE) TRAILS:</strong> Sponge trails observed by <em>Polarstern</em>researchers in an area of seafloor wholly covered by spicule mat. Purple arrows indicate individual sponges, with red dotted lines indicating the midpoints of sponge trails. <em>Image from Morganti, T.M., et al.</em> Current Biology.</p>
+<p>Looking forward, sponges provide important insights into the future of our oceans, and how marine organisms might be able to respond to rapidly changing marine conditions—or not.7 Sponges’ relationship to climate change—and their roles in it—may be nearly as varied as the creatures themselves.8 Shallow water sponges have been identified as possible “climate winners” because of their relatively high temperature tolerance.9 In the deeps of the North Atlantic, some of the same patterns of resilience appear to hold true, making sponges unusual among northern animals; warming waters are not necessarily less hospitable. In certain instances, sponges’ ranges may actually expand under projected climate conditions.</p>
+<p>And many questions remain. Sponges collected from the Caribbean Sea are currently at the center of a heated scientific debate about how much the planet has already warmed, and whether we’ve passed a critical tipping point.10 Laboratory experiments show mixed results for sponges when simulating future conditions, with outcomes varying by species and climate model selected; unsurprisingly, not much survives under the “worst case” warming scenario. Besides temperature, sponges can be sensitive to shifts in oxygen and pH levels, as well as more-abrupt changes in ocean environments. Such changes—many of which reflect a combination of human-driven and natural processes—can both help and hurt sponges. For instance, tidal waves and other large-impact waves help facilitate sponge dispersal but can also be deadly to the individual animals. And the fate of sponges mirrors that of the multitude of species that depend on them.</p>
+<p>Climate change isn’t the only pressure these slow-growing animals face: They’re also vulnerable to disturbance from trawling and other human seafloor activities, such as mining. And as researchers learn more about sponges’ contemporary utility, including in biomedical applications, there’s potential for direct exploitation, this time by means more sophisticated than a diving suit and a strong set of lungs. In fact, part of the mission of the research project that included the <em>Polarstern</em> team was to help support the sustainable harvest of deep-sea sponges given continued commercial interest in them.</p>
+<p>There, in the murky depths of the Langseth Ridge, another Porifera superpower had been revealed—these purportedly-sessile creatures were on the run, changing the seafloor and whole ecosystems in their wake. As sponges’ secrets continue to unfold, we’re reminded to observe not only the big things, but the small; interrogate not only the clever but the brainless; follow not only the swift-winged and fleet-footed but also the seemingly stationary. The lowly sea sponge is going places, that much is clear. <img alt="" src="../images/nautilus-favicon-14_1184.png" /></p>
+<p><em>Lead image: Citron / Wikimedia commons</em></p>
+<p><strong>References</strong></p>
+<ol>
+<li>
+<p>Morganti, T.M., Purser, A., &amp; Rapp, H.T. <em>In situ</em> observation of sponge trails suggest common sponge locomotion in the deep central Arctic. <em>Current Biology</em> <strong>31</strong>, R359-R373 (2021).</p>
+</li>
+<li>
+<p>Wilson, H.V. On some phenomena of coalescence and regenerations in sponges. <em>Journal of the Elisha Mitchell Scientific Society</em> <strong>23</strong>, 161-174 (1907).</p>
+</li>
+<li>
+<p>Pronzato, R. &amp; Manconi, R. Mediterranean commercial sponges: Over 5,000 years of natural history and cultural history. <em>Marine Ecology</em> <strong>29</strong>, 146-166 (2008).</p>
+</li>
+<li>
+<p>Bell, J.J. 2008. The functional roles of marine sponges. <em>Estuarine, Coastal and Shelf Science</em> <strong>79</strong>, 341-353 (2008).</p>
+</li>
+<li>
+<p>Botting, J.P., <em>et al.</em> Flourishing sponge-based ecosystems after the end-Ordovician mass extinction. <em>Current Biology</em> <strong>27</strong>, 556-562 (2017).</p>
+</li>
+<li>
+<p>Reynolds, A.S. Ernst Haeckel and the philosophy of sponges. <em>Theory in Biosciences</em> <strong>138</strong>, 133-146 (2019).</p>
+</li>
+<li>
+<p>Muir, L., Botting, J., &amp; Beresi, M.S. Lessons from the past: Sponges and the geologic record. In Carballo, J.L. &amp; Bell, J. (Eds) <em>Climate Change, Ocean Acidification, and Sponges</em>. Springer, Cambridge, United Kingdom (2017).</p>
+</li>
+<li>
+<p>Samuelson, A., Schrum, C., Yumruktepe, V.C., &amp; Daewel, U. Environmental change at deep-sea sponge habitats over the last half century: A model hindcast study for the age of anthropogenic climate change. <em>Frontiers in Marine Science</em> <strong>9</strong>, 737164 (2022).</p>
+</li>
+<li>
+<p>Beazley, L.I., Kenchington, E.L., &amp; Murillo, F.J. Climate change winners in the deep sea? Predicting the impacts of climate change on the distribution of the glass sponge <em>Vazella pourtalesii</em>. <em>Marine Ecology Progress Series</em> <strong>657</strong>, 1-23 (2023).</p>
+</li>
+<li>
+<p>McCulloch, M.T., Winter, A., Sherman, C.E., &amp; Trotter, J.A. 300 years of sclerosponge thermometry shows global warming has exceeded 1.5 °C. <em>Nature Climate Change</em> <strong>14</strong>, 171-177 (2024).</p>
+</li>
+</ol>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

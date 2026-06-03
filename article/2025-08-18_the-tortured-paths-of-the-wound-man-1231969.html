@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tortured Paths of the Wound Man - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Tortured Paths of the Wound Man - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-ZE72</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The Wound Man is an image at once troubling and enigmatic. A male figure looks out from the parchment page bearing a multitude of graphic wounds. His skin is covered in bleeding cuts and lesions, stabbed and sliced by elaborately detailed knives, spears, and swords of varying sizes, many of which remain stuck threateningly in the body. His head and thighs are pierced with arrows, some intact, some snapped down to just their heads or shafts, their fletching feathering his form. A club metes out blunt trauma at the shoulder, while inside his chest—rendered eerily transparent so as to reveal the structure of his intestines, lungs, spleen—the tip of a dagger punctures his heart.  </p>
+<p>The figure also bears traces of more quotidian accident. His shins and feet are clustered with thorn scratches and trod-upon blades. He is peppered with itchy insect bites. And to compound his appalling, cumulative misfortune, the Wound Man is also deeply unwell. His armpits and groin sport rounded, dark red buboes. A label tells us he is beset by “<em>pruritus per totum corpus</em>” (itching all over the body), which alongside the depicted rashes and swellings suggests the contraction of multiple diseases. The violence and illness rendered unto his body is total and all-consuming.  </p>
+<p>Yet, despite such a horrendous barrage, the figure’s expression is unnervingly resolute. He stands with eyes wide open, very much still alive, and in this simple act the image’s purpose crystallizes. For despite its gratuitous display, the Wound Man was not a figure originally designed to inspire fear or to menace. Instead, it represented something altogether more hopeful: an imaginative and arresting reminder of the powerful knowledge that could be channeled and dispensed through the practice of premodern medicine.</p>
+<p>Today the image leads a spectacular life. Recently, his broken body has provided a grotesque lure to a diverse and somewhat bizarre variety of modern constituents. In 1995, the figure was included as part of the new official coat of arms of the United Kingdom’s Royal College of Emergency Medicine, reworked with rippling abs and Ken-doll hair to conveniently present in a single body the many trauma injuries that the college’s members were equipped to tackle. For the administrators of Mont Orgeuil Castle, a 13th-century fortress overlooking the port of Gorey on the island of Jersey, the Wound Man was a more playful thing, a fitting inspiration for a sculpture by the artist Owen Cunningham, who produced a giant three-dimensional likeness of the figure for the gleeful, gross-out delight of visitors.</p>
+<p><img alt="" src="../images/fPaN0L6X-Hartnell_BREAKER.png" /></p>
+<p><strong>WOUNDED MEN:</strong> Another version of the Wound Man, this one having encountered an unfriendly dog and an arrow to the calf. <em>Credit: Wellcome Collection, London, Public Domain.</em></p>
+<p>This same gruesome sensibility, revived and mercilessly amplified, ushered the image onto TV screens, gracing the desk of Mads Mikkelsen’s eponymous cannibalistic doctor Hannibal Lecter in the 2013 NBC series <em>Hannibal</em>, a show in turn based on Thomas Harris’s 1981 novel <em>Red Dragon</em>. Harris drew on the Wound Man as a model for several of his book’s particularly spectacular murders, but he was not the first writer to cite the figure as their muse. Back in 1957, no less a literary luminary than Ian Fleming had written to his publisher to suggest that instead of its current title, <em>Dr. No</em>, perhaps the sixth book in his James Bond series of spy thrillers should be renamed <em>The Wound Man</em>, after a historical picture he had recently come across in a pamphlet and for which he claimed to have great affection. The publisher declined.</p>
+<p>In the last decade or so, the image has inspired music from a heavy metal band, a book of Scots poetry, a piece of one-man storytelling theater entitled <em>The Adventures of Wound Man and Shirley</em>, an anarchist tea-towel protesting corporate profiteering, and a diagram in a respected veterinary journal outlining commonly sustained wounds among dueling cats.</p>
+<p>But the Wound Man is far more than spectacle. From the very moment of its inception, the Wound Man was an image intimately tied to actual practice. He was in fact many, many things at once: epistemic diagram, medical tool, affective muse, technical spur, international artwork. The Wound Man can be seen as one of the most unusual outcomes in a long line of surgical literary reformulations, for we find the figure closely allied with a specific group of surgical books whose structure and contents aimed to take large swaths of well-established medical knowledge and rework it in innovative ways.</p>
+<p>On the one hand, the Wound Man boldly gathered together in a single space an encyclopedic host of contem­porary techniques for cutting, suturing, bandaging, administering, setting, and letting. But it also paired these instructions with a canny ability to draw on parallel innovations in visual diagnosis and diagrammatic aesthetics. The image of the Wound Man’s large body would have caught the reader’s eye far more effectively than a mere contents list, assuring them quickly that a particular cure could be found within. Likewise, the ordered mapping of disease about his physical form could serve a mnemonic function for readers keen to memorize the contents of his body and thus the contents of the treatise.  </p>
+<p>Textual remedies following the image would include a brief set of practical procedures for treating the problem, for instance, directions on how to clean and stitch a wound or for making up compound medicines for application or ingestion. Entries are typically rounded out by a brief comment on aftercare, either recommending that the patient be moni­tored for specific signs or that certain prescriptions be repeated at particular times. Many also close with the casual assurance that a certain salve is par­ticularly effective, that a rash will soon abate, or that a patient will no doubt return to good health.</p>
+<p>Still, it is hard to know exactly how these Wound Men images were received or for whom they were specifically intended. Few iterations have reached us with clear enough internal evidence or collecting provenance to link them to particular medieval individuals with much certainty. We might sensibly assume that their visual diversity and handsome lines point to patrons who could afford the expense of a relatively accomplished artist. The regular incorporation of other forms of parallel calendrical and medical materials—bloodletting figures, urine tables, Zodiac Men—indicates that the books in which these images were contained were also geared toward medical professionals, or at least toward nonspecialists invested in the impressive learning represented by the healing arts.</p>
+<p>To track the Wound Man’s history is to explore a developing cast of characters who interacted with the image from different vantage points across its busy chronological and geographical sweep. Engaged by healers and patients alike, but also by printmakers and poets, scribes and students, nuns and monks, and modern writers and artists today, the Wound Man and his wounds have enjoyed a surprisingly robust and vital longevity. <img alt="" src="../images/nautilus-favicon-14_1009.png" /></p>
+<p><em>Adapted</em> <em>from</em> <a href="https://press.princeton.edu/books/hardcover/9780691243481/wound-man?srsltid=AfmBOooIx7fDSlM3sRFoYFg8xoYbx5SfLNqjaxM1OR9cYvOCHxZ2uUoE">Wound Man: The Many Lives of a Medical Image</a>, <em>Copyright (c) 2025</em>  <em>by Jack Hartnell.</em> <em>Used with permission of the publisher, Princeton University Press. All rights reserved.</em>  </p>
+<p><em>Lead image: Wellcome Collection, London, Public Domain</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

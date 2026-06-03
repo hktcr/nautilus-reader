@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharks Show How Animals Scale Like Geometric Objects | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Sharks Show How Animals Scale Like Geometric Objects</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-ITQ0</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It’s a universal fact that as any 3-D object, from a Platonic sphere to a cell to an elephant, grows outward in all directions, its total surface area will increase more slowly than the space it occupies (its volume). If the object’s geometry and shape remain the same as it gets bigger, then its surface area will increase roughly as fast as its volume to the two-thirds power. For centuries, biologists have wondered if life forms, too, follow this two-thirds scaling law, even though they come in a stunning variety of shapes and sizes. If so, it would suggest that there are underlying constraints fundamental to evolution that might influence how life interacts with the world around it.</p>
+<p>Recently, researchers used CT scans and digital tools to calculate the surface areas and volumes of an ancient and diverse animal lineage: sharks. The team’s analysis, <a href="https://doi.org/10.1098/rsos.242205">published in <em>Royal Society Open Science</em></a>, included more than 50 shark species and provides some of the best empirical evidence to date for some kind of firm scaling rule in zoology. As with a sphere, the surface area and body mass of sharks do indeed follow a two-thirds scaling law, the team found. If this holds true in other animal groups, it probably reflects underlying rules of heat exchange, metabolism or development that constrain evolution.</p>
+<p>If you’re looking for an animal group in which to study biological scaling, it’s hard to do better than sharks, according to Joel Gayford, a shark biologist at James Cook University in Australia who led the new study. They share an overall form, but come in many sizes, occupy a plethora of niches, and have huge variations in body shape. In his research into sharks’ morphological evolution, Gayford noticed what appeared to be scaling relationships between their body parts, such as the sizes of their fins. It made him wonder whether there might be more fundamental rules constraining the forms that sharks can take.</p>
+<p>However, he could find little high-quality research into scaling in large animals. Research in <a href="http://dx.doi.org/10.5061/dryad.t06q9">single cells</a> has uncovered many deviations from expected rules; rare studies in smaller animals such as <a href="https://doi.org/10.1111/1744-7917.12362">insects</a> and <a href="https://europepmc.org/article/med/8007663">snakes</a> have found some evidence for two-thirds scaling. But few studies included larger animals, and most of those were conducted decades ago. Plus, Gayford found that existing animal scaling data was somewhat messy. Due to technological limitations in the 19th and 20th centuries, attempts to accurately measure animals’ surface area and volume were “error-prone and also kind of ethically questionable,” he said.</p>
+<p><img alt="" src="../images/Thompson_BREAKER.png" /></p>
+<p><strong>SHARK SCALING:</strong> Joel Gayford (pictured with a goblin shark) created 3-D models of more than 50 shark species of various sizes and shapes to find out if they scale geometrically. <em>Credit: Dr. Yi-Kai Tea.</em></p>
+<p>He wasn’t the only one who thought so. “One of the big limitations—especially if you read these early biology studies—is, like, how do you measure the surface area of a cow?” said Brian Enquist, an evolutionary biologist at the University of Arizona who was not involved in the study.</p>
+<p>Until recently, options were limited. Researchers could run a measuring wheel across an animal’s hide and mark out units in chalk, or skin the creature and measure its surface area by hand. To calculate its volume, they could drop the animal into a water-filled tub and see how much liquid it displaced; some went one step further and poured water directly into freshly liberated pelts.</p>
+<p>Gayford’s team had significantly more advanced technology available. They measured the surface area and volume of 54 different shark species, ranging from a 9-inch pygmy shark, one of the world’s smallest, to a whale shark, the largest living fish. But rather than skinning them, they took CT scans of high-quality museum specimens to create detailed virtual reconstructions. For those species too large to fit in a CT scanner, they used photogrammetry software, which stitches together many photos of an object’s surface to create a 3-D model. (In one case, the object in question was a 37-foot-long whale shark that lives at the Georgia Aquarium.) They then loaded the models into 3-D processing software called Blender, which was originally developed for rendering objects in video games. To calculate a shark’s surface area, Gayford just had to click a button.</p>
+<p><img alt="" src="../images/Thompson_BREAKER-2.png" /></p>
+<p><em>Mark Belan /</em> Quanta Magazine<em>; Source: Joel Harrison Gayford</em></p>
+<p>In addition to reflecting a huge range of animal sizes, the dataset also represented sharks that fill a variety of ecological niches, from reef dwellers to bottom feeders to open-ocean predators. They came in “a ton of different unique morphologies,” Gayford said, including several oblong-faced hammerhead species; the common thresher, whose tail fin is nearly as long as the rest of its body; and the flat and frilly wobbegong, along with your more standard shark-shaped sharks. And while most sharks are cold-blooded, or ectothermic, a few species (including great whites) can generate their own heat. Gayford’s team included one of these regionally endothermic sharks—the thresher—in the dataset.</p>
+<p>Despite this diversity of size, shape, lifestyle, and metabolism, the sharks fit the two-thirds scaling rule almost perfectly. “They showed there’s not a lot of variability in it, so that’s really cool,” Enquist said.</p>
+<p>The analysis suggests that this two-thirds scaling rule could be universal for animals. To be certain, more research is needed in other animal groups—including terrestrial animals, which can have complex external geometries such as feathers and hair, and warm-blooded, or endothermic, animals such as mammals and birds. To that end, Gayford’s team is collecting more data; he hopes other researchers will further test biological scaling in the animals they study.</p>
+<p><img alt="" src="../images/Thompson_BREAKER-3.png" /></p>
+<p><strong>SHARKS!:</strong> Sharks are an incredibly old and diverse group of species, encompassing many sizes, shapes, habitats, and lifestyles, including (clockwise from top left) the whale shark, scalloped hammerhead, zebra shark, and tassled wobbegong. <em>Credit: Clockwise from top left: Guillen Photo; Kris Mikael Krister; Simon Pierce; Leonard Low.</em></p>
+<p>However, the surface area measurements could still be considered incomplete because they only include the sharks’ external features. Even though structures such as gills are tucked away inside animals’ bodies, their surfaces are actually external from a topological perspective, said Karl Niklas, an emeritus professor of biomechanics at Cornell University. If the researchers had analyzed the sharks’ gills as well, Niklas speculated that they would have found a scaling ratio closer to three-fourths. Still, the consistency of the numbers across many different shark species suggests the rule is not incidental. “We’ve got to think of this as some kind of reflection of adaptive evolution,” Niklas said.</p>
+<p>The scientists aren’t certain what fundamental mechanisms could be limiting sharks and other animals’ sizes and shapes, but they have hypotheses. One involves tissue allocation during early growth. To visualize this, imagine a developing animal as a ball of clay. “There’s only so many ways you can stretch out the clay to make different shapes without incurring energetic costs,” Gayford said. In that case, the scaling relationship is significant to the embryo, and it goes on to limit the potential forms the adult organism can take.</p>
+<p>Alternatively, the ratio could reflect a fundamental constraint on heat exchange. In animals, which can absorb external heat and generate it through metabolism or movement, a scaling principle in which surface area grows more slowly than volume would create an insulating effect as you move from small species to larger ones. “Surface area to volume is really important for heat exchange,” said Van Savage, a computational biologist at the University of California, Los Angeles who was not involved in the study. This may explain why Arctic species tend to be large and bulky, while those living in tropical climates can be svelte: A bigger body is harder to cool down than a smaller one. This applies even to ectothermic animals, which may need to hold on to heat as they move between warm and cool environments—for example, when whale sharks dive into deeper, colder water.</p>
+<p>The study offers insight into the mathematical limits of evolution, and could help identify fundamental mechanisms that limit life’s topology. But calculating how organisms scale has practical value as well. It can help veterinarians figure out how much anesthesia to administer to a cat versus a Great Dane, for example, or help doctors determine drug dosages for infants versus adults.</p>
+<p>For Gayford, it highlights the need for continued empirical studies of biological scaling. “It’s really important that people actually test these laws,” he said. “Because often they’re just kind of assumed to be correct.”</p>
+<p><em>This article was <a href="https://www.quantamagazine.org/shark-data-suggests-animals-scale-like-geometric-objects-20251027/">originally published</a> on</em><a href="https://www.quantamagazine.org/">Quanta</a><em>.</em></p>
+<p><em>Lead image: Samantha Mash for Quanta Magazine</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

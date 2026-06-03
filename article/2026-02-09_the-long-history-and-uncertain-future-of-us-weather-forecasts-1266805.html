@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Long History and Uncertain Future of US Weather Forecasts | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Long History and Uncertain Future of US Weather Forecasts</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-W3HB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It’s easy enough to glance at a weather app on your phone and not consider all the work that went into the daily forecast you rely on.</p>
+<p>Throughout the country, meteorologists at the National Weather Service, or NWS, keep a close eye on all sorts of helpful data gleaned from satellites, radar, and instruments on the ground and in the air—including weather balloons that soar more than 100,000 feet above the ground. They feed this information to various models to predict what your local conditions will look like in the coming days.</p>
+<p>People in the United States didn’t always have a highly organized network of meteorologists to guide their outfit choices and warn them of dangerous storms. The foundation for the NWS kicked off in the mid 19th century, thanks to the recent arrival of the telegraph in the U.S. Volunteers around the country <a href="https://www.weather.gov/timeline">sent</a> their weather observations to the Smithsonian Institution, which had provided telegraph companies with weather instruments. By 1860, 500 stations were delivering daily weather reports to a D.C. paper called the <em>Washington Evening Star</em>.</p>
+<p><img alt="" src="../images/QKGJ6oKz-Glick_BREAKER-1.png" /></p>
+<p><strong>FIRST FORECASTS:</strong> An 1872 weather map from the agency that later became the National Weather Service. <em>Image courtesy of the U.S. Army / Wikimedia Commons.</em></p>
+<p>As this infrastructure swelled, so did the need for federal oversight. On this day in 1870, President Ulysses S. Grant signed a congressional resolution into law that <a href="https://www.noaa.gov/jetstream/nws_intro">required</a> the Secretary of War to “provide for taking meteorological observations” throughout the states and territories, and to alert people on the coasts and at the northern Great Lakes of “the approach and force of storms.”</p>
+<p>This responsibility went to the Secretary of War because “military discipline would probably ensure the greatest promptness, regularity, and accuracy in the required observations,” <a href="https://www.noaa.gov/jetstream/nws_intro">according to</a> the National Oceanic and Atmospheric Administration (NOAA).</p>
+<p>The first iteration of our weather service didn’t exactly roll off the tongue: It was <a href="https://www.noaa.gov/jetstream/nws_intro">known</a> as The Division of Telegrams and Reports for the Benefit of Commerce. Later in 1870, “observing-sergeants” of the Army Signal Service took the first organized, synchronous weather observations in the U.S. and telegraphed them to D.C.</p>
+<p>At that time, “little meteorological science was used to make weather forecasts,” <a href="https://vlab.noaa.gov/web/nws-heritage/-/the-national-weather-service-at-150-a-brief-history?redirect=%2Fweb%2Fnws-heritage%2Four-stories2%2F-%2Fcategories%2F6721985">per</a> NOAA. “Instead, weather which occurred at one location was assumed to move into the next area downstream.” This meant that forecasts were relatively basic, mentioning factors like clouds and precipitation.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-secret-messages-in-ancient-storms-312906/">The Secret Messages in Ancient Storms</a>”</strong></p>
+<p>Two decades later, it became a civilian agency under the Department of Agriculture, and meteorology research began to make major strides. It wasn’t until 1970, though, that the agency took on the name of the National Weather Service, which was when the NWS settled into its new home under the recently formed NOAA.</p>
+<p>Today, the NWS forecasts weather, climate, and water conditions like droughts for the U.S., its territories, and nearby waters. During dangerous weather, the agency serves as our official source of unfolding information.</p>
+<p>But threats from the Trump administration have wreaked havoc on the NWS and its ability to support us in emergencies. Attacks on NOAA and NWS align with Project 2025, which <a href="https://envirodatagov.org/project-2025-national-oceanic-and-atmospheric-administration-annotated/">claims</a> the broader agency “has become one of the main drivers of the climate change alarm industry and, as such, is harmful to future U.S. prosperity.”</p>
+<p>In early April 2025, the Trump administration seemed <a href="https://www.theguardian.com/us-news/2025/apr/01/trump-cuts-noaa-spam-emails">poised</a> to purge around 20 percent of NOAA’s staff, and the NWS eventually <a href="https://www.npr.org/2025/07/06/nx-s1-5458512/texas-flash-flood-weather-forecast?utm_source=bsky.app&amp;utm_term=nprnews&amp;utm_campaign=npr&amp;utm_medium=social">lost</a> nearly 600 employees. As a result, almost <a href="https://apnews.com/article/doge-weather-cuts-tornado-dangerous-staff-warnings-aa7db3e0d0009d99c143742ab722c40a">half</a> of all NWS offices contended with serious vacancies.</p>
+<p>Some of these offices could no longer run 24/7, and short-staffing reduced the number of weather balloon launches at certain locations—these are “typically the most important ingredient in making reliable model weather forecasts,” <a href="https://yaleclimateconnections.org/2025/07/cuts-to-noaa-increase-the-risk-of-deadly-weather-tragedies/">wrote</a> meteorologist Jeff Masters for <em>Yale Climate Connections</em> last July. That’s because they <a href="https://www.cnn.com/2025/12/09/weather/national-weather-service-hiring-gaps-winter-weather-storms-trump">collect</a> information including air temperature, humidity, and air pressure from high up, offering a fuller picture when combined with data from the ground.</p>
+<p>After public outcry and criticism from politicians, the NWS <a href="https://apnews.com/article/national-weather-service-doge-hiring-forecasts-92dcc528a3cbeb10a7d47a57b25d84bf">announced</a> this past August that it would hire more than 450 “critical positions.” But as of December, that rehiring has <a href="https://www.cnn.com/2025/12/09/weather/national-weather-service-hiring-gaps-winter-weather-storms-trump">moved slowly</a>, and the agency doesn’t plan to replace all of the positions that were initially slashed.</p>
+<p>The Trump administration also tried to slash funding for NOAA by 27 percent, along with significant cuts to other federal agencies’ budgets. But the Senate <a href="https://www.nbcnews.com/politics/politics-news/congress-passes-bill-fund-us-science-agencies-rebuffing-trumps-request-rcna254291">responded</a> last month with a bill to fund these agencies through September 30—ensuring that, at least for the next few months, we’ll be as prepared as we can be to combat bitter cold, powerful hurricanes, and other weather emergencies that can put lives at risk. <img alt="" src="../images/nautilus-favicon-14_447.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Danazar / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

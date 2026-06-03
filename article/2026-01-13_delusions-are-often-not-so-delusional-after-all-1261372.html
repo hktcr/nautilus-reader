@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delusions Are Often Not-So-Delusional After All | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Delusions Are Often Not-So-Delusional After All</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-13
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-C7YO</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I feel like I’m sort of being sent a mission,” says Adam, “… like I’m getting messages through the TV.” Adam doesn’t know what his mission is, he clarifies, but it doesn’t feel like a good mission. He gets the sense that the TV wants him to do something bad. His mission seems to connect to homicidal thoughts, he explains, and has a “commanding atmosphere.”</p>
+<p>Adam was a participant in a recent <a href="https://www.thelancet.com/journals/lanpsy/article/PIIS2215-0366(25)00341-4/fulltext">study</a> about clinical psychosis and delusions published in <em>The Lancet Psychiatry</em>, where his account was recorded. Psychotic delusions only affect a small percentage of the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5120396/">global population</a>, about 1 percent. But they’re very troubling for those who have them, and very difficult to dislodge. How do these strange beliefs arise, particularly during a person’s first episode of psychosis, and how can clinicians help those who are having them return to a more grounded reality?</p>
+<p>One team of psychologists from the United Kingdom and Australia proposed that these psychotic episodes are more than just problems of thought: They represent a bigger shift in how a person experiences the lived and embodied world, shaped in part by life events, personal history, and emotions. To test this hypothesis, they led a qualitative study of a small group of 10 young adults in the U.K. who were getting early intervention for psychosis care. The participants had a median age of around 25. All had suffered through a first episode of psychosis and were either experiencing or had experienced clinically significant delusions in the past. People whose delusions were related to substance use were excluded.</p>
+<p>“Our research provides a radically different perspective on psychotic delusions, demonstrating how they emerge from the emotional, bodily, and linguistic fabric of people’s lives,” explained Rosa Ritunnano, from the Institute for Mental Health at the University of Birmingham, a consultant psychiatrist and author of the study, in a <a href="https://www.birmingham.ac.uk/news/2026/psychosis-patients-living-in-metaphor-new-study-radically-shifts-ideas-about-delusions">statement</a>. “For a long time, clinicians have struggled to understand where delusions come from and how they take shape. Our research offers new insight by showing how delusions are grounded in emotional experiences that involve great bodily turmoil.”</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-faulty-weathermen-of-the-mind-386474/">The Faulty Weathermen of the Mind</a>”</strong></p>
+<p>Over a period of six months in 2023, the researchers completed 33 interview sessions total across all 10 participants. Participants also completed a number of standardized psychological questionnaires about anxiety, insight, purpose, and anomalous experiences. Then the team analyzed the material they collected from three perspectives. First, they examined clinical records, to classify delusion themes using a standardized clinical framework. Next, they carried out a phenomenological analysis to capture the first-person lived texture of the experience, mapping changes in space, time, language, mood, and existential orientation, among other things. In the final narrative analysis, they collected each individual’s life story, aiming to understand the delusions in the context of childhood experiences, relationship turning points, and coping strategies. They paid special attention to figurative language.</p>
+<p>What the researchers found was that each participants’ delusions were driven by overlapping themes. Three major themes were most common across the delusions they examined: All of the delusions were persecutory, while 9 out of the 10 had delusions with so-called “reference” themes—feeling that everything carries special messages for you—and grandiose or religious themes. These delusions also coincided with a larger shift in how the participants understood reality: Their experiences of time, of other people, the atmosphere, and their place in the world all shifted significantly.</p>
+<p>The most common distortions included unusually intense or sticky perception, distortion of time, boundaries between self and other becoming blurred, a pervasive revelatory mood, and existential shifts, such as feeling uniquely special or cosmologically different. Taken together, these findings suggest that delusions aren’t just random beliefs, but rather a story the mind begins to tell itself to make sense of a whole-system-change in their lived and embodied experience.</p>
+<p>The researchers also found some patterns in the participants’ life stories: early and repeated painful interpersonal experiences that featured powerful emotions, particularly shame but also fear, anger, and feeling controlled. Later, during major life upheavals, such as breakups, abusive relationships, rejection, loneliness, or major stress, that template was reactivated and the participants coped through a series of strategies that included obsessive searching for meaning, immersion in spiritual or fictional narratives, and spirals of absorption. In other words, the delusions often arrived at the end of a long emotional runway, not out of thin air.</p>
+<p>Three common upheavals often preceded the emergence of delusions. The first was feeling under the spotlight, exposed, or judged, a feeling often rooted in shame. This heightened self-consciousness could later shift into feelings of persecution or transform into feelings of grandiosity (for example: that one is a god). The second involved a shift from emotional emptiness to a sense of meaning or connection, which could be experienced as awe, hope, feeling protected, and feeling chosen or connected to a cosmic mission. The third was that the individuals were living in a simulation, marked by disembodiment, detachment, and numbness, which could coincide with feelings of being watched, everything seeming fake, and emotions feeling performative.</p>
+<p>The authors argue their findings suggest that delusions can be hard to correct not because of bad reasoning but because they’re so powerfully anchored in bodily feelings, in deep instinctual urges to hide, fight, connect, or obey, in transformations of their understanding of the social world and in identity-level meaning. As such, they believe that treating the delusion will require engaging not just with the false belief itself, but with a person’s embodied emotional states, history, and coping styles and providing emotionally soothing environments. They also suggest clinicians pay special attention to figurative language.</p>
+<p>Jeannette Littlemore, a professor of linguistics and communication at the University of Birmingham and co-author of the paper, said, “We all use metaphors and narratives to understand our experiences and make sense of our lives. But psychosis patients do so more intensely. As a result of having endured strong (often negative) emotional experiences, which are then responded to by the body, and shaped by everyday language use, people experiencing psychotic delusions really are living in metaphor. People may feel delighted and say they are so happy they can ‘touch the sky’; this could lead them to experience the delusion of thinking they can fly.”</p>
+<p>If the findings hold up in larger scale studies, they suggest that delusions aren’t just odd beliefs. They’re the visible signs of a deeper whole-world emotional shift, grounded in the lived body, shaped by personal history and expressed through stories. <img alt="" src="../images/nautilus-favicon-14_555.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: missSIRI / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

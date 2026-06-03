@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In the Land of the Eyeless Dragons | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>In the Land of the Eyeless Dragons</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-8HGB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>To get to know the olm, Europe’s only exclusively cave-dwelling vertebrate, you need to meet it on its terms. Extremely particular terms.</p>
+<p>The pale, blind salamander (<em>Proteus anguinus</em>), once thought to be the offspring of dragons, can live for up to a century.* It only lives in deep cave systems, hundreds of feet underground, where light doesn’t reach, in countries across the north Mediterranean and the Balkans. It is long and thin, growing up to about a foot in length, with stunted limbs and a somewhat sedentary lifestyle. It is sensitive to sound, vibrations, pressure changes, temperature, electromagnetism, and the intrusion of light, and it only appears above ground when washed to the surface by high waters.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>It is, thus, not exactly the easiest study species—but this hasn’t deterred Gregor and Magdalena Aljančič. The husband-and-wife team spend a fair amount of their time in the pitch-dark, under Kranj, Slovenia’s fourth-largest city, the railway and old road to the capital rumbling above. Their cave laboratory, established by Gregor’s father, Marko, in 1960, can be entered through an inauspicious metal door on an industrial estate. Far from your typical scientific establishment, its natural cave walls are covered in rare species of crickets and spiders, and only phone flashlights are allowed to light your way around. It’s a haven for 20 of these olms, living in specially made pools.</p>
+<blockquote>
+<p><em>Once thought to be the offspring of dragons, olms can live for up to a century.</em></p>
+</blockquote>
+<p>Technological advancements in this subterranea are something of an Aljančič family preoccupation. Upgrades have included using a vintage, 8-bit ZX Spectrum computer connected to a camera as part of a high school project in 1989, a low-resolution CCTV-style system in the late ’90s, one of the earliest examples of biological video-tracking in the early 2000s, and the last major advance in 2009, when a digital infrared video system was put in.</p>
+<p>All of this has yielded important insights, including on the olm’s sensitivity to the <a href="https://academic.oup.com/gigascience/article/doi/10.1093/gigascience/giac030/6562166">Earth’s magnetic fields</a> and its reproductive behavior. But work in a lab, however creatively constructed, can only get you so far. Testing water using <a href="https://www.nature.com/articles/srep45054">environmental DNA technologies</a> has allowed scientists to learn more about where olms make their <a href="https://nautil.us/the-secrets-of-the-blind-salamander-238488/">dark homes</a>. Scientists have also discovered how much these reclusive animals are impacted by goings on at the surface;  although they can live nearly a thousand feet below ground, olms are threatened by water pollution and construction and deforestation in large parts of their range. And a warming climate looms large over their fragile <a href="https://nautil.us/what-we-can-learn-from-an-insomniac-fish-405226/">cave ecosystems</a>, as they and other species there depend on a consistently cool temperature. To truly understand the curious amphibian and the threats it faces, though, there’s a need to go deep, literally. And perhaps unsurprisingly, the Aljančičs have a plan for that.</p>
+<p>Why such effort for a strange species barely known outside a handful of countries?</p>
+<p>The olm’s striking biology, which also includes the capability of going for years without eating and having <a href="https://pubmed.ncbi.nlm.nih.gov/34480358/">one of the largest</a>—albeit currently unsequenced—animal genomes, offers potential insights that could change medicine. Its life (and death) also exposes otherwise hidden impacts of human activities happening right now, and their damages.</p>
+<p>Karst, the Slovenian-born name for the limestone landscapes home to olms as well as many other rare and unusual species, covers 20 percent of the world’s terrestrial surface, and its groundwater provides anywhere from 20 to 50 percent of drinking water for people. It is easily carved by water, creating essential aquifers—including the Edwards Aquifer in Texas—as well as elaborate caves, such as the Mammoth Cave system, which runs more than 400 miles in Appalachia. It also harbors countless isolated caves. All of these hidden ecosystems can <a href="https://nsojournals.onlinelibrary.wiley.com/doi/abs/10.1111/ecog.03905">help provide answers</a> to great questions of evolution, ecology, and climate adaptation.</p>
+<p><img alt="" src="../images/Hartley_BREAKER.png" /></p>
+<p><strong>STRANGE SCIENCE:</strong> Wife and husband team Magdalena and Gregor Aljančič have devised a wide range of creative solutions for studying the elusive, sensitive olm. They do most of their work here, in their cave lab in Slovenia, which was originally set up by Gregor’s father in the 1960s. <em>Credit: Tomaz Bukovec.</em></p>
+<p>Despite containing such life-sustaining commodities and tantalizing potential for discovery, subterranean karst ecosystems remain severely understudied compared to other biomes. This is especially striking, given that they face considerable threats from intensive farming and industrial development, which can cause pollutants to leach into groundwater—an issue that also contributes to olms, and many other cave-dwellers, being on a <a href="https://apistaging.iucnredlist.org/species/18377/227229041">downward population trajectory</a>.</p>
+<p>Cave specialist animals provide a barometer of ecosystem health, and olms in particular, with their decades-long lifespans, can act as a living gauge for groundwater quality and other disturbances, tracking the historic presence of pollutants right up to the present. A proverbial canary in the karst cave.</p>
+<p>“Even though <em>Proteus</em> is only endemic to dynamic karst in our region, karst itself is everywhere,” says Magdalena Aljančič, whose day job is with the Karst Research Institute in Postojna, home to Slovenia’s largest known olm population. “Sometimes you need such a charismatic species to better put your message across.” And, yes, to many people, the olm is the picture of charisma; its image once graced Slovenian coins, is used as a poster-animal for local ecotourism, and even spawned the name of that country’s oldest science magazine, <em>Proteus</em>. So, here, its survival has an added cultural urgency.</p>
+<p>With water security and biodiversity high on political agendas in Europe, now might well be the olm’s moment. And substantial developments in monitoring technologies over the past decade offer the chance for olm research to make a great leap forward: the creation of a “virtual lab” in the karst underworld.</p>
+<p>“The main reason for building the cave laboratory 65 years ago was to circumvent the inaccessibility of <em>Proteus</em>’ natural habitat and allow long-term observations under more controlled conditions,” says Gregor Aljančič.</p>
+<p>“Of course, there has always been as much fieldwork as possible as caves are the ultimate place to test laboratory observations, but this can be dangerous,” he says. He would know, having experienced a lucky escape after a close call during a cave dive collecting olms for DNA swabs 10 years ago. After losing the safety line, with his oxygen rapidly running out and his family fearing the worst, he just managed to escape to safety. “With advanced technologies, the idea of studying olms in the wild is becoming more and more realistic. The new approach would not only be more efficient but could also save lives.”</p>
+<blockquote>
+<p>Olms can go for years without eating and have one of the largest animal genomes.</p>
+</blockquote>
+<p>The Aljančičs have mapped out plans for something they are calling the ProteusWatch Virtual Lab. It would recreate almost all of the experimental capabilities of their home Kranj cave lab—except that the humans would be far, far away from their study subjects. The in-the-deep-wild lab would pair video analysis with machine learning, advanced environmental sensors, imaging sonars, and underwater drones to study the ecology and behavior of olms. This setup could, for the first time ever, allow researchers to record  the animals’ activities, sensory capabilities, interactions, foraging, and reproduction—in situ, in real time. A second proposed virtual lab would focus on the groundwater habitat, painting a picture of how healthy and stable these extreme ecosystems really are.</p>
+<p>Just assembling these capabilities might be hard enough, but studying these remote cave ecosystems—even from afar—introduces a certain echo from quantum mechanics: the quandary of how much observing might change what is being observed. Whatever technology goes into the chosen deep cave, it must not change the way the sensitive species interacts with its environment, whether that’s from light, vibrations, or electromagnetism. It also must be robust enough to work with infrequent maintenance and in harsh conditions. Training AI also won’t be easy, given that the nearest machine learning models to what’s needed have only looked at surface-living lizards.</p>
+<p>Difficult and impossible are different things, however. Especially to the Aljančičs. Solutions are out there, including special cages to block out electromagnetic fields from equipment. Initial ideas have been explored through the European Union’s <a href="https://www.lifewatch.eu/">LifeWatch ERIC program</a>, and new machine learning studies are in progress.</p>
+<p><img alt="" src="../images/Hartley_BREAKER-2.png" /></p>
+<p><strong>EMERGING INTELLIGENCE:</strong> Once thought to be the spawn of dragons, olms still live a mysterious life—one that can stretch for a century. If the Aljančičs’ AI-enabled project to study them succeeds, we may learn more secrets about this salamander’s extreme biology. <em>Credit: Gregor Aljancic.</em></p>
+<p>The goal is to make the data from these remote labs freely available. So computer scientists, led by Zhiming Zhao at the University of Amsterdam, are working to make sure sensors, software, and AI are aligned in a central computing infrastructure, enabling researchers to make the best use of the proposed facility. Zhao’s team has already created similar Open Science facilities for projects studying ecosystems in the Netherlands and Italy, and for taxa as barely tangible as phytoplankton.</p>
+<p>There are several parties keen to get the ball rolling, too, with the governments of Slovenia, Croatia, and Italy all committed to monitoring their olm populations in support of European Union biodiversity laws. And making the data open to all, many hope, will accelerate research—for the benefit of the organisms living in these remote ecosystems, as well as the humans above.</p>
+<p>The world of karst, like many fields of study, has been one long marked by research silos, and “biologists are still on one side of the river, with karstologists on the other bank,” Gregor Aljančič notes. “The result of this project would be that the geologists and biologists will start to work together where this is most needed.”</p>
+<p>Christos Arvanitidis, CEO of LifeWatch ERIC, a group which aims to use digital technologies to investigate European biodiversity and the ecosystem services it provides, is backing the team’s efforts as a new leading example of accessible, multidisciplinary science. “You can show your data to other communities in [a] way they can take advantage of, prove to them that this type of research can be done, and they can perhaps use their own data, for the same kind of analysis,” he says. “That’s amazing, because it leads progressively to a kind of knowledge which is produced by as many data, from as many domains, as possible.”</p>
+<p>Getting the olm remotestudy project off the ground would be a huge step forward for cave research more broadly. The field of cave ecology to date has been <a href="https://riojournal.com/article/85859/instance/7659226/">disproportionately focused</a> on bats, while caves have also often remained outside <a href="https://www.nature.com/articles/s41558-021-01057-y.epdf?sharing_token=g2iPCIMgm03eb_iSVqY0aNRgN0jAjWel9jnR3ZoTv0MJ_3hbrFhaadZpAfYgwHh_6iNuIt3M-0KfLzMtAYED8omqbMw9ibCvrVKZoZ_w8R5iFN0QIvcfe9nm3k7qhlEiuk-9LMY8xboUacaiEj_1WytMEl5oKryUfZgMZ_aC2x0%3D">climate and biodiversity</a> discussions. Organizations working to protect these little-understood ecosystems—and their subterranean denizens—worldwide are watching with interest.</p>
+<p>This includes the San Antonio Zoo, whose specialist cave team has set up its own lab, in part geared toward the conservation of the federally protected Texas blind salamander (<em>Eurycea wallacei</em>), but also other threatened groundwater species.</p>
+<p>“Animals living in aquifers tell you a lot more than spot water checks about the long-term quality of the groundwater,” says Danté Fenolio, who runs the zoo’s Center for Conservation and Research. “Because if some contaminant blew through, there is nowhere else to go; they are exposed to it, whereas sometimes our routine testing misses those contaminants because of timing.”</p>
+<p>San Antonio straddles the edge of the artisan zone of the karst-based Edwards Aquifer, where fresh groundwater is easy to tap, supplying <a href="https://www.edwardsaquifer.org/groundwater-users/manage/">2.5 million people</a> at home, on farms, or in industry. But water flows ever-downward, too. So, notes Fenolio, “There’s a real irony that unfolds, where most of the people that are actively involved in contaminating aquifers live right above them, using those waters, and a lot of folks just don’t think about it.” These threats are varied: nitrates and pesticides from intensive farming, heavy metals from industry, compounds from pharmaceuticals, and petroleum products and other materials from household and industrial use. And those impacts can wreak havoc on the rare animals adapted to life beneath the surface—as well as trickle back to the water supply for people.</p>
+<p>It’s said that some secrets should stay buried. But all signs suggest that leaving those of the olm and other sensitive subterranean creatures in their hidden habitats would be perilous. Whatever happens with the latest effort to better understand the olm’s hidden habitat, its advocates remain steadfast.</p>
+<p>“As long as we have this animal, we are obliged to work for it,” says Magdalena Aljančič. Even if their virtual cave lab is never assembled, “it’s not like we’d just concentrate on another species,” she says. “We’ll be motivated to work further, even if that means starting all over.”</p>
+<p>And as Gregor Aljančič adds, recalling their days of the 8-bit computer and low-fi video systems, “We are used to improvising, to find all kinds of solutions on the way.”  <img alt="" src="../images/nautilus-favicon-14_1005.png" /></p>
+<p><em>Lead image: PJakopin / Wikimedia commons</em></p>
+<p><em>*As originally published, this article stated that olms are eyeless. They do, in fact, have eyes, but their eyes are rudimentary and covered with skin in adults, so they're blind. This has been corrected in the article above.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

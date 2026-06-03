@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Deadly Effects of Touchdown Airbursts | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Deadly Effects of Touchdown Airbursts</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GWTF</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We live in a <a href="https://nautil.us/our-busy-universe-1223282/?_sp=96c2a4d1-823f-4f9c-ae22-7057df33b7de.1755706547038">crowded cosmic neighborhood</a>. Asteroids <a href="https://rubinobservatory.org/news/rubin-first-look/swarm-asteroids">swarm</a> our solar system. Interstellar comets <a href="https://www.theguardian.com/environment/2025/aug/19/3i-atlas-comet-interstellar-alien-object-where-size-speed">whiz</a> past. Occasionally, something altogether bizarre <a href="https://nautil.us/how-oumuamua-got-shredded-237036/?_sp=96c2a4d1-823f-4f9c-ae22-7057df33b7de.1755707049463">swings</a> by. Just this week, a livestream trained on a volcano in Japan <a href="https://japantoday.com/category/national/mystery-object-lights-up-night-skies-across-western-japan">captured</a> a fireball (likely a meteorite) piercing our atmosphere and lighting up the skies above the island of Kyushu.</p>
+<p>When heavenly bodies cross paths with Earth’s orbit and gravity does its thing, brilliant <a href="https://nautil.us/spying-the-medusa-slayers-meteor-shower-1229884/">light shows</a> can unfold. But such interactions can also spell disaster. Just ask the <a href="https://nautil.us/the-origin-of-the-asteroid-that-killed-the-dinosaurs-889220/?_sp=96c2a4d1-823f-4f9c-ae22-7057df33b7de.1755708304788">dinosaurs</a>. The evolution-altering asteroid that led to their demise and paved the way for the rise of mammals and birds truly left its mark on the Earth. The massive Chicxulub crater at the tip of the Yucatán Peninsula commemorates the event.</p>
+<p>But dramatic brushes with the space stuff that shares our solar system can be deadly even when that stuff doesn’t physically strike ground. Sometimes, comets or meteors entering Earth’s atmosphere explode before hitting the surface, sending tsunamis of heat and high pressure blasting downward with the force of an atomic bomb. These so called “touchdown airbursts” can lay waste to vast swaths of habitat in seconds without leaving a gaping impact crater, and these events may have been more common in our planet’s history than previously appreciated, according to an international team of researchers.</p>
+<p>“Touchdown events can cause extreme damage through very high temperatures and pressures,” says James Kennett, professor emeritus at the University of California, Santa Barbara, and a scientist on the team, in a <a href="https://news.ucsb.edu/2025/021989/destructive-cosmic-airbursts-likely-more-common-previously-believed">statement</a>. “And yet they don’t necessarily form a crater, or they form ephemeral surface disturbances, but they’re not the classic major craters that come from direct impacts.”</p>
+<p>Publishing their findings in four recent papers, Kennett and his co-authors provide evidence for cosmic airbursts that they claim happened across the globe and across centuries.</p>
+<p>In a <em>PLOS One</em> <a href="https://journals.plos.org/plosone/article/authors?id=10.1371/journal.pone.0328347">paper</a>, the researchers describe marine sediments that contain “impact proxies” that they suggest resulted from a disintegrating comet that exploded above our planet approximately 12,800 years ago, sending a shockwave hurtling Earthward. These proxies, found in sediment samples taken from four deep-sea cores in Greenland’s Baffin Bay, included high levels of metallic debris that could have originated in comet dust and tiny spheres rich in iron and silica that may have formed as intense heat was generated in a touchdown airburst.</p>
+<p>Three other papers detailing evidence of cosmic airbursts were all published earlier this year in <em>Airbursts and Cratering Impacts</em>, an open-access journal published by the Comet Research Group, a nonprofit cofounded and directed by Kennett along with three of his co-authors. One study <a href="https://www.scienceopen.com/hosted-document?doi=10.14293/ACI.2025.0004">posits</a> a touchdown airburst that occurred above Louisiana around 13,000 years ago and left traces of minerals that were melted by extreme heat, shocked quartz grains that could have been fractured or melted by an intense shockwave, and a small depression that could have resulted from the event near the town of Perkins.</p>
+<p>These bits of evidence suggest that the Louisiana site could be related to the fragmented comet exploding above Earth 12,800 years ago, sparking a major shift in the planet’s climatic  history. Another <a href="https://www.scienceopen.com/hosted-document?doi=10.14293/ACI.2025.0001">paper</a> reports similar sediment-born evidence for a cosmic airburst that some scientists suggest flattened a massive swath of Siberian forest in 1908. And a third <a href="https://www.scienceopen.com/hosted-document?doi=10.14293/ACI.2025.0003">provides</a> expanded evidence suggesting that the Middle Bronze Age city of Tall el-Hamman, near the Dead Sea, met a similar cosmic fate about 3,600 years ago.</p>
+<p>Curiously, just prior to the publication of that last study, Kennett and his collaborators were forced to <a href="https://www.nature.com/articles/s41598-025-99265-5">retract</a> a paper from <em>Scientific Reports</em> on the same topic after four researchers levied accusations of methodological and analytical errors in the work at Tall el-Hammam. In an editor’s note within the updated paper, the authors write: “A small but vocal group of scientists has actively sought to stifle discussion on the Tall el-Hammam airburst … In response, the authors updated, expanded, and republished the original article on Tall el-Hammam in this journal.”</p>
+<p>As <a href="https://nautil.us/here-to-save-the-day-521210/">skywatchers</a> keep their eyes on the heavens, the potential for cosmic airbursts and the destruction they might wreak deserve greater scientific attention, according to Kennett and his coauthors. “They’re far more common, but also possess much more destructive potential than the more localized, classic crater-forming asteroidal impacts.” he says. “The destruction from touchdown events can be much more widespread. And yet they haven’t been very well studied, so these should be of interest to humanity.” <img alt="" src="../images/nautilus-favicon-14_1001.png" /></p>
+<p><em>Lead image: Romolo Tavani / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

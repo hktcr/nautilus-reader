@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nobody Could Save Timmy the Whale | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Nobody Could Save Timmy the Whale</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-B3HV</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Timmy the whale is dead. Over the weekend the juvenile humpback was <a href="https://www.nbcnews.com/news/animal-news/timmy-humpback-whale-released-spectacular-rescue-effort-found-dead-den-rcna345527">found</a> off the northern tip of Denmark, close to where he was released just two weeks ago. A barge had dragged him there from the Baltic Sea in a last-ditch effort to save him. A tracking device was still fastened to his lacerated, blistered back.  </p>
+<p>The 12-ton animal briefly became an online celebrity. Rescue operations dragged on for months as the whale repeatedly ran aground, with the increasingly frantic efforts live-blogged across the Internet. The operations involved not just a special barge, but coast guard boats, sand dredgers, excavators with flotation devices, a so-called Whale Whisperer, a right-wing influencer rumored to have links to Hells Angels, and celebrity biologist and adventurer Robert Marc Lehmann, whose footage of the whale attracted millions of views online.  </p>
+<p>The rescue operations also drew considerable controversy. In early April, scientists advised letting the animal die peacefully, and German officials called off the rescue. But the public outcry was intense. Some people who took part in the efforts to save Timmy received death threats. Two German multimillionaires eventually mounted a private rescue operation, though infighting seemed to jeopardize its success, and at least one veterinarian abandoned it out of disgust.</p>
+<p><strong>Read more: “<a href="https://nautil.us/humans-are-overzealous-whale-morticians-238529">Humans Are Overzealous Whale Morticians</a>”</strong><br />
+As time wore on, it seemed increasingly likely that further attempts to get the whale back to open ocean would only prolong his death. One expert, from the German Oceanographic Museum, told <em>New Yorker</em> reporter Jessica Camille Aguirre that continuing to try to save the whale “<a href="https://www.newyorker.com/news/the-lede/the-unlikely-rescue-of-timmy-the-stranded-humpback-whale">amounted to torture</a>.” A Hawaiian veterinarian, in turn, accused the museum in an expletive-laden social media post of discouraging rescue efforts so that it could grab the skeleton.  </p>
+<p>Timmy was first spotted in early March off the German coast in the Baltic Sea, a deadly trap for a humpback. The Baltic isn’t deep enough or salty enough, and lacks most of a humpback's normal food sources. The young whale was already in bad shape. He was wrapped in fishing net and rope, and divers were only able to cut some of it away, leaving bits around his body and in his mouth. Timmy developed a skin disease caused by the water’s low salinity, and had lacerations mostly likely from colliding with a ship.  </p>
+<p>It’s still not entirely clear why Timmy ended up in the Baltic, or what will be done with the dead whale now, but biologists are looking for lessons in the tragedy. Mecklenburg-Western Pomerania’s environment minister, Till Backhaus, insists that he made the right choice in allowing the private rescue mission to continue.  </p>
+<p>Some scientists have called for a full investigation, according to <a href="https://www.science.org/content/article/chaotic-whale-rescue-shocks-marine-biologists"><em>Science</em></a>. “You would hope that German officials would support scientists’ advice, but they have ignored it,” one marine biologist told the magazine. Fabian Ritter, a marine biologist and whale researcher at M.E.E.R., a nongovernmental organization, pointed out that elections are coming up and the Social-Democratic party of Backhaus is trailing the extreme-right Alternatives in polls.  </p>
+<p>In a statement, Backhaus said, “I think it is absolutely human to use even the smallest chance when a life is at stake.”</p>
+<p>If this logic were extended to all marine life—which humans regularly abuse with pollution, noise, shipping, and global warming—Timmy might not have needed saving at all. <img alt="" src="../images/nautilus-favicon-14_60.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Crimson Beats / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Work Spaces Support Creativity | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Work Spaces Support Creativity</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-74Z0</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>When I work, my desk faces a wall decorated with a collection of cherished curios: postcards from my favorite trips, historical paintings, antique maps, inspirational quotes, and—my favorite—a postcard with a painting of Sigmund Freud’s desk on it. The card is from the Freud Museum in London where, on a recent visit, I stood in his office and admired his eccentrically decorated workspace: His walls overflow with Greco-Roman busts, statues of gods, Neolithic tools, and a collection of penis amulets.</p>
+<p>Freud, who once compared psychoanalysis to “excavating a buried city,” was an obsessive antique collector. Standing across from his famous therapy couch, taking in the clutter, I wondered: What did this decor say about Freud? And how did it influence his work?</p>
+<p>Creatives have long obsessed over their workspaces. Charles Dickens was so invested in decor he once wrote a <a href="https://www.theguardian.com/books/2012/jan/24/charles-dickens-world-home-interiors">6,000-word essay</a> on wallpaper. Science-fiction author Brandon Sanderson built a <a href="https://calnewport.com/brandon-sanderson-built-an-underground-lair-in-suburban-utah/">fantasy giant writing lair</a> under his house. Could this eccentric nesting be playing a bigger role in the creative process than merely providing a pretty backdrop?</p>
+<blockquote>
+<p>Creativity isn’t just something inside our heads.</p>
+</blockquote>
+<p>In <em>The Journal of Aesthetics and Art Criticism</em>, philosophers Jussi Saarinen and Joel Krueger <a href="https://academic.oup.com/jaac/article/80/3/322/6605645">argue</a> that when artists curate their “studio niches”—say, by hanging artwork, or sticking up Post-it notes, or playing music—they’re designing a kind of external scaffolding to offload part of the work of creative thinking. In these personalized spaces, artists “do not need to rely solely on their ‘inner’ powers of imagination, memory, decision making, and technique to execute their paintings,” they write. Their environments help. The creative process exists at the intersection of mind and space, the philosophers argue. “Creativity isn’t just something inside our heads,” says Krueger in a zoom interview. “It’s distributed across the individual and the environment they’ve curated and scaffolded in a very specific way.”</p>
+<p>Some of the ways our environments scaffold our creative work is straightforward. The painter Jenny Saville surrounds herself with reproductions of famous works so that she feels in constant dialogue with the artists who inspire her. Ray Bradbury hung a reminder over his typewriter: a sign that read “Don’t Think.”</p>
+<p>But a growing body of evidence suggests that our spaces may influence our creativity in more subtle ways. <a href="https://pdf.sciencedirectassets.com/273510/1-s2.0-S1871187123X00029">Research shows</a> that warm lighting, high ceilings, and cool colors can boost our creativity. Being immersed in nature confers all sorts of mental health benefits—improved affect, restored attention, and creative thinking—but so does bringing nature indoors. House plants, windows, natural materials, and even pictures of nature can have <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6926748/">similar benefits.</a> This type of decor may act as a kind of emotional support, regulating our mental states so we can do our best work.</p>
+<p>Our spaces can also enable creative processes in an even more fundamental way: by helping to reinforce our identities. “Much of what’s in our space is there to help us construct a sense of identity, a sort of narrative thread about ourselves,” says Sam Gosling, University of Texas at Austin psychology professor and author of <em>Snoop: What Your Stuff Says About You</em>. Many of the objects we display are what Gosling calls “identity claims,” pieces that tell the story of who we are or want to become. Though we make external identity claims in many ways—in what we choose to wear, the cars we choose to drive, or the things we post about on social media—our spaces are uniquely intimate. Their primary audiences are ourselves.</p>
+<p>I took one other souvenir home from the Freud Museum: a little statue of the Greek god Eros, a recreation of the one Freud kept on his desk. In Freudian psychology, <em>eros</em> is the life instinct, a drive associated with love, life, and creativity. When I got home I placed it on my own desk and sat down to write. <img alt="" src="../images/nautilus-favicon-14_1257.png" /></p>
+<p><em>Lead image: aliaksei kruhlenia / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

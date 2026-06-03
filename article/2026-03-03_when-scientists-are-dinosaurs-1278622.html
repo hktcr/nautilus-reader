@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Scientists Are Dinosaurs | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When Scientists Are Dinosaurs</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-03-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RZ8X</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Iwasn’t fazed one bit as the tequila hit the table for the third time in an hour.</p>
+<p>You see, while I wore the name tag Matt Kaplan, Science Correspondent at <em>The Economist</em>, I had once been a part of this tribe. Long ago they welcomed me as one of their own. I had wandered with them in the desert, shared their meals, and labored alongside them under the beating sun to pluck bones from the earth. Yes, I had been a paleontologist. The tequila was there from day one.</p>
+<p>I had spent years staring at fossils at the University of California. My lab at Berkeley used tequila to make poor man’s margaritas with Minute Maid Lemonade in the field. They may not sound like much, but after spending a day in the scorching heat, sifting through sediment for the teeth of rodents that died a million years ago, kicking back with one of these drinks under the stars was a great way to relax. Unfortunately, as the shots were poured this time—in a noisy bar near the 72nd annual meeting of the Society of Vertebrate Paleontology—nobody at my table was even remotely relaxed. I quietly removed my press pass and name tag to avoid reminding my present company that I was not, in fact, part of their tribe any longer.</p>
+<p>“She’ll ruin us,” hissed one of them as his hand clenched a shot glass.</p>
+<p>Language too vile to publish here, referring to female genitalia, slipped off the tongue of another.</p>
+<p>“It is contrary to everything that we know,” stated another with a cold and calm precision that I found decidedly disturbing amid all the anger. While this fury made me feel as if I had traveled back in time to the days when evolutionary theory was being shouted down by the Church, this was 2012. Moreover, this wasn’t anger from the religious right toward a liberal scientist. No, this was a blue-on-blue event. Science was attacking itself.</p>
+<blockquote>
+<p>This violent reaction was not the way science was supposed to be functioning.</p>
+</blockquote>
+<p>The conference was in Raleigh, North Carolina. The general presentations, where paleontologists talk about their findings, get asked questions by the audience, and then sometimes argue, were over for the day. London, five hours ahead, was asleep for the night. I took the opportunity to step out of the hotel into a cool and clear autumn evening for a light meal. Feeling refreshed from the break, I decided to visit the conference floor one last time before sequestering myself in my room and writing nonstop until midnight.</p>
+<p>I came upon the poster session of the conference, where newbie scientists, mostly Ph.D. students, present findings that tend to be relatively minor. Journalists usually skip them. Not me.</p>
+<p>Poster sessions are a bit like old-fashioned marketplaces where traders stand around trying to sell their wares—only, instead of traders pushing fruit, you have scientists pushing ideas. As I wandered past poster after poster with explanations of what the researcher did, why they did it, and what they found, the quiet of the hall was shattered by a sudden burst of shouting. I hurried over to find out what the commotion was about and, as I turned a corner, I saw a woman surrounded by a group of men.</p>
+<p>The woman had blond hair and was in her 20s. The men were decades older and clearly very angry. I would later learn that she was a Ph.D. student named Alison Moyer. Behind her was an older woman with steel gray hair, whom I immediately recognized as Mary Schweitzer, a scientist who had created a lot of important controversy by suggesting that soft organic materials that ought to rot away quickly after death (like blood cells) can sometimes survive the test of time and endure within fossilized bone for us to find millions of years later. Standing quietly along the periphery of the growing crowd I also spotted Jack Horner, a legendary maverick in the paleontological community who, among other things, revealed evidence that dinosaurs were social, engaged in maternal care, and grew quickly like mammals.</p>
+<p>Nasty language was increasingly emerging from the hostile crowd, and my curiosity about this poster was growing by the minute. I snuck around to the side to have a look and realized that, of course, this was another fight about color.</p>
+<p>Working out what color dinosaurs were when they ruled the planet over 66 million years ago might not sound particularly important, but it has increasingly taken center stage at conferences during the past decade. The reason is because the colors found on an animal tell us a great deal about how that animal lives its life. Think about it. Poison arrow frogs have brilliant hues to communicate, “eat me at your peril.” Stick insects are a drab brown to help them trick predators into believing they are inedible twigs. Yet those are the simple examples. Birds take things to an entirely different level.</p>
+<p><img alt="" src="../images/Kaplan_BREAKER.png" /></p>
+<p><strong>COLOR MATTERS:</strong>The debate over animal colors is important, as it tells scientists a great deal about how that animal lives its life. Male blue-footed boobies, for example, with the brightest and bluest feet, are in prime health, signaling their appeal to females. <em>Photo by Femke van den Bos / Shutterstock.</em></p>
+<p>Female blue-footed boobies always seek out males with the brightest and bluest feet. Why? Because booby immune systems rely upon the same chemical compounds found in their food to fight off diseases as they do to color their feet blue. A booby fighting an infection has to send these chemical compounds to its immune system rather than using them to brighten foot color. The females, being a rather discerning lot, use foot color to determine whether a given male is healthy enough to be worthy of breeding with.</p>
+<p>Bluebirds, flamingos, pheasants, peacocks, toucans, and hundreds of other avian species use similar strategies. This matters because, while many dinosaurs like stegosaurus, triceratops, and diplodocus went extinct long ago, birds are the living relatives of velociraptor and Tyrannosaurus rex. Many paleontologists have argued that, since we know so much about how birds use color today, we should be able to use any color information that we can gather about dinosaurs to work out how they behaved, too.</p>
+<blockquote>
+<p>“She’ll ruin us,” hissed one of the scientists as his hand clenched a shot glass.</p>
+</blockquote>
+<p>Color in fur, feathers, and skin comes from tiny structures called melanosomes that are contained within the cells of these structures. Like red blood cells, these were thought to rot away shortly after animals die but, building on Schweitzer’s findings, scientists began to question whether this might not be true. In 2008, a group of researchers announced that they had found melanosomes in fossil feathers belonging to what can best be described as very late dinosaurs or very early birds. Those researchers noted that these melanosomes were arranged in interesting patterns and suggested that these patterns might indicate the color that the feather once had. This encouraged other labs to look closely at this and, suddenly, melanosomes were absolutely everywhere. Paper after paper was being published on the subject. Many of these articles came with artistic renderings of T.rex and its kin painted in vibrant hues reminiscent of bluebirds and peacocks that the most prominent journals were gobbling up and publishing on their covers.</p>
+<p>Dozens of these scientists were gaining considerable prestige from all of this work. Indeed, their reputations hinged on it. So, any suggestion that what people were seeing were not melanosomes was going to be met with considerable resistance. Unfortunately for Schweitzer’s student Moyer—standing before me at the conference—this is exactly what she had found.</p>
+<p>Moyer questioned whether the melanosomes being discovered might actually be something else. Advised by Schweitzer, who was well trained by Horner, Moyer was tasked with proving that what people were seeing were not in fact melanosomes. To explore this, she collected chicken feathers and buried them in fine sediment. This allowed the feathers to decompose in the way that many animals would before becoming fossils. She then collected the remains and studied them under her microscope. She made two important discoveries.</p>
+<p>The first was that the microbes and the melanosomes overlapped each other both in size and in shape. She found this alarming, because paleontological papers have routinely argued for the presence of melanosomes based only upon the sizes and shapes of the fossilized objects in question. The second was that the melanosomes in her feathers were always embedded in the keratin of which the feather is made. The microbes, by contrast, grew across the surface. Most of the supposed melanosomes associated with fossil feathers have been distributed in dense mats over the surface of the feathers, rather than being embedded within them.</p>
+<p>In short, Moyer was presenting evidence that powerful scientists in her field, who had achieved considerable prestige by publishing papers about color in extinct animals, were wrong. This was why Moyer was at the center of an angry mob. This was why everyone around me in the bar was seething. This was not why the paleontologists were drinking heavily—­they do that anyway. Perhaps more importantly, this violent reaction was not the way science was supposed to be functioning.</p>
+<blockquote>
+<p>Scientists are supposed to ask questions, test these questions with experiments to prove themselves wrong.</p>
+</blockquote>
+<p>Sure, Moyer might have been wrong. Indeed, one of her critics had recently considered in a paper that what was being seen were bacteria. This notion was then discounted because of the clear patterns that the grains seemed to form. Several other researchers who were in the midst of the mob had also investigated the chemical properties of the melanosomes. None had found any indication that they were bacterial. Yet, to focus on whether Moyer was right or wrong misses an important point.</p>
+<p>Scientists are supposed to ask questions about the world around them, test these questions with experiments to try to prove themselves wrong, and then present their results to their peers. When new findings contrast with older findings, scientists are supposed to write papers exploring why the findings create the contrast and run more experiments to study the matter. This structure of question, test, challenge, and present is known as the scientific method. It has been around for hundreds of years and is meant to make science function smoothly.</p>
+<p>Unfortunately, it failed Moyer. Paleontologists at the time were just using shape and size to identify melanosomes in fossils. Her work revealed that this was a flawed approach because bacteria get preserved, too, and they have the same shape and size as melanosomes. Yes, we now know that melanosomes can be preserved in fossils, but lots of bacteria were incorrectly being counted as melanosomes when she presented her findings in 2012. Moyer should have been celebrated for revealing such a serious problem.</p>
+<p>But she wasn’t. At the 2012 conference, I was stunned to see all of the men losing their minds at Moyer’s work, but I should not have been. Because this has all happened before.</p>
+<p>Copernicus feared how the outside world would respond to his discovery that the Earth went around the sun, and hid his notes away in a desk drawer, just like Schweitzer tried to do. He kept them unpublished until he was so seriously ill that he was certain he would be dead before the Inquisition could come for him. Contrary to popular legend, Darwin did not really fear that the public would lynch him for his theory of evolution, so much as worry that the rest of the academic community would think less of him for coming up with such a wild idea. Even so, his concerns over being thought, as he put it in his own notes, “a complete fool” by other researchers played an important part in leading him to check and double-­check his arguments for nearly two decades. It was not until he learned that his colleague Alfred Russell Wallace had come to the same evolutionary conclusions that he made the tough decision to publish. Others carefully managed their relations with the outside world. Galileo had to consider the church with every step that he made. Joseph Lister and Louis Pasteur had to constantly handle emotional reactions from both the government and the wider scientific community. They didn’t hide their findings, but political games were essential to their survival. Pasteur even turned to fraud.</p>
+<p>Science is going to be critical for tackling the big challenges that our society faces. Solving the energy crisis, defeating cancer, countering climate change, feeding 8 billion people … the list is long. We need it operating at its best to confront these problems and, while science might look like a well-­oiled machine spitting out findings to those glancing at it from the outside, it looks more like a clunky old engine prone to breakdown to those of us on the inside. It fills me with doubt. Can science defeat our big challenges? Yes. What remains unclear is whether it can do so in time.  <img alt="" src="../images/nautilus-favicon-14_337.png" /></p>
+<p>Adapted from <em>I Told You So!: Scientists Who Were Ridiculed, Exiled, and Imprisoned for Being Right</em> by Matt Kaplan. Copyright © 2026 by the author and reprinted by permission of St. Martin’s Publishing Group.</p>
+<p><em>Lead image: Andrus Ciprian / shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

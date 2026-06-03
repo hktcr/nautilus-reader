@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sailing Weather Gets Weird - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Sailing Weather Gets Weird - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-13
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PP9Q</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It’s 0400 hours on a Wednesday in November, and it’s dark. The puny crescent moon set hours ago. Huge, black clouds obscure the stars. Will they bring us driving rain? Gale-force winds? Lightning? Ship-killing waves?</p>
+<p>Who knows.</p>
+<p>I’m finishing the overnight watch on the 47-foot sailing vessel <em>Eos</em>, and our crew of four is approaching the Gulf Stream, the powerful ocean current that flows northeast from the Gulf of Mexico and across the North Atlantic Ocean to Europe.</p>
+<p>Out here, at the nexus of warming oceans and climate change, weather contradicts forecasts, especially at peak hurricane season. Atmospheric phenomena 1,000 miles away can dictate what happens to your ship—and to you. Sailors, far more connected to land than ever by technology, can now call on science to keep their vessel and crew safe. Modern sailboats are loaded with maritime technology that is intended to mitigate the challenges that used to make offshore passages so daunting: isolation from shore and difficulty predicting the weather.</p>
+<blockquote>
+<p>Warming seas cause more frequent and intense storms, creating even more unpredictable weather patterns.</p>
+</blockquote>
+<p>Out here, though, you still need to rely on old instincts. And tonight, since I am alone in the cockpit, it is my job to figure out how to respond to the weather and protect <em>Eos</em> and her crew of four.</p>
+<p>On the ocean, when weather changes suddenly and violently, I experience it firsthand: in my stomach, in the bruises, scrapes, and burns I’ll get when the rocking of the boat throws me into a wooden table or a metal winch, or onto the burner where I’m attempting to cook dinner for our crew.</p>
+<p>But now, Jules Miller, captain of <em>Eos</em>, is replacing me on watch, and she is happy. A 62-year-old with a quick smile, a quicker laugh, and an encyclopedic knowledge of sailing, Miller has taken the job of captaining <em>Eos</em> from the boat’s summer berth in the Chesapeake Bay to a warm weather port in the Caribbean island of Antigua, where her owner can pick it up in the winter. This passage entails hundreds of miles of open ocean on the western North Atlantic, where the northerly gales of November and the confused seas of the Gulf Stream can contrive to make even the saltiest ocean sailor turn back.</p>
+<p><img alt="" src="../images/Filipov_BREAKER-1.png" /></p>
+<p><strong>SAILOR'S DELIGHT</strong>: Captain Jules Miller happily takes on challenging sailing routes—with help from the latest in modeling of complex weather systems at sea. <em>Photo by Ernest Khirallah</em>.</p>
+<p>This is no big deal for Miller, who has <a href="https://www.sailingpainkiller.com/">circumnavigated</a> the globe since walking away from a career as an <a href="https://www.juliemillerstudio.net/">artist</a> to dedicate herself to sailing oceans. “My whole world was making tiny circles; then I made a big circle in a small boat around the whole world,” is how she puts it, punctuating the quip with her trademark laugh. She expects that the voyage will take about 11 more days.</p>
+<p>And as we left the Chesapeake the day before, Miller got a very upbeat forecast from the service she uses to plot her route for the fastest passage that best avoids inclement weather and unpleasant seas. This is why she is so cheered when she comes up on deck two hours before dawn to replace me on watch. “As long as it’s right,” she says with her rapid-fire laugh.</p>
+<p>It won’t stay right for long. Although cutting-edge equipment and modern weather-forecasting services have made it easier than ever to know what awaits a small boat entering the ocean, a mariner still can’t be sure what is going to happen. Further complicating matters is that warming seas cause more frequent and intense storms, altering ocean currents, and creating even more unpredictable weather patterns.</p>
+<p>And as we head into the Gulf Stream, we’re about to experience some of them.</p>
+<p>Predicting the weather at sea is different than on land. Tiny changes in currents or winds or the temperature of the water that are impossible to predict from weather stations located on land or on buoys hundreds of miles away can have an immediate and violent impact on the conditions in a specific place at a specific time. Imagine if, to set out on a cross-country road trip, a driver needed to steer clear not just of storms, but also of roads that would suddenly turn up full of boulders without warning.</p>
+<p>For centuries, sailors have relied on their weather eye, a paper chart, a barometer, and age-old wisdom. We’ve all heard “red skies at night, a sailor’s delight; red skies in the morning, sailor take warning.” And it’s more or less true, in mid-latitude regions, where storms generally move from west to east. A red sky in the evening indicates that a low-pressure system is departing the area, and a high-pressure system is arriving and stable air is coming in from the west. A red sunrise indicates that a low-pressure storm system is moving in from the west.</p>
+<p>Weather prediction at sea, however, has advanced far beyond adages and rhymes. No longer limited either to crackly single-sideband radio calls to forecasters on land or other vessels at sea for information about the weather, mariners now have their pick of a variety of weather-routing apps that analyze information from a variety of weather forecast models in real time, connected by high-speed satellite internet.</p>
+<blockquote>
+<p>No one wants to face 35-knot gusts and nine-foot chop at six-second intervals in a 47-foot sailboat.</p>
+</blockquote>
+<p>Miller often uses one called PredictWind, which will create six routes, each based on a different forecast model, centered on the mariner’s time and point of departure, and desired destination. The interface shows how conditions might change depending on the route: Not just the speed and direction of the wind, but also how it will likely change over time at any given location. As well as the height of the waves—and what kind of waves: steep, choppy ones; long, slow rollers; or waves of different sizes and characters coming from different directions. If all six routes follow the same path, and the conditions along that path are favorable, the logic goes, then the mariner can be fairly confident that the passage will go well.</p>
+<p>But even as software gets better at telling mariners what to expect, it also takes someone with expertise and experience to really understand what's going on out there. On <em>Eos</em>, Miller takes advantage of an additional service provided by a meteorologist named Chris Parker, who advises mariners on the most advantageous routes to take to make use of favorable conditions and avoid storms, rough seas, headwinds, and doldrums. Parker, who is also an avid sailor, analyzes hundreds of factors that take into account weaker systems and atmospheric phenomena the apps cannot see. “Computer models do better with larger, stronger features, which have more data points,” he says.</p>
+<p>All models start by approximating the current state of the atmosphere using observations from buoys, ships at sea, land-based observations, weather balloons, satellites, airplanes, and airports. Then they perform calculations, using some of the fastest supercomputers on Earth, to predict the state of the atmosphere, the surface of the land, and the surface of the sea in the future.</p>
+<p>Even the best supercomputers, however, cannot predict many weather phenomena, especially thunderstorms, tornadoes, and other severe weather.</p>
+<p>Instead of providing a forecast, or several forecasts, about what will happen along a route, Parker creates an ensemble of forecasts that give an indication of the range of possible future states of the atmosphere—and how that might affect conditions where a mariner will be at a given time. Then, he brings to bear what he calls his “gut feeling and years of experience about what happens typically in weather systems like that.”</p>
+<p>It’s Thursday, 1630 hours, and I’m trying to make dinner so we can eat before it gets dark. Three of the four people on board have lots of experience on the high seas—Miller co-captained a 41-foot boat around the world; Jason Jernigan circumnavigated on his 30-foot boat solo, and I’ve sailed 15,000 offshore miles and crossed two oceans. Our fourth crew member, João Geada, is on his second long ocean passage. But I’m the only one of us who’s at ease cooking on the high seas, and everyone appreciates a hot meal on a boat in the North Atlantic. Though the water temperature is warming into the 70s as we head east, the air is still chilly, and everyone is bundled in foul weather gear.</p>
+<p><em>Eos</em> is making her way across the roiled waters of the Gulf Stream in long, slow, side to side rolls, a very safe and comfortable motion when you’re seated in the cockpit. When you’re trying to stay upright belowdecks at the stove, not so much. I don’t get seasick, but “just in case,” I’ve gratefully accepted a scopolamine patch from Geada. I’ve decided to whip up something quick so I don’t have to stay below for long: five-cheese tortelloni with a simple butter-garlic-basil sauce. It’s a terrible idea. As the boat rolls, the two hot pots want to slide off the stove, so I have to hold both with one hand while I add ingredients. Some of the rolls catch me off guard, and I burn my hand. Then the tortelloni go flying. I bump my head as I reach down to pick them up. Five second rule. I carefully pass the hot pot up the ladder to the cockpit and we eat.</p>
+<p>Meanwhile, <em>Eos</em> is taking advantage of a three-knot current, and we’re making excellent time, on pace for a 170-mile day. That should allow us to easily make the waypoint—a specific location along a route—that Parker has advised, which will put us just off Bermuda, the closest port, in two days, and on track to reach our destination of Antigua on schedule.</p>
+<p><img alt="" src="../images/1jKGs5Da-Filipov_BREAKER.png" /></p>
+<p><strong>SHIFTING PATTERNS</strong>: Before circumnavigating the globe as a sailboat captain, Miller made her career as an artist. “My whole world was making tiny circles," she says. "Then I made a big circle in a small boat around the whole world.” <strong>Illustration by Julie Miller</strong>.</p>
+<p>We make it to Parker’s Thursday evening waypoint at 1800 hours. We’re out of the Gulf Stream now; however, the situation has changed for the worse. Weather forecasts can change quickly on the water, especially in November, the month when you have to leave the Chesapeake to avoid wintry gales from the north and arrive in the Caribbean when hurricane season has largely passed; I’ve seen seven- to nine-foot waves coming from three directions at once, driven by brisk northwest winds that are, in turn, driven by fronts coming off the U.S. East Coast, swells from some distant storm in the east, and the crazed waves from the southwest of the Gulf Stream (the effect is kind of like whitewater rafting). And so it is that Parker’s latest forecast predicts winds building to gale force on Saturday.</p>
+<p>Parker also tells Miller that, in addition to the “salty” conditions, she can expect as <em>Eos</em> nears Bermuda, in the tropics there is also an “impulse of energy” forming along a trough—a long, weak low-pressure system, the kind of thing computer models don’t always pick up. The trough has already produced a <a href="https://www.nhc.noaa.gov/archive/2024/al18/al182024.public.013.shtml">hurricane</a>—Rafael, which made landfall in Cuba with winds of 115 miles per hour—and Parker doesn’t want <em>Eos</em> to sail unawares into any new tropical weather system the trough might generate.</p>
+<p>The crew of <em>Eos</em> considers this. Miller has sailed through plenty of gales, and worse, at sea. So have Jernigan and I.</p>
+<p>But no one wants to face 35-knot gusts and nine-foot chop at six-second intervals in a 47-foot sailboat—not even Miller. And Parker expects seas to build to 13 feet at eight-second intervals. That’s just plain hard to sail. Miller takes Parker’s advice; <em>Eos</em> will change course and head first to harbor in Bermuda.</p>
+<p>Friday at 0430 hours, 230 miles northwest of Northeast Breaker Light—the point at which we will round the island to enter Bermuda—<em>Eos</em> is flying along happily at 8 knots.</p>
+<p>Miller is happy, too. We’re on pace for another 160-mile day, and now think we can make it into St. George’s in daylight on Saturday. The wind dies in the afternoon, however, and a threatening-looking line of squalls builds up in red blotches on our radar screen. They bring none of the promised gusts but plenty of rain. So Miller runs the engine, so that we can try to beat the coming storm into Bermuda.</p>
+<p>The front arrives Saturday morning, 60 miles from Northeast Breaker Light. <em>Eos</em> is now yawing to windward when she surfs down the larger, steep waves. We keep an eye on that; if it gets much worse, we’ll have to steer by hand to keep her from taking a wave broadside and capsizing. I somehow make burgers, an acrobatic trick as the patties try to fly off the frying pan. A large plastic bucket of dill pickles plummets and shatters on the floor. Five second rule.</p>
+<p>As we head into the channel that leads to St. George’s, the wind comes up above 30 knots. We arrive just by daylight, though it’s still a tricky landing, with the breeze blowing <em>Eos</em> away from the dock.</p>
+<p>As we encountered, no matter the technology of modern cruising sailboats, weather prediction at sea is still far from perfect. Although we’re better at it now, the variables have shifted under our feet—and over our sails. Rising ocean temperatures and the atmospheric changes they have wrought have brought new uncertainties to sailing the high seas, a business that was never about certainty anyway. Even the traditional trade winds, the reliable easterly breeze used by centuries of sailors, have at times recently disappeared. And storm seasons—and storm systems—have become harder to predict, last longer, and are more intense. Forecasting algorithms, and even the best of maritime meteorologists, are racing to catch up.</p>
+<p>And this is how, on Sunday, we’re sitting below decks, having polished off my best meal of the voyage: pasta with an elaborate Bolognese ragu that—trust me—can be done only at the dock. Here at harbor, temporarily, in Bermuda, we’re listening to the constant <em>snap-crackle-pop</em> of pistol shrimp cruising along the bottom of the hull, zapping their tiny prey, a sound that evokes floating on a sea of Rice Krispies.</p>
+<p>Outside, the wind Parker predicted has arrived in a big way. Even below decks, the roar is starting to drown out the shrimp. Parker tells us the gales will blow for a week or more. So, after setting out on a voyage we had expected to last 12 days, <em>Eos</em> will stay in Bermuda until the long trough creating instability in the Caribbean has dissipated. A month and seven days after leaving the Chesapeake, <em>Eos</em> will finally arrive in Antigua. Propelled by the one thing you can never predict at sea: Really favorable, really predictable weather. <img alt="" src="../images/nautilus-favicon-14_1179.png" /></p>
+<p><em>Lead illustration by Natali Snailcat / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

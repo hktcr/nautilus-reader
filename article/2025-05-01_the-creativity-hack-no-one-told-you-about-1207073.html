@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Creativity Hack No One Told You About - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Creativity Hack No One Told You About - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-01
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-YG1N</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I’ve been reading the obituaries for as long as I can remember. At first glance, they might seem like little more than a collection of dates and accomplishments. But for me, they’ve become a wellspring of creativity—each one a glimpse into a life I never would’ve imagined. And as decades of creativity research suggest, the most original ideas often come from the most unlikely sources.</p>
+<p>That’s why one popular piece of advice for boosting creativity is to learn something new every day. But here’s the catch: This only works if that new information is <em>very different</em> from what’s already in your head. This is where most of our modern habits fall short. Internet searches, for instance, give you information that’s related to what you already know, or information that you’re already interested in. So, how do you escape that loop and stumble upon something unexpected, something you didn’t even know to look for? The obituaries, obviously—but I’ll come back to that.</p>
+<p>I <a href="https://sawyerpodcast.com/yoed-kenett-the-associations-of-the-creative-mind">interviewed Yoed Kenett</a>, who studies high-level cognition and creativity. His research shows that creativity thrives on making connections between very different concepts. The core idea is simple: Our ability to create relies on prior knowledge, and our creative potential increases when that knowledge is organized into conceptual networks that help us search for, connect, and generate new ideas—what Kenett calls a “Google of the mind.”</p>
+<blockquote>
+<p>It’s important to read all of the obituaries on Sunday.</p>
+</blockquote>
+<p>This research goes back to the 1960s, when psychologist Sarnoff Mednick was studying patterns of thought in people diagnosed with schizophrenia. He was exploring the idea that highly creative individuals might share certain associative patterns with those diagnosed with schizophrenia, namely, the tendency to make connections between seemingly unrelated ideas. In <a href="https://psycnet.apa.org/record/1963-06161-001">a classic 1962 experiment</a>, Mednick asked participants to say the first word that came to mind when they heard a prompt like <em>table</em>. Less creative participants tended to respond with obvious associations like <em>chair</em> or <em>leg</em>. The more creative participants gave those answers, too, but they also came up with more surprising ones, like <em>food</em> or even <em>mouse</em>.</p>
+<p>Mednick’s observations led him to propose that highly creative people have a different kind of memory structure—one that holds a wider range of ideas and forges more unexpected connections between them. He called his theory the associative theory of creativity. His research showed that creative ideas are more likely to emerge from combinations of concepts that are further apart in the mind’s conceptual network. The greater the distance between two ideas, the more original and surprising their combination tends to be. <a href="https://pubmed.ncbi.nlm.nih.gov/30667235/">More recent research</a>, by Kenett and others, confirms these observations.</p>
+<p>Some of the best-known stories of invention come from unexpected associations. Velcro, for example, <a href="https://invention.si.edu/invention-stories/george-de-mestral-velcror-inventor">was invented</a> when George de Mestral was walking his hairy sheepdog through a field of burr-covered plants. It’s notoriously difficult to remove burrs from an animal’s hair, which means the animal is going to carry seeds a far distance, allowing the plant to spread more successfully. De Mestral took out a magnifying glass and saw very tiny hooks that clung to the dog’s hair. Then he made the distant connection: The burr’s mechanism, designed by nature to spread seeds, could be used to make a clothing fastener. There’s no shortage of other surprising inventions that began with distant connections: <a href="https://www.invent.org/blog/trends-stem/who-invented-post-it-notes">Post-It notes</a>, the <a href="https://www.sciencealert.com/these-eighteen-accidental-scientific-discoveries-changed-the-world">X-ray</a>, <a href="https://thereader.mitpress.mit.edu/is-discovery-inevitable-or-serendipitous/">shatterproof glass</a>, <a href="https://www.scienceabc.com/social-science/how-some-inventions-had-the-funniest-origin-stories.html">the microwave oven</a>, <a href="https://www.museumofplay.org/toys/silly-putty/">silly putty</a>, <a href="https://www.mddionline.com/cardiovascular/the-surprising-history-behind-an-extremely-common-cardiovascular-medical-device">heart stents</a>.</p>
+<blockquote>
+<p>Why was a British mystic in Mexico City? How did Spanish-language television evolve in the U.S.?</p>
+</blockquote>
+<p>The psychologist Dedre Gentner <a href="https://groups.psych.northwestern.edu/gentner/papers/wisniewski%26Gentner_1991.pdf">also found</a> that the more conceptually distant two ideas are, the more creative their combination tends to be. For instance, she found that if you ask 100 people to imagine a chair combined with a table—two closely related items—most of them will picture something like a school desk. It’s an obvious match within the category of furniture. But if you asked 100 people to imagine a chair combined with a pony—very distant concepts—the results are far more varied and surprising: A chair you sit on while grooming a pony, one that a pony sits in, one shaped like a pony’s head, or one covered in fur.</p>
+<p>Gentner calls this property mapping—when people borrow attributes like texture or shape from one concept and apply them to another. It’s a kind of remote association, and clearly more creative than imagining a standard school desk. But Gentner identified something even more powerful: structure mapping. This happens when you transfer the relational structure of one concept to another. Say you combine “pony” and “chair” and picture a chair shaped like a pony—that’s still property mapping, just more elaborate. But if you imagine a <em>small</em> chair, you’ve made a bigger leap. That’s structure mapping: drawing on the idea that a pony is smaller than a horse, and applying that relationship to redefine the size of a chair. These kinds of mappings—especially when the underlying relations are abstract or non-obvious—tend to produce the most original and surprising combinations.</p>
+<p>You can strengthen your ability to make remote associations by exposing yourself to a wider variety of information, especially from conceptually different domains. Most of us stick to what we know. We don’t normally encounter distant concepts in everyday life, so stretching our minds into unfamiliar territory takes some effort.</p>
+<p>Which brings me back to obituaries. I’m not talking about the half-page write-ups of celebrities or politicians. I mean the small-print obituaries in <em>The New York Times</em> Sunday edition—the ones squeezed into eight columns on a single page, paid for by friends and family. These people aren’t famous. But their lives, described lovingly and vividly by those who knew them best, are often more surprising than any headline obituary. And they’re an ideal way to boost your creativity.</p>
+<p>It’s important to read all of the obituaries on Sunday. If you filter your reading by only choosing people who are like you, then you won’t be absorbing the most different, surprising new information.</p>
+<p>Here are two that I read one Sunday morning recently:</p>
+<p><strong>Berta Escurra</strong> was born in 1924 in San Pedro de Lloc, Peru. She was a follower of British writer and spiritual thinker Rodney Collin when he moved to Mexico City in 1948. In 1963, she moved to New York City and founded the Spanish International Network (SIN) with Rene Anselmo. SIN was the first TV network in the U.S. to broadcast entirely in Spanish. Anselmo later went on to found PanAmSat, the world’s first private international satellite system.</p>
+<p><strong>Norton Garfinkle</strong> died on March 20, 2025 at the age of 94. Garfinkle was a professor at Amherst College and a serial entrepreneur. He founded a company that detected land mines for the U.S. and foreign governments. He invented a news database search algorithm and sold it to Reuters. He developed PLAX, the first pre-brushing dental rinse. He started Electronic Retailing Systems, which provided self-checkout systems to supermarkets. He started a company that published <em>Lamaze Parent Magazine</em>.</p>
+<p>See what I mean about being interesting? You’ve probably never heard of either of them. (I hadn’t.) But reading their stories introduces you to a mix of fields—broadcasting, aerospace, esotericism, oral hygiene, database design, prenatal publishing—that you’d rarely, if ever, encounter all in one place. It’s exactly the kind of conceptually distant material that helps fuel creative thinking.</p>
+<p>Here’s how you can use the obituaries to enhance your creative cognition.</p>
+<p>First, start by reading them slowly, without searching for a big idea. Let the details wash over you—the places lived, the professions practiced, the odd hobbies pursued. Notice what sticks.</p>
+<p>It’s not just about learning new facts, of course—it’s about asking questions. Why was a British mystic in Mexico City? How did Spanish-language television evolve in the U.S.? What led someone to invent PLAX or build search tools for financial news decades before Google? Even if you don’t find all the answers, just posing the questions helps you flex the creative muscle that thrives on curiosity and connection.</p>
+<p>Will any of the life stories you read cause you to have a surprising, creative insight? No one can say. Butresearch shows that distant analogies often lead to creative breakthroughs, often in unexpected ways. What you’re doing is filling up your brain with a range of very different cognitive material.</p>
+<p>In every person’s life story, there’s always a narrative, always a deeper principle at work. How did a woman from Peru get to Scotland, Mexico City, and then New York? How does a professor at Amherst College found so many different companies, with so many different technologies and within so many industries? Seek that deeper principle, ask “Why?,” and look for distant connections with your own life. Creativity is a daily practice available to anyone. <img alt="" src="../images/nautilus-favicon-14_1202.png" /></p>
+<p><em>This story was originally published in</em> <a href="https://thereader.mitpress.mit.edu/the-creativity-hack-no-one-told-you-about-read-the-obits/"><em>MIT Press Reader</em></a>.</p>
+<p><em>Lead image by Macey11 and llorcraft / Pixabay</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

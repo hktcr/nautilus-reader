@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science of Your Weed’s Stank | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Science of Your Weed’s Stank</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RBLN</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Walk by someone smoking weed and you’ll catch the whiff in an instant, even if they are behind closed doors. With recent state-level legalizations of medical and recreational cannabis in the United States, the odors are impossible to miss. But like different wines having distinct aromatic notes, different kinds of cannabis and hemp have telltale scents. Some are cakey, some are fruity, others smell like straw, baking spices, fuel, or even vomit.</p>
+<p>Recent <a href="https://ethanrusso.org/wp-content/uploads/2022/11/The-Nose-Knows.pdf">research</a> suggests these scents are better predictors of quality than the THC content consumers so eagerly chase today. So scientists did the most sensible thing: They created a scent dictionary for cannabis.</p>
+<p>“Aroma plays a key role in how consumers judge cannabis quality, yet until now there's been no standardized language to describe it,” said Tom Shellhammer, professor of food science and technology at Oregon State University, who worked on the weed list, in a <a href="https://news.oregonstate.edu/news/researchers-develop-first-ever-common-language-cannabis-hemp-aromas">statement</a>. “This research lays the groundwork for a shared vocabulary that benefits consumers, retailers, and growers.” Shellhammer and colleagues published their <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0335125">findings</a> in <em>Plos One.</em></p>
+<p>To assemble their library of terms, the scientists enlisted a panel of human testers. These experimenters sniffed 91 samples of hemp and cannabis bud—not smoke—and were asked to check off all the scents they noticed from a set list of 81, borrowing from data collected between 2018 and 2020 in a weed growing competition in Portland, Oregon, called Portland’s Cultivation Classic. Then the researchers analyzed how well these terms allowed them to distinguish between samples, choosing a final lexicon of 25 scent names.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-ecology-of-good-weed-238283/"><strong>The Ecology of Good Weed</strong></a><strong>”</strong></p>
+<p>With just a bit of training, even panelists who’d never put names to smells before could sort buds with impressive accuracy, suggesting the list is fairly intuitive, the researchers note. Future work, they say, could look into which scent profiles are most enjoyable, and whether trimming style or other cultivation and processing practices inform these aromatic fingerprints.</p>
+<p>A few scent profiles stood out. In general, cannabis known for its high levels of THC and low CBD content leaned into the darker end of the scent wheel: skunky, musty, fuel, animal, and nutty or toasted bread. Less-intoxicating types of cannabis, with low THC and high CBD, swung in a brighter direction: It was described as citrusy, fruity, candy-like, tropical, and floral. The chemical profiles of the different varieties didn’t have much connection to their aroma profiles. Surprisingly, neither did terpenes—the aromatic molecules typically linked to the smell of weed and the intensity of the high.</p>
+<p>Today many consumers use THC potency as a gauge for quality, but this association pushes consumers to buy products with higher and higher THC content, the researchers pointed out. And that poses health risks such as driving while high, acute psychosis, as well as a condition known as cannabinoid hyperemesis, which features nausea and vomiting.</p>
+<p>The good news is, the bouquet seems to matter more than the buzz, and now we have a way to name it.</p>
+<p>Below, the inaugural menu of cannabis aromas, assembled one sniff at a time:</p>
+<p><img alt="" src="../images/ncgeOUiz-French_BREAKER.png" /></p>
+<p><a href="https://doi.org/10.1371/journal.pone.0335125.t001"><em>https://doi.org/10.1371/journal.pone.0335125.t001</em></a></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: SharkPaeCNX / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

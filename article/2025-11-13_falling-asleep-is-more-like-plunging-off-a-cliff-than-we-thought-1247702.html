@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Asleep Is More Like Plunging Off a Cliff Than We Thought | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Falling Asleep Is More Like Plunging Off a Cliff Than We Thought</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-13
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-2FZV</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Unless you are having a very bad night, you will eventually succumb to sleep, your head sinking into the pillow, your mind releasing its hold on consciousness. If you have insomnia, it may take a lot longer to reach this blissful moment. But once your brain does open the door to the elusive borderland beyond full consciousness, it will be more like “falling” than you might think.</p>
+<p>Researchers recently discovered that the transition from awake to asleep hits a kind of tipping point after which slumber comes all at once, and that this point can easily be predicted within 49 seconds of the event using EEG. The finding counters conventional models of how sleep works, which has long held that it is an excursion into darkness that unfolds over time.</p>
+<p>“We discovered that falling asleep is a bifurcation, not a gradual process, with a clear tipping point that can be predicted in real time,” said study lead author Nir Grossman, of the Imperial College London, in a <a href="https://www.imperial.ac.uk/news/270894/falling-asleep-follows-brain-tipping-point/">statement</a>.</p>
+<p>To map this somnolent moment, Grossman and his colleagues collected overnight scalp EEG readings from more than 1,000 people, tracking something called “sleep distance,” how close your brain is to falling asleep, moment to moment. Their <a href="https://www.nature.com/articles/s41593-025-02091-1">results</a>, published in <em>Nature Neuroscience</em>, could help with the design of early drowsiness warnings for driving safety and with diagnosing and treating sleep disorders, such as <a href="https://nautil.us/what-we-can-learn-from-an-insomniac-fish-405226/">insomnia</a>, <a href="https://nautil.us/narcoleptic-naps-are-a-creative-sweet-spot-259482/">narcolepsy</a>, and excessive daytime sleepiness.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/narcoleptic-naps-are-a-creative-sweet-spot-259482/"><strong>The Creative Sweet Spot of Dreaming</strong></a><strong>”</strong></p>
+<p>In the group data, the scientists found that activity in the brain abruptly drops around four and a half minutes before conventional sleep onset. This was the case independent of age, gender, or how long it took the person to fall asleep. The researchers first observed the dynamic in their sample of 1,000 people, then replicated the finding in a smaller cohort of 36 people in the laboratory, each participant logging an average of seven nights in the sleep lab. To further validate their results, they used the data to successfully predict individual sleep progressions in real time.</p>
+<p>Before now, our understanding of how sleep happens was largely based on a classification <a href="https://psycnet.apa.org/record/1995-97417-014">system</a>  proposed more than three decades ago by a trio of Japanese researchers Tadao Hori, Mitsuo Hayashi, and Toshio Morikawa, which held that falling asleep consists of a sequential transition between nine distinct EEG patterns, such as alpha wave trains, alpha wave intermittent, and vertex sharp waves. But the time spent in each of these stages varied widely from one person to the next and was time consuming to measure.</p>
+<p>More recently, neuroscientists had attempted to quantify gradual changes in specific EEG features, but the transitional process between wakefulness and verifiable sleep was still often characterized as an extended state of drowsiness. Ultimately, the researchers of the new paper point out, these approaches have not helped us understand the real-life experience of falling asleep nor devise new methods to manage and treat poor sleep.</p>
+<p>The team noticed that sleep onset does cruise through different parts of the brain at different times in the process. For instance, the occipital cortex, involved in visual processing, begins to shut down earlier than the frontal cortex, which is involved in planning and decision making. And they admit that the tipping point model suggested by their data does not rule out other possible models of the process of falling asleep.</p>
+<p>But if what they found is correct, then what we know as “drifting off” is actually more like cliff diving into oblivion. <img alt="" src="../images/nautilus-favicon-14_796.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Ekaterina Salova / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Thwart Internet Scams - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How to Thwart Internet Scams - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-9G3O</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It sounds like a Star Wars movie moment, but when “malicious cyber actors deployed Darkside ransomware,” it was anything but a movie script (<a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-131a">CISA, 2021</a>). Ransomware created by hackers was used to curtail oil flow through the 5,500 miles of pipeline that supply the eastern United States, resulting in long gas station lines of panicked <a href="https://sbhunia.me/publications/manuscripts/ccgrid23.pdf">drivers<em>.</em></a>Known for their phishing tactics to gain access to personal data, the “Darkside gang” hackers logged into a Colonial Pipeline employee account and took control of the <a href="https://www.colpipe.com/news-insights/media-resources/post/media-statement-update-colonial-pipeline-system-disruption/">company.</a> For almost a week, the oil distribution network was compromised until Colonial paid a $4.4 million ransom.</p>
+<p>This sort of attack, albeit on a smaller scale, is also directed at individuals every day, with the number of cybercrimes reported to the FBI on the rise, quadrupling from 2005 to 2023. But why, in an age of digital literacy, do so many people still fall prey to them? Research shows that we’re hardwired to be vulnerable. The cognitive underpinnings and emotional triggers that evolved for our survival can be co-opted into trapping us in these ruses.</p>
+<p>Tim McGuinness, the director of the Society of Citizens Against Relationship Scams, posits that “the rise of online scams and fraud presents a novel challenge to modern human populations, exploiting psychological vulnerabilities rather than physical traits.”</p>
+<p>Experiments show that hidden processes in our brains initiate actions before we make conscious decisions. By the time we’re aware of deciding whether to click on a pernicious email, our brains may have already made the decision. When study participants are monitored with scalp electrodes while taking an action, such as tapping a button when they see something on a screen, EEG activity starts as early as 1.5 seconds before self-initiated <a href="https://pubmed.ncbi.nlm.nih.gov/27328786/">movements</a>, in what’s been called the “readiness potential.” (Schmidt et al., 2016)</p>
+<p>Scientists debate the implications of this readiness potential for exercising free will, whether to escape a pouncing tiger or open a tantalizing email. Regardless, we have a suite of traits that render us vulnerable to scams. A <a href="https://pubmed.ncbi.nlm.nih.gov/38641887/#full-view-affiliation-1">2024 study</a> (Zhao and Zhou, 2024) found that our emotions as we make decisions have a statistically significant effect on risk-taking. Study participants experiencing positive emotions chose higher-risk higher-reward options in a gambling scenario. Phishing scams that elicit positive emotions may, likewise, increase click rates on risky emails.</p>
+<p>Our vulnerability to internet scams also stems from cognitive overload. Think about walking into a megastore to find one item you need on rows and rows of crowded shelves. In overtaxed brains, our decision-making functions worsen, resulting in spontaneous bad purchases. A <a href="https://acr-journal.com/article/cognitive-biases-in-digital-decision-making-how-consumers-navigate-information-overload-consumer-behavior--889/">2025 study</a> of information overload noted that “digital interactions force consumers to make rapid decisions during information overload situations because traditional decision-making time is unavailable.”</p>
+<p>A <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8567038/">2021 study</a> showed that when people visiting a simulated e-commerce platform were faced with high volumes of product information about products, they invested fewer attentional resources in making a decision. And, later, the participants that had faced information overload were more likely to regret their decisions. In a fatigued state, we may rush to click on a phishing email, bypassing a rational assessment of risk.</p>
+<p>So, in terms of our cognitive underpinnings, we’re set up for failure when internet scams come our way. Moreover, according to a <a href="https://pubmed.ncbi.nlm.nih.gov/35224514/">2022 questionnaire</a>, people are “worried and often dissatisfied with the current technologies available to protect them against phishing emails.” Organizations working to reduce phishing and other scams look to break the ties that allow cyber-criminals to reach peoples’ computers.</p>
+<p>The data privacy company <a href="https://incogni.com/deal/special?transaction_id=102f33166a73c19eba39f788a7371c&amp;offer_id=2&amp;affiliate_id=1041&amp;source=Jun27&amp;aff_sub=&amp;utm_source=Affiliates&amp;utm_medium=1041icg&amp;utm_campaign=affiliate&amp;utm_content=2">Incogni</a> roots out and removes personally identifiable information from the internet. Such information—Social Security numbers, bank IDs, passwords—is the raw material for targeted scams. <a href="https://incogni.com/deal/special?transaction_id=102f33166a73c19eba39f788a7371c&amp;offer_id=2&amp;affiliate_id=1041&amp;source=Jun27&amp;aff_sub=&amp;utm_source=Affiliates&amp;utm_medium=1041icg&amp;utm_campaign=affiliate&amp;utm_content=2">On its website, Incogni explains</a> that they “decided to build a tool that would curb the unfair data collection practices of data brokers and empower people to leverage existing privacy laws.”</p>
+<p>The more personalized the cyber attack, the higher a victim’s vulnerability. A <a href="https://pubmed.ncbi.nlm.nih.gov/36403509/">2023 experiment</a> on spear-phishing (individually targeted scam emails) compared participant vulnerability under conditions of high and low personalization. Participants were three times as likely to fall prey to emails that were highly customized to their personal information.</p>
+<p>In a two-fold strategy to cleanse the internet of people’s stored personal information while also blocking the barrage of marketing materials, Incogni works with data brokers to suppress customers’ names from marketing lists. As unwanted emails and other spam abate, cognitive overload should ease, leaving people better positioned to make sound choices about what to click on.Research also shows that we can learn to behave in a more resilient manner when confronted with scams. A <a href="https://www.sciencedirect.com/science/article/pii/S0164121223002947">2024 literature review</a> of 53 published studies on phishing education, training, and awareness found that when people are aware of anti-phishing efforts in place, they’re more likely to be vigilant themselves. So, reading this article may have given you a leg up in watching for suspicious digital communications and deleting them before you act on any temptation to click.</p>
+<p><a href="https://incogni.com/deal/special?transaction_id=102f33166a73c19eba39f788a7371c&amp;offer_id=2&amp;affiliate_id=1041&amp;source=Jun27&amp;aff_sub=&amp;utm_source=Affiliates&amp;utm_medium=1041icg&amp;utm_campaign=affiliate&amp;utm_content=2">Protect yourself with Incogni. Use code NAUTILUS today to get an exclusive 55% discount on annual plans</a>.</p>
+<p><em>This post was originally published on June 24, 2025.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

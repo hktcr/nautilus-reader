@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet the Real Dr. Frankenstein | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Meet the Real Dr. Frankenstein</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-A715</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Our centuries-long fascination with Frankenstein’s monster—which has inspired <a href="https://knarf.english.upenn.edu/Pop/filmlist.html">dozens</a> of films, including the recent Guillermo del Toro movie—might have been sparked by a scholarly feud over frogs. An electric conflict that also gave us the battery.</p>
+<p>In the 18th century, scientists sought to pinpoint electricity’s influence on living things, and whether it could be wielded to resurrect the dead. Italian physicist and physician Luigi Galvani <a href="https://www.lindahall.org/about/news/scientist-of-the-day/giovanni-aldini/">claimed</a> to have discovered an intrinsic form of electricity within animals after observing that frogs’ severed legs appeared to move on their own. For example, he stuck the creature’s limb on a brass hook and, when cutting it with a steel scalpel, it <a href="https://nationalmaglab.org/magnet-academy/history-of-electricity-magnetism/pioneers/luigi-galvani/">twitched</a>.</p>
+<p>This intrigued Italian physicist Alessandro Volta, who later found that the electrical current jiggling these frog legs emerged from the charge moving between two types of metals—not from the frog limb itself. The isolated frog leg was just <a href="https://www.aip.org/inside-science/the-science-that-made-frankenstein">serving</a> as the conductor. He later went on to invent an early version of today’s batteries, known as a “Voltaic pile,” based on this finding.</p>
+<p><img alt="" src="../images/xZwdOVom-Glick_BREAKER.png" /></p>
+<p><strong>IT’S ALIVE!:</strong> An illustration from Giovanni Aldini’s 1804 book describing his experiments jolting human bodies with electricity. <em>Credit: Wellcome Collection gallery / Wikimedia Commons.</em></p>
+<p>Galvani’s nephew, Giovanni Aldini, was intrigued by this work and wondered if it could somehow be used to reanimate bodies. But he took things a step further, experimenting on other animals as well as humans. Using a Voltaic pile, Aldini began showcasing his work on non-human animals and on executed prisoners throughout Europe—at the time, European scientists <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2561859/?page=5">took an interest</a> in studying the bodies of these individuals to learn how their systems function shortly after death. To the horror of observing audiences, Aldini stimulated decapitated human bodies with electricity and even prompted <a href="https://lithub.com/the-italian-electrical-scientist-who-may-have-inspired-frankenstein/">some to sit upright</a>.</p>
+<p>In 1803, Aldini made headlines when experimenting with the body of George Forster, who had recently been executed for murder. In London, Aldini <a href="https://pmc.ncbi.nlm.nih.gov/articles/instance/2561859/pdf/jnma00246-0061.pdf">placed electrodes</a> on Forster’s body. The deceased man’s “jaws quivered” and “entire head moved.” In the same experiment, the audience <a href="https://theconversation.com/frankenstein-the-real-experiments-that-inspired-the-fictional-science-105076">observed</a> how Forster’s “right hand was raised and clenched, and the legs and thighs were set in motion.” To some onlookers, it appeared as if Aldini had revived him.</p>
+<p>While the provocative exhibition generated plenty of press at the time, <em>Frankenstein</em> author Mary Shelley was a child when this show was put on. But later connections may have exposed her to Aldini’s work and similar experiments. Her orbit included prominent electrical researchers, who were friends with her father, William Godwin; and her doctor, John Abernethy, <a href="https://books.google.com/books?id=DuA-AAAAcAAJ&amp;printsec=frontcover&amp;source=gbs_ge_summary_r&amp;cad=0#v=onepage&amp;q=correspond&amp;f=false">claimed</a> that “the phaenomena of electricity and of life correspond.”</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-body-electric-264075/"><strong>The Body Electric</strong></a><strong>”</strong></p>
+<p>In the summer of 1816, Shelley <a href="https://www.nytimes.com/2011/05/29/travel/lake-geneva-as-byron-and-shelley-knew-it.html">spent</a> a summer in Switzerland with a group of literati including poet Lord Byron and her future husband Percy Shelley. <a href="https://nautil.us/the-volcano-that-shrouded-the-earth-and-gave-birth-to-a-monster-235728/">On this trip</a>, they allegedly spoke of “galvanism,” a term referencing Luigi Galvani’s work and other electricity experiments that followed. In the 1831 preface to <em>Frankenstein</em>, Shelley notes how the idea influenced her creative process: “Perhaps a corpse would be re-animated; galvanism had given a token of such things: perhaps the component parts of a creature might be manufactured, brought together, and endued with vital warmth.”</p>
+<p>Even if Aldini’s dreams never fully came to life, the fiction it spawned has continued to animate our imaginations. <img alt="" src="../images/nautilus-favicon-14_864.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em>.</p>
+<p><em>Lead image: Theodor von Holst / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Some Songbirds Use Blinks to Defend Their Territory | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Some Songbirds Use Blinks to Defend Their Territory</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RF6P</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>White-throated dippers are brown-feathered, plump little songbirds; they usually live along riverbanks and defend their territory by chirping at any birds that drop by. But the loud rivers burbling near them can at times drown out their songs. In a recent <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(25)00958-3?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982225009583%3Fshowall%3Dtrue"><em>Current Biology</em></a> study, scientists found that the undeterred birds switch up their communication strategy when the streams get too loud for interlopers to hear their territorial songs, and use their distinctive eyelids instead.</p>
+<p>“Their white eyelids are so striking—every time they blink, it’s like a tiny flash,” says Henrik Brumm, senior study author and a behavioral ecologist at the Max Planck Institute for Biological Intelligence, Germany. The snow-white eyelids are so conspicuous because the birds’ plumage is a rich dark brown. “That made us wonder: Could this be a way of communicating in the noisy habitats where they live, along fast-flowing rivers?”</p>
+<p>The researchers found that the birds blinked at a higher frequency as the river got noisier, and the birds that blinked more also didn't sing as loudly—specifically when another member of their species was around. Based on these findings, the scientists suggest that the birds may prefer to completely shift their communication strategy—from listening to looking and singing to blinking—when the waters become too loud. “Natural noise, like rushing water, can be a powerful force shaping how animals <a href="https://nautil.us/ai-could-help-humans-understand-animals-1211108/">communicate</a>,” says Brumm.</p>
+<blockquote>
+<p>“Every time they blink, it’s like a tiny flash.”</p>
+</blockquote>
+<p>Brum and his colleagues observed the birds in Yorkshire Dales National Park in northwest England. They used a telescope or binoculars to count the dippers’ blinks and to spot any other birds of the same species around them. They also recorded how loudly they sang using a directional microphone, a particular kind of microphone that helps pick up sounds from a specific direction in noisy environments, and recorded river noise separately using a sound level meter. To simulate the presence of an intruder, they placed a loudspeaker near the dippers’ nests on the riverbank and played songs of dippers singing.</p>
+<p>The toughest part of the experiment, Brumm says, was the weather. “Dippers sing in February, so we spent more than 300 hours in the freezing, wet north of England,” Brumm says. “I still don’t know how the team managed to get their clothes dry each evening!”</p>
+<p><strong>“Stay Away” Signaling</strong></p>
+<p>Brumm and his team initially noticed that the birds seemed to be using their blinks to send a “stay away” signal to intruders. The more aggressively the birds reacted to simulated intruders, the more they blinked. Then when the researchers analyzed their field data, they discovered that as the river noises grew, so did the rate at which the birds blinked, as long as another same-species bird was around to receive their signals.</p>
+<p><img alt="" src="../images/UrN8t9HA-Subrahmanyam_BREAKER.png" /></p>
+<p><strong>SIGN LANGUAGE:</strong> White-throated dippers have snowy eyelids that become visible against their rich brown plumage when they blink. They use these blinks to defend their territories against rivals when the rushing rivers in their habitat become too loud for chirps to be heard. <em>Credit: Leopardinatree / Shutterstock.</em></p>
+<p>“When other dippers are around, the birds sing softer and blink more, which shows a clear shift between sound and visual signals,” explains Brumm.  “The surprising part is that switching between senses like this—from hearing to seeing—is very rare in animal communication.” Another example of such switching can be found in <a href="https://academic.oup.com/beheco/article-abstract/31/1/213/5608973?redirectedFrom=fulltext&amp;login=false">white-crowned song sparrows</a>, which choose to flutter their wings instead of singing softly in noisy urban settings.</p>
+<p>Clinton Francis, an ecologist at the California Polytechnic State University notes that white-throated dippers live in a highly specialized environment that few other bird species occupy. “They're in these areas that have this rushing whitewater—really, really difficult visual fields and also super loud,” he says.</p>
+<p>Francis, who wasn’t involved with the dipper study, thinks many other organisms could be dynamically adjusting how they communicate based on the world around them, but scientists have not yet managed to decode their signals. “Maybe we aren't paying enough attention to some of these visual signals that animals are using with one another all the time,” he says. “Different gestures could be important visual signals, [but] we have not interpreted them as such yet.”</p>
+<p>Brumm agrees. “Animal communication is far more complex and flexible than most of us imagine,” he says. “Even a simple blink can carry meaning—especially when nature forces animals to get creative.” <img alt="" src="../images/nautilus-favicon-14_932.png" /></p>
+<p><em>Lead photo by Kevin Duclos</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Some Volcanoes Don’t Explode | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why Some Volcanoes Don’t Explode</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-26
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-TW00</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Scientists studying volcanoes have long thought that rising magma rich in gas bubbles should quickly zip to the top of a volcano and erupt.</p>
+<p>But famous eruptions, like Chile’s Quizapu and Mount St. Helens in Washington state, haven’t fit this mold. Between 1846 and 1847, Quizapu gently unloaded one of South America’s largest lava flows ever documented, leaving behind piles of rock spanning some 20 square miles.</p>
+<p>And months before Mount St. Helens erupted for nine hours in 1980, something strange happened: Lava chock-full of gas and seemingly primed to quickly explode instead leisurely flowed inside the volcano’s cone. A massive blast was only triggered when an earthquake and resulting avalanche struck, causing the north face of the mountain to crumble. (This freed pressurized gases within the volcano, prompting magma from below the surface to surge upward and spew into the air.)</p>
+<p>Now, researchers say they have identified a pressure release valve of sorts that enables a sluggish escape of thick, gas-rich lava, according to a <a href="https://www.science.org/doi/10.1126/science.adw8543">paper</a> published in the journal <em>Science</em>.</p>
+<p><img alt="" src="../images/WjtiSuwn-Glick_BREAKER.png" /></p>
+<p><strong>BUBBLE, BUBBLE:</strong> Researchers suggest that bubble formation deep within volcanoes can ease some pressure, avoiding violent eruptions. <em>Image by Roche, O.,</em> et al. Science <em>(2025).</em></p>
+<p>Gas bubbles have been thought to pop up as magma rises in volcanoes, and the ambient pressure decreases—like popping open a bottle of champagne, the bubbles speedily shepherd the sizzling magma stew toward explosion.</p>
+<p>But, in some cases, bubbles might form within a tube-like channel called the conduit, in which magma surges up from an underground reservoir before it’s released as lava. When emerging deep within the conduit, these bubbles can merge and form channels for gas to escape before pressure mounts.</p>
+<p>"We can therefore explain why some viscous magmas flow out gently instead of exploding, despite their high gas content—a riddle that's been puzzling us for a long time," said study co-author Olivier Bachmann, a volcanologist at ETH Zürich in Switzerland, in a <a href="https://ethz.ch/en/news-and-events/eth-news/news/2025/11/why-some-volcanoes-dont-explode.html">statement</a>.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-sound-so-loud-that-it-circled-the-earth-four-times-235101/"><strong>The Sound So Loud That It Circled the Earth Four Times</strong></a><strong>”</strong></p>
+<p>This early bubbling occurs thanks to shear forces. The process can be compared to stirring honey. At the jar’s edge, more friction causes the honey to move more slowly than the sweet liquid in the center. Likewise, the friction in a volcano’s conduit is higher along the edge than in the center. “This essentially ‘kneads’ the molten rock, producing bubbles of gas” deep in the conduit, according to the statement.</p>
+<p>The team of scientists identified this phenomenon when modeling volcanic activity in the lab by saturating a thick liquid that mimics molten rock with carbon dioxide gas, then applying shear forces to this substance.</p>
+<p>Now, Bachmann hopes that volcano models will better incorporate shear forces, helping to paint a clearer picture of volcanoes’ potential perils. <img alt="" src="../images/nautilus-favicon-14_735.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Aaron Rutten / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

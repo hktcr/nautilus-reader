@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Primitive Understanding of Language-Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Our Primitive Understanding of Language-Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-30
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-IZ06</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="" src="../images/eMVnZUvD-1.png" /></p>
+<p>If humans have been talking for 200,000 years—for most of our species’ existence, that is—then an estimated half a million languages might have been spoken in all. To put that number in perspective, around 7,000 languages are spoken today. And because writing was only invented about 5,000 years ago, the vast majority of those half a million languages are lost to us, having been spoken in a preliterate world and died before they could be recorded. That’s half a million distinct systems of knowledge including histories, myths, songs, pharmacopoeias, recipes, jokes, prayers, and swear words that have vanished into oblivion. (It’s possible some of the earliest languages were signed rather than spoken.)</p>
+<p><img alt="" src="../images/Spinney_breaker.png" /></p>
+<p><strong>TOWER OF BABEL:</strong> Author Laura Spinney was dismayed to realize just how many languages once spoken by humans were never recorded and have been lost to oblivion. Linguists can only piece together our linguistic past up through 10,000 years ago. <em>Courtesy of Laura Spinney.</em></p>
+<p>Even if that number is off, which it might be because researchers disagree about when humans started speaking—some <a href="https://www.umass.edu/preferen/You%20Must%20Read%20This/Evans-Levinson%20BBS%202009.pdf">argue</a> it was around 100,000 years ago, others that speaking predates our species—we can be confident that the number of languages that have ever been spoken dwarfs those that are spoken today. I find this fact dizzying and—I can’t help it—tragic. Think of all those ways of knowing and doing that have been invented and lost, only—in some cases—to be invented again. Think of all that gossip!</p>
+<p>But it also has some quite staggering implications for our understanding of language. It means that living languages likely represent less than 2 percent of humanity’s full linguistic range, and a non-random sample at that—one heavily shaped, for example, by Western imperialism. And it gets worse. Perhaps only 10 percent of the languages that make up that 2 percent are well documented. When you consider that linguists continue to record previously unrecorded languages and to discover novel linguistic features in the process—as they are doing today in Papua New Guinea, for example—you realize how laughably little we know about what language is and what it does.</p>
+<p><img alt="" src="../images/TzXphdad-2.png" /></p>
+<p>At the turn of the 14th century, when Latin was already dead except as a language of scholars and priests, a Tuscan writer called Dante Alighieri observed that many words were almost identical across the Romance languages. He went on to make the frankly heretical suggestion that this was because the various flavours of Romance were all descended from Latin. At the time, in Europe, there was no concept of language evolution. The Bible held that linguistic diversity and its corollary, mutual bewilderment, was the punishment visited on humanity by God for the impertinent construction of the Tower of Babel—and medieval Europeans took the Bible literally.</p>
+<blockquote>
+<p>Living languages likely represent less than 2 percent of humanity’s full linguistic range.</p>
+</blockquote>
+<p>For Dante’s contemporaries, language was static until God said otherwise. Dante argued that <em>al contrario</em>,languages change infinitesimally all the time. It was like a person growing up, he explained: A baby becomes a child becomes a man. People had no trouble grasping this even though they didn’t perceive the baby morphing before their eyes. Unfortunately, for all his literary panache, the celebrated author of the <em>Divine Comedy</em> found himself roundly ignored on this point.</p>
+<p>It took another couple of centuries for people to accept that languages change. Even today, though most people readily acknowledge linguistic evolution, some balk at the idea that their own language is in a state of flux. And yet, though that flux is heavily context-dependent, and happening at different rates in different languages, it is incontestably real.</p>
+<p><img alt="" src="../images/nzm5ViJL-3.png" /></p>
+<p>One way that all languages change is simply through young children learning them. It’s a fidelity issue: In reproducing what they hear, infants unconsciously introduce tiny deviations from the template presented to them. But people can also innovate deliberately, by borrowing a foreign word or grammatical construction, or by mimicking an accent. They might do so because they want to sound like someone else, or for the opposite reason—to distinguish themselves from the exotic-sounding other.</p>
+<p>These opposing forces have operated throughout our species’ existence, and the upshot is that languages and dialects have diverged and split, but also, occasionally, converged. The resulting branchings and fusings reflect the language’s journey through the world—the different speech communities its speakers have encountered and their receptiveness, or otherwise, to those communities.</p>
+<p>You could think of a language, then, as a sort of chronicle of the past, but one composed collectively and in large part unconsciously. By poring over the language’s internal workings, historical linguists can “read” that chronicle. This revelation was balm to my soul, after the earlier one that most languages are lost to us, because it means that we can salvage some of our unwritten past. Linguists can reconstruct living languages’ prehistory, to some extent, and even those languages’ long-dead ancestors. They can only do so up to about 10,000 years back, however, because beyond that threshold data become so scarce that it is difficult to distinguish the different forces shaping a language—to tell loan from inheritance, say.</p>
+<p>That leaves at least 190,000 years of the human backstory an impenetrable black box. It’s still dizzying, I’d say. Still tragic. <img alt="" src="../images/nautilus-favicon-14_1097.png" /></p>
+<p><em>Lead image: KitohodkA / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

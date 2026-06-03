@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whales Run Aground by the Sun - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Whales Run Aground by the Sun - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-OLQV</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>News of a whale stranding evokes the sense of the funereal. When these leviathans wash ashore en masse, the inevitable question is, "Why?"</p>
+<p>Our contemporary world presents a gauntlet of hazards that might lead to whales beaching themselves. Things like ear-splitting naval sonar, entanglements with industrial fishing gear, collisions with ships, illness, and pollution are often cited as culprits. But whale strandings have a history that predates our Anthropocene assistance—the fossil record shows that strandings <a href="https://royalsocietypublishing.org/doi/10.1098/rspb.2013.3316">have been happening</a> for at least the past 6 million years. It’s a phenomenon that vexed even Aristotle, who wrote in his <em>Historia Animalium</em> that “it is not known why they sometimes run aground on the seashore: For it is asserted that this happens rather frequently when the fancy takes them, and without any apparent reason.”</p>
+<p>But an emerging body of research around the violent churnings of our sun might provide a new theory as to why some whales might stray fatally off course. Solar storms might be throwing whales off their bearings, says Jesse Granger, a Duke University biophysicist who studies how animals orient themselves.</p>
+<blockquote>
+<p>Geomagnetic storms can be powerful, causing radios to crackle and power grids to fail.</p>
+</blockquote>
+<p>The idea that the particles thrown off by our nearest star could be so powerful as to disrupt the navigation of some animals seemed far-fetched a couple of decades ago. Other leading studies at the time pointed to <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165783607001257">periodic warming trends</a> or <a href="https://royalsocietypublishing.org/doi/abs/10.1098/rsbl.2005.0313">wind cycles</a> for their role in mass whale strandings. Granger observed that gray whales trace a well-documented 10,000-mile migration route that hugs the crenulated shorelines along the Pacific coasts of Central and North America. Studying strandings among these massive marine mammals, she thought, might illuminate whether solar storms could actually throw off the navigation system these animals use to travel the complex route.</p>
+<p>But there’s at least one problem: The biological mechanisms behind <em>how</em>, exactly, gray and other kinds of whales get their bearings is still unknown. It’s been shown that numerous migratory species operate on some sort of internal compass. But how that compass is wired up to an animal’s nervous system, and how it interacts with Earth’s magnetic field is something scientists studying navigational phenomena don’t yet agree on.</p>
+<p>By reviewing 31 years’ worth of data on 187 strandings of otherwise healthy gray whales amassed by the National Oceanic and Atmospheric Administration, and comparing them with solar storm activity over the same period, <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(20)30028-2">a paper</a> Granger published presents a compelling correlation. “The gray whales that we were looking at had a fourfold increased likelihood of stranding on a day where there were very high radio-frequency levels coming from the sun,” she says.</p>
+<p>Thanks to the electric currents created by the churn of molten iron in the Earth’s outer core, our planet has a magnetic field that tugs the needle northward on even the most rudimentary toy compass. Biologists have long posited that whales and other migratory animals could find their bearings through some sort of internal mechanism that mimics the magnetic components and function of that instrument.</p>
+<p><img alt="" src="../images/oNdbqOEX-Digges_BREAKER.png" /></p>
+<p><strong>A FATE IN THE STARS:</strong> Each year, some whales find themeselves stranded on beaches. Now researchers are wondering if solar flares play a role. <em>Photo by Hector Gago Bellido / Shutterstock.</em></p>
+<p>Problems with following such an internal compass arise when the sun’s corona—the outermost layer of its atmosphere—blasts streams of charged particles and radiation outward, into the solar system. This can create ghostly veils of light around the North and South Poles, the aurora borealis and australis, respectively. From Earth, we see these streams as spots on the sun’s surface, and their ejecta easily traverse the 93 million miles between the two bodies to strum at our planet’s magnetic cocoon. These geomagnetic storms can also be powerful, causing radios to crackle, power grids to fail, and communications satellites to fritz out. They can also cause compass needles to <a href="https://research.noaa.gov/the-serendipitous-discovery-of-solar-flares/">jump erratically</a>.</p>
+<p>The sun goes through waxing and waning cycles of magnetic activity that range from about eight to 17 years, with 11 years or so being roughly average. At the height of these periods, the sun’s magnetic poles swap places and whip up all sorts of energy. The shorter the sun’s cycle, the higher and stormier the energy output. As it happens, we’re currently <a href="https://science.nasa.gov/science-research/heliophysics/nasa-noaa-sun-reaches-maximum-phase-in-11-year-solar-cycle/">in the midst of</a> this frenetic period of activity—called the solar maximum—which, Granger says, could put her theory regarding the effects of this activity on whale navigation to the test.</p>
+<p>Physicist Klaus Vanselow of Kiel University in Germany agrees, and says that we might see an uptick in strandings over the next couple of years as the sun crackles through its latest swing in activity. When Vanselow started researching whether solar storms impacted the navigation of sperm whales about 20 years ago, he says, “many people thought: ‘That’s nonsense.’” In a <a href="https://www.sciencedirect.com/science/article/abs/pii/S1385110104001297">2004 study</a>, Vanselow, like Granger, investigated years of data on whale strandings and correlated them with historical cycles of solar activity.</p>
+<p>The difference between the two studies was that Vanselow looked at a much longer window of time. Investigating a 291-year span, he found that, of 97 sperm whale stranding events in the North Sea, 90 percent occurred when the sun’s cycle lasted fewer years than the average—meaning periods when solar activity was higher.</p>
+<blockquote>
+<p>Blasts of radio-frequency radiation could be fouling the whales’ internal system of magnetic sensors.</p>
+</blockquote>
+<p>In a <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/1FDC09CDEEBDAD4FB1973D853D63564A/S1473550420000051a.pdf/where_are_solar_storminduced_whale_strandings_more_likely_to_occur.pdf">subsequent study</a>, Vanselow focused on a 2015 mass stranding along the coast of northern Europe. While researching it, he found that whales' location on the planet also seemed to play a role in how liable they were to strand. The higher the latitude—that is, the closer to the North Pole—Vanselow wrote, the more likely are solar storms to play havoc with the whales’ internal GPS.</p>
+<p>"Where the polar lights are seen, that's the region with the most geomagnetic disruptions on the Earth's surface," he tells me. In the area of the North Sea between the Shetland Islands and Norway, for example, solar events can cause short-term shifts in the magnetic field of up to 285 miles, Vanselow found in his study.</p>
+<p>Often, whales can course-correct if they’re swimming in the open ocean, as Vanselow notes. But this magnitude of disorientation can be dangerous as whales swim into the shallower North Sea, for example, to hunt squid. Particularly, less experienced whales may face bigger challenges when they encounter scrambled signals in unfamiliar latitudes. Vanselow says that younger whales reared mainly in deep water around the Azores, where magnetic effects are weaker, may be unprepared for the stronger magnetic swings at higher latitudes, leading them to beach more often closer to the poles.</p>
+<p>But where Vanselow’s sperm whales seemed stymied by the vicissitudes of Earth’s magnetic field as it shifts and shimmies under the influence of solar flares, Granger says she saw something a little different affecting the orientation of the stranded gray whales in her study.</p>
+<p>Her findings showed that, rather than responding to the external magnetic hiccups solar storms create, blasts of <a href="https://www.arpansa.gov.au/understanding-radiation/what-is-radiation/non-ionising-radiation/radiofrequency-radiation">radio-frequency radiation</a> caused by the storms could be fouling the whales’ internal system of magnetic sensors. In this view, it’s not that the whales sense these radio waves directly, but rather that the waves jam or scramble whatever magnetic sensors that whales might possess, thereby sending them off course.</p>
+<blockquote>
+<p>Animal navigation can go a little haywire under the sun’s energetic assaults.</p>
+</blockquote>
+<p>Whether the animals are confused by external shifts in magnetism or by how radio-frequency radiation scrambles their sense of magnetic fields, a sensory organ connecting the whales to the planet’s magnetic field simply hasn’t been found yet, says Granger.</p>
+<p>There are, however, two primary contenders, she says. One involves a mineral called magnetite, a hugely abundant metal oxide found in all manner of rocks whose crystals act as tiny magnets. Magnetite has been found in the tissue of several animals that somehow orient themselves as they travel—in the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3552369/#:~:text=Conclusion.%20Behavioral%20evidence%20indicates%20that%20there%20are,the%20ophthalmic%20nerve%20and%20the%20trigeminal%20system.">beaks</a> of homing pigeons and migratory European robins, for instance, as well as <a href="https://www.sciencedirect.com/science/article/pii/S0960982207008196">within the brains</a> of sea turtles and <a href="https://link.springer.com/article/10.1007/BF00618127">olfactory organs</a> of salmon. But researchers still haven’t pieced together how trace amounts of the mineral in any of these species is wired up to their nervous systems, Granger says. Still, studies have shown that in some birds that possess magnetite, the Earth’s magnetic field excites a cranial nerve that provides sensory information to the face.</p>
+<p>The other possible locus of navigation involves something called the radical pair hypothesis, which envisions a sort of chemical compass that orients an animal at a molecular level through unpaired electrons that are sensitive to magnetic fields. Such minute reactions could take place in the eye tissue of gray whales, Granger suggests—but, as with magnetite, this is just a guess. In fact, Granger explains, things called magnetotactic bacteria—which produce infinitesimal chains of magnetic particles within their cells—are the only organisms that we <a href="https://www.sciencedirect.com/science/article/pii/S094450131200047X#:~:text=MTB%20are%20a%20group%20of,(Bazylinski%20and%20Sch%C3%BCbbe%202007).">know</a> of that truly orient themselves along magnetic fields, growing and swimming toward magnetic north.</p>
+<p>Given that we can’t yet put our finger on a specific biological mechanism that acts as a compass, neither Granger nor Vanselow can claim to have solved the mystery of strandings. But many other studies showing that animal navigation can go a little haywire under the sun’s energetic assaults have steadily begun to build a literature of their own. A 2023 <a href="https://www.pnas.org/doi/abs/10.1073/pnas.2306317120">study</a> by the University of Michigan’s Eric Gulson-Castillo, for instance, showed how solar storms throw off the navigational hardware of migratory birds. During periods of high solar activity, many species simply seem to stay put rather than risk flying off course. Like Vanselow and Granger, Gulson-Castillo has said he expects our current solar maximum to offer further evidence of the theory. Salmon, too, with their famed treks to spawning sites, are disoriented by magnetic pulses like those encountered during solar activity, a <a href="https://journals.biologists.com/jeb/article/223/10/jeb222091/224420/Magnetoreception-in-fishes-the-effect-of-magnetic">2020 study</a> suggested.</p>
+<p>As researchers continue to investigate the mechanisms that whales and other migratory animals might use to orient themselves geographically, Vanselow is keen to emphasize that solar storms would be only one factor among several dozen others—many caused by humans—that have the capacity to drive whales to their deaths onshore.</p>
+<p>“If you know which strandings are triggered by the sun, you can better identify the strandings triggered by anthropogenic influence,” he says. “Otherwise, you can always hide behind the other reasons.” <img alt="" src="../images/nautilus-favicon-14_1170.png" /></p>
+<p><em>Lead image: Oliver.zs / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

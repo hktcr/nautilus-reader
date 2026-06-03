@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Rescue Dogs - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>AI-Powered Rescue Dogs - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-04-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-09IF</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A blur of golden fur and exuberance, the search and rescue dog bolts from a handler’s side and carves a wide arc through a patchy field in Missouri.</p>
+<p>The dog, who is part of an elite urban search-and-rescue team, knows what her duty is: Find a scent trail, locate the person at the other end of the odor, and alert her handler—guiding them to someone who might be lost, trapped, injured, or dead.</p>
+<p>But this isn’t just any training session: It’s a test of new technology—a new relationship, really, between artificial intelligence, animals, nuts-and-bolts technology, and humans. In this test, AI-enabled tools are being put through their paces to see if they can enable search-dog teams to help rescuers find people faster after a catastrophic event, such as an earthquake or tornado.</p>
+<p>High above the scene hovers a drone, gathering information about the dog’s movements. Combining this data with stats on the location, including its topography and weather conditions, AI-powered software can make predictions of where someone in need of rescue is most likely to be. This information in hand, the human handler in a real rescue could then send drones equipped with cameras and infrared sensors out ahead of the dog—faster and more efficiently than either mammal could go—to pinpoint the victim.</p>
+<blockquote>
+<p>Some of the magic is in the human-dog rapport.</p>
+</blockquote>
+<p>On a tablet displaying an overview of the trial, the area is divided into a grid, which turns into a high-tech game of “hot-or-cold.” Each square within is shaded to represent the probability that the person they’re searching for is in that area. Purple-blue is cold, green is getting warmer, yellow is hot. A blue line traces the dog’s trajectory across the area. The pup cuts west, then loops back around to the handler. Soon, after the canine sets off again in a more pointed direction, the line representing her path becomes yellow: The program has inferred from the dog’s behavior that they’ve caught the scent. Squares of the grid start shifting hue in response to the dog’s movements, adjusting and refining the predictions of where the hiding human might be. The ones near the victim shift toward yellow as the dog gets closer.</p>
+<p>The pup is helping to develop the Collaborative Intelligence for Olfactory Search Missions Integrating Canines and Technology (COSMIC-T). Created by an AI company called Scientific Systems, the technology aims to combine biological dog-data with digital info, using humans as a bridge between the two—a collaboration that could help save lost hikers, victims of natural disasters, or soldiers in war by locating humans in peril faster than animal, human, or drone could.</p>
+<p>The work sits partly within a field of study sometimes called “animal activity recognition,” which uses instruments such as motion sensors, now often coupled with AI, to classify what an animal is doing. It also incorporates “latent state inference,” which in this case works to interpret more indirect or hidden canine cues. The human team has applied the combo to search and rescue operations—to understand and respond to a dog’s signals that they’ve caught a scent, and are on the trail of a “gotcha.” The same technology could also be useful for tracking down fugitives or suspected criminals, since a human scent is a human scent.</p>
+<p>Although researchers have <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8840386/">studied</a> the ways that the combination of AI and animal behavior might aid search and rescue, a 2023 review paper found that fusing data from different sensors to understand what animals were up to, in general, “is still in its early stages and has yet to be fully explored.” As Humberto Pérez-Espinosa of the National Institute of Astrophysics, Optics, and Electronics in Mexico, and an author of that review, says, “Compared to advancements in interpreting human behavior using AI and sensor data, the study of canine behavior is still in its infancy.”</p>
+<p>For decades, dogs and their superior sense of smell—combined with their athletic prowess and endearing desire to please—have been essential to search and rescue teams. As early as World War I, the Red Cross trained dogs to find wounded soldiers, calling them “mercy dogs.” There were, of course, no digital algorithms or drones back then, and the analog seek-and-finds were not as efficient as they have become nearly a century later.</p>
+<p>People involved in search-and-rescue or medicine typically refer to the initial period after a person experiences a traumatic injury as the “golden hour”: the short window in which life-saving care tends to be most effective. People needing search or rescue who may not be gravely injured are still at critical risk because every minute that ticks by prolongs the time they might be subject to the elements and surviving without food or water. In December, for example, two men died of exposure in a Washington State forest and were found only after a three-day search involving human, dog, and drone search capabilities.</p>
+<p>Humans still haven’t found a way to replicate a canine’s role in the search process. “We’ve spent hundreds of millions of dollars trying to make a sensor that is as good as a dog’s nose, and we’ve never gotten close,” says Mitchell Colby, the group lead for AI and machine learning at Scientific Systems. Beyond that, some of the magic is in the human-dog rapport. “AI is making great strides, but I have not seen any AI that can compete with the intuition of an operator with a lot of experience.”</p>
+<p><img alt="" src="../images/5LZ3IU9y-Scoles_BREAKER.png" /></p>
+<p><strong>TECH ON THE TRAIL:</strong>A heat map powered by AI analysis and drone imagery helps search-and-rescue teams of dogs and their handlers pinpoint the most likely location of a human in need faster.  <em>Credit: Scientific Systems.</em></p>
+<p>Nevertheless, the handler-dog pairing can be somewhat inefficient. Each dog has one specific human partner, who has often raised them since they were a puppy, spending 800 to 1,000 hours of training to get them certified—plus countless hours after that practicing and actually saving people.</p>
+<p>One key outcome of all that time together is a close, instinctive connection, in which a handler knows that, say, their dog lowers their body slightly when they’ve sniffed the smell they’ve been searching for. Success is in the dyad, says Jeff Hiebert, president of the organization Search and Rescue Dogs of the United States. “They rely just as much upon the handlers as the handler does on the dog.” Still, our eyes can’t parse all their movements and bodily cues to make as much sense of the shifts as AI-powered observation of the dogs can.</p>
+<p>And the intense dog-handler relationship makes scaling up canine search difficult. Scouring an earthquake-leveled block of apartment buildings for survivors is slow going if you need one particular human paired with one particular dog. “It gets really scary when we start to think about these large-scale disasters,” says Colby.</p>
+<p>That one-person-one-dog limitation was the inspiration for the exercise taking place in the Missouri field.</p>
+<p>Colby had worked on algorithms that direct drones—and even future space robots—to work collaboratively. But what if an algorithm could improve collaboration across the biology-technology divide—and even a species one? So he came to the idea of incorporating humans, animals, and drones, augmented by AI, that could be useful in saving soldiers or civilians during catastrophes. He pitched it to the Defense Advanced Research Projects Agency (DARPA), a research arm of the U.S. Department of Defense. DARPA was interested. According to Matthew Marge, a DARPA program manager, it continues the tradition of the agency’s Information Innovation Office to investigate human-machine melding—a goal first laid out in the <a href="https://spectrum.ieee.org/untold-history-of-ai-darpa-dream-of-cyborg-intelligence">1960s</a> by former DARPA director J.C.R. Linklider. “How can humans and machines find symbiosis and achieve more together than they can separately?” asks Marge. “This type of project gets at that essence.”</p>
+<p>After years of development, Colby and the Scientific Systems team built drone software that can perform “canine latent state inference”: basically, watching a canine scour the Earth, and inferring whether it is actively following Timmy’s scent to the well, or still seeking that trail. Then, also borrowing from the field of movement ecology, they outfitted dogs with GPS-enabled vests, to precisely watch their motion. “If an animal is trying to find something based primarily on its nose, how does it move through the environment to optimally use that sensor?” Colby asks.</p>
+<p>The dogs are also kitted out with a microphone and speaker, allowing the humans to hear the dog’s barks or other audible alerts, and for handlers to give commands back.</p>
+<blockquote>
+<p>Humans still haven’t found a way to replicate a canine’s role in the search process.</p>
+</blockquote>
+<p>The initial stages of the project tracked a canine member of the Missouri Task Force One as they jogged, snuffled, sprinted, and barked, beginning in 2018. The search team kept specifics—like the dog’s name, and other potentially biasing details—from the AI team so they wouldn’t have insider information that might affect their analysis. Colby and team used AI-driven software to ingest and interpret that behavior, so it could learn to predict whether an animal is searching for a scent or actively on the trail. In the early test, the dog-human-drone-software team found a simulated victim six times faster than the search team would have without the AI.</p>
+<p>Missouri Task Force One helped the team gather data for four years. From 2022 to 2024, they furthered this theory of dog-mind: To make sure the early dog behavior that trained the AI was more broadly applicable, the researchers tested it with dogs whose movements hadn’t been part of the early training data. Once the AI-enabled software determined that the dog caught a smell, it combined that with environmental data, such as weather and wind models—inferring, for instance, that if there’s a north-south breeze, and a dog is on the scent, the victim probably lies north of the dog. Autonomous drones can then make their own way in that direction, homing in on the person faster than if the dog had to lead a trotting human to them, or if the drones were searching without canine-computer guidance. Overall, depending on the specific environment of the test, the mock victims were located five to 10 times faster than they would have been without the synthetic help.</p>
+<p>Unlike traditional search and rescue—which relies on the one-to-one pairs—this approach can provide understanding of the behavior of numerous dogs, their varied behaviors, and their overall environment all at once. And with multiple animals’ inputs, rescuers can seek many victims at once. “If you have multiple canines moving through the environment, and some are hitting and some aren’t, you can combine all that data and get much tighter areas where you think victims might be,” says Colby.</p>
+<p>Combine that ability with a swarm of small drones, all of which can communicate with each other, as Colby and his fellow engineers hope to do, and rescuers stand an even better chance of finding someone in those crucial early times.</p>
+<p>Beyond help for humans at risk, says Pérez-Espinosa, smart sensor systems can also make sure the dogs themselves are doing okay during a search. “These missions are physically and emotionally demanding, and it is needed to monitor a dog’s physiological and behavioral state in real time,” he says.</p>
+<p>In the test in the Missouri field, watching the screen as the yellow dog and its yellow line converge with the red dot, it’s easier to see this future materializing. As the dog approaches the northern end of the map and slows down, the square they’re in suddenly turns yellow, too. The highly trained animal is right on top of her target: contact!</p>
+<p>Of course the dog found the hidden person: That’s what search dogs do. But the watchful drone, in its way, understood where the dog was heading before the dog did, and passed that information on to help help arrive sooner.  <img alt="" src="../images/nautilus-favicon-14_1210.png" /></p>
+<p><em>Lead photo by Noska Photo / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

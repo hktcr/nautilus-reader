@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viruses That Roam the Fungal Kingdom - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Viruses That Roam the Fungal Kingdom - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-F61E</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://knowablemagazine.org/content/article/living-world/2025/the-strange-viruses-that-infect-fungi"><em>This article</em></a><em>originally appeared in</em> <a href="https://knowablemagazine.org/">Knowable Magazine</a>.</p>
+<p>Did you know that mushrooms can get sick?</p>
+<p>It was 1948, on a Pennsylvania mushroom farm operated by the La France brothers, when scientists first observed a <a href="https://www.pubhort.org/isms/1/1/v1_p1_a30.htm">mushroom malady</a> featuring puny caps and crooked stems. But only in 1962 did researchers finally realize viruses were behind La France disease, as it had come to be called, and that viruses caused other fungal afflictions as well—thus launching a whole new field of study.</p>
+<p>Today, scientists researching fungal viruses are enjoying a “golden age of discovery,” says Matt Kasson, a mycologist (aka fungus researcher) at West Virginia University in Morgantown. Researchers are finding all sorts of <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-micro-041522-105358">weird and wonderful interactions</a> between fungi and their viruses and even between fungal viruses and plants or animals. Most fungal viruses don’t seem to do much of anything to their hosts, but others definitely do:  Sometimes they <a href="http://arjournals.annualreviews.org/eprint/hQged5J342asKuqIfDId/full/10.1146/annurev-phyto-080508-081932">cause sickness</a>, sure, but sometimes they offer <a href="https://knowablemagazine.org/content/article/living-world/2018/why-viruses-deserve-better-reputation">surprising benefits</a>.</p>
+<p>Even today, most fungi <a href="https://link.springer.com/article/10.1007/s13225-020-00458-2">remain undescribed</a>, and analyses of their viruses are scarcer still. So there’s plenty more to learn. These days, scientists can use DNA and RNA sequencing to detect signs of viruses inside fungi even if there are no other indications that a virus is there. Scientists are particularly interested in viruses that cause disease in fungi that are themselves pathogens to<a href="http://arjournals.annualreviews.org/eprint/Wy5U2wacrBaPu9QtMDEG/full/10.1146/annurev-phyto-102313-050222">plants</a>, animals, or even people—making the viruses potential allies against fungal infection and pests.</p>
+<p><strong>Viruses show up in all kinds of fungi, in all kinds of forms</strong></p>
+<p>“Almost all fungi have viruses—they’re extremely common,” says Marilyn Roossinck, <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-virology-100520-013446">a virus ecologist</a> retired from Penn State University in University Park. She adds: “They’re so cool.”</p>
+<p>Many plant and animal viruses enclose their genes within a protein coat or even a membranous bubble, creating a particle that can flit from host to host. But “fungal viruses are very exceptional,” says Nobuhiro Suzuki, a virologist at Okayama University in Kurashiki, Japan.</p>
+<p>Some have no coat at all, notes Suzuki, who coauthored an article about <a href="http://arjournals.annualreviews.org/eprint/VMWEA5KUHTZT3HDMXYGB/full/10.1146/annurev-phyto-021621-122122">fungal virus diversity and evolution</a> for the <em>Annual Review of Phytopathology</em>. They never seem to leave their host’s comfortable embrace. And in one interesting case, Suzuki and colleagues came across a virus that has no coat of its own but borrows the <a href="https://www.nature.com/articles/nmicrobiol20151">coat of another virus</a>. They named the borrower <em>yado-kari</em>, the Japanese term for hermit crab, which translates to “borrowing a room to stay.” They called the other virus <em>yado-nushi</em>, for “landlord.”</p>
+<p>Whether or not they sport outerwear, most fungal viruses don’t find new homes by going outside the host like, say, a flu virus does. They’re typically transmitted when two fungal strands meet in the soil. Strands from related fungi can fuse, sharing insides—and their viruses.</p>
+<p>Fungal viruses also vary greatly in their genomes: Some get by with one or a handful of genes; others are genomic<a href="https://www.biorxiv.org/content/10.1101/2024.01.04.574182v1.abstract">giants</a>, with more than 300 genes.</p>
+<p>Fungal viruses are so common that some fungi are homes to multiple types—in one study, a fungus was found to contain <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0165965">17 different viruses</a>, and others have more than 20, says Jiatao Xie, a fungal virologist at the Huazhong Agricultural University in Wuhan, China, who coauthored a discussion of <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-micro-041522-105358">fungal virus diversity and evolution</a> in the <em>Annual Review of Microbiology</em>. And they show up in a diverse array of hosts, such as fungi that live in marine environments, including in <a href="https://www.sciencedirect.com/science/article/pii/S0168170215301076">sea grass</a> and <a href="https://www.sciencedirect.com/science/article/abs/pii/S0168170219304447">sea cucumbers</a>, or fungi that have emerged from <a href="https://journals.asm.org/doi/10.1128/msystems.00582-22">thawing permafrost</a>.</p>
+<p><strong>Viruses can give fungi properties they didn’t have before</strong></p>
+<p><img alt="" src="../images/OVlhnscV-Dance_BREAKER.png" /></p>
+<p>Back in the early 2000s, colleagues of Roossinck found an interesting <a href="https://www.science.org/doi/full/10.1126/science.1078055">fungus-plant pairing</a> in Yellowstone National Park, where soils can reach temperatures of 122 degrees Fahrenheit or higher. When the grass was alone, growing at 122 degrees caused it to shrivel and lose its green hue. If occasionally exposed to 149 degrees, it died. But if the grass hosted the fungus <em>Curvularia protuberata</em>, the pair could withstand 122 degrees and intermittent 149-degree spikes.</p>
+<p>Roossinck, curious, investigated further, and found that the heat tolerance happened only when the fungus <a href="https://www.science.org/doi/full/10.1126/science.1136237">contained a virus</a> that the team named <em>Curvularia</em> thermal tolerance virus.</p>
+<p>In other words, the heat-tolerant pair was really a trio. “The virus has to be there,” says Roossinck. “They have to have all three.”</p>
+<p><strong>Scientists used viruses to track white-nose syndrome in bats</strong></p>
+<p><img alt="" src="../images/ZShEFCzC-Dance_BREAKER-2.png" /></p>
+<p><strong>BAT BUSINESS:</strong> The United States spread of the white nose fungus in bats appears to be facilitated by a fungal virus that enhances spore formation. <em>Credit: Ryan Von Linden, New York Department of Environmental Conservation / Flickr.</em></p>
+<p>The white-nose syndrome that has killed more than <a href="https://biologicaldiversity.org/campaigns/bat_crisis_white-nose_syndrome/Q_and_A.html">6 million bats</a> in North America since 2006 is caused by a fungus, <em>Pseudogymnoascus destructans</em>, that grows on the creatures’ snouts, ears, and wings. Roossinck was not surprised to discover that this fungus <a href="https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1006076">harbors a virus</a>. It’s a member of the Partitiviridae family, which have two or three genes and form polyhedral particles.</p>
+<p>It’s been hard to map the spread of white-nose syndrome because bats travel so far. The virus provided a solution: Roossinck and colleagues traced the fungus by tracking mutations in the quickly evolving gene responsible for the virus’s coat. Changes in that gene over time revealed how the <a href="https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1009236">fungus-virus pair moved</a> from Connecticut to other parts of the Eastern United States, and even to Washington state.</p>
+<p>The virus is unique to North American <em>P. destructans</em> and it is, Roossinck thinks, what makes the fungusso destructive: Only fungi containing the virus can make plentiful viable spores, helping it spread from bat to bat.</p>
+<p><strong>Some viruses shuttle between fungi and plants</strong></p>
+<p><img alt="" src="../images/s2IDUbfm-Dance_BREAKER-3.png" /></p>
+<p><strong>PATHOGEN PATHS:</strong> Certain viruses can be shared by fungi and plants, fungi and animals, or plants and animals, allowing cross-kingdom transmission that influences crops, their fungal pathogens, and the insects that transmit viruses.</p>
+<p>Many plants and fungi are tightly linked—so much so that viruses can <a href="https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.15364">cross between them</a>. In China’s Inner Mongolia province, researchers found a root-rot fungus, <em>Rhizoctonia solani</em>, in a potato plant. That fungus <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1714916114">had a hanger-on</a>: the cucumber mosaic virus, which usually infects (you guessed it) cucumbers, among many other fruits, vegetables, herbs, and weeds. In the lab, the virus could be passed from plants to fungi. Once inside fungi, it could spread to other plants.</p>
+<p>So, cucumber mosaic virus is a plant-focused virus that also has a taste for fungi. The same research team next tested whether a fungus-focused virus could also be passed into plants. They found that the coatless Cryphonectria hypovirus 1, which typically infects fungi, could indeed <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1915996117">infect tobacco plants</a>. Alone, it could get into the leaves it was placed on but it couldn’t spread to other plant parts. But if another virus, like the tobacco mosaic virus, was also present, both viruses could travel around the plant. That’s because the tobacco plant virus contributed a “movement protein” that helped both viruses travel. The researchers think this ability to cross host kingdoms may be an <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-virology-111821-122539">important factor</a> in viral spread and evolution.</p>
+<p><strong>Fungal viruses can protect plants—and maybe even animals—from fungal infections</strong></p>
+<p><img alt="" src="../images/Dance_BREAKER-4.png" /></p>
+<p><strong>FIGHTING WITH FUNGI:</strong> Scientists have developed a treatment for crops that uses a fungus that is infected with a virus. The treatment, which works like a vaccine against plant-harming fungi, resulted in noticeably greater rice yield (rightmost sheaves) than in untreated crops (leftmost sheaves). <em>Credit: Courtesy of Jiatao Xie.</em></p>
+<p>If fungi are the enemy of farmers growing plants, then viruses of fungi could be the farmers’ best friends.</p>
+<p>Indeed, this has been shown before. In the mid-1900s, European scientists battling a fungus of chestnut trees discovered that the Cryphonectria hypovirus 1 <a href="https://www.annualreviews.org/content/journals/10.1146/annurev.genet.35.102401.085929">slows the infection</a>, giving the trees time to mount an immune response. “It worked pretty well,” says Kasson; the virus became a flagship example of viral biocontrol. Unfortunately, the same virus largely failed to protect <a href="http://arjournals.annualreviews.org/eprint/ENV9ykTtAZPHTCzVXsgj/full/10.1146/annurev.phyto.42.040803.140325">American chestnuts</a>; most of the American fungi were of genetic types unable to accept transfer of the virus from the donor fungi.</p>
+<p>But the idea stands. Xie and his Huazhong colleague Daohong Jiang are developing a virus to help crops like rapeseed and soybean. It fights the fungus pest <em>Sclerotinia sclerotiorum</em>, which causes white mold in more than 700 plant species, Xie says. The virus, SsHADV-1, weakens the fungus’s ability to cause disease—but there’s more to it than that. Unlike most fungal viruses, it can leave the fungus and spread as free particles, or be transmitted by a <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1608013113">fungus-eating gnat</a>. Moreover, in a fungal Jekyll-and-Hyde switcheroo, the virus turns the fungus from something that harms plants to something that benefits them.</p>
+<p>That’s because the virus-weakened fungus acts kind of like a vaccine. Exposure to the infected fungus <a href="https://www.cell.com/molecular-plant/fulltext/S1674-2052(20)30293-8?s=09">triggers plant defenses</a>, making the plants better able to fight off other kinds of disease, not just white mold. The virus-fungus combo also alters the plants’ hormone signaling and circadian rhythms in ways that boost growth.</p>
+<p>Xie and colleagues developed a way to spray virus-infected fungal fragments over crops <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1213755110">as a natural fungicide</a>. The sprayed bits act as vaccine by outcompeting, or infecting, any plant-harming Hyde fungi until all that’s left is vaccinesque Jekyll. Indeed, Xie says, field trials showed that the treatment boosted yield of rapeseed, rice, and wheat.</p>
+<p>The potential to transmit the virus by spray (or insect) makes it “a really big deal,” says Timothy James, a mycologist at the University of Michigan in Ann Arbor. Though the viral treatment hasn’t yet hit the market, patents are approved in China, Canada, and the U.S., Xie says. If successful, it would join the virus that weakens chestnut-blight fungus as another example of viral biocontrol.</p>
+<p>And scientists speculate they might be able to protect animals from fungi, too, with the right viruses. James, for example, is trying protect amphibians from a <a href="https://knowablemagazine.org/content/article/living-world/2024/new-strategies-offer-hope-for-frogs-dying-from-fungus">deadly chytrid fungus</a>, using what he’s learned from a virus that infects it. And Roossinck has experimented with viruses that infect <a href="https://knowablemagazine.org/content/article/food-environment/2024/evolution-of-koji-mold-soy-sauce-sake"><em>Aspergillus</em> mold</a>, which can cause allergic reactions, often in people with asthma or cystic fibrosis, and fatal lung infections in immunocompromised people.</p>
+<p>Those other treatments haven’t happened yet, says Xie<em>.</em> For now, it’s “just a thought.” <img alt="" src="../images/nautilus-favicon-14_1064.png" /></p>
+<p><em>Lead image: Viral infections often cause no symptoms in fungi, but mushroom virus X, a syndrome brought on by multiple viruses, visibly afflicts the white button mushroom,</em>Agaricus bisporus<em>. Credit: D. Eastwood et al / Applied and Environmental Microbiology 2015.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

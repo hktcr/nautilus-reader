@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival of the Wittiest | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Survival of the Wittiest</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-XXP1</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Killjoys and scatterbrains might have propelled the evolution of the human species. This is, essentially, the theory proposed by linguist Ljiljana Progovac in a new <a href="https://academic.oup.com/pnasnexus/article/5/3/pgag052/8559600?login=false">paper</a> published in <em>PNAS Nexus</em>.</p>
+<p>Progovac argues that clever verb-noun compounds like killjoy—which has a bit more punch than joy killer—were the earliest forms of verbal wit and helped the species survive. They enabled our ancestors to both soothe tempers with humor and compete with words rather than with fists. The wittier the human, the more likely that human would survive.  </p>
+<p>One point of evidence: In brain scans, Progovac and colleagues have found that these compound words produce a stronger effect in a part of the brain called the fusiform gyrus than when the words are separated—particularly a part of the brain thought to be responsible for visual processing and metaphor as well as facial recognition.  </p>
+<p>I spoke with Progovac about so-called spin-buts and burst-cows, about why she calls these compound words living fossils, and how she arrived at her theory. We also talked about how verbal cleverness relates to intelligence and the election of leaders, and whether she thinks of herself as witty.</p>
+<p><img alt="" src="../images/French_BREAKER_1.png" /></p>
+<p><strong>QUICK WIT:</strong> Ljiljana Progovac says that verbal wit, in the form of verb-noun compounds like pickpocket, helped humans compete with one another in ways that were not deadly. She argues that wit is distinct from more complex forms of intelligence, such as problem-solving, but that it helped the species survive. <em>Photo courtesy of Ljiljana Progovac</em>.</p>
+<p><strong>What’s the wittiest thing anyone has ever said to you?</strong></p>
+<p>I can’t answer that question. These things, they’re in the moment, they happen and they come and they go, and you don’t necessarily even remember them. But there are certain compound words that I find especially witty. There are hundreds, thousands of them, actually. They’re also transient. They were created, used for a while, and then they disappeared. They go out of use. One of the reasons is that many of them are obscene. They refer to body parts and body functions.  </p>
+<p><strong>What were the origins of these compounds?</strong></p>
+<p>One thing that I noticed, which I find really compelling, is compounds with similar images can be found across languages, even across continents. So, for example, in Old English, one of these compounds that is now obsolete is burst-cow, which means insect. You might think, “Oh maybe it’s just a funny old English word.” But then in Berber, spoken in Morocco, there’s a very similar image: Suck-cow means insect. These are great discoveries because once you get a critical mass of them, you can draw conclusions. In Serbian, we have these funny ones, like spin-but, which means fidget. Another one with the same meaning is spin-tail.  </p>
+<p>One of my main claims is that these are proxies or living fossils of the earliest grammars, which only had verb-like and noun-like elements. And the grammar could only combine two things at a time—just one verb, one noun. There was nothing else. That was all.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-kekul-problem-236574">The Kekulé Problem</a>”</strong><br />
+<strong>Why do you call them living fossils?</strong></p>
+<p>There’s this catchphrase or mantra that language leaves no fossils—that we cannot even study language evolution as a result. Many people have said that. Some of them say we need stones and cave paintings. People have gone out and studied cave paintings, and there are proposals to the effect that language evolved as a consequence of tool making. For some people, a fossil must be something very robust that they can hold. But I’ve argued that the fossils that we find in language aren’t fossils found on stones. My argument is that the compound words are proxies, or living fossils, because language never died once it started. These are even better fossils.  </p>
+<p><strong>How did you arrive at this theory?</strong></p>
+<p>I arrived at that stage, not impressionistically, but by relying very heavily and precisely on linguistic theory and syntactic theory, which is very abstract. How I got there is that I reconstructed the verb-plus-noun stage of language, and I was asking myself, “Is there anything that looks like that in modern languages?” And I didn't know for a while. Then I got it, because in the syntax and morphology texts that we were reading, one would often mention exactly these compounds like killjoy and scatterbrain, and say, “Oh, by the way, these exist, but they’re exceptional.” They defy the rules of grammar. They were pushed aside.  </p>
+<p>But I started looking for more examples, and I studied Serbian and found hundreds of them. It all started to fall into place slowly. They can create super interesting metaphorical expressions, like scatterbrain in English. That’s one that I like. It’s a concept that it’s hardly possible to express it in any other way. It’s very abstract, and it’s very funny.</p>
+<p><strong>You argue in your paper that quick wittedness has been left out of the research on language evolution. Why?</strong></p>
+<p>In order to reconstruct those early stages of language, you need linguists and linguistic theories. And linguists in particular, have been preoccupied, including myself, with the abstract rules and principles that govern grammars across languages. We were looking for language universals. This is all a very important enterprise, but we were focusing on complex sentences, sophisticated syntactic rules.</p>
+<p>But there’s another thing: Being witty, funny, and humorous may not be characteristic of academics. Academics tend to think that the most important features of intelligence are an ability to solve problems. They might think of wittiness or humor as being silly or frivolous. Once this idea came up and I was presenting it everywhere, I saw skepticism. How can humans evolve because of some silly words and humor? It didn’t sound academic enough. The idea of humor or wittiness was considered un-serious.</p>
+<p>But also, most of these syntacticians have been very hesitant to even address the evolution of language, claiming that it was all or nothing. Noam Chomsky, for instance, has been very influential, and he’s claimed that all grammatical complexity emerged at once in human evolution. He doesn’t believe in this gradual evolution of language with adaptation being a part of the story. He also proposed that this first stage wasn’t even externalized. It was the language of thought. It wasn’t spoken because supposedly the first human who got this mutation needed time to pass it on to the children. His theory is that it was only several generations later that humans actually started speaking. I have criticized this view in many places.</p>
+<p><strong>Interesting, because of course, there are also those who believe that</strong> <a href="https://nautil.us/did-music-give-rise-to-language-1279034"><strong>music</strong></a> <strong>was the seed of language.</strong></p>
+<p>Yes. Darwin thought that language was partly the result of sexual selection. He also thought that there was some kind of musical proto-language stage. That would make sense, because language, even today, has a lot of elements of music—especially languages which have tone. Tone can distinguish meanings. There is also intonation.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-strange-persistence-of-first-languages-235672">The Strange Persistence of First Languages</a>”</strong></p>
+<p><strong>You argue that wittiness was sexually selected from the earliest stages of grammar, but how do we know it’s not part of a simpler story, where it’s a downstream consequence of cognitive complexity and selected for other reasons?</strong></p>
+<p>You say simpler, but why would that be simpler? And anyway, if language evolves as a result of some other cognitive process, well, which ones exactly and how?  </p>
+<p>But of course, many people have asked this same question. My own approach is that language has an active role in its own evolution. And not just the evolution of language, but the evolution of cognition. In that sense, my approach is very specific and can be tested. We can do experiments. We can cross-fertilize this approach with some biological approaches because language is the most tangible aspect of our cognition. We can explain many other aspects of our cognition with language, including abstract reasoning, agency, and planning.  </p>
+<p>What we see in the brain is that language processing occupies many areas that were previously used for other things, such as visual processing. The fusiform gyrus, for example, is activated especially by language with a visual component, such as <a href="https://nautil.us/metaphors-are-us-234312">metaphors</a>. This part of the brain now also supports facial recognition, which I argue was enhanced by the emergence in humans of naming.</p>
+<p><strong>Do you believe that wittiness arose with language, or can it be separated from language? I was thinking about early silent movies and slapstick. There can be so much physicality in wittiness. I wondered where the dividing line between those things lies.</strong></p>
+<p>This is what the reviewers of the paper asked me, too. The actual definition I give from the Oxford English Dictionary is that wittiness is with words. It also mentioned metaphors and painting a picture with words, so technically it may be just with words, but it doesn't matter. Other species and humans, children, for example, can be humorous without words. Some of the primates can combine two words together. Koko, the gorilla, was reported to be able to put two words together in a humorous way. I believe that there is continuity. It lies along a continuum of some kind of nonverbal capacity for humor. But language explodes it.</p>
+<p><strong>You write that wittiness favors friendliness, by offering an alternative to physical aggression. But verbal cutdowns can be so devastating, harming a person’s reputation, having long-lasting effects on their psyches, even encouraging larger scale violence against certain groups if framed in a certain way. Maybe it isn’t really wittiness at that stage, but how do you account for that?</strong></p>
+<p>I do mention in some places that humor can have a very dark side. It can even be used for self-ridicule, in fact. However useful our language is to us, it can also be turned against us, in depression, for example. We can tell ourselves terrible things. We can be insulted by other people.</p>
+<p>But friendliness isn’t the best term. It’s more groupishness, the ability for people to form groups. Of course, these groups are often formed in order to fight other groups. But where this hypothesis interacts with the biological theory of human evolution, is self-domestication theory, which argues that humans gradually reduced reactive aggression, while increasing proactive, premeditated aggression. Humans of today, I would say, are characterized as preferring to fight with words. I’m not talking about big wars. I’m talking about modern everyday competition. It used to be physical fighting, when our ancestors didn’t have language.  </p>
+<p>The idea is that once language emerged, we had means to compete with words and wittiness. This was more adaptive than fighting with fists, because you survive a war of words—you don’t die. When language started and people were using those insults and those labels, they weren’t taken as seriously as they are today. I’m now speculating. But yes, insult and ridicule can be devastating. It’s all relative.</p>
+<p><strong>Do we understand why verb-noun compounds like killjoy or pickpocket produce a more visceral effect when we hear them than other kinds of words?</strong></p>
+<p>That’s what our experiment showed. It surprised us. We found this very robust effect in favor of these simpler compounds, in the right fusiform gyrus, which specializes for concreteness, for imageability, for metaphors. And as it turns out, also for naming. We concluded that this was because these compounds are just a verb and a noun, and they are processed directly. They don’t involve complex grammar, which our brains would also need to process. The advantage of this approach is that it can be tested with neuroimaging experiments, and it can be cross-fertilized with biological theories of human evolution.</p>
+<p><strong>Read more: “<a href="https://nautil.us/chasing-lost-languages-1221167">Chasing Lost Languages</a>”</strong></p>
+<p><strong>How would cross-fertilizing it with theories of evolution work?</strong></p>
+<p>We would try to correlate different languages with different linguistic features and then the genetic makeups in these populations. So far, our efforts to do this haven’t gotten anywhere, but mostly because there wasn’t enough data. It’s something for future research.</p>
+<p>But it does overlap with the self-domestication theory of human evolution. In my joint work with Antonio Benítez-Burraco, we cross-fertilized this linguistic reconstruction of early grammars with the self-domestication hypothesis, which claims that humans are more like domesticated animals than wild animals. It’s always a statistical matter because it’s never all of us. The features of self-domestication include less reactive aggression, lower cortisol levels, and less sexual dimorphism, the latter referring to fewer physical differences between men and women. These are some characteristics of domesticated animals—and it has been argued, of humans.  </p>
+<p>This is related to friendliness, because we’re now supposedly friendly, but only in the sense that we’re not punching each other when we converse. This overlaps with humor because humor is also biological: It reduces cortisol levels. It relaxes people. So language soothes people, and it’s also a linguistic means of competing as opposed to physical fighting, which interacts with these general processes of self-domestication. They all activate the same subcortical areas of the brain: aggression, complex syntax, humor, metaphors.</p>
+<p><strong>You suggest that quick wittedness could be considered frivolous or shallow, and I found that surprising because it seems like it could require considerable intelligence to put together words in a way that’s surprising and funny.</strong></p>
+<p>With quick wittedness, somebody can say something extremely funny and you love it. You’re laughing, you’re relaxed. But it doesn’t mean that this person is super intelligent. To me, it’s a form of art. You have this way with words, and you can seduce somebody with words, but you may not be able to solve problems, existential problems. There can be people who are much more intelligent in that respect. Human beings aren’t perfect. We elect politicians based on how eloquent they are at debates, rather than how good they are at solving problems.</p>
+<p><strong>Do we though? It seems like it’s all sound bites and ad campaigns produced by media handlers. I don’t think you could use eloquence or wit to describe the current administration.</strong></p>
+<p>Yes, but before we vote, we’re confronted with debates. In these debates, we focus on who is superior at “outwitting” the other. We often go for these catchy phrases rather than for some deep statistical analysis of a problem. Why do we even have those debates? Why don't they just have a platform where they say what they will do? People like those debates, and they’re very influential in how we choose.</p>
+<p><strong>Do you consider yourself a witty person?</strong></p>
+<p>I think everybody is witty to some extent. We’re all using language in creative novel ways. We’re all combining things. I try to be witty. This is one thing I can tell you for sure. I think most people do try to be funny and witty. But not everybody. There’s a great variability among people in this particular trait, also in the use of humor. Maybe it’s good, maybe it’s not good, but everything is relative.  </p>
+<p>When we think that somebody is very witty, it just means they’re maybe wittier than some other people. Evolution works on this variability. Almost all of our human traits are subject to this variability. And that’s good. It’s considered to be good because then there’s always a potential for survival. If some traits become maladaptive, then at least there will be some people who don’t have those traits.  </p>
+<p>I guess wittiness is in the ear of the beholder. <img alt="" src="../images/nautilus-favicon-14_207.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: 32 pixels and The_Believer / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

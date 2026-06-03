@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botox and the Beast - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Botox and the Beast - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-05
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-95QQ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Lithe necks, blown-out lips, eyelashes worthy of a cartoon princess. The camels that compete in Saudi Arabia’s annual King Abdulaziz Camel Festival are a striking bunch. Many contestants, who are mostly female, have undergone cosmetic enhancements, including Botox injections and surgical procedures such as nostril enlargement.</p>
+<p>For the camel owners, winning a pageant can be life-changing—millions of dollars in prize money.But the same goes for the dromedaries: Some of the procedures can cause serious long-term harm to their health.</p>
+<p>A Botox scandal that led 40 camels to be <a href="https://www.theguardian.com/world/2021/dec/08/camels-enhanced-with-botox-barred-from-saudi-beauty-contest">disqualified a few years ago</a> did not stomp out the practice. “It’s a continuous game of cat-and-mouse between rule enforcement and circumvention,” says Mohamed Tharwat, a professor of veterinary medicine at Qassim University in Saudi Arabia, by email.</p>
+<p>Cosmetically enhancing camels with medically invasive procedures may have started about 15 years ago, says Tharwat, but it has been banned by the festival since its inception in 2016.</p>
+<blockquote>
+<p>Short-term pain, infections, and distress are some of the immediate concerns for the camels.</p>
+</blockquote>
+<p>Last month, Tharwat wrote a paper for <a href="https://www.frontiersin.org/journals/veterinary-science/articles/10.3389/fvets.2025.1632022/full"><em>Frontiers in Veterinary Science</em></a>that calls attention to the alarming practice. Fascinated with camels from a young age, he later became a veterinarian, but his current work focuses increasingly on ethical and welfare issues related to the animal, which is so central to Arabian culture.</p>
+<p>Camel beauty is big business. Running for over a month, from late November through the start of January, the King Abdulaziz Camel Festival is the largest camel-related event in the world. It draws thousands of spectators and even more camels, and hosts falconry, racing, and other events apart from the pageants, <a href="https://saudipedia.com/en/article/520/culture/festivals/king-abdulaziz-camel-festival#:~:text=The%20King%20Abdulaziz%20Camel%20Festival%20recently%20held%20its%20seventh%20edition,colors%2C%20subject%20to%20specific%20conditions.">according to Saudipedia</a>, a digital resource maintained by the Saudi government.</p>
+<p>Instagram, TikTok, and YouTube have brought it and other pageants on the Arabian Peninsula to a broader audience, boosting demand for female camels with the features of a beauty queen, according to some researchers, who spoke to owners and breeders in the United Arab Emirates for a <a href="https://www.mdpi.com/2571-9408/8/5/165">paper</a> published recently in the journal <em>Heritage</em>.</p>
+<p>What judges tend to look for in a standout one-humped contestant are a pendulous lower lip and long upper lip covering the teeth; a wide and elongated nose; a long, slender neck; a high-set hump; and long eyelashes, among other traits. These beauty standards “are rooted in traditional Bedouin appreciation of camel form and elegance,” says Tharwat. But they don’t improve a camel’s health, or ability to provide transport, meat, or milk.</p>
+<p>The standards vary a bit among different breeds of <em>Camelus dromedarius</em>. The most popular breeds for festivals, says Tharwat, include the Majaheem, which are often black and known for their high milk yield, and the Maghateer, which range from white to light brown, and are <a href="https://www.spa.gov.sa/en/N2228157">known</a> for their “elegant appearance.”</p>
+<p>For the Majaheem, ears that are long and forward-facing are most desirable; for Maghateer it’s short ones that are pricked backward. To produce the most beautiful contestants, owners use state-of-the-art breeding techniques. But some go much further.</p>
+<p>Illegal interventions include filler injections in the lips and nose area, lip stretching and binding, ear trimming, nostril enlargement, and injected anesthesia that makes the lips droopier, and by extension, more attractive. Some owners also inject their camels with testosterone, which changes the shape of the animals, in part by increasing muscle growth.</p>
+<p>But these enhancements have consequences: Short-term pain, infections, and distress are some of the immediate concerns for the camels, says Tharwat, but many of the procedures can also cause chronic health issues. Botox can paralyze facial nerves, making it hard for the camel to eat and drink. Reshaping the lips and ears can undermine sensory function. And testosterone can render a female camel infertile or suppress milk production. Perhaps what’s most frightening is that often these interventions aren’t carried out by professionals.</p>
+<blockquote>
+<p>Instagram, TikTok, and YouTube have boosted demand for female camels with the features of a beauty queen.</p>
+</blockquote>
+<p>Making animals more aesthetically appealing to their owners and other humans is by no means confined to the Arabian Peninsula. In the United States, people crop the ears of their dogs and dock their tails—practices banned in many countries but still accepted by the American Kennel Club as ways to help certain breeds “<a href="https://www.akc.org/wp-content/uploads/2021/11/DispellingMythsCroppedDockedDewclawsDebarking.pdf">perform the tasks they were meant to do</a>.” But it’s hard to argue that cropped ears on a Doberman have any useful value apart from meeting a standard of beauty. “They’re amputations, plain and simple,” says Barbara Hodges, director of advocacy and outreach for the Humane Society Veterinary Medical Association.</p>
+<p>The most thorough investigation of camel cosmetic practices took place at Saudi Arabia’s 7th annual camel festival that ran from December 2022 to January 2023. An inspection of some 12,385 dromedary camels at two different sites at the festival found that almost 8 percent had been tampered with, according to a paper in the <a href="https://www.ejmanager.com/mnstemps/100/100-1732303937.pdf?t=1753711488"><em>Open Veterinary Journal</em></a>from last March by Tharwat and colleague Abdulla Al-Hawas. The most common procedure: lip stretching. Nearly 8 percent of the inspected camels also had unusually elevated testosterone levels, indicating they’d been injected, probably as they were growing.</p>
+<p>What that investigation didn’t find is any evidence of a rare practice that sounds like it could have been dreamt up by David Cronenberg: surgically altering the hump. “It represents one of the more extreme and risky procedures,” says Tharwat. A hump that is large, high-set, and close to the tail is considered most appealing, but not all camels are built like that. “Because the hump contains fat reserves and is central to the camel’s energy balance, surgically modifying it could have serious metabolic and structural consequences, including infection, atrophy, or even death.”</p>
+<p>The dromedary has a storied history in the Middle East and Northern Africa. The nomadic Bedouins domesticated the animal about 4,000 years ago, and it remains vital to their culture, and, more broadly, to the Arabic people. A marvel of desert adaptation, the camel might be the most recognizable extremophile among megafauna. Even in the West, most schoolchildren know that these humped hoofers can go without water for an inordinate stretch of time—even <a href="https://www.nationalgeographic.com/animals/mammals/facts/arabian-camel?loggedin=true&amp;rnd=1753804528026">weeks in the winter</a>, when desert plants carry more moisture. And anyone who’s heard <a href="https://youtube.com/shorts/WC1ZunYOcLU?si=mcT530PN3FhXvezn">a camel roar</a> doesn’t soon forget it.</p>
+<p>But the modern world is presenting challenges that the camel didn’t evolve to confront. While the beauty standards aren’t entirely contemporary—lip binding and ear shaping have been used for years—the new technologies have increased the potential for harm, Tharwat says. As the creature’s digital footprint expands, so has global interest in camel festivals. The role of the camel in Arabic culture—traditionally as beast of burden, livestock, and symbol of heritage—is shifting. As one owner cited in the <em>Heritage</em> paper put it: “Technology is changing the way we view camels.”</p>
+<p>And, for some, that view isn’t so pretty. <img alt="" src="../images/nautilus-favicon-14_1036.png" /></p>
+<p><em>Lead image: VD Image Lab / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

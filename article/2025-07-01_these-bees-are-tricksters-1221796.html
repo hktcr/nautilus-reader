@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>These Bees Trick Others into Caring for Their Young | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>These Bees Trick Others into Caring for Their Young</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-01
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-XWA9</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In England’s Hertfordshire county, a fork-jawed nomad bee (<em>Nomada ruficornis</em>) dangles from a single blade of grass, covered in morning dew. It rests in preparation for another day of calculated trickery.</p>
+<p>Nomad bees are known less for their pollination roles and more for their cunning brood-rearing habits. All nomad bees are brood parasites—also known as cuckoo bees—meaning their evolutionary edge relies on practiced deception: sneaking their eggs into the nests of other bees and leaving the hosts to unknowingly raise and provide for their young. This convenient adaptation relieves nomad bees of the time-intensive parental responsibilities of building nests and collecting food. Instead of spending their days preparing pollen and nectar stores for their young, they can be found lurking around the nests of other bees, waiting for their chance to slink in. At night, with no home to return to, they might roost on leaves or blades of grass, sometimes anchoring themselves with their mandibles, as in the photo above, so they won’t fall off as they sleep.</p>
+<blockquote>
+<p>While cuckoo bees are shrewd tricksters, they have one great weakness.</p>
+</blockquote>
+<p>Most cuckoo bees, including the nomad bee shown, target other solitary bees that lay their eggs in cavities or multichambered tunnels or crevices in the ground. When a host mother leaves her nest to forage, the cuckoo bee, hiding nearby, deposits her eggs. If the nest was previously sealed, the interloper reseals the brood chamber before the host returns. Then, when the cuckoo larvae emerge, they use their large mandibles to enjoy a first meal: their nest mates. The impostors continue to benefit from the host’s stores of pollen and nectar until they leave as well-fed adults.</p>
+<p>Male cuckoo bees don’t live long enough to participate in these ruses, but scientists think they may provide the females with crucial cover for their deceptions. During mating, male cuckoo bees release chemical compounds that are identical to the pheromones emitted by the hosts, and researchers suspect this transfer gives females the disguise they need to lay their eggs unnoticed. The scent may also discourage other males from pairing with mated females.</p>
+<p>With over 850 species of cuckoo bees worldwide, their approaches and adaptations can differ wildly. Some species always parasitize the same host species, while others are less discerning. And while many prefer solitary hosts, some target social species. The vestal cuckoo bumblebee (<em>Bombus vestalis</em>), for example, infiltrates bumblebee colonies, then kills and impersonates the queen, hoodwinking the workers into caring for its young.</p>
+<p>While cuckoo bees are shrewd tricksters, they have one great weakness: They are only as healthy as their hosts. When bee populations decline, so do the parasitic cuckoos that depend on them. And many bee populations are in trouble, from social species such as bumblebees to the solitary sorts that account for at least 90 percent of all bee species but have benefitted from much less research into their life cycles and health. For now, <em>Nomada ruficornis</em> populations appear to be stable, but without more research and conservation measures protecting all bee species, the crafty cuckoo bee in our photo might one day wake up more alone than ever. <img alt="" src="../images/nautilus-favicon-14_1093.png" /></p>
+<p><em>This</em> <a href="https://www.biographic.com/machiavellian-mothering/"><em>story</em></a> <em>originally appeared in</em> <a href="https://www.biographic.com/">bioGraphic</a><em>, an independent magazine about nature and regeneration powered by the California Academy of Sciences.</em></p>
+<p><em>A lifelong naturalist, Andy Sands has been photographing wildlife for more than 25 years. His passion is British wildlife, and he particularly enjoys photographing birds in song, the small mammals that we seldom see, as well as insects and other invertebrates, documenting their lifecycles and behavior. Being an experienced field naturalist has enabled him to take intimate portraits of wild animals in natural surroundings. In recent years he has focussed extensively on coverage of fungi and slime molds.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nautilus Reading List About the Cosmos | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Nautilus Reading List About the Cosmos</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-OTMB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We pride ourselves on the surprising vantage points and elegant writing in our articles at <em>Nautilus</em>. Those qualities don't come easy. They arise from the authority of our writers.</p>
+<p>In the vast field of space and astronomy, we often turn to Sean Raymond, George Musser, and Corey Powell to seek and explain the mysteries of the universe to you. Their many articles for <em>Nautilus</em> include “<a href="https://nautil.us/the-planets-with-the-giant-diamonds-inside-238243/">The Planets with the Giant Diamonds Inside</a>”(Powell), “<a href="https://nautil.us/roadmap-to-alpha-centauri-234442">Roadmap to Alpha Centauri</a>” (Musser), and “<a href="https://nautil.us/the-stars-foretell-our-doom-688118/">The Stars Foretell Our Doom</a>” (Raymond).</p>
+<p>All three writers were delighted to recommend their favorite books about space and astronomy and offer personal reasons why. Each book is followed by who recommended it.</p>
+<h2><a href="https://www.penguinrandomhouse.com/books/159730/cosmos-by-carl-sagan/"><em>Cosmos</em></a> by Carl Sagan</h2>
+<p><img alt="" src="../images/Breaker_1_1.png" /></p>
+<p>Penguin Random House</p>
+<p>“The Cosmos is rich beyond measure—in elegant facts, in exquisite interrelationships, in the subtle machinery of awe,” Sagan wrote. The importance of the book is hard to overstate. How many kids' eyes did it open to the wonders of astronomy? I remember it being like an explorer's guide to the Solar System. —Raymond</p>
+<h2><em><a href="https://www.cambridge.org/us/universitypress/subjects/physics/planetary-systems-and-astrobiology/new-solar-system-4th-edition?format=PB&amp;isbn=9780521645874">The New Solar System</a></em> by J. Kelly Beatty, Carolyn Collins Petersen, &amp; Andrew Chaikin</h2>
+<p><img alt="" src="../images/Breaker_2_1.png" /></p>
+<p>Cambridge University Press</p>
+<p>Hands down the single best book on planetary science, filled with glorious images and meaty scientific explanations. The authors, who are leading science journalists, assembled chapters by the domain experts on each aspect of the solar system. —Musser</p>
+<p><img alt="" src="../images/Breaker_3_1.png" /></p>
+<p>Fontana</p>
+<p>This book came out when I was 11 and it blew my young mind, even if I didn't fully understand it until a few years later. In passionate and meticulously clear language, Weinberg lays out the modern Big Bang story of creation and explains how we know it is true. The most remarkable part is the titular moment-by-moment account of how a soup of energy transformed into particles and atoms and an infant universe and did so in less time than it takes to hard-boil an egg. —Powell</p>
+<p><img alt="" src="../images/Breaker_4_1.png" /></p>
+<p>Bantam</p>
+<p>When I read this in my first year of college, it felt like I was learning that everything I thought I knew was just the tip of a huge, strange iceberg, and that theoretical physics was one way to understand what was below the surface. Reading it definitely helped keep me on the astrophysics career track. —Raymond</p>
+<p><img alt="" src="../images/Breaker_5.png" /></p>
+<p>W. W. Norton &amp; Company, Inc.</p>
+<p>My copy of this book is filled with Post-it notes to bookmark favorite pages. There are a lot of them, especially when Thorne gets into the paradoxes of time travel. He has some of the best explanations I’ve read of Einstein’s theories and black holes, adorned with charming hand-drawn sketches. —Musser</p>
+<p><img alt="" src="../images/Breaker_6.png" /></p>
+<p>University of California Press</p>
+<p>I'll admit, I don't pick this one up very often, but it's a surprisingly lively read. Galileo was a great writer in addition to a great researcher, and the smug satire here shows you exactly why he pissed off the Church. (Hint: The character representing the perspective of the Pope is named “Simplicio.”) Also, this book is a useful tonic for anyone who thinks they know who Galileo was and what he said. —Powell</p>
+<p><img alt="" src="../images/Breaker_7.png" /></p>
+<p>Oxford University Press</p>
+<p>My favorite part of this book, which is saying a lot, is the index. Entries such as “reality, validity denied,” and “interstellar communications, motivations for,” give you a sense of the scope of this book. Whether you ultimately accept the authors’ argument about the centrality of life in the universe, this book will make you a smarter person. —Musser</p>
+<p><img alt="" src="../images/Breaker_8.png" /></p>
+<p>Bantam</p>
+<p>The <em>Foundation</em> series is like an action-packed psychological mystery, set in a galaxy that's so different than our own (but within the realm of extrapolation). Rereading the <em>Foundation</em> books, I realized that Asimov in the 1950s was already touching on subjects that related with my own astronomical research. He discusses what types of stars are likely to host rocky planets like Earth and makes some reasonable assertions that are now being directly tested with exoplanet-hunting missions. —Raymond</p>
+<p><img alt="" src="../images/Breaker_9.png" /></p>
+<p>Princeton University Press</p>
+<p>No one knows what dark matter is, but no one does a better job in going down the list of options than theoretical astrophysicist Freese. It’s fun to read, with anecdotes about knocking back margaritas before major scientific announcements and accidentally insulting the Queen of Sweden. —Musser</p>
+<p><img alt="" src="../images/Breaker_10.png" /></p>
+<p>Little, Brown and Company</p>
+<p>In 2013, Hadfield had already gone viral on YouTube by <a href="https://youtube.com/watch?v=KaOC9danxNo&amp;t=24s">performing “Space Oddity</a>” aboard the International Space Station. Then this book came out and cemented his status as an icon of the new space culture: sincere, slightly ironic, and unabashedly nerdy, the antithesis of <em>The Right Stuff</em> machismo. Yes, Hadfield tells you exactly what life is like aboard an orbiting tin can. But he also confides that his kids play a game called "The Colonel Says," in which they gently mock his earnest bits of astronaut-dad wisdom. —Powell <img alt="" src="../images/nautilus-favicon-14_913.png" /></p>
+<p><em>Lead image: Sergey Nivens / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

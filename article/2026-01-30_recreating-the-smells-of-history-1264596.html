@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recreating the Smells of History | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Recreating the Smells of History</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-30
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-35XM</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://knowablemagazine.org/content/article/society/2026/recreating-the-smells-of-the-past"><em>This article</em></a><em>originally appeared in</em> <a href="https://knowablemagazine.org/">Knowable Magazine</a>.</p>
+<p>We often learn about the past visually—through oil paintings and sepia photographs, books and buildings, artifacts displayed behind glass. And sometimes we get to touch historical objects or listen to recordings. But rarely do we use our sense of smell—our oldest, most primal way of learning about the environment—to experience the distant past.</p>
+<p>Without access to odor, “you lose that intimacy that smell brings to the interaction between us and objects,” saysanalytical chemist<a href="https://profiles.ucl.ac.uk/8768-matija-strlic">Matija Strlič</a>. As lead scientist of the Heritage Science Laboratory at the University of Ljubljana in Slovenia and previously deputy director of the Institute for Sustainable Heritage at University College London, Strlič has devoted his career to interdisciplinary research in the field of heritage science. Much of his work focused on the preservation and reconstruction of culturally significant scents.</p>
+<p>Reconstructed scents can enhance museum and gallery exhibits, says <a href="https://research.vu.nl/en/persons/inger-leemans/">IngerLeemans</a>, a cultural historian at the Royal Netherlands Academy of Arts and Sciences. Smell can provide a more inviting entry point, especially for uninitiated visitors, because there’s far less formalized language for describing smell than for interpreting visual art or displays. Since there’s no “right way” of talking about scent, she says, “your own knowledge is as good as the others’.”</p>
+<p>Despite their potential to enrich our understanding of history and art, smells are rarely conserved with the same care as buildings or archaeological artifacts. But a small group of researchers, including Strlič and Leemans, is trying to change that—combining chemistry, ethnography, history and other disciplines to document and preserve olfactory heritage.</p>
+<blockquote>
+<p>A chemist could theoretically whip up the smell of old books centuries from now.</p>
+</blockquote>
+<p>Some projects aim to safeguard a beloved smell before it disappears. When the library in London’s St. Paul’s Cathedral was scheduled for renovation, for example, Strlič and his UCL colleague <a href="https://www.ucl.ac.uk/bartlett/cecilia-bembibre">Cecilia Bembibre</a> set about documenting the historic library’s distinct smell.</p>
+<p>The team first analyzed the chemicals wafting from the collection, which includes books dating back to the 12th century, and the surrounding furnishings, which have barely changed since the library was completed in 1709. They used a process called <a href="https://knowablemagazine.org/content/article/society/2021/what-did-ancient-people-eat">gas chromatography-mass spectrometry</a>, which helps separate, identify and quantify volatile organic compounds, to examine air samples they’d captured in the library.</p>
+<p>“As an analytical chemist, I was able to characterize and quantify those molecules, but how people describe what they felt required a completely different approach,” says Strlič. To whittle down the list of compounds identified by the mass spectrometer to the ones that humans can actually smell, the researchers next invited seven untrained “sniffers” into the cathedral library and asked them to describe its smell using a list of 21 adjectives commonly used to describe the compounds.</p>
+<p><img alt="" src="../images/Seruga_BREAKER.png" /></p>
+<p><strong>ROBOSNIFFERS:</strong> These delicate instruments sample the air wafting through the library of St. Paul’s Cathedral in London, picking up volatile compounds that evoke the collection’s distinctive scent of old books and furniture. <em>Credit: Cecilia Bembibre.</em></p>
+<p>The list included words like <em>green</em> and <em>fatty</em>, which people frequently use to describe the smell of the chemical hexanal, and <em>almond</em>, which is associated with benzaldehyde. Both compounds are released by paper as it degrades. The sniffers were also invited to add any descriptors of their own.</p>
+<p>One word that all sniffers used to describe the library wasn’t particularly surprising: <em>woody</em>. Others that proved popular were <em>smoky</em>, <em>earthy</em>,  and <em>vanilla</em>. Such descriptors can help conservators assess the state of old paper, since papers that are slightly more acidic due to decay, for example, “smell more sweet,” says Strlič. “And those that are stable smell more like hay.”</p>
+<p>Strlič and colleagues next matched the qualitative descriptors the sniffers had selected with their underlying chemical compounds to create a chemical “recipe” for the scent of the cathedral’s library. Such recipes are published in scientific journals and stored in digital research repositories, so a chemist could theoretically whip up the smell of old books centuries from now, “even if, in the future, people no longer go to a library or no longer read physical books, and only receive all information digitally,” says Strlič.</p>
+<p><strong>How musty are mummies?</strong></p>
+<p>The work at St. Paul’s Cathedral, which ended in 2016, suggested that it might be possible to capture far older scents—including smells from thousands of years ago. For a study published in 2025, Strlič was joined by scientists from Egypt, Slovenia, Poland, and the United Kingdom to study <a href="https://www.acs.org/pressroom/presspacs/2025/february/scientifically-sniffing-ancient-egyptian-mummified-bodies.html">nine ancient Egyptian mummies</a>. The aim was to learn about the mummification process and recreate a scent that will be available to visitors of the Egyptian Museum in Cairo from 2026 onward.</p>
+<p>One might expect the scent of millennia-old mummified bodies to be off-putting, to say the least. Yet the smell is surprisingly pleasant, “because the ancient Egyptians used so many aromatic compounds, oils and resins that a lot of the original smell still remains,” Strlič says.</p>
+<p>To capture these chemicals, Strlič and colleagues extracted air samples from the sarcophagi, separated them into single compounds with a gas chromatograph and identified them with a mass spectrometer.</p>
+<p><img alt="" src="../images/Seruga_BREAKER-2.png" /></p>
+<p><strong>A WHIFF OF MUMMY:</strong> By analyzing air next to these mummies at the Egyptian Museum in Cairo, scientists can recreate their scent—and shed light on the embalming ingredients used to preserve them. <em>Credit: Cecilia Bembibre.</em></p>
+<p>A panel of eight scientists—all trained on the scent of mummification materials—then evaluated the samples’ smells in terms of quality, intensity and pleasantness. After assessing each sample individually, the group discussed their findings to reach consensus: <em>Woody</em>, <em>spicy</em>, and <em>sweet</em>  emerged as common descriptors across all nine bodies.</p>
+<p>The scent profiles that the team created based on these chemical and sensory observations can now be used to understand which mummies are more degraded than others, and how some of the bodies were mummified in the first place, says Strlič. For example, <a href="http://theconversation.com/myrrh-conifer-oil-and-breakfast-tea-my-sniffer-teams-surprise-findings-on-what-mummified-bodies-smell-like-249904">the team identified embalming ingredients</a> like conifer oils, frankincense, myrrh, and cinnamon, as well as more modern compounds, such as synthetic pesticides and plant-based pest oils, which museums have used to preserve the mummies, often without documentation.</p>
+<p>Strlič hopes that such research will help to expand the use of smell analysis as a noninvasive research technique, since it doesn’t require removing any physical samples from the studied object. The team also intends to apply its findings to create what amounts to a mummy “perfume” for the Egyptian Museum. For this, they will select up to 15 key chemical compounds from the mix and adjust their ratios to reflect the natural scent, with panels of sniffers comparing the new creation with the original until there’s no perceptible difference between them. “This is a repetitive process that involves a lot of trial and error,” says Strlič.</p>
+<p><strong>Creating even the smell of Hell</strong></p>
+<p>While old artifacts offer a convenient starting point for olfactory analysis, many historic smells have not been preserved in physical form. To re-create them, researchers must rely on archival documents and a certain amount of creative interpretation. That’s what a European olfactory heritage project called <a href="https://odeuropa.eu/">Odeuropa</a> did for a number of historical events, sites and even ideas, including the <a href="https://odeuropa.eu/2020/11/seeing-by-smelling-how-to-enhance-the-experience-for-blind-and-low-sighted-people-in-a-museum-of-visual-art/">Battle of Waterloo</a> and 17th century Amsterdam canals. The team even re-created the scent of Christian “Hell” as described in 16th century sermons, including notes of sulfur and brimstone and a whiff of “a million dead dogs.”</p>
+<p>“Olfaction helps shape our cultures, although it often does so unknowingly or without us noticing,”says Leemans, who led the Odeuropa project. “When we talk about cultural heritage, we can think about religious rituals, but we can also think about specific scents that we’ve been cherishing and living with for a long time.”</p>
+<blockquote>
+<p>The team also intends to apply its findings to create what amounts to a mummy “perfume” for the Egyptian Museum.</p>
+</blockquote>
+<p>To reconstruct these complex historic “smellscapes,” Leemans and her colleagues scoured old document archives and images for any related smell references. “We search for nose witnesses, people describing those smells,” she says. “But we also look at the components of that smellscape,” such as architectural descriptions listing building materials.</p>
+<p>To accelerate the work, Odeuropa has <a href="https://explorer.odeuropa.eu/">created an AI-driven database</a> of more than 2.5 million historical smell references, mined from 43,000 images and 167,000 historical texts published in seven European languages.</p>
+<p>When it’s time to create a real perfume based on this data, Odeuropa researchers write a detailed brief outlining the smell’s relevant components as well as the story behind it. Working with a perfume and fragrance company, they begin evaluating iterations of the scent <a href="https://zenodo.org/records/10101890">in different ways</a>—by asking panels of sniffers to assess the scent blind or after a short presentation on the subject, or by approaching curatorial, academic and fragrance experts to peer-review the fragrance.</p>
+<p><strong>To each their own odors</strong></p>
+<p>A person’s <a href="https://knowablemagazine.org/content/article/mind/2024/peter-mombaerts-how-sense-of-smell-works-identify-odors">perception of smell</a> is inherently subjective and dependent on their unique biology, personal experience and culture, says neuroscientist <a href="https://scholar.google.com/citations?user=5EqGyRkAAAAJ&amp;hl=en">Gülce Nazlı Dikeçligil</a> at the University of Pennsylvania, and lead author of a 2024 <em>Annual Review of Psychology</em> on <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-psych-042023-101155">human olfaction</a>. “The olfactory system isn’t necessarily optimized for certainty and consistency,” she says. Instead of simply identifying molecules from the environment with computer-like precision, our brains are asking, “What does this molecule mean to me now, in the context of my history?”</p>
+<p>As our oldest sense, evolutionarily speaking, olfaction enjoys priority access to brain regions like the amygdala and <a href="https://knowablemagazine.org/content/article/mind/2025/memory-formation-long-term-potentiation">hippocampus</a>, which are key in processing emotion and memory, notes Dikeçligil. This means that the memories triggered by scents tend to be especially vivid and emotionally significant.</p>
+<p>Scent “sparks thoughts, memories, ideas and gets people talking about and in front of paintings, which is what I want,” says art historian <a href="https://britishartnetwork.org.uk/membership/members/christina-bradstreet/">Christina Bradstreet</a> from the Association for Art History in the U.K. She recently worked with the renowned Spanish perfumer Gregorio Sola to create three scents to accompany two paintings in a British exhibition on Pre-Raphaelite art. When, in 2022, the Prado Museum in Madrid <a href="https://www.puig.com/en/newsroom/airparfum-technology-at-prado-museum/">created 10 scents</a> to accompany Jan Bruegel the Elder’s painting <em>The Sense of Smell</em>—including jasmine, fig tree, and civet—they found that visitors lingered in front of the painting for 13 minutes, compared to the average 32 seconds.</p>
+<p>Museums and galleries worldwide are taking note and increasingly integrating scent into their exhibitions. This attracts new visitors and engages them in a different way, “not only with the collection, but also with each other,” says Leemans. “When people start to smell, they immediately start to talk to each other, exchanging their memories, their emotions, their knowledge about the scents. It’s a really open conversation that you evoke in the museum space.” <img alt="" src="../images/nautilus-favicon-14_487.png" /></p>
+<p><a href="https://knowablemagazine.org/content/article/society/2026/recreating-the-smells-of-the-past"><em>This article</em></a><em>originally appeared in</em><a href="https://knowablemagazine.org/">Knowable Magazine</a><em>, a nonprofit publication dedicated to making scientific knowledge accessible to all.</em><a href="https://knowablemagazine.org/newsletter-signup"><em>Sign up for</em>Knowable Magazine’<em>s newsletter</em></a><em>.</em></p>
+<p><em>Lead image: Chemists, historians and other scientists are working to design perfumes that recreate and evoke scents from the past. Credit: Knowable Magazine.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

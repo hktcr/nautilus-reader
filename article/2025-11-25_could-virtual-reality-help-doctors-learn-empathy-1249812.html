@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Could Virtual Reality Help Doctors Learn Empathy? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Could Virtual Reality Help Doctors Learn Empathy?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NCBU</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Ever since Frank’s wife passed away a few months ago, he’s barely getting by. His wife used to help with chores and errands, but now Frank struggles just getting to the store because his diabetes causes neuropathic pain that makes it impossible to drive. Because of this, his house is a mess, his medications unfilled, and worst of all, his children live far away, meaning there’s no one to share in his grief. One day, overpowered by his loneliness and his worsening health, Frank doubles over in the shower from a heart attack.</p>
+<p>Luckily, Frank isn’t harmed—because Frank isn’t even a real person. Instead, he’s the central character in the Frank Lab, a virtual reality experience designed by Embodied Labs, a company that uses immersive training to help healthcare providers empathize with patients.</p>
+<p>Empathy is essential in healthcare, allowing clinicians to communicate successfully with patients and understand their needs, and research has linked clinician empathy with higher patient satisfaction, better health outcomes, and fewer medical errors. Unfortunately, studies also show that empathy tends to decrease during medical school, as fact-based learning and high-stakes testing drive students’ attention away from patients’ subjective experiences. “You’re just in survival mode,” explains Riham Alieldin, a physician and medical educator at the University of Rochester.</p>
+<blockquote>
+<p>Virtual reality isn’t always guaranteed to increase empathy.</p>
+</blockquote>
+<p>The question of whether empathy is a <a href="https://pubmed.ncbi.nlm.nih.gov/32353470/">trainable</a> <a href="https://pubmed.ncbi.nlm.nih.gov/7965564/">skill</a> is the subject of substantial <a href="https://www.researchgate.net/publication/385011726_Categories_of_training_to_improve_empathy_A_systematic_review_and_meta-analysis">debate</a>, but either way, most experts agree that medical schools’ usual teaching methods don’t tend to work as well for such soft, context-based skills. “Anybody in health professions education learns best by doing, by experiencing, by having that kinesthetic awareness,” says Marilyn Gugliucci, a professor at the University of New England’s College of Osteopathic Medicine. Virtual reality helps create this awareness, immersing students in embodied experiences that their patients might have. “It just tricks your mind in a different way,” explains Alieldin.</p>
+<p>In 2024, Alieldin <a href="https://link.springer.com/article/10.1007/s10055-024-01019-7">led a study</a> using the Frank Lab to expose 19 first-year medical students to the overlapping challenges older adults face with social isolation and declining health. “What happened is, the students would come in, they put on the headset, and they become the patient,” says Alieldin. Instead of just hearing about Frank’s troubles, they could actually sit in his cluttered living room and open his unstocked fridge.</p>
+<p>Alieldin’s team used the Jefferson Scale of Empathy, a questionnaire designed specifically for healthcare professionals, to measure students’ empathy both before and after the intervention, finding that, on average, students’ empathy increased significantly following their time in the Frank Lab. Interviews with participants also revealed that they felt newly aware of empathy’s importance in medical care, along with the everyday challenges faced by older adults. The majority also said they felt a deep emotional connectedness to Frank, as if they had “become” him. “It was very powerful," says Alieldin. A few students cried.</p>
+<p>Gugliucci and other researchers at the University of New England <a href="https://www.tandfonline.com/doi/abs/10.1080/02701960.2024.2328514">found similar results</a> when testing out Embodied Labs’ Alfred Lab, which lets users experience sensory deficits firsthand. For example, the lab simulates macular degeneration, a type of vision loss that prevents people from seeing what’s directly ahead of them, by placing a large block dot in the center of the screen. Forced to turn their heads to see what was in front of them, Gugliucci says, students became frustrated—and with this, viscerally aware of how exasperating the condition can be.</p>
+<p>Still, virtual reality isn’t always guaranteed to increase empathy. “A lot of the current designs don't utilize it in a way that's going to work,” says social scientist Alison Jane Martingano, who has done extensive research on virtual reality and empathy. As she explains, exercises that merely arouse emotion may provoke emotional empathy, or the ability to feel what someone else does, but what clinicians need is cognitive empathy, which allows them to make sense of patients’ mental states from a distance. “We don't want our doctor to get super upset when we're in pain,” Martingano says, “because that would not be good for us, or the doctor.”</p>
+<blockquote>
+<p>Realism isn’t actually what makes virtual reality powerful.</p>
+</blockquote>
+<p>Plus, sudden bursts of feeling tend to dissipate just as quickly, meaning that interventions focused on emotion don’t typically produce lasting changes in behavior. For example, Martingano <a href="https://journals.sagepub.com/doi/abs/10.1177/08997640221125804">conducted a study in 2022</a> where participants viewed footage of child refugees through a virtual reality headset before being asked to donate to the United Nations International Children’s Emergency Fund (UNICEF). While measures of emotional empathy increased after the intervention, suggesting that the footage stirred participants' emotions, they were no more likely to donate than those from a control group that didn’t view the footage.</p>
+<p>This doesn’t mean virtual reality is hopeless for bolstering empathy—it just means interventions need to target cognitive empathy by forcing participants to work what Martingano calls their “empathy muscles.” As Martingano explains, perspective-swapping exercises like Alieldin’s show potential because they compel students to work out a fictional person’s emotions on their own. “It's essentially doing what a novel does, in the sense that it's asking you to take the perspective of the narrator, but it's not telling you how they feel,” says Martingano. Alieldin’s team also followed the Frank Lab with a debriefing session where students reflected on what they’d learned and how they would apply it to clinical practice later on, which added an additional level of deliberate thinking to the experience.</p>
+<p>Alieldin’s findings suggest that the Frank Lab had more than just a momentary impact—when interviewed six months later, most participants reported that they still worked to apply what they’d learned in real patient encounters. Some, for example, used the experience as a reminder to ask in-depth questions about patients’ lives or to take note of subtle cues in patients’ behavior. But these details were self-reported and so could have been influenced by social desirability bias.</p>
+<p>Martingano stresses that realism isn’t actually what makes virtual reality powerful. Just as we can become engrossed by powerful novels or works of theater, an immersive experience that tells a truly engaging story will have a much greater impact than one centered around convincing graphics. In fact, Gugliucci’s team actually found that students’ empathy increased just as much when the Alfred Lab was streamed to entire classes of students as it did when they used virtual reality.</p>
+<p>For this reason, Martingano cautions against treating virtual reality as the only option, since this could dissuade medical schools who can’t afford the expensive technology from trying out more accessible options. “I don't think there's anything magical about the technology,” she explains. “It's essentially just another tool in the toolbox.” <img alt="" src="../images/nautilus-favicon-14_756.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: AKIO75 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

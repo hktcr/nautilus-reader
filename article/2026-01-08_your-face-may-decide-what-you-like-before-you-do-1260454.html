@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Face May Decide What You Like Before You Do | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Your Face May Decide What You Like Before You Do</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-DEPZ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We all subtly mirror the facial expressions of the people around us, smiling when they smile, furrowing our brows in concert, usually without even noticing it. This is known as facial mimicry, and it’s thought to play a role in empathy and social connection. But what can this form of mimicry actually say about a person’s preferences?</p>
+<p>More than you might think, according to new research.</p>
+<p>To investigate this question, a team of scientists from Tel Aviv University paired dozens of strangers up in a lab and ran two experiments. In the first, one of the partners described two different films in short summaries. The other partner listened, watched the first person’s face, and then decided which movie they most wanted to watch. Next, they switched roles. In the second experiment, both partners listened to recordings of an actress reading similar summaries of movies, without any visuals to refer to. Afterward they chose which movie they preferred. The movie summaries in each case were similar, with no obvious winner.</p>
+<p>While these experiments were underway, the scientists used sensitive sensors to track tiny muscles in the faces of the listeners—muscles that can’t be seen in a mirror and that move without our knowing or even feeling it. After that, they analyzed both how much each person’s face changed overall, how broadly they arched their eyebrows, for instance, as well as how much they mimicked the speaker’s facial expression.</p>
+<p>What they found is that peoples’ stated preferences tracked the degree to which they mimicked the speaker’s positive facial expressions, such as cheek-raising, more than it matched their own facial expressions. That finding, <a href="https://www.nature.com/articles/s44271-025-00351-1">published</a> in <em>Communications Psychology</em>, held up across multiple forms of analysis and ways of crunching the data. Mimicry of negative expressions sometimes trended toward weaker preference, but those effects were less consistent. By contrast, the listener’s own facial expression alone didn’t predict preferences as reliably.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/time-is-contagious-236403/"><strong>Time Is Contagious</strong></a><strong>”</strong></p>
+<p>“The study showed that we are not just listening to a story—we are actually being ‘swept’ toward the speaker,” explained co-author Liron Amihai, a doctoral student, in a <a href="https://english.tau.ac.il/research/face-decides-before-you-do">statement</a>. “This mimicry often happens automatically, and it can predict which option we will prefer long before we think about it in words. Facial mimicry, therefore, is not merely a polite gesture, but also a part of the decision-making system.”</p>
+<p>What was most surprising is that this outcome held up even in the second experiment, where the listeners were unable to see the speakers’ faces. It turns out that humans can hear a smile in someone’s voice, and can mimic it. So even when there was minimal social interaction with the person reading the movie summary—and little expectation of polite behavior—the listeners’ mimicry of the speaker’s facial expression still revealed their preference.</p>
+<p>The researchers hypothesize that when you mirror someone else’s facial expressions, your brain may use that as a signal to influence your decisions, even before you consciously evaluate them. Of course, the scientists point out, the findings are correlational and so don’t show that mimicry causes preference, nor that listeners are being manipulated by the speakers.</p>
+<p>But it would be wise to interpret the results with caution. The study had some important limitations: The participants were all women, and the effects were modest. Also, past efforts to show that body postures and facial expressions influence our minds and emotions have been at least partially debunked.</p>
+<p>For example, one widely circulated 1988 <a href="https://pubmed.ncbi.nlm.nih.gov/3379579/">study</a> showed that if your mouth is arranged into a smile by holding a pen in your mouth, you will rate things as funnier than if your mouth is prevented from smiling. But a large multi-lab replication effort failed to yield the original effect, and a later <a href="https://pubmed.ncbi.nlm.nih.gov/30973236/">meta-analysis</a> found these effects to be small and variable. Another popular 2010 <a href="https://pubmed.ncbi.nlm.nih.gov/20855902/">study</a> suggested that “power poses” could change hormone levels and risk tolerance among women, but later work found that these gestures <a href="https://www.zne.uzh.ch/dam/jcr:e5fc4c3c-d50e-4aa9-96ab-4389e426d20d/Psychological%20Science-2015-Ranehill-0956797614553946.pdf">didn’t have the effects</a> the researchers initially claimed, instead only nudging self-reported <a href="https://www.tandfonline.com/doi/abs/10.1080/23743603.2017.1326760?">feelings</a> of self-confidence.</p>
+<p>But if the findings hold up, they suggest our faces may know what we like before our brains do. <img alt="" src="../images/nautilus-favicon-14_575.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newslette</a>r</em>.</p>
+<p><em>Lead image: Prostock-studio / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

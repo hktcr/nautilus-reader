@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrating the Relationship Between Science and Illustration - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Celebrating the Relationship Between Science and Illustration - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-20
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-YBEH</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Science and art are two sides of the same coin. From da Vinci’s “Vitruvian Man” to Darwin’s sketches of finches to modern data visualization infographics, illustration has played a vital role in both recording and communicating scientific knowledge. It’s a relationship you can see on display at the Society of Illustrators museum in New York City.</p>
+<p>Arabelle Liepold, the executive director of the Society of Illustrators, recently sat down to answer our questions about illustration’s relationship with science, what scientists can learn from artists, and how we can all support illustrators.</p>
+<p><strong>How did you decide you wanted to pursue a career in the arts?</strong></p>
+<p>I've always been drawn to the arts—not just as a form of personal expression but as a way to connect people and tell meaningful stories. My journey started early, with a deep interest in visual storytelling and creative expression. Studying art, film, and literature further shaped my understanding of how artistic narratives influence culture and bring communities together. Over time, I realized that my passion lay in the intersection of art curation, community, and cultural management. That’s what led me to pursue a career where I could champion artists, organize cultural events, and contribute to the broader creative landscape.</p>
+<p><img alt="" src="../images/Arabelle-Liepold-Portrait_c-John-Jay-Cabuay.jpg" /></p>
+<p>Portrait of Arabelle Liepold by John Jay Cabuay. <em>Image courtesy of Arabelle Liepold.</em></p>
+<p><strong>What drew you to illustration over other forms of artistic expression?</strong></p>
+<p>As a kid, you would always find me drawing stories and characters. Storytelling has always been at the heart of what I love, and illustration felt like the perfect medium to bring narratives to life in a visually compelling way.</p>
+<p>What I love most about illustration is that it’s literally everywhere. We’re oftentimes surrounded by it without even realizing it—on your cereal package in the morning, the poster in the subway on your way to work, the logo of your go-to coffee brand, the cover of your favorite book or news magazine, the opening title sequence of a TV series, or the label on a wine bottle. In a way, illustration is very accessible, inclusive art.</p>
+<p>Illustration also has the unique ability to communicate humor and satire, often serving as a powerful tool to comment on social and political issues. Through editorial cartoons or political covers, illustrations can quickly make a point with wit and visual impact that text alone might not achieve. A perfect example is our current exhibition featuring <em>New Yorker</em> cartoons from the past 100 years, celebrating the magazine’s centennial. This ability to blend lighthearted humor with pointed social critique is something that has always drawn me to illustration, as it allows artists to address important topics in ways that resonate deeply with a wide audience.</p>
+<p>Illustration has an incredible ability to connect with people on a personal level, which is what ultimately drew me to it over other forms of artistic expression.</p>
+<p><img alt="" src="../images/New-Yorker-Exhibit_c-Joe-Iovino-scaled.jpg" /></p>
+<p>The Society of Illustrators Museum. <em>Photo by Joe Iovino.</em></p>
+<p><strong>Can you talk about the role illustration plays in science?</strong></p>
+<p>Illustration has always been fundamental to scientific discovery and communication. Long before photography, images were the primary means of recording and sharing knowledge. From the earliest depictions of the human body in medical texts to scientific illustrations of the planetary system that helped lay the foundation for our understanding of the universe, drawing has been a crucial tool for scientists to visualize and understand complex concepts. In medicine, anatomical drawings were essential for studying the human body and conveying knowledge to students, doctors, and researchers. They allowed for a deeper understanding of anatomy, injury, and disease—much before the advent of modern imaging technology.</p>
+<p>Early botanical drawings of plants are another great example. These images served not only as a method of explanation but also as archives that preserved knowledge for future generations. We recently hosted the American Society of Botanical Artists’ Annual International Exhibition at the Society of Illustrators, showcasing firsthand the incredible detail and scientific significance of illustration.</p>
+<p><strong>Is there anything in science that inspires you?</strong></p>
+<p>One thing that always fascinates me is the way science and illustration intersect—how both are driven by discovery and curiosity. The detailed illustrations of the human body in early medical texts or the intricate drawings of plants and animals in botanical studies are amazing examples of how art has helped expand our understanding of the world. I’m especially inspired by the work that continues to bridge these two fields, like illustrations that depict complex scientific concepts, such as the structure of DNA, or the beauty of space exploration with vivid renderings of distant planets and galaxies.</p>
+<p>What excites me the most is the potential for new scientific frontiers to spark even more creativity in illustration. Science is always evolving, and as it does, so too do the ways we represent and understand the world around us—whether it's in biology, astronomy, or environmental science. The challenge of illustrating these ever-evolving concepts keeps me inspired and reminds me how closely art and science are intertwined.</p>
+<p><img alt="" src="../images/SI-Mission-Statement-Lobby_c-David-Plakke-1.jpg" /></p>
+<p>The Society of Illustrators Museum. <em>Photo by David Plakke.</em></p>
+<p><strong>Is there anything you think scientists can learn from artists—or vice versa?</strong></p>
+<p>There’s so much that both scientists and artists can learn from each other! For one, artists have an incredible ability to communicate complex ideas in a visually engaging and accessible way. Scientists can learn from this by using visual storytelling—whether through illustrations, diagrams, or graphics—to make their work more comprehensible and relatable to a broader audience. Illustration can also help convey the emotional and human side of science, something that raw data or technical language often misses.</p>
+<p>On the other hand, artists can draw from the precision and objectivity of scientific inquiry. Science is rooted in observation, measurement, and evidence, and artists can be inspired by this attention to detail and dedication to exploring the world with a critical, investigative eye. Artists often observe things from a subjective standpoint, but learning to approach their subjects with the same level of analysis and curiosity that scientists do could lead to new, innovative ways of creating art.</p>
+<p>In essence, there’s a shared emphasis on exploration, whether in the lab or on the canvas. The collaboration of both fields has the potential to create deeper connections, uncover new insights, and produce work that is both intellectually and visually captivating. It’s all about seeing the world in new ways—and combining the scientific method with artistic creativity can lead to discoveries and expressions that neither could achieve alone.</p>
+<p><strong>The rise of generative AI services is causing some controversy in the art world. What are your thoughts on the use of AI to create illustrations?</strong></p>
+<p>At the Society of Illustrators, we are dedicated to showcasing art created by humans and do not allow AI-generated art in our competitions or exhibitions. While technology has its place, I believe that human-made art carries an irreplaceable depth of emotion, thought, and experience. AI can replicate patterns and styles, but it cannot capture the soul or the story behind each piece. Our exhibitions celebrate the authentic work of human artists, and we hope society will continue to value human creativity. Artists dedicate years of training, skill, and personal vision to their craft, and it's essential that their contributions are respected. Until there is a reliable system to ensure artists are properly credited and compensated when their work is used or referenced in AI-generated creations, this issue remains a significant challenge. Art should always center on human creativity and effort, and those who contribute to it deserve rightful recognition.</p>
+<p><strong>What are some things non-artists can do to support illustrators?</strong></p>
+<p>Non-artists can best support illustrators through active engagement and appreciation of their work. One simple yet impactful way is by attending exhibitions and public programs with illustrators. When you come to our Museum of Illustration for an exhibit or an event, you are not only experiencing the incredible talent and creativity of illustrators but also directly contributing to their livelihoods. Your presence and participation validate their hard work and dedication, making them feel valued and respected.</p>
+<p>Credit and promotion are also crucial. When sharing art on social media or other platforms, always credit the artist. This recognition helps build their reputation and expand their reach. Actively promoting art made by humans reinforces the importance of individual creativity and the unique perspectives that each artist brings to the world.</p>
+<p>Purchasing art is another significant form of support. Whether it's original pieces, prints, books, handcrafted products, or zines, it provides artists with financial stability and encourages them to continue creating.</p>
+<p>Last but not least, supporting our work at the Society of Illustrators helps support illustrators and the broader artistic community. As the oldest nonprofit organization in the United States dedicated to the art of illustration, we rely on contributions to fulfill our mission of promoting the art of illustration, appreciating its history, and supporting its evolving nature through exhibitions, lectures, education, and community outreach. Your support enables us to continue providing valuable resources and services for illustrators.</p>
+<p><strong>Do you have any upcoming exhibits or events you’re especially excited about?</strong></p>
+<p>We’ve just opened the Illustrators 67th Annual Exhibition, which celebrates the best in book and editorial illustration. The work on display is incredibly diverse, showcasing international talent and a variety of styles. Two of the pieces, by Tim O’Brien and John Hendrix, were even featured on the cover of <em>Nautilus</em>, and it's always exciting to see the originals in person! The exhibition will be up until April 12, and during <em>Nautilus</em> week (March 26-29), it’s free to visit.</p>
+<p>I’m also particularly looking forward to Peter Kuper’s <em>Insectopolis</em>, which will be on view from May 15 to September 20. This exhibit is a visually immersive journey into the 400-million-year history of insects, bringing to life the fascinating stories of ants, cicadas, bees, butterflies, and more. Peter Kuper is an award-winning cartoonist and his work blends science, history, color, and design, illustrating everything from dung beetles navigating by the stars to prehistoric dragonflies hunting and mosquitoes changing the course of human history. It’s yet another powerful example of how illustration and science intersect!</p>
+<p><em>Interview by Jake Currie.</em></p>
+<p><em>Lead image by David Plakke courtesy of Arabelle Liepold.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

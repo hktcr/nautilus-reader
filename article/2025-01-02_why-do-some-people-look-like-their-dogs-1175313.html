@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why We Look Like Our Dogs | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why We Look Like Our Dogs</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-01-02
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-C952</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In the Disney animated film <em>101 Dalmatians</em>,there’s an amusing sequence in which lookalike pairs of people and their dogs parade across the screen, the resemblances between human and canine in both shape and facial expression comically exaggerated. It’s funny because it plays off the impression many people have that pets look like the owners who care for them.</p>
+<p>But what’s really behind this impression? Do we just think that dogs resemble their owners because we only tend to notice and remember such extraordinary instances, and ignore it when they don’t look alike? This is called the “availability heuristic.” We forget what’s unremarkable.</p>
+<p>Psychologist Yana Bender and her colleagues at Friedrich Schiller University in Germany decided to try to find out. They recently conducted a systematic review of studies probing for similarities in dog-human dyads and found that people actually resemble their dogs more often than chance would predict, not just in physical characteristics but also in personality and behavior. Their research, which analyzed 15 studies, was <a href="https://www.sciencedirect.com/science/article/pii/S0191886924003441">published</a> in the journal <em>Personality and Individual Differences</em>.</p>
+<blockquote>
+<p>Women with long hairstyles express greater preference for long-eared dog breeds, such as beagles and Springer Spaniels.</p>
+</blockquote>
+<p>It turns out that when you give people shuffled pictures of dogs and their owners, they are consistently good at guessing which human owns which dog. This finding held across four separate studies, the team of researchers found, even when the mouths of the dogs and owners were hidden—but not the eyes. In one study, test subjects were only able to match purebred dogs to their owners, however. In a more objective measure, overweight dogs were found to be more likely to have owners with high body-mass index.</p>
+<p>Two hypotheses could explain such resemblances. The first is that dog owners <em>choose</em> dogs that resemble them. This possibility is supported by a couple of studies that show that women with long hairstyles express greater preference for long-eared dog breeds, such as beagles and Springer Spaniels, while those with short hairstyles tend to prefer short-eared breeds, such as Siberian huskies or Basenjis. Dog owners in general might do this because of the general finding that people prefer others who resemble themselves, or because of the mere-exposure effect, which is that people prefer things that are familiar. Since people see themselves a lot, they like that equivalent look in dogs.</p>
+<p>The second possibility is that dogs and humans become more similar in appearance over time. If this were happening, owners should resemble their dogs more when they’ve been with the dog longer. However, the research reviewed suggests people’s abilities to match owners with their dogs in photographs is not affected by how long the owner has had the dog, casting doubt on this hypothesis. The only resemblance that seems to grow with time is weight—overweight owners are more likely to have overweight dogs the longer they have been together. This is possibly due to the dog living a similar lifestyle as the owner.</p>
+<p>The similarities between dogs and their owners don’t end with appearance. Bender and her colleagues found multiple studies that showed significant correlations between dogs and their owners on all five major personality dimensions: neuroticism, extraversion, openness, agreeableness, and conscientiousness. Extraverted owners tend to report that their dogs are extraverted and the dogs are also observed to display more sociable behavior. Dog owners who rated themselves as emotionally unstable had dogs who showed higher rates of aggression toward their owners and more stranger-directed fear.  </p>
+<p>Only one of eight studies the team reviewed found weak correlations between dog and human personality, but the researchers note that study looked only at owners who had adopted their dogs within the past two months. They propose that emotional mirroring between pets and owners may evolve over time, a psychological process that is well documented in humans.  Dog owners also expressed higher levels of satisfaction when they felt their dogs’ personalities and behaviors resembled their own.</p>
+<p>Humans have had a friendly relationship with dogs for some 30,000 years. Many of us see our dogs as members of our family. We are social creatures, sensitive to the goals and moods of those around us. Dogs also are <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0274143">sensitive</a> to human moods. When we select dogs to own, we tend to seek dogs that “fit.”</p>
+<p>So if you think you look and act like your dog, you might be right. <img alt="" src="../images/nautilus-favicon-14_1292.png" /></p>
+<p><em>Lead image: Good_Stock / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

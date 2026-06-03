@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Answer to Humboldt’s Enigma in Tectonic Uplift | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>An Answer to Humboldt’s Enigma in Tectonic Uplift</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-04-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-QFO3</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 1807, pioneering German naturalist Alexander von Humboldt published a now-iconic illustration of the Ecuadorean volcano Chimborazo, known as <em>Tableau Physique</em>. One half of the mountain he drew is lush and verdant, skirted by thin clouds, smoke billowing from the snow-capped summit. The other half is a mountain silhouette coated with species names, each written at the rough elevation where Humboldt encountered it. It’s a reminder of the richness of life a single mountain can hold.</p>
+<p>Over the past several decades, scientists have learned that, in fact, mountains often contain a greater diversity of species than the plains and jungles at their feet. Though mountains cover only 25 percent of all land on Earth outside of Antarctica, they’re home to some 87 percent of all species of birds, mammals, and amphibians. But biodiversity varies wildly from one mountain to the next, which has been difficult to explain. Some scientists have called this “<a href="https://www.science.org/doi/abs/10.1126/science.aax0149">Humboldt’s enigma</a>.”</p>
+<p>Now a new paper <a href="https://www.science.org/doi/10.1126/science.adp7290">published in <em>Science</em></a> suggests that the process of mountain building itself may be responsible—that the pace and magnitude of tectonic uplift determines how much rock, river channels, and microclimates fragment the landscape, and how many distinct ecological niches emerge. The greater the altitude and rate of lift, the greater the biodiversity a mountain will hold, the authors found.</p>
+<blockquote>
+<p>As the cyber mountains rose, the animals dispersed into newly created habitats</p>
+</blockquote>
+<p>“The evolution of life depends on the evolution of the geology, and the evolution of the climate,” says Indiana University Earth scientist Brian Yanites, one of the authors of the paper. “No matter where you're at or who you are as a species, you're there because of the interconnection of these different Earth systems.”</p>
+<p>Yanites says the team’s simulations help address an information gap between the past and the present. While both surveys of present inhabitants of mountain ecosystems as well as millions of years of fossils suggest a relationship between mountain building and species diversity, this relationship has been difficult to confirm. Because mountains continue to grow and erode over time, most fossils are found in lowland basins adjacent to or within mountains instead of in the highlands themselves. Scientists believe that these fossils may belong to creatures that once lived on slopes and cliffsides instead.</p>
+<p>To assess how the rise of a mountain range influences evolution, the team of Earth, climate, and ecology researchers ran a series of mountain building simulations. In these simulations, they placed a population of 100 individuals of a single species of rodent-like mammal on a plain and watched how they dispersed and adapted under different rates of tectonic uplift over the span of 20 million years.</p>
+<p><img alt="" src="../images/PrmqSUni-Valentine_BREAKER.png" /></p>
+<p><strong>VERTICAL THINKING:</strong> German naturalist Alexander von Humboldt's illustration of Ecuadorean Volcano Chimborazo, pictured here, was published in 1807. It was one of many maps and paintings he made of the natural world. Humboldt was one of the first to present scientific data about nature not in tables and graphs but in visual form, and to illustrate the relationships between where different species lived and the elevation of an ecosystem. <em>Credit: Wikimedia Commons.</em></p>
+<p>To create their simulation, they took a previously validated evolution modeling tool called <a href="https://gmd.copernicus.org/articles/16/6921/2023/">AdaScape</a> and modified it: They altered the algorithm for classifying distinct species as they evolved and excluded other evolutionary forces, such as changing climates and the pressures of interactions with other animals—including predators, parasites, and symbionts—to focus outcomes on the impacts of mountain uplift and erosion.</p>
+<p>As the cyber mountains rose, the animals dispersed into newly created habitats and, in some cases, found themselves isolated from members of their kind. This migration and isolation, over the course of the simulation, caused the critters to diverge from their common ancestor and evolve into new species. The variety of species was proportional to how fast and high the mountains rose, and the pattern remained consistent even as the researchers adjusted many of the parameters of their model: the size and durability of the landscape and the rodents’ lifespan and abilities to disperse, adapt, and evolve.</p>
+<p>Yanites says the team used rodents for their simulation because they’re highly sensitive to changes in their habitat, particularly topography, and because a wide diversity of rodent species currently live in mountain ecosystems and are represented in the fossils around mountain bases. But the simulation could easily be tweaked to model another species with different reproductive characteristics and sensitivities to changes in the landscape, he says, such as reptiles.</p>
+<p>Carsten Rahbek, an evolutionary biologist at the University of Copenhagen, who was not involved in the study,saysit is one of the first to simulate the specific role of mountain geology in species diversification over millions of years. “They showed really elegantly that the uplift of mountains and the topography heterogeneity has a tremendous influence" on species diversity, he says.</p>
+<p>The findings reflect what one might find on a tour of some of today’s most iconic mountain ranges. Take the Andes, which rose rapidly through a series of <a href="https://www.sciencedirect.com/science/article/abs/pii/S0012821X13002136">growth spurts</a> to become one of the tallest ranges in the world. On a per acre basis, it is one of <a href="https://www.sciencedirect.com/science/article/pii/S1360138521002752">the most</a> <a href="https://www.cepf.net/our-work/biodiversity-hotspots/tropical-andes/species">species-rich</a> regions on the planet. By comparison, the squat Atlas mountains lie at the lowest end of the species diversity scale.</p>
+<p>The shudderings of the Earth’s crust, it turns out, may influence how creatures adapt and evolve over millions of years. <img alt="" src="../images/nautilus-favicon-14_1208.png" /></p>
+<p><em>Lead image: Ksenia Bobrova / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

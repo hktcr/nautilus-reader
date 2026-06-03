@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humans Evolving, One Way or Another | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Humans Evolving, One Way or Another</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-17
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-EVY5</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Human evolution is in the news again. This week, an international team of researchers led by Harvard University ancient DNA guru David Reich <a href="https://www.nature.com/articles/s41586-026-10358-1">published</a> a paper in <em>Nature</em> that suggested natural selection has been tinkering away with the human genome much more than previously appreciated for the past 10 millennia.</p>
+<p>But in more recent times, culture (artificial selection?) has come to the fore as a key driver of human evolution. It makes one wonder how modern humans, living through the present day, are actually evolving. Are our collective genomic shifts driven more by the same environmental pressures that have shaped organisms since the dawn of life? Or rather by the conscious decisions humans make across a globe that houses a great diversity of traditions, customs, and cultures?</p>
+<p>As with most things in biology, it’s likely a little of this and a little of that.</p>
+<p>Riech and his colleagues identified hundreds of genes from roughly 16,000 ancient humans living across West Eurasia over the past 10,000 years that showed the marks of directional selection, which is pressure from the environment that chooses genetic winners and losers. Flavors of genes, or alleles, that were best suited to particular conditions gave the carriers of those gene versions survival and reproductive advantages, allowing them to spread their genetic fabric throughout populations. Disadvantageous alleles, on the other hand, make it harder to survive and reproduce in a given environment, so over time, their frequency in populations decreases.</p>
+<p>The major surprise in this study is not that humans have been subject to natural selection, as are the rest of our fellow Earthlings. It’s that so many gene alleles, 479 to be exact, appear to have been strongly selected for in humans living through the past 10,000 years in what is now Western Europe and the Middle East. Previously, research on genetic information wrested from far fewer ancient human genomes suggested that only 20 or so alleles were affected by directional selection.</p>
+<p>“This work allows us to assign place and time to forces that shaped us,” Reich said in a <a href="https://hms.harvard.edu/news/massive-ancient-dna-study-reveals-natural-selection-has-accelerated-recent-human-evolution">statement</a>.</p>
+<p>The past 10 millennia of human history have been pretty eventful, especially in West Eurasia. Agriculture likely rose around 10,000 or 12,000 years ago, meaning that during the intervening period, many populations transitioned from traditional nomadic lifestyles to more sedentary living. With that shift, cities—along with all the religious, political, and technological developments they nurtured—cropped up across the landscape.</p>
+<p><strong>Read more: “<a href="https://nautil.us/evolution-led-humans-into-a-trap-483792">Evolution Led Humans into a Trap</a>”</strong></p>
+<p>Human alleles that were strongly selected for in the ancient DNA studied by Riech and his team included ones that code for red hair, lighter skin tones, increased risk of developing celiac or Crohn’s diseases, and a lower chance of male-pattern baldness, to name a few. Other, more-complicated traits, such as household income and educational status–which researchers have <a href="https://www.nature.com/articles/s41467-019-13585-5">correlated</a> with several alleles–also appeared to have been favored by directional selection in the ancient genomes.</p>
+<p>Impressive technological advancements allowed Riech and his colleagues to sequence so many ancient human genomes, and slick computational methods facilitated the identification of the alleles that were shaped by directional selection as opposed to migration, population, or other events that can change allelic frequencies in a population. But interpreting how and why natural pressures acting on humans in this time and place selected for one allele or another is trickier. Why, for example, would having an increased risk of celiac be advantageous in an age where diets were shifting from wild game and plants to cultivated crops, such as wheat? And what traits from 8,000 or 9,000 years ago stood in for modern measures, such as household income or years of schooling? Clearly, early agriculturists weren’t expressing the traits of economic income or educational attainment as we measure today. And even directional selection is more complicated than one allele being favored in isolation. Genes and the traits they confer are inherited in complex ways, oftentimes linked to each other or in groups that are passed down together.</p>
+<p>I’ll leave it to the scientists and the exciting future work that will no doubt build from this research to disentangle questions like these. Also there are also more genes to interrogate—Riech’s team said that there are more than 7,600 additional components of the human genomes they studied that warrant further investigation as having been shaped by directional selection. And analyzing ancient DNA from humans that lived outside of West Eurasia could shed a ton of light on other selective patterns in other places.</p>
+<p>But upon learning of this study, I recalled a paper that came out this <a href="https://nautil.us/has-culture-overtaken-genes-in-human-evolution-1237863">past fall</a>. In the journal <em>BioScience</em>, University of Maine colleagues Timothy Waring, who studies cultural evolution, and Zachary Wood, an ecology postdoc, <a href="https://academic.oup.com/bioscience/advance-article-abstract/doi/10.1093/biosci/biaf094/8230384?redirectedFrom=fulltext">compared the relative impacts</a> of genetic and cultural inheritance in humans. "Cultural evolution eats genetic evolution for breakfast," Wood said in a <a href="https://umaine.edu/news/2025/09/culture-is-driving-a-major-shift-in-human-evolution-new-theory-proposes/">statement</a> in September. "It's not even close."</p>
+<p>The idea is that, in our modern day, cultural pressures—from our communities, our technologies, or our national customs—exert far more influence on our personal life outcomes than our genes. The crux of this difference lies in both speed and breadth. Culture, they argued, can immediately change the course of a population’s path where genetic change takes generations. Also, cultural forces typically benefit groups rather than just individuals. Granted, this work was theoretical, but Waring and Wood did mention in the paper that their hypotheses were testable and measurable.</p>
+<p>So this week, we learned that human evolution likely didn’t slow as much as we had previously supposed as our hunter/gatherer ancestors settled into farming and then urban lifestyles. The wild, natural world that they sought to domesticate still affected their fitness across many different traits. But it’s also likely that as civilizations rose and cultures blossomed, additional forces and choices outside of natural section acted on our survival and reproductive outlooks.</p>
+<p>Science will continue to parse the relative contributions to the everchanging makeup of humanity, as we continue to evolve, one way or another. <img alt="" src="../images/nautilus-favicon-14_179.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Alex / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

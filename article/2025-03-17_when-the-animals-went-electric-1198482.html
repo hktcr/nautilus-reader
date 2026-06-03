@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When the Animals Went Electric - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When the Animals Went Electric - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-17
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-EU39</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>One moment a flounder lies hidden in the sandy bottom of the ocean, the next it vanishes in the bloody frenzy of a shark’s dinner. The shark didn’t see or hear the fish; it pinpointed it from the infinitesimal electrical signals of the flounder’s beating heart.</p>
+<p>This seeming superpower is called electroreception. It allows sharks to locate electric fields from a few feet away using sensory organs in their skin.</p>
+<p>The flounder’s signal sparks a “little jolt in the shark’s brain,” says Chris Braun, who studies animal sensory systems at Hunter College in New York. To appreciate how the shark zeroes in on the flounder, says Duncan Leitch, who researches sensory adaptations in vertebrates at the University of California, Los Angeles, imagine “navigating toward a hot lightbulb with your eyes closed and hand outstretched.”</p>
+<p>Electroreception is an extra sense, not a substitute. Sharks hear well, have good vision, and can smell blood in the water from a quarter mile away. But within a few feet, electroreception is the go-to sense. You don’t want to challenge a shark to a game of hide-and-seek.</p>
+<blockquote>
+<p>Paddlefish electroreception is so sensitive it can detect plankton.</p>
+</blockquote>
+<p>When researchers placed an electrode generating electricity near a dead fish, they discovered that sharks tried to eat the electrode. Biting where the electricity is also likely explains <a href="https://youtube.com/watch?v=1ex7uTQf4bQ">sharks chewing underwater cables</a>, including <a href="https://nautil.us/your-datas-strange-undersea-voyage-1138554/">transoceanic internet cables</a> that provide global <a href="https://youtube.com/watch?v=1ex7uTQf4bQ">connectivity</a>.</p>
+<p>Electroreception exists in fresh- and saltwater fish, some amphibians, such as the axolotl, and even a few mammals, such as the platypus, which has electroreceptors on its bill, and the echidna, which sticks its electroreceptive nose into water or damp soil. The <a href="https://www.science.org/content/article/guiana-dolphins-can-use-electric-signals-locate-prey">Guiana dolphin</a> has electroreceptors on its snout. This extra sense is all about evolutionary creativity and thrift.</p>
+<p>In 1678, while dissecting a torpedo ray, the Italian physician and ichthyologist Stefano Lorenzini discovered the sensory organs in the skin that detect electroreception, which he described as gel-filled elongated pores, and which are now known as ampullae of Lorenzini or ampullary receptors. But Lorenzini didn’t understand what these ampullae were for. Since then, scholars have been piecing together how the sensors evolved and how animals use them.</p>
+<p>Insights into electroreception grew out of research into another sensory system in aquatic animals: “lateral lines.” These receptors in the skin along the sides of fish or amphibians contain motion-sensing hair cells, named for the hair-like protrusions on the external surface of the cell, that fish use to sense movement, vibrations, and pressure changes in water. These hair cells are similar to ones in our inner ear, and they function similarly: Just as a sound wave pushes the endolymph fluid within our inner ear to bend or move the hair cells, so does water move the hair cells in the lateral lines of a fish.</p>
+<p>The lateral line system extends down the body of the fish, but electroreceptors are primarily on the head, often concentrated near the mouth. From the surface, they look like pits or pores, but they extend as deep as several inches into the body of a fish, fanning out from the snout like tendrils of cooked spaghetti. The canal walls secrete a jelly that conducts electricity down to the hair cell similar to how silicon conducts electricity in computer chips. This is how the shark senses the flounder’s heartbeat beneath the sand.</p>
+<p>The similarities between the lateral line system and electroreceptors led scientists to the hypothesis that the latter evolved out of the former. Based on similarities in which cranial nerves connect to the lateral line and electroreceptors, it is likely that electroreception first evolved in some common fish ancestor, and later, some of the most common fish—including catfish, tuna, and salmon—lost it.</p>
+<blockquote>
+<p>You don’t want to challenge a shark to a game of hide-and-seek.</p>
+</blockquote>
+<p>In animals that possess it, weak electroreception has evolved to be selective. Weak electrical fields don’t travel very far in air, but aquatic environments are full of them. Even animals with electroreception don’t perceive all electrical fields in the water. That would be noisy and overwhelming, Leitch explains, and so the receptors are tailored to the low frequencies that are most relevant to the given species, such as the frequencies their prey emit.</p>
+<p>Remarkably, electroreception has re-evolved at least twice in fish whose ancestors had previously had it and lost it. “Sensory systems take a lot of energy,” Leitch says. “So, if the animal isn’t getting an advantage, and it’s using some other senses like smell or vision more, then there would be less pressure to maintain electroreception and eventually it would become nonfunctional.” At some point, knifefish and catfish lost their electroreception, then redeveloped it.</p>
+<p>To shed light on this extrasensory system, Clare Baker, a professor in Cambridge University’s Department of Physiology, Development, and Neuroscience, studies embryos of electroreceptive fish. In 2017, Baker focused on <a href="https://elifesciences.org/articles/24197">paddlefish</a>, who possess electroreception so sensitive that they detect electric fields generated by the tiny zooplankton on which they feed.</p>
+<p>Electroreception in paddlefish arises out of a patch of thickened skin on an embryo’s head called placodes, a layer of cells that contribute to the development of senses. Baker and colleagues show that mammalian inner ear hair cells (critical to our own hearing and balance) develop from the same type of placodes. “As-yet unidentified genes presumably help orchestrate whether a hair cell or electroreceptor develops,” Baker says.</p>
+<p>Electroreception offers a fresh insight into how evolution operates from “conserved mechanisms,” scientists say, related genetic processes in animals from paddlefish to platypuses to us. But to the sharks, electroreception is just better odds of securing dinner. <img alt="" src="../images/nautilus-favicon-14_1242.png" /></p>
+<p><em>Lead image: An Vin / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

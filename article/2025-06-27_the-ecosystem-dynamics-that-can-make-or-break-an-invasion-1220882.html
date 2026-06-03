@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ecosystem Dynamics That Can Make or Break an Invasion - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Ecosystem Dynamics That Can Make or Break an Invasion - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-37B7</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For decades, ecologists have puzzled over a mystery: Why do some natural habitats get overrun by invasive species while others seem to repel outside threats? In <a href="https://press.uchicago.edu/ucp/books/book/chicago/E/bo3614808.html">a classic 1958 book</a> on the subject, the ecologist Charles Elton argued that an ecosystem with more species should be more resilient. In a diverse ecosystem, he wrote, so many species are already divvying up the available resources that little remains for a potential interloper looking to gain a foothold. Elton also posited that simpler food webs are more vulnerable, while more complex ones often contain predators or parasites that can control possible invaders.</p>
+<p>Since Elton’s time, ecologists have scoured forests, grasslands, lakes, and oceans to see if his predictions hold up. It has been a tough road: Determining which of the many variables in nature allow an invasion to happen can be daunting, and deliberately introducing a new species into an existing ecosystem as an experiment is morally fraught. And where there is good data, examples conflicting with Elton’s ideas are easy to find: Some highly diverse ecosystems do indeed resist outsiders, but others are just as easily overtaken by a new species.</p>
+<p>“Like [with] many topics in ecology, there’s split evidence,” said Jeff Gore, a physicist at the Massachusetts Institute of Technology.</p>
+<p>In his lab, Gore has found a way to do ecological experiments that don’t require years of data collection in the great outdoors or threats to existing habitats. Instead, he and his colleagues grow communities of microbes as simplified models of their wild counterparts to develop and test ecological theories. And in a study published earlier this year, this work led them to <a href="https://doi.org/10.1038/s41559-024-02618-y">a new factor</a> that could help determine when an invasive species might be successful.</p>
+<p>When the scientists added new species to their lab-grown microbial ecosystems, they were surprised. Contrary to Elton’s prediction, invasions were more likely in diverse ecosystems than in ones with fewer species—especially when the populations of individual species rose and fell over time. This suggested that whatever hidden mechanisms were causing the fluctuations were also making Gore’s ecosystems more or less susceptible to invasion.</p>
+<p><img alt="" src="../images/popkin_breaker.png" /></p>
+<p><strong>RESILIENCE RESEARCHER:</strong> In 1958, the ecologist Charles Elton posited that an ecosystem with more species should be more resilient. New experiments with microbes test his theory. <em>Credit: Wikimedia Commons.</em></p>
+<p>“It’s a very classic problem they’re examining,” said Jonathan Levine, an ecologist at Princeton University who was not involved in the research. Yet “no one has fully explored this question before, let alone from a powerfully combined theoretical and empirical approach.”</p>
+<p>The revelation that intrinsic ecosystem dynamics can affect the success of an invader, he said, is “exciting and novel.”</p>
+<p>The study revealed the ecological influence of something that’s hard to examine in the field: time. Ecologists often rely on static species counts when assessing an ecosystem, said <a href="https://www.eawag.ch/en/about-us/portrait/organisation/staff/profile/megan-lee/show/">Megan Lee</a>, a microbial ecologist at the Swiss Federal Institute of Aquatic Science and Technology, who reviewed the paper for the journal <em>Nature Ecology and Evolution</em>. Gore’s more dynamic concept of biodiversity with fluctuations offered, Lee said, “a very nuanced approach to what a diverse community really is.”</p>
+<p><strong>Ecological Microcosms</strong></p>
+<p>Jeff Gore is a physicist who left his home range and <a href="https://www.quantamagazine.org/a-physicists-approach-to-biology-brings-ecological-insights-20201013/">migrated to ecology</a>. Unlike the stereotypical invasive species, he hopes to enhance the field, not wipe it out.</p>
+<p>He and his colleagues have spent more than a decade building artificial microbial ecosystems in the lab. Their workhorse is a rectangular plastic plate, slightly smaller than a standard passport, with 96 small, semispherical wells in which they grow microbes. Each well is a habitat where bacterial species collected from MIT’s campus learn to live together and form an ecological network; think of each one as an analogue of an artificial gut, coral reef, or rainforest. By cultivating a multitude of such microbial habitats, the researchers can compare them and develop theories of how ecological communities work.</p>
+<blockquote>
+<p>It may be a surprising emergent property of these complex dynamical systems.</p>
+</blockquote>
+<p>If the goal is to understand what happens in the gut or the rainforest, one might ask, why study completely different microbial habitats in the lab? The short answer: Studying natural ecosystems is hard. Plants and animals take years to grow and reproduce. During that time, any number of environmental factors can alter the system, making it difficult to tease out which variable caused any observed changes. And real-world microbial environments, such as the human gut, are often difficult to study directly.</p>
+<p>Plus, unlike with wild plants and animals, “nobody cares what you do to microbes,” noted William R. Shoemaker, a microbial ecologist at the Abdus Salam International Center for Theoretical Physics in Trieste, Italy, who is not involved in the research. That freedom means you can run the same experiment many times, he said, “to test mathematical models of ecology.”</p>
+<p>Gore and his colleagues can quickly spin up ecosystems and isolate the effects of different factors. They can also create control groups and replicate experiments—the hallmark of rigorous science—with relative ease. To tally up which species live in an ecosystem, and how much of each species there is, the researchers simply sequence the DNA found in their wells.</p>
+<p><img alt="" src="../images/popkin_breaker-2.png" /></p>
+<p><strong>MICROBIAL MATH:</strong> The physicist Jeff Gore seeks mathematical rules for ecology by cultivating and running experiments on microbial communities in the lab. <em>Credit: Katherine Taylor for</em> Quanta Magazine<em>.</em></p>
+<p>The approach has been fruitful. In 2022, Gore and colleagues discovered that ecological communities <a href="https://doi.org/10.1126/science.abm7841">undergo phase transitions</a>—a core organizing principle in physics that describes, for example, water’s change from solid ice to liquid to gas. As the researchers increased either the number of species in their experimental ecosystems or the strength of the interactions between species, the ecosystems might progress through three phases. In phase one, all bacterial populations remained stable. In phase two, some species died out while others survived. And in phase three, the populations of the remaining species started oscillating wildly, revealing a loss of stability.</p>
+<p>Gore next wondered what would happen to his microbial communities if he sent in a potential chaos agent—an interloper.</p>
+<p><strong>Niche Dynamics</strong></p>
+<p>What makes an ecosystem vulnerable or resilient in the face of invasion is not just an academic exercise; it’s one of the most important questions in ecology. Protecting vulnerable ecosystems from harmful invasive species could save at-risk wildlife and prevent billions of dollars in environmental damage each year. At a microscopic level, preventing hostile takeovers of the usually beneficial microbial ecosystems that inhabit our guts could protect many thousands of people annually from serious illness.</p>
+<p>“Invasive species are one of the primary drivers of these sorts of problems,” Gore said. He noticed, though, that many studies seemed to focus on what properties make an invader more or less successful, with few asking what makes an ecosystem more or less open to invasion.</p>
+<p>To explore this question, Jiliang Hu, then a graduate student in Gore’s lab, went outside and collected soil from a lawn on the MIT campus, as well as leaves from nearby trees and water from the Charles River. Using bacteria isolated from those samples, he established hundreds of communities, each composed of a different set of 20 bacterial species (from a larger pool of 80), and fed them for a week to give them time to stabilize.</p>
+<blockquote>
+<p>If more ‘native’ species can coexist in an ecosystem, it stands to reason that an invader can find a way to coexist, too.</p>
+</blockquote>
+<p>To create different kinds of ecological networks, the scientists fed more nutrients to some communities than to others. They knew from past experiments that altering nutrient levels could make the microbes compete more intensely for food and other resources, creating stronger interactions among species.</p>
+<p>In all ecosystems, the majority of starting species died off. In roughly half the ecosystems, the remaining bacterial species settled into a stable state in which populations remained steady. In the other half, populations rose and fell wildly. Consistent with the 2022 study uncovering phase transitions, these roller-coaster ecosystems harbored more species diversity, perhaps because the fluctuations created more ecological roles, or niches, for a species to fill in an ecosystem.</p>
+<p>The scientists then tried to disrupt the ecosystems. To some wells they added a randomly chosen additional species—an invader. Uninvaded ecosystems served as controls. After another week, the scientists sequenced parts of the bacterial genomes, to see whether the invader had successfully established itself, and tallied up the total biomass in each ecosystem.</p>
+<p>Surprisingly, invaders were eight times more likely to survive in the diverse, up-and-down ecosystems than in the stable, species-poor ones. The result “was not what you would expect,” Gore said, based on Elton’s ideas. Fluctuations in populations over time, Gore speculated, could open up ecological niches to new species.</p>
+<p><img alt="" src="../images/popkin_breaker-3.png" /></p>
+<p><strong>ECOSYSTEM EXPERIMENTER:</strong> To study the effects of invasive species, the biological physicist Jiliang Hu grew hundreds of microbial ecosystems in the lab—and then introduced a new species to see how the systems changed. <em>Courtesy of Jiliang Hu.</em></p>
+<p>The researchers also found that communities of species that interact strongly with one another were more likely to repel invaders. However, when an invader did manage to work its way into one of these high-interaction communities, it often had a dramatic effect, greatly boosting the community’s total biomass.</p>
+<p>This result provides a very clear demonstration of how an invasive species can change an ecosystem, said Shoemaker, who reviewed the paper for the journal. “If I was teaching a microbial ecology course and wanted to show the effects of an invasion, this is something I would show.”</p>
+<p><strong>Survival Mode</strong></p>
+<p>Gore and his team next searched for a way to predict an invader’s likelihood of success or failure—and they found one in the first step of the experiment. Each microbial ecosystem started with 20 species. After a week to settle and stabilize, only a fraction of these species survived. Gore calls this the “survival fraction.”</p>
+<p>Traditional field ecologists also use this kind of survival ratio, though they have a different lingo. “Gamma diversity” describes all the species that survive in a broad region, such as a state or county, while “alpha diversity” describes the subset of those species that live together in a specific ecosystem, such as a local park or pond. Gore’s survival fraction is the ratio of alpha to gamma diversity. And he found that the higher this ratio in his microcosms—the more species survived its initial formation—the more likely an invader was to also survive.</p>
+<p>To Gore, this makes sense: If more “native” species can coexist in an ecosystem, it stands to reason that an invader can find a way to coexist with them, too. This survival fraction, he said, may be a unifying concept that could predict how likely a natural ecosystem is to resist or succumb to an invasive species.</p>
+<p>But how well did his results fit with traditional ecological theory? To find out, Gore and his colleagues reached for one of the first mathematical models in ecology. In the 1920s, two mathematician-scientists independently wrote a set of equations—which became known as the Lotka-Volterra model—that predicts how the population of one species varies as a result of its interactions with other species. Famously, this model reveals fluctuations in predator and prey populations in opposition to one another over many generations. For example, in an ecosystem where lynxes prey on hares, a growing lynx population eventually overhunts and crashes the hare population, which then results in food scarcity and the decline of lynxes, which allows hares to recover, and so on. The researchers wondered if this model could also explain their fluctuating microbial ecosystems.</p>
+<p>When they ran a version of a Lotka-Volterra model modified to introduce an outside species to the community, they found that population fluctuations made the more diverse communities more likely to be invaded. To be able to replicate their surprising results within a simple, time-tested model was comforting, Gore said. “It’s telling you that you don’t need to invoke additional weird mechanisms” to explain how their microbes behaved, he said. “It may be a surprising emergent property of these complex dynamical systems.”</p>
+<p>However, those dynamics may not operate equally everywhere. For example, Levine, who mainly studies plant ecosystems, doubts that the rapid population fluctuations found in Gore’s microbes play a major role in ecosystems such as forests or grasslands, which are dominated by organisms such as trees and perennial grasses that can live for decades. But he thinks they could be influential in communities where generations are shorter, such as those of insects or plankton.</p>
+<p>A next step, Levine said, could be to examine what lies beneath the population swings Gore’s team observed. Those fluctuations, he said, are driven by as-yet unknown interactions between species or with their environment. Teasing out exactly how those underlying mechanisms maintain diversity while increasing susceptibility to invasion, Levine said, “would be fascinating.”</p>
+<p><em>This article was <a href="https://www.quantamagazine.org/the-ecosystem-dynamics-that-can-make-or-break-an-invasion-20250616/">originally published</a> on</em> <a href="https://www.quantamagazine.org/abstractions/">Quanta</a><em>.</em></p>
+<p><em>Lead image: Dave Whyte for</em>Quanta Magazine</p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

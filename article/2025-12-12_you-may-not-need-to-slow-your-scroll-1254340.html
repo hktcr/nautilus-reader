@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You May Not Need to Slow Your Scroll | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>You May Not Need to Slow Your Scroll</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-CDS4</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Social media can be tough to ignore these days. There is so much of it, and it’s so accessible, right there glowing on the phones in our pockets and purses. Many of us find ourselves scrolling through the feeds of friends, family, and so-called influencers more often than we might like (or like to admit).</p>
+<p>But does that mean we’re addicted in a clinical sense, or just indulging a bad habit?</p>
+<p>The distinction matters, it turns out. While the United States Surgeon General warned in early 2023 that excessive use of social media can have neurological effects similar to substance abuse, for most people, the language of addiction is neither accurate nor helpful, according to a recent study by a pair of researchers from the California Institution of Technology and the University of California, Los Angeles. The <a href="https://www.nature.com/articles/s41598-025-27053-2">findings</a> were published in <em>Scientific Reports</em>.</p>
+<p>The team ran two studies. For the first, they recruited 380 U.S. adults who used Instagram at least monthly and were representative of the larger U.S. population. Participants answered questions about addiction-like symptoms, such as withdrawal and life conflict, how “mindless” the behavior felt, and whether they personally described their use as an “addiction” or a “habit.” Then the researchers examined how those labels lined up with feelings of control, self-blame, and past attempts to cut back.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/to-understand-facebook-study-capgras-syndrome-236173/"><strong>To Understand Facebook, Study Capgras Syndrome</strong></a><strong>”</strong></p>
+<p>The scientists found a stark mismatch: Eighteen percent of participants said they felt at least somewhat addicted, but only about 2 percent scored in a range the study defined as a warning sign for possible addiction risk. And the people who labeled themselves “addicted” didn’t just feel more out of control, they also reported more failed attempts to cut back and more self-blame.</p>
+<p>In a second study, the researchers tested whether telling oneself an addiction story could actually cause these same feelings and behaviors. They recruited 824 daily Instagram users and randomly assigned them one of two different versions of a writing prompt. One group was explicitly told their use of Instagram might be “addictive,” drawing on language used in the U.S. Surgeon General warning, and then they were asked to assess their own feelings of control, self-blame, and attempts to cut back. The other group did the self-assessment first. Then the researchers compared the groups.</p>
+<p>That short exposure to addiction framing was enough to nudge people’s mindset. Those who got the “addiction” prompt reported lower feelings of control, more self-blame, and a stronger desire to reduce their Instagram use.</p>
+<p>The researchers argue this can become a self-fulfilling prophecy: If you believe you’re addicted, you may assume your ability to stop is limited, which undermines your confidence and makes change harder. But if most overuse is characterized as habit, the solutions look less like a dramatic battle with the self and more like simple environmental engineering.</p>
+<p>Instead of drastically changing their lives, social media users can perform simple tasks to curtail their habit. Reduce cues: Turn off notifications, keep the phone out of sight. Add friction: Log out, remove the app from your home screen. Swap in a replacement behavior for the moments that usually trigger scrolling, like boredom, anxiety, or waiting in line.</p>
+<p>The study authors speculate that popular media are responsible for making people feel more addicted than they are. To test this hypothesis, they tallied the number of articles published across U.S. media using the phrases “social media addiction” or “social media habit” between November 2021 and November 2024. Addiction was the more common descriptor, they found, primarily driven by stories about lawsuits as well as by the May 2023 Surgeon General warning.</p>
+<p>A small minority of users may truly have more serious, addiction-like symptoms related to social media use, the researchers point out. But for the rest of us, they argue, using “addiction” language can backfire, adding shame while steering people away from the most effective tools for change.</p>
+<p>“Our findings offer users good news,” they write, “the large majority are not addicted to social media, even if they feel that way.” <img alt="" src="../images/nautilus-favicon-14_672.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Stokkete / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

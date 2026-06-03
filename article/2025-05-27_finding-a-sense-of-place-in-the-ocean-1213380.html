@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finding a Sense of Place in the Ocean - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Finding a Sense of Place in the Ocean - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-C5NE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>One of Aaron Eger’s favorite places to go is a lush forest near his home in Sydney, Australia. He describes the world enclosed beneath the canopy—often as tall as 200 feet—as “enchanting,” with “an amazing diversity of life bustling around at your fingertips.” The forest is right outside a major metropolis, but few know of this ecosystem that supports more than 700 species because … it’s a giant kelp forest. Composed of undulating seaweeds, which serve as structural and biological supports, carbon sinks, foraging grounds, and nurseries, this vanishing biodiversity hotspot is invisible to most of its human neighbors.</p>
+<p>“You can crawl through the forest, you can swim through the forest, you can just lay at the bottom and stare up at the surface and watch the sun play off the seaweeds,” says Eger, a marine ecologist and program director of the Kelp Forest Alliance, a global environmental organization that aims to protect kelp forests. He’s been speaking to me at length about his work in kelp research and conservation, but this is the first time I’ve heard an edge of reverence in his voice on our video call.</p>
+<p>The thought of an old growth forest being felled can tug at one’s emotions, but few of us have likely ever given much thought to vast canopies of seaweed, despite the fact that the benefits they provide to both natural and human communities are on par with the most productive terrestrial forests on Earth. Just as tree forests grow on approximately a third of the Earth’s landmass, so do kelp forests cover a third of the world’s coastal shallows. Suddenly, as I listen to Eger speak, I’m tempted to seek one out.</p>
+<blockquote>
+<p>“The Western mindset has been groomed to think of the waters as an alien force, a dark void.”</p>
+</blockquote>
+<p>He is used to such reactions. “I try to encourage other people to go [to kelp forests], change that perception, get it a bit more commonplace,” Eger says.</p>
+<p>Kelp forests are one of many threatened or endangered marine ecosystems that suffer not only from a visibility problem, but also from a relationship problem. The Earth is about 71 percent water, and 40 percent of the world’s population lives within <a href="https://doi.org/10.1038/s44183-024-00071-9">60 miles of a coast</a>. But to many of us—especially in the Global North, which dominates decision-making that impacts the planet the most—ocean spaces remain abstract, difficult to define, and hard to access, both physically and emotionally.</p>
+<p>“At a deeper cultural level, the Western mindset has been groomed to think of the waters as an alien force, a dark void, a theater of chaos,” writes the social theorist Jeremy Rifkin in his book <em>Planet Aqua: Rethinking Our Home in the Universe</em>. The frequently made—if not entirely accurate—point that we know more about the surface of the moon than the bottom of our own oceans, isn’t helping the cause.</p>
+<p>Some scientists are now arguing that the widespread cultural notion of the ocean as a vast and mysterious entity has become a serious hindrance to applied marine research that seeks to protect the oceans and mitigate climate change. As the stakes of marine management climb ever higher in a time of oceanic warming, pollution, resource extraction, and sea level rise, cutting-edge research and emerging technologies in the marine sciences—drones, autonomous vehicles, 3-D mapping, nano satellite imagery that monitors ocean color—will not be enough on their own to restore balance to the seas. It is our relationship to the ocean that must shift. Now a growing community of scientists who study marine spatial planning are asking: Does the ocean have a place problem?</p>
+<p>“How <em>do</em> you create a place?” asks Christopher Lepczyk, an Auburn University ecologist. “It’s an old question in geography and ecology.”</p>
+<p>In the marine sciences, it’s a relatively new one.</p>
+<p>A place is a space with meaning—an incarnation of the experiences and aspirations of people,” wrote the authors of a <a href="https://www.nature.com/articles/s44183-024-00071-9">paper published in <em>npj Ocean Sustainability</em></a> last year. An interdisciplinary collaboration among a dozen scientists from the United Kingdom, France, Australia, and the United States that includes conservationists, Indigenous scientists, marine biologists, and geographers, the research called for a new, place-based path forward in seascape ecology.</p>
+<p>“Place is particularly overlooked at sea, where depth and fluidity alter human relationships to the Earth’s surface, each other, and thus placemaking,” they wrote. They argued that marine spatial planning—a process developed by UNESCO that seeks to manage marine ecosystems to balance human demands for ocean space with environmental protection—must include not only the latest models and technologies, but socio-cultural context, place names, historical relationships, traditional ecological knowledge, symbolism, and storytelling.</p>
+<p>In terrestrial landscapes, the complex relationships and understandings that give rise to a sense of place have long been a core principle in applied ecology. By the late 20th century, “we had a lot of conservation projects that were just failing,” says Lepczyk, who is a coauthor of the paper, even though “the science may well have been known.” He gives the example of the northern spotted owl, a species that was in drastic decline in the 1980s due to logging in the U.S. Pacific Northwest. Though the facts of its dwindling population and the causes were known, the attempts to protect it erupted into a years-long battle among the logging industry, the U.S. government, and conservation groups. This controversy helped terrestrial conservation practices to shift toward strategies that considered not only environmental concerns, but diverse human uses of and relationships to landscapes.</p>
+<p><img alt="" src="../images/Scudder_BREAKER-2.png" /></p>
+<p><strong>MONUMENTAL ECOSYSTEM:</strong> The Northeast Canyons and Seamounts Marine National Monument teams with life that is out of human view—but submersibles have captured photos of a number of different lifeforms, including this bamboo coral. <em>Credit: NOAA Office of Ocean Exploration and Research / AP</em></p>
+<p>Also bolstering this shift was the philosophy of a land ethic, articulated in the mid 20th century by the philosopher and environmentalist Aldo Leopold, who argued that caring for people meant <a href="https://academic.oup.com/bioscience/article-abstract/54/2/149/255019?redirectedFrom=fulltext">caring for the land</a>, and vice versa. A sense of place—the ways in which people are connected to the land not only physically, but emotionally, culturally, economically, and often spiritually—has now been widely incorporated into terrestrial conservation work, bringing with it a sense of moral obligation to the work of protecting interconnected human and natural communities.</p>
+<p>Though efforts are imperfect and there is still plenty of room to grow beyond Western frameworks of thought, Lepczyk says that terrestrial ecology has nonetheless come to take the idea of place seriously.</p>
+<p>But a shared, place-based understanding of seascapes is a largely uncharted territory in Western science.</p>
+<p>It is not a question of simply transposing place-based ecological approaches from land to sea. The ocean operates under different laws, both natural and human. Ecological boundaries and the ranges of species are often harder to define; ownership is limited when it exists at all; laws and regulations are notoriously difficult to enforce. Volumetrically speaking, much of the ocean remains undiscovered and unknown to science.</p>
+<p>One of the issues is that, to most humans, “once you’re really away from any landmass at all, you’re just floating out in the middle of nowhere,” says Lepczyk. “That’s a grand challenge. It all looks homogenous.” And scientists, too, have “often treated the open ocean as this big [mass], kind of like the atmosphere.”</p>
+<p>But many of the challenges facing the ocean are not abstract or homogenous—they are concrete, specific, and increasingly dire. Addressing them requires not just rigorous interdisciplinary science, but also support and buy-in from governments, industry, and communities.</p>
+<p>Take the <a href="https://www.fisheries.noaa.gov/new-england-mid-atlantic/habitat-conservation/northeast-canyons-and-seamounts-marine-national">Northeast Canyons and Seamounts Marine National Monument</a>, which is located just 130 miles out to sea, southeast of Cape Cod, and covers an area about the size of Connecticut. Were this seascape on land, it would rival the majesty of the Rocky Mountains. Canyons plunge thousands of feet deep, their walls decorated with sponges, corals, and skittering crabs. Seamounts (underwater mountains) rise 8,000 feet from the seafloor, where pristine, ancient forests of deep-sea corals spread their crooked branches. Endangered sperm whales—capable of diving 10,000 feet below the surface—hunt their food in these mysterious depths. It’s a wonderland of astonishingly intact marine biodiversity, home to more than 1,000 species.</p>
+<blockquote>
+<p>Much of the ocean remains undiscovered and unknown to science.</p>
+</blockquote>
+<p>But not only is the monument utterly out of sight, it is physically out of reach. Unlike Eger’s underwater kelp forests, a person cannot strap on a scuba suit and visit. No human being has made direct contact with this sprawling reserve. Our images of this seascape have come from remotely operated vehicles and robots.</p>
+<p>“Ecological gems or not, it isn’t easy to advocate for the protection of a place that’s entirely out of the general public’s view,” states <a href="https://www.nrdc.org/stories/what-it-took-create-atlantics-first-marine-national-monument">an article</a> about the monument from the National Resources Defense Council. Commercial fishing and the potential for oil and gas drilling posed known and direct threats to this fragile ecosystem. Still, the effort that it took to protect it—it was officially declared a National Monument by President Obama in 2016—was, no pun intended, monumental. An abbreviated list of those who contributed to its current status as a Marine Protected Area includes, according to the NRDC: “The Conservation Law Foundation, Pew Charitable Trusts, the Mystic and New England aquariums, Earthjustice … elected officials, business leaders, scientists, faith-based groups, fishermen, marine mammal research groups, whale watch operators, dive groups, and more than 300,000 members of the public.”</p>
+<p>Though 8 percent of the world’s oceans are under some form of Marine Protected Area designation, only <a href="https://news.nationalgeographic.org/global-study-of-34-countries-ocean-protection-delivers-massive-overlooked-economic-benefits-to-fishing-tourism/">3 percent</a> are considered fully protected (<a href="https://www.weforum.org/stories/2021/05/how-much-of-earth-is-currently-protected/">compared to approximately 17 percent</a> of terrestrial lands and inland waters). This is despite the fact that the deep ocean contains 95 percent of the water on Earth that serves as habitat for animal life. “This realm, largely out of sight and poorly explored” <a href="https://www.jstor.org/stable/26651193?read-now=1&amp;seq=1#page_scan_tab_contents">writes Lisa Levin for <em>Oceanography</em></a>, “remains one of planet Earth’s final frontiers.”</p>
+<p>Ocean-as-place is not a new concept to coastal and seafaring Indigenous peoples the world over. Native Hawaiians have, for centuries, connected to the landscape and the natural resources of their archipelago <a href="https://www.bbc.com/travel/article/20220818-ahupuaa-hawaiis-ancient-land-management-system">through a land management system</a> called <em>ahupua’a</em>, which entails a holistic understanding of the continuity of a watershed as it flows down from the highest mountain peaks, to the shoreline, and out into the ocean. It also extends the sense of place, without boundary, from land to sea—interconnected sites of ecological, cultural, ancestral, and spiritual meaning.</p>
+<p>Every year between November and April, more than half of the North Pacific’s humpback whale population arrives at the Hawaiian Islands Humpback Whale National Marine Sanctuary to breed and calve. The whale sanctuary is managed by the National Oceanographic and Atmospheric Association (NOAA), in collaboration with the state of Hawaii and with local groups, including members of the Native Hawaiian community.</p>
+<p><img alt="" src="../images/imV4Q7Ud-Scudder_BREAKER.png" /></p>
+<p><strong>WHALE TRAILS:</strong> Large marine animals, such as whales, tend to travel ancient paths that span entire oceans and have defined destinations. These whales were spotted at the Hawaiian Islands Humpback Whale National Marine Sanctuary. <em>Photo by lego 19861111 / Shutterstock</em>.</p>
+<p>The <em>Kumulipo</em>, the Native Hawaiian creation chant, describes a shared, sacred genealogy as it depicts how all of the beings who inhabit these land-and-seascapes came to be. First came the coral polyp. Later, the whale. And later still, the people. Whales are called <em>koholā</em> in the Hawaiian language and are understood to be ancient beings that embody ancestral relationships to both family and to the ocean.</p>
+<p>Thus the presence of whales in the sea imbues a marine space with cultural and spiritual meaning, such that it becomes not just space, but place. And this place-based understanding of the habitat of these marine giants is informing both practical ways and the wider scientific framework through which NOAA and its Hawaiian collaborators manage the sanctuary. The strategy, according to NOAA, “follows this traditional wisdom that recognizes what happens on the land (<em>mauka</em>) impacts the ocean (<em>makai</em>).”</p>
+<p>Elsewhere, others are working to bring, if not a spiritual, then a deep cultural resonance to marine spaces.</p>
+<p>When Eger was beginning his serious study of seagrasses and kelp, he found the research fascinating but became frustrated by a trend he noticed in the field: No matter how solid the published science, “the world was functionally the same after the paper as it was before the paper.” During his Ph.D. candidacy, he decided to cast a wider net; the science of kelp, yes, but also the <em>culture</em> of kelp.</p>
+<p>Out of this work emerged the Kelp Forest Alliance, a global network of people and organizations working not only to protect and restore kelp forests, but also to rebuild their cultural importance. One goal of the Alliance is to tell the story of kelp forests not as isolated ecosystems, but as sites of ancient and ongoing placemaking, where human interests and relationships interact with a unique ecological space. “It’s not just the scientists,” says Eger, “it’s not just the marine park managers, but there’s all sorts of ways for people to get interested.” From a <a href="https://kelpforestalliance.com/posts/award-winning-film-gardening-marine-forests-a-hands-on-approach-to-restoration">film on Indigenous marine gardening</a> to music videos to sharing the emerging theory that kelp was <a href="https://www.smithsonianmag.com/science-nature/how-humans-came-to-americas-180973739/">instrumental</a> in human migrations through the Americas, the Alliance is constructing a narrative that brings, in its words, “wonder” and emotional investment to protecting kelp.</p>
+<p>These sorts of efforts to engage a wider range of people in what a place could mean in the ocean recalls the early applications of the land ethic in the mid to late 20th century as it sought to expand the idea of community to include terrestrial spaces. As the <strong>npj Ocean Sustainability</strong> paper states: “It is ultimately the role of place in developing an ocean ethic that upholds a symbiotic relationship between humans and the ocean.”</p>
+<p>The ocean challenges and often undoes what, on land, had a solid foundation. In science, this has been a source of both frustration and opportunity.</p>
+<p>“The Ocean is not empty,” write the authors of the <em>npj Ocean Sustainability</em> paper. “It is dynamic, heterogeneous, highly interconnected, and can be understood by people in many ways. Place matters in the sea, and the way we view the ocean determines how we manage it.”</p>
+<p>But to manage it effectively, we must be willing to see it differently—and find our place within it. <img alt="" src="../images/nautilus-favicon-14_1157.png" /></p>
+<p><em>Lead photo: Daniel Poloha / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

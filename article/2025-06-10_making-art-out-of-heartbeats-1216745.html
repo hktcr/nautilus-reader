@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allan Kaprow’s Interoceptive Art of Shared Vital Signs | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Allan Kaprow’s Interoceptive Art of Shared Vital Signs</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-2DBD</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Two men seated at a table next to one another, touching wrists, appear to be concentrating. On the table, a watch, a pen, and a sheet of paper imply the act of recording and counting. Another black-and-white shot in the same document shows the two men palpating each other’s wrists, but this time in a stairway.</p>
+<p>These images are part of Allan Kaprow’s <em>Time Pieces</em> (1973), a work focused on monitoring vital signs and exploring interpersonal relationships. Kaprow is best known for his “<a href="https://www.artsy.net/article/artsy-editorial-what-were-1960s-happenings-and-why-do-they-matter">Happenings</a>,” one-of-a-kind, participatory events for large audiences that combined careful planning with room for improvisation. <em>Time Pieces</em> is part of a later series in which Kaprow began working with smaller groups, producing instruction-based pieces primarily for individuals and couples. Originally intended for publication in an edition of the arts magazine <em>Avalanche</em>, he later opted to present the work at an exhibition at the Neuer Berliner Kunstverein in Berlin. Like many of his works from the 1970s, <em>Time Pieces</em> employed booklets with staged photographic documentation that suggested anticipated outcomes and served as indexical links to reality.</p>
+<p>In his presentation to participants before the realization of <em>Time Pieces</em> in Berlin in September 1973, Kaprow stated that his intention was to produce an emotional connection through the sharing and awareness of vital signs. Kaprow’s work entails interoception, which is the sensing of our heartbeats, breathing, and other internal bodily signals that provide information about our inner state and emotions:</p>
+<p>[The work] concerns human feelings, that is, each participant’s feelings. … It is a framework of objective moves designed to tap subjective states, states which are, however, unknown at the beginning. … These moves are intentionally clinical … but the content of the moves are basic to our existence: our heart beat and our breath. Without them we die, and each of us has learned to subtly monitor these internal rhythms as signs of how we feel. … Thus, “Time Pieces” can be viewed as a “container” which we fill with the discovery of ourselves. … And what we will be doing, of course, throughout the activity is watching ourselves and each other. What we don’t know, however, is the effect upon our feelings of conscious involvement in such time segments. This remains to be discovered and reported when we reconvene on Sunday.</p>
+<p>Kaprow believed that art should challenge notions of time and space. In <em>Time Pieces</em>, he offered participants a connecting action modeled on the traditional practice of taking a pulse to detect emotions, but stripped of its clinical and hierarchical associations. Instead of a patient-doctor dynamic, he transformed the gesture into a means of communication between equals. Kaprow proposed that time, rather than serving merely as a marker of events in the Western tradition, should be regarded in a more Zen-like sense: as the ongoing rhythm of life, the steady pulse, the flow of breath, the sensation of being. With this curious yet intriguing action, he posits that time is not something to be measured, but felt—a lived awareness of life itself.</p>
+<p><em>Time Pieces</em> involved dozens of participants, who followed more than 40 instructions that tested their sense of intimacy and personal space. All pairs were asked to monitor and tape-record their pulses and then listen to them while apart or climbing stairs. They also sensed each other’s pulses while exchanging breaths into each other’s mouths, and captured their breaths in plastic bags to exchange while counting their pulses. Kaprow’s intention was to generate sensations, interrelationships, and improvisation, but participants effectively produced a parody of human connection. The activity booklet, with its easy-to-follow instructions and photographic guide to how to execute the work, left little to the imagination.</p>
+<p>Kaprow later created two separate video versions of <em>Time Pieces</em>: one with images of the booklet, a tape recorder, a telephone, and a few pictures of the first participants’ pulse and breathing actions, and another with a remake of the instructions with his wife, Vaughan Rachel. Curator and art writer Glenn Phillips has noted that “<em>Time Pieces</em> are not about watching an activity, on the contrary, they are about experiencing an activity. … These books employ a visual system that is so finished and self-contained that the viewer also feels finished after reading the illustrated instructions or watching the video and, thus, does not necessarily feel any urge or need to undertake the activity to truly experience the artwork.”</p>
+<p>But <em>Time Pieces</em> remains illuminating. It offers new possibilities for considering time as something that is happening right now, with each pulse reaffirming our existence, our ongoing present and presence, and our interconnection with others. It is a living performance that combines the heart and the mind, Western and Asian traditions, the individual with the collective, culture and nature.</p>
+<p>By paying attention to pulses and other physical processes, Kaprow reminds us that time and life are meant to be felt and lived rather than known or measured. <img alt="" src="../images/nautilus-favicon-14_1131.png" /></p>
+<p><em>This</em> <a href="https://thereader.mitpress.mit.edu/timing-pulses-the-interoceptive-art-of-allan-kaprows-time-pieces/"><em>excerpt</em></a> <em>is reprinted with permission from MIT Press Reader.</em></p>
+<p><em>Lead photo: Allan Kaprow, photo from 1973 activity booklet illustrating how to perform "Time Pieces," 1973. Presented for ADA: Aktionen der Avantgarde, Neuer Berliner Kunstverein, Berlin © Allan Kaprow Estate. Courtesy Hauser &amp; Wirth. Credit: Alvin Comiter.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

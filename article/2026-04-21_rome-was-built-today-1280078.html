@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rome Was Built Today | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Rome Was Built Today</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-5S70</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The year is 753 B.C. Two twin boys, Romulus and Remus, have grown into healthy adults. The men quarreled over property rights, and Romulus killed his brother for trespassing. On April 21 of that year Romulus founded a city on the Palatine Hill. That city would come to be called Rome, and Romulus would become its first king.</p>
+<p>This series of events is notable because Romulus and Remus almost didn’t make it to adulthood. As mere babes, they washed up on the banks of the Tiber River, abandoned by their mother’s uncle Amulius after he violently seized the throne of the ancient Latin city Alba Longa in what is now Italy. There, on the river, a she-wolf found the twins and suckled them with her milk until a shepherd in the area found the boys and raised them.</p>
+<p>At least this is what Roman legends and myths would have you believe. Historians and archeologists actually think that Bronze and Iron Age humans had settled the area where Rome would eventually sit for centuries before 753, and a Greek king named Evander may have founded a city called Pallantium on the site in the mid-eighth century. But for generations, Romans celebrated April 21 as the birthday of Rome, making offerings and sacrifices to the gods as part of the ancient Parilia Festival.</p>
+<p><strong>Read more: “<a href="https://nautil.us/make-concrete-roman-again-236729">Make Concrete Roman Again!</a>”</strong></p>
+<p>Whatever the fact or fiction of its founding, Rome would grow over the centuries to become one of the most dominant civilizations in the ancient world. Following a 200-year period when Rome was ruled by kings, the people of the city would band together to form a republic, complete with officials elected to brief terms in office and a senate. Eventually Rome blossomed into a full-fledged empire that controlled much of Europe, North Africa, and Asia Minor.</p>
+<p>The history of Rome is well-told, replete with stories of megalomaniacal emperors, battles waged and won, sieges of the eternal city, and conquest aplenty. While ruins and artifacts exist—and indeed still emerge—throughout the extent of the Roman Empire, some of the most enduring vestiges of ancient Rome live on in the scientific and technological <a href="https://nautil.us/ancient-roman-glass-reveals-a-hidden-language-1247932">advancements</a> devised by Roman citizens that persist today.</p>
+<p>Befitting a culture that was hell bent on territorial expansion, Romans were whizzes at construction and urban architecture. One of their biggest accomplishments in this arena was their recipe for <a href="https://nautil.us/make-concrete-roman-again-236729">concrete</a>. Made from a mix of crushed rock, volcanic ash, and lime, Roman concrete was the cutting edge of construction technology in ancient times. It allowed architects to design impressive buildings like the Parthenon and—because it could cure underwater and was actually strengthened by seawater—harbor infrastructure, aqueducts, and bridges. Researchers still <a href="https://www.nature.com/articles/s41467-025-66634-7">study</a> the chemical and physical properties of ancient Roman concrete to understand and perhaps mimic the astounding material that, in many cases, has stood the test of millennia.</p>
+<p>Ancient Rome also stood out among other cities of antiquity for its centralized sewer system, the marvel of innovation that is the <em>Cloaca Maxima</em>. One of the world’s oldest sewer systems, it was designed to collect and remove human waste and also drain the marshes upon which much of Rome was built. Although it started its life as an open-air canal, it was eventually enclosed over centuries of use and expansion. Even after the fall of the Roman empire, the <em>Cloaca Maxima</em> was still used by the inhabitants of the city. (Side note: While we’re on the subject, ancient Romans also had a pretty <a href="https://nautil.us/what-ancient-romans-used-instead-of-toilet-paper-237398">ingenious solution</a> to cleaning themselves after defecating.)</p>
+<p>Throughout its long history ancient Rome and its empire were home to many great thinkers. Aelius Galenus (often referred to as simply Galen) was a Greek and Roman medical researcher. Born in what would become Turkey, Galen settled in Rome, and his dissections of <a href="https://nautil.us/top-roman-military-officers-loved-their-pet-monkeys-1253909">primates</a>—both living and dead—revolutionized humanity’s understanding of the anatomy and physiology of the spine, vocal cords, nervous system, and circulatory system. His work, as spelled out in as many as 500 treatises, also helped launch the scientific fields of not only anatomy and physiology, but also psychotherapy, pathology, pharmacology, and neurology.</p>
+<p><strong>Read more: “<a href="https://nautil.us/what-ancient-romans-used-instead-of-toilet-paper-237398">What Ancient Romans Used Instead of Toilet Paper</a>”</strong></p>
+<p>Rome also nurtured scientific progress in astronomy. Chief among the ancient thinkers in this arena was Greco-Roman astronomer and geographer Claudius Ptolemy, or just Ptolemy for short. Although it would later be disproven, Ptolemy’s mathematically-supported geocentric model of the solar system was popular and widely studied throughout antiquity until later astronomers worked out more-accurate heliocentric models.</p>
+<p>Finally, one of ancient Rome’s greatest thinkers was Pliny the Elder (Gaius Plinius Secundus in Latin). His scientific writing, especially in his last work, <em>Natural History,</em> constituted a compendium of ancient knowledge that stood as antiquity’s first and most complete encyclopedia for generations. Covering the fields of zoology, minerology, botany, astronomy, geology, and art, <em>Natural History</em> offers the clearest window into ancient Rome, and insights from its pages are still verified with new archaeological insights into the lives and histories of citizens of that empire.</p>
+<p>Rome, as they say, was certainly not built in a day. But today is one of the calendar dates we can point to as a celebration of the mythical founding of the ancient city that changed world history and fostered enduring scientific innovations. Happy birthday, Rome! <img alt="" src="../images/nautilus-favicon-14_167.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Wilfredor / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

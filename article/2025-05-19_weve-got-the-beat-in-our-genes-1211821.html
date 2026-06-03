@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How We Enjoy Music, and How Much, is Heritable | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How We Enjoy Music, and How Much, is Heritable</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-19
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RVQU</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Back when I was a mohawked teenager, my mother was horrified by the music that moved me. Dutiful flower child that she had been, merely mentioning The Dead Kennedys would cause her to weep. She had raised me on The Beatles; Peter, Paul and Mary; Bob Dylan; the soundtrack from <em>Hair—</em>and I repaid this education in free love by idolizing a band whose name made a sneering joke of one of her generation’s defining cultural ruptures. Nothing could have displeased her more.</p>
+<p>But <a href="https://www.nature.com/articles/s41467-025-58123-8">a new study</a> on the genetics behind our responses to music suggests that it might have been partly her fault. For, as divergent as our tastes in specific bands might have been, research from the Max Planck Institute of Psycholinguistics in Nijmegen, the Netherlands, shows that our capacity to feel moved by music is at least partly heritable.</p>
+<p>That explains some things. While my mom might not have been a fan of <em>what</em> I was listening to—at least during my aggrieved adolescence—there was never any question in our house that music <em>would</em> be listened to. Whether the tempo was set by Joan Baez or the Sex Pistols, it was the search for the tempo itself that was fundamental—our attraction to it as immutable as our signature green eyes. And that set us apart, making our house louder than others in a neighborhood where the quest for the jam seemed less pronounced.</p>
+<p>People like our neighbors served as a source of inspiration for cognitive neuroscientist Giacomo Bignardi, the lead author of the new study. Noticing that some folks didn’t seem to feel much from music at all, he was moved to investigate what separates them from people who are deeply affected by it—whether they dance, tear up, get chills, or are just all-around slaves to the groove.</p>
+<p>“I got the idea that our capacity to enjoy music may be partly influenced by our genetic makeup from the curious case of musical anhedonia—a blunted capacity to feel pleasure from music, despite no major deficits in auditory, music perceptual, or general reward processing,” Bignardi wrote to me in an email.</p>
+<blockquote>
+<p>We inherit not just our eye color but also our capacity to be swept away by the sound of music.</p>
+</blockquote>
+<p>Bignardi’s team used a twin study design to compare similarities between identical twins and fraternal twins. Their thinking was that if genetics do play a role in our ability to enjoy music, the musical enjoyment profiles of identical twins, who share 100 percent of their genetic material, would be more similar than those of fraternal twins, who share roughly 50 percent.</p>
+<p>With help from the Max Planck Institute for Empirical Aesthetics in Germany and the Karolinska Institute in Sweden, the team compiled detailed genetic data and survey responses from more than 9,000 Swedish twins not only about music reward sensitivity, but also general reward sensitivity, as well as their ability to perceive musical features such as pitch, melody, and rhythm.</p>
+<p>To drill into their enjoyment of music, the different twin groups were asked to answer questions on a standardized psychological tool called <a href="https://www.brainvitge.org/bmrq_eng.html">the Barcelona Music Reward Questionnaire</a>,which has long been used to establish not only whether respondents enjoy music, but how they enjoy it and to what degree. The survey consists of 20 statements, such as “I get emotional listening to certain pieces of music,” “Music makes me bond with other people,” and “I can’t help humming or singing along to music that I like,” which respondents are asked to rate on a five-point scale: 1 for weak agreement to 5 for strong agreement. To get a sense of the twins’ musical perceptual abilities and general reward sensitivity they used separate standardized tests.</p>
+<p>What Bignardi and his team discovered when they crunched the responses and analyzed them against the genetic data is that one’s ability to experience pleasure from listening to music is indeed partly written in our genes. Using the twin design, they estimated that about 54 percent of the variation in musical reward sensitivity could be explained by genetic differences.</p>
+<p>Bignardi and his team also found that genetic influences related to music reward sensitivity are largely independent from those associated with reward sensitivity for other non-musical activities—the ability to enjoy cooking, or art, or French movies, for instance. They’re also mostly distinct from genes associated with musical perceptual abilities, like a talent for learning music. (Prior research has shown that numerous genetic factors play into a person’s ability to synchronize with a beat, recognize a melody, and achieve mastery of a musical instrument.)</p>
+<p>Further, they found that the genetics of enjoying music don’t involve a single gene, but rather a cluster of them, offering confirmation to recent research in the field of behavioral genetics, which examines how genes act in concert. And they found that eachtype of musical enjoyment is genetically interconnected but distinct: In other words, specific genes may decide whether music inspires some of us to dance, but not to feel emotionally soothed by music. Why some feel a sense of camaraderie when headbanging along with an arena full of leather-clad confrères but feel no need to rush out and perform music with a group. And why others may tap along to a familiar tune on the radio but not experience a wave of nostalgia about how that song was playing when they met their spouse.</p>
+<p>What all these various responses have in common, though, is that they’re mostly (but not entirely) explained by genetics, with shared upbringing playing little to no role. Identical twins who grew up in very different environments, in other words, still tended to love music in similar ways, while fraternal twins did not.</p>
+<p>“This is an interesting and well-done paper with state-of-the-art analyses and a large sample that permits these sophisticated analyses,” says Robert Plomin, a leading behavioral geneticist at King’s College London, who wasn’t involved in the study.</p>
+<p>Plomin says the findings square with his decades-long research on the genetic basis of our psychological traits, which has shown that many human traits—from the emotional to the cognitive—are shaped by overlapping genetic forces, rather than by single genes acting alone.</p>
+<p>“It’s striking that so much of genetic effects are general for cognitive abilities, psychopathology—and now music,” Plomin says.</p>
+<p>That we inherit not just our eye color or temperament but also our capacity to be swept away by the sound of music would appear to show just how deeply the search for the groove seems to be wired into many of us. It’s not just a cultural artifact or a learned habit—it’s a biological response, shaped by evolution, refined by personality, and—yes—handed down through family lines.</p>
+<p>Bignardi told me he wants to keep pushing on his search for the origins of music loving.</p>
+<p>“Where <em>does</em> the capacity to enjoy music come from?” he wrote me. “I think we are still very far away from having a satisfactory answer to this question. To be honest, I am not sure whether we have a satisfactory question to begin with.”</p>
+<p>“For some, [music] seems to be a necessity,” he continued. “For others, it doesn’t. To me, that is what matters the most.”</p>
+<p>He and his team also want to see future studies that focus more closely on the individual facets of musical enjoyment—investigating, for instance, who gets chills, who feels social, who headbangs, who is moved to tears, and why.</p>
+<p>I eventually outgrew my mohawk—though it would dismay my mother to know that my affection for the Dead Kennedys has proved more durable. But Bignardi’s study assured me that this actually makes my mom and me much closer than our tastes might suggest. In the end, we were doing the same thing: reaching instinctively for music, because some part of us was built for it. <img alt="" src="../images/nautilus-favicon-14_1168.png" /></p>
+<p><em>Lead image: Elegant Solution / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

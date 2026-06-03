@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Track Space Debris As It Crashes to Earth | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>I Track Space Debris As It Crashes to Earth</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GG8P</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Last February, debris from a SpaceX Falcon 9 rocket set the skies of Europe ablaze before crashing down to Earth in Poland, hitting a warehouse in a small village. The next month, the uncrewed trunk of another SpaceX spacecraft crash-landed in the Sahara Desert. And in May, the Soviet Kosmos 482, a Venus probe launched in 1972, disintegrated as it hurtled back to Earth, most likely over the Indian Ocean west of Jakarta, Indonesia.  </p>
+<p>Such incidents are rare, but are becoming more frequent as we crowd the skies with spacecraft and satellite constellations like Starlink. Most debris burns up before it makes contact, and when it doesn’t, it tends to rain down over oceans, <a href="https://nautil.us/space-is-raining-junk-and-its-getting-worse-1243470/">deserts</a>, or unpopulated areas. But the risk is growing of larger fragments colliding with <a href="https://nautil.us/the-first-person-to-get-hit-by-space-junk-1262929/">humans</a>, buildings, and infrastructure, smashing into airplanes, and polluting the atmosphere and water when they land.  </p>
+<p>Predicting where these giant rocket fragments will make contact—and recovering the toxic debris they leave behind—is tough because when they come screaming back to Earth, they’re moving faster than the speed of sound, and their trajectories are unpredictable. Recently, a pair of scientists hit upon a novel way of tracking the fragments in real time as they enter the atmosphere: existing networks of earthquake sensors known as seismometers.  </p>
+<p>Researchers Benjamin Fernando of Johns Hopkins University and Constantinos Charalambous from the Imperial College London were able to show that the shock waves created by some fragments as they travel through the atmosphere generate sonic booms that show up in seismic data. They tested their method on a specific piece of space junk from the Shenzhou-15 that fell to Earth in April 2024, and published their <a href="https://www.science.org/doi/10.1126/science.adz4676">results</a> in <em>Science</em>.</p>
+<p>I spoke with Fernando, a seismologist and planetary scientist in the Department of Earth &amp; Planetary Sciences who has studied earthquakes on other planets, about the problem of space junk, why it’s getting worse, and what we can do about it. He says interceding would be like trying to outrun a ballistic missile.</p>
+<p><strong>How pressing a problem is space junk?</strong></p>
+<p>We’re now at a point where we have multiple satellites reentering the atmosphere per day. And each of those poses some risk to planes, to people, and to infrastructure on the ground. And they’re all also beginning to change the composition of our atmosphere. This is a problem that’s new. There were tens of thousands fewer satellites 10 years ago than there are in orbit today—a  problem that’s only going to get worse.</p>
+<p><strong>Why is it going to get worse?</strong></p>
+<p>It’s mostly due to satellite mega constellations. The likes of SpaceX’s Starlink, though there are others. They’re basically working on a model of providing internet connectivity and other services through clusters of satellites, which operate in low Earth orbit. They have very low lifetimes. After a few years, they burn up, they come back to Earth, and then they’re replaced by new ones, which is quite different to how previous communications constellations have worked, where they tended to fly at much higher, more stable orbits.</p>
+<p><strong>What are the risks to humans and property over the next decade?</strong></p>
+<p>A couple of reports have looked recently at the risk of space debris hitting an aircraft, and it looks like a pretty substantial risk. Then, of course, we have the actual risk of being hit by space debris on the ground, which keeps growing. But more widely, there’s the risk that fragments of space debris, which are flammable, toxic, and occasionally even radioactive, cause environmental contamination. This problem is also getting worse because we’re getting more satellites decaying more often, but we really don’t understand what the environmental implications of that are going to be either for the atmosphere or down on the ground.</p>
+<p><strong>What can scientists do to better understand it?</strong></p>
+<p>Part of the problem is that, at the moment, we don’t really have any independent way of validating whether these objects entirely burn up and are destroyed on reentry, as these companies say they are. SpaceX, for example, says their satellites completely disintegrate in the atmosphere, but it’s difficult to validate that. And there’s some evidence of bits and pieces being found around the planet, which might be from Starlink satellites. So developing techniques that allow us to track and characterize debris during re-entry is particularly valuable because then we can actually start to independently evaluate, via open source data, what’s happening to these spacecraft as they hit the atmosphere.</p>
+<p><strong>Read more: “<a href="https://nautil.us/space-exploration-speaks-to-the-core-of-who-we-are-1261104/">Space Exploration Speaks to the Core of Who We Are</a>”</strong></p>
+<p><strong>What’s the most damaging space-junk incident in recent history?</strong></p>
+<p>The worst one ever was in 1978. That was the Kosmos 954 satellite. It was a Soviet reconnaissance satellite that had a nuclear reactor on board that reentered the atmosphere over Northern Canada and spread radioactive debris across a huge area of the Northwest territories. Part of the problem with the cleanup was it was difficult to tell exactly where which pieces had fallen.</p>
+<p>That problem continues to exist today, largely because we don’t have good ways of tracking debris once it’s actually disintegrating within the atmosphere. A lot of the debris from Kosmos 954 was never recovered. It’s probably sitting at the bottom of lakes or rivers in northern Canada these days. And that’s just one example. We had a number of near misses in the Caribbean last spring from Starship explosions. We came pretty close to several aircraft being hit by pieces of debris. And then we also had widespread contamination across beaches in the Caribbean islands from debris fallout.</p>
+<p><strong>How did you hit upon earthquake sensors as a good method to track space junk?</strong></p>
+<p>We’ve been using seismometers to track natural meteoroids entering the atmosphere for a while. We do that both on Earth, and I did a lot of work on NASA’s insight mission on Mars using meteoroids. So both the sonic booms and the ground impacts are sources for our seismometers. What we realized is that not only can we use these sensors to track natural meteoroids, we can also use them to track artificial meteoroids, pieces of space junk reentering the atmosphere. And we tested it on this example in California, which was a particularly good example because we have lots of seismometers in California. It opened our eyes to the fact that this technique could be far more widespread and enable characterization of debris reentries in close to real time.</p>
+<p><strong>Will it work in places that don’t have widespread earthquake sensors?</strong></p>
+<p>Yeah, we’ve been looking at other reentries, not included in this paper, and we can still do stuff in regions that have far fewer sensors. So, for example, those Starship explosions over the Caribbean and subsequent reentries, we picked that up on single station seismometers in some cases, and we can still study the process. If we have an array, with 10 or more seismometers, it’s much easier to work out things like trajectory and speed. But that’s not always available. Across most of the contiguous United States and Canada, across Europe, bits of Asia, bits of Australasia it is, but elsewhere in the world we don’t always have that resource.</p>
+<p>In those regions, we’re thinking about whether instead of earthquake sensors, we can use nuclear monitoring sensors—infrasound sensors that are directly measuring the shock waves in the atmosphere rather than measuring the shock waves once they’ve coupled into the ground, which is what the seismometers do.</p>
+<p><strong>Are there other kinds of accidental instruments that could be repurposed for space safety like weather stations or radio arrays?</strong></p>
+<p>Weather radars will often pick up space-debris reentries. That’s one way of tracking them. But they’re not without challenges. They’re normally sensitive to the smallest fragments because those are the most numerous. And so, that gives you some information, which is very valuable, but it doesn’t necessarily give us all the information that we might want. The other thing to bear in mind is that many countries don’t have open-source radar or even any sort of radar systems that are shareable. And the best radar systems, normally military radar systems, can see over the horizon, which normal radar can’t. But those radar systems are normally classified.</p>
+<p><strong>The spacecraft that you studied for this paper, Shenzhou-15, was predicted to reenter over the Atlantic but actually appeared over California. How common are errors like that?</strong></p>
+<p>Very common. So part of the problem is that once you’re below about 200 kilometers in altitude in the atmosphere, the air resistance becomes very unpredictable and quite chaotic. Small changes lead to big differences in outcome. So you might remember that last year there was a reentry of a Soviet spacecraft. It was one of the Venus probes. No one knew where it was going to reenter. Even after the fact, no one knows whether it fell on land or out over the ocean, despite the fact that that spacecraft was designed to survive reentry. So pieces almost certainly impacted either the ocean surface or the land surface; it’s very common for these reentries even a few hours before they happen to have uncertainty of tens of thousands of miles.</p>
+<p><strong>Shenzhou-15 also broke apart in stages before impact. Why was that significant?</strong></p>
+<p>If you’re interested in figuring out whether stuff reached the ground, and if so, what stuff reached the ground, you need to figure out how the spacecraft actually disintegrated. Things that are designed to survive reentry, like the space shuttle, obviously they ablate continuously. The surface layer is burning up, but the core stays intact. Other things like natural meteoroids, you’ll often see them explode in one single explosion. And those are, in some ways, the best cases for space debris. Either one piece hits the ground or the fragments are completely dispersed in a single explosion. We’re living in this unhappy middle place where we have things breaking off at different points in the trajectory. That gives you a big spread in both fragment size and fragment location. Also, we’re able to study how that spacecraft is interacting with the atmosphere, what’s happening when, because we don’t always know what these spacecraft are made out of. There’s no international reporting requirement to give exact compositions or measurements. They’re not like aircraft. So what we can do is make some inference about how the spacecraft actually broke up in the atmosphere, as well.</p>
+<p><strong>Is there anything about particular kinds of spacecraft or spacecraft components that makes them more likely to turn into these space-junk fragments?</strong></p>
+<p>Some companies claim that they’re designing their spacecraft to actively burn up in the atmosphere. Whether that’s true or not, it’s very difficult to validate because we don’t have a good way of tracking them. In general, unfortunately, it seems like the things that are most likely to survive an explosion are also the things that are most dangerous on the ground—fuel tanks, battery packs, nuclear reactors. Because things that are small and dense don’t slow down very much in the atmosphere, and therefore, they don’t burn out very much either. They tend to be quite structurally strong as well.</p>
+<p><strong>Right now a lot of the tracking data is classified or proprietary. Is that sustainable as reentries increase?</strong></p>
+<p>I’m assuming that many national space agencies and militaries are monitoring this problem, but they’re obviously approaching it from slightly different perspectives than what we might be trying to do. One thing that we’re interested in is understanding the impacts that these reentries are having upon the chemistry and physics of the atmosphere. If we want to do that, I do think we will need more data. Whether that data comes from sources that are currently classified or whether we have to find new ways of studying these processes through, for example, seismology, is unclear.</p>
+<p><strong>Do you have any hypotheses about what it might be doing to the atmosphere?</strong></p>
+<p>It looks like as it comes through the atmosphere, we get a lot of black carbon, which we suspect has a climate-warming potential. There are other components of the spacecraft, some of the glues, resins, and nitrogen species that are produced just by the intense heat of the atmosphere almost burning that appear to have an ozone-depleting potential. And then there’s all of the heavy metal ions and everything else that we’re adding to the atmosphere whose chemical and physical impacts are relatively understudied. So who knows really what that’s doing to the chemistry of the upper atmosphere.</p>
+<p><strong>Once you track this debris with the seismometers, is there anything that can be done to avoid impact or to intercede?</strong></p>
+<p>Not really. So we’re focused on the near real-time response—once something has happened, cleaning it up, figuring out exactly where it ended up as quickly as we possibly can. Space debris will always outrun its own sonic boom. It’s traveling faster than the speed of sound. So it will hit the ground before you hear it. Frankly, it’s moving so fast, I’m not sure there’s a huge amount you could do about it anyway. It would be like trying to outrun a ballistic missile, which is impossible unless you know exactly where it’s going to hit. If you had a couple seconds warning you could get out of the way, but in practice there’s nothing you can do. <img alt="" src="../images/nautilus-favicon-14_513.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Christoph Burgstedt / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

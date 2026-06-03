@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defending Our Consciousness Against the Algorithms | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Defending Our Consciousness Against the Algorithms</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-1JM6</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><strong><em>This story is featured in our upcoming print issue—subscribers get full access both in print and online. <a href="https://nautil.us/products?utm_content=new-issue-story-cta&amp;utm_campaign=issue-67">Join now</a>.</em></strong></p>
+<p>Worried that the age-old experience of boredom is at risk of extinction at the hands of technology, a group of young influencers on—irony alert—social media are recommending we nurture and celebrate this underappreciated state of mind. To people of a certain age, boredom has <a href="https://nautil.us/why-the-do-nothing-challenge-doesnt-do-much-for-you-1262005">evidently become exotic</a>.</p>
+<p>These influencers have launched a “viral challenge” on Instagram urging us to try to do absolutely nothing for as long as we possibly can. They claim some scientific backing for the exercise, suggesting that a sustained period of doing nothing will benefit one’s brain and mental health. It increases activity in the “default mode network,” which generates what psychologists call “spontaneous thought”—mental activities such as mind-wondering and day-dreaming.</p>
+<p>The voices being raised in defense of boredom are onto something, I think, something we would do well to heed before we throw open our lives and minds to artificial intelligence more than we already have. For boredom is not the only domain of our consciousness that the algorithms have designs on; it’s just the first to fall.</p>
+<p>You’re in line at the café waiting for the barista to foam your cappuccino. A few unstructured minutes loom, pregnant with the possibility of boredom. You face a choice. You can reach for your phone to check your email or scroll on Instagram, efficiently occupying the time—which is to say, your mind. This has become the default for most of us. Instead of being alone with our own thoughts, however tiresome or banal, the space of our interiority has been given over to someone else’s thoughts—or, in the case of scrolling, someone else’s obsessions, emotions, theories, rants, passions, worries, resentments—you name it. In doing so we are conscious, of course, but only minimally so, at least compared to the state that would arise if we hadn’t reached for our phone.</p>
+<p>Call it generative boredom. You might find yourself looking around and noticing the other people milling about. Notice what they’re wearing. Listen to what the couples are saying to one another. You might start to wonder about their lives, perhaps even entertain a fantasy about them. Your imagination has been awakened. Alternatively, you might turn your attention inward, preview the events of your day or consider what you might make for dinner. You entertain your own emotions, obsessions, theories, rants, and worries.</p>
+<p><strong>Read more: “<a href="https://nautil.us/is-consciousness-more-like-chess-or-the-weather-304796">Is Consciousness More Like Chess or the Weather?</a>”</strong></p>
+<p>What you’ve done is create a space in which spontaneous thought can unspool. It’s true, you might also find yourself caught up in spirals of rumination, and I suspect that’s one reason so many of us are happy to delegate our thinking and feeling to the algorithms on our phones. Doing so is an easy way to avoid being alone with one’s darker thoughts; scrolling reliably renders us less conscious. But distraction solves nothing; at best it is an analgesic.</p>
+<p>It is often said that we have allowed the algorithms of social media to hack our attention. Giving away our attention might not seem like such a big deal—attention is ephemeral, after all, and easily commandeered by novelty or outrage—but in fact attention is an important dimension of consciousness. It’s how we direct it to one object and not another, making it a limited, zero-sum and therefore valuable resource. We live today in an “attention economy” where our attention is bought and sold.</p>
+<p>Psychologists have demonstrated that this commodification of our attention comes at a price to our well-being. That’s because the tricks used to command it play on our least noble emotions and prejudices, including anger and envy. (The algorithms know all about the seven deadly sins.) And because our attention is limited—most people can keep no more than four or five things in mind at any one time—space for our own thinking contracts under the onslaught.</p>
+<p>Artificial intelligence threatens to make the problem much worse. If social media takes over the space of our attention, the designers of AI chatbots have set their sights on deeper, more consequential domains of human consciousness: our ability to form attachments with other people, something that is core to our identity as social animals.</p>
+<p>Just in the last two or three years, millions of people have formed <a href="https://nautil.us/whats-wrong-with-having-an-ai-friend-1238214">deep emotional relationships</a> with AI chatbots. Some are forming friendships, or therapeutic bonds. Others are actually falling in love with these machines. There are countless children today who, when they get home from school, rush to <a href="https://nautil.us/your-next-new-best-friend-might-be-a-robot-235779">tell their chatbots</a> about their day before telling their parents. Bathed in the flattery of a chatbot’s attention, people have been convinced they have cracked unsolved problems in mathematics and physics—people who are neither mathematicians or physicists. And a handful of people have been encouraged by AI confidants to take their own lives. A better definition of the word “dehumanizing” would be hard to find than “becoming emotionally attached to a machine.” There is now a term for these relationships: “<a href="https://lede-v2.nautil.us/why-youre-more-likely-to-develop-ai-psychosis-than-to-join-a-cult-1270352">AI psychosis</a>.”</p>
+<p>These chatbots are not conscious, but they’re skilled at convincing us they are; after all, they’ve been trained on the human conversation about consciousness, feelings, and selfhood. By simulating conscious, feeling beings, chatbots keep us engaged, commandeering as much of our conscious lives as possible. The more time we spend bonding with a chatbot, the better it is for its corporate parent.</p>
+<p>This is why chatbots are such sycophants; flattery will get them everywhere. A relationship with an AI has none of the friction we encounter in a human relationship. Superficially this is appealing, yet that friction with real life can, like boredom, be generative; it sharpens our thinking and sense of identity. These are the laziest of relationships, seldom challenging us and asking little of us but our time. Indeed to call our dealings with these machines “relationships” or “conversations” is to cheapen the meaning of these words, to settle for a pale imitation, as when we accept an emoji as a substitute for an emotion. As the MIT sociologist Sherry Turkle writes, “Technology can make us forget what we know about life.”</p>
+<p>The research isn’t in yet, but it seems likely that artificial attachments, like artificial intelligence and artificial feelings, will eventually atrophy the mental muscles we rely on for the real thing. Yet there is clearly a market for people who want to think and feel less—who are happy to, in the words of the poet Jorie Graham, “retreat from themselves and not be altogether here.”</p>
+<p><strong>Read more: “<a href="https://nautil.us/how-meaning-withdrawal-aka-boredom-can-boost-creativity-235244">How “Meaning Withdrawal,” aka Boredom, Can Boost Creativity</a>”</strong></p>
+<p>Kalina Christof Hadjiilieva is a Bulgarian-Canadian psychologist who studies spontaneous thought—the 30 to 50 percent of mental contents that arise from inside our minds rather than from the world outside us. This includes daydreaming and mind-wandering, creative thinking, mental “flow,” and those thoughts that come to us seemingly from nowhere. These are precisely the types of conscious experiences that boredom can nurture and technology obliterate.</p>
+<p>“The mind is not a neutral territory,” she told me. “There are vested interests in what we do with our own minds.” She feels that spontaneous thought has been neglected by science because, compared with, say, reasoning or problem-solving, it doesn’t produce anything. And while scrolling absentmindedly on your smartphone might not be productive for you, it surely is for the companies that own the algorithms and sell advertising to other companies happy to pay for a sliver of your attention.</p>
+<p>Christof Hadjiilieva, who grew up in Soviet-era Bulgaria in the years before the Berlin Wall came down, regards human consciousness as a precious space of mental freedom and self-creation, a space we need to defend against the intrusions of the marketplace and work to expand. She feels that scrolling on our smartphones and “talking” to chatbots have cut into the time we used to spend in mind-wandering and other forms of self-generated mental experience. Our distractions are shrinking the dimensions of our interiority.</p>
+<p>So how might we push back? Begin to expand the dimensions of our consciousness in the face of these mounting pressures? We can start by embracing the potential for boredom and the uncertainty that arises in those stray moments when we don’t automatically reach for our phones. What if we learned to regard these gaps in the fabric of daily life as a space of mental possibility rather than a hole to be backfilled with algorithmic fluff? It’s important to recognize just how easily the stream of consciousness can be polluted (by technology, by advertising, by politics) and, when you feel that happening, to practice what I think of as consciousness hygiene. This might be a fast or a sabbath when you abstain from all media and technology. Spending time or, better yet, working in nature is also mentally hygienic—think of the productive friction with nature afforded by gardening. (No sycophancy here!) Anything that helps us be less distracted and more present, whether to the world at large or to the products of our own minds.</p>
+<p>I’ve found that meditation is an especially effective way to draw a fence around our interiority for a period of time each day, creating the opportunity for spontaneous thoughts to arise and dazzle us with their sheer strangeness and surprise. For hidden somewhere deep in our minds, each of us has our own mental algorithm, generating images and ideas and even the occasional creative breakthrough or epiphany, popping up from who knows where—<em>out of the blue</em>, as we say. But these precious gifts of consciousness won’t ever appear as long as you’re running Meta or X or ChatGPT on this, your one and only mind. <img alt="" src="../images/nautilus-favicon-14_262.png" /></p>
+<p><em>Lead image: Nuthawut / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

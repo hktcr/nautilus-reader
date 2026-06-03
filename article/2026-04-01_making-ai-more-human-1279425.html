@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Making AI More Human | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Making AI More Human</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-01
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-CMWR</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>While AI is new in a manifest sense, humans have been telling stories of artificial intelligence for ages. Today we have <em>Her</em> and <em>Ex Machina</em>, but these stories owe much to tales that came before them. The ancient Greeks told of Pygmalion, whose statue was granted life. Mary Shelley imagined an artificial intelligence in an era when mathematician Ada Lovelace was creating the first computer algorithms. Lovelace’s father, Lord Byron, incidentally, was present when Shelley wrote <em>Frankenstein.</em></p>
+<p>The thread connecting all of these stories, according to University of California, Berkeley researcher <a href="https://substack.com/@ninabegus">Nina Beguš</a>, is that we have persisted in humanlike, often gendered conceptions of artificial intelligence. And this, she argues in her book <a href="https://press.umich.edu/Books/A/Artificial-Humanities3"><em>Artificial Humanities: A Fictional Perspective on Language in AI</em></a><em>,</em> limits and misaligns AI as it emerges beyond fiction. In the book, she also explores the need for a new discipline—the titular “artificial humanities”—that would fuse the academic disciplines of science and the humanities to ensure that technological innovation is driven by humanist principles.</p>
+<p>I interviewed Beguš via email about <em>Artificial Humanities</em>, why we need to get more creative with our conceptions of AI, and why instilling artificial intelligence with human-oriented motivations is essential in a time of rising authoritarianism.</p>
+<p><strong>What are artificial humanities, and why do we need this new discipline?</strong></p>
+<p>Artificial humanities is an approach that treats AI both as a technical system and cultural artifact. It brings tools from the humanities—history, philosophy, literary and media studies—into direct collaboration with technical work.  </p>
+<p>Artificial humanities grew out of a need over 10 years ago because many decisive aspects of AI are qualitative, not just quantitative, and went underaddressed. What role an AI system is meant to play: a tool, teacher, companion, or co-creator? Which metaphors are built into its voice and design interface? Which values as defaults?</p>
+<p><strong>What first got you thinking about this concept?</strong></p>
+<p>It was the early days of Apple’s Siri, actually, in 2012. It was clear back then that virtual assistants are not just a voice-based search but an entirely new product category that tries to feel relational. This sent me back to the history of conversational machines, such as Weizenbaum’s ELIZA from the mid-1960s.</p>
+<p>​​Connecting these dots from the history of technology and from imaginaries around AI offered clarity about what we’re doing and where we’re going with AI. This is why I put Pierre Huyghe’s mask on the cover of <a href="https://press.umich.edu/Books/A/Artificial-Humanities3">the book</a>: It marks a long history of projecting humanness onto machines.</p>
+<p>A current example is the use of erotica in LLMs, with OpenAI now reaching to the market where Replika and character.ai have reigned so far. This idea that artificial beings could be humanlike or, even more, that they are perfected humans, goes back to the ancient Pygmalion myth. Pygmalion is known primarily from Ovid’s <em>Metamorphoses,</em> where he creates an artificial woman and falls in love with her. The trope is rather archetypal and now holds power over relational technologies that play into the illusion of the human.</p>
+<p><strong>What do Pygmalion and Frankenstein have to do with AI? And why do you think we should question the humanlike conceptualization of AI?</strong></p>
+<p>We keep re-enacting the two myths in technology.  </p>
+<p>Pygmalionism leans into the fantasy of a perfect artificial being whose intimacy feels natural. And yet, the illusion inevitably breaks. In my view, it limits what machines could be and also brings a lot of baggage. Where do we stop the imitation of the human and lean into uniquely machinic abilities?</p>
+<p><em>Frankenstein</em> offers a counter-story of creation without responsibility, and what technologists would call great misalignment.  </p>
+<p>We cannot inhibit anthropomorphism: It discloses our inherent and deepest intuitions. We have known about the ELIZA effect since the 1960s, seeing the machine as human when it performs language. Human tendency for relationality is powerful. A society of 8 billion people and who knows how many AI companions was a logical trajectory of this tendency. We shouldn’t dismiss it just because it seems bizarre.  </p>
+<p>The Pygmalion myth—which is related to Shelley’s <em>Frankenstein</em> through the adjacent ancient myth of Prometheus—is in itself quite revealing of the human side of technological development. In Ovid’s poem, the artificial woman is a statue turned into flesh by the grace of a goddess. In the 19th-century renditions, the central question in the Pygmalion myth is about the ability of art to imitate life. At the turn of the century, artificial women became more technological, merging with the idea of a robot and later cyborg.  </p>
+<p>Now, why is the Pygmalion myth so powerful in AI, centered around language?  </p>
+<p>The Pygmalion myth is a male fantasy. Mary Shelley’s 1818 novel goes against the grain: We met a male humanoid creature, capable of speaking and appreciating literature, even writing a chapter of the novel. In that century, it takes artificial women another few decades to gain a perspective and a voice. Thanks to women writers, they slowly acquire more agency and autonomy. Only in 1995, with Richard Powers’s <em>Galatea 2.2</em>, we got an artificial woman—a neural network—that is trained in language and literature.  </p>
+<p>But the training of artificial women in speech has begun already at the beginning of the century with Shaw’s play <em>Pygmalion</em>, known also after film and musical adaptations under the name <em>My Fair Lady.</em> Here, a working-class woman, named Eliza Doolittle, is taught how to speak properly, in high-class English, and goes through a series of Turing tests. The play reveals many preexisting ideas about language machines, which had yet to be developed in technology: The line from Eliza Doolittle goes directly to the Turing test, ELIZA the chatbot, today’s language models and GANs, as well as elocution and language enhancement technologies.</p>
+<p><strong>Read more: “<a href="https://nautil.us/does-science-fiction-shape-the-future-543468">Does Science Fiction Shape the Future?</a>”</strong></p>
+<p><strong>I’ve known people who are pretty traditionalist about the boundary between science and the humanities. Has anyone pushed back at the idea of artificial humanities?</strong></p>
+<p>Not really. At this point there is a consensus that the sociotechnical approach to AI needs to grow. The concept of artificiality, for example, began as a human characteristic and has developed to designate a contrast with nature—which is why I enjoy “artificial humanities” as a term. AI has challenged these basic concepts, making us question if machines can learn, have language or a kind of creativity.  </p>
+<p>I also see more understanding about arbitrary boundaries of disciplines themselves: We’ve created them because they were useful and productive but are, at least in the case of AI, becoming less so. Humanities are sciences of the human, and engineering of the machines. And yet, here we are.  </p>
+<p>Again, the need comes from the research topic and questions. I’ve been involved with a hard science group at the Lawrence National Lab for this very reason. Their scientific practices do not distinguish between nature, human, and technology in the way we’ve all been implicitly taught, which intervenes both with the way they set up their experiments and how they narrate their findings. They foster a planetary philosophy based on the science they practice, where they consider the biosphere as taking advantage of the Earth’s energetic sources, followed by the technosphere as a continuation of life’s activities that tinker with the same energetic potential. Our current hypersegmentation of disciplines misses out on synthetic insights afforded by such humanities-sciences collaborations.</p>
+<p><strong>Do you think any recent works of science fiction have done an especially good job at portraying AI?</strong>It’s striking to see how hard it is to break out of the humanlike mold. Even in fiction, which offers an unlimited landscape of possibilities.  </p>
+<p>Pygmalionesque films <em>Her</em> and <em>Ex Machina</em> both make an attempt to represent the machine from a nonhuman perspective: <em>Her</em> with a metaphor, <em>Ex Machina</em> visually. In <em>Her</em>, virtual assistant Samantha breaks up with her human boyfriend but cannot explain to him adequately how her world has evolved, so she resorts to a metaphor of a book whose letters are floating farther apart. In <em>Ex Machina</em>, the scene portraying the robot Ava’s visual perception didn’t make it into the film because the director said he failed to execute it well. Instead, we see Ava going through the Turing test from afar, passing as a real human before the helicopter pilot takes her into the city, into the society.</p>
+<p><a href="https://nautil.us/the-book-no-one-read-235082">Stanisław Lem</a> is one of the rare authors who consistently delivers nonhuman intelligences without human projection. Think of <em>Solaris</em> portraying a planet-spanning entity, or <em>The Mask</em>, which portrays a Pygmalionesque woman lover that turns into an arachnid-like killer machine. <em>Summa Technologiae</em> is a whole treatise on the future of technology, and <em>Golem XIV</em> a philosophical essay given by a supercomputer<em>.</em>One of my favorite of Lem’s quasi-scientific graphs is the one below, on language development from his collection <em>Imaginary Magnitude.</em> I discussed it in the book, and we republished it in the project <a href="https://latentspacecraft.antikythera.org/"><em>Latent Spacecraft.</em></a> The graph shows computers taking use of human languages and inventing their own, which we cannot access. This is already happening in generative adversarial networks (GANs) that are encoding new information, unknown to us, into silences.</p>
+<p><img alt="" src="../images/Hilden_breaker.png" /></p>
+<p><strong>What do you think have been some of the most exciting recent developments in AI?</strong></p>
+<p>I focus largely on creativity and language. I’m seeing new uses of AI that are not based on the typical chatbot conversation in which the writer needs to comb through a flood of text and revise it through further prompting. Creative computational tools should support human creative decisions. Humans are not as good at brute force or calculation of the myriad of possible paths. We’re good at feeling, intuiting, imagining, meaning-making, valuing, responding with responsibility.  </p>
+<p>These capabilities are useful in scientific research as well, with AI serving as our augmentation. It will be exciting to see more scientific discoveries coming from human-AI collaboration.</p>
+<p><strong>What do you think are the biggest risks to AI?</strong></p>
+<p>We are all navigating new conditions without an adequate chart. How to prepare for the labor market? Knowledge production is changing with AI: It is transforming the long-established norms, based on human authorship, editing, and control.  </p>
+<p>At all moments, we are close to both cognitive acceleration and atrophy. A cognitive diet of what we consume and outsource is now a crucial aspect of the 21st-century existence.  </p>
+<p>I suggest a thought exercise for any given challenge you’re addressing with AI: Consider it at an individual level, at small group and community levels, and then scale up to the society. You get a very different view into the challenge in each, sometimes incommensurable with the prior layer.</p>
+<p>For experts, two major bottlenecks will need to be solved with seismic innovations: One is the merging of human and machinic systems, the other is the environmental cost of AI. All attempts so far have been relying on more technology.  </p>
+<p>If we manage to ensure the continued energy availability, we can assume that the growth of digital data continues today’s trends, surpassing the total amount of biological data—DNA—on Earth in about a century. In any case, we are undergoing a major transition in information storage, transmission, and processing.</p>
+<p><strong>Some people argue that the existential threats posed by AGI are simply too great to proceed toward it. Do you ever find yourself thinking that maybe we should stop before it’s too late?</strong>I don’t think halting development is a real economic and geopolitical possibility. We need to be pragmatic with no delusions either way. My approach is to include the humanities in the very process of creating these technologies, which allows for a deeper and fairer framework and more dignified, transparent, and accountable development. AI is a series of human decisions after all.</p>
+<p><strong>I’ve been thinking a lot about how AI can be used by authoritarians. How can artificial humanities help mitigate this danger?</strong>This is exactly where the humanities should rise up to the task. It is becoming even more important for individuals, the media, and society to develop a critical eye on the use of AI, political narratives, trust, and truth. AI in politics and in law can be incredibly dangerous, adding to the fire started by social media, and before that, the Internet, and so on.</p>
+<p>These are not new problems. And yet, even if we ban AI from politics, I can see a scenario where a politician would say that they will consult the most advanced AI on political issues and still get elected. (Reading recommendation: <a href="https://nautil.us/our-magnificent-ocean-889177">Richard Powers</a>’ recent novel <a href="https://nautil.us/manta-rays-at-play-1204569"><em>Playground</em></a>brilliantly addresses the theme of AI in politics.)</p>
+<p>In the past, we turned to philosophers for guidance on ethical and political decisions. <em>Artificial Humanities</em> argues that we should rely on humanities—with deep knowledge of human behaviors, desires, and cultures, including the narratives that we all inherit—for guidance on the new realities that AI enables, such as the relationships we form with AI agents.</p>
+<p><strong>In “</strong><a href="https://www.nature.com/articles/s41599-024-03868-8"><strong>Experimental narratives</strong></a><strong>” you found that when prompted to compose a fictional narrative, AI draws inspiration from the same media that humans do. Hany Farid told me that one of his concerns is that AI has been trained on media like <em>the Terminator</em> and <em>2001</em>’s Hal 9000, and that it’s begun presenting as if it’s learned that it’s supposed to act that way. What do you think of that concern?</strong></p>
+<p>I share this concern. We mold AI with our cultural imaginaries. LLMs have been trained on all available data but keep averaging to clichés. There are so many other ways to imagine, build, and use AI from the single marketable form we have now. LLMs get all the attention, and my hope for the second part of the 2020s is that AI diversifies toward less exploitative and more creative directions. I believe in the human spirit and our ability to solve problems, as well as to create new ones.</p>
+<p>I write in <em>Artificial Humanities</em> that “The responsibility of making these technologies is too big for the technologists to bear it alone,” and my new book, <a href="https://press.umich.edu/Books/F/First-Encounters-with-AI2"><em>First Encounters with AI</em></a>, is a continuation of the posited task.</p>
+<p>Imagination has become more important than ever, and writers are specialists in alternative worlds.This is why I asked creative writers to reflect on the entry of AI into the writing space.The overwhelming majority of people are affected by AI but are not a part of the conversation about it. <img alt="" src="../images/nautilus-favicon-14_241.png" /></p>
+<p><em>This interview was reposted with permission from Nick Hilden’s</em> <a href="https://nickhilden.substack.com/"><em>substack</em></a><em>.</em></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em><a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: pinkeyes / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

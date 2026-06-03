@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why We Love Horror Stories | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why We Love Horror Stories</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-31
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-R0GD</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Some of our oldest tales are horror stories. Greek and Roman myths are full of gore, psychological terror and vile corporal punishments. <em>The Odyssey</em>, composed around the eighth or seventh century B.C., gave us the Sirens, whose enchanting songs lure lonely sailors to their deaths, and Polyphemus, a colossal, lawless, cannibalistic Cyclops who devours humans. Even earlier than that, the ancient Mesopotamian Epic of Gilgamesh, penned around 1800 B.C., recounts a half-human king’s encounter with a terrifying underworld where the dead eat dust and dirt.</p>
+<p>Perhaps humans have always been so enamored with horror stories because, as a species, we are built for threat detection. We can’t help but imagine all of the potential horrors in store for us, but in the process of imagining these threats, we can also imagine how we might vanquish them. This is the argument author and behavioral scientist Coltan Scrivener makes in his latest book, <a href="https://www.penguinrandomhouse.com/books/705578/morbidly-curious-by-coltan-scrivner-phd/"><em>Morbidly Curious</em></a>: <em>A Scientist Explains Why We Can’t Look Away</em>. We enjoy dark, terrifying stories not because we’re twisted but because they are psychologically adaptive, he says. <em>Nautilus</em> spoke with Scrivener about the relationship between a love of horror and empathy, why some people are especially drawn to the macabre, and how engaging with horror can help us.</p>
+<p><strong>What makes some people more morbidly curious than others?</strong></p>
+<p>Morbid curiosity tends to peak as a trait around adolescence or young adulthood. It slowly declines at a population level after that. A personality trait that tends to correlate positively with morbid curiosity is sensation seeking. If you're a more curious person in general, some of that also gets directed toward things that are dangerous. Also contextually, if you're getting cues that something dangerous is looming on the horizon, it might pique your morbid curiosity. This happened in 2020, around <a href="https://nautil.us/horror-fans-have-more-fun-during-a-pandemic-237891/">the time COVID-19 hit</a>, people became <a href="https://pure.au.dk/portal/en/publications/an-infectious-curiosity-morbid-curiosity-and-media-preferences-du/">very interested</a> in fictional stories of <a href="https://www.sciencedirect.com/science/article/pii/S0191886920305882">pandemics</a>.</p>
+<p><strong>Why does an interest in morbid, gory stuff sometimes inspire condemnation?</strong></p>
+<p>If you see someone who enjoys a movie where there's a lot of suffering, for example, like a horror movie, you might think, “oh, well, maybe that person thinks suffering is okay, or maybe that person doesn't have an issue with violence or suffering.” I understand that intuition. But it doesn't seem to bear out in the data. There's no evidence, for example, that horror fans or morbidly curious people are lower in empathy. In fact, they score about the same as everyone else on empathy. And in some cases, their levels of compassion and cognitive empathy are actually higher. Humans can still make a pretty clear demarcation between what is real and what is fictional, or what is a story and what is not a story.</p>
+<p><img alt="" src="../images/MAhMMn6Q-French_BREAKER.png" /></p>
+<p><strong>WHY WE CAN’T LOOK AWAY:</strong> Behavioral scientist Coltan Scrivener, author of <em>Morbidly Curious</em>, explains why fear sometimes feels good and what that tells us about being human. <em>Photo by Matt Loveland.</em></p>
+<p><strong>What are some of the documented psychological benefits of consuming horror stories in books and video games and engaging in scary play more broadly?</strong></p>
+<p>One of the studies I did at a 30- 40-minute haunted Halloween attraction found that a large portion of the people experienced self-realization or <a href="https://econtent.hogrefe.com/doi/abs/10.1027/1864-1105/a000354?journalCode=zmp">personal development</a>. Some of them had a better understanding, for example, of how they handled their own fear and their own anxieties, what they needed to work on and what they were good at.</p>
+<p>There's a really great game called MindLight produced in the Netherlands and used to treat anxiety in children. It only works because it's a scary game.The player wears an EEG headband that measures brainwaves associated with relaxation. As they play the game, they control a character who wakes up in this dark mansion that's filled with monsters, and they need to escape the mansion. The only way to fight the monsters is for the character to look at the monsters and shine a little headlamp that's called the “mind light” on the monster. If the EEG headband picks up that you're getting too anxious, it actually pauses the game and gives you some tips on how you can calm down, including reminders that if you calm down, your mind light will shine stronger and you can defeat the monsters. And of course, once you calm down, the EEG headband detects your relative calm and that makes your mind light shine brighter and defeat the monsters.</p>
+<p><strong>That's so cool. I love that. It’s a spooky form of neurofeedback.</strong></p>
+<p>It's incredible. And several studies have shown that it is as effective as cognitive behavioral therapy at treating anxiety, which is the best way we know how to treat anxiety.</p>
+<p><strong>Outside of games like MindLight, how does engaging with morbid stories help people psychologically prepare for threats, particularly if the fictional threat is not one that they might encounter in real life, like say getting attacked by a paranormal spirit or psychopathic killer?</strong></p>
+<p>One of the things that I discovered is that a lot of people who enjoy horror score a bit higher in anxiety than the general population, which is a little counterintuitive at first. You would think people who would enjoy horror would be much lower in anxiety. Why would someone who's feeling anxious seek out something that causes them to feel anxious? And I think what's going on there is that when you're experiencing anxiety, particularly generalized anxiety, but you don't have a source that you can attribute that anxiety to or control to help reduce the anxiety, you can get caught in these vicious cycles of rumination about potential dangers. It becomes very difficult to just relax because your mind will still latch onto whatever it is you're feeling anxious about.</p>
+<blockquote>
+<p>As soon as language came about, we were probably telling scary stories.</p>
+</blockquote>
+<p>But one thing that some people have discovered is that horror movies can help them turn off their mind because it helps redirect their attention to a new threat—in this case, a threat that is fictional and controllable in some way. You can pause the movie, you can watch with the lights on, you can do things to control how anxious you're feeling. And then after about 90 minutes, in the case of a movie, the threat goes away. And that signals to your brain that this thing that you were anxious about is gone, and your parasympathetic nervous system, which is the rest and digest part of your nervous system, can activate, and that will physiologically calm you down.</p>
+<p><strong>You divide morbid curiosity into four types: The minds of dangerous people; acts of violence; the aftermath of violence, such as bodily injury; and finally the paranormal: malevolent ghosts, demons, angry deities, upset ancestors, even aliens. Do humans have different ways of responding to these different kinds of morbid curiosity?</strong></p>
+<p>It's a little easier to sit back and learn about the mind of a dangerous person or the psychology of a dangerous person than it is to learn about a violent act itself, because violence itself produces other kinds of feelings that motivate us to avoid it. So disgust, or high levels of empathy, could lead us to look away from violence. So it's kind of a gas-and-brake system like in a car. Your morbid curiosity is your gas, but some of these things produce feelings that help us push the brakes a little bit.</p>
+<p><strong>What is your favorite horror story?</strong></p>
+<p>I have a few that always float around in my top fear category. In the case of movies, one of my favorites is the 1982 <em>The Thing</em>. I think it's one of the most perfect horror movies ever created. It does an excellent job of tapping into fear of uncertainty and isolation and coalitions and powerful entities that we just don't understand. It includes lots of body violations. It does a good job of kind of capturing all of the domains of morbid curiosity in some way.</p>
+<p><strong>What is the oldest known horror story?</strong></p>
+<p>As soon as language came about, we were probably telling scary stories. There is a really great phylogenetic <a href="https://link.springer.com/chapter/10.1007/978-3-319-39445-9_6">study</a> of folklore and the oldest stories we know. One of the oldest ones they identified was about making a deal with the devil. Little Red Riding Hood is also phylogenetically a very old story with elements of horror that you find in a lot of different languages. I would say quite a few of the old stories are trickster stories, which are horror stories in their own way. <img alt="" src="../images/nautilus-favicon-14_856.png" /></p>
+<p><em>Lead image: paseven / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

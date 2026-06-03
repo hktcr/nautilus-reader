@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stranger Things in the Universe - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Stranger Things in the Universe - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-0V6X</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>After years of painstaking development, too many sleepless nights, and the seemingly never-ending slog that is the careful scrutinization of data, cosmologists this spring finally made their announcement.</p>
+<p>Dark energy—the mysterious force that is causing our universe to accelerate—may be <a href="https://newscenter.lbl.gov/2025/03/19/new-desi-results-strengthen-hints-that-dark-energy-may-evolve/">evolving with time</a>. The data could expose a crack in the standard model of the cosmos. A small crack, mind you. But big enough to remind us cosmologists the universe is always stranger than we think.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>The new data was gathered by the Dark Energy Spectroscopic Instrument. Perched atop Kitt Peak in the Sonoran Desert, DESI sports a 13-foot mirror, 5,000 robots to constantly reposition fiber optic cables, and an army of collaborators across the world to interpret its data. DESI can capture light from 5,000 galaxies simultaneously. The remarkable new finding is derived from three years of measuring the spectra—intensity of light—emitted by 15 million galaxies and quasars, luminous objects in the sky.</p>
+<p>In a recent conversation, astrophysicist Will Percival of the University of Waterloo, who has been a DESI team member since 2001, stressed just how state-of-the-art these measurements are. “In the first six months of operation, DESI had obtained more spectra than had previously been obtained in human history,” he said. Cosmologists are endlessly pursuing this data, which shows up in subtle shifts of galaxy positions.</p>
+<p>One thing DESI is looking for is an artifact of the early universe known as “baryon acoustic oscillations.” These oscillations represent a pattern of how matter was distributed in the primordial universe. Cosmologists use the early pattern as a “standard ruler” of distances between galaxies. The baryon-acoustic-oscillations signal, Percival explained, is seen “in galaxy distributions as a function of redshift, and we can precisely measure the distance-redshift relationship.” Redshift is a measure of how light waves emitted by a galaxy long ago and far away have stretched due to the expansion of the universe.</p>
+<p>VIDEO</p>
+<p><strong>GALAXY QUEST:</strong> In this three-minute video, go on a quest through millions of galaxies mapped using data from the Dark Energy Spectroscopic Instrument. <em>Video by DESI collaboration and Fiske Planetarium, CU Boulder.</em></p>
+<p>Today, we know the general Big Bang story is on the right track. We live in an expanding universe, one that was smaller and hotter in the past. This basic story has checked all the main observational boxes for over a century. But the devil is in the details. How long has the universe been in its present state? What are its main constituents? What form will it evolve into in the future?</p>
+<p>To answer these detailed questions, cosmologists since the 1990s have been developing a model, known as ΛCDM. The Greek letter Λ stands for dark energy, and CDM for cold dark matter. This model is by far the simplest way we have to describe the wealth of cosmological data pouring into our observatories every single day. It’s also almost certainly wrong.</p>
+<p><a href="https://nautil.us/have-we-gotten-dark-matter-all-wrong-356525/?_sp=7fcb0a98-bcaa-4fd2-8f66-6a709be04a78.1749158675209">Dark energy and dark matter</a> are placeholders. We don’t really know what they are, only what they do. Dark matter is the name we give to the tendency for matter to clump together more tightly than it should at large (that is, galactic) scales. Dark energy is the name we give to the accelerated expansion that appears to rip apart the universe at even bigger scales.</p>
+<p>Starting about 15 years ago, cosmologists knew this state of affairs couldn’t stand. “It’s embarrassing that we think dark energy is the dominant form of energy in the universe, but we know nothing about it,” Percival said. ΛCDM wasn’t the full story, but there was nothing in the ΛCDM data to point us in the right direction.</p>
+<blockquote>
+<p>Foundational models have always shifted as we’ve revealed more about the cosmos.</p>
+</blockquote>
+<p>The hope was DESI data would point us toward a new cosmological model. And the new results are highly suggestive, but not yet conclusive. There is an ever-so-subtle shift in the positions and shapes of millions of galaxies spread across the cosmos indicating that maybe—maybe—dark energy is not a constant, one of the foundational assumptions of the ΛCDM model.</p>
+<p>Interestingly, DESI’s results do not stand alone. At the same time that cosmologists were designing and building DESI, they were analyzing data from the Planck space telescope, a joint NASA/ESA venture to <a href="https://www.esa.int/Enabling_Support/Operations/Planck">map the earliest radiation emitted</a> when our cosmos was but a young baby. That mission to collect more data produced its own startling result, a measurement of the Hubble constant, which is a quantification of the present-day expansion rate of the universe. Planck’s estimate was slightly slower than measurements taken with other means. Not by a lot, but enough to be statistically significant and <a href="https://science.nasa.gov/missions/hubble/nasas-webb-hubble-telescopes-affirm-universes-expansion-rate-puzzle-persists/">scientifically fascinating</a>. Anytime tensions appear in high-quality measurements, it shows that our models are not adequate to capture the full complexity of the cosmos—meaning there must be something new right around the corner.</p>
+<p>There are other unexplained bits and pieces in recent observations, where one set of measurements seem to contradict another. The <a href="https://nautil.us/what-the-webb-telescope-really-showed-us-about-the-cosmos-beginning-296282/?_sp=7fcb0a98-bcaa-4fd2-8f66-6a709be04a78.1749158201342">James Webb Space Telescope</a> recently revealed that some galaxies seem to grow up too fast: We’re seeing the equivalent of teenagers sitting in kindergarten classrooms; at the same time, relatively mature galaxies are bursting on the cosmic scene earlier than our models had expected.</p>
+<p>These anomalies are pointing to … something.</p>
+<p>There is no known solution. The problem is that our models are always grounded in physics, which prevents us from having absolute freedom in adjusting how the models work. If we change one thing, we are forced by physics to alter something else in response. And if we try to resolve one contradiction in the observations by adjusting the model, we end up violating some other measurement.</p>
+<p><img alt="" src="../images/Sutter-Inside-art.png" /></p>
+<p><strong>MAPPER OF THE UNIVERSE:</strong> The Dark Energy Spectroscopic Instrument maps the universe by collecting spectra from millions of galaxies and quasars. <em>Photo by Marilyn Sargent / Berkeley Lab.</em></p>
+<p>If we adjust ΛCDM to accommodate the new DESI results, and allow for dark energy to evolve with time, we also end up unexpectedly forcing neutrinos, a ghostly lightweight particle, to have negative mass—that’s the only way to make all the measurements line up. That’s probably not correct, so we can’t be sure about what conclusion to draw.</p>
+<p>But as the saying goes, this ain’t our first rodeo. Foundational models have always shifted as we’ve revealed more and more about the cosmos.</p>
+<p>At the turn of the 20th century, astronomers hotly argued the distances to the Andromeda nebula—as it was then known. Some measurements suggested that Andromeda was near—maybe 10,000 or 20,000 light-years away, which is near enough in cosmological terms. Others suggested that it was much farther, perhaps 100,000 light-years away. The resolution to the debate came with Hubble’s constant, which pinned the distance of Andromeda to several million light-years away. That discovery revolutionized our understanding of the cosmos and opened the door for the theory of the Big Bang itself.</p>
+<p>In the 1970s and ’80s, tensions flared again, this time over the precise value of the Hubble constant. This number anchors our knowledge of the age of the universe, and so it came to be known as the cosmic age problem. Different measurements disagreed wildly, with some estimates up to double the values of others.</p>
+<p>But this tension did not lead to a revolution. Dedicated analysis, especially with the Hubble Space Telescope, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC34182/">resolved the contractions</a> to land at a middle-of-the-road result. No fireworks, no paradigm shifts, no upending of the cosmological order. Just hard work and refinement. An advance to be sure, but not a change in direction.</p>
+<p>What will our current era of tension reveal? The answer to these riddles could indeed be a new cosmological model, a new understanding of dark energy or dark matter—or even the destruction of those very concepts. Or it could be something mundane.</p>
+<p>Already <a href="https://www.newscientist.com/article/2481555-physicists-are-waging-a-cosmic-battle-over-the-nature-of-dark-energy/">other cosmologists</a> have brought forward their own interpretations of DESI’s findings. It could be a misunderstanding, they say, about how light has propagated through the thick fog of the early universe, skewing the results. Or it could be a batch of bad data in one segment of the survey, throwing the whole conclusion into a warped perspective.</p>
+<p>Right now, it’s impossible to say.</p>
+<p>To paraphrase Arthur C. Clarke, astronomy, like nothing else, teaches humility. We know we have not finished this story, and it’s poignant to know that our efforts in this generation will likely not close it. But this is exactly what motivates scientists like those at DESI to stay up late and get up early. We are surrounded by mysteries everywhere we look. As cosmologists, we wouldn’t want it any other way. <img alt="" src="../images/nautilus-favicon-14_1132.png" /></p>
+<p><em>Lead image: A long-exposure image captures circular star trails above DESI in Arizona. Credit: KPNO/NOIRLab/NSF/AURA/B. Tafreshi.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

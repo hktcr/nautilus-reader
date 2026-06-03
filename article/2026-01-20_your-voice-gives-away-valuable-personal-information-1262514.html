@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Voice Gives Away Valuable Personal Information | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Your Voice Gives Away Valuable Personal Information</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-20
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-S7U3</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The voice is the music of the soul. Since the time of Plato and Aristotle, it’s been linked to a person’s character and inner life. And it often betrays things we try to hide: fatigue, fear, attraction, scorn.</p>
+<p>But the sound of your voice may reveal even more than you realize—for instance, details of your physical and mental health, your cultural and education backgrounds, even your political preferences.</p>
+<p>Scientists are increasingly learning how to use computers to track these vocal inflections and fingerprints, but some scholars are sounding the alarm. Today, speech-recording devices are everywhere, in smart speakers and phones like Siri and Alexa and in the voice control systems in TVs, cars, and appliances. Some of these systems have “always listening” protocols that monitor audio continuously in the environment for trigger phases to activate.</p>
+<p>Given the intimate personal information contained in your voice, these technologies present major privacy risks. The recordings of your voice that they collect could one day be used against you, warns Tom Bäckström, professor of speech and language technology at Aalto University in Finland: to increase your insurance premiums; tailor ads to your interests, needs, or emotional states; screen you for certain jobs; and worst of all, harass, stalk, or extort you.</p>
+<p>“When someone talks, a lot of information about their health, cultural background, education level, and so on is embedded in the speech signal. That information gets transmitted with the speech, even though people don’t realize it,” Bäckström explained in a <a href="https://www.newswise.com/articles/your-voice-gives-away-valuable-personal-information-so-how-do-you-keep-that-data-safe#:~:text=Personal%20information%20encoded%20in%20your,harassment%2C%20stalking%20or%20even%20extortion.">statement</a>.</p>
+<p><strong>Read more: “<a href="https://nautil.us/what-makes-an-opera-star-stand-out-1237820/">What Makes an Opera Star Stand Out?</a>”</strong></p>
+<p>To deter abuse before it happens, Bäckström and his colleagues are working to develop protective measures and technologies. They recently published a <a href="https://ieeexplore.ieee.org/document/11261339">paper</a> in the <em>Proceedings of IEEE</em> that reviews the potential risks posed by speech-recording technologies, and the measures that could be taken to protect against those risks.</p>
+<p>Some of the risks include voice assistants accidentally recording private conversations, companies using voice data for profiling or surveillance, stalkers or abusers using voice data to track people, and shared devices leaking one person’s private information later on.</p>
+<p>The scientists built a metric that they say can be used to tell how much information about a person a particular voice clip reveals, based on the pitch of the voice or other features, such as the actual words it contains. The new metric is the first, they claim, that can capture <em>how much</em> is revealed in any one audio recording of a voice. Bäckström says the technology could be used specifically to help people understand how much of their privacy is at risk when they use certain speech-recording technologies.</p>
+<p>The team of scientists is also working to build technologies that can compress, distort, anonymize, or re-synthesize speech, so that only the essential information gets transmitted when a person uses a speech-recording technology. And they’re developing “adversarial training” protocols that would train systems to complete an intended task without tracking private personal information contained in a voice.</p>
+<p>“To ensure privacy, you decide that only a certain amount of information is allowed to leak, and then you build a tool which guarantees that,” he explained. “But with speech, we don’t really know how much information there is. It’s really hard to build tools when you don’t know what you’re protecting, so the first thing is to measure that information.”</p>
+<p>Another privacy-saving approach would be to disentangle the components of speech when companies record it, the authors write—separating words from tone, identity, and emotional content, though this is one of the more challenging projects. Encryption is yet another tool that might help protect voice privacy, though it’s slow and expensive. Then there’s sound engineering, which could be used to alter a vocal recording in such a way that only the intended listener could hear it clearly. One thing individuals can do to protect their privacy in advance is to avoid sending any voice data to the cloud, the scientists suggest, though this can be tricky with shared services.</p>
+<p>The speech technology privacy field is in its infancy, and many open questions for study remain: how to handle consent in real-time voice interactions, how privacy degrades over longer recordings, how to protect against future attacks, how to deal with multi-person conversations, how to design systems that people trust. Perceived privacy is in some ways as important as actual privacy, the study authors argue, given the strong psychological ownership people tend to feel about their voices. People will abandon systems they don’t feel they can trust, they point out.</p>
+<p>Ultimately, much of the burden will lie with the companies that make speech-activated technologies. The ethical thing to do is to build systems that minimize what they hear, record, remember, and infer.</p>
+<p>Because the machines are learning to listen—in ways that a human never could. <img alt="" src="../images/nautilus-favicon-14_529.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Anton Vierietin / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

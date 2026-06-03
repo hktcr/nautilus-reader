@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poop Cruises Are No Laughing Matter | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Poop Cruises Are No Laughing Matter</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-UETI</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Hantavirus is a zoonotic disease that has been hitherto unknown to the American public, with the potential exception of the <a href="https://asm.org/articles/2024/october/indigenous-knowledge-solved-mysterious-outbreak">1993 Four Corners outbreak</a>. Only a few thousand cases of hantavirus infection are reported each year in Europe, <a href="https://www.who.int/news-room/fact-sheets/detail/hantavirus">according to the World Health Organization’s estimate</a>. And globally, the Andes strain of the rodent-borne virus, which is endemic in the Southern Cone, sees “limited human‑to‑human transmission among contacts.”</p>
+<p>Why, then, is a hantavirus outbreak aboard a cruise ship, <a href="https://apnews.com/article/hantavirus-outbreak-hondius-cruise-ship-ac42357c5c3ae1694a93f1d43ba38bdb">which has so far infected 11 people</a>, generating so much media exposure and attracting public interest?</p>
+<p>Some may argue that this is an aftereffect of the COVID-19 pandemic and the symbolic, if not epidemiologically significant, role that cruise ship outbreaks played in it. Others may deplore it as a spectacle of global health coordination—when in reality, infectious-disease containment and public health programs more broadly across the Global South are destabilizing as a result of the United States defunding the sector, <a href="https://hsph.harvard.edu/news/usaid-shutdown-has-led-to-hundreds-of-thousands-of-deaths/">leading to hundreds of thousands of deaths</a>. Or, by contrast, one may see this as a demonstration of the World Health Organization providing a much-needed lifeline to health diplomacy.</p>
+<p>Thus, the hantavirus, from its humble abode among rodents, has suddenly found itself caught in the limelight between scientific concern, media sensationalism, and global health melancholia. Still, the question remains: Why do cruise ship epidemics, from the <em>Diamond Princess</em> to the MV <em>Hondius</em>, attract social and political commentary in a manner so disproportionate to their epidemiological significance?</p>
+<p>To begin answering this question, we need to step back and consider how diseases and ships—and more recently outbreaks aboard cruise ships—have shaped our modern epidemic imagination.</p>
+<p>Ships had been indicted for introducing epidemics to new locations since Thucydides, the Greek historian, obliquely hinted at a naval introduction of the “plague of Athens” during the Peloponnesian War. Suspected as vessels of disease, <a href="///Users/jonskolnik/Downloads/MV%20Hondius">such as the Black Death in Europe’s case</a>, ships eventually came to play a key role in debates about quarantine during the 19th century.</p>
+<p>Most historical attention has focused on debates about ships as maritime bridges of port-to-port contagion. More recently, historian <a href="https://pubmed.ncbi.nlm.nih.gov/24769803/">David Barnes has shown</a> that cargo boats, in particular, were also seen as environments that fostered the self-generation of disease, implying that ships not only carry diseases but also <em>produce</em> and spread them to ports of call. This dual role of the ship as both a spreader and a generator of disease was hotly debated amid the devastating cholera and <a href="https://academic.oup.com/ije/article-abstract/38/1/7/698533?redirectedFrom=fulltext">yellow fever epidemics</a> of the mid 19th century.</p>
+<p>Following the bacteriological revolution later in the century, international sanitary conventions continued to debate quarantine and disinfection measures for passenger boats, usually those carrying <a href="https://www.bloomsbury.com/uk/quarantine-9781137524447/">migrants</a> or <a href="https://www.jstor.org/stable/j.ctt9qgb84">Muslim pilgrims</a>, as well as for cargo boats. If the newly achieved ontological stability of the cause of epidemics (pathogens) provided common ground on which medical scientists, port authorities, and governments could discuss maritime quarantine, this did not mean that a consensus was easily reached on how diseases spread across the seas or what was needed to halt their propagation. In fact, it would take an absolutely devastating bubonic plague event for a consensus to be reached.</p>
+<p>The <a href="https://www.jstor.org/stable/j.ctt9qgb84">Third Plague Pandemic</a>, triggered by the bacterium <em>Yersinia pestis,</em> had its roots among wild rodents in Yunnan, a southwestern province of China. It eventually reached the British colony of Hong Kong in 1894. From there, it quickly spread across the globe, becoming a pandemic by 1900, causing between 12 and 15 million deaths.</p>
+<p>Often forgotten today, this plague pandemic provided a blueprint for pandemic response: developing vaccines, implementing isolation and quarantine based on incubation periods, implementing infrastructure changes to prevent transmission pathways, launching eradication campaigns against suspected vectors, and demanding behavioral change from affected communities.</p>
+<p><a href="https://www.press.jhu.edu/books/title/54112/how-plague-got-rats?srsltid=AfmBOorPt3MuWVW1gjfSk1ZGTfqzLaN2kMd-JovruXXnhYXK3rEZmOaZ">Rats only gradually came to play a key role</a> in these anti-pandemic campaigns. Lacking agreement on whether experiments identifying fleas as the rat-human vector were valid, medical scientists and public health authorities initially hesitated to single out the rat as the spreader of plague in cities and towns during the first years of the pandemic, when it was largely confined to China and India. The plague’s global spread from 1899 onwards, however, forced them to refocus. By 1903, scientists became convinced that, as far as the maritime spread of plague was concerned, rats should be singled out as the key culprits.</p>
+<p>That was thanks to ships. At the time, in what were called “naval epidemics,” medical experts had begun to notice that plague developed in members of the crew just as rats were discovered to be dying of the disease. And there was one naval epidemic in particular that solidified the belief that rats spread plague both between ports and within boats.</p>
+<p><img alt="" src="../images/Ball_BR-art-breaker.png" /></p>
+<p><strong>ALL ABOARD:</strong> Passengers from the <em>S.S. Sénégal</em> behind the gates of the lazaretto on Ratonneau Island, in the Frioul archipelago off Marseille. “La Vie Illustrée,” October 11, 1901.</p>
+<p>The ship in question was the <em>S.S. Sénégal</em>, a boat famous during the inaugural 1896 Olympics in Athens for carrying celebrities. In the summer of 1901, the French scientific society that published the journal “Revue générale des sciences pures et appliquées” organized a cruise aboard the <em>S.S.</em> <em>Sénégal</em> around the Mediterranean. There were 174 passengers, most of them scientists and inventors, such as the pioneer of cinema Léon Gaumont, as well as politicians, like the future Prime Minister and President of France, Raymond Poincaré. They were to enjoy a science-themed trip calling at Rhodes, Cyprus, Syria, Palestine, Egypt, and Malta.</p>
+<p>The <em>Sénégal</em> boarded its passengers and sailed from Marseille on September 14. Soon, however, one of its sailors, Marius Fabre, fell ill, and before reaching the Aeolian island of Lipari, plague was declared on board. The cruise ship was forced to return to Marseille, where it was placed under a week-long quarantine at the Frioul lazaretto, on an island off the coast of the French port city, with investigators uncovering heaps of dead rats. The well-heeled passengers were then placed under quarantine in the Spartan rooms of the lazaretto, stirring intense public interest.</p>
+<p><a href="https://direct.mit.edu/books/oa-monograph/5461/Visual-PlagueThe-Emergence-of-Epidemic-Photography">The press at the time expressed horror</a> at the confinement and provided sobering testimonies by and photos of the confined passengers. Were these to have been migrants, colonial subjects, or pilgrims to Mecca—cohorts regularly subjected to disease-related quarantines across the French Empire and beyond—nobody would have paid the slightest attention to the incident. However, it was instead a lofty slice of the French elite that suddenly found itself exposed to rat-borne plague and subjected to quarantine on a barren island, no less on a vessel embodying modernity and progress.</p>
+<p>The cruise ship crisis was eventually resolved, and on September 26, passengers were released. Relieved of having regained his freedom unscathed, one passenger, Gustave Austran, composed a poem titled “The Ballad of 80 Dead Rats,” which began like this:</p>
+<p><em>Maritime Passengers</em><br />
+<em>Embarked without too much hassle</em><br />
+<em>Subtle rodents and merry rats</em><br />
+<em>We set off from Alexandria</em><br />
+<em>We were all plump and fat</em><br />
+<em>But, alas! The nasty adenitis</em><br />
+<em>Made our obese paunch swell</em><br />
+<em>And soon, victims of fate</em><br />
+<em>In the Senegalese hold</em><br />
+<em>We became eighty dead rats.</em></p>
+<p>For the scientific officialdom, though, the debacle left its mark. It seemed to validate the warning of a key anti-rat crusader at the time: Danish civil engineer Emil Zuschlag, who had argued that modern civilization fostered plague through fast transoceanic and land-based transport, as well as the Industrial Revolution. This, he claimed, <a href="https://www.press.jhu.edu/books/title/54112/how-plague-got-rats?srsltid=AfmBOorPt3MuWVW1gjfSk1ZGTfqzLaN2kMd-JovruXXnhYXK3rEZmOaZ">disturbed the “equilibrium” between humans and rats</a>. Indeed, if a celebrated vessel like the <em>Sénégal—</em>which had been meticulously examined for plague before boarding its passengers in Marseille—could still carry plague-transmitting rats, then no ship was safe, and no port of call either.</p>
+<p>Today, the infected cruise ship is once again a space turned upside down. It is a space of privilege where one is supposed to leave behind the demands and stress of industry and politics, relishing exotic sights and the good life from the comfort and safety of one’s cabin, only to be found instead in the floating epicenter of an epidemic. It is an escapist folly turned percolator of disease, which, rather than stopping fleetingly at sites of interest, becomes stuck in a quarantine station, with the comfort and privacy of salons and cabins giving way to the harshness of quarantine dorms, and one’s life exposed to the public’s curious and not always sympathetic gaze.</p>
+<p>We saw the reemergence and reworking of that topos a century later, in the case of the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7403638/"><em>Diamond Princess</em></a>. In February 2020, it became the epicenter of media and public attention when COVID-19 struck. With over 700 passengers becoming infected in the early period of the pandemic, the cruise ship was quarantined in Japan for roughly a month as the whole world watched. The incident captured the public imagination in conflicting ways—with some denouncing the quarantine as draconian and others calling containment chaotic—and led to extensive debates over transmission pathways, the legal aspects of epidemic control, and the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9376310/">economic impact</a>.</p>
+<p>Before this event, the metaphor of cruise ships as “floating petri dishes” had been used to describe <a href="https://edition.cnn.com/travel/article/cruises-sanitation">gastrointestinal outbreaks</a> on board, without indicating them as a risk to off-board public health. However, the COVID-19 twist linked cruise ships to older epidemiological imaginaries of the maritime spread and percolation of diseases, which turned these vessels into infrastructural “<a href="https://www.nationalgeographic.com/travel/article/when-a-cruise-ship-becomes-a-hot-zone-coronavirus">hot zones</a>”—<a href="https://www.jstor.org/stable/j.ctv11sms36">another trope</a> that has been mobilized since the 1990s through movies like 1995’s <em>Outbreak</em> and Richard Preston’s 1994 book <em>The Hot Zone</em>.</p>
+<p>The hantavirus cruise ship outbreak adds another layer to this narrative: Rather than being one among many sites of infections—like the <em>Diamond Princess</em> was in the case of COVID or the <em>Sénégal</em>in the case of plague—MV <em>Hondius</em> is portrayed as the original locus of the epidemic, with the zoonotic infection site (yet to be confirmed) being largely sidelined in this story of epidemic origins. And yet, it may be argued that cruise ship outbreaks, like the current hantavirus outbreak, attract disproportionate public attention not because they introduce anything original into the public sphere, but because of their routinization within well-established epidemic imaginaries.</p>
+<p>Over and over in comments online and offline, one hears iterations of: <em>Not again</em>, <em>not another cruise ship</em>. Scientists are right to stress the biological distinctions between COVID and hantavirus, but perhaps in so doing, they miss a key point: While the two viruses are incomparable, the events unfolding before our screens seem to follow a familiar, indeed banal, pattern. Most people have very little time to understand virology or engage with complex evidence about transmission pathways, incubation periods, or R0. Instead, they readily relate to symbolic stories of ships as constant emblems of life turned upside down—fun turned to horror, relaxation into illness, sociality into transmissibility.</p>
+<p>Global health experts and medical anthropologists have long stressed that we need to take the perceptions of those affected by diseases and those at risk of them seriously. It is thus necessary to take seriously the sense of banality and repetition elicited by cruise ship outbreaks. We should reflect on what they mean for the way we inhabit the world today, and foster effective epidemic response. As a banal exception, as a routinized outlier, the infected cruise ship is a trope here to stay; it is up to us not to let it hamper global health. <img alt="" src="../images/nautilus-favicon-14_39.png" /></p>
+<p><em>This article is reprinted here with permission from</em><a href="https://thereader.mitpress.mit.edu/pleasure-plague-and-panic-why-cruise-ship-outbreaks-still-haunt-us/"><em>MIT Press Reader</em></a><em>.</em></p>
+<p><em>Lead image: Wellcome Collection / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

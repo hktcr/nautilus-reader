@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Exactly Is a Superfood Anyway? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What Exactly Is a Superfood Anyway?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-L1P2</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The term “superfood” is sticky. It seems as though every few months, a new food lands in this lofty category of nourishments. Bamboo, a popular ingredient in many traditional Asian cuisines, is one of the latest to receive the designation. The superfood label was used by the <a href="https://www.aru.ac.uk/news/study-suggests-bamboo-has-superfood-potential">authors</a> of a peer-reviewed <a href="https://www.sciencedirect.com/science/article/pii/S2773139125000898">paper</a> covering bamboo’s potential health benefits: When properly prepared, the plant may promote antioxidant activity, probiotic effects, and improved blood sugar management, they reported.</p>
+<p>But it’s unclear what the word “superfood” really means. In popular discourse, the term generally <a href="https://nutritionsource.hsph.harvard.edu/superfoods/">refers</a> to foods that are linked to disease prevention or are considered to have benefits for human health that extend beyond nutritional value. But the word has no standard scientific or medical definition. And yet, in the decades since it was first coined in the 1990s, the list of foods it’s been used to describe has ballooned to include at least 136 plants and animals, according to one recent <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9914617/">estimate</a>. Remember kale? Chia seeds? Goji berries? Quinoa? It’s hard to keep track.</p>
+<p>I reached out to acclaimed New York University nutritionist, public health advocate, and molecular biologist Marion Nestle to ask her why contemporary culture is so enamored of the idea of the superfood, whether such categories are more harmful than helpful, and how to get the most out of what we eat. Nestle, who has written extensively about the harms of food marketing, was dismissive of the concept’s scientific value, but conceded that if it helps some people eat more fruits and vegetables, she is in favor of it.</p>
+<p><strong>Why do so many people find the language of superfoods appealing? What does it say about our food culture?</strong></p>
+<p>“If you eat this, you’ll be healthy.” It’s as simple as that: “You’ll be super healthy.”</p>
+<p><strong>What does superfood mean? I know there’s no real scientific meaning, but …</strong></p>
+<p>It’s a marketing term.</p>
+<p><strong>But does it designate anything at all? Is there anything about these foods that sets them apart?</strong></p>
+<p>No. They have vitamins, minerals, fiber. All fruits and vegetables have some combination of vitamins, minerals, and fiber. And by that definition, every fruit and vegetable is a superfood.</p>
+<p><strong>Are some foods better for you than others?</strong></p>
+<p>Well, they may have more of one vitamin, but something else has more of another.</p>
+<p><strong>Does kale have more vitamins and minerals than, say, iceberg lettuce?</strong></p>
+<p>Iceberg lettuce has more water so it’s more diluted. But the basic principle of nutrition is variety. Because different foods have different combinations of essential nutrients, and if you mix and match them, you get everything you need.</p>
+<p><strong>So there’s no reason to go around looking at the mineral and vitamin contents of different foods and picking them that way?</strong></p>
+<p>I wouldn’t bother. It’s a waste of time. They all have vitamins and minerals. No one food has everything that you need in the right proportion. Therefore, you must eat multiple foods. The more the merrier.</p>
+<p><strong>What is lost when we designate some foods this way? What are the risks?</strong></p>
+<p>I’m all for encouraging people to eat fruits and vegetables. If that’s what it takes, I’m for it. But it’s marketing.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/this-meal-might-bring-you-to-tears-1255467/"><strong>This Meal Might Bring You to Tears</strong></a><strong>”</strong></p>
+<p><strong>How does this trend of naming new superfoods fit into the larger ecosystem of wellness grift?</strong></p>
+<p>The whole wellness thing is about personal responsibility. It’s up to you to make food choices. So obviously you’re gonna make healthier food choices. And if something is marketed as a superfood, you’re gonna buy it.</p>
+<p><strong>Is there any other catchy food terminology that you think is useful for helping people to think about how to eat?</strong></p>
+<p>These are marketing terms.Any ridiculous health claim on a food package is gonna do the same thing.</p>
+<p><strong>I know some people describe food as medicine. Is that a useful catchphrase?</strong></p>
+<p>That’s a marketing term, too.</p>
+<p><strong>Okay. So it’s not useful.</strong></p>
+<p>It is for people who aren’t eating their vegetables. If it encourages people to eat more fruits, vegetables, and grains, I’m all for it.</p>
+<p><strong>Do you think of food as medicine?</strong></p>
+<p>No. I think of food as food.</p>
+<p><strong>If there were a perfect plate of food, what would it have on it?</strong></p>
+<p>There is no such thing as a perfect plate of food. Food should be eaten in variety. You should eat as many minimally processed foods as possible. The new guidelines—eat real food, avoid ultra processed foods—that’s good advice.</p>
+<p><strong>What major questions do scientists still have about how our bodies process foods?</strong></p>
+<p>The major nutrition research these days is focused on precision nutrition, which is analyzing individuals’ genetic responses to foods so that you can design perfect diets aimed at their particular genetic composition. I don’t think that’s very useful.</p>
+<p><strong>Why not?</strong></p>
+<p>Because you have to be really rich to be able to afford that. And healthy diets are so simple that Michael Pollen did it in seven words: “Eat food, not too much, mostly plants.” That’s all there is to it, really. With those principles, you can put together an infinite number of different kinds of diets and different kinds of meals that will meet those principles, satisfy nutritional requirements, and keep you healthy. You don’t need any more than that. You wanna know about individual vitamins and minerals. Fine. I think it’s a waste of time.</p>
+<p><strong>What research questions are you trying to answer right now?</strong></p>
+<p>The big science of nutrition questions have to do with how you can get people to eat healthfully. First of all, finding out what it is people are actually eating, which is a difficult question to answer. I’m only interested in public health questions. I’m not interested in individual questions. We have vast numbers of people who don’t eat very well. Seventy-five percent of American adults are overweight or obese. The big question is how do you prevent that?</p>
+<p><strong>What are some of the possible answers?</strong></p>
+<p>GLP-1 drugs, these days.</p>
+<p><strong>Beyond drugs, how do you change people’s minds about what to eat?</strong></p>
+<p>You make it easier, less expensive, and more convenient for them to eat healthy foods. That’s what you need to do. Right now, the food system is set up to sell as much of the most profitable junk foods as possible to as many people as possible, as often as possible at the highest prices they can get away with.</p>
+<p><strong>Back to superfoods, why do we resort to these kinds of labels?</strong></p>
+<p>We like them. It makes us feel good. It gives you an excuse to buy something: “Ooh, this is a super food. I’ll eat it, and I’ll feel better.”</p>
+<p><strong>But we haven’t always anointed foods in this way.</strong></p>
+<p>The pomegranate people invented the term. I’ll give them credit for it. That was the first time I saw it—with pomegranate juice. They were selling pomegranate juice.</p>
+<p><strong>I read that the United Fruit Company may have kicked things off in World War I. They called bananas a superfood, essentially, in</strong> <a href="https://onlinebooks.library.upenn.edu/webbin/book/lookupid?key=ha001522422"><strong>marketing materials</strong></a><strong>. And bananas took off. Then some medical journals</strong> <a href="https://archive.org/details/rootedinamericaf00davi"><strong>endorsed</strong></a> <strong>their benefits for celiac disease and diabetes.</strong></p>
+<p>It was a good way to sell bananas. It’s a good way to sell pomegranates or blueberries. I think that’s fine. But nobody should confuse it with science. <img alt="" src="../images/nautilus-favicon-14_503.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: beats1 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

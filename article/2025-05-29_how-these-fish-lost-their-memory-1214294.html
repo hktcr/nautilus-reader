@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Fishing Disrupts Herring Migration Memory | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Fishing Disrupts Herring Migration Memory</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-UQJJ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For as long as scientists have been watching, the world’s largest herring population has migrated up to 800 miles every year from wintering areas in northern Norway to spawning grounds along the country’s southwest coast. The herring larvae grow faster in the warmer southern waters, feeding off the rich zooplankton that thrives there.</p>
+<p>But a few years ago, scientists noticed something odd. When the spring rolled around in 2021, instead of heading all the way south, the adult fish migrated a few hundred miles to Lofoten in northern Norway and then stopped, and they’ve largely stuck around there ever since, says Aril Slotte, a fisheries biologist at Norway’s Institute for Marine Research. The scientists track the fish’s movements with radiofrequency identification tags and other methods. “This is the first time something dramatic like this has happened,” says Slotte.</p>
+<p>The shift is worrying. Fewer baby herring might survive in the colder and less plankton-rich conditions in the north, something that could cause population declines in the long term. The collapse of migration patterns may also have ripple effects on the fish, birds, and mammals along the coast that prey on the herring larvae as they drift north from spawning grounds to the Barents Sea in the north during the first year of their lives. Slotte is especially concerned about the many bird colonies that rely on these drifting herring babies to feed their young. Without herring larvae, “it could be quite dramatic for those populations,” he says.</p>
+<blockquote>
+<p>Too many old, wise fish were being harvested, causing the population as a whole to lose its way.</p>
+</blockquote>
+<p>In a <a href="https://www.nature.com/articles/s41586-025-08983-3">new study</a> published in <em>Nature</em>, Slotte and his colleagues set out to track down the causes of this massive shift. At first, they suspected that climate change might have made conditions in the south too hot for young herring or somehow weakened the fish to the point that they couldn’t make the journey. But they didn’t find evidence for sudden temperature fluctuations, and the individual herring were in fact remarkably healthy thanks to the generally warmer conditions. Then the team started to consider the impacts of fishing.</p>
+<p>Like many fisheries, the region’s herring operations target the large—and hence, old—fish that fetch higher prices on the market, selectively harvesting at times and in places where the older fish tend to hang out. Scientists have long worried that this tendency could have outsized impacts on the population because the old individuals are thought to pass on knowledge of migration routes to the young herring. Researchers believe that when the young herring first swim south into the Norwegian Sea—after spending three or four years of their early lives in the Barents Sea in the north—they mix with schools of older fish, who lead the way to the spawning grounds that lie farther south. “The young ones will tend to follow the leaders that are very clear on where to migrate,” Slotte says.</p>
+<p>But computational models had suggested that, in general, removing a certain proportion of older fish can <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4006244/">disrupt the collective memory</a> necessary for migration. And sure enough, when Slotte and his colleagues analyzed the ages of herring in fisheries data, and tracked fish of different ages to study their movements, all the data seemed to support the idea that too many old, wise fish were being harvested, causing the population as a whole to lose its way. In fact, the few surviving old fish began to follow the increasingly abundant young fish. “When you remove a lot of old fish, and you know that the herring acts as a collective, then you actually remove the collective memory of the population,” Slotte says.</p>
+<blockquote>
+<p>Elderly individuals play key roles in passing down important survival lessons.</p>
+</blockquote>
+<p>The loss of older herring is not an isolated incident. An international team of scientists <a href="https://www.science.org/doi/10.1126/science.ado2705">voiced concern</a> last year in <em>Science</em> that such losses are growing among wild animal populations around the world. Human activities like fishing or trophy hunting often selectively target larger, older individuals that are more economically lucrative or have desirable characteristics like big horns, antlers, or tusks. One study determined that, for fish worldwide, the proportion of oldest individuals have declined significantly in the majority of populations.</p>
+<p>These trends are worrying given the vital roles that old individuals play in their respective animal cultures. For many fish species, what scientists have dubbed “<a href="https://www.sciencedirect.com/science/article/abs/pii/S0165783623003272">big old fat fecund female fish</a>,” or BOFFFs, are thought to be especially productive breeders, spawning more often and for longer periods. Meanwhile, old African elephant bulls—frequently targeted by hunters for their big tusks—play important roles in helping younger males navigate through <a href="https://www.nature.com/articles/s41598-020-70682-y">unfamiliar environments</a> and <a href="https://royalsocietypublishing.org/doi/10.1098/rspb.2021.1374">tempering their aggression</a> toward other animals and vehicles.</p>
+<p>And in many animals, from <a href="https://pubmed.ncbi.nlm.nih.gov/33868710/">warblers</a> to <a href="https://www.pnas.org/doi/10.1073/pnas.1903844116">killer whales</a>, elderly individuals play key roles in helping take care of young and passing down important survival lessons such as migration, the authors of the review write. In their view, conservation should focus not only on the decline of populations as a whole, but also on the disproportionate loss of old individuals from populations. Such “longevity conservation” measures could include, for instance, regulating harvests to spare more old individuals.</p>
+<p>As for the herring, Slotte hopes his results will motivate fisheries scientists to come up with solutions to conserve the old fish and their important knowledge. “Maintaining a culture by conserving old fish is something feasible through management,” he says. But restoring a pattern when it’s broken, he admits, is much more difficult.</p>
+<p>He believes the herring could recover their migration patterns under the right conditions. Scientists have observed that, when there’s a population boom, the herring tend to spread out and explore new areas, where they might rediscover their old spawning grounds and rekindle their traditional migration pattern. It could be a drawn out process. “Once disrupted, it can take a long time to restore,” Slotte says. “Let us hope this is not the case for our herring.” <img alt="" src="../images/nautilus-favicon-14_1149.png" /></p>
+<p><em>Lead image: irkus / shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

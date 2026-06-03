@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Stories Rocks Tell Us - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Stories Rocks Tell Us - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-MUKM</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The walls of Wyoming’s Bighorn Canyon rise above a slender lake that once ran as a river. That river flowed for many thousands of years, surging at the end of the last ice age as melting glaciers sent torrents down the Rocky Mountains and out into tributaries that carved through the earth like blades through soft lumber.</p>
+<p>That flowing and carving ended here, in the 1960s, with the construction of a dam. Ever since, the waters have lapped calmly against sedimentary layers that ascend more than a thousand feet, capped by a plateau on top.</p>
+<p>A web of hiking trails stretches across that plateau today in the Bighorn Canyon National Recreation Area, where I found myself walking a few summers ago. As I crunched along a dusty path, I dutifully obeyed signs warning me to watch out for scorpions and rattlesnakes. I peered behind bushes and beneath boulders for a mile or so, until I followed a bend in the path and came upon that massive scar in the earth, the Bighorn Canyon.</p>
+<p>I set down my backpack and folded my legs beneath me to sit on the pale ground. Bluebirds chased flies through juniper and sagebrush; wild mustangs grazed on a hillside nearby. I could hear families shouting about snakes or scorpions up ahead. But all that faded around me as I took in the strata, those neatly arranged layers of sand, silt, and clay laid out on the canyon walls in a striped pattern, all the way down to the water below. Pulled from the moment, I plunged into deep time, caught somewhere in the Paleozoic—long before human voices echoed on Earth, even before snakes or hooves or grasses grew here.</p>
+<blockquote>
+<p>Stability has come and gone and returned so many times before now.</p>
+</blockquote>
+<p>I sat for a while, taking in the remnants of ancient beaches or seafloors or other sandy environments that had long since turned to stone. My mind shuffled through the winds and rains that had spilled out those sediments, and all the dramas that had unfolded in the millions of years since then. The rise and fall of species; the coalescing and disintegration of continents. The storms bigger than the last, the clouds too heavy to hold snow.</p>
+<p>I imagined my own short life in the context of all the time locked up in that canyon wall and felt tiny. Tinier than tiny, a speck of dust.</p>
+<p>In that smallness, I felt a sort of relief.</p>
+<p>On my way back to the trailhead, I stumbled over a patch of crumbly rock, an extension of the canyon wall. I crouched and found a collection of perfectly sculpted ripples, ones you might find at the edge of a sea. I traced the ridges with my forefinger and felt curves shaped by flowing water millions of years earlier. A moment frozen in time, whispering memories of a world without us.</p>
+<p>So much of what we know about Earth’s 4.54-billion-year history, we know thanks to strata like those in that canyon wall in Wyoming. It is through these lines in stone that we can glimpse ancient iterations of this planet and gain context for the moment we’re spinning through now. Along canyon walls and hillsides on all seven continents, geologists flock to these types of sedimentary rocks to piece together the story of how Earth became the place we inhabit today. In collecting bits of stone that they bring back to the lab, they puzzle out how our atmosphere formed into the air we breathe, or how the planet’s thermostat has fluctuated through time, or how landscapes have morphed, and how life has shaped and been shaped by all these upheavals. They turn to these rocks to understand the underpinnings of our current environmental crises, searching for evidence of past periods of tumult to help get us through this one.</p>
+<p>But the language of stratigraphy is not in the common lexicon. Most hikers along that canyon wall in Wyoming probably take in the wide sky and the river down below, and then carry on, warily scanning for venomous things without giving the strata much thought. I had arrived there with an awareness that bordered on reverence for those lines in stone, but only because of a geology class I had stumbled into during my freshman year in college. Before then, I wouldn’t have given much thought to the strata either.</p>
+<p>In that first geology class, we traveled to lakes and rivers and beaches all across Maine, collecting samples of silt and sand that we brought back to the lab and dropped through sieves and weighed on scales to tease out patterns in the landscapes around us. I hadn’t signed up for that class with any particular interest in sediments. I mostly just wanted an excuse to tramp around outside for credit. But over that semester, I grew to appreciate the silt and sand for the ways they drew my attention to details in the landscape I had never thought to pay attention to before. How the inner bend of a river flows more slowly and drops finer sediment than the outer bend, or how one side of a beach may contain larger sediments than the opposite side. How this sorting isn’t random, but is orchestrated by winds and tides and currents that are, in turn, orchestrated by a larger web of activity I came to know as the Earth system. This hidden organizing force, I learned, extended all around us, weaving a precise order through even the smallest of grains.</p>
+<blockquote>
+<p>I plunged into deep time, caught somewhere in the Paleozoic.</p>
+</blockquote>
+<p>I declared myself a geology major and, over the next four years, began to see the world through a wholly different lens. Landforms I had once perceived as blank backdrops for the travails of daily life began brimming with their own quiet sagas. I found stories in the curves in the land around campus, couldn’t jog through town without thinking of the glaciers that had carved the river I ran beside. I stopped to examine the foundations of buildings and the contents of slate walkways, often to perplexed looks from my friends.</p>
+<p>I went on to work as a field assistant and lab technician for a group of stratigraphers for a year or so after I graduated, before replacing my rock hammer with a voice recorder and reporter’s notebook. Still digging into stories of the planet, but from the human perspective rather than that of the rocks. Even after I left geology for journalism, though, my appreciation for strata only grew. The crises facing our planet increasingly call for the insights and context tied up in those layers, for the wisdom that they hold.</p>
+<p>By the time I arrived on that trail in Wyoming, I had been working as an environmental journalist for more than a decade, covering story after story of Earth’s unraveling. I had spoken with glaciologists about disappearing ice, oceanographers about disappearing coastlines, geochemists about disappearing permafrost. I arrived at that canyon wall with a longing for a version of the planet I knew I would never see in my lifetime. A version that wasn’t burning, flooding, skittering off-kilter from our own undoings.</p>
+<p>As I sat on that pale plateau with my legs beneath me, though, I remembered that stability has come and gone and returned so many times before now. That geologic timescales arc too wide to witness in a single human lifetime, but have always spun toward some sort of new stasis.</p>
+<p>I know this doesn’t let us off the hook, or mean that it is time to stop righting our wrongs to the environment. The changes we have unleashed today are unfolding far faster than past periods of change, and they were not geologically inevitable. We are the agents of this geologic moment.</p>
+<p>But the strata reminded me that we are also part of the Earth system, this much larger web of connections that thread between the atmosphere, continents, water, ice, and life. That these threads slacken and tighten over time and accommodate for one another with more brilliance than the human mind can easily grasp. That we live within this system, and the system lives within us. We carry its iron in our blood and its stardust in our bones, and its strength is our strength because we are it.</p>
+<p>We are it, but we are not a given. The only given is the change and the sphere that contains it. <img alt="" src="../images/nautilus-favicon-14_1070.png" /></p>
+<p><em>Read Laura Poppick’s “3 Greatest Revelations” while writing her new book <a href="https://nautil.us/when-earth-had-no-fire-1224345/">here</a>.</em></p>
+<p><em>Excerpted from</em> <a href="https://bookshop.org/p/books/strata-stories-from-deep-time-laura-poppick/21798554?ean=9781324021605&amp;next=t&amp;affiliate=132">Strata: Stories from Deep Time</a><em>. Copyright © 2025 by Laura Poppick. Used with permission of the publisher, W. W. Norton &amp; Company, Inc. All rights reserved.</em></p>
+<p><em>Lead image: photo.eccles / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

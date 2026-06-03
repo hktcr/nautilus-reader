@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How AI Is Helping Archaeologists Make Discoveries | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How AI Is Helping Archaeologists Make Discoveries</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-26
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-B0Z7</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="" src="../images/schmidt-banner-1.png" /></p>
+<p>Archaeologist Jesse Casana was scrolling through thousands of aerial images on his computer looking for signs of ancient sites. The images, taken from planes and drones over the Middle East, harbored definitive evidence of old Roman forts. But spotting them required the trained eye of a seasoned archaeologist. And hours and hours of time.</p>
+<p>Archaeology happens at many different scales—from the single shard of pottery to full landscapes and networks of civilizations. Each has its own challenges, and for Casana’s work, one of the big challenges was volume. He was up to 400 forts with at least a couple of thousands more to go—tedious work that was taking a long time. “I’ve been doing this my whole career, I go fast, and I’m good at finding things,” he says. “But this was a really big area, and I could use some help.”</p>
+<p>At the time, in early 2023, Casana, founder and director of  the <a href="https://sites.dartmouth.edu/sparcl/">Spatial Archeometry Lab at Dartmouth College</a>, didn’t have many options. He tried enlisting his students to help, but that didn’t work well. “They were very earnest, but not very good,” Casana shares. “They missed real forts and found things they thought were forts, when they weren’t. I had to redo their work.” He was thinking about what else he could do. And then he had a Eureka moment.</p>
+<blockquote>
+<p>“The very first aerial photos of an archaeological site were taken over Stonehenge with a hot air balloon.”</p>
+</blockquote>
+<p>It was right around then that AI-powered tools, such as ChatGPT, began surging into everyday life, answering questions, writing term papers, and even detecting tumors in medical images. Casana wondered if he could train an “AI-rcheology” model to spot archaeological sites to speed up the process. “I was hoping I could get a new AI friend that is almost as good as me.”</p>
+<p>Archaeology may not always come to mind as a hotbed of high-tech work. We’ve been trained by books and movies to conjure archaeologists burrowing into the ground in deserts and valleys in remote parts of the world, unearthing ancient objects, dusting them off, perhaps hand-writing some field notes.</p>
+<p>Casana, however, would like to correct this misconception. Archaeologists have always been keen on technological advances, he says. And not only for time-saving reasons. Being able to study relics of the past—from cities to structures—from a distance also avoids many challenges inherent in digging things up, including access to land, the ethics of artifacts, and the labor itself. As the field of digital archaeology has taken off, enabled by drones and new imaging technology, AI has emerged as the next promising tool to help scientists comb through the vast troves of data. But it, too, comes with pitfalls, and some experts say it should be used with caution and supervision.</p>
+<p>Almost as soon asarchaeologists could get a bird’s eye view of sites, they leapt at the chance. “The very first aerial photos of an archaeological site were taken over Stonehenge with a hot air balloon, before planes were even invented,” Casana says. Once planes and satellites began to fly, archaeologists started using even more aerial imagery. As Geographic Information Systems (GIS) became widely available in the second half of the 20th century, it became a tool, too, almost as essential as the old fashioned pick and hammer.</p>
+<p>Camera-carrying drones now let researchers peek at places they couldn’t access before. Thermal cameras enabled them to see walls and other stone objects buried underground—because rocks heat up and cool off differently than the surrounding dirt, giving off different thermal signatures. Ground penetrating radar (GPR) uses electromagnetic pulses to reconstruct what’s beneath the soil, allowing one to see even more over large swaths of land. <a href="https://nautil.us/these-maps-reveal-earths-unspoiled-places-237689/">Light detection and ranging</a> or LIDAR uses laser light to measure distances, allowing researchers to create 3-D maps of landscapes, revealing hidden structures and features beneath vegetation or soil.</p>
+<p><img alt="" src="../images/6eajYQdv-Zeldovich_BREAKER.png" /></p>
+<p><strong>EYES IN THE SKIES:</strong>Archaeologists have been using aerial views to assist with their work since the days of the early hot air balloons. Since then, different imaging technologies have improved their abilities to find and study ancient sites like this one, a Roman site in eastern Syria. The next frontier is AI. <em>Credit: Maxar (2018).</em></p>
+<p>Buried in that digital information, archaeologists have been diligently digging from under it—but that takes time. In the years preceding widely available AI, they tried teaching computer systems to identify the spots of interest in that data deluge. “The archaeologists were very enthusiastic adopters of the idea that we could get the computer to do the work of finding things in the imagery,” Casana says, but the early attempts foundered. “I was a famous skeptic of these approaches,” he shares. “I published two papers in which I talked about how disappointing they were.”</p>
+<p>For most of his career, Casana advocated for what he brands as the “brute force” method. “If you want to find the stuff, you should just look at everything with your eyes,” he says. “But now, I realize that I might be wrong,” he says, especially with new AI systems that can learn from human feedback and from their own mistakes.</p>
+<p>The easiest way toteach AI to identify specific objects is to train it on objects that are highly regular, says Emily Hammer, associate professor of digital humanities at the University of Pennsylvania. For example, some temples may have similar features, but they may differ, too, from site to site or over time periods. “That’s a big problem with archaeology because the past is not regular,” Hammer says. But there are some exceptions. For a few years, Hammer has been working on mapping caravanserais in Afghanistan—ancient hotels that dot the Silk Road, a trade route that connected the East and West for centuries.</p>
+<p>The caravanserais have a typical structure, Hammer explains. There’s a road that leads in through a monumental entrance. There’s a courtyard in the middle, surrounded by rooms. There are places to house the pack animals that carried the goods. “These things tend to be of a fairly regular size, and they were built along the roads in isolated areas,” says Hammer. All these characteristic attributes make caravanserais an easier training model than rarer structures.</p>
+<blockquote>
+<p>Thermal cameras enabled them to see walls and other stone objects buried underground.</p>
+</blockquote>
+<p>Hammer’s work on these structures focused on Afghanistan, but caravanserais existed all over Central Asia, so once trained, the AI will be able to plow through hundreds of thousands of old photos and maps and point archaeologists to the previously unknown sites. “We are planning to use Soviet maps that were created in the ’40s through ’60s,” says Hammer, referring to a future project she and Casana are hoping to do together. “These Soviet cartographers were incredibly skilled,” she adds, so the maps are of very good quality.</p>
+<p>The recently declassified spy aerial photos from the mid 20th century can help, too. In fact, they may be a veritable boon for digital archaeologists because they captured part of the world that no longer exists. “People don’t realize the degree to which the archaeological record has been destroyed by mechanized agriculture, irrigation, the expansion of cities and industrialization,” Casana says—particularly in the past few decades. But the sites remain preserved, in a digital way, in the old, recently declassified photos.</p>
+<p><img alt="" src="../images/Zeldovich_BREAKER-2.png" /></p>
+<p><strong>PATTERN HUNTING:</strong>AI still doesn’t have the nuanced interpretive skill of a trained human archaeologist, but it is a workhorse at finding patterns in images, and spotting similar structures within large expanses of land, such as these ancient Roman Forts.  <em>Credit: Casana et al. (2023).</em></p>
+<p>“That’s where AI can do a better job,” says Hammer. “It could find them where we know they were. And then we can use it to search on a much broader scale, at the level of countries or continents, because we can’t do that with our own eyes.”</p>
+<p>This project is one of 10 initial projects supported by the <a href="https://www.schmidtsciences.org/humanities-and-ai-virtual-institute/">Humanities and AI Virtual Institute (HAVI) at Schmidt Science</a>s, which provides funding for research that brings together AI experts and humanities scholars to unlock secrets of human history and culture.</p>
+<p>Developing archaeologically savvy AI models offers other advantages. AI may allow scientists to reduce the number of excavation projects. “I used to run big excavations in the Middle East for many years,” Casana says. “A lot of people assume that, as an archaeologist, my goal is to dig a hole in the ground, but really, if I never dig another hole in the ground, I’ll be okay with that.”</p>
+<p>That’s because there are better ways to learn about our past than digging through dirt, he explains. Excavating is far from ideal. It creates ethical problems, as many communities don’t want to disturb the sites. Some sites are on private land, which is usually off limits. Once you dig up the hole, you can’t “un-dig it,” so if you make mistakes, such as accidentally breaking a structure, you can’t redo it. The excavating process is time consuming and labor intensive, which makes it very expensive. Plus, it produces an enormous number of artifacts that must be taken care of indefinitely—preserved, cataloged, and stored in proper conditions somewhere.</p>
+<blockquote>
+<p>Recently declassified spy aerial photos captured part of the world that no longer exists.</p>
+</blockquote>
+<p>Which is another reason Casana and others have been embracing digital archaeology methods, which are cheaper, faster, and less destructive. “With these new technologies we can learn about the human past without ever disturbing the soil,” Casana says. “We record it, we map it, we interpret it, we take only data, we leave only footprints, and we get out of there. That’s my preferred way to do archaeology today.”</p>
+<p>Hammer doesn’t think that remote imaging and AI analysis will entirely replace excavating. Digital tools generate a “flattened” picture of what’s underground—they compress centuries and even millennia together. Researchers can’t yet fully tell from the digital images whether a site was originally a small village that grew into a big city, or whether the city shrank over time.</p>
+<p>Physically uncovering layers allows archaeologists to understand the chronology of a site and date the materials they find in the proper order, which is key for understanding the trajectory of an ancient settlement or a society.</p>
+<p>“As digital archaeologists, we believe in the power of our tools to tell an important part of the ancient story, but I don’t think we’re ever going to replace going into the field,” Hammer says. “If we were to conflate things that happened in one place, we wouldn’t have an accurate picture of history at all, without excavation.”</p>
+<p><img alt="" src="../images/Zeldovich_BREAKER-3.png" /></p>
+<p><strong>DIGGING THROUGH DATA:</strong>An unexpected source of archaeological new revelations are old aerial images, such as these, spanning more than seven decades. Water has consumed this site, but early and mid 20th-century images reveal clues as to what was there long before. AI can help sort through mounds of these records to help tip off humans for a closer look. <em>Credit: Clark and Casana (2016).</em></p>
+<p>There is still more due diligence that AI and remote-sensing can’t replace, Hammer says. “I also don’t think we should be interpreting history without the knowledge of people who live on that land and probably consider the people of the site to be ancestral to them in one way or another.”</p>
+<p>Keeping humans in the loop is crucial to avoid perpetuating biases that exist in the archaeological field today, says Colleen Morgan, a senior lecturer in digital archaeology and heritage at the University of York in the United Kingdom.</p>
+<p>This is particularly important when turning to AI to take the next creative leap in interpreting the past—not just analyzing images, but generating them. Even before AI, many human-created visualizations of past societies were often biased, for example, depicting only men hunting, making tools, or performing rituals, Morgan notes.</p>
+<p>“These reconstructions do not reflect scientists’ nuanced understanding of the past. We know humans organized themselves in an incredible array of variety, with a multitude of gender roles and self-expression,” Morgan wrote in a <a href="https://theconversation.com/how-ai-imagery-could-be-used-to-develop-fake-archaeology-247838">recent essay</a> in <em>The Conversation</em>. “Generative AI has both fascinating potential and enormous risk for archaeological misrepresentation.”</p>
+<p>Hammer suggests that, when used thoughtfully, AI could also help reduce some biases. Historically, archaeologists have favored certain types of places for studies. “They like to excavate temples and wealthy tombs and palaces, so the everyday person’s life is sometimes left out of that narrative,” Hammer says. AI might be more able to help find more subtle structures, for example, the places where an average person lived.</p>
+<p>For their work on new “AI-rcheology” models, Casana and Hammer aren’t planning to give AI a lot of interpretational power. Its main task will be to quickly analyze reams of information and present its findings. “And then I, a human, can take that information and make some meaning from it,” Casana says.</p>
+<p>This is how the real magic usually happens in archaeology, he notes, including excavations. “We dig some holes and find some things, but then we have to explain to people why this is significant and interesting,” he says. It takes people to interpret the lives of those who had been there before us, he adds. “And this will remain the job of humans.” <img alt="" src="../images/nautilus-favicon-14_946.png" /></p>
+<p><em>Lead image: StockStudio Aerials / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When We Learned Our Universe Is Speeding Up | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When We Learned Our Universe Is Speeding Up</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-QEE1</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>On this day nearly three decades ago, our view of our cosmic neighborhood changed forever. Our universe seems to be swelling over time at an increasing pace, two groups of scientists <a href="https://www.nytimes.com/1998/01/09/us/new-data-suggest-universe-will-expand-forever.html">announced</a> at a 1998 American Astronomical Society meeting.</p>
+<p>These teams were studying distant supernovae, or massive explosions of dying stars, <a href="https://www.aps.org/archives/publications/apsnews/200901/physicshistory.cfm">hoping to learn</a> the speed at which the universe’s expansion was winding down. By comparing the supernovae’s intrinsic brightness with the observed brightness, scientists can estimate their distance from Earth and learn about the universe’s growth. That’s how they noticed something odd: These blasts, known as Type 1a supernovae, were fainter than they expected. Such supernovae are usually quite bright, so something was contributing to their surprisingly dim appearance.</p>
+<p>The scientists realized that these supernovae weren’t as nearby as they had thought, so they had zipped away from Earth quicker than expected. “These observations led scientists to ultimately conclude that the universe itself must be expanding faster over time,” <a href="https://science.nasa.gov/dark-energy/">according</a> to NASA.</p>
+<p>Since then, a growing pile of evidence from far-off supernovae and other space spectacles has supported this theory. But what mysterious force is behind our universe’s accelerated expansion?</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/these-physicists-want-to-ditch-dark-energy-1177085/"><strong>These Physicists Want to Ditch Dark Energy</strong></a><strong>”</strong></p>
+<p>Researchers use the term dark energy to describe whatever’s responsible for this phenomenon, and they don’t have a solid grasp as to what it actually is. There are, however, plenty of guesses so far. For instance, seemingly empty parts of space might generate something called <a href="https://hetdex.org/what-is-dark-energy/vacuum-energy/">vacuum energy</a>, which is thought to nudge the universe outward.</p>
+<p>Vacuum energy, also known as <a href="https://nautil.us/how-to-measure-the-universe-1235873/">the cosmological constant</a>, comes from Albert Einstein’s theory of general relativity. He put this arbitrary component in his equations to ensure that the universe remained static—this was the prevailing understanding of our cosmic realm at the time. He later scrapped the cosmological constant when astronomer Edwin Hubble demonstrated that the universe is, in fact, expanding. Einstein <a href="https://link.springer.com/article/10.1007/s00016-018-0228-9?fbclid=IwAR1DshPTeLROifWEjZVlM-ILWi6JFkPCZj94euBy-2ebEZKcG5W816_alDU">called</a> this his “biggest blunder.”</p>
+<p>But his work wasn’t for nothing. Today, scientists studying the bizarre realm of quantum mechanics think that vacuum energy can be explained by pairs of particles and antiparticles that rapidly pop up and vanish after duking it out. “The effect of all these particles wiggling into and out of being is a thrumming ‘vacuum energy’ that fills the cosmos and pushes outward on space itself,” <a href="https://www.scientificamerican.com/article/the-cosmological-constant-is-physics-most-embarrassing-problem/">wrote</a> Clara Moskowitz for <em>Scientific American</em>.</p>
+<p>That’s just one potential explanation for dark energy, which scientists can’t even directly glimpse and makes up roughly <a href="https://news.uchicago.edu/explainer/dark-energy-explained">70 percent</a> of the universe. To make things even more complicated, recent findings <a href="https://ras.ac.uk/news-and-press/research-highlights/universes-expansion-now-slowing-not-speeding">suggest</a> that the universe’s expansion may actually be slowing down.</p>
+<p>Thankfully, high-tech tools like the Dark Energy Spectroscopic Instrument, which is currently inspecting tens of millions of galaxies to learn about the effects of dark energy on the growth of our universe, could help assemble the pieces of this cosmic puzzle.</p>
+<p>Until then, we’ll continue as tiny specks within a massive realm transforming at a rate unknown to us. <img alt="" src="../images/nautilus-favicon-14_570.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: NASA/CXC/U.Texas</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

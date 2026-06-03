@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Turn Scientific Renderings of Space into Art | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>I Turn Scientific Renderings of Space into Art</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-ING9</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For many people, Luís Calçada’s imaginative interpretations of the universe <em>are</em> the universe—even if the events they illustrate can’t be observed with the naked eye or happened billions of light-years ago. Calçada works as an <a href="https://luiscalcada.com/">illustrator</a> for the <a href="https://www.eso.org/public/">European Southern Observatory</a> (ESO) near Munich, where he creates stunning images of cosmic events in flamboyant color, such as <a href="https://luiscalcada.com/forged-in-fire">one</a> that recently graced the cover of <em>Nature</em> depicting a fiery explosion around a protostar.</p>
+<p>Calçada’s journey into astronomical art began when he spied <em>Contact</em>, a 1985 work of science-fiction by Carl Sagan, as a kid in a bookstore. The <a href="https://bookshopapocalypse.com/products/contact-by-carl-sagan-first-edition-first-printing-1985?srsltid=AfmBOor6Sa6qTutpoutQSKE64IH2Rv4bRkgt3_xrhzTtYM0FnFSUHa_Z">cover</a> showed an inky Earth floating in a sea of darkness, a mysterious fingerprint of light emerging out of the milky abyss. Calçada was so struck by that vision that he asked his parents to buy him the book on the spot. After he read it, he devoured all of Sagan’s other books. And that set him on his path.</p>
+<p><img alt="" src="../images/yu6afXSt-French_BREAKER-4.png" /></p>
+<p><strong>THE INTERPRETER:</strong> Luís Calçada’s images bring the beauty and magic in complex astronomy to life. <em>Courtesy of Luís Calçada</em></p>
+<p>Calçada started out studying astronomy and physics, but he soon learned that he was more interested in the ways a beautiful image can trigger an emotional tug to understand. So he left astronomy for art. We caught up with Calçada to talk about the relationship between beauty and scientific understanding.</p>
+<p><strong>Your images are lush and cinematic. Do you think beauty can ever get in the way of scientific truth?</strong></p>
+<p>I think beauty is a trigger for curiosity, because the fascination with something extraordinary—the way a star works, or the explosion of a supernova—makes people want to understand it. Sometimes, when I see people fascinated by more mystical things, or I have conversations with friends about, let’s say, astrology, I’m like, “Why are you fascinated by those topics?” Science alone is so beautiful, and there’s so much magic there.</p>
+<p><img alt="" src="../images/yMqVENan-French_BREAKER-3.png" /></p>
+<p><strong>SUPERNOVA:</strong> This artist’s impression shows a star going supernova. About 22 million light-years away the supernova, SN 2024ggi, exploded in the galaxy NGC 3621. Using the ESO’s Very Large Telescope, astronomers managed to capture the very early stage of the supernova when the blast was breaking through the star’s surface. <em>Credit: ESO / L. Calçada</em></p>
+<p><strong>Have you ever argued with a scientist over artistic license you took in one of your illustrations?</strong></p>
+<p>There are a few kinds of scientists here at ESO. When you’re working on a press release, sometimes you get those who are extremely happy with whatever you give them. Because quite often they’re just working on data and code and plots. But when they see a nice interpretation of their data, they’re quite happy.</p>
+<p>But there are other scientists who tend to say, “Oh, but maybe this could be like that.” And sometimes there’s a bit of a struggle to massage them into understanding that what they’re suggesting is actually not relevant for the story, or important for the general audience. Of course, we always want to make these illustrations as true to the science as possible. But it’s our job as communicators to understand what message we want to transmit to people, right? Because sometimes the science is quite clear for us, and for our scientists, but for the audience it’s not. So it’s about what we’re trying to communicate.</p>
+<p><img alt="" src="../images/mcttPNkR-French_BREAKER-2.png" /></p>
+<p><strong>GONE ROGUE:</strong> Astronomers have identified an enormous "growth spurt" in a so-called rogue planet. Unlike the planets in our solar system, these objects do not orbit stars, free-floating on their own instead. <a href="https://www.eso.org/public/archives/releases/sciencepapers/eso2516/eso2516a.pdf">The new observations,</a> made with the European Southern Observatory’s Very Large Telescope, reveal that this free-floating planet is eating up gas and dust from its surroundings at a rate of 6 billion tonnes a second. This is the strongest growth rate ever recorded for a rogue planet, or a planet of any kind, providing valuable insights into how they form and grow. <em>Credit: ESO / Luís Calçada</em></p>
+<p><strong>Can you give me an example of something a scientist wanted to change?</strong></p>
+<p>One recent project comes to mind—the simulated <a href="https://www.eso.org/public/videos/eso2520b/">explosion</a> of a star <a href="https://nautil.us/exploding-stars-dramatic-first-moments-captured-for-the-first-time-1247503/">going supernova</a> (published in November of 2025). One of the scientists—he’s a brilliant person—paid too much attention to the details. And we had a lot of back and forth, trying to negotiate some things that shouldn’t go into the illustration and the animation. For example, in this illustration, we see a few things happening at once. In the real world, these things would happen at different timescales. The first outflow from the poles of the exploding star, maybe that would happen very fast. Whereas the other parts of the explosion would happen over seconds. And then the rest of flowing out happens maybe in days, and we’re showing it all in just 20 seconds of animation.</p>
+<p>That’s why it’s important for us to always include captions for the images on our website. We send those captions to the journalists, very clearly explaining, this is an artist’s impression. But we also understand that these animations and illustrations have a life of their own. They get reproduced elsewhere on websites, and the caption gets lost. They can sometimes be harmful as well.</p>
+<p><strong>What kind of harm do you think they can cause?</strong></p>
+<p>Harmful is probably a strong word. But they can create a false impression about what the universe really looks like. We’ve done so many illustrations of colorful events, but to human eyes, most of the universe is just black, empty. The timescales are also sped up for a lot of these things. Back in the day when I was doing some activities with the general public as an astronomer, when you’re trying to show them things in the telescope, they’re expecting to see this very colorful, dramatic scene. And you’re like, “Can you see it?” And they’re like, “No, I don’t.”</p>
+<p><strong>Do your images ever serve as visual hypotheses? Or are they always explanations of a settled idea or a finding that’s been established?</strong></p>
+<p>We try to be very careful about how much these images are guessing. I think the role here is the science, the discovery. And we’re just trying to help the science get to the public. Many times, a nice, colorful, exciting image helps a lot for a finding to get onto the cover of a magazine or in <em>The</em> <em>New York Times.</em></p>
+<p><img alt="" src="../images/sAIUREk0-French_BREAKER.png" /></p>
+<p><strong>DISTANT STAR:</strong> Reconstruction of the star WOH G64, the first star outside our galaxy to be imaged in close-up. It is located at a staggering distance of over 160,000 light-years away in the Large Magellanic Cloud. This impression showcases its main features: an egg-shaped cocoon of dust surrounding the star and a ring or torus of dust.<em>Credit: ESO / Luís Calçada</em></p>
+<p><strong>How do you balance realism against imagination?</strong></p>
+<p>This one of the exploding supernova actually triggered a bit of a debate. There was some negativity surrounding this particular image, because some people thought it was too realistic looking. And that’s a danger. I saw people complaining. Some people were like, “Why are you showing this? Why are you not showing the supernova itself?” Because the actual supernova image was <a href="https://www.eso.org/public/images/eso2520b/">just a few pixels</a>, so it wasn’t very interesting. What we tried to show is what the astronomers inferred through these <a href="https://www.science.org/doi/10.1126/sciadv.adx2925#F1">complex methods</a>.</p>
+<p>The scientists were really happy at how well we portrayed the phenomenon in the end, but it triggered an internal discussion about ways of using these images. Even this week, we had more discussions about future use of AI in our work, ethical issues. Because it’s true that people may start getting fed up with this kind of overflow of bright, colorful images. And our work that’s tightly developed with scientists might get lost in that noise. We have to explore ways of cutting through the noise.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-art-of-quantum-forces-698495/">The Art of Quantum Forces</a>”</strong></p>
+<p><strong>What are some ways you might do that?</strong></p>
+<p>I use Reddit quite a lot, and I saw some people commenting along the same lines, calling it AI slop, and so I kind of pitched in on the conversation. I actually tried to explain a bit about the process with the scientists. It was quite cool to see the surprise in some of the people on Reddit. So maybe what we have to do is to engage in some of those conversations, convey some of the science behind these images.</p>
+<p>Because ultimately the goal is communicating the science—not just to make pretty pictures. <img alt="" src="../images/nautilus-favicon-14_544.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: This illustration shows what the luminous blue variable star in the Kinman Dwarf galaxy could have looked like before its mysterious disappearance.  A luminous blue variable star some 2.5 million times brighter than the sun. Stars of this type are unstable, showing occasional dramatic shifts in their spectra and brightness. Credit: ESO / Luís Calçada</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tectonics Behind the Myanmar Quake | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Tectonics Behind the Myanmar Quake</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-TFTZ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A 7.7 magnitude earthquake struck central Myanmar on Friday afternoon local time near the country’s second-largest city, Mandalay. The quake caused extensive damage across Myanmar and also <a href="https://www.facebook.com/100004691588430/videos/1362737451812029">toppled a skyscraper</a> under construction in Bangkok, Thailand, more than 600 miles away. After the quake, the Myanmar military junta declared a state of emergency in six regions and confirmed more than 100 people killed and many hundreds injured, while Thai officials reported at least seven deaths and scores of people missing. A <a href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000pn9s/pager">report</a> from the United States Geological Survey (USGS) estimates that the death toll will likely exceed 1,000, and could even surpass 10,000 given the quake’s epicenter near populated areas.</p>
+<p>Myanmar sits atop one of the most tectonically active regions in the world, along a 9,300-mile swathe of land called the Alpide Belt, which extends across the southern region of Eurasia, from the Mediterranean, eastward through Asia, and into the East Indies. The Alpide belt is one of three major earthquake <a href="https://www.usgs.gov/faqs/where-do-earthquakes-occur">zones</a> on Earth, and is responsible for about 15 percent of all the world’s largest earthquakes, second only to the Ring of Fire in the Pacific. The belt’s tectonic activity has birthed many of the world’s most impressive mountain ranges, including the Alps, the Atlas Mountains, and the Himalayas.</p>
+<blockquote>
+<p>Today’s quake today is similar in size and magnitude to the 1906 San Francisco earthquake.</p>
+</blockquote>
+<p>Zhigang Peng, a seismologist at Georgia Institute of Technology in Atlanta who has studied quakes along the Alpide in Turkey, says that while Myanmar has experienced large earthquakes in the past, today's quake—followed by a magnitude 6.7 aftershock roughly 11 minutes later—is among the most powerful to hit the region in recent memory. Since 1900, at least six quakes measuring a magnitude of at least 7 have been recorded within 150 miles of Friday’s quake, <a href="https://earthquake.usgs.gov/earthquakes/eventpage/us7000pn9s/executive">according to USGS</a>.</p>
+<p>We spoke with Peng about the region’s seismic history, the causes of today’s quake, and what scientists know about what might be coming.</p>
+<p><img alt="" src="../images/quake_breaker.png" /></p>
+<p><strong>FAULT LINES:</strong>Zhigang Peng, a seismologist at Georgia Institute of Technology in Atlanta,  has studied quakes along the Alpide belt in southern Eurasia, one of the most seismically active regions in the world. Here he stands beside the Pacific plate of the San Andreas Fault, an 800-mile slip-strike fault that runs from the Bay Area to the Salton Sea. The San Andreas Fault was responsible for the 1906 San Francisco earthquake, which killed an estimated 3,000 people and left half the city homeless. <em>Photo courtesy of Zhigang Peng.</em></p>
+<p><strong>Myanmar is one of the most seismically active areas in the world. Can you tell me about the history of earthquakes in this region?</strong></p>
+<p>Myanmar is near the southeastern end of the Alpide Belt, and long story short, this area is a <a href="https://doi.org/10.1002/2013JB010762">well-recognized section</a> of the belt where earthquakes are pretty common. Most of the belt is seismically active, or was in the past. For example, the Alps are part of the system, but most of that area is not tectonically active right now even though it was in the distant past. [Recent research suggests that parts of the southern Alps may still be <a href="https://eos.org/research-spotlights/scientists-decipher-the-seismic-dance-of-the-southern-alps">active</a>.]</p>
+<p>Of course, earthquakes of such a size as this one are rare, but they have happened. If I remember correctly, the last time a similar-sized event occurred in this region was in 1839, and it was a magnitude 8.0 earthquake. But there have been many “smaller” quakes in the area, including a magnitude 6.8 in 2011.</p>
+<p><strong><em>*What is driving all this tectonic activity? Is it the same as what is happening in other earthquake-prone places like the Ring of Fire in the Pacific Ocean, the most seismically and volcanically active region in the world?</em></strong>*</p>
+<p>The area has a lot of different things going on. A big part of what is happening is that the African, Arabian, and Indian tectonic plates are moving northward and colliding with the Eurasian tectonic plate. More locally, in Myanmar, the Indian plate is colliding with the Sunda plate, which straddles the equator in the Eastern hemisphere. That’s a subduction zone, where one plate is going underneath another one. But near the edge of this boundary you get what we call a transform or strike-slip fault—one block is moving north, another block is moving south. It’s similar to the San Andreas Fault in the U.S., and actually, this quake today is somewhat similar in size and magnitude to the 1906 San Francisco earthquake.</p>
+<p>The Ring of Fire in the Pacific is also a subduction zone, but it’s different in the sense that it’s a lot more volcanically active, and a lot of the earthquakes there are linked to the volcanism in the region.</p>
+<blockquote>
+<p>This is a classic example of an earthquake occurring at a place where we know it’s going to happen.</p>
+</blockquote>
+<p><strong>How would you describe this particular earthquake?</strong></p>
+<p>Today's event is actually very simple. This earthquake was not a part of the mountain-building process, but occurred along a strike-slip fault in Myanmar called the Sagaing Fault.</p>
+<p>From what I’ve seen, the event is a pretty typical continental strike-slip event. It looks like a fault section of about 200 kilometers broke in a single event near Mandalay, and it mostly propagated to the south. It was pretty shallow, probably around 10 kilometers or so deep, and because the event is so large, it took about one minute to unfold itself and produced some pretty significant shakes. I’ve seen a lot of infrastructure damage, buildings and bridges coming down. [USGS has estimated that the quake ran along a fault section that lies 6 miles (10 kilometers) deep, 124 miles long and 12 miles wide.]</p>
+<p><strong>Was there any inkling that this particular area was due for an event of this magnitude?</strong></p>
+<p>Earthquake scientists have studied this region for quite some time, and I would call this a classic example of an earthquake occurring at a place where we know it's going to happen. Of course, we don't know when—that's always the $1 million question—but you can <a href="https://nautil.us/a-new-way-to-predict-earthquakes-681818/">do the math</a> to find out whether or not it’s within an expected range of time, which we call the recurrence interval.</p>
+<p>If we think of what happened today as a repeat of what happened in 1839, you can see that it has been almost 200 years. And we know that the slip rate—that's how much stress has been accumulating along the fault—is generally on the order of about 2 centimeters per year. If it's 2 centimeters per year, and it has been roughly 200 years, you get about 4 meters of accumulated stress. A slip of that size is enough to produce a magnitude 7 event or higher, and that’s what we observed.</p>
+<p><strong>What are the secondary hazards of such an earthquake?</strong></p>
+<p>Typically, the three secondary hazards associated with big earthquakes are landslides, fire, and tsunamis. We can rule out tsunamis because it occurred on land, and it also occurred in a region that is relatively flat, so I wouldn't expect to see major landslides. There are probably going to be small, localized fires that have the potential to get big if they aren’t contained.</p>
+<p>But most of what I’m looking at are aftershocks. Earthquakes like this one will almost certainly be followed by aftershocks, and some of them could be large. We should expect to see other large events in the next few weeks to months. Most are going to be smaller than today’s earthquake, however, there's always a chance of a similar size event or, in the worst case scenario, an even larger event. <img alt="" src="../images/nautilus-favicon-14_1234.png" /></p>
+<p><em>Lead image: A chart showing the intensity of the earthquake. Credit: USGS</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Visit with My Dead Father’s Brain - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>My Visit with My Dead Father’s Brain - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-05
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-H9PJ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>On a brisk January evening this year, I was speeding down I–295 in northeast Florida, under a full moon, to visit my dad’s brain. As I drove past shadowy cypress swamps, sinewy river estuaries, and gaudy-hued billboards of condominiums with waterslides and red umbrellas boasting, “Best place to live in Florida,” I was aware of the strangeness of my visit. Most people pay respects to their loved ones at memorials and grave sites, but I was intensely driven to check in on the last remaining physical part of my dad, immortalized in what seemed like the world's most macabre library.</p>
+<p>Michael DeTure, a professor of neuroscience, stepped out of a golf cart to meet me. “Welcome to the bunker. Just 8,000 of your quietest friends in here,” he said in a melodic southern drawl, grinning in a way that told me he’s made this joke before. The bunker is an indiscriminate warehouse, part of the Mayo Clinic’s Jacksonville, Florida campus that houses its brain bank.</p>
+<p>DeTure opened the warehouse door, and I was met with a blast of cold air. In the back of the warehouse sat rows of buzzing white freezers. DeTure pointed to the freezer where my dad’s brain sat in a drawer in a plastic bag with his name written on it in black Sharpie pen. I welled up with tears and a feeling of intense fear. The room suddenly felt too cold, too sterile, too bright, and my head started to spin. I wanted to run away from this place.</p>
+<p>And then my brain escaped for me. I saw my dad on a beach on Cape Cod in 1977. He was in a bathing suit, shirtless, lying on a towel. I was 7 years old and snuggled up to him to protect myself from the wind. He was reading aloud to my mom and me from Evelyn Waugh’s novel, <em>A Handful of Dust</em>, whose title is from T.S. Eliot’s poem, “The Wasteland”: “I will show you fear in a handful of dust.” He was reading the part about Tony Last, an English gentleman, being imprisoned by an eccentric recluse who forces him to read Dickens endlessly.</p>
+<blockquote>
+<p>The room suddenly felt too cold, too sterile, too bright, and my head started to spin.</p>
+</blockquote>
+<p>The memory calmed me down. The brain in a freezer bag, after all, was not my dad. My dad was Christopher Lehmann-Haupt, a <em>New York Times</em> book critic who spent decades, from the 1960s to the ’90s, shaping literary culture with an authority that made authors both revere and fear him. At home, my mom, Natalie Robins, a poet and author, called him “Crit,” her pet name for the tough critic who was most tough on himself, reading books late into the night, clinging to a glass of Christian Brother’s brandy, reclined in a broken swivel chair.</p>
+<p>As we walked through the freezer room, I continued to think about my dad’s brain, nestled in a shelf among other frozen brains, and my fear gave way to a strange mix of wonder and sadness. The once active neurons that fired electrical and chemical signals from axons to dendrites inside the crevices and folds of the left frontal lobe, home to the language center, were now quiet. The memories produced in the hippocampus were now frozen. These parts worked in concert to convert my dad’s experiences into the language of more than 4,000 essays and book reviews, two novels, and a memoir about his life as a New York Yankees fan.</p>
+<p>Beginning when he was in his 70s, my dad loyally volunteered for a longitudinal study on the aging brain run by the Albert Einstein College of Medicine. He would drive from home in the Riverdale neighborhood of the Bronx to a nearby lab at Montefiore Hospital every few months to take written tests and participate in interviews to evaluate his memory and mental agility. The purpose was to contribute to the body of scientific data on neurodegenerative diseases, such as dementia and Alzheimer’s disease, which <a href="https://www.nature.com/articles/s41591-024-03340-9"><em>Nature Medicine</em></a> recently predicted could double in the United States over the next 35 years to 1 million new cases annually. My dad became so inspired by the study that he agreed to donate his brain for further research when he died.</p>
+<p>I came to the brain bank because I wanted to learn how his brain was contributing to science. And I came for my own reasons. I have always wondered about my dad’s mind, how it worked, why it told stories, and how our family stories going back generations shaped his life. What I learned was emotional and startling, particularly when the neuropathologist explained to me what my dad’s brain revealed about how he died. My visit helped me find the deeper connection with my dad that I had yearned for growing up.</p>
+<p>As my dad was taking tests about his brain at the Albert Einstein College of Medicine, he was writing a lot, working on a memoir about his experience working for <em>The New York Times</em> and the Jewish side of his family that he knew little about. He was calling it <em>Re-View</em>.</p>
+<p>He had been in therapy in the last decade of his life, working out family trauma related to his parents’ tumultuous divorce during the time his father moved the family to Berlin after World War II. My grandfather, Hellmut Lehmann-Haupt, was an expert on rare books and the Gutenberg printing press. After the war, he took an assignment from the Monuments, Fine Arts, and Archives program, which the Allied powers had set up to hunt for artistic and cultural artifacts that had been stolen by the Nazis. My dad wrote that “my father’s assignment was to nurture and to revive the artists that Hitler and his henchmen had trod down for being ‘degenerate,’ their characterization of any imagery that deviated from their narrow totalitarian ideal of the human form.”</p>
+<p>My dad also wrote about his relationships with many authors of his era: William F. Buckley Jr., Robert Caro, John Cheever, E.L. Doctorow, Joan Didion, Nora Ephron, Philip Roth, Lillian Hellman, and critic Lionel Trilling. He wrote that he and my mom Natalie “got so close to Bill and Pat Buckley that once when they were squabbling, which they did very often, Natalie was able to take their hands and say, ‘Now, children.’ About our being friends with both Hellman and Trilling, mortal enemies, Mailer once remarked to Natalie, ‘Someday, after you die, especially if you go to Hell, you’ll have to choose between those two.’”</p>
+<p><img alt="" src="../images/Lehmann-Haupt_BREAKER.png" /></p>
+<p><strong>FATHER AND DAUGHTER:</strong> The author and her dad, Christopher Lehmann-Haupt, an influential book critic, at home in New York City in 1972. "I have always wondered about my dad’s mind," Rachel Lehmann-Haupt writes today. <em>Photo by Nancy Crampton.</em></p>
+<p>My dad was in relatively good health for his age, but he spent many years writing while chain-smoking unfiltered Camel cigarettes. At 45, he had a silent heart attack, so he quit smoking, began taking statins and took up jogging around the neighborhood.</p>
+<p>When he turned 80, he would occasionally give me updates on his brain study, I think mainly to assure me that he didn’t have dementia. He was the kind of parent who never wanted to become a burden to his children. I mostly listened because I hoped hearing about the study would help me get to know him better. We were close, yet he was emotionally distant like many men of his generation. Getting his attention always felt like a struggle. He seemed to soften in those years and enjoy life more. He even gave up drinking brandy, and one day, I saw him doing deep knee bends in the kitchen. He loved being a grandfather and wanted to stay healthy to extend his time with us.</p>
+<p>Then, one evening, in late October of 2018, at the age of 84, he suffered a stroke. My mom called me from an ambulance rushing from their Riverdale home to the Columbia Presbyterian emergency room on West 168th Street. Through her tears, she described how he had made a stir fry for dinner and then returned to his study to write. An hour later, she came downstairs to show him a photo of my son on her phone and found him unconscious and paralyzed in front of his computer.</p>
+<p>In the emergency room, the doctors discovered that soon after he sat down at his desk, a blood clot was released from his heart and traveled up a cerebral artery into his brain, stopping blood flow. They rushed him into endovascular surgery to clear the clot, but when he woke up, he could no longer speak. When the nurses handed him a pen, his hand could no longer form letters. It was a poetic and cruel twist of fate for a man whose life was shaped by words and stories. I didn’t know what was worse: his impending death or that we couldn’t talk about what was going through his mind. “Be logical.” he always told me, when I went to him for advice, but logic was lost on me now. I just longed for his comforting words.</p>
+<p>Over 10 days, our family watched him fade away, and soon, we made the collective decision to turn off the machines that were keeping his heart pumping. My dad had made it clear in his medical directive that he didn’t want “death staved off” if he no longer could live independently. In those hours, my mother, brother, and I were making that decision, I didn’t want to let go, but then I placed a pen in his hand to see if he could still hold it, and he couldn’t. His literary brain had lost language and could no longer produce the words that drove his life and defined so much of his identity. I knew then it was time to say goodbye.</p>
+<p>I left the cold brain bank and piled into a golf cart with DeTure and Dennis Dickson, the neuropathologist who performed the autopsy of my dad’s brain. We zipped past modern glass research buildings, many of which contain a vast art collection that includes a chandelier of 170 glass-blown flowers by Dale Chihuly and a triptych of animal paintings by Andy Warhol called “Endangered Species.” There were bronze nudes on lawns donated by the wealthy families of former patients and a human-made lake dotted with palm trees punctuated by a fountain.</p>
+<p>Dickson and I sat in his small office just down the hall from the dissection lab. In a modest, adroit Midwest manner, Dickson looked at me. “It’s rare for a loved one to come to visit a brain. Maybe we get one a year, usually a benefactor who donated.” He walked me through how my dad’s brain got to this unusual library. In New York, a pathologist removed his brain, and half was fixed in the chemical formalin, and the other half was frozen, and then both were flown down to Florida in a box.</p>
+<p>The formalin-fixed half of his brain was set in a refrigerator to be dissected and sampled in the “brain-cutting conference.” Dickson cut standardized sections from the major brain areas while Ph.D. students read out the donors’ cause of death. A neurohistologist—a specialist who studies the microscopic anatomy and connections of the brain—embedded the tissue sample into paraffin wax and applied pink and purple dyes to make slides resembling fibrous stained-glass windows. These slides are used to look for specific pathologies under a microscope and digitized in a scanner so researchers can view the tissue on a large scale on a computer screen to analyze the cells. Brains are de-identified so scientists don’t know who the donor was.</p>
+<blockquote>
+<p>My dad was a <em>New York Times</em> book critic whose authority made authors revere and fear him.</p>
+</blockquote>
+<p>Dickson told me that the report found no signs of Alzheimer’s disease. That jibed with what Richard Lipton, the head investigator of the Einstein study, had told me about my dad.* “Our staff thought he was amazing, articulate, and kind,” Lipton said. “I have rarely seen people at age 84 with verbal memories that good.” It was hypertension and atherosclerotic disease that caused the blood clot to blast through his brain. I thought about his ashtrays filled with smashed cigarette butts, his volcanic reactions to stress, and love of fatty foods.</p>
+<p>Dickson said my dad had two contiguous strokes in the temporal and frontal lobes, the location of the control centers of language. The second stroke destroyed almost the entire temporal lobe, including the medial temporal lobe structures such as the amygdala, where emotions get processed, and the hippocampus, where memories form. The temporal and frontal lobes also hold the language control centers, Broca’s and Wernicke’s areas. “The affected regions are very much in the business of expressive and receptive language, both understanding what’s said to you and being able to formulate semantics with meaningful sentences,” Dickson said.</p>
+<p>Because my Dad could understand us in his final 10 days in the hospital, but he couldn’t speak or read, they concluded that he had Broca’s aphasia. In 1861, French neurosurgeon and anthropologist Pierre Paul Broca studied patients with language deficits and aphasias. He discovered the role of the left frontal lobe in speech production. It was the first time a scientist showed that the two hemispheres of the brain, though seemingly symmetrical, have different functions. He famously said, “<em>Nous parlons avec l'hémisphère gauche</em>,” meaning “We speak with the left hemisphere.”</p>
+<p>I was curious whether, when he was dying, even though he couldn’t express himself, my dad’s memories were still in there. Dickson said he couldn’t speak to that. Later, I spoke to John Crary, professor of neuroscience, artificial intelligence and human health at the Icahn School of Medicine at Mount Sinai, who runs its brain bank. He told me that while aphasia can impact the ability to access semantic memory and create words, that memory itself is generally still present. Although my dad could not express his thoughts and memories, I felt relieved knowing they were still there in the last 10 days we were all together.</p>
+<p>There was something else I had to ask Dickson in his office. A few months after my dad died, my mom received his autopsy report. It was written in medical language that laypersons can only puzzle through. But one passage did jump out. It said several sections of my dad’s brain had lesions that resulted not from the stroke but “foreign material.” I had to accept that my dad was gone, but I always wondered about that material, how it got there, and whether it was connected in any way to his death.</p>
+<p>Dickson told me he suspected the foreign material was polymer granules that sheared off a catheter that doctors had inserted into my dad’s arteries to assess the damage to his heart. As blood flowed to the brain, the polymer material “occluded” and “distended” tiny vessels in the brain, blocking blood flow and oxygen. While the initial stroke was likely caused by a blood clot due to atherosclerosis, the subsequent stroke may have been caused by the brain lesions that formed in response to the polymer material.</p>
+<p>Your dad, Dickson said, “got the worst of both worlds. He got the stroke, and then the treatment for the stroke made it even worse.”</p>
+<p><img alt="" src="../images/Lehmann-Haupt_BREAKER-2.png" /></p>
+<p><strong>A FOREIGN DISCOVERY:</strong> At his neuropathology lab at the Mayo Clinic, Dennis Dickson dissects a brain. When Dickson performed the autopsy on the author's father's brain, he found it contained a damaging "foreign material." <em>Photo courtesy of the Mayo Clinic.</em></p>
+<p>I didn’t press Dickson further on the polymer reaction because I had other questions ready for him. But later I thought a lot about it. I attained my dad’s medical records and found no mention of the polymers. I told my mom. “I was shocked that no one ever told us about it,” she said. “It was a piece of information I should have known, and I should have been told. I certainly would have not reacted quietly. I would have been a lot louder.”</p>
+<p>I learned, though, the doctors who treated my dad likely didn’t know about the polymer leakage from the catheter. Except for a handful of medical journal articles and newspaper articles, the problem of polymers shearing from catheters into patients’ blood and organs is practically unknown.</p>
+<p>Tyler Hickey, an assistant professor of medicine and pathology at the University of Toronto, who wrote <a href="https://www.sciencedirect.com/science/article/abs/pii/S1054880718304034">one of those journal articles</a>, published in 2019, told me that most medical personnel are indeed unaware of the problem. During procedures, he added, they can’t see the microscopic particles. “They get scattered into little areas in the brain—it’s death by a thousand cuts.” Hickey’s study of 110 patients who had catheter treatments within 90 days of their deaths showed that polymer materials in their bodies caused death in nine of them.</p>
+<p>Hickey was kind enough to look at my dad’s autopsy report for me. “The polymer leakage certainly may have exacerbated the initial problem the physicians were trying to treat,” he told me. “But it’s impossible to know if your dad would have lived without the polymer material. Unfortunately, the leakage is just a quality of these catheter designs.” That was cold comfort to hear.</p>
+<blockquote>
+<p>“He got the stroke, and then the treatment for the stroke made it even worse.”</p>
+</blockquote>
+<p>As Dickson and I continued to talk in his office, he told me the polymer contamination in my dad’s brain made it “one of a kind" among the thousands of brains in the Mayo Clinic brain bank. It was a VIP in brain research in another way. Because there was no trace of dementia in his brain, it would be used as a healthy control. Control brains are used in research to measure brain changes that are related to diseases like Alzheimer’s and vascular dementia, and to better understand advancements in rehabilitation for stroke patients who have lost the ability to communicate. “We don’t get enough healthy brains to use as normal controls,” Dickson said, expressing his gratitude that my dad had donated. His brain tissue can now be checked out like a book from stacks of shelves to answer so many scientific questions.</p>
+<p>After I said goodbye to Dickson, I waited in the Mayo Clinic lobby for my taxi to the airport. I watched a father push his elderly mother in a wheelchair while her grandson cuddled on her lap. I thought about my own aging and brain and wondered whether my dad’s love of words and story helped keep his brain strong. Studies have revealed that our most human qualities, our connections and collective stories, can protect our memories and keep our brains strong as we age. Sharing personal stories or fictional narratives can improve the neuroplasticity of the neural networks and encourage new neural connections. It can also boost neurotransmitters suchas dopamine and serotonin, which enhance mood and motivation. No doubt this emerging science proves why my dad continued to excel in memory tests until the end.</p>
+<p>In the taxi, I called my mom, who is 86 and still writing poetry and short stories every day, to tell her about the visit. “What he did for the world is so beautiful and magical,” I told her. “His brain is continuing, life goes on indefinitely with this research.” She became quiet. “Well, when you’re done with this, you and your brother still have to deal with the ashes. It’s not nothing. It’s a different thing.”</p>
+<p>My dad’s ashes sit inside a bookshelf in the Riverdale home where I grew up. He was an avid fly fisherman, and his final wish was for us to spread his ashes in a trout stream where he used to fish. In the <a href="https://www.nytimes.com/2018/11/07/obituaries/christopher-lehmann-haupt-dead.html?searchResultPosition=1"><em>New York Times</em> obituary</a> of my dad, Robert McFadden quoted from my dad’s review of the anthology <em>The Habits of Rivers</em> editedby Ted Leeson: “The wonder of these dozens of pieces is that they offer a lesson in the art of living,” he wrote. “Or, more precisely, in the art of getting outside yourself, which is essential to sane living.”</p>
+<p>Reading these words made me realize that this visit to his brain was a way to see the bigger picture of my dad. He saw himself as part of a larger corpus of connected stories. This approach to life was punctuated by the words of his college buddy, the novelist Norman Rush, author of <em>Mortals</em>, who spoke at his memorial.</p>
+<p>“Chris was an engaged man, with a citizenly approach to those tasks and institutions that help sustain enlightenment, idealism, and human decency,” Rush said. “He was generous with his mortal life.” Rush named my dad’s connections to his high school board and the James Joyce Society. He mentioned my dad’s commitment to the aging study with its “long-term aging study that involved detailed record-keeping and irksome visits to the doctors managing the project. This was citizen Christopher.”</p>
+<p>Growing up, I often felt invisible to these pursuits when he worked so many hours in his home study, intensely focused on other writers’ words and his own to support our family. Now that I’m older and a parent, I see this effort better; his choices to get outside of himself. He showed up. He said yes to it all. He, indeed, was generous with his mortal life. The gift of his brain to science has given me a way to see my dad as a man just trying to get through all the stresses, pains, and baggage—and the joys of enjoying good food and a little too much brandy—that we all accumulate in our bodies. Mostly, I now know that I share the DNA of his brain, and the rest of the story is unfolding through me, giving me the connection with him I had always yearned for.</p>
+<p>In the 17th century, the philosopher René Descartes proposed that humans have a body and a soul that exist outside the body, immaterial and indestructible. He called the non-physical stuff of thinking <em>res cogitans</em> and everything else, the physical that runs through our nerves, <em>res </em>extensa**. My family has not yet had the ceremony to send my dad off down the river, so this story feels, in a way, unfinished.</p>
+<p>But if there’s one thing I came to realize more deeply than ever before about my father, it’s this: His words and the wisdom in them will always live in archives that can be called up with fingers, and his brain will live on in the network of brains pushing the boundaries of science, and his ashes—maybe his soul—will be part of nature, forever flowing. <img alt="" src="../images/nautilus-favicon-14_1197.png" /></p>
+<p><em>Lead photo by Carol Kitman</em></p>
+<p><em>*As originally published, this piece misspelled Richard Lipton's last name. It’s been corrected in the story above.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

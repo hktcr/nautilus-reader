@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Amateur Archaeologist Who Found the Wrong Troy | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Amateur Archaeologist Who Found the Wrong Troy</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-SWR3</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Three millennia ago, the Greek bard Homer spun an epic yarn that <a href="https://www.bbc.com/culture/article/20231004-the-iliad-the-ultimate-story-about-war">became</a> “the original action film.” The <em>Iliad</em> recounted the Trojan War, a key event in Greek mythology—some readers took this tale literally, and by the 19th century, a growing number of amateur archaeologists became determined to hunt down real-life Troy.</p>
+<p>These dogged fans included the German businessman Heinrich Schliemann, born on this day in 1822. At the time, the remnants of Troy were suspected to lie in a region called the Troad in what’s now Turkey. In 1868, Schliemann visited the Troad “with Homer in one hand and a spade in the other,” <a href="https://www.britishmuseum.org/blog/search-lost-city-troy">according to</a> the British Museum. Schliemann teamed up with Frank Calvert, a British amateur archaeologist, to dig into a hill in the area called Hissarlik. There, Calvert claimed he had found artifacts tied to ancient Troy, but he needed Schliemann’s financial support.</p>
+<p><img alt="" src="../images/QVjfp58m-Glick_BREAKER.png" /></p>
+<p><strong>UNBURIED TEASURES:</strong> Schliemann’s wife, Sophia, donning jewelry that he excavated from the Troy site. <em>Photo by Elizabeth Simpson/Wikimedia Commons.</em></p>
+<p>The two began an illegal excavation of Hissarlik in 1870, before they received a permit in 1871. Over the next few years, the team excavated a large trench into this hill to reach a layer around 56 feet deep, damaging other historical structures in the process. They believed this spot contained remnants connected to Homer’s epic.</p>
+<p>Schliemann and Calvert’s search didn’t come up totally empty: They encountered exciting artifacts including jewelry and silver and gold vessels, which Schliemann called “Priam’s Treasure” in reference to the king of Troy from the <em>Iliad.</em> He thought this loot, consisting of thousands of items, also included the jewels of Helen. Schliemann even <a href="https://www.jstor.org/stable/148361?seq=1">smuggled</a> these finds to Athens.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-beloved-mesolithic-girl-238374/"><strong>The Beloved Mesolithic Girl</strong></a><strong>”</strong></p>
+<p>In reality, the eager explorers missed the mark. Later research suggested that the Trojan War from the <em>Iliad</em>—if it actually happened as Homer described it—would date back to more than a millennium later than the evidence unearthed by Schliemann and Calvert. The region has been <a href="https://whc.unesco.org/en/list/849/">inhabited</a> for around 8,000 years, and archaeologists have divided the settlements found at Troy over time into multiple layers. Schliemann and Calvert had actually found items from a period called Troy II, which is estimated to have spanned 2550 to 2300 B.C., when the village was modestly sized yet thriving.</p>
+<p>By around 1750 B.C., during the late Bronze Age, Troy rose to local prominence within its area of the Hittite Empire and might have attracted conflict with the jealous Greeks—a brawl that could have constituted the Trojan War.</p>
+<p>Not long after encountering his Troy trove, Schliemann also checked out what he believed to be the settings of Homer’s tales in the Aegean. At the site of Mycenae, an ancient Greek civilization, he dug up royal tombs and found a funerary mask that he thought belonged to the mythical king Agamemnon, for example.</p>
+<p>Today, Schliemann is remembered for his ethically questionable research tactics and his contribution to the <a href="https://www.smb.museum/en/exhibitions/detail/the-worlds-of-schliemann/">discovery</a> of one of Europe’s earliest advanced civilizations, the Bronze Age Mycenaean culture. Schliemann might have scoured in vain for Homer’s Troy, but his digs did lay the foundation for our current grasp of ancient Greece.  <img alt="" src="../images/nautilus-favicon-14_587.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

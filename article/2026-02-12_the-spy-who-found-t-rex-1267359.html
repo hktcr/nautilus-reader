@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Spy Who Found T. Rex | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Spy Who Found T. Rex</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-VEYM</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Fossil hunter Barnum Brown is remembered today as “Father of the Dinosaurs,” or, more curtly, “Mr. Bones.” Brown is best known for his <a href="https://www.amnh.org/exhibitions/permanent/saurischian-dinosaurs/tyrannosaurus-rex">discovery</a> of Tyrannosaurus rex in 1902, but that’s just one feat in his paleontology career that took him around the globe—he also did some side work with Disney, oil titans, and the CIA’s predecessor.</p>
+<p>He was born on this day in 1873 in Kansas, named after the showman P.T. Barnum. As a kid, Brown <a href="https://ncse.ngo/files/pub/evolution/Excerpt--DarwinsUniverse.pdf">gathered</a> fossils from fields after they’d been plowed. He went to the University of Kansas, then made his way to New York City. In 1897, Brown started working at the American Museum of Natural History. A few years later, Brown’s most famous find arrived while he was still a budding paleontologist.</p>
+<p>Brown was working under the sizzling summer sun in Hell Creek, Montana, at a site dating back to the Cretaceous era. There, he was <a href="https://lithub.com/on-discovering-the-first-fossil-of-a-t-rex/">intrigued</a> by a sandstone hill he referred to as Sheba Mountain, which was close to an ancient inland sea. He dove in with a plow and scraper without success, so he acquired a bunch of dynamite and made a massive blast. Peering into the wreckage, he noticed remains from “a large Carnivorous Dinosaur” and noted that evening that “I have never seen anything like it.”</p>
+<p>These mysterious, fragmented remains belonged to what would become known as the T. rex, and Brown went on to <a href="https://www.amnh.org/exhibitions/permanent/saurischian-dinosaurs/tyrannosaurus-rex">unearth</a> a nearly complete specimen of the same species six years later at Big Dry Creek, Montana.</p>
+<p><strong>Read more: “<a href="https://nautil.us/how-american-tycoons-created-the-dinosaur-237532/">How American Tycoons Created the Dinosaur</a>”</strong></p>
+<p>Brown soon became a household name and started to don luxurious clothing while out in the field, including a fur coat. During the 1920s, he <a href="https://www.tandfonline.com/doi/full/10.1080/08912963.2011.630260">sought out</a> fossils around the world, from Myanmar to India to Greece, at the request of paleontologist (and eugenicist) Henry Osborn at the American Museum of Natural History. Osborn seemed to seek out remains that would support Jean-Baptiste Lamarck’s <a href="https://www.americanscientist.org/article/experimental-lamarckism">now-disproven</a> theory of evolution, in which organisms take on acquired traits from their parents.</p>
+<p>Barnum eventually returned to the western United States for more bone breakthroughs. In 1934, he uncovered a dino treasure trove at the Howe Quarry in Wyoming. He and his team found around 4,000 fossil bones in six months. This mass grave seemed to be occupied by a flock of sauropods who fled predators and ended up in a muddy watering hole where they met their demise.</p>
+<p>“Never have I uncovered a more interesting deposit of prehistoric remains, or seen one where the story of their death and entombment could be read with such clarity,” Barnum <a href="https://www.amnh.org/explore/news-blogs/howe-quarry-fossil-site">wrote</a> about the site. These discoveries, which weighed 69,000 pounds in sum, were shipped in a box car to the American Museum of Natural History.</p>
+<p>Brown didn’t only hunt down fossils. For some extra cash, he was paid by oil companies to prospect for petroleum around the world. And in another foray outside of dinosaur digging, he worked for the Office of Strategic Services, which the CIA spawned from. The agency <a href="https://ncse.ngo/files/pub/evolution/Excerpt--DarwinsUniverse.pdf">asked</a> him for information on the Aegean Islands as it mapped out Allied invasion routes during World War II—details <a href="https://www.tandfonline.com/doi/full/10.1080/08912963.2011.630260">shared</a> by his daughter, which weren’t publicized until four decades after Brown’s death. In yet another side gig, he offered his dino expertise to Walt Disney for the 1940 film <em>Fantasia</em>.</p>
+<p>Brown continued his expeditions late in life, <a href="https://ncse.ngo/files/pub/evolution/Excerpt--DarwinsUniverse.pdf">finding</a> a plesiosaur skeleton in Lewiston, Montana, in 1956 when he was 83 years old. Two years later, he looked for skeletons on the Isle of Wight off England’s coast, and he envisioned a future trip where he would dangle from a helicopter while excavating fossils.</p>
+<p>He never got to perform this daring feat, as he died at the age of 89 in 1963. This was shortly before the dawn of the “paleobiological revolution,” when paleontology went from a discipline commonly associated with amateurs to a crucial component of evolutionary research. While Brown never lived to see this transformation, his contributions to the field live on in the thousands of fossils he helped unearth. <img alt="" src="../images/nautilus-favicon-14_430.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: David Monniaux / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Canaries Actually Worked in Coal Mines | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When Canaries Actually Worked in Coal Mines</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-30
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-QI1O</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The canary in a coal mine is more than a metaphor—for nearly a century, this bright yellow songbird saved lives around the world by alerting miners of deadly harms deep underground.</p>
+<p>There, hazardous gases including methane, carbon dioxide, and carbon monoxide can form, the latter of which can kill people within two hours, even at low levels. Canaries are particularly sensitive to carbon monoxide, and they show hints of distress before humans do, swaying and fainting as they fall ill. That’s because they’re so tiny and have a <a href="https://bioone.org/journals/journal-of-avian-medicine-and-surgery/volume-30/issue-4/1082-6742-30.4.386/The-Canary-in-the-Coal-Mine/10.1647/1082-6742-30.4.386.short">super efficient respiratory system</a>, breathing in twice as much gas with each breath compared with us. In some cases, miners revived the birds by supplying them with oxygen.</p>
+<p>Mining companies in countries including the United States, Canada, and the United Kingdom began employing canaries as gas detectors around the early 20th century. A few decades earlier, coal mining had taken off as steam-powered train lines grew around the globe, but deadly accidents forced coal companies to come up with safety measures.</p>
+<p><img alt="" src="../images/7GZBUi7i-Glick_BREAKER.png" /></p>
+<p>This type of cage, equipped with oxygen supply, was used to revive canaries exposed to harmful gases in mines. <em>Credit: Wikimedia Commons.</em></p>
+<p>To test for dangerous gases, these companies initially had workers carry flames around mines, but this risked explosions. In 1906, mine workers in England <a href="https://go.gale.com/ps/i.do?p=GDCS&amp;u=webdemo&amp;id=GALE%7CJE3240485514&amp;v=2.1&amp;it=r&amp;sid=GDCS&amp;asid=87ba73d1">used</a> canaries to carefully enter a mine after an explosion, and a few years later, a <a href="https://link.gale.com/apps/doc/IO0701590037/GDCS?u=oxford&amp;sid=GDCS&amp;xid=c213349d">U.K. law</a> required workers to “bring two small, caged birds” down into the mines with them. Around this time, the U.S. Bureau of Mines tested a whole host of critters for the job, including guinea pigs, chickens, dogs, and pigeons. But the canaries performed best.</p>
+<p>Canaries also aided in rescues—in the case of explosions or fires, they warned rescuers of hazardous conditions.</p>
+<p><strong>Read more: <a href="https://nautil.us/in-the-land-of-the-eyeless-dragons-1232238/">“In the Land of the Eyeless Dragons”</a></strong></p>
+<p>They weren’t hard to get. In the United Kingdom, for example, mining companies often sourced them from pet shops or private breeders. Most of these working birds had color imperfections or other features seen as flaws that made them less likely to be bought by the public, and females were typically <a href="https://bioone.org/journals/journal-of-avian-medicine-and-surgery/volume-30/issue-4/1082-6742-30.4.386/The-Canary-in-the-Coal-Mine/10.1647/1082-6742-30.4.386.short">cheaper</a> due to their “poor singing ability.” Some mining companies even built aviaries in their offices to breed these birds.</p>
+<p>Workers often treated these avian assistants like beloved pets, whistling to them in the dark depths of the mines. A newspaper article printed in Scotland in 1926 <a href="https://go.gale.com/ps/i.do?p=GDCS&amp;u=oxford&amp;id=GALE%7CJF3228390891&amp;v=2.1&amp;it=r&amp;sid=GDCS&amp;asid=1c47fd47">claimed</a> the birds were “well looked after.”</p>
+<p>But miners began to say goodbye to these feathery friends as electronic sensors, invented in the <a href="https://d1wqtxts1xzle7.cloudfront.net/112791735/IJEAS0602007-libre.pdf?1711526768=&amp;response-content-disposition=inline%3B+filename%3DMicrocontroller_Based_LPG_Gas_Leakage_Al.pdf&amp;Expires=1767120697&amp;Signature=elS5vQIsPvtFsMEWkfiREDqvmkkmpve1Db49f550L8EKzZnPl6q6Rn-kxw-OKps4coA4JOSSOLMaq7FCSJd9Mr0aPQFTf3RiejjCkemnxEj8~qRR77-Y8FqPMU7IW0pYfPbNmajD2ZcxlwQoCwPr5W8Qj8T3oqmtCgtF7Lwb~RWPefkdEsYKYzzXV0k31J~9ncBM5OtQMgjGemrvdp~o5yN7kAlqv-yfAViOJXYi5imHLgOWkcZzPU9WQRuC20HlkKTJB9Yj6ZrhjeiZ4~LZmBHOV4eqJ-YW5y~WEM3wjrix0R5vQfMzbMp1aeVJjwbiLbjwy649S~gjdog2fjV7~A__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA">mid-1920s</a>, took their place. Compared with other countries, the U.K. ended the practice relatively late: On this day in 1986, the British government announced a plan to phase out canaries from mining pits. “New electronic detectors will replace the bird because they are said to be cheaper in the long run and more effective in indicating the presence of pollutants in the air otherwise unnoticed by miners,” the BBC <a href="http://news.bbc.co.uk/onthisday/hi/dates/stories/december/30/newsid_2547000/2547587.stm">wrote</a>.</p>
+<p>Canaries carried on similar duties sporadically in the decades that followed. For instance, people fearing chemical weapon attacks in <a href="http://news.bbc.co.uk/2/hi/middle_east/2825377.stm">Baghdad</a> and <a href="https://go.gale.com/ps/i.do?p=GDCS&amp;u=oxford&amp;id=GALE%7CIF0501463143&amp;v=2.1&amp;it=r&amp;sid=GDCS&amp;asid=eb4e208d">New York</a> in the early 2000s bought up these birds.</p>
+<p>Today, canaries are primarily proverbial in this context. But the songbirds’ sacrifices, of course, live on in the saying. <img alt="" src="../images/nautilus-favicon-14_605.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: George McCaa, U.S. Bureau of Mines / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

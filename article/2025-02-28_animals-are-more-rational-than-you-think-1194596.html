@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animals Are More Rational than We Think | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Animals Are More Rational than We Think</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-QCJX</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>To be rational is to have the ability to reason, perhaps in a variety of ways, and to use the results of such reasoning in the execution of one’s goals. For a long time, the received view was—incredibly—that animals possessed no such ability. And if any animal did appear to be engaged in reasoning, this could be explained in some other way. In this, the received view followed the 17th-century philosopher René Descartes, who thought that animals were entirely bereft of reason.</p>
+<p>If you teach a magpie to say good day to its mistress, when it sees her approach, this can only be by making the utterance of this word the expression of one of its passions. For instance, it will be an expression of the hope of eating, if it has always been given a tidbit when it says it. Similarly, all the things that dogs, horses, and monkeys are taught to perform are only expressions of their fear, their hope, their joy, and consequently can be performed without any thought.</p>
+<p>By “passions,” Descartes meant what we would now call <em>emotions</em>. Animals, he claimed, could not reason and anything that seemed to be the result of reasoning could be explained as the expression of one or more emotions (ignoring, of course, the strong likelihood that emotions might themselves be rational—but that’s a whole different story).</p>
+<p>Descartes’ claim is not only false but incoherent. Why, for example, does the magpie say “good day” to its owner? This is an expression of its excitement, Descartes tells us. But why does it get excited? In the hope of being fed, Descartes explains. But why does it hope to be fed? Descartes’ answer: “if it has always been given a tidbit when it says it.” This means that the magpie, as represented by Descartes, has drawn an inductive generalization based on prior experience. This is a f<a href="https://nautil.us/steven-pinker-has-his-reasons-238352/">orm of rationality</a>. On Descartes’ own interpretation of the magpie’s behavior, it turns out to be inductively rational.</p>
+<p>The view of David Hume—the 18th-century Scottish empiricist philosopher—is the polar opposite of Descartes’:</p>
+<p>Next to the ridicule of denying an evident truth, is that of taking much pain to defend it; and no truth appears to me more evident, than the beasts are endowed with thought and reason as well as men. The arguments are in this case so obvious, that they never escape the most stupid and ignorant.</p>
+<p>I think it is fair to say that recent decades of research in comparative psychology have amassed a body of evidence that firmly favors Hume over Descartes. It is not possible to survey the full breadth of this research here. But, following Descartes, the broader magpie family—corvids—might be a good place for a brief foray.</p>
+<p>The corvid family includes crows, ravens, rooks, jays, jackdaws, and magpies, among others. Corvids are the MacGyvers of the animal world, capable of manufacturing a variety of tools, for a variety of purposes, and often with very little or no preparation time. Imagine a tasty morsel lies on a platform just out of reach. You know that if you push a particular button, one end of the platform will fall, and the morsel will be deposited within your grasp. Alas, the button is out of reach. There is a stick nearby, but even if you grab it, the button remains tantalizingly beyond your grasp. However, tied next to your perch is a piece of string, which is wrapped around another stick. This second stick can be conjoined with the first (they are designed that way), and the button reached. Can you work this out?</p>
+<p>If you are a New Caledonian crow, the chances are that you can. In fact, if you are a particularly astute New Caledonian crow, you might well be able to do it <a href="https://royalsocietypublishing.org/doi/10.1098/rsbl.2003.0085">on your first try</a>—with no practice whatsoever. You might also be in the habit of whittling sticks to make hooks, of <a href="https://pubmed.ncbi.nlm.nih.gov/17024509/">bending wires</a> to the same effect, to make tools you can use to extract food from hard-to-reach places.</p>
+<blockquote>
+<p>If a human is present, then the dogs will prefer to stare at her face, with a view to garnering some clues.</p>
+</blockquote>
+<p>The tool-making exploits of corvids alone would take up several books. But tool-making abilities are distributed widely through the animal kingdom. There are the animals we would expect to make tools—<a href="https://nhm.org/stories/chimpanzees-redefining-what-it-means-be-human">such as chimpanzees</a>—and they do, routinely using rocks to crack nuts, using twigs to fish termites out of their mounds, and making spears to hunt bush babies. But there are also those we might not expect to have such abilities.</p>
+<p>There is the veined octopus, adept at <a href="https://www.sciencedirect.com/science/article/pii/S0960982209019149">manufacturing a shelter</a> from coconut shell-halves. Perhaps most surprising of all, at least to me, is the American alligator who, as it floats motionless in the water, will sometimes arrange for a collection of twigs to rest on its snout. It does this <a href="https://www.smithsonianmag.com/smart-news/crocodiles-balance-twigs-on-their-heads-to-lure-nest-building-birds-180948107/">to fatally tempt</a> nesting birds looking for twigs. The alligator only does this during nesting season, demonstrating at least some grasp of the seasons and their implications for the behavior of things it likes to eat.</p>
+<p>Tool use is one example of causal reasoning. When an animal reasons causally, it demonstrates understanding of the properties of objects, and how these properties may be utilized in the pursuit of its goals. Causal reasoning is one form that rationality can take. It is widely distributed throughout the animal kingdom, and for obvious reasons: Animals of a certain sort—mobile animals whose existence requires responding in real time to changes in environmental circumstances—will not last long without it. Many animals qualify as rational in this sense.</p>
+<p>When an animal reasons causally, it demonstrates understanding of the properties of objects, and how these properties may be utilized in the pursuit of its goals.</p>
+<p>Another form that rationality might take is logical reasoning. To reason logically is to reason in accordance with the rules of logic, rather than the causal or mechanical affordances of objects. The ancient Stoic philosopher, Chrysippus, once told a story, an early thought experiment, of a dog tracking a rabbit. Running, nose to the ground, the dog arrives at a three-way fork in the path. He quickly sniffs the first two paths, and not finding the scent in either of the first two, immediately runs down the third path, without bothering to sniff first. If the dog can do this, he would have executed a logical inference of the form:</p>
+<p>Either A or B or C; Not A; Not B; Therefore, C</p>
+<p>This is a three-option version of what is known as disjunctive syllogism or <em>modus tollendo ponens</em>. In its more standard, two-option, form, a disjunctive syllogism looks like this:</p>
+<p>Either A or B; Not A; Therefore, B</p>
+<p>This is an example of logical, rather than causal, reasoning. The capacity to execute this rule has been tested in several species of animal. In outline, the tests are all variations on the same theme. Present an animal with two opaque vessels: A and B. Both are initially empty—and the animal is shown this. The animal then sees an experimenter baiting one of the vessels, but precisely which one is hidden from the animal by a barrier. The experimenter then reveals that one vessel—say, vessel A—is empty. Both vessels are then put in front of the animal, and it is allowed to choose one of them. If the animal can execute a disjunctive syllogism, it should choose vessel B. Several species have succeeded at this task, including <a href="https://www.eva.mpg.de/documents/Springer/Call_Apes_AnimCog_2001_1556156.pdf">great apes</a>, <a href="https://link.springer.com/article/10.1007/s10071-015-0848-2">monkeys</a>, <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0006368">ravens</a>, and <a href="https://www.sciencedirect.com/science/article/pii/S0003347207002126">dogs</a>.</p>
+<p>Dogs are my favorite case. While dogs show they can reason in this way, it seems that, all things considered, they would rather not. Typically, they only pass the test when the cups are manipulated remotely. If a human is present, then the dogs will prefer to stare at her face, with a view to garnering some clues, or persuade her to solve the problem, rather than do the hard work of thinking things through for themselves. In this respect, dogs are obviously in sympathy with an observation of the philosopher Alfred North Whitehead: “Operations of thought are like cavalry charges in battle—they are strictly limited in number, they require fresh horses, and they must only be made at decisive moments.”</p>
+<p>Nevertheless, some philosophers still argue that animals are incapable of logical reasoning. For example, José Luis Bermúdez <a href="https://link.springer.com/article/10.1007/s10892-007-9013-8">has argued</a> that such reasoning requires understanding the relations between <em>thoughts</em>: “Consider a conditional thought of the sort that might be expressed in the sentence ‘If A then B.’ To entertain such a thought is to understand that two thoughts are related in a certain way—namely that the second thought cannot be false if the first thought is true.” However, animals, he argues, are incapable of higher-order thoughts: They cannot think about their thoughts and so cannot understand relations between those thoughts. Therefore, Bermúdez claims, animals cannot reason logically.</p>
+<p>This argument, however, is only as strong as its initial assumption—that logical reasoning involves understanding the relations between thoughts—and this is highly implausible. According to Bermúdez, to execute a disjunctive syllogism of the sort involved in the tests described above, what an animal needs to understand is this:</p>
+<p>Either the thought that the food is in cup A is true or the thought that the food is in cup B is true. The thought that it is in A is false. Therefore, the thought that it is in B is true.</p>
+<p>But this is a needlessly overcomplicated account of the ability to execute disjunctive syllogisms. All an animal really needs to understand is:</p>
+<p>Either the food is in cup A or it is in cup B. It is not in A. Therefore, it must be in B.</p>
+<p>It is true that in an introductory logic class, when students are taught what logical inferences, including disjunctive syllogism, are, the instructor may well appeal to thoughts—or perhaps more likely, propositions, the contents of thoughts—to explain what makes logical inferences valid. But children can effortlessly execute logical inferences long before they set foot in a logic class (if they ever do). This ability is presumably grounded in a much less conceptually sophisticated understanding that if the world is a certain way (for example, the food is not in cup A) then it <em>must</em> be another way (the food is in cup B). There is no reason to suppose that this understanding requires reflection on thoughts or understanding of propositions—but every reason to recognize it as reasoning all the same. <img alt="" src="../images/nautilus-favicon-14_1255.png" /></p>
+<p><em>This</em> <a href="https://thereader.mitpress.mit.edu/animals-are-more-rational-than-you-think/"><em>article</em></a> <em>is an excerpt from</em> <a href="https://mitpress.mit.edu/9780262549400/animal-rights/">Animal Rights<em>,</em></a> <em>by Mark Rowland, and was reprinted with permission from MIT Press Reader.</em></p>
+<p><em>Lead image: GoodFocused / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

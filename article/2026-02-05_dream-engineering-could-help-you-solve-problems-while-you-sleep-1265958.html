@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Engineering Could Help You Solve Problems in Your Sleep | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Dream Engineering Could Help You Solve Problems in Your Sleep</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-05
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-FNJ2</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Dreams have famously led to some pretty spectacular insights. Chemist Dmitri Mendeleev dreamt up the organization of the periodic table. Mary Shelley dreamt the two main scenes that became the famous Gothic novel <em>Frankenstein</em>. Niels Bohr solved the structure of the atom. And Elias Howe hit upon a major invention in his sleep. He had been struggling with the problem of how to design an effective sewing machine. Then, one night, he dreamt he was being attacked by warriors with spears that had holes at their tips. The dream inspired a eureka moment: He realized he could design a sewing needle with an eye at the point instead of at the top, an innovation that led to the first clothing factories.  </p>
+<p>But can we deliberately harness the fertile realm of dreaming to creatively solve problems? It’s a question scientists have struggled to answer, in part because dreams are elusive and difficult to manipulate in a reliable way. This is the field of dream engineering.   </p>
+<p>Recently, a team of neuroscientists from Northwestern University set out to see if lucid dreaming might yield some new insights. Lucid dreamers are consciously aware they’re dreaming and can control the narrative, and some estimates suggest that a little over half of us can lucid dream, which is a trainable skill. What the scientists <a href="https://academic.oup.com/nc/article/2026/1/niaf067/8456489">found</a> surprised them: They were able to manipulate the dreams of their participants using auditory cues, prompting them to dream about puzzles that they’d learned to associate with those sounds while awake. But it was the non-lucid dreams that were most often linked to problem-solving. Was it the dreaming itself or other unconscious processes? Many questions remain. Still, the findings suggest that dreaming could one day become a problem-solving tool.  </p>
+<p>I spoke to American neuroscientist and study author Ken Paller about the relationship between dreaming and creativity and the potential uses and risks of dream engineering.</p>
+<p><strong>Dreams and REM sleep have long been associated with creativity. Why is that?</strong></p>
+<p>Sleep is about a lot more than just restoration. We sleep to not be sleepy during the day and to be alert, but there’s a lot more going on. The brain’s not turned off. It’s quite busy. In my work on memory, I’ve looked at how all the things we learn each day need to be processed further, and integrated with other knowledge, so that they can be remembered later. And a lot of that happens unconsciously while we’re asleep. That’s the interesting part of sleep from a cognitive neuroscience point-of-view. Our waking cognition is partly a function of what happens while we sleep.</p>
+<p>This work is an extension of that idea, because creativity is connected to memory. When you put the individual fragments of memories together in new ways, seeing how they relate to problems you have, or questions you have, that’s a creative function. Finding those connections is a foundation for our creativity. That’s why it makes sense that both of those things are happening during our sleep: improving memory storage as well as creativity.  </p>
+<p><strong>People have been talking about dream engineering for some time now. How has the science changed?</strong></p>
+<p>Dream research was a lot harder in the old days, because you could only ask people what they were dreaming about <em>after</em> they woke up. Now we ask them while they’re still asleep. We can present a question to people and have them give a signal with their eyes moving or their nose sniffing to tell us what’s happening at that moment, while they’re still in REM sleep and dreaming. That gives us an additional vantage point, and new opportunities for dream engineering. On top of that, we can look at brain activity at that moment and try to work out what the brain activity means, which is still a hard challenge, but we’re working on it.</p>
+<p><strong>Read more: “<a href="https://nautil.us/narcoleptic-naps-are-a-creative-sweet-spot-259482/">The Creative Sweet Spot of Dreaming</a>”</strong></p>
+<p><strong>You used soundtracks to influence your participants’ dreams. Why do auditory cues work for dream engineering?</strong></p>
+<p>Prior to our 2009 study, there was this great study by Björn Rasch and his colleagues in Germany. They used odors and they thought, “We’ve gotta use odors because odors get in without waking you up, and they bypass the part of the brain called the thalamus.” At that time, people thought the thalamus would block out every sound or sight or any other modality except olfaction. So their thinking was, it’s gotta be olfaction. We came into it and thought, “Well, maybe, maybe not.” So we tried sounds, and in fact, there’s plenty of evidence that sounds do get in during sleep. An alarm clock works, but even soft sounds are processed in your brain, and—as we show—influence what kind of memories you process and the problems you’re thinking of.  </p>
+<p>This is a method we’ve used since 2009 in a <em>Science</em> paper we published. We call it targeted memory reactivation, where we first have people learn something before sleep. And then, during sleep, we decide which of the things they learned they’re going to process more. Targeted memory reactivation is where we play some sounds that are connected to something they learned, and we know it reactivates specific memories because when they wake up, they’re better at remembering those memories. So we can tinker with memory storage in that way. And we think it also happens naturally. I mean, you don’t need sounds, you’re always reactivating things, but we can bias which things with our method and therefore study how it works.</p>
+<p>This isn’t entirely new. Aristotle described how if you hear some dripping water in your sleep, you might dream about water. But we were using this phenomenon in a very systematic way to say, “Here are these sounds that are connected specifically with puzzles you failed to solve when you were awake.”</p>
+<p><strong>You expected that people would solve more problems while they were lucid dreaming as opposed to non-lucid dreaming? Why?</strong></p>
+<p>The idea was that you could intentionally try a particular strategy in your lucid dream. So in your lucid dream, maybe you would have some ability to get at the information that’s hidden away in your brain. And you might do that by not just thinking about it as the dreamer, but maybe summoning another character in your dream and saying, “Well, I think my brother might know the answer to that.” That’s a strategy that people use in their lucid dreams. We didn’t find that it particularly worked in this study, though. There might be better strategies, but it’s hard because not that many people have lucid dreams and they don’t have them that often. So we have to keep working on that challenge and on getting more evidence. How could you intentionally use your dreams for certain goals? We’re studying intentional dreaming in other contexts, too, with people who can develop these skills to a very high level.</p>
+<p><strong>I noticed in the study you told your participants to ask the dream itself for help on the problem. Why did you give them this prompt, and how do you think that works?</strong></p>
+<p>The thinking is that your unconscious mind has more information than your conscious mind knows about. That’s undoubtedly true, but how to get to it. And you can also say your unconscious mind has more creativity. How do you unleash it? How do you get to that creativity? That’s a really exciting idea—that some people might have more access to that intuitive part of themselves and that playfulness, to get more creativity. And maybe we could learn how to do that using strategies like this. We may find some shortcuts.</p>
+<p>Lucid-dreaming experts tell me that they often can’t just will things to happen in their lucid dream. They have to be subtle about it. So just demanding, “Give me the answer, dream!” doesn’t seem to work so well. From what they say, that doesn’t lead to success but other more subtle strategies, where they try to sneak up on the answer, can sometimes work for them. So dream control is possible for lucid dreamers, but it has its limits and can be challenging. It’s more like working with your dream as a partner rather than dominating it.</p>
+<p><strong>You write in the study that the findings mostly relate to convergent creativity, where there is a single right answer. Why is this?</strong></p>
+<p>The creativity research field has multiple theories about how you get to answers. Sometimes you go strategically step-by-step and reach the answer. Other times it just sort of appears suddenly in an “aha” moment, and you don’t see the process that brought you there. The problems we gave our study participants all had a single right answer so we could know when they reached the correct solution, but they often had dead ends, too. Like one of the problems was, “You have to plant four trees equidistant from each other. In what arrangement do you plant your trees so that each one’s the same distance from the other three?” You start thinking about it, and you think, “Okay, I plant them in a square.” And then you come to the conclusion, “No, in a square they’re not gonna be equidistant from each other. That doesn’t work.” And you think, “Okay, a diamond, or some other shape, what do I do?”</p>
+<p>You struggle with it. But you’re thinking in a two-dimensional way, and the key insight is to think in three dimensions. If there’s a hill, then you could have three in a triangle and one in the middle on top and they could all be equidistant. That’s the solution—to go to that additional dimension. A lot of problems are like that, where the way you initially think is not gonna get you the answer, but you have to unhook from that and try a new way. That’s the creativity. It’s like they say, “You have to think outside the box.”</p>
+<p><strong>Do your results change how we think about the relationship between dreams and creativity or problem-solving?</strong></p>
+<p>I think it opens the door to the idea that dreams can offer a wealth of insight and creativity that you could use to your advantage. You might benefit from that, compared to ignoring your dreams. But scientifically, I’m also happy with the idea that your unconscious mind is where that wealth is. And your dreams just provide a little glimpse into it. I’m willing to play both sides of that argument and say dreams could be really important, or maybe not. For now, we’re just trying to understand how the brain works. Everyone knows sleeping on a problem can help you get to the right answer. We’ve just never been sure where dreaming fits in with all that. And I’m still not sure.</p>
+<p><strong>How do you ultimately want to use this research?</strong></p>
+<p>The next research frontier could relate to mental health. If you’re spending time really bothered by something, or having depressing thoughts all day long, we figure those thoughts are gonna come up again during your sleep and influence how your sleep goes. And how you feel the next day! And so, one of our new research questions is to see, okay, is that contributing to people having anxiety and depression during the day? And can we bias their overnight memory reactivation in a better direction?</p>
+<p>So we might engineer dreams not just to solve problems, but perhaps to improve your psychological well-being. Can we have wearable devices where people would strategically decide what sounds they wanted that could guide them in particular ways? Outside of made-up brain teasers that no one really cares about, can we move this to the life issues that people do have, and beyond that, to the big problems we have in the world today?</p>
+<p><strong>Is there any danger that dream engineering could be misused?</strong></p>
+<p>There are always dangers, and we always have to think carefully about the ethical issues that could come up. Our techniques could be misused. I wrote a paper that was subtitled “Sleeping in a Brave New World” in 2017. Let’s take an unscrupulous hotel owner, for example. They could rig up something with your hotel bed to play advertising to you when you’re asleep. Would you want advertising when you were asleep? You wouldn’t even know that you were exposed to it, if it came in while you were asleep. We have rules against subliminal advertising, but people push the rules sometimes. That’s one example I could imagine. Also, it could be misused by people interrogating suspected criminals. Sleep tactics are already used in the sense that sleep deprivation is a cruel punishment for people in prison that can mess you up pretty badly.</p>
+<p><strong>Do these techniques of dream engineering and problem-solving carry any other risks?</strong></p>
+<p>There could be opportunities, and there could be costs. Some of our studies have shown, in the memory context, that if we play sounds too loud, the sounds can arouse people from deep sleep. So if they disturb sleep, that’s bad. And it’s bad not just for their sleep, but also, the memories get worse instead of better. So, there’s a danger of doing sleep engineering in a way that’s not prioritizing high-quality sleep. We’re really careful to play these sounds very, very softly. In our experiments we watch the ongoing sleep physiology and monitor the sound levels carefully, so that they’re not disrupting sleep.</p>
+<p>Another question is that if we reactivate some memories, then are other memories not getting reactivated? Maybe you’re missing out on something important that your natural sleep would’ve accomplished. So we have to consider these issues, that there could be some trade-offs. In each case, one would need to ask whether the trade-off is worth it.</p>
+<p>It might be, if you get a memory boost you genuinely need, an improvement in learning in a rehab context, or an answer to a major problem in your life. <img alt="" src="../images/nautilus-favicon-14_460.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: agsandrew / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

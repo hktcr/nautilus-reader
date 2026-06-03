@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Your Dream Life Says About You | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What Your Dream Life Says About You</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-ZSWD</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>What does a person’s dream life tell us about their waking life?</p>
+<p>It’s a question that’s preoccupied humans for thousands of years. In ancient civilizations like Greece, Egypt, and Mesopotamia, dreams were often seen as divine messages from the Gods. Today, some psychologists plumb their depths for clues to a person’s subconscious preoccupations. While some may dream of snakes falling from the sky, others’ dreams are more likely to plot out mundane shopping trips or involve repeatedly failing a math test. Many of us always remember our dreams, while others recall nothing at all.</p>
+<p>Recently, a team of dream researchers from Italy got together to see if they could identify patterns in dream content and recall related to cognitive and personality types and other factors. Together, they analyzed 3,366 dream reports from 207 adults collected between 2020 and 2024 using large language models, and compared this data against demographic, cognitive, psychometric, and sleep measures. What they found is that intense interest in dreams, a tendency for the mind to wander, and high quality sleep were associated with both certain kinds of dream content and the ability to remember dream sequences and details. They published their <a href="https://www.nature.com/articles/s44271-026-00447-2">results</a> in <em>Nature Communications</em>.</p>
+<p>I spoke with co-author Valentina Elce about why some people have strange, vivid dreams, why dreaming may be the guardian of sleep, what dreams can tell us about the nature of consciousness, and what happens to dream recall as we age.</p>
+<p><strong>Do you remember your dreams easily?</strong></p>
+<p>I always remember my dreams, basically. Sometimes when I’m very stressed, I have these dreams with mazes. I get lost in places. It’s funny because I associate getting lost in a maze with anxiety about losing my orientation in life. But sometimes I also have happy dreams, where I dream of colorful nature scenes.</p>
+<p><strong>Why does the dreaming mind tend to be more narrative and cinematic than the waking one?</strong></p>
+<p>There are many hypotheses. Mine is that sleep is a state where the brain is more disconnected from the environment compared to wakefulness. So when we’re sleeping, our brain basically is free to explore distant concepts and connections with minimal interference from the outside world. It’s processing all the information that we’ve acquired during the day to allow us to learn new things, to consolidate our memories.</p>
+<p><strong>What separates people who have very realistic dreams from those who have more bizarre surrealistic ones?</strong></p>
+<p>We noticed that, for example, people who are prone to mind wandering during the day tend to have more bizarre dreams, with more shifts in scenes. They’re not necessarily dreaming of magical creatures, but rather the narratives are less coherent. One of the main theories we have about why is that fragmented and bizarre dreams are a version of mind wandering, that there’s some continuity there. We also notice from different studies that there are specific areas of the brain that are very active both during mind wandering in wakefulness, and during fragmented dreaming.</p>
+<p>Also, people who report more vivid dreams tend to perceive their sleep as better. This is pretty interesting, because it suggests that dreams are the guardians of sleep. One hypothesis first proposed by Freud is that having a vivid dream allows the brain to become more disconnected from the environment because we get immersed in these very imaginative, perceptual scenarios. The less connected we are to the external environment, the less prone we are to be awakened. These very vivid dreams would theoretically then allow us to have higher quality sleep.</p>
+<p><strong>Read more: “<a href="https://nautil.us/does-dream-inception-work-311117">Does Dream Inception Work?</a>”</strong></p>
+<p><strong>What do we know about people who don’t remember their dreams?</strong></p>
+<p>First of all, not remembering your dreams doesn’t mean that you’re not dreaming. That’s important because most of us dream for most of the night. In the studies that we published last year, we found individual variables that predict whether somebody might be more prone to remember their dreams than others. What we noticed is that there is a process of memory retrieval in the recall of a dream that’s pretty important. For example, if you think about the process of recalling a dream, it’s pretty difficult from a cognitive point of view because you must wake up and you must ignore all the information that comes from the external environment, like the weather, the time, and the things that you must do during the day. You must ignore all that information and focus on a very weak and very fragile short-term memory.</p>
+<p>What we noticed was that people who are better at ignoring incoming information and focusing on a very specific memory can remember more dreams. We used a famous cognitive test called the “Stroop task,” which is often used in neuropsychology to measure selective attention and the ability to suppress competing information.</p>
+<p>Another thing that we noticed was that sleep patterns matter for recall. People who tend to wake up a little bit later in the morning tend to remember more dreams. When we sleep, we go through different sleep stages: REM and not REM. Typically, REM sleep tends to accumulate at the end of the night or in the morning. We noticed that during REM sleep, we tend to have more vivid dreams. Since REM is more common later in the morning, those who wake up later are going to be more likely to have REM dreams and remember them.</p>
+<p><strong>Are certain kinds of personality or cognitive traits associated with greater facility for remembering dreams?</strong></p>
+<p>Aside from mind wandering, people who see greater value in dreaming, who are more interested in their dreams and who attribute greater significance to their dreams, tend to remember their dreams more. But we aren’t sure yet which thing comes first. That’s still an open question.</p>
+<p>One possible interpretation is that if you remember your dreams more, you’re going to be more interested in them. This is something that I noticed in my study. We wanted to have a sample that was as representative of the general population as possible, so I recruited people who weren’t at all interested in dreams. They told me, “Look, I’m going to do your experiment, but I really don’t care about dreams, and I don’t remember my dreams.”</p>
+<p>What was funny was that when they took part in the study, they remembered their dreams, and they were surprised by this, and they were so happy. At the end of this experiment, they came to me, and they told me, “I’m shocked. I cannot believe that I really dream.” Even months after the experiment, I still receive messages from some of my participants who now remember their dreams. They think about me when they remember their dreams.</p>
+<p><strong>Does dream recall change over a person’s lifetime, as they age?</strong></p>
+<p>Dream recall decreases with age, for different reasons. There is a cognitive decline that is completely physiological. It becomes more difficult with aging to remember dreams. With aging, there’s also a disruption of sleep patterns that affects dreaming. You sometimes have more fragmented sleep, but you also wake up earlier, and that means that you might have less REM sleep, and therefore less vivid dreams.</p>
+<p>We also noticed that younger people tended to dream more about daily life and daily schedules. They tended to have more references in their dream accounts to timing, with words like tomorrow, yesterday, and next week. This probably reflects our daily experiences. When you’re young, when you’re at university and when you work, your life is strongly dependent on a time schedule that might be very busy.</p>
+<p><strong>What do your findings tell us about the possible evolutionary function of dreams?</strong></p>
+<p>We’re still discussing the possible biological function. Some people believe that dreams are actually just random noise of the brain, a byproduct of sleep. But I believe that we’re supposed to dream, that dreams allow us to learn from present and past experiences. One of the functions of dreams seems to be emotional processing and memory consolidation.</p>
+<p>For instance, sometimes we dream of colleagues we met years before in different scenarios and contexts, which allows us to build new connections in the brain. Memory consolidation requires emotional processing because every memory has an emotional tone. By elaborating these experiences in different contexts that are much more perceptual and immersive, we can strip away some of the emotional load and consolidate them into our general knowledge. That’s my interpretation.</p>
+<p><strong>What can dreams tell us about the nature of consciousness?</strong></p>
+<p>This is a very important question, because dreaming is a great model for consciousness. The definition of dreams is conscious experiences that we have while we sleep. So it’s a moment where we’re both conscious and yet not fully aware of the external environment. Dreams allow us to study the phenomenology of consciousness in a cleaner way. It’s interesting also to study what happens when participants wake up. We wake them up and we ask what was going through their minds, and sometimes they say that they were experiencing nothing.</p>
+<p><strong>Do you remember your dreams more now than before you studied dreaming?</strong></p>
+<p>Yes, absolutely. It’s one of the good and bad things about my job. As a scientist, you start by observing the world. I observe my dreams and start to wonder how dreams work. I’m always my first subject. <img alt="" src="../images/nautilus-favicon-14_110.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Jorm Sangsorn / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

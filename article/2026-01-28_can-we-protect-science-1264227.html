@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can We Protect Science? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Can We Protect Science?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-IX09</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The question was asked in the cold alpine air of Davos, Switzerland, where ideas are often spoken with confidence and the future is treated as something that can be managed. <em>Can we protect science?</em> It sounded, at first, like a question of defense, as if science were a vulnerable possession, something that might be damaged or lost if not carefully guarded. Yet as the conversation (<a href="https://www.weforum.org/meetings/world-economic-forum-annual-meeting-2026/sessions/can-we-protect-science/">preserved on video</a>) unfolded last week at the World Economic Forum annual meeting,the question revealed itself to be something else entirely. It was not science that was uncertain, but our understanding of what science is, and why it matters.</p>
+<p>Science, Magdalena Skipper, editor-in-chief of <em>Nature</em>, reminded the room, is so deeply embedded in modern life that it has become almost invisible. We read by artificial light, travel vast distances in hours, and survive illnesses that once ended lives abruptly. These are not miracles; they are consequences of patient inquiry, of experiment, of error corrected by evidence. And yet, she observed, while scientists remain among the most trusted individuals in society, trust in science as a collective enterprise has begun to fray. We live within its achievements, yet increasingly question its authority.</p>
+<p>Oceanographer <a href="https://nautil.us/voice-of-the-ocean-234856/">Sylvia Earle</a> responded by returning the discussion to its human origins. Scientists, she said, “are basically kids who never grew up, never stopped asking questions.” Every child begins life with an unembarrassed curiosity. “They want to know who, what, why, where, how, everything. What’s this world about?” Science is not the invention of elites; it is the discipline of a universal instinct. If science now appears distant or inaccessible, it is not because curiosity has vanished, but because language and institutions have sometimes obscured its roots.</p>
+<p><strong>THE KID IN SCIENTISTS:</strong> At the World Economic Forum this month, pioneering oceanographer Sylvia Earle remarked that scientists “are basically kids who never grew up, never stopped asking questions. They want to know who, what, why, where, how, everything. What’s this world about?” <em>Video courtesy of WEF.</em></p>
+<p>Earle’s optimism was tempered by perspective. Children today grow up knowing truths that were inaccessible even to the most brilliant minds of the past. Einstein never saw the Earth from space. He never knew the molecular machinery of life. Yet this expansion of knowledge has not brought certainty. It has revealed the scale of our ignorance. “What we’ve learned,” Earle said, “is the magnitude of what we don’t know.” We have mapped only a fraction of the <a href="https://nautil.us/why-we-need-to-map-the-ocean-floor-237601/">ocean floor</a>; every descent into the deep uncovers new forms of life and unfamiliar systems. Knowledge does not close the book on mystery. It opens it wider.</p>
+<p>From the ocean’s depths, the conversation turned inward, to the human body. Daniel Skovronsky, chief scientific and product officer at Eli Lilly spoke of recent medical advances with restraint rather than triumph. “Three years ago,” he said, “we didn’t have medicines that could effectively treat obesity. Today, for most people, we can offer a life without obesity.” Gene therapies now allow children born deaf to hear their parents’ voices. New treatments can slow, and perhaps one day prevent, neurodegenerative disease. These are not promises. They are outcomes.</p>
+<p>Yet Skovronsky insisted that science does not earn trust through certainty. It earns trust through honesty. “There are always unknowns in science,” he said, and pretending otherwise corrodes credibility. Science does not proceed by proclamation; it proceeds by evidence tested and retested, by conclusions held provisionally and revised when necessary. When science is presented as infallible, disappointment is inevitable. When it is presented as a method, grounded in humility, trust has a chance to endure.</p>
+<blockquote>
+<p>Science is not the invention of elites; it is the discipline of a universal instinct.</p>
+</blockquote>
+<p>That sense of science as a living process ran quietly through the room. From the perspective of those who fund discovery long before its usefulness is clear. The president of the European Research Council, Maria Leptin, spoke of freedom as the essential condition of knowledge. “Research of this kind requires freedom,” she said. “Freedom to ask any question, freedom to pursue that question.” Fundamental research rarely aligns with political cycles or economic forecasts. Its value often becomes visible only years, even decades, later. The most transformative ideas begin as curiosities, pursued for no reason other than the desire to understand.</p>
+<p>Freedom, she argued, is not only the absence of censorship. It is also time, trust, and patience. Short funding cycles, constant reporting, and narrow definitions of impact can quietly suffocate originality. “Frontier research is bloody difficult,” she said. Experiments fail. Results resist replication. Reality proves more complex than expectation. This difficulty is not a flaw in science; it is the terrain through which science advances.</p>
+<p>Concerns about credibility, reproducibility, publication bias, the pressure to publish, were not ignored. They were placed in context. Science contains within itself the means of correction. Errors are uncovered because work is exposed to scrutiny. Openness is not a weakness; it is the system’s immune response. A culture willing to examine its own failures is not in crisis. It is alive.</p>
+<p>From outside the traditional structures of science, Alexi Robichaux, the CEO of the digital coaching and human transformation platform BetterUp, offered a perspective shaped by behavioral research. Science, he suggested, is one of the few human institutions designed to revise itself. Other systems—political, ideological, cultural—often persist in error because admitting mistake carries too high a cost. Science advances because it allows itself to be wrong. Its strength lies not in certainty, but in correction.</p>
+<blockquote>
+<p>A culture willing to examine its own failures is not in crisis. It is alive.</p>
+</blockquote>
+<p>This strength, however, is easily misunderstood. To those unfamiliar with the scientific method, changing conclusions can look like inconsistency or failure. What is often missing is connection. Trust depends not only on competence and integrity, but on the sense that knowledge is offered in service, not imposed from above. Science must be communicated not as decree, but as dialogue.</p>
+<p>Artificial intelligence entered the discussion not as a threat, but as a reminder. New tools can accelerate discovery, sift patterns from vast datasets, and extend human reach. But tools do not choose meaning. They do not ask why. “We’re going to need humans,” Skovronsky said, “to point it at the right questions and understand the answers.” Technology amplifies inquiry; it does not replace judgment.</p>
+<p>By the end of the session, the original question had quietly transformed. Science does not need protection in the way borders or monuments do. It cannot be preserved by decree or defended by force. It survives because it answers something elemental in us. Like the title of Paul Gauguin’s famous painting, <em>Where Do We Come From? What are we? Where Are We Going?</em></p>
+<p>To protect science is not to shield it from doubt or disagreement, but to defend the conditions that allow it to flourish, freedom of inquiry, openness to correction, patience with uncertainty, and humility before the unknown. As Earle said with disarming clarity, “Knowing is the key to caring.” The real danger is not that science will disappear, but that we will forget how to listen to it, and in doing so, forget something essential about ourselves. <img alt="" src="../images/nautilus-favicon-14_498.png" /></p>
+<p><em>Lead image: Triff / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Print a Human | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How to Print a Human</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NOZT</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The first “ghost heart” showed up online around 2005. In photographs, it has every appearance of being a normal heart, except that it’s white.</p>
+<p>This is because the cells have been washed away, leaving only collagen and other pallid human support matter—the stuff known collectively as the extracellular matrix. Wash is a technically apt verb, as the deed is done with detergent. Detergent, be it Dawn or Triton X-100, breaks down lipids and makes them easy to rinse away. In addition to supplying greasy residue on plates and pans, lipids make up the outer membranes of our cells. So if you infuse an organ with detergent—that is, you pump it in via the vascular system, much as a mortician distributes embalming fluid—it will handily dissolve these cells.</p>
+<p>In theory, you could decell an entire body, leaving behind a pale husk, a sort of humanoid sheath with a skein of empty blood vessels. It’s a mystery to me that no horror film has yet featured a scientist turned serial killer who decellularizes their victims.</p>
+<p>The real horror show is far more mundane, though: We desperately need new organs, and we’re running out of ways to get them. Nature can’t keep up with the demand, and the risks of transplanting living tissue are many, so scientists are trying to step in with printers.</p>
+<p>Decellularization is the “decell” portion of a bioengineering process known as decell/recell. Collagen has an appeal for would-be organ builders. It has no live cells, and thus none of the cell surface proteins that prompt the immune system to go on the attack. The body will accept foreign collagen—from cows, pigs, most any mammal—without much fuss. Once you’ve decelled, say, a pig organ, you would use the same network of capillaries to recell the scaffold that remains—to deliver millions of the patient’s own lab-cultured cells. In this way, the thinking went, it might be possible to construct whole replacement organs, ones that require no immunosuppression.</p>
+<blockquote>
+<p>Everything is more complicated than you think it’s going to be.</p>
+</blockquote>
+<p>Decell/recell inspired the career of Adam Feinberg. “It was such an intriguing idea,” he said when I visited his lab at Carnegie Mellon one spring morning in 2024. “This notion that you could take a pig heart, remove the cells and keep the collagen, and then replace the pig cells with human cells.” He cracks a knuckle. “Turns out that’s very difficult.”</p>
+<p>There’s a problem. When detergent dissolves cells, the rubble takes the form of molecules, which, because they’re extremely tiny, are easy to flush away. Whole cells are 10,000 times larger than molecules. Feinberg describes it as the difference between running a 5K and running around the Earth. So when you try to reseed a scaffold by pumping in the patient’s intact cells, they’re too big to pass through the capillary walls. “It’s almost impossible to get the cells back.” Feinberg has a vibe of fitness and calm confidence, partly from his posture and build, but also from his voice, a splendid baritone that carries without effort. A voice for the stage. It’s like having Macbeth explain regenerative medicine for you.</p>
+<p>“And even if you could flow them in, how do they get to the right spots?” The liver, for instance, is built of five major types of cells. How would they know where to hop off the ferry? The answer, for now at least, lies in 3-D bioprinting: building the cellular tissues and the collagen scaffold together, as you go, in thin cross sections. Imagine printing a hardboiled egg layer by layer, the printer switching materials as it moves along: shell, white, white, white, white, yolk, yolk, white, white, white, shell. For human bioprinting, one ink would contain the extracellular matrix, mainly collagen, and others would contain live cells. Using 3-D data from a patient’s MRIs, the printer would lay down the various inks, switching among two or more extruder heads as it travels the plane it’s printing. (Other 3-D bioprinting processes exist, but for the sake of simplicity, we’ll stick to extrusion.)</p>
+<p>A problem here, too: <a href="https://nautil.us/the-anatomical-quirk-that-saved-dr-no-951705/">Organs are malleable</a>—flimsy, even. An extrusion 3-D printer builds what it’s building from the bottom up, the first layers serving as the base for the layers to come. To facilitate this, plastic inks are made to solidify within seconds. I own a 3-D printed facsimile of a human rectum, made of hard plastic. You could not print an actual rectum this way, any more than you could build a cathedral out of tofu. The farther up you build, the floppier the structure becomes.</p>
+<p>Feinberg invented a process called FRESH (Freeform Reversible Embedding of Suspended Hydrogels), whereby the printer extrudes the construct—that is, the thing it’s printing—inside a gel “support bath.” He has enlisted a grad student, Caner Dikyol, to demonstrate. Dikyol, despite his obvious commitment to the work, is endearingly goofy. He selects a needle-thin nozzle and attaches it to the printer’s extruder. Underneath he slides a Petri dish the size of an antique pocket watch, which is filled with a pale amber gel: the support bath. The main ingredient, Feinberg chimes in, is basically the main ingredient in hair gel.</p>
+<p>I glance at Feinberg’s hair, which is cut close to his head but has the sheen of product. He intercepts the glance. “No, I have never tried it.”</p>
+<p>We chat for a while as the printer does its thing. Dikyol asks why I own a 3-D printed rectum, a not unreasonable question. I explain that it was a gift from a radiologist who had interviewed me onstage about a book that includes a rectum chapter. “He printed it with a base, so I can stand it on a shelf. It’s bright red and—”</p>
+<p>The giddy exuberance that is Caner Dikyol dims abruptly.</p>
+<p>“We were thinking to give you an artery.” He indicates the Petri dish, the little worm materializing in the costly hair gel.</p>
+<p>“But this is so much better,” I lie. “It’s collagen!”</p>
+<p>Half an hour later, Dikyol slides the Petri dish out from under the printer head and holds it up for me to see—the artery suspended like fruit in a serving of Jell-O. He walks it over to an incubator for the final step. The support bath is temperature-sensitive; heat causes the gel to melt away.</p>
+<p>While my souvenir warms, Dikyol and Feinberg and I wander over to visit a postdoctoral student, Ali Asghari Adib, who is printing liver cells. (Actually, liver tumor cells, a commercially available cell line used in liver-related research.) This printer is larger and fancier. It can switch among up to four extruders, and does so using the same no-friction electromagnetic technology that makes possible the fast, smooth ride of a bullet train. Two extruders are going, one for the collagen ink and one for the ink with the live cells. Feinberg likens it to printing a brochure with different color inks.</p>
+<p>The nozzle that extrudes the bio-ink is about the diameter of a human hair. You can push a liquid through an opening that small, but neither end product here, not the collagen or the live cell ink, is liquid. Here’s what Feinberg came up with. The collagen ink is acidified, which keeps it in liquid form while it’s being extruded. When the ink hits the support bath, the pH changes to neutral. For reasons we need not dive into here, this prompts the liquid collagen to assemble itself back into fibers.</p>
+<p>This ingenious bit of laboratory alchemy won’t work with a bio-ink of live cells, however. The acidity would kill them.</p>
+<blockquote>
+<p>Without nerves, leg muscle is just meat.</p>
+</blockquote>
+<p>In this case, Feinberg took inspiration from the body’s clotting mechanism. The live cell bio-ink contains fibrinogen, which turns to fibrin, the stuff of clots, when it’s exposed to the enzyme thrombin. So Feinberg’s support bath contains thrombin, which causes the fibrinogen-spiked ink to solidify on contact—to clot, basically—once it’s printed.</p>
+<p>Here’s another difference between printing a brochure and printing living tissue: Brochures don’t need to be fed. Human cells get what they need to survive—nutrients, oxygen, waste disposal services—via capillaries. You can’t go more than about the diameter of a hair without encountering a capillary. They’re everywhere. You can’t print all those little tubes. The printer would be changing heads every other second. Fortunately, the human body excels at building capillaries on its own. “That’s what happens when we get fatter or build muscle,” Feinberg says. So if you’re printing tissue, you cross your fingers that it will sprout its own vasculature. (Feinberg encourages this by adding growth factors to his inks.) The body is not good at—or even willing to try—building large vessels. Consider the aorta, a multilayered blood vessel so large it has interior capillaries.</p>
+<p>It’s vasculature that has its own vasculature.</p>
+<p>“We’re in this period,” Feinberg says, “of trying to understand: How much do we have to build versus how much can we get the body to do some of the job for us?”</p>
+<p>The cells Adib has just printed, I’m told, will get to work in a few days, dutifully secreting albumin for no one. I find astounding the extent to which a cell, independent of an organ or even a body, will proceed to do the job it’s born to do. Liver and pancreas cells make and secrete hormones. Heart muscle cells beat. Earlier, I was given a microscope view of thousands of heart cells that had, with no prompting from their human caretakers, begun beating in unison. Cardiomyocytes have an intrinsic behavior whereby when two of them touch, Feinberg explained, they synchronize beats by opening a tiny passage between themselves. Soon a third connects to the pair and takes up the beat, and so on, until the herd is drumming so vigorously it occasionally catches air, losing contact with the base of its dish.</p>
+<p>The liver bit is being printed as a mixture of extracellular matrix, cells, and proteins that support growth. Adib will watch to see what, if anything, self-assembles. Some of the constructs have grown capillaries, but it hasn’t happened consistently. “So now we are troubleshooting,” he says.</p>
+<p>Why not start with something easier, I ask them. Maybe cartilage. It’s basically one type of cell, with no nerves and no vasculature. On an earlier reporting trip, I encountered a transplant surgeon who had enthused about the future of the 3-D bioprinted meniscus, a fibrous pad between the bones of the knee. “Pop it in, and you’re good to go,” he’d said.</p>
+<p>But not very far, according to Feinberg. “No one’s figured out how to make it as strong and tough as normal cartilage,” he says. In studies, 3-D bioprinted replacement cartilage has been shown to be helpful, but no more so than current treatments on offer. “So, yeah, you can make a thing that looks like a meniscus, with the right cells, but you can’t make it with the right properties, the same durability,” Feinberg says, quickly adding, “yet.”</p>
+<p>Everything is more complicated than you think it’s going to be. It took Feinberg’s team two full years to figure out how to print collagen that can be sutured in place without the stitches ripping through. It wasn’t just the mechanical properties of the collagen filaments that mattered, but how they were aligned in the printing—their direction relative to the pull of the sutures.</p>
+<p>In 2006, Wake Forest University sent out a splashy news release: “Wake Forest Physician Reports First Human Recipients of Laboratory-Grown Organs.” Cells were cultured from patients’ biopsies and pipetted onto collagen scaffolds and allowed to grow for seven weeks. The resulting structures were stitched into the malfunctioning bladders of children with inherited anomalies. I had heard about this, in general terms, from an acquaintance who runs a stem cell lab at Temple University. One of the kids, she said when we spoke, had just graduated college with his Wake Forest bladder still in place. (“It survived all the beer!”)</p>
+<p>I mention this to Dikyol, how these entities supposedly functioned like natural bladders.</p>
+<p>“Supposedly.” Dikyol isn’t convinced. A working bladder relies on communication between muscle and nerves in order to sense fullness and empty itself. “There was not this muscular function,” Dikyol says.</p>
+<p>Functional muscle is an extremely challenging tissue to print. Within the<br />
+musculoskeletal system, for example, muscles need nerves to carry out their work. A heart can do without, as hormones help control its function, but a limb takes orders from the brain. Without nerves, leg muscle is just meat. “Nerves are a separate issue that we’re not yet tackling,” Feinberg allows. No one in the field is printing working human nerves. They’re challenging, in that they have a limited capacity for regrowth.</p>
+<blockquote>
+<p>They’re keeping mice alive with 3-D bioprinted heart chambers?!</p>
+</blockquote>
+<p>To function, any variety of muscle cells needs to be printed in a precise manner that serves its calling. That is, the cells have to be appropriately aligned. In the deltoid, for instance, cells are arranged in a fan shape; this is partly what gives the shoulder its impressively broad range of motion. The cells of the hamstring, a muscle at the back of the thigh, are laid out in parallel, enabling the quick contractions of locomotion. Cells that make up sphincters are aligned in rings, with the rings themselves laid out in a loop. When the rings contract in unison, the loop shrinks, applying the needed chokehold.</p>
+<p>Dikyol brings me to the workstation of Maria Stang, a post-doctoral researcher whose days currently revolve around printing the various architectures of human muscle. Stang has been working on printing the trickiest architecture of all: heart muscle. Cardiomyocytes are arranged in a helix shape around the heart’s chambers. So as the organ beats, it not only squeezes but also twists slightly. Feinberg compares it to wringing a wet towel. This serves to maximize the volume of blood that’s pumped with each beat.</p>
+<p>Alignment is especially important with heart muscle, because without it, the cells’ electrical impulses fire arrhythmically, and nothing, pumping-wise, is achieved. Stang has succeeded in creating heart constructs that beat in a coordinated manner. That’s huge. Unlike the beating heart cells I saw earlier under the microscope—a single layer of a single type of cell—Stang’s constructs are 1 millimeter thick. (There are no capillaries; for now the cells are printed with a low density that allows nutrients and oxygen to diffuse through them.) Like actual heart tissue, they’re three-dimensional structures that incorporate struts of collagen.</p>
+<p>“I’m going to show you the tissue which is contracting the best.” With Feinberg tagging along, Stang leads me to an adjoining room. She readies a slide and slides it onto a microscope platform, then steps away to let me look. There is an awkward quiet. I can’t see any movement. “It’s beating very slowly,” Stang says. “Maybe 30 beats per minute.”</p>
+<p>“Hm.”</p>
+<p>Feinberg leans in. “Is it in focus for you?” It is.</p>
+<p>“Watch the sides,” Stang directs. “See how they squeeze in?” “Oh yes.” It’s subtle. “Yes, I think so.” My husband has a friend, Dale, whom we once took to watch a meteor shower, because he’d never seen one. The word shower had led Dale to expect legions of stars streaming across the sky at once. So of course he was underwhelmed. Right now I am Maria Stang’s Dale. I’ve read so many overblown press releases and news bits about 3-D bioprinting that the reality, this amazing, near-godly little chunk of working human heart, has failed to spark the wonderment it unquestionably deserves.</p>
+<p>Stang takes it in stride. “Obviously there’s more work to be done.”</p>
+<p>I ask Feinberg when he thinks medical science will arrive at the point of implanting entire functional bioprinted organs in patients. If we use the analogy of airplane flight, he puts things somewhere around the Wright brothers stage. “Of course, we don’t want a plane that goes 30 feet down the field. We want a plane that can fly around all day.”</p>
+<p>And how far off is that? A decade plus, Feinberg says.</p>
+<p>For medical science, that’s actually a brisk turnaround. (In an earlier phone conversation, Feinberg equated “a decade or two” with “pretty quickly.”) He adds that he thought it could easily happen far sooner. “Because we keep coming up with new things.” Just 20 years ago, he points out, there was no gene editing, no CRISPR. “Plus AI is going to accelerate, and that’s going to change what’s possible.”</p>
+<p>I pose the same question now to Jaci Bliley, a senior post-doctoral fellow in the lab. Bliley has just joined us in the microscope room. Two to three decades is her estimate. Like Feinberg, she says she’s surprised at how fast things are moving. She offers the example of some stand-alone beating heart ventricles, little tubular constructs that she printed as part of her Ph.D. research. “That was 2019,” she says. “Now we’re putting them into mice and they’re surviving. After six months they’re still alive and beating.”</p>
+<p>They’re keeping mice alive with 3-D bioprinted heart chambers?!</p>
+<p>Not exactly. The mice kept their natural hearts. The printed ventricles lack valves, which are needed to keep blood from back-flowing, so it moves in the direction you need it to, regardless of the pull of gravity. When Bliley’s mouse ventricles pump, the blood shoots out unhelpfully in either direction. Collagen valves will be incorporated soon. The lab has already printed them, and they function perfectly.</p>
+<p>I guess because I’ve had a glimpse now of some of the hurdles to be cleared, it’s hard for me to imagine the day when organs are being routinely printed, like car parts, and installed.</p>
+<p>I ask Bliley if she ever feels daunted by the amount of work that remains or discouraged when experiments fail. She shakes her head. Her hoop earrings sway. She wears a look that suggests she’s just a little bit disappointed in me. “It’s never a failure. You’ve learned something. It’s all progress. It’s exciting.” From Bliley’s expression it’s clear she isn’t upselling the positive just because Feinberg is standing here or the university public affairs person would like her to. “For the rest of my life,” she’d said earlier, while we were walking across campus, “I can’t imagine doing anything else.”</p>
+<p>As the beneficiaries of this kind of passion and dedication, we owe our scientists a lot. We owe them gratitude, awe, respect. Mostly what they want from us, of course, is a little more funding. <img alt="" src="../images/nautilus-favicon-14_734.png" /></p>
+<p><em>Excerpted from</em> <a href="https://www.penguinrandomhouse.com/books/807111/replaceable-you-by-mary-roach/">Replaceable You</a> <em>by Mary Roach. Copyright © 2025 by Mary Roach. Used with permission of the publisher, W.W. Norton &amp; Company, Inc. All rights reserved.</em></p>
+<p><em>Lead image: Anna Bielousova99 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

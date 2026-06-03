@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Video Calling Worked Almost 100 Years Ago | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Video Calling Worked Almost 100 Years Ago</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-07
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-P8DL</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>If you’re in your early 20s, you haven’t lived in a world without the widespread ability to have a video chat with someone halfway around the globe. Of course, there was a time when instantaneous conversations over video were relegated to the pages of science fiction.</p>
+<p>The first video call took place on this day in 1927 between Commerce Secretary Herbert Hoover in Washington, D.C. and AT&amp;T officials in New York City. It represented the culmination of half a century of technological advances.</p>
+<p>Dreams of transmitting images over long distances began shortly after the advent of the telephone. In 1898, just two decades after Alexander Graham Bell’s marvelous invention, rumors of the development of a “telectroscope” spread, with a <em>New York Times</em> <a href="https://www.nytimes.com/1898/04/03/archives/that-new-telectroscope-details-of-the-instrument-that-is-to.html">headline</a> describing it as “a scheme for the transmission of colored rays.”</p>
+<p><img alt="" src="../images/Currie_BREAKER_b0016b.png" /></p>
+<p><strong>VERY EARLY VIDEO:</strong> This prototype videophone from Bell Labs, dates to as early as 1927. It could only send video images one way, but was still the first hesitant step toward the ready video calling of the modern era. <em>Photo courtesy of Marcin Wichary / Wikipedia.</em></p>
+<p>While there was no such invention, 1898 also saw a real leap in transmitting images via electricity with the invention of the “telediagraph.” A precursor to the modern fax machine, this <a href="https://www.deadmedia.org/notes/27/279.html">device</a> could transmit drawings over telegraph wires that were reproduced with a mechanical stylus. Less than a decade later, the <a href="https://en.wikipedia.org/wiki/Wirephoto">wirephoto</a>, used by newspapers, could perform the same feat by digitizing photographs using perforated paper.</p>
+<p>AT&amp;T had their own version of a fax machine, and it was this technology that powered the historic video call in 1927. Called the “ikonophone” (from the Greek words for image and sound), their device was an electromechanical system that used a spinning disk to produce moving images at a rate of 18 frames per second.</p>
+<p>Obviously, this early video phone had significant limitations. For starters, it was incredibly cumbersome, occupying about <a href="https://web.archive.org/web/20161007092237/http://www.tml.tkk.fi/Opinnot/T-109.7510/2007/Proceedings_2007.pdf#page=37">half a room</a>, and the system needed a closed circuit linking Washington, D.C. to New York City. Though it conveyed two-way audio, it only transmitted choppy, monochromatic video images one-way. Still, it was a historic feat, and AT&amp;T followed up three years and two days later with the first demonstration of a two-way video call.</p>
+<p><strong>Read more: “<a href="https://nautil.us/why-i-built-a-dumb-cell-phone-with-a-rotary-dial-237746">Why I Built a Dumb Cell Phone with a Rotary Dial</a>”</strong></p>
+<p>It wasn’t the only invention that propelled video phones forward in 1927, however. Five months later, Philo Farnsworth successfully <a href="https://en.wikipedia.org/wiki/Image_dissector">transmitted</a> the first image—a straight line—to a receiver in another room using cutting-edge cathode ray tube technology. With the widespread adoption of television in the coming decades, the dreams of video telephones seemed tantalizingly close.</p>
+<p>AT&amp;T <a href="https://en.wikipedia.org/wiki/History_of_videotelephony#AT&amp;T_Picturephone_Mod_I:_1964%E2%80%931970">rolled out</a> video phone booths in 1964 that required users to book a time for use, but discontinued them shortly after, citing insufficient demand. As television technology improved, the first videoconferencing services launched in the 1970s, but calls were expensive and they too failed to catch on. Technological advances in digital video in the 1980s and 1990s made video telephones smaller and person-to-person calls more feasible, but costs remained a barrier to widespread adoption.</p>
+<p>It would take enormous strides forward in personal computing, video compression algorithms, and the internet to make the dreams of video phone calls a reality in the early 2000s. Now it’s so easy to initiate a video phone call that many of them are made accidentally. While the visionaries of the late 19th century were the first to imagine seeing and hearing real-time images of a loved one from across the planet, they never could have imagined the “butt-dial.” <img alt="" src="../images/nautilus-favicon-14_220.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Sveta Khoruzhaia / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

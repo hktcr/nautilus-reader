@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mathematical Mysteries of Fireflies - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Mathematical Mysteries of Fireflies - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-02
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-P4HE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>On a sticky,  late-spring night in parts of the eastern United States, you might witness one of the wonders of the animal kingdom: a constellation of hundreds of fireflies blinking in unison. Only three of the 130 or so species of fireflies in the U.S. are known to exhibit this synchrony, and they do so for only a few weeks a year.</p>
+<p>The displays have gotten so popular that the Great Smoky Mountains and Congaree National Parks hold lotteries for the privilege of watching the fireflies in the parks during their peak. If you are lucky enough to win that lottery, you might run into Orit Peleg, a computer scientist and biophysicist from the University of Colorado Boulder, setting up cameras to record the display with some of her research collaborators.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>The data she and her colleagues have collected over the past seven years has shed new light not only on how and why fireflies synchronize, but also on the mathematical properties of synchrony across biological and humanmade systems, in the contraction of heart tissue, audience <a href="https://www.lucadistefano.eu/papers/isola2024.pdf">applause</a> at the end of a concert, even the electrons of a superconductor. “It’s like seeing all of these mathematical models come to life,” says Peleg.</p>
+<blockquote>
+<p>“Once all of these experiments are running, there’s downtime where we just have to wait and watch the fireflies.”</p>
+</blockquote>
+<p>Peleg first learned about firefly synchrony as an undergrad physics major, when she was introduced to the work of Steven Strogatz, an applied mathematician renowned for models of synchronization in nature. In his writing, he drew parallels between the synchronous displays of fireflies and the alignment of electrons in a superconductor, a material that allows electricity to flow through it indefinitely without energy loss. Later, as a postdoctoral researcher, Peleg used physics to explore the complex dynamics of living systems, including honeybee swarms and protein folding patterns. When she started her own lab, she recalled Strogatz’s example of the fireflies and was surprised at how little empirical data she could find about the phenomenon, so familiar to children around the world in spring and summertime.</p>
+<p>Peleg and her collaborators were soon trekking into the forest with tents, cameras, nets, and other equipment to capture the glittering displays of the fireflies. “It’s both the best time of the year, and at the same time the most stressful time of the year,” Peleg says of her time in the field. They only have a week or two to collect data, and if something goes wrong, they have to wait until the next year to try again. Fireflies don’t observe the Gregorian calendar. Their emergence each year varies based on weather conditions and other unpredictable events. The researchers rely on park entomologists and amateur scientists to help them decide when to make the trip out, but they don’t always get a lot of advance notice.</p>
+<p>Western scientists were skeptical when they first heard reports of synchronous firefly displays from Southeast Asia in the early 1900s. They dismissed these displays as an illusion or a statistical coincidence. Then in the 1960s, American biologists John Buck and his wife and collaborator Elisabeth conducted some of the first scientific <a href="https://www.nature.com/articles/211562a0">studies of firefly synchrony</a>.1 The pair captured fireflies while traveling in Thailand and took them back to their hotel room to observe them. Once the fireflies settled down, they began blinking, first separately and then gradually together in groups of two or three, until eventually the whole group blinked in unison. These first, informal observations paved the way for <a href="https://www.jstor.org/stable/24950352">decades of more rigorous investigations</a> into firefly behavior by the Bucks and other researchers.</p>
+<p>Since then, firefly synchrony has become a popular topic of study not just in biology but also in mathematics. Blinking fireflies proved a compelling case study for various mathematical models of so-called coupled oscillators. An oscillator is any object that cycles between states in some way, like the tick of a metronome or the blink of a light. Oscillators are said to be coupled if their oscillations influence one another. For instance, metronomes that are sitting on a platform suspended in the air will often <a href="https://youtube.com/watch?v=5v5ebf2kwf8">lock into the same rhythm</a>.</p>
+<p><img alt="" src="../images/Lamb_BREAKER.png" /></p>
+<p><strong>LIGHTNING BUG:</strong>The fireflies pictured here belong to a species known as <em>Photinus carolinus</em>, which computer scientist and biophysicist Orit Peleg has studied. When certain population densities are reached, the males of the species will blink in unison to better attract females in their vicinity to mate. But the flashes aren’t actually 100 percent synchronous, Peleg has found. They propagate like a “wave” you might see at a crowded sports stadium. <em>Photo by Radim Schreiber / Wikimedia Commons.</em></p>
+<p>In 1975, Kyoto University physicist Yoshiki Kuramoto developed the <a href="https://doi.org/10.1016/s0167-2789(00)00094-4">Kuramoto model for coupled oscillation</a>, which explained how a large number of individual actors with their own natural frequencies could spontaneously synchronize. In his model, oscillators that were out of sync with each other would adjust their timing slightly based on how close they were to being in sync. Two oscillators that were only slightly out of rhythm would lock in together quickly, while it would take longer for oscillators whose rhythms were more distinct.</p>
+<p>Kuramoto’s paper was purely theoretical: He was trying to streamline the mathematical approach that another researcher, theoretical biologist Art Winfree, had taken to describing synchrony in biological systems. “At the time, I had no idea that my model could realistically describe synchronization in natural or manmade systems,” Kuramoto wrote in an email.</p>
+<blockquote>
+<p>While both male and female fireflies flash, only the males synchronize.</p>
+</blockquote>
+<p>But in the 1990s, other researchers started publishing <a href="https://doi.org/10.1103/physreve.57.1563">papers</a> that showed that the Kuramoto model for coupled oscillators could describe real-world situations such as the motion of electrons in superconductors and, yes, swarms of synchronous fireflies.</p>
+<p>Even hidden motions in our own bodies. “Having a new model system where you can really study synchrony in quite granular detail is a good thing,” says Bard Ermentrout, a mathematical biologist at the University of Pittsburgh who has worked on the mathematics of several different examples of coupled oscillators in nature, from fireflies to neurons to the intestinal pulsing that pushes material through the gut. “It turns out there’s this really cool intrinsic pacemaker system in the colon,” Ermentrout says. It may not be the most glamorous example of biological synchrony, but “if that’s broken, then you die,” he says.</p>
+<p>When Peleg started studying fireflies, two mathematical models already existed for firefly synchrony—not just the Kuramoto model, but also another known as integrate-and-fire, which is based on neuron firing and takes into account the length of a firefly’s light burst and the gap of darkness between bursts. Peleg felt that researchers needed better experimental data to verify that the models fit and to help refine the way they work. Previous researchers had made still and video recordings of firefly swarms, but three-dimensional information about firefly movements was lacking, so they could not accurately determine the distances between individual fireflies in a swarm. Using multiple cameras to record the firefly displays, Peleg and her colleagues were able to create more accurate reconstructions of the flickering swarms of insects, which allowed them to get a clearer view of how and when synchrony was happening.</p>
+<p>Peleg and her team usually spend the first night of their trip staking out likely firefly haunts so they can set up their equipment where the fireflies will be, no matter how out of the way those places are. The insects don’t necessarily choose to hang out in the spots where researchers can observe them most easily. “A few times, we were optimistic and put the cameras in places that were convenient for us, Peleg says, “and the fireflies just didn’t show up.” Still, she relishes the chance to sit in the parks and take in the light show. “Once all of these experiments are running, there is kind of a downtime where we just have to wait and watch the fireflies,” she says. “No complaints there.”</p>
+<p>Synchronization is a relatively rare behavior for fireflies. “It’s weird,” says Sara Lewis, a firefly researcher at Tufts University and author of the book <em>Silent Sparks: The Wondrous World of Fireflies</em>. “The behavior has evolved many times, independently, in different lineages of fireflies that are not related.” Among the thousands of firefly species in the world, only a handful blink in sync. A family of fireflies with dozens of species generally only has one or two synchronous species. Scientists still do not understand why synchrony has evolved only in these isolated cases. “Why these species and not other species?” Lewis asks. Does it confer an advantage on species with particular physiological characteristics or habitats? Some researchers have conjectured that it helps the insects mate en masse in places where visibility may otherwise be low, such as tropical swamps.</p>
+<p>While both male and female fireflies flash, only the males synchronize. In one species Peleg has studied, <em>Photinus carolinus</em>, males generally flash on the wing to attract the attention of females, who perch in the vegetation. The females occasionally flash back in response, a gesture meant to entice the males to come mate with them. <em>Photinus carolinus</em> females are most likely to respond when males are synchronized.</p>
+<blockquote>
+<p>Among the thousands of firefly species in the world, only a handful blink in sync.</p>
+</blockquote>
+<p>In a 2021 <a href="https://www.science.org/doi/10.1126/sciadv.abg9259">paper</a>, Peleg and her coauthors Raphaël Sarfati and Julie C. Hayes used their reconstructions to measure how the density of fireflies in a particular area would affect their synchrony.2 If a few fireflies are spread out over a large area, they probably won’t end up synchronizing. As more fireflies congregate in the same space, it becomes more likely that they will start to flash in sync. Peleg, Sarfati, and Hayes came up with a critical density threshold fireflies need to attain to start synchronizing. Their study also addressed one of the most pressing scientific questions about firefly synchrony: <em>How</em> do they do it?</p>
+<p>The group found that “synchronous” firefly flashes aren’t actually 100 percent synchronous. They propagate a little like “the wave” in a crowded sports stadium and sometimes run into physical obstructions such as trees that break up the synchrony, supporting one theory that fireflies use visual cues to start synchronizing with each other. Ermentrout hopes the work will help clarify the radius of influence each individual firefly has on a group. “How close does another firefly have to be to influence the rhythm?” he asks.</p>
+<p>In 2002, Kuramoto and his coauthor Dorjsuren Battogtokh <a href="http://www.j-npcs.org/abstracts/vol2002/v5no4/v5no4p380.html">discovered</a> that under certain conditions, the coupled oscillators in the Kuramoto model could exhibit strange behavior, which has since been dubbed a “chimera state.” In a chimera state, some of the oscillators are locked in phase with each other, while the rest are either out of phase or completely asynchronous. Even more than two decades after the phenomenon was given a name, the way chimera states function remains mysterious. The biological significance of such states is not clear yet, either, although some researchers have found evidence that <a href="https://doi.org/10.1063/1.5009812">epileptic seizures</a> display aspects of chimera states, so a deeper understanding of them could inform treatments for epilepsy and <a href="https://www.sciencedirect.com/science/article/abs/pii/S1571064518301088#:~:text=Recent%20research%20has%20shown%20that,seizures%2C%20and%20even%20to%20schizophrenia.">potentially other diseases</a>.</p>
+<p>Peleg and Sarfati published a <a href="https://www.science.org/doi/10.1126/sciadv.add6690">2022 paper</a> describing these chimera states in swarms of fireflies in Congaree National Park, an old growth <a href="https://www.experiencecolumbiasc.com/things-to-do/parks-and-gardens/congaree-national-park/">river swamp</a> forest in South Carolina.3 Observing a chimera state in a natural system is alluring because, despite the Kuramoto model’s prediction that they will occur, it has been hard to find tangible evidence of such behavior in nature. “If we know that fireflies do something weird,” Peleg says, “we can try to check whether all of these other systems are doing that as well.”</p>
+<p>Other researchers are skeptical. There’s a fine line between a chimera state and a few odd fireflies that are out of step with a larger group. “We really don’t see it,” Ermentrout says. “It’s hard to define a chimera state unless you’ve got really a lot of oscillations.” He doesn’t think the number of fireflies that have been observed out of sync with the group is sufficient to truly call the phenomenon a chimera state.</p>
+<p>But Peleg believes that even though the numbers they observed are small, the persistence of the behavior over time makes it a good example. “These two groups coexist for a duration that is much longer than the interval of the individual flashes,” she says, around half an hour. One of Peleg’s students is currently working on experiments to further probe the conditions and mechanisms that might produce chimera states in firefly groups, using LEDs to influence their rhythms.</p>
+<p>For decades, global firefly populations have been <a href="https://academic.oup.com/bioscience/article-abstract/70/2/157/5715071?redirectedFrom=PDF">declining</a>, due to habitat loss, light pollution, and pesticide use. If it turns out that synchrony confers a mating advantage on males of synchronizing species, population declines may have a vicious cycle effect: Fewer fireflies could lead to lower population densities, which would decrease synchrony and therefore mating success.</p>
+<p>Peleg is interested not only in how her work can help us understand the mysterious rhythms and mathematical models that govern some natural systems, but also how we can protect these glowing bugs. <img alt="" src="../images/nautilus-favicon-14_1212.png" /></p>
+<p><em>Lead image: Fer Gregory / Shutterstock</em></p>
+<p><strong>References</strong></p>
+<ol>
+<li>
+<p>Buck, J. &amp; Buck, E. Biology of synchronous flashing of fireflies. <em>Nature</em> <strong>211</strong>, 562-564 (1966).</p>
+</li>
+<li>
+<p>Sarfati, R., Hayes, J.C., &amp; Peleg, O. Self-organization in natural swarms of <em>Photinus carolinus</em> synchronous fireflies. <em>Science Advances</em> <strong>7</strong>, eabg9259 (2021)</p>
+</li>
+<li>
+<p>Sarfati, R. &amp; Peleg, O. Chimera states among synchronous fireflies. <em>Science Advances</em> <strong>8</strong>, eadd6690 (2022)</p>
+</li>
+</ol>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scent Makes a Place - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Scent Makes a Place - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-01-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-IEWT</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In the late spring, the desert smells like chocolate. It’s fleeting, and it isn’t everywhere in New Mexico, but sometimes, walking in the scrubland, it suddenly hits: a sweetness shimmering through the air. At first, I didn’t know how to read this olfactory information, but now I can look for the source: yellow-petaled flowers with dark centers—chocolate daisies—blooming in the sun.</p>
+<p>The American Southwest smells unlike anywhere I’ve lived before. It’s better than the woods of Maine; it’s far more fragrant. I didn’t expect that when I moved here. I’m a perfume collector, so I had smelled the desert through art before I smelled it in person. Through my experience sampling “Mojave Ghost,” “Arizona,” and “Desert Eden”—perfumes designed to evoke cactus flowers and conifers—I thought the mesas would smell dusty and musky, with a little green cypress thrown in. I was wrong.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>Here, the plants hold their essences close to the stem out of necessity, only letting their oils free when it’s safe to do so, when they’re ready to be fertile. Here, the sand bakes under the sun and the fragile soil releases its secrets with each step. Here, even my dog’s urine is more potent, more fragrant on the wind, a louder yellow than I ever witnessed during our walks in Maine, blending uneasily with the grey rabbitbrush. It’s wetter and stranger than I ever anticipated—complex, elusive, fecund.</p>
+<p>After a year in Santa Fe, I’ve finally started to scratch the surface of knowing this landscape. But the learning is slow and requires all my senses, including the one most often forgotten, what Hellen Keller called the “fallen angel” of the body. Unable to see or hear, smell became her primary way of reading the wider world; she lamented how that “most important” sense had been “neglected and disparaged” by the general populace, though she found it hard to communicate this knowledge to others. “It is difficult to put into words the thing itself,” she wrote. “There seems to be no adequate vocabulary of smells, and I must fall back on approximate phrase and metaphor.”</p>
+<blockquote>
+<p>Sniffing, searching, naming: These actions enable us to more thoughtfully engage with our environment.</p>
+</blockquote>
+<p>Perhaps due to our trouble translating scents into language, it was once common wisdom that human noses were weak, shoddy things compared to our animal friends. Time and research has challenged that paradigm. Although we don’t have the smart wet noses of dogs or the large nasal chambers of reptiles, humans can discriminate between an estimated 1 trillion different odors; the myth of our poor olfaction is rooted in the Victorian distaste for all things scented and the Puritanical eschewing of all things bodily. In other eras people assumed that odd smells were evidence of <a href="https://www.sciencedirect.com/topics/medicine-and-dentistry/miasma-theory">impending illness</a>, <a href="https://www.gutenberg.org/ebooks/8486">ghostly presences</a>, or <a href="https://pubmed.ncbi.nlm.nih.gov/18505801/">moral failings</a>, rather than taking them for what they were.</p>
+<p>We’ve also numbed our noses into oblivion, dulling <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3018978/">our most primal sense</a> with the overwhelming presence of synthetic musks and so-called “clean” compounds, used to scent everything from candies to detergents. So when I go outside and try to smell the air, identify the plant, find the source of aromatic joy, I’m engaging in an uphill battle, fighting both my culture and my exhausted, chemical-addled olfactory bulbs.</p>
+<p>Yet it’s a wildly worthwhile thing, to immerse oneself in a landscape, and savoring the scents of place is a crucial element of this process. “Olfactory scientists have considered smell to be largely the purview of the unconscious, but by putting a smell into words we bring it into consciousness,” explains Asifa Majid, a cognitive scientist at the University of Oxford who studies both language and olfaction. Sniffing, searching, naming: These actions enable us to more thoughtfully engage with our environment.</p>
+<p>Smell can also ground us in our bodies—my therapist uses scent as a part of our meditative practice—and tie our consciousness to place and time, rather than letting it swirl wildly around the contortions  of future-thought. I relish my olfactory abilities because they help me feel embodied, reminding me that I am also a part of the world.</p>
+<p><img alt="" src="../images/8WHwggPB-Kelleher_BREAKER.png" /></p>
+<p><strong>DESERT CANDY:</strong> Blooming chocolate daisies, more lyrically known as lyreleaf greeneyes, are part of Southwestern smellscapes from spring to fall. <em>Photo by G B Hart / Shutterstock.</em></p>
+<p>“We are constantly taking a read of our environment and synching,” says artist and theorist Gayil Nalls,* founder of the World Sensorium Conservatory, a repository of “culturally important” botanical scents. Just as we constantly take in information from our eyes and ears, both consciously and unconsciously, we’re also receiving olfactory detail. “It is a big, important way that we understand our environment,” Nalls says.</p>
+<p>On New Year’s Eve, 1999, Nalls debuted an “olfactory sculpture” to millions of people in Times Square. This scent was composed from iconic plants from every nation; for America, Nalls chose pine. After speaking to Nalls, I went for a walk through the scrubby forests at the foot of the Sangre de Cristo Mountains on the Atalaya trails. Almost immediately upon entering the woods, I found myself leaning into trunks, sniffing at the bark of a ponderosa pine.</p>
+<p>It was a hot day, and it smelled warm, resinous, homey, and alive. Even in that small patch of forest, each tree—piñons and junipers, bristlecone pines, and cypress—smelled distinctive, each plant had its own olfactory fingerprint, and together they created a complex and resonant symphony of a very particular smellscape. The more I sniffed at bark, the more confused I became. What did pine even smell like, anyway? It was only when I stepped back that the forest came into view. Iconic and piney, certainly, but also so much more.</p>
+<p>I could list each note that sung with the pine, laying it out beat by beat. That’s how perfume companies do it: They give you the top, middle, and base notes. Sometimes this information is provided right on the packaging, though one still must sniff the nozzle to understand how they all come together. Language can only offer a loose approximation of a perfume, and a perfume can only offer a loose approximation of a natural smellscape.</p>
+<p>The airy scent that follows rain is known as petrichor, and there are many forms. The petrichor in Singapore, for example, will be quite different from that of Reykjavik. The desert smells most intensely after a sudden summer downpour, when the plants release their oils, when the soil opens its pores to the sky. Nevertheless, perfumers have identified a common essence to petrichor: the chemical compound geosmin. It takes its name from the Greek words for “earth” and “smell.” In small amounts—and we are able to detect <em>very</em> small amounts of geosmin, down to 10 parts per trillion, akin to a stick of incense diffused through the entire Empire State Building—it smells familiar and musty, a little minerally, a little dirty, but in a nice way. In larger doses, it can come across mildewy and rank, like dirty laundry left in a damp basement. In nature, geosmin is produced by certain species of blue-green algae that live within soil, and is part of the fragrance bouquet that gets released into the air before, during, and after the high desert gets hit by rain.</p>
+<p>For perfumers, the discovery and naming of geosmin in the 1960s was a boon, although it did take several more years to perfect the lab-synthesized version of the compound. It can be used in perfumery to add a muddy, petrichor scent to the bouquet. Since most fragrance houses don’t release a list of their chemical compounds, it’s not always easy to know when you’re smelling geosmin, but if you’re looking for a desert-inspired smellscape, there’s a good chance that synthetic petrichor will be part of the mix.</p>
+<blockquote>
+<p>"We underestimate the human sense of smell, but we notice it a great deal when it is gone.”</p>
+</blockquote>
+<p>Indie perfume house Solstice Scents makes a botanical, woodsy scent called “Desert Thunderstorm,” which features sage, pinon resin, sweetgrass, creosote brush, sand, and petrichor among its notes. Another atmospheric perfume, “Two cups of tea, a summer monsoon, and me and you” by Death and Floral, also relies heavily on petrichor to ground it in place. Both can veer mildewy if worn too heavily. That’s the risk of geosmin thanks to our remarkable sensitivity to this compound.</p>
+<p>But there are other ways to get a rainy desert scent, according to Cebastien Rose and Robin Moore, perfumers at the Albuquerque-based company Drylands Wilds. Unlike most perfumers, they don’t use synthetic odor molecules; their ingredients are derived from locally foraged plants, and through their work, they’ve become experts in the various scentscapes of New Mexico. Including greasewood, which is often considered a pest plant, a garbage scrub that needs getting rid of but is also responsible for an earthy, fresh Southwestern scent that wafts from its leaves. “Right before it rains,” explains Rose, “it opens all its stomata.” These “tiny mouths” are how the plant breathes, and as the rain begins to fall, the leaves release aromatic organic compounds called cresols, which smell a bit like coal tar and—thanks in part to their association with rainfall—a lot like a drenched desert.</p>
+<p>“We’re obsessed with trying to capture that exact experience of being out here, walking the hills, smelling the piñon resin when it gets hot, smelling the ponderosa bark that wafts the air with vanilla,” Rose says. But it’s not enough to simply extract oils from the bark. It’s even difficult to capture a single tree in perfume form, says Rose. Plus, that wouldn’t reflect the experience of walking under the “giant, orange-barked trees. You wouldn’t get the oak moss, the soil, the place.” That, explains Rose, is where the “art of perfumery” comes in. The Dryland Wilds ponderosa perfume has yellow nutsedge, sweet clover, piñon, oakmoss, fir, and ponderosa. It contains extracts that mimic the dirt, resulting in a liquid that smells like a tree, yes, but is also intended to smell like a moment—a dry summer afternoon on the Atalaya trails, for instance. “We’ve had people cry after smelling it,” adds Moore. “One woman had lived in a ponderosa tree trying to protect old growth forest for a year, and for her, that hit was instantaneous.”</p>
+<p>To me, this perfume feels more like an artistic interpretation, a translation of experience, as emotionally resonant as a poem or a song. “It’s not just about creating a nice-smelling thing,” Moore had said. “It’s about trying to connect and reconnect to these spaces. To connect and inspire a sense of stewardship.” It’s a lot to ask from a splash from a $32 perfume bottle, but perhaps scent could inspire action. It’s what Nalls is hoping for, too. And doesn’t every artist want, at least on some level, for their work to change the world?</p>
+<p>Perfumery is an ancient art. It’s also a lucrative product. According to Stuart Firestein, a neuroscientist at Columbia University who studies olfaction, most of the funding that goes into research about the nose comes from the fragrance industry; compared to vision, which is well-studied and well-funded, we know relatively little about both the physiology and psychology of perceiving scent.</p>
+<p>That is beginning to change as more scientists look to the olfactory system for insight into the brain. This is what drew Firestein to the field. “For many years, we have used the vision system as a way to understand the way the brain works. And we did learn a lot about brain function from the retina. But little by little, the visual system has become less interesting,” he explains. Unlike light, which can ultimately be understood as variations along what Firestein calls the “single dimension” of wavelength, scents can’t be broken down into a neat spectrum. The olfactory system is stranger and more unwieldy than sight, harder to grasp yet arguably more representative of how the brain performs its essential functions, from retrieving memory to processing emotion.</p>
+<p>Smell, as a sense, is dependent on so many variables—it can be affected by our previous experience, our current context, and our emotional or mental state. Something may smell “good” in one scenario and disgusting in another. How we judge a smell can be changed by the <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4246650/">sounds we’re hearing</a>, the <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.571852/full">temperature that surrounds us</a>, the food we’re tasting, <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9940644/">the colors we’re seeing</a>. It’s a sense that shifts and slips, sometimes in predictable ways but sometimes in totally unexpected directions. Much like the brain as a whole.</p>
+<blockquote>
+<p>A smellscape is more than the list of chemicals found in a location. It’s a poetic map of the world.</p>
+</blockquote>
+<p>To lose your sense of smell, Majid points out, is to experience a disruption in perception that can have massive emotional and psychological impacts. “The human sense of smell is strongly linked to well-being, so much so that when people lose their sense of smell they report it deeply impacts their quality of life, and it can even be linked to depression,” she says. “It’s a sense we take for granted, as much as we take breathing for granted.” Firestein agrees. “In general, we underestimate the human sense of smell,” he says. “But we notice it a great deal when it is gone. Suddenly, people complain quite vividly about their sense of smell. They can know they are home, see all their stuff, but they don’t <em>feel</em> like they are at home. It’s invasion of the body snatchers.”</p>
+<p>I’ve always been keenly aware of the scent of my home and the scents of my body, but over the past year, since moving to New Mexico, my relationship to outdoor scents has dramatically changed. At first, I was picking out individual scents and identifying their sources, a one-by-one exploration of the landscape that gave me a good deal of surface level knowledge about the desert’s flora and fauna. As I began to know the strongest smells—greasewood leaves, ponderosa pines, chocolate daisies—I also began to recognize the interplay between them, much in the same way that I recognize the distinct smellscape of my bedroom. It now makes sense to me why perfumers refer to scents as “notes.” Emotionally complex, effective, and evocative art is typically made with more than one note; it’s the combination that elevates something from music to song, oil to perfume.</p>
+<p>Similarly, a smellscape is more than the list of chemicals found in a location. It’s a poetic map of the world, fed to us through our oldest sense. The smells of the desert are more than just sweet, dusty, dry, or sharp. Each smell is a distinct sensation, but together they are more than that. Smellscapes are part of place-making, the process by which a site becomes imbued with meaning and metaphor; a <em>place</em> is more than just the physical location. Places have history, lore, memory, and emotion all infused into them, and encounters we have with a place are participatory.</p>
+<p>It’s of course impossible to remake the smellscape of the desert in a single piece of art. The place is continually changing based on the weather, the time of year, the exact location, and just as importantly, my mindset. The most we can ask from a perfume is that it evokes that sense of the place, opening doors in memory that we can choose to walk through. And like landscape painters, who often alter colors and dramatize scenery for effect, perfumers are free to play with their ingredients to create something that is both more and less than the real experience. They can create an atmosphere that speaks to our experience of nature without reproducing it note-by-exact-note.</p>
+<p>Smelling a landscape, and knowing, on a deep level, the scent of a place—these actions bring us more into the world. And when a site becomes a place, we’re better equipped to celebrate and protect it.</p>
+<p>I plan to leave this landscape at some point, returning to my family back east, my little house in the Maine woods. I will spend many cold New England days aching for the bright sensations of New Mexico. I’ll feel place-sick but perhaps will find solace in a pathway back, in my mind, cleared by just the right desert perfume. This scent of place weaving a web of connection across an entire continent. <img alt="" src="../images/nautilus-favicon-14_1291.png" /></p>
+<p><em>*Gayil Nalls is married to John Steele, who is the publisher of</em>  Nautilus.</p>
+<p><em>Lead image: Mike Hardiman / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

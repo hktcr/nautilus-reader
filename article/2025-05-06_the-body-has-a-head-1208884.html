@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Gustav Eckstein’s The Body Has a Head | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Reading Gustav Eckstein’s The Body Has a Head</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NLAC</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I want to tell you about the most absolutely wild book I have ever read about the human body and mind. I discovered it from an author's <a href="https://www.nytimes.com/2017/07/06/books/review/a-scott-berg-by-the-book.html?searchResultPosition=1">offhand reference</a> in <em>The New York Times Book Review</em> and bought it from an online antiquarian bookstore.</p>
+<p>But I'm not sure where to start because if science writing is a round hole, this book is a giant square peg. The best I can say is <em>The Body Has a Head</em> by doctor and teacher Gustav Eckstein, published in 1969, reads like <em>Gray's Anatomy</em> written by James Joyce.</p>
+<p>Descriptions of biological mechanisms start out straightforwardly enough, explaining, say, the stomach is J-shaped. But the descriptions soon take flight on metaphoric reveries that compare what's going on inside our bodies to the carnival of life outside them. Talk about interconnection. Of <a href="https://nautil.us/who-said-science-and-art-were-two-cultures-238351/">science bridging art</a>. Let's have some examples.</p>
+<p>• While the attacking molecules and the food molecules are engaging each other in chemical combat, muscles of the stomach wall are acting on the softening lunch. A nagging. A maceration. A trituration. A pushing forward. A steady pressing on the late filet mignon or goose like the pressing on a toothpaste tube. Nothing that once gets into the digestive tube is allowed to loiter.</p>
+<p>• Why do we have pain? Why do we have this sense forever waiting? Someone, too discriminating, called it music. <em>Doloroso</em>. The whole orchestra, all the violins especially, first, second, viola, cello, bass, now and then a complaint from the oboe, a crash from the brass, a rumble from the drums. Why? The creature must be forewarned. Pain is preventing destruction going too far by making a quick announcement whenever anything has begun threatening the flesh, and something almost always is.</p>
+<p>• A road map is in the mind of every neurologist or neurosurgeon. He sees the events. Urine enters the tank, rises in the tank, a report goes to the owner, who reaches a decision, telegraphs initial orders from mind to brain, that frees the spinal-cord center of its duty to stem the tide, and bladder wall and its double-valve outlet go into action. The bladder contracts, the internal outlet valve releases, the urine keeps pressing, the external relaxes, the floodgates open, and all is well. Assistance is given by the abdomen, whose muscles are holding firm while everything below is relaxing. "A machine made by the hand of God." Relaxing could have been changed to contracting if the gentleman had, for instance, decided to finish his crossword puzzle.</p>
+<p>Trust me, these are just a few of the flares in this volcano of exposition. 784 pages! A reviewer in the <em>Journal of the American Medical Association</em> in 1970 tutted that the book "is narrated in what I call a floating hyperbolic style, undisciplined and interminable, a sort of flamboyant free association." As if that were a bad thing!</p>
+<p>You're fine not reading the book from the first page to last. The chapters are short with a lot of subsections, so you can sneak in anywhere. Along its serpentine paths you’ll encounter Hippocrates, Descartes, <a href="https://nautil.us/shakespeares-genius-is-nonsense-235105/">Shakespeare</a>, <a href="https://nautil.us/why-scientists-need-to-get-high-305830/">Thomas De Quincey</a>, Beethoven, Louis Pasteur, Einstein, Pavlov, Poe, Nietzsche, <a href="https://nautil.us/your-brain-is-shaped-like-nobody-elses-297950/">Phineas Gage</a>, and a supporting <a href="https://nautil.us/when-the-surgeon-was-an-uneducated-barber-238521/">cast of surgeons</a> from the 17th, 18th, and 19th centuries, portrayed through their grisly tales of experimentation.</p>
+<p><img alt="" src="../images/vruzJVOZ-Berger_BREAKER.png" /></p>
+<p><strong>DR. GUS:</strong> Gustav Eckstein was a dentist, doctor, and professor. He taught bacteriology, then physiology, then neurophysiology. "Somewhere in the course of this I had found a pen, and that clarified everything," he wrote. <em>Credit: The Henry R. Winkler Center for the History of the Health Professions at the University of Cincinnati.</em></p>
+<p>Of course, there's a big hole here. A fault in Eckstein's stars. Badly missing from his opus are <a href="https://nautil.us/its-time-these-ancient-women-scientists-get-their-due-235893/">women in philosophy, science, medicine</a>, and art. (Georgia O'Keeffe merits a few lines to illustrate subjective perception caused by the interplay of eye angles and vision neurons.) <em>The Body Has a Head</em> is also autobiographical, I suspect, as the anatomy lessons are often fleshed out by scenes from a hospital, where Eckstein coolly comments on all manner of macabre scenes, gossiping like a rascal about other doctors, nurses, and patients.</p>
+<p>Who was Gustav Eckstein? He was a dentist from 1911 to 1918, then earned an M.D., and then settled into a long run as a professor of physiology at the University of Cincinnati Medical School. He lived nearby in a resident hotel for 40 years. He was briefly married when he was young. He died at age 90 in 1981. His friends, students, and patients knew him as Dr. Gus.</p>
+<p>"Dr. Gus was a slight man with a shock of unruly hair atop a too large head," <a href="https://libapps.libraries.uc.edu/liblog/2014/12/gustav-eckstein-a-memoir/">wrote his friend and fellow doctor</a>, the late Stanley Block. "He was curious about everything. And everything aroused his curiosity."</p>
+<p>Before <em>The Body Has a Head</em>, Eckstein had written eight books and one play, about an Irish woman in America troubled by her overweening father; it flopped on Broadway. One of the books was about canaries and another, <em>Everyday Miracle</em>, about the animals around him, notably Willy the cat, who every Monday night at 7:45 crossed town to sit in a window and watch a bingo game. How did Eckstein know? He followed him. Eckstein loved his pet macaw and on Saturday nights took him to the symphony, hidden under his coat.</p>
+<p>Eckstein installed a screen door inside his university lab door. That was to make sure the flock of canaries flying freely in his lab didn't get out. Nor <a href="https://nautil.us/living-with-lab-mice-1202657/">the mice</a> who made the lab floor their playground. Visitors who dropped by and dodged the birds and mice would invariably find Eckstein at his typewriter, pecking away, wearing a straw hat to keep the bird poop—notable on countertops, books, and chairs—off his hair.</p>
+<p>I can't imagine a more perfect scene to capture the author behind <em>The Body Has a Head</em>. There he was, typing away in a fury, canaries above, mice below, grinning with a mordant glee, pouring out everything from his capacious brain, making literature like none other out of science and medicine. <img alt="" src="../images/nautilus-favicon-14_1190.png" /></p>
+<p><em>Lead image: lynea / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

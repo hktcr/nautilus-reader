@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Lamarck’s Giraffe Got Right | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What Lamarck’s Giraffe Got Right</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-14
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GXQ5</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><em>French naturalist Jean-Baptiste Lamarck proposed the first evolutionary theory of life in the early 1800s. But for centuries, he was mocked and undercut by those who came after him. New findings suggest his central claim was essentially right. In her latest book,</em> <a href="https://www.penguinrandomhouse.com/books/763654/the-power-of-life-by-jessica-riskin/">Power of Life: The Invention of Biology and the Revolutionary Science of Jean-Baptiste Lamarck</a><em>, Stanford historian Jessica Riskin tells the story of Lamarck’s life and work. Below, three revelations she had while writing the book.</em></p>
+<p><strong>1</strong> <strong>The Science of Biology Originated in a Jumbled Garden</strong></p>
+<p>When I set out to write about Lamarck—the man who coined the term “<em>biologie</em>” in 1802—I knew that he had lived and worked in the botanical garden in central Paris, the <em>Jardin des plantes</em> (Garden of Plants). But I hadn’t realized that the science of biology and its central idea of life’s evolution first took root in that garden itself and then grew from a fertile tangle of activities that included not just sciences, like botany and zoology, but also philosophy, literature, and all the arts.  </p>
+<p>In this landscape that gave rise to the first theory of evolution, I was surprised and delighted to find, for instance, poetic rhapsodies on the sex lives of plants by Sébastien Vaillant, one of Lamarck’s predecessors in the royal botanical garden. The idea of a basic commonality and continuity among all forms of life, plants and animals alike, became central to Lamarck’s revolutionary theory. Equally delightful were the philosophical-poetic musings on love and friendship among animals—within and across species—by the novelist Bernardin de Saint Pierre, who served briefly as the garden’s director. His writings featured an actual lion and dog who were the best of friends, evacuated from the King’s collection at Versailles during the Revolution. Their friendship led Bernardin to speculate that interspecies love might produce new species.  </p>
+<p>The Garden of Plants, which I came to think of as the Garden of Evolution (a kind of counter-narrative to the Garden of Eden) also contained some wonderful scenes, including a series of concerts performed for a pair of elephants who arrived in the menagerie in 1798. The naturalists of the Garden arranged these concerts in order to measure the elephants’ emotional responses to different kinds of music and compare them to human responses. The Garden’s librarian, Georges Toscan, described these experiments in a series of literary-philosophical essays, and the elephants’ responses were also depicted by an illustrator who worked in the Garden, Nicolas Maréchal.  </p>
+<p>This combination of philosophy, music, art, literature, and scientific experimentation informed Lamarck’s thinking as he began to imagine a dynamic interconnectedness of all living beings, including humans. He turned this idea into the first modern theory of evolution and proposed <em>Biologie</em> as the science of life. The idea caught on! It served as a critical foundation for Charles Darwin to build upon.</p>
+<p><strong>2 The World Is Made by Living Things</strong></p>
+<p>Lamarck made a radical move when he reassigned God’s monopoly on creation to mortal, living beings. He saw organisms as constantly creating and recreating not just themselves but the world around them. He wrote and taught that living organisms made the inanimate world: mountains, islands, coastlines. When I was writing about that idea, I wondered how close it came to current accepted science regarding the formation of structures on the Earth’s surface, such as mountains. Pretty close, it turns out!</p>
+<p><img alt="" src="../images/French_BREAKER.png" /></p>
+<p><strong>ADAPTABLE:</strong> Author Jessica Riskin argues in her new book that Lamarck was essentially right all along: Animals shape their own evolution. <em>Photo by Jim Block.</em></p>
+<p>From my reading and conversations with geologists and geochemists, I discovered that people studying mineral evolution today believe that living organisms and the biochemical processes they perform are responsible for most of Earth’s mineral species. As one mineral physicist, Robert Hazen of the Carnegie Institution, <a href="https://www.quantamagazine.org/is-mineral-evolution-driven-by-chance-20150811/">has put it</a>, “The origin of life depends on minerals, but the origin of minerals depends on life.  </p>
+<p>I had known that the White Cliffs of Dover were made of chalk that came from pulverized seashells. But I didn’t think about the limestone that comprises lots of other mountain chains—the Rockies, the Alps, the mountains of Guilin in China—which is also made from coral and seashells. I hadn’t realized either that the free oxygen in Earth’s atmosphere comes from living organisms or that this free oxygen is essential to the surface mineralogy of the Earth. Apparently, biological activity might even have helped to stabilize the continents by increasing the rate of granite production. So, Lamarck’s idea of a life-made world is consistent with current science. Realizing this has transformed the way I look at the world, not just plants and animals but the inanimate world too, all as the product of living creation.</p>
+<p><strong>3 Lamarck’s Giraffe Is Coming Back</strong></p>
+<p>Giraffes are what most people think of when they hear Lamarck’s name. That’s because for almost two centuries, science teachers and textbooks have been pointing to what he said about giraffes as an example of how wrong he was. Lamarck said that when giraffes stretch to reach high branches, they make their necks infinitesimally longer and then pass the change on to their offspring. Added together over thousands of generations, these elongations result in the giraffe’s extended neck. Darwin adopted Lamarck’s idea, which he called “the inherited effects of use and disuse.” But after he died, a new generation of scientists modified his theory, and in their Neo-Darwinist version of evolution, they banished the idea of “inheritance of acquired characteristics,” which became unthinkable in mainstream science.</p>
+<p><strong>Read more: “<a href="https://nautil.us/when-we-were-lunch-1255357">When We Were Lunch</a>”</strong></p>
+<p>According to these Neo-Darwinists, living beings were the passive objects of outside forces: They varied purely randomly and were then acted upon by their environment, either selected or deselected in the struggle for survival. Nothing they did—and no change they underwent as a result—could influence the course of evolution. This Neo-Darwinist theory, in other words, rendered organisms as passive as they had been according to the “argument from design,” the theory that God had designed and built each one.</p>
+<p>But recently, the study of epigenetic inheritance—including chemical groups on or around the DNA that change how it is expressed in the organism—has shown that inherited characteristics can be acquired in the next generation. I’ve been part of a group carrying out an experiment, still in its very preliminary stages, on epigenetic inheritance in giraffes, looking to see whether there are epigenetic differences between two species of giraffes and between giraffes and their closest relatives, okapis. Being a historian, I don’t usually participate in scientific experiments, but I asked some biologist friends and colleagues to undertake this with me, and we’ve been working with the Giraffe Conservation Foundation in Namibia.</p>
+<p>Furthermore, the evidence that animals are active in the evolutionary process, not passive, goes far beyond the study of epigenetic inheritance. Scientists in several areas of evolutionary biology have been studying the myriad ways in which animal behaviors shape the course of evolution. The last line of <em>The</em><em>Power of Life</em> (spoiler alert!) is “Lamarck was right.” I know it’s important to be clear what I mean when I say that someone who died in 1829 was “right” about evolution. Obviously, he didn’t know anything about DNA, which is central to current biology, or about epigenetics. But I’ve been fascinated to learn of the ever-mounting evidence that he was right to say animals have evolutionary agency: By their behaviors, they help to shape the course of evolution. <img alt="" src="../images/nautilus-favicon-14_71.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Reelistic / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

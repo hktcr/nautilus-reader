@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Gaming Could Help Cure Cancer | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Gaming Could Help Cure Cancer</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-02
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-P4BO</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Consider a gamer playing a game. Maybe one of them is in a room near you right now. You hear periodic outbursts of anger and joy. They’ve been at it for hours. These games might be easy to pick up, but they sure aren’t easy to win. As Atari founder Nolan Bushnell said, “The best games are easy to learn and difficult to master.”</p>
+<p>What is it about humans that keeps us glued to a game console for hours on end? One answer is evolutionary: <a href="https://www.pnas.org/doi/abs/10.1073/pnas.0914623107">We’re natural problem solvers</a>. This same drive continues to benefit us today. Scientists, for instance, spend years mastering their fields—writing tedious grant proposals, culturing cells for hours, and enduring decades of training. Their persistence leads to better medicine, better technology, a better world.</p>
+<p>Games exploit this evolved tendency: They appeal to the ancient circuitry in us that strives to figure things out. Game designers create a virtual embodiment of some kind of problem-solving situation—escaping an enemy, defeating an opponent, making it to the next level, unlocking a skill—and they make it easy and intuitive to start playing. They lure you in with easy wins and progress. But over time, it gets harder and harder, and in the end, to win, you must thread a narrow path through action space, doing just the right things, in the right order, to achieve your goal.</p>
+<p>These remarkable parallels can be put to good and surprising use, helping us to solve some of medicine’s most stubborn problems, such as cancer. Thousands of scientists worldwide are working diligently to make progress in the treatment of cancer. What sequence of actions will lead to a better way to block that channel? How can that cell type be detected in early stages? How can that tumor be targeted without harming healthy cells nearby? What treatment will work to eradicate the tumor without making it resistant to the treatment? Scientists, like game players, must thread an incredibly narrow path through action space, but the variables are more numerous, the stakes are higher, and it’s not even known if there is any path at all.</p>
+<blockquote>
+<p>Games appeal to the ancient circuitry in us that strives to figure things out.</p>
+</blockquote>
+<p>Community science games are not like standard games, where the designers know how the game players’ goals can be achieved. But that’s okay. The creators of chess could not have dreamed of all the innovations the game would inspire. The designers of Pac-Man and Donkey Kong didn’t even know what the highest possible scores were. So long as the game has clear success conditions, everything else stays the same. We can create games where players attempt to solve problems that have never been solved, utilizing a defined set of tools to engineer something that has never been engineered before.</p>
+<p>Consider the following challenge: Build a Lego bridge using a fixed set of pieces to support a large weight. A success condition has been defined, but it’s unclear whether success is achievable. This challenge has actually been tried: <a href="https://youtube.com/watch?v=G9WT6TB15yE">In an episode of the TV show <em>Lego Masters</em></a>, teams were tasked with building bridges that could hold 1,000 pounds.</p>
+<p>The idea is to explicitly place an unsolved problem related to a common concern within the context of a challenge or a game. In fact, there is a long history of games and competitions for public good. Modern canning and jarring techniques originated in part from <a href="https://www.smithsonianmag.com/smart-news/father-canning-knew-his-process-worked-not-why-it-worked-180961960/">a reward offered during the French Revolutionary Wars</a> to anyone who could devise a cheap way of preserving large quantities of food. In 1714, British Parliament passed “An Act for providing a Public Reward for such Person or Persons as shall discover the Longitude at Sea,” establishing prizes with payouts tied to improvements in accuracy. The rewards were paid out for over 100 years, and the results had a lasting impact on precision timekeeping.</p>
+<p>In our era, we have computers, and this has taken the old idea of a game for good or a “serious game” and completely transformed it. The entire domain of modern science is available in game-like interfaces within seconds to anyone interested. The games involve community members solving problems related to almost every area of science, from identifying celestial bodies (there are only so many human astronomers, and AI has its limits) to transcribing ancient texts to finding new ways to engineer quantum computers.</p>
+<p>Drug discovery is one especially popular focus for community science games. We have Eterna, Foldit, and Nanocrafter. All three gamify the process of engineering the kinds of molecules that run our bodies. Each game has slightly different mechanics. Foldit is a bonsai-like game where you pull and twist the folds of a protein and see your score rise and fall.</p>
+<p>Eterna is a more Sudoku-like discrete game, where an RNA strand is shown as a colored string of beads. Players change the colors and again, watch a score go up and down as they try to create an RNA molecule that does specific things, like fold in one way in the presence of one molecule but in another way in its absence. Nanocrafter, now defunct, was more of an abstracted puzzle game, in which strands of DNA snapped together like puzzle pieces in a sequence of slowed-down chemical reactions, and the objective was to set up a pathway that terminated in a specific sequence of DNA.</p>
+<p>Eterna and Foldit are notable because they have led to actual scientific discoveries that are now in use. An Eterna challenge (the “OpenVaccine Challenge”) from a few years ago asked game players to help design RNA molecules for COVID-19 vaccines that do not require ultra-cold storage, allowing for easier storage and transport, which is especially crucial in developing parts of the world. Although attribution is tricky, <a href="https://www.discovermagazine.com/health/a-game-playing-app-may-have-just-helped-create-covid-vaccines-for-the">the challenge was a success</a>; Covid vaccines today are more stable at room temperature than they were before.</p>
+<p>There’s no reason we can’t take this further, with any open problem, including cancer research. Think of it this way: Cancer isn’t just one problem, but a giant tree of interconnected problems. Many of these problems could, at least in principle, be turned into a gamified open challenge. There are thousands of problems relating to cancer and there are thousands of approaches to game design and genres of game, so the potential is vast. In addition, we have all the powerful tools and techniques of game design at our disposal, tools that didn’t exist at this scale even a decade ago.</p>
+<p>I should be clear: It’s not obvious that this strategy will generally allow gamers to solve problems that professional scientists have not been able to solve (though that could happen, as in the example of cold-storing viruses). But if they fail at that mission, they could still succeed in other ways. These games teach players about biology and how the body works—knowledge that could help them make more informed decisions about their health or advocate more effectively for others. Why not slip a little education in? Unusual embodiment of scientific problems in games could also get scientists and others to think about existing problems in new ways.</p>
+<p>It’s an empowering thought: Cancer is a terrible foe, but we can fight it in concrete ways. Even without a background in biology, you might have skills in art or design, or just be really good at games. That’s enough to contribute. You could build new games that get us a little closer to a cure, and make people a little smarter along the way. <img alt="" src="../images/nautilus-favicon-14_1092.png" /></p>
+<p><em>This article is an excerpt from</em> <a href="https://mitpress.mit.edu/9780262550727/gaming-cancer/?_gl=1*16rkbza*_ga*MTYxMDY0NDI0OS4xNzEwNzk2NjA2*_ga_LKJ2S6BH0S*czE3NTEzODQ5NzUkbzEyNCRnMCR0MTc1MTM4NDk4MiRqNTMkbDAkaDA.">Gaming Cancer</a><em>, reprinted with permission from</em> <a href="https://thereader.mitpress.mit.edu/how-citizen-science-games-could-help-cure-disease/"><em>MIT Press Reader</em></a><em>.</em></p>
+<p><em>Lead image: PERFECT_VECTORS / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cure Hiding in a Rotten Eggplant | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Cure Hiding in a Rotten Eggplant</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GB77</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A young boy in Nebraska may well have been saved thanks to a particular piece of rotten eggplant collected in South Africa. And a virus it contained.</p>
+<p>Like many other kids, Hudson Campbell was no stranger to ear infections. But his were incredibly persistent. Antibiotics usually seemed to help initially, but once the course was over, the infections would come roaring back. Born in 2017, by age 2, he had already gotten ear tubes surgically implanted to drain the excess fluid the infections produced. A second set of tubes inserted in 2020 fell out within weeks—his infected ears had too much fluid in them.</p>
+<p>That fall, doctors took a sample of bacteria growing in Hudson’s ears. The result was troubling: The bacteria were <em>Mycobacterium abscessus</em>. Frequently resistant to antibiotics, not many known drugs can fight the pathogen. The infection threatened his hearing, but also, if it spread, could quickly make its way beyond his ears.</p>
+<p>Hudson’s bacterium is, of course, far from the only drug-resistant infection spreading. Its relative, <em>Mycobacterium tuberculosis</em>, which causes TB, has become notoriously resistant to antibiotics. Others include strains of <em>Salmonella</em> and Staph. Each year, some 2.8 million Americans struggle with antibiotic resistant infections and <a href="https://www.cdc.gov/antimicrobial-resistance/stories/partner-estimates.html">more than 35,000 people</a> die from them.</p>
+<p>Yet, many of these infections do have cures. Known as <a href="https://nautil.us/medicine-is-going-viral-1066631/">bacteriophages</a>, bacteria-slaying viruses just don’t yet exist on the shelves of hospital pharmacies. Instead, they lurk in strange places, like sewage, soil, and decaying vegetables.</p>
+<p>By summer 2021, just six months after doctors identified <em>M. abscessus</em> in his middle ears, Hudson’s hearing started to disappear. One morning he had woken up and said, “Mom, I can’t hear you.” His mother, Kylie Campbell thought he was just being a mischievous 3-year-old. But three days later, the family was coming back from vacation, and Hudson was sitting in the back seat with his two younger sisters. He kept complaining that he couldn’t hear the video playing in the car. “I turned it up almost as loud as it could go, and he could barely hear the TV,” Kylie Campbell recalls. Sitting in the car with the sound blaring, she realized he meant it. That week Hudson had lost much of his hearing.</p>
+<p>Doctors weren’t sure if Hudson’s infection or the antibiotics used to treat it caused his hearing loss. Late in 2020, Hudson had been outfitted with a so-called PICC line—a peripherally inserted central catheter—a long, thin, flexible tube that went into his upper arm and threaded into a large vein near his heart, so he could receive an antibiotic called amikacin, which can only be given intravenously. But in addition to wrecking his gut microbiota—causing such bad gastrointestinal side effects he could barely leave the house to participate in normal little kid life—amikacin can also cause hearing loss.</p>
+<blockquote>
+<p>Bacteriophages have their own evolutionary incentive to keep up with and outsmart their prey.</p>
+</blockquote>
+<p>Whether it was the drugs, the infection, or a combination, Hudson’s eardrums became so damaged they could no longer transmit sound to the auditory nerve, which passes it to the brain. Hudson became profoundly deaf in his left ear and severely deaf in his right. His hearing could be restored with cochlear implants—electronic devices that bypass the damaged parts of the ear and “talk” to the auditory nerve directly—but whether they would work properly amid a raging <em>M. abscessus</em> infection was the question. Doctors were also worried that if amikacin stopped working, Hudson’s infection would spread.</p>
+<p>The bacteria did spread, next infecting Hudson’s mastoid bone, a part of the skull located behind the ear. His parents took him to the Mayo Clinic for mastoidectomy, surgery that cleaned the dead cells from the bone with the hope of clearing the infection, too. He seemed to improve. In 2022, his medical team decided he was ready for a cochlear implant in his left ear, where he had lost almost all hearing. Time was of the essence because without regular stimuli, the auditory nerve could quickly atrophy. The surgery went well, but the implant didn’t last—the infection returned with a vengeance. “About six to eight weeks later, the implant fell out of his ear because the infection was so bad,” Kylie says.</p>
+<p>On Good Friday of 2022, Mayo Clinic surgeons took the implant out of Hudson’s left ear and implanted another into his right. The new implant took well, but Hudson’s left ear was not getting better.</p>
+<p>Back in Nebraska, a pediatrician who had treated Hudson at the Children’s Nebraska hospital in Omaha named Bradford Becken had a bold idea: Enlist a virus to fight off the aggressive bacteria.</p>
+<p>Evolution has typically been our enemy in the world of antibiotics. These drugs exert their lab-crafted killing pressure on bacteria, prompting the microbes to evolve new ways to defend against or disarm the medications. Some bacteria can eject antibiotics from their cells before they can act, others produce enzymes that cut antibiotic molecules to shreds. And with survival of the fittest as the law of the microscopic land, the more antibiotics we use, the more selective pressures they exert, the tougher the survivors—and the less effective our antibiotics.</p>
+<p>Evolution, however, could be our collaborator in a different, dynamic class of treatments. Bacteriophages, the viruses that attack bacteria only and are harmless to humans, have their own evolutionary incentive to keep up with and outsmart their prey. Unlike broad-spectrum antibiotics, which typically target whole classes of bacteria in our bodies—the bad and the good, hence their negative side effects, such as diarrhea and yeast infections—phages are very targeted, preying on very specific bacteria. This is excellent news for our bodies and our commensal microorganisms.</p>
+<p>But it can also make finding the right phages tricky. Even within one strain of <em>M. abscessus</em>, there can be big enough variations so that not every <em>M. abscessus</em>-targeting phage may work efficiently enough to kill off the bacterium, explains Graham Hatfull, a professor of biotechnology at the University of Pittsburgh whose research focuses on mycobacteria species. Hatfull also runs <a href="https://seaphages.org/">SEA-PHAGES</a>, a research course for which students search through soil, compost, and other substances to identify and catalog novel bacteria killers in different parts of the planet.</p>
+<p>And that’s where the expired eggplant comes in. Some years ago, a SEA-PHAGES student in South Africa was digging through a pile of garbage, from which they fished out a half-rotten eggplant chunk. Living on the chunk was a phage that was fairly adept at attacking <em>M. abscessus</em>. The student noted the phage activity against <em>M. abscessus</em>, named the phage Muddy, and added it to the collection, which today totals about 28,000 strains  of bacteria-killers.</p>
+<p><img alt="" src="../images/z5Ge6Nzd-Zeldovich_BREAKER.png" /></p>
+<p><strong>BACTERIA-EATERS:</strong>Bacteriophages, whose name was inspired by the Greek word <em>phagein</em> (“to devour”) are viruses that have evolved to prey on bacteria. In 1919, French microbiologist Felix d’Herelle isolated one strain of these targeted viruses and used it to treat three children dying from dysentery. All three were cured. <em>Credit: shoma81 / Shutterstock.</em></p>
+<p>Becken had heard about phage therapy, but never used it before, so he reached out to Hatfull to ask if there might be a phage in his collection to try against Hudson’s <em>M. abscessus</em>. It wasn’t the first such email Hatfull had received. He had created a few phage treatments before for similarly stubborn cases. If Hatfull’s lab found the right phage, Hudson would become the first young  child in the United States—that his medical team was aware of—to be treated with phage therapy.</p>
+<p>He wouldn’t be the first in medical history, though. In fact, the first documented pediatric use of phage therapy was more than a century ago. The children, three brothers aged 3, 7, and 12, were treated in a children’s hospital in Paris in 1919. The boys were dying from dysentery, caused by a <em>Shigella</em> bacterium, which had already killed their sister. Antibiotics hadn’t yet been discovered and wouldn’t become widely available for another three decades. But French microbiologist Felix d’Herelle had just zeroed in on something that killed the dysentery bug, which he correctly identified as a virus that preys on bacteria.</p>
+<p>That insight struck when one of d’Hérelle’s dysentery patients managed to beat the illness seemingly on his own. As he got better, d’Hérelle noticed that <em>Shigella</em> began to disappear from the patient’s stool samples. D’Hérelle seeded the stool samples onto petri dishes with plenty of beef bouillon to help feed the deadly bacterium, but <em>Shigella</em> dwindled there also, leaving behind clear patches where it originally had been. Something was killing off the bacteria. So d’Hérelle devised a clever trick to isolate the mysterious agent.</p>
+<p>He passed the remaining bouillon through a Pasteur-Chamberland filter with holes so small that fluids could trickle through, but bacteria couldn’t. He ended up with a clear liquid, seemingly lacking all microbial life. But when he added <em>Shigella</em> back into the liquid, the bacteria were gone by the next day. “They dissolved like sugar in water,” d’Hérelle later wrote. “What caused my clear spots was in fact an invisible microbe.”</p>
+<p>He named the curative agent “bacteriophage,” from the Greek word <em>phagein</em>, which means to devour or eat. D’Hérelle and his colleagues tested phages on themselves first, found no adverse effects, and then gave the medicine to the children, all of whom recovered within days. Later, d’Herelle used phages to treat a variety of infections, including the plague, caused by the bacterium <em>Yersinia pestis</em>, which had no cure.</p>
+<p>In the 1920s and 1930s, medics in Europe, North America, and the Soviet Union successfully used phages to treat a range of infectious diseases, including dysentery, cholera, and staph. However, in the U.S., phages eventually fell out of favor, partially because of the advent of more broad-spectrum antibiotics and partially because phages had to match the exact subtype of bacteria the person was infected with to be effective. So with effective antibiotics on hand by the mid 20th century, many U.S. physicians grew less inclined to turn to phage therapy, some even expressing doubt as to their efficacy.</p>
+<blockquote>
+<p>As antibiotic resistance grew, it became clear that alternatives were needed.</p>
+</blockquote>
+<p>Still, in countries of Eastern Europe and the Soviet Union, phages were used alongside antibiotics, especially when the latter failed to work. In Georgia, which was then part of the Soviet Union, health officials created an entire research institution, today called <a href="https://eliava-institute.org/en">George Eliava Institute of Bacteriophages, Microbiology, and Virology</a> devoted to the production and study of bacteriophages. In the 1970s, Georgian researchers managed to cultivate a phage active against methicillin-resistant staphylococcus aureus, or MRSA, a dreaded superbug. When the Soviet Union fell apart, Georgian scientists began to arrive in the U.S., bringing their bacteriophage knowledge with them.</p>
+<p>But decades of distaste for phage therapy, combined with the Cold War cast a pall on bacteriophages and other corners of Soviet biomedical research as “commie medicine,” made their uptake slower in the U.S. Yet, as antibiotic resistance grew, it became clear that alternatives were needed. In 2016, for the first time, the FDA greenlighted a phage treatment for an experimental case. It was granted for Thomas Patterson, currently a psychiatry professor at the University of California, San Diego, who was near death, infected by bacteria that appeared resistant to all known antibiotics. When phages vanquished his bacteria, saving his life, a paradigm shift ensued. Over the past several years, bacteria eaters have been climbing their way back in the U.S. from scientific obscurity. But slowly.</p>
+<p>Part of the challenge is still finding the right match, which is typically done by pitting phages and bacteria against each other in the lab and looking for a winner. So Becken sent Hatfull a sample of Hudson’s bacteria. At Hatfull’s lab, workers tested a number of phages against the sample, but none were successful. A few weeks later, Becken sent another sample—with the same result. But Becken was tenacious and sent yet another one. Hudson’s third sample found a match, a virus that had descended from the one collected from that mushy eggplant. It was Muddy’s progeny.</p>
+<p>When Becken learned that Hatfull’s lab found the match, he was excited and nervous. “It was the first phage patient that I’ve ever had, and the first phage patient this hospital has ever had,” he reflects. “And I was very hopeful, because I didn’t know what would come after a phage if it didn’t work. I wasn’t sure what else was out there.”</p>
+<p>Becken filed an Investigational New Drug request with the FDA, and in May of 2023, Hatfull’s lab prepared Hudson’s phages.</p>
+<p>Hudson’s phages arrived at the Children’s Nebraska hospital in little glass bottles, ready to be administered intravenously and directly into his left ear to give <em>M. abscessus</em> a double blow. Hudson would also remain on his antibiotics for an extra punch. Phages and antibiotics can work synergistically, each killing the respective susceptible bacterial population. “Hudson was admitted to the hospital because you can’t send a phage to CVS,” Becken says, adding that this also afforded extra protection in case he had any side effects during his first few phage applications.</p>
+<p>He had none, so the rest of his treatments were done as outpatient visits, and the results were fast. “It was just amazing to watch,” Kylie says. “Within the first month of starting it, his ear had completely dried up. We went to Mayo, and they said his ear was better than it had looked in years. You could just tell he was feeling better.”</p>
+<p>Hudson received phages for several months. “I probably treated Hudson with the phage longer than he needed to be treated,” Becken says, but he was worried that <em>M. abscessus</em> may rebound once therapy ceased, and he wasn’t taking any chances. Around September 2023, Becken deemed Hudson cured and stopped the phages. The bug did not return. A few months later, Hudson got the cochlear implant in his left ear, and it  stayed for good.</p>
+<p>Since Hudson, more patients at Children’s Nebraska have received phage therapy and some are currently being evaluated for the treatment, Becken says. “Phages are fascinating, because I see issues with antibiotic resistance every day, and every time you use an antibiotic, you increase antibacterial resistance.” Becken says.</p>
+<p>Bacteria can develop resistance to phages, too, but phages will respond in kind, boosting their attack prowess. “Bacteria and phages have been racing against each other for millions of years,” explains Sandro Sulakvelidze, a Georgian expat and researcher who <a href="https://www.intralytix.com/principal/16?e=Alexander%20Sulakvelidze%20Ph.D.">founded  Maryland-based phage company Intralytix</a> in 1998. Sulakvelidze’s company manufactures phage spray used in the food industry to eliminate pathogens such as listeria, salmonella, and campylobacter. “All we need to do is to sic them on each and harvest the winner.”</p>
+<p>That’s exactly what happened in Hudson’s case, explains Hatfull. The original Muddy phage wasn’t effective against Hudson’s <em>M. abscessus</em> strain, but its progeny was. “We kind of played this battle between the bacteria and the phages,” he says, which made the phage evolve to be a better killer.</p>
+<p>This approach to battling bacterial infections will likely be increasingly important. Fighting antibiotic-resistant infections already costs upward of <a href="https://www.cdc.gov/antimicrobial-resistance/stories/partner-estimates.html">$4.6 billion</a> in healthcare costs in the U.S. annually. And the death toll is climbing. Experts warn that between now and 2050, antibiotic-resistant superbugs will claim 39 million lives around the world. The United Nations has an even grimmer prediction: <a href="https://news.un.org/en/story/2019/04/1037471">10 million deaths annually by 2050</a>.</p>
+<p>For Kylie and her husband Gregg, seeing Hudson living his life like most other children was a gift. Before the phage therapy, “Gregg and I were almost at the point of withdrawing all medications because it was hurting Hudson physically so bad, and we felt like we were never getting any better,” she says. “And now he’s enjoying hearing with both ears with 95 percent accuracy.”</p>
+<p>Today, Hudson, now 9, plays multiple sports, and one of his favorite activities is swimming. “From a mom’s perspective, I would say that without phage therapy, we would have never cleared the infection,” Kylie says. “It was a game changer.” Thanks to a virus hidden away in a rotten eggplant. <img alt="" src="../images/nautilus-favicon-14_899.png" /></p>
+<p><em>Lead image: Kristina Savelieva / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

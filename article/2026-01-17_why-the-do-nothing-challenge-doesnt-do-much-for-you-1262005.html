@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why the Do Nothing Challenge Doesn’t Do Much for You | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why the Do Nothing Challenge Doesn’t Do Much for You</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-17
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-EB0V</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>They sit alone in a room, expressionless, doing absolutely nothing, giant timers clocking down the hours and minutes. No books, no devices, no food, no distractions, no sleep. It’s a challenge some Gen-Zers are setting for themselves on TikTok—the “Do Nothing” challenge. The idea is to deliberately court boredom to restore depleted attention spans, a salve for the frantic overstimulation of our distracted age. Some of these videos accumulate millions of views.</p>
+<p>It’s a new twist on an old idea. Over a decade ago, South Korean artist Woopsyang started the “Space-Out Competition” to combat burnout. Since then, the urge for stillness has evolved in many forms, including the recent mania for rawdogging, a term that’s come to mean enduring any mundane activity without aids, particularly long flights. That trend became such a sensation that the American Dialect Society chose <a href="https://americandialect.org/2024-word-of-the-year-is-rawdog/">rawdog</a> as its Word of the Year in 2024.</p>
+<p>But the Do Nothing challenge and the rawdogging trend suggest a fundamental misunderstanding of how boredom and disconnection work, says James Danckert, a researcher in the <a href="https://boredomlab.org/">Boredom Lab</a> at the University of Waterloo. Boredom is closer to hunger than to holiness, he argues, and forcing it on yourself for hours on end doesn’t by itself have restorative power. Instead, the feeling suggests something about your attention, agency, or meaning is out of alignment.  </p>
+<p>I spoke with Danckert about why we’re so fascinated with boredom in this cultural moment, why some people have more trouble with boredom than others, and his frustration with the stubborn idea that boredom is fertile territory for creativity.</p>
+<p><strong>Why do you think we’re so fascinated by boredom of late?</strong></p>
+<p>In the early 2000s, we’d start all of our scientific papers with “boredom is an understudied phenomena,” but we can’t do that anymore because in the last 20 years, a lot more people have begun researching it. Some of the recent <a href="https://www.apa.org/pubs/journals/releases/xge-xge0001639.pdf">work</a> aims to understand the relationship between social media and boredom. You might think that there’s so much at our fingertips now, surely boredom is gonna go away. But what we’re finding is that it’s actually increasing. So one speculation is that our capacity to connect well is diminishing, and as that’s happening, we’re getting more bored.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/what-boredom-does-to-you-236854/"><strong>What Boredom Does to You</strong></a><strong>”</strong></p>
+<p><strong>It seems like boredom means a lot of different things to different people. Is there a good standard scientific definition of boredom?</strong></p>
+<p>There’s a distinction to be made here that’s important. State boredom is the in-the-moment feeling of “I am bored right now.” Functionally what is it doing? It is meant to signal to you that <em>what you’re doing right now isn’t working</em>. <em>You need to do something else</em>. And then there’s trait boredom, or <a href="https://pubmed.ncbi.nlm.nih.gov/33484603/">boredom proneness</a>. These are individuals who experience boredom frequently and intensely, and it makes them feel like their lives are just lacking in meaning.</p>
+<p><strong>Are there any real downsides to forced boredom? These TikTokers who are filming themselves doing nothing for hours and hours and hours. Is that actually restorative?</strong></p>
+<p>The ultimate goal of in-the-moment feelings of boredom is to eliminate itself. Boredom wants to not exist, right? And so, to embrace boredom and say, “Oh, I’m gonna try and rawdog it on this flight for 12 hours.” It’s just a stunt. And it’s not listening well to what boredom is actually telling you, which is to find something meaningful to do.</p>
+<p>But the other thing is that they’re misconceiving their own needs. They don’t want boredom. They want disconnection. And that’s perfectly fine. We used to talk about this in other ways: vegging out, or just relaxation for Christ’s sake. So anything that takes you out of the normal everyday stresses that we all experience. But I think we ought to intentionally choose those times and activities that are our disconnection times—and rawdogging boredom ain’t it. That’s just a fundamentally dumb idea. In the one or two examples that I’ve looked at, what I saw is that they’re uncomfortable, right? So they’re at least experiencing one of the key features of boredom. But when you want to disconnect from the hustle and bustle of your life, why would you intentionally engage in a thing that feels bad? It doesn’t make sense to me.</p>
+<p><strong>People claim that boredom is like a form of mindfulness, or it helps them address feelings and thoughts that maybe they were too afraid to confront. And both of these things can certainly be uncomfortable. How do you know the difference between the discomfort of boredom and say the discomfort of mindfulness or meditation?</strong></p>
+<p>Mindfulness practice, as I understand it, isn’t typically described as uncomfortable. It might allow you to deal with thoughts and experiences in your life that themselves are uncomfortable. But the practice of being mindful is generally considered to be quite positive, I would think. Mindfulness is also a practice. It’s a thing that takes time to get good at. So you can’t hope to just do a one-hour session of mindfulness and solve all of your problems. You need to practice this over a number of months and years.  </p>
+<p>In 2014, Timothy Wilson and his group published a research paper titled “<a href="https://www.science.org/doi/10.1126/science.1250830">Just Think</a>.” They put people in a room for 15 minutes with nothing but their thoughts. They took away their cell phones. There was nothing to look at in the room. You couldn’t do anything. You just had to sit in a chair, you and your thoughts. Then they asked you how it felt. And one thing that got lost in the media frenzy around this particular paper was that actually one-third of the participants rated the experience to be quite pleasant. One-third were ambivalent, and one-third hated it. They just thought it was boring and terrible. Again, the paper included nine experiments, but the one that got the media attention was this one that involved either sitting in a room for 15 minutes with nothing but your thoughts—or you could self-administer an electric shock.</p>
+<p>And people had experienced these electric shocks before the 15 minutes began. They’d rated them to feel negative and bad. They’d said that they would pay certain amounts of money to not experience them again. And then when you put them in there for the 15 minutes, still some significant percentage—more men than women—administered these electric shocks, rather than sit there and do nothing. One guy administered 196 electric shocks in 15 minutes to himself. To me, what that says is that we evolved for action, not for thought<em>.</em> Thought is a great and wonderful thing. Language is a great and wonderful thing. But we evolved to control our bodies and interact with the environment around us.</p>
+<p>Boredom is also common where we feel constrained—when we have no autonomy and no agency. So we don’t feel like we can act in ways that we want to act. So these are examples and data that suggest that rawdogging boredom on a flight is just a silly idea. It’s going against what we’re actually evolved to do. Instead, what you might want to do is to say, “Okay, I’ve got a boring flight ahead of me. What would be a meaningful thing that I can do?” It could be something as simple as trying to complete the hardest Sudoku you’ve ever done. It doesn’t have to be meaningful in the sense of curing cancer, but something that matters to you is a better thing to attempt on a long flight than just trying to sit with it and do nothing.</p>
+<p><strong>You mentioned earlier that some people are more prone to boredom, and in other talks I’ve heard you say that this is connected to problems with self-control and self-esteem. Why?</strong></p>
+<p>We’re actually still working on that. But self-control seems to be a cluster of processes that allows you to effectively pursue your goals. It allows you to marshal your thoughts, actions, and emotions in the pursuit of what matters to you. Often what you see in the literature is that people talk about self-control primarily as a challenge of inhibition. But for boredom proneness, I actually think that it’s a different kind of self-control that they struggle with—what we call a struggle to launch into action. When a young 5-year-old child comes to you and says, “I’m bored,” you, as a parent, tend to have this sort of knee-jerk reaction to say, “Why don’t you do this? Why don’t you go play with your Legos? Why don’t you go play outside? Why don’t you go and do a drawing? Why don’t you read a book?” The child knows all of those options are available. They just don’t want those things at this time. That’s the problem of boredom proneness. You don’t want what’s available right now, and you don’t know what you do want.</p>
+<p><strong>That’s so interesting because a study just came out about</strong> <a href="https://nautil.us/why-finding-motivation-is-often-such-a-struggle-1260605/"><strong>motivation</strong></a> <strong>in macaques, specifically related to getting started on a task, even one that’s expected to be rewarding. They found basically that there’s this one circuit in the basal ganglia of the brain that when it’s inhibited, the monkeys could get started, even if the reward came with an unpleasant punishment. Whereas if the circuit was active, they couldn’t. As far as you know, is there a signature of boredom in the brain?</strong></p>
+<p>So the answer to that would be no. There’s really great work from Lisa Feldman Barrett talking about this notion of signatures of any kinds of affective experiences. And I think we’ve been hunting for that for decades. You know, what’s the signature of happiness? What’s the signature of anger? The answer is, there just really isn’t one physiological or neurological signature. We have these large-scale networks that are important for interacting with the world. And there’s just a ton of overlap.  </p>
+<p>But one part of the brain that seems to be very interesting for boredom is the insular cortex, which is very important for representing what we call interoceptive sensations, or internal body sensations. So feelings of hunger and thirst, butterflies in the stomach, a racing heart. And what Feldman Barrett suggests—she focuses a lot on depression and a little bit on anxiety—is that we use these internal body states to predict how we’re going to feel later on. So the boredom-prone person might just have faulty anticipation of reward. They might not know what’s going to feel good. They might not know what’s going to be engaging or might not be using these internal signals accurately. We’ve published some work on that that shows that people who are boredom-prone pay a lot more attention to their internal body states, but they’re kind of confused by them. They don’t make sense of them as well. There’s a concept known as alexithymia<strong>,</strong> which is the difficulty of labeling and discriminating your affective states, and people who are boredom-prone tend to have higher levels ofalexithymia, as well.</p>
+<p><strong>Some researchers suggest there’s a relationship between boredom and creativity. Do you think there is any merit there?</strong></p>
+<p>The creativity idea has been a bit of a bugbear of mine, and a number of my colleagues who do boredom research feel this way, too. I think there’s this great desire in people to want to believe that boredom will somehow make you creative. But if you think about it, the logic just doesn’t work. So I start thinking about, “Where does the desire come from?” Famous people will often say, “I was bored, so I did X.” And because we look up to famous artists, we think, “Oh wow, boredom must be a really helpful tool in making you creative.”</p>
+<p>The story I’ve used in the past a lot is from Jimi Hendrix. Somebody sees Jimi Hendrix play for the first time, and is just blown away and corners him backstage and says, “Man, where have you been hiding?” And Hendrix replies, “I’ve been playing the Chitlin’ Circuit, and I was bored shitless.” A Chitlin’ Circuit was something in the ’50s and ’60s in America that was a sort of safe circuit of venues for Black Americans to perform anything from stand-up comedy to music to whatever. But the kind of music that was expected in the Chitlin’ Circuit was old and not to Hendrix’s liking. So he did something else and became the guitar virtuoso that we know. But the logic there is all wrong. Boredom didn’t make Hendrix a genius. Practice made Hendrix a genius. Trying to do different things made Hendrix a genius.</p>
+<p>Creativity is a wonderful solution to boredom, but you can’t hope that it works the other way around. So the <a href="https://www.tandfonline.com/doi/abs/10.1080/10400419.2014.901073">paper</a> from 2014 that everybody cites that says boredom makes you creative: There’s loads and loads of problems with that paper. We tried to replicate it and found the opposite: The more bored we made people, the less creative they were.</p>
+<p><strong>I would think that people who get bored easily tend to seek out novelty more.</strong></p>
+<p>That’s a reasonable conclusion to come to, but we have actually struggled to find that. People who are prone to boredom want novelty, but they fail to launch into action. Now, the temporary state itself might work exactly in the way that you suggested—that it pushes you toward novelty seeking. But novelty seeking alone isn’t gonna make you creative either. It’s what you do with that novelty, what you do with the new thing that you find and come back to practice.</p>
+<p><strong>You have mentioned elsewhere that animals feel boredom. How do we know?</strong></p>
+<p>I don’t know if you’ve ever seen a mink in the wild. They scamper around. They look like they’re mischievous little creatures. And we still farm them for their fur, which is disgusting. But what Georgia Mason and Rebecca Meagher <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0049180&amp;utm_source=baytoday.ca&amp;utm_campaign=baytoday.ca&amp;utm_medium=referral">did</a> is they had two groups of mink housed in different types of cages. One group is in cages that we normally keep them in on our fur farms, where there’s just nothing for them to do. Very boring. The other one was a cage that had lots of little things for the mink to play with.</p>
+<p>They housed these two groups for two weeks in the different types of cages. At the end of the two weeks, they exposed the animals to different kinds of items. They exposed them first to items that the animal would normally approach—apparently for mink, a toothbrush is like a laser pointer for a cat. They just go crazy for it. They love toothbrushes. So they expose ‘em to something like that, that they would normally approach. Then they’d expose them to things that they’d normally avoid—the silhouette of a predator or the smell of urine of a predator. Things that they would shy away from. And then the third group of things was neutral stuff. Stuff the animals had seen before—just a bottle of water or something like that.  </p>
+<p>The logic was this: If the animals in the cage with nothing to do were depressed, they’d show less interest in the toothbrush stuff they normally liked ‘cause they were depressed. If they were apathetic after the two weeks in the cages, they’d show no interest in anything. They wouldn’t show approach or avoidance behavior. They wouldn’t care about any of the items. If they were bored, they’d approach everything—and they’d approach even things that they’d normally avoid, like the silhouette of the predator. And that’s exactly what they found. The minks in the cage with nothing to do for two weeks rapidly—more rapidly than the other group—and indiscriminately approached all kinds of items as if they were desperate for stimulation and just wanted something to do.  </p>
+<p><strong>What made you want to study boredom?</strong></p>
+<p>Two things motivated me to get into boredom research. One was that, as a late teen, early 20-something young person, I started to experience boredom a lot and hated it. I wanted to find ways to eliminate it from my life. I no longer think that that’s either possible or desirable. But around about the same time, my brother had a motor vehicle crash where he suffered a fairly serious brain injury. Months later, after serious rehabilitation, he’d report that he was bored a lot. And to me, that suggested that something organic had changed in his brain. Some consequence of that brain injury made things that were once pleasurable seem boring. And so, I wanted to understand what had happened in the brain to make that the case for him.  </p>
+<p><strong>Has studying boredom helped you feel less bored?</strong></p>
+<p>I don’t think studying it has made me feel less bored. I think time has made me feel less bored. That’s one of the things that the data shows: Boredom rises in our teenage years and then starts to drop off in the late teens and early 20s. There’s a great study from Alycia Chin and colleagues called “<a href="https://www.cmu.edu/dietrich/sds/docs/loewenstein/BoredUSA.pdf">Bored in the USA</a>.” In our middle decades, when we’re busy with our careers, our children and all that kinda stuff, boredom drops off, because you don’t have time for it. Then it starts to rise again in the 60s and 70s. And what we’re starting to pursue a little bit more is that that’s probably about loneliness as much as anything. And so, in those later decades, people who are more socially connected experience boredom less. There’s some great work from my colleague Mark Fenske, who’s <a href="https://drive.google.com/file/d/1Te0yLwoYZq9bUNSraZxjpGKAn9Jfl4-h/view">shown</a> recently that hearing loss in the elderly is predictive of boredom.</p>
+<p>So studying boredom hasn’t made me less bored, but over time and with all of the pressures of life, I don’t feel bored nearly as much as I used to. I’m hopeful that in my later decades I’ll pay attention to social connection—and avoid boredom. <img alt="" src="../images/nautilus-favicon-14_538.png" /></p>
+<p><em>Lead image: Master1305 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

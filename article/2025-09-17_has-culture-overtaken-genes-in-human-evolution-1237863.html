@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culture Overtakes Genes in Human Evolution | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Culture Overtakes Genes in Human Evolution</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-17
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-M1UF</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>From epic poetry to game shows, from Stone Age axes to spaceflight, humans have the most complex cultures of any species on Earth. Since the time of Darwin, scientists have suspected that this culture played a role in shaping the species’ survival and spread. But over the decades, culture’s influence on evolution has become increasingly clear. We don’t just learn behaviors, language, and shared rules and systems from our neighbors and elders, or pass on knowledge and technologies to our kids. We build on these flexible cultural attributes across generations.</p>
+<p>Now some scientists claim in a <a href="https://academic.oup.com/bioscience/advance-article-abstract/doi/10.1093/biosci/biaf094/8230384?redirectedFrom=fulltext">new paper</a> that culture has actually overtaken genetics as the leading force shaping human evolution, marking a major shift. Timothy Waring, an economist at the University of Maine, and Zachary Wood, Waring’s ecologist colleague, argue that our cultural practices now spread faster than our genes can, allowing us to quickly adapt and problem-solve. Biology simply can’t keep up.</p>
+<p>"Cultural evolution eats genetic evolution for breakfast," said Wood in a <a href="https://umaine.edu/news/blog/2025/09/15/culture-is-driving-a-major-shift-in-human-evolution-new-theory-proposes/">statement</a>. "It's not even close."</p>
+<p>The researchers relied on evidence from anthropology, biology, and history to support their argument. Genetic change, they say, takes generations—from decades to centuries—whereas cultural forces can influence evolution in a matter of days or years. Humans can also choose which ideas, behaviors, and technologies to adopt, which theoretically speeds up the spread of successful cultural adaptations.  Culture can also be self-correcting in the short-term, unlike genetic inheritance, something strengthened by digital culture, the researchers argue. And whereas genes generally benefit only individuals, culture can benefit (or disadvantage) entire groups.  </p>
+<p>"Ask yourself this: What matters more for your personal life outcomes, the genes you are born with, or the country where you live?" Waring said. "Today, your well-being is determined less and less by your personal biology and more and more by the cultural systems that surround you—your community, your nation, your technologies. And the importance of culture tends to grow over the long term because culture accumulates adaptive solutions more rapidly."</p>
+<p>Many cultural adaptations now actually pre-empt genetic ones. Waring and Wood offer the examples of eyeglasses and surgery that allow a person with vision problems to thrive despite their genetic shortcoming, or fertility treatments that allow someone with reproductive limitations to build a family and pass on their genes. Especially compared with our prehistoric ancestors, a person’s survival and longevity today are more reliant on group-level cultural systems like medicine and hospitals, education and public health systems, than individual intelligence or genetics.</p>
+<p>Waring and Wood also suggest that as culture becomes increasingly important to human survival and reproduction, we will evolve to become even more group-oriented and group-dependent, potentially changing the human condition entirely. If this happens, we will become societal “superorganisms” that <a href="https://nautil.us/dont-worry-smart-machines-will-take-us-with-them-235610/">adapt through cultural change</a>, they suggest.</p>
+<p>The researchers say their theory is testable and propose a system for measuring how quickly the transition from genetic to cultural evolution is occurring, in terms of both human phenotypes and fitness. They also offer mathematical models to help describe this process. The study is part of a broader <a href="https://nautil.us/evolution-led-humans-into-a-trap-483792/">effort</a> by Waring and his team at the University of Maine’s Applied Cultural Evolution Laboratory. Researchers there have been studying patterns in human evolution to foster positive social change.</p>
+<p>If Waring and Wood are right, our destiny as a species may be written less in our DNA than in our collective laws, medical treatments, and memes. <img alt="" src="../images/nautilus-favicon-14_956.png" /></p>
+<p><em>Lead image: Rumka vodki / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

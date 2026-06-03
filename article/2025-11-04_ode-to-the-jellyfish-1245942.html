@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ode to the Jellyfish | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Ode to the Jellyfish</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-FQ5P</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Today, we celebrate jellyfish—creatures that have persisted for <a href="https://www.nhm.ac.uk/discover/what-is-a-jellyfish.html">more than 500 million years</a> and are older than dinosaurs. There are <a href="https://www.noaa.gov/stories/fact-vs-fiction-3-things-you-thought-you-knew-about-jellyfish">more than 200 recorded species</a> of true jellyfish, and they can be found throughout the depths of all the Earth’s oceans. Species vary widely in size, spanning between a <a href="https://manoa.hawaii.edu/exploringourfluidearth/biological/invertebrates/phylum-cnidaria/weird-science-deadly-box-jellyfish">centimeter</a> and <a href="https://oceana.org/marine-life/lions-mane-jellyfish/">over 6 feet long</a>. These enchanting blobs are <a href="https://oceanservice.noaa.gov/facts/jellyfish.html">about 95 percent water</a>, and they may thrive as climate change intensifies: these hardy animals can endure high water temperatures and low oxygen levels, for example, and their competition for resources may <a href="https://oceans.ubc.ca/2022/11/03/climate-change-may-mean-more-jellyfish-in-our-oceans/">continue to dwindle.</a> But jellyfish can also benefit their environments, <a href="https://eos.org/research-spotlights/jellies-transfer-a-significant-amount-of-carbon-to-the-deep-ocean">shuttling carbon</a> to the deep ocean and <a href="https://www.mcsuk.org/news/jellyfish-helping-to-keep-our-ocean-full-of-life/">carrying around</a> nutrients.</p>
+<p>In honor of World Jellyfish Day, feast your eyes on some dazzling jelly species:</p>
+<p><img alt="" src="../images/T9N8p5jQ-Glick_BREAKER.png" /></p>
+<p><em>Photo by Kevin Raskoff  / Wikipedia.</em></p>
+<p><em>Bathykorus bouilloni</em>, a relatively newly identified species that was <a href="https://mapress.com/zt/article/view/zootaxa.2361.1.5">first described in 2010,</a> was found between around 4,600 and 6,500 feet deep in the Arctic Ocean. <em>B. bouilloni</em> is quite fragile, so this creature may have been crushed by nets and gone unrecognized in past surveys.</p>
+<p><img alt="" src="../images/QVvIPSHS-Glick_BREAKER-2.png" /></p>
+<p><em>Photo by Ryan Schwark  / Wikipedia.</em></p>
+<p><a href="https://www.montereybayaquarium.org/animals/animals-a-to-z/bloodybelly-comb-jelly"><em>Lampocteis cruentiventer</em></a>, or the bloody-belly comb jelly, might look stunningly vibrant to us—but deep in the North Pacific ocean, it’s almost invisible to predators.</p>
+<p><img alt="" src="../images/VZKIo9gF-Glick_BREAKER-3.png" /></p>
+<p><em>Photo by </em>Derek Keats / Wikimedia Commons<em>.</em></p>
+<p><em><a href="https://www.montereybayaquarium.org/animals/animals-a-to-z/crown-jelly">Cep</a></em><a href="https://www.montereybayaquarium.org/animals/animals-a-to-z/crown-jelly"><em>hea cephea</em></a>, also known as the crown or cauliflower jelly, has some 30 “spikes” that jut out of its circular body. It lives in the Indo-Pacific, and has a diameter of up to 24 inches.</p>
+<p><img alt="" src="../images/me0SFBXg-Glick_BREAKER-4.png" /></p>
+<p><em>Photo by Chris Favero / Wikipedia.</em></p>
+<p>This might look like a cap donned at a rave, but it’s actually <a href="https://www.aquariumofpacific.org/onlinelearningcenter/species/flower_hat_jelly1"><em>Olindias formosus</em></a><em>—</em>the flower hat jelly. These nocturnal wigglers hover on or around the sea bottom during the day, and they’re spotted off of Argentina, Brazil, and southern Japan.</p>
+<p><img alt="" src="../images/Glick_BREAKER-5.png" /></p>
+<p><em>Photo by W. Carter / Wikimedia Commons.</em></p>
+<p>This is one big jelly: The <a href="https://www.montereybayaquarium.org/animals/animals-a-to-z/lions-mane-jelly">lion’s mane jelly</a>, or <em>Cyanea capillata</em>, has tentacles that can span more than 100 feet long—even longer than the body of the 90-foot <a href="https://nautil.us/the-mystery-of-the-blue-whale-songs-248099/">blue whale</a>, the world’s biggest mammal. This species lives in the Arctic and North Pacific oceans, and the heftiest ones live in the former. <img alt="" src="../images/nautilus-favicon-14_845.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em>.</p>
+<p><em>Lead image: Derek Keats / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA is Struggling to Get Mars Rocks to Earth | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>NASA is Struggling to Get Mars Rocks to Earth</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-01-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-HARN</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Roughly 62 million miles away on the surface of Mars, the Perseverance rover is collecting rocks. Black, red, and gray colored regolith and cores, some of which are the width of a pencil. Over a little more than three years, the rover has filled 24 titanium sample tubes, each about the size of a cigar, with these bits of planetary sediment.</p>
+<p>Scientists believe the Mars rocks could help <a href="https://www.pnas.org/doi/full/10.1073/pnas.2415280121">resolve big questions</a> about the red planet, including its evolution, mineral makeup, the likelihood it once had oceans and rivers, and whether microbial life teemed there in the past. But the question is how to get the Mars rocks back to Earth.</p>
+<p>When Perseverance landed on Mars in February 2021, NASA had an elaborate plan to retrieve the rocks for study back on our home planet—the Mars Sample Return mission. It involved numerous different spacecraft and machines making multiple handoffs. They were going to land another probe near the Perseverance, send out a second “fetch” rover to collect the sample tubes, and then load them into a rocket-powered capsule with a robot arm. The capsule would then blast-off from Mars and rendezvous with yet another probe in orbit, which would carry it through interplanetary space back to Earth. Finally, the capsule would splash-down in an ocean on Earth, and the rock samples would be recovered for study.</p>
+<blockquote>
+<p>"For most planets we’re only at the fly-by stage."</p>
+</blockquote>
+<p>The costs of such a complicated space mission, however, blossomed out of control. Last week, the agency announced it was considering two new strategies for returning the rocks to Earth that it hopes will cost about half as much—although many of the details are still being worked out.</p>
+<p>Perseverance has placed some of the sample tubes at “depots” during its explorations and carries others with it—so the only prospects for retrieving them require getting down to the Martian surface. But landing a probe or rover on Mars is notoriously difficult, and more than half of the attempts have failed. The planet’s gravity and thin atmosphere make it <a href="https://science.nasa.gov/solar-system/skywatching/night-sky-network/landing-on-mars-a-tricky-feat/">difficult</a> for objects to float gently to the surface with a parachute. But the atmosphere is also thick enough that friction can easily burn up a spacecraft upon entry.</p>
+<p>Another complication is that nobody has ever launched a rocket into space remotely from another planet, nor transported any material from space back to Earth without a human escort. Such an achievement in the face of so many difficulties would rank alongside the greatest scientific developments in history, says planetary scientist Harry McSween of the University of Tennessee Knoxville. “For most planets we’re only at the fly-by stage,” he says.</p>
+<p><img alt="" src="../images/pxUDjmlR-Metcalfe_BREAKER.png" /></p>
+<p><strong>WE WILL ROCK YOU:</strong> A sealed titanium sample tube containing the first sample of Mars rock collected by the Perseverance rover. <em>Photo by NASA/JPL-Caltech</em>.</p>
+<p>Details of the latest Mars rock return proposals are scarce, but the agency seems to hope to save dollars by re-using technologies developed for other space missions, such as a cheaper robot arm to load the Mars rocks into the rocket capsule. The agency also plans to eliminate the “fetch” rover, which would have cost a lot to develop. Instead, the Perseverance rover itself could transport many of the rock samples to the ascent vehicle, though this may mean some samples have to be left behind. Alternatively, a “Mars helicopter” based on the Ingenuity drone could potentially retrieve them. The mission timeline has also been sped up: NASA now hopes to bring the Mars rocks back in the late 2030s, rather than in 2040.</p>
+<p>One possibility NASA is now considering to overcome the difficulty of landing a probe on Mars is to use a “sky crane,” the same technology that delivered both the Perseverance and Curiosity rovers to the Martian surface by lowering them on cables from a rocket-powered descent stage. The other alternative would involve figuring out a way to land on Mars with large probes launched from Earth by a “heavy-lift” rocket, such as the SpaceX Starship or the New Glenn rocket from Blue Origin. According to Casey Dreier, the chief of space policy at the Planetary Society, this second option might be a way for NASA to hedge on new landing technologies, including some that may not have been invented yet.</p>
+<p>McSween says the Mars rocks could reveal important clues about ancient life on the red planet, including whether it really had surface oceans between 3 and 4 billion years ago. The rocks could also help us prepare to send a human explorer to Mars. “It would help us know what <a href="https://nautil.us/hear-the-wind-on-mars-260496/">Mars dust</a> would look like, and the medical hazards of ingesting it,” for instance, he says.</p>
+<p>Scientists have already studied some Martian rocks here on Earth: Roughly 277 “Martian meteorites,” thrown into space by asteroid impacts and the eruptions of Martian volcanoes, have landed on our home planet. But these Martian meteorites tend to be less than 1 billion years old—and therefore too young to resolve questions about the planet’s early evolution—while Perseverance is now sampling rocks that may be up to 4 billion years old, says McSween.</p>
+<p>Back on Earth, scientists will be able to study the Mars rocks with an almost boundless variety of instruments and tests, says planetary geologist Victoria Hamilton of the Southwest Research Institute in Boulder, Colorado. She points to the lunar rocks brought back by moonwalkers during NASA’s Apollo project, which are still being studied more than 50 years later. “The Mars rocks are going to be here for generations.” <img alt="" src="../images/nautilus-favicon-14_1282.png" /></p>
+<p><em>Lead image: Artmim / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

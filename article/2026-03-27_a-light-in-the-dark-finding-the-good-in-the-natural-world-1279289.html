@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Light in the Dark: Finding the Good in the Natural World | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>A Light in the Dark: Finding the Good in the Natural World</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-03-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-56JU</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://knowablemagazine.org/content/article/society/2026/opinion-finding-good-in-the-natural-world"><em>This article</em></a><em>originally appeared in</em> <a href="https://knowablemagazine.org/">Knowable Magazine</a>.</p>
+<p>When the world seems dark and scary, when compassion and tolerance seem in short supply, when hostility and hate make our future foreboding, hope comes from the place we might least expect it: science.</p>
+<p>As the Roman philosopher Lucretius observed during similarly fraught times, back in 55 B.C.: “This dread and darkness of the mind cannot be dispelled by sunbeams, the shining shafts of day, but only by an understanding of the outward form and inner workings of nature.”</p>
+<p>To be sure, applying “hard” science to human affairs can veer badly off track. From quantum healing to the quantum nonsense promoted in the film <em>What the Bleep,</em> there’s not a corner of science that hasn’t been compromised by people seeking to give advice or win an argument, insisting that “everything is relative,” or that survival of the fittest requires brutal combat and selfishness is only natural.</p>
+<p>That said, the creators of the quantum revolution welcomed the philosophical—and human—implications of their discoveries. Physicist <a href="https://www.nobelprize.org/prizes/physics/1922/bohr/facts/">Niels Bohr</a>, the “father” of quantum theory, understood the inherent contradictions in the theory to mean that the opposite of a deep truth is not heresy, but can also be true. What’s more, aspects of truth may be mutually exclusive (light is a wave; light is a particle). Such complementary descriptions explain how we can see ourselves as collections of quarks and at the same time as thinking, feeling beings.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-thrill-of-science-in-2042-1270684">The Thrills of Science in 2040</a>”</strong></p>
+<p>“This loosening of the rules of thinking seems to me the greatest blessing which modern science has given us,” wrote <a href="https://www.nobelprize.org/prizes/physics/1954/born/facts/">Max Born</a>, another Nobel-winning quantum pioneer. “The belief that there is only one truth and that oneself is in possession of it seems to me the deepest root of all the evil that is in the world.”</p>
+<p>Lest you think that physics has outgrown such notions, more recent Nobel laureate <a href="https://www.nobelprize.org/prizes/physics/2004/wilczek/facts/">Frank Wilczek</a> embraces Bohr’s complementarity as “a wisdom I … recommend to you.”</p>
+<p>Wilczek concludes his 2016 book, <em>A Beautiful Question,</em> with a timely complementary pair:</p>
+<p>“The physical world embodies beauty.</p>
+<p>“The physical world is home to squalor, suffering, and strife.</p>
+<p>“In neither aspect should we forget the other.”</p>
+<p>The early 1900s also brought us special relativity, which Einstein himself once complained seemed to interest more clergymen than physicists. The core lesson of the theory is quite the opposite of “everything is relative.” It’s rather that fundamental truths don’t change in different frames of reference.</p>
+<p>What can make this confusing is that the things <em>we thought</em>  were fundamental, such as <a href="https://knowablemagazine.org/content/article/physical-world/2019/quantum-origin-spacetime">space and time</a>, are actually quite elastic, facets of a larger bedrock truth—the invariant speed of light. Thus, space may shrink and time may slow, but the relationship between them stays constant.</p>
+<p>The same is true of energy and matter. Each is a form of the other (<em>E=mc2</em>). We can think of matter as a congealed phase of energy, ever morphing into shape-shifting forms, transforming while staying the same. The energy you use to read this sentence comes from the ice cream you ate yesterday.</p>
+<p>Nobody put it better than yet another physics laureate, <a href="https://www.nobelprize.org/prizes/physics/1965/feynman/facts/">Richard Feynman</a>:</p>
+<p>“What is this mind,” he asked, “what are these atoms with consciousness?”</p>
+<p>His answer: “Last week’s potatoes!”</p>
+<p>The lessons of science are clear: While the things we think are fundamental might not be, the relationships between things fundamentally are.</p>
+<p>Life, too, runs on relations, connections, community. We share genes with mites, mushrooms, mastodons. Bacterial cells in our bodies equal the number of human cells. Viruses have left <a href="https://knowablemagazine.org/content/article/health-disease/2025/awakened-viral-jumping-genes-role-in-alzheimers-als">contributions in our DNA</a>. Early evolution exploded when solitary organisms like the ancestors of mitochondria joined forces with others to create the first eukaryotic cells. The tapestry that is “you” contains the combined wisdom of entire ecosystems, including our shared biological heritage: Those pretty blue eyes might suggest <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9741939">Neanderthals</a> in your ancestry.</p>
+<p>Our brains got big in large part to keep track of our fellows—to make sense of relationships. Families, tribes, social groups helped early humans to thrive. Natural selection ensures that the fittest survive, but “fit” can mean a knack for coalition building; individuals can improve their chances of success by forming alliances and nations—even United Nations.</p>
+<p>Famous experiments in game theory in the 1980s showed to everyone’s surprise that cooperative strategies are, in the long run, more successful than ruthlessly competitive ones. In contests among computer programs, the “nice” strategy consistently came out on top. Generally, the first move is to cooperate; if you get stabbed in the back, retaliate. But be forgiving and try cooperation again.</p>
+<p>It doesn’t work in all environments—within an extreme imbalance of power, for example. It’s a game for the long term. Ruthless self-interest might win for today, but enduring means a measure of getting along.</p>
+<p>Math isn’t the only place where winner-takes-all is a losing strategy. Predators who vanquish their prey can go extinct. Viruses that kill their hosts outright don’t hang around for long; to stay in the game, they need us up and around and sneezing, yelling, and going to bars.</p>
+<p>Viruses like SARS-Cov-2 are a whole lot better than we are at adapting to shifting environments because they can diversify on a dime. When one strategy fails, adopt another. Mutations provide multiple pathways, alternate routes to success.</p>
+<p>Without diversity, though, we’re stuck. Monocultures are fragile. The bananas we love are in danger of disappearing because while breeding a single variety makes it is easier to grow and harvest, a single disease infestation can be fatal to an entire farm. The Irish potato famine that killed hundreds of thousands of people happened in large part because farmers came to depend on a single vulnerable strain of tuber. With no variation, there’s nothing for Nature to select from, no plan B when bad things happen suddenly.</p>
+<p>Among humans, having colleagues with diverse backgrounds can shift perspectives, offer new ways of thinking and open minds to smarter solutions. At least one set of studies concluded that diversity was correlated with a greater probability of turning a profit. The most <a href="https://www.mckinsey.com/featured-insights/diversity-and-inclusion/diversity-matters-even-more-the-case-for-holistic-impact">recent</a>, a study of more than 1,200 businesses from 23 countries by McKinsey &amp; Co., found that companies focused on gender diversity were 39 percent more likely to beat the average profits for their industry; ethnic diversity showed a similar result.</p>
+<p>And as if we needed more reasons to be decent, neuroscience suggests generosity releases endorphins. People who give away money actually feel richer than those who accumulate it. What’s more, they’re healthier. Giving <a href="https://www.health.harvard.edu/heart-health/the-heartfelt-effects-of-kindness">decreases blood pressure</a>, increases life span, lowers stress, boosts self-esteem. The “helper’s high” can be as addictive as drugs.</p>
+<p>Maybe it’s absurd to think that science can inform our values, grasping at straws to hope that science gives us a shot at better selves. But I like to think that Lucretius was right: The more we understand about the universe, the more those learnings can guide us to a plausibly better future—and the more basis we have for ditching bad behavior.</p>
+<p>Wishful thinking? Maybe.</p>
+<p>But as the 19th-century scientist Michael Faraday put it: “Nothing is too wonderful to be true.” <img alt="" src="../images/nautilus-favicon-14_259.png" /></p>
+<p><a href="https://knowablemagazine.org/content/article/society/2026/opinion-finding-good-in-the-natural-world"><em>This article</em></a><em>originally appeared in</em><a href="https://knowablemagazine.org/">Knowable Magazine</a><em>, a nonprofit publication dedicated to making scientific knowledge accessible to all.</em><a href="https://knowablemagazine.org/newsletter-signup"><em>Sign up for</em>Knowable Magazine’<em>s newsletter</em></a><em>.</em></p>
+<p><em>Lead image: Donaldb / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

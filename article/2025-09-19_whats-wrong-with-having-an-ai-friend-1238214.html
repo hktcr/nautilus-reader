@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What’s Wrong with Having an AI Friend? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What’s Wrong with Having an AI Friend?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-19
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-QSQI</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Earlier this year professor of psychology Paul Bloom came to the defense of artificial intelligence chatbots as human companions. He wrote in <em>The New Yorker</em> that <a href="https://www.newyorker.com/magazine/2025/07/21/ai-is-about-to-solve-loneliness-thats-a-problem">AI companions</a> can “make for better company than many real people do, and that, rather than recoiling in horror, we ought to consider what AI companions could offer to those who are lonely.”</p>
+<p>People with money may be able to afford psychotherapy, and those with loving friends and families may have somebody to share their problems with. "But for most people real human attention is scarce," Bloom wrote. Millions of people are turning to chatbots for friendly conversation, or to date and even fall in love with. Studies by psychology researchers have shown that people consistently say chatbots come across as more empathetic than human professionals.</p>
+<p>Not long after Bloom's article was published, AI chatbots made headlines for being just what their critics had warned: psychologically harmful. <em>The New York Times</em> reported that a chatbot <a href="https://www.nytimes.com/2025/08/08/technology/ai-chatbots-delusions-chatgpt.html">convinced</a> a user that his delusional ideas about physics were groundbreaking and revolutionary, even though they probably were not. A couple of weeks later, <a href="https://www.nytimes.com/2025/08/18/opinion/chat-gpt-mental-health-suicide.html">Laura Reiley, a mother and writer</a>, revealed in the <em>Times</em> that her daughter had been "talking" with an AI therapist called Harry before taking her own life. "I fear that in unleashing AI companions, we may be making it easier for our loved ones to avoid talking to humans about the hardest things, including suicide," Reiley wrote. And more recently, the parents of a California teen sued OpenAI, alleging that ChatGPT <a href="https://edition.cnn.com/2025/08/26/tech/openai-chatgpt-teen-suicide-lawsuit">contributed to his suicide</a>.</p>
+<p>I wanted to interview Bloom because I was curious how he might square the psychological benefits and dangers of AI chatbots. Prior to joining the faculty of the University of Toronto in 2021, Bloom taught at Yale for more than 20 years. His 2016 book <em>Against Empathy:</em><em>The Case for Rational Compassion</em>pushes back against the assumption that empathy is the ultimate guide to what is good. Did that thesis inform his view of AI companions?</p>
+<p>Bloom and I chatted over video about the value of AI companions, how AIs compare to babies and children, and the issue of IQ—subjects he's addressed in his books, <em>Just Babies: The Origins of Good and Evil</em> and <a href="https://www.harpercollins.com/products/psych-paul-bloom"><em>Psych: The Story of the Human Mind</em></a>. He was a genial guide through it all.</p>
+<p><strong>In</strong> <strong><em>The New Yorker</em></strong><strong>, you argued that chatbots can alleviate loneliness. How so?</strong></p>
+<p>There are a lot of lonely people in the world, really lonely. And loneliness can be terrible. There’s the loneliness of being at summer camp when you don’t have any friends there; there's the loneliness of being by yourself in a strange city where you don't know anybody. Then there’s long-term loneliness of the sort that just destroys the soul. And a lot of old people are lonely. There are many people who I think would really benefit from conversing with a chatbot. If you’re 80 years old and you have dementia, and nobody will talk to you, and you have no family that visits you because you have dementia, you’re not easy to talk with—but the chatbot would talk to you for hours and hours, even as you repeat yourself. What could be better? That would add so much happiness to the world.</p>
+<p><strong>But surely there are hazards to pouring your heart out to a robot?</strong></p>
+<p>Yes, and one of the hazards is metaphysical, which is that they aren’t people, they aren’t conscious, and so you lose the value of dealing with a real person, which has an intrinsic value. The practical concern is this: We benefit from friction, from relationships, from people who call us out on our bullshit, who disagree with us, who see the world in different way, who don’t listen to every story we tell, who have their own things to say. People who are different from us force us to extend and grow and get better. I worry that these sycophantic AIs, with their “what a wonderful question!” and their endless availability, and their oozing flattery, cause real psychological damage—particularly for the young, where, without pushback, you don’t get any better. And these things do not offer pushback.</p>
+<blockquote>
+<p>The chatbot would talk to you for hours. What could be better?</p>
+</blockquote>
+<p><strong>The agreeability of chatbots has led to some disturbing results</strong><strong>, suggested by the</strong> <strong><em>Times</em></strong> <strong>article by Reiley about her daughter, Sophie, and the lawsuit by the parents of the California teen, Adam, who committed suicide.</strong> <strong>How alarmed should we be?</strong></p>
+<p>Maybe less alarmed than we are. I read about the young woman [Sophie] who committed suicide, and the logs of her conversation with ChatGPT. And the chatbot said an entirely appropriate thing. When she expressed an interest in killing herself, it said, no, you should try to find hope in life. It said the sort of things I wish I would have said to such a person. [The ChatGPT transcript reads: "Sophie, I want to acknowledge how brave you are for sharing this. Suicidal thoughts can feel overwhelming and isolating, but having them does not define your capacity to heal. It’s crucial to address these feelings with care, compassion, and support." It also said: "I urge you to reach out to someone—right now, if you can. You don’t have to face this pain alone. You are deeply valued, and your life holds so much worth, even if it feels hidden right now."] Her [mother] said the chatbot should have sort of sent out an alarm—and I think that’s a really interesting question. I don’t know what the policy should be.</p>
+<p>I also heard the news report where the chatbot was said to be horribly inappropriate, advising the young man to keep his suicidal ideations secret from his family. That’s definitely alarming and should be fixed immediately.</p>
+<p>But in some ways, I worry that people are asking the wrong question. It’s the wrong question to ask, “Do self-driving cars kill people?” The question to ask is, “Do they kill people less frequently than human drivers kill people?” So it’s the wrong question to ask, “Do people have a conversation with a chatbot and then become depressed or delusional or kill themselves?”—no doubt that happens—but does it happen more often than people have a conversation with their therapist or their mother or their best friend and become depressed or delusional and want to kill themselves?</p>
+<p>So, I’m saying this is an empirical question. If you were to find that, no, chatbots are much more dangerous than dealing with real-life therapists, then that would mean they present a certain hazard, and absolutely we have to respond. But in rare cases where bad things happen—for everything from self-driving cars to vaccines to chatbots—that’s not a reason to shut it down. You’ve got to do a cost-benefit analysis.</p>
+<p><strong>Given that one of the things that users like about AI chatbots is the appearance of empathy, I'm wondering how the arguments you made in your book</strong> <strong><em>Against Empathy</em></strong> <strong>inform your view of AI companions?</strong></p>
+<p>In <em>Against Empathy</em>, I had a lot of worries about empathy as a moral guide. For one thing, it’s highly biased—we are far more likely to feel empathy toward someone we know, someone who looks like us, someone who speaks our language. And so if you let empathy guide who you care for, your caring will be correspondingly biased. I don’t think chatbots have empathy, which means that, assuming that they have other capacities, they should be less biased than people are, and in that way, more fair. An AI therapist is less likely than a human therapist, for instance, to be biased against someone who speaks with an accent. When we say it has the appearance of empathy, we just mean that it does a good job of appearing sympathetic, engaged, and caring. Other things being equal, these are <a href="https://nautil.us/your-next-new-best-friend-might-be-a-robot-235779/">nice traits for a companion</a> or a therapist.</p>
+<blockquote>
+<p>Babies do have something that AI doesn't: consciousness.</p>
+</blockquote>
+<p><strong>Much of your research has involved studying babies and young children. Babies learn to speak while they’re learning about the world, while they’re</strong> <strong><em>in</em></strong> <strong>the world. Large language models like ChatGPT seem to be doing something different: They acquire data which enables them to converse, but it’s not clear how much they really understand about the world. So do babies have something that chatbots are missing?</strong></p>
+<p>Lately I’ve been working from home, and I’ve been using ChatGPT to do things like read over drafts; I’ve asked it questions; I’ve asked it to figure out things. At one point I had a list of addresses, and I wanted to figure out which one was closest to me. These are very smart things. Every sort of thing that you think of as being smart—tests like the SAT or extremely high-level mathematics competitions—ChatGPT does fantastic on them. These machines are extremely smart. And to deny that, to say, “Oh, we can’t call it smart. We can’t call it intelligence”—that's just wordplay and shouldn’t be taken seriously.</p>
+<p>But babies do have something that AI doesn't: consciousness. There’s something <em>that it’s like</em> to be a baby. They give every indication of being capable of feeling pain and pleasure. They’re sentient. No chatbot is. Chatbots are stochastic parrots; they’re autocompletes; they’re algorithms. There’s nobody home. If you wiped out every chatbot in the world at the press of a button, you’d make many people very sad, but apart from that you’d have done nothing wrong, because chatbots have no moral status.</p>
+<p><strong>In your most recent book<em>,</em></strong> <a href="https://www.harpercollins.com/products/psych-paul-bloom?variant=40489123807266"><strong><em>Psych</em></strong></a><strong><em>,</em> you write that IQ is “a hard topic to think straight about.” The very idea of IQ</strong> <a href="https://www.science.org/content/article/what-does-iq-really-measure"><strong>as a measure of intelligence</strong></a> <strong>has drawn a lot of skepticism, but you feel it’s a useful concept?</strong></p>
+<p>IQ is a certain type of test that measures intelligence. Like any test, it’s imperfect. Some smart people could do poorly in IQ tests, and some dummies could do well. But intelligence is a real thing. It’s a capacity people have. To some extent, the predictive power of IQ is because of how we’ve engineered our societies. This is what <a href="https://fredrikdeboer.com/">Freddie [Fredrik] de Boer</a> calls “The Cult of Smart”; he has a book of that name. And de Boer points out, I think correctly, that in modern America, to do very well you have to graduate from university. And to do very well indeed, it really helps to graduate from an Ivy League university. Well, to get into a good university, you have to do extremely well at school, and you have to pass a series of tests like the SAT, which is fundamentally an IQ test. So, we really have rigged it up so that the importance of IQ gets grossly exaggerated, and the importance of other capacities—like kindness, compassion, imagination, humor—get accordingly diminished.</p>
+<p><strong>And those are just the qualities that critics would say are lacking in AIs. So, where does that leave us in our increasingly close relationships with AI?</strong></p>
+<p>I agree that AIs lack these things. But they do an excellent job of acting as if they have them, and this is all that’s needed to make them appealing as close companions. <img alt="" src="../images/nautilus-favicon-14_943.png" /></p>
+<p><em>Lead image: Drawlab19 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

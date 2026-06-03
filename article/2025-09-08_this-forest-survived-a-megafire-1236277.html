@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Do Some Forests Survive Megafires? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why Do Some Forests Survive Megafires?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-6S41</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Five miles down a bumpy dirt road in Plumas National Forest, at the northern end of the Sierra Nevada mountain range, lies a paradox. On one side of the road, a scorched wasteland of burnt toothpicks covers the Earth, a stark reminder of the devastating Dixie Fire that swept through this area four years ago. Not a single living tree remains. But a few hundred feet away, a standof hardy, healthy ponderosa pines shoot into the sky, their branches reaching toward the sun. Small burn marks on the trunks of these trees are the only evidence of that brutal fire, which devoured nearly 1 million acres across five counties in 2021, making it California’s largest single wildfire to date.</p>
+<p>How did one stand manage to survive such a devastating blaze almost intact when the other perished entirely? As bigger and hotter fires increasingly wipe out entire forests in California, leading to unprecedented loss of huge swaths of woodland, forest managers understandably want an answer to this question, backed by hard evidence.</p>
+<p>That’s why, late last year, a team of researchers from California, the Forest Service, and The Nature Conservancy took a systematic look at how different forest management practices influence the frequency of fires that kill entire groves of trees. They surveyed 164 study plots that burned in the Dixie Fire, including the two neighboring stands in Plumas National Forest. It turns out that between 2003 and 2005, the U.S. Forest Service had removed roughly two‑thirds of the trees in the surviving stand, and set a prescribed burn. The forest that went up in flames had been left untouched.</p>
+<blockquote>
+<p>The odds that the megafire killed all the trees on the plot sank to just 4 percent.</p>
+</blockquote>
+<p>The most commonly used methods to protect forests against megafires today include either thinning the trees or setting prescribed burns, and sometimes both. But some <a href="https://www.sciencedirect.com/science/article/pii/S0378112714003661?via%3Dihub">have begun to question</a> whether controlled burns are effective during <a href="https://nautil.us/with-regard-to-the-invisible-1231926/">increasingly intense droughts</a>, given the risks that such burns could spiral out of control. And while plenty of research has looked at how thinning and burns influence fire severity, few efforts have studied how these treatments affect the longer-term survival of individual groves of trees.</p>
+<p>When the researchers analyzed the data from their plots, what they found is that thinning trees alone is not much better than a total lack of forest management. This is possibly due to the fact that some methods of tree thinning actually can increase fire risk because they leave behind dry branches that serve as tinder. But prescribed burns clear away that fuel, making a combination of thinning and burning the winning approach, the researchers found. It didn’t matter if the combination of treatments had been tried five years or 20 years prior. When thinning was followed by burning, the researchers saw much lower levels of both tree mortality and canopy torching. To save trees, it appears, you have to both cut them and burn them.</p>
+<p>“Our study confirmed that thinning and burning treatments can make a huge difference for fire severity,” says study author Kristen Shive, a fire ecologist at the University of California-Berkeley. <br />
+Study plots that were subject to no management before the Dixie Fire had a 58 percent chance of losing all of their trees in the inferno, while plots that had two-thirds of their trees removed before the wildfire, without burn treatment, suffered a 48 percent chance of losing all of their trees. But in areas that were managed through first tree removal and then prescribed fire, the odds that the megafire killed all the trees on the plot sank to just 4 percent.</p>
+<p>Since weather and topography also influence how severely a fire burns, Shive and her colleagues statistically analyzed how these factors contributed to the prevalence of grove-annihilating fire. They found that trees on steeper slopes were more vulnerable to tree-killing fire, but that weather did not play an important role once treatment approaches were taken into account. The results were <a href="https://www.sciencedirect.com/science/article/pii/S0378112724004833?via%3Dihub">published</a> in <em>Forest Ecology and Management</em>.</p>
+<blockquote>
+<p>To save trees, it appears, you have to both cut them and burn them.</p>
+</blockquote>
+<p><a href="https://doi.org/10.2737/PSW-GTR-256">Fires used to sweep through</a> the northern Sierra Nevada about every decade, consuming the forest understory. This created grassy woodlands full of large, widely-spaced trees whose branches soared above the flames. But a century of fire suppression and the end of Indigenous cultural burning has turned many forests into tinderboxes full of flammable undergrowth.</p>
+<p>Now, when fires do ignite, they often grow <a href="https://nautil.us/whats-fueling-todays-extreme-fires-238270/">big and hot enough</a> to kill large trees. Thinning and prescribed fire aim to recreate the fire-resilient woodlands of the past. The kinds of burns typically used to protect forests include pile burns, where cut branches and logs left over from thinning are piled up and set on fire under controlled conditions, and broadcast burns, where low intensity fire spreads across a forest floor or grassland.</p>
+<p>“Fire is the key component,” says Travis Woolley, forest ecologist at the Nature Conservancy who did not participate in the study. In fact, prescribed fire alone often works as well as a combination of thinning and fire in reducing the risk of a severe burn, <a href="https://doi.org/10.1016/j.foreco.2024.121885">a review study by Woolley</a> found. But thinning is still valuable because it helps the trees survive drought, enhances biodiversity, and can make wildfires spread more slowly, he adds.</p>
+<p>Like Woolley, Shive believes that the best way to protect the forests of the Sierra Nevada from wildfires is to burn them more often. Thinning the trees is not enough. “That woody debris on the forest floor is incredibly important for fire behavior,” she says. “Thinning treatments just don't deal with that in the way that prescribed fire does.”</p>
+<p>This year, <a href="https://wildfiretaskforce.org/wp-content/uploads/2025/03/2025-Task-Force-Key-Deliverables-.pdf">the California Wildfire Task Force plans</a> to thin trees and conduct prescribed burns on a record 700,000 acres. Despite this progress, Shive acknowledges that forest treatments have been hampered by steep costs and the sheer ruggedness of the Sierras. But whether the flames are intentional or uncontrolled, fire is coming. <img alt="" src="../images/nautilus-favicon-14_974.png" /></p>
+<p><em>Lead photo: Brian Gailey Photography / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

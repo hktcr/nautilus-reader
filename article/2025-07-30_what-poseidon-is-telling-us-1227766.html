@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Poseidon Is Telling Us - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What Poseidon Is Telling Us - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-30
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-HNPJ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>All the gods like to stir things up every now and then. Apollo gives unwanted gifts. Zeus throws tantrums, flings thunderbolts, assaults boys and women. But no one can mess with an island civilization quite like the god of the sea. Poseidon loves this part of the job. All it takes is a little shake of the waters at the surface and the people lose their minds. They pray, they call on heroes, they start sacrificing anything they think might please him. His wife loathes this, starts hollering at him whenever the bloated, fish-bitten corpses of drowned horses and cattle begin to drift down to the underwater palace. What, she asks (not unreasonably), do they think we’re going to <em>do</em> with these? Once, the people tried chaining a naked princess to a rock by the sea, which struck even Poseidon as a little weird. He allowed her to be rescued by some hero who probably never shut up about it for the rest of his short life.</p>
+<p>Men need to do crazy things for immortality. Gods don’t. Time moves more slowly when you’re divine. Deep in the dark waters, Poseidon often finds himself behind the times. It takes information many years to worm its way to the depths of the ocean. Sometimes he hears something that makes him rush to the surface, only to find that all those concerned have died. As he descends beneath the waves again, Poseidon watches the constellations blur above the shallow waters overhead and then disappear from view. The stars shine bright over the midnight sea, patterned with stories of heroes long gone.</p>
+<p>All the water in Poseidon’s seas was born in that twinkling sky. When a large star dies, it explodes and spreads its guts across space, where they are recycled into new forms and new beings. Oxygen released in the first such explosion combined with ambient hydrogen to make the first water. The water created by many subsequent explosions eventually found its way to us, transported in the frozen surfaces of comets and meteors. This means Earth’s water is older than Earth itself. It’s probably even older than the sun. In 5 billion years, when the sun exhausts its own fuel, our water will be carried off into the depths of space, ready to nourish some other planet yet to be born.</p>
+<blockquote>
+<p>The ocean is deep; it keeps secrets. Time passes differently in the abyss.</p>
+</blockquote>
+<p>In the beginning, the new baby Earth was so hot that the water carried by these rocks was turned immediately to vapor suspended in its nascent sky. There would have been no ocean for many years. But then the planet cooled, and the steam cooled and then condensed. There was a primordial rainstorm, which became a deluge and then a flood, covering three-quarters of the planet in water. The oceans came from the sky.</p>
+<p>Since then, sea and sky have never lost contact. The ocean absorbs and retains the heat of the sun. It moderates the climates of coastal regions, because water is much slower to warm or cool than land. And the ocean is an effectively boundless source of the water that makes clouds, rain, and snow. The seas are governed by the same physics as the sky: floating, sinking, moving, turning. Together, these motions help the ocean move heat, salt, and moisture around the planet. No model of Earth’s climate would be complete without an ocean, extending the tall columns of atmosphere not just outward into three dimensions but also downward into the deep, letting water rise and sink and flow. The sea and the sky are inseparable. They form the world in which winds blow and rain falls, the background against which life on Earth goes on.</p>
+<p>When steady winds blow across the surface of the sea, they drive currents, which twist with the spinning Earth and slam into the boundaries of continents. These form great circular gyres, some parts of which have names. The western boundary of the North Atlantic gyre, for example, is the Gulf Stream, a northward-flowing saltwater river that travels between 25 and 75 miles a day, bringing warmth from the Gulf of Mexico into the Atlantic Ocean. On the other side of the world the Kuroshio current brings warm Philippine waters to Taiwan and Japan. As long as the wind blows and Earth turns, these currents will continue.</p>
+<p>But underneath the surface, something much more gradual is happening. The overturning of the deep ocean is slower, a conveyor belt driven by floating and sinking. Surface waters move northward until they reach the Arctic, where some of them harden into sea ice. The left-behind Arctic waters are saltier and cold; both of these properties make them heavy. They sink resignedly down in the cold polar ocean, pressing down on the deeper waters and forcing them to flow. The deep ocean is a river of failed ice, a bottom-dwelling current moving southward, overshooting the warm places, journeying to the southern pole. The waters around Antarctica move eastward and close, unimpeded by land, in a swift and freezing ring. There, they wait for storms and turbulent seas to bring them once more to the surface. Eventually, the water surfaces again and resumes its long, slow movement around the globe. This is called the thermohaline circulation, driven by temperature and saltiness. It takes around a millennium for water to complete its journey to the depths and back. The ocean is deep; it keeps secrets. Time passes differently in the abyss.</p>
+<blockquote>
+<p>The rules, shaped for so long only by physics, are changing now. There are new characters.</p>
+</blockquote>
+<p>And time is what marks the difference between climate and weather. We don’t need to know much about the deep ocean, or anything else that works as slowly, to forecast the weather. We just need accurate measurements of current atmospheric conditions. If we know enough about the present, physics will tell us what’s coming. The trick is to both gather the right information and hold tight as it’s buffeted by the chaos of the outside world. Weather forecasts are excellent a few hours out, good a few days out, and unreliable after about a week.</p>
+<p><em>Climate</em> is the long-term average of weather: the background conditions in which it happens. Like the weather, the climate changes naturally, but this happens over many millions of years as tectonic plates move, Earth wobbles in its orbit, and the deep ocean currents shift. Weather is what humans experience over our short lives. Climate is a matter for the gods. To understand it, you have to understand all of the forces that shape the world: not just the atmosphere, but the oceans as well. No weather model can tell me with any accuracy what the temperature in New York City will be at 10 in the morning two years from today. But I know it is likely to be hot and sticky in the summer and cold and gray in the winter. The New York climate is made by the prevailing winds, a whole continent of land to the west, the chemical composition of the sky, and the slow circulation of the nearby ocean: things that change more slowly. Things that, in a human lifetime, are not supposed to change at all.</p>
+<p>The climate models I use every day tell me why the world is the way it is. They tell me that the planet is spherical, watery, and turning. It’s heated by the sun. Air rises from the warm, moist tropics and sinks in the desert subtropics. In sinking, it presses down hard on the surface, forcing the air below to move toward areas of lower pressure. The world turns beneath the moving air, which is deflected into trade winds. The winds move over the sea surface, shoving the water along at the boundary between ocean and sky. The water obeys, but recalcitrantly, slowed by its own choppy roughness and bent at an angle by the spinning world. The ocean layers below the surface are dragged by the moving current above. Water rains into the ocean and evaporates back to the sky. These are the foundations. You can always add more and more complexity, building the model up further. Add swirling confrontations between stray warm air just up from the tropics and cold air dripping down from the poles. Now add the boundaries of continents. Now add mountains. Now add forests that exhale great breaths of cloud. Now add cities, cars, factories. Now add yourself.</p>
+<p>The rules, shaped for so long only by physics, are changing now. There are new characters in the story, entities not describable by the laws of physics but still subject to their consequences. They are tiny but powerful, capable of changing the very sky under which they live. These characters can think and feel and read. They are us. <img alt="" src="../images/nautilus-favicon-14_1041.png" /></p>
+<p><em>From</em> <a href="https://www.harpercollins.com/products/human-nature-kate-marvel?variant=43110377324578">Human Nature: Nine Ways to Feel About Our Changing Planet</a> <em>by Kate Marvel. Copyright © 2025 by Kate Marvel. Excerpted by permission of Ecco, an imprint of HarperCollins Publishers.</em></p>
+<p><em>Read our article about Kate Marvel, “You Have Never Felt Climate Change Like This,” <a href="https://nautil.us/you-have-never-felt-climate-change-like-this-1227750/">here</a>.</em></p>
+<p><em>Lead image: Zwiebackesser / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

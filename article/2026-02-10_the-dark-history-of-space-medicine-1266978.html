@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dark History of Space Medicine | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Dark History of Space Medicine</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-5C85</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>If we’re ever going to send humans to Mars, a crew would have to <a href="https://www.nasa.gov/hrp/hazard-distance-from-earth/">spend</a> <a href="https://www.space.com/nasa-astronauts-30-day-mars-mission-science">several</a> years on the round trip. This far-off ambition would require a thorough understanding of how space affects the human body, which scientists haven’t yet fully grasped.</p>
+<p>Researchers have been asking this question for more than 70 years, over a decade before people even made it to space. This week in 1949, the world’s first Department of Space Medicine <a href="https://www.nasa.gov/wp-content/uploads/2023/04/sp-4003.pdf">launched</a> at the United States Air Force’s School of Aviation Medicine in Texas.</p>
+<p>The founder, Air Force Major General Harry Armstrong, organized a meeting the year before where he gathered scientists, physicians, and military officers. This crowd heard about the grueling details of space flight, including the extreme speeds required to remain in orbit—more than 24,000 miles per hour, as estimated at the time. The audience found this information “exotic—and often baffling,” <a href="https://www.airforcemedicine.af.mil/News/Display/Article/1690964/this-month-in-afms-history-first-space-medicine-symposium/">according to</a> Green Payton, a historian with the U.S. Air Force’s School of Aerospace Medicine.</p>
+<p>After discussing the many possible hazards of space travel—from cosmic radiation to the potential meteor collisions—Armstrong decided that the topic demanded “a firm foundation to provide safety for future astronauts,” according to an <a href="https://www.airforcemedicine.af.mil/News/Display/Article/1690964/this-month-in-afms-history-first-space-medicine-symposium/">article</a> from the Air Force Medical Service.</p>
+<p><img alt="" src="../images/dpJS6sM1-Glick_BREAKER-1.png" /></p>
+<p><strong>COSMIC DOCTOR:</strong> Hubertus Strughold with the space cabin simulator at the Air Force School of Aviation Medicine. <em>Photo courtesy of the U.S. Air Force.</em></p>
+<p>Armstrong enlisted physicians who had worked with the German Air Force, including Hubertus Strughold, who became <a href="https://spacemedicineassociation.org/download/strughold_award_documents/Strughold-Accomplishments.pdf">known</a> as the father of space medicine. Strughold, like several other German scientists involved in early space medicine research, came to the U.S. through <a href="https://airandspace.si.edu/stories/editorial/project-paperclip-and-american-rocketry-after-world-war-ii">Operation Paperclip</a>, a secretive, controversial program that was instrumental in developing the country’s space program.</p>
+<p>While Strughold reportedly <a href="https://spacemedicineassociation.org/download/strughold_award_documents/Strughold-Accomplishments.pdf">refused</a> to join the Nazi party, his work as a civilian was still funded and supervised by the German Air Force. In fact, he began his research on space medicine in Nazi Germany. “On his watch, researchers locked prisoners at the Dachau concentration camp in low-pressure chambers,” <em>The</em> <em>New York Times</em> <a href="https://www.nytimes.com/2020/07/24/science/mars-jars-strughold.html">reported</a> in 2020. This experiment was conducted to reveal the impacts of high-altitude flight.</p>
+<p>With Strughold as a leader, the first-ever Department of Space Medicine became an influential hub for investigations on the behavioral and physiological impacts of spaceflight. There, scientists <a href="https://spacemedicineassociation.org/download/strughold_award_documents/Strughold-Accomplishments.pdf">created</a> the first “Space Cabin Simulator,” where study subjects experienced pressure equivalent to an altitude of 18,000 to 25,000 feet. In 1958, when Airman Donald F. Farrell stayed in the chamber for a week, he showed a “seemingly abrupt onset of frank hostility.” According to a report from the time, “The psychological problems presented by the exposure of man to an isolated, uncomfortable void seem to be more formidable than the physiological problems.”</p>
+<p><strong>Read more: “<a href="https://nautil.us/how-does-blood-splatter-in-space-533383/">How Does Blood Splatter in Space?</a>”</strong></p>
+<p>Strughold also <a href="https://apps.dtic.mil/sti/tr/pdf/ADA044985.pdf">helped develop</a> the pressurized suits donned by early U.S. astronauts, a crucial invention. Because space is a vacuum without any pressure from air molecules, liquid in the human body would boil without them.</p>
+<p>Since humans began launching into space in 1961, astronauts have revealed myriad insights into the mental and physical impacts of these journeys. The past few years have brought particularly detailed findings.</p>
+<p>For example, a NASA study conducted between 2015 and 2016 examined how retired astronaut Scott Kelly fared over the course of a year in low-Earth orbit aboard the International Space Station. Scott’s outcomes were compared with his identical twin and fellow former astronaut Mark Kelly, who spent that year on our planet. This experiment revealed that Scott’s body mass <a href="https://www.nasa.gov/humans-in-space/nasas-twins-study-results-published-in-science-journal/">shrank</a> by 7 percent, for example, and that he <a href="https://www.nasa.gov/humans-in-space/twins-study/about/">experienced</a> some changes in gene expression. But more than 90 percent of these shifts reverted within six months of returning to Earth.</p>
+<p>Recent missions have also shown that spaceflight <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11591694/">can</a> <a href="https://www.nasa.gov/missions/station/iss-research/science-in-space-july-28-2023-astronaut-vision/">affect</a> people’s vision, heart function, and immune system, among other impacts. Ultimately, it <a href="https://news.stanford.edu/stories/2024/09/how-space-became-a-place-we-study-aging">seems</a> that spending time in space speeds up aging, but most of these changes appear to reverse when they get back to Earth.</p>
+<p>There’s still plenty to learn, and scientists are continuing to study <a href="https://www.nasa.gov/humans-in-space/nasas-spacex-crew-12-to-study-adaptation-to-altered-gravity/">how</a> people respond to long stretches aboard the International Space Station. And on the upcoming Artemis II mission, the crew plans to <a href="https://nautil.us/revisiting-the-last-crewed-moon-mission-on-the-eve-of-the-next-1263218/">break the record</a> of the farthest human space travel, offering a unique chance to explore how humans will react to increasingly far-off cosmic conditions—a test that could inform future visits to Mars. <img alt="" src="../images/nautilus-favicon-14_442.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Butusova Elena / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

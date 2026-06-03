@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What if Every Roadkill Had a Memorial-Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What if Every Roadkill Had a Memorial-Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-20
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-WYID</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We saw it happening, my then-girlfriend and I: The little bird suddenly flew out of the bushes by the roadside, darted low across the tarmac, and then disappeared into the right rear wheel of the car in front of us. It was centrifuged for a few revolutions before it was ejected sideways and landed, flapping in an uncoordinated fashion, in the verge.</p>
+<p>I quickly parked the car, walked back, squatted down, and picked up the animal: a Sardinian warbler, a pretty, very common bird; petite and not at all resistant to the racking it had just suffered. My girlfriend squatted beside me. Together we watched how the bird attempted a few half-hearted wing flaps, weakly pecked my fingertip, and then lost the light in its little beady eyes and died in the palm of my hand.</p>
+<p>At that moment, to my surprise as much as to my girlfriend’s, I was overcome by sadness, and for a few minutes I sat there, crying, by the side of a country road in the Peloponnese, cradling a dead warbler in my hand, with claxoning cars swishing by and my girlfriend comforting me with a slightly bewildered look on her face. Fifteen minutes later, when we were driving again, she quietly asked me how come the death of a bird affected me so, when I am such an animal mass murderer myself.</p>
+<p>She hit the nail—or rather, the insect pin—on the head. Throughout my life as a scientist I have been responsible for the scientifically sanctioned deaths of hundreds of thousands of animals, mostly arthropods and mollusks. In fact, earlier that day I had merrily stuffed some snails into a jar of alcohol. And although I have never killed any vertebrates, I have regularly participated in field trips where others were collecting frogs, small mammals, and also cute little birdies like that Sardinian warbler, and never shed a tear.</p>
+<blockquote>
+<p>He saw entire families of graylag geese and barn swallows being mowed down.</p>
+</blockquote>
+<p>So why would I cry over the death of this bird? Analyzing my emotions, I concluded that what had touched me was the utter senselessness of this death. An animal that is killed and preserved by a researcher contributes to the knowledge that we have of its species. It is lovingly curated, its features are recorded, it is the object of study and the subject of scientific publications, and it is preserved for eternity in a natural history museum collection. Yes, its life has been lost, but its body has obtained a new kind of value.</p>
+<p>Roadkill is the complete opposite of that. That motorist did not kill that warbler intentionally; in fact, he or she probably never even noticed the collision. And that ignorance and lack of intent are what make the event so tragic. A little life has been ripped from this Earth (and, who knows, if it was a nesting bird with dependent chicks, several lives) and its value has been lost forever.</p>
+<p>Not that the worth of these animals is obvious to everyone. The American anthropologist Jane Desmond, who published <a href="https://www.academia.edu/84366847/Requiem_for_Roadkill_Death_Denial_and_Mourning_on_Americas_Roads">a study of the cultural impact of roadkill</a>, concludes, “These animal lives have little value for most of the [people] in the United States, as these animals are unowned, lacking in monetary or emotional value, not pets or livestock, and without the charismatic following that megafauna like elephants and lions in zoos receive.”</p>
+<p>Nonetheless, most people are uncomfortably aware of our indifference toward the multitude of road deaths of pet-sized mammals and birds, and their unease emerges as humor. The faux field guide “Flattened Fauna” by Roger Knutson, for example, provides species-specific diagrams to recognize the two-dimensional shapes of pancaked animals and a handy “death list” in the back to tick off the ones you have spotted. Then there is Buck Peterson’s trilogy of hillbilly-esque humor, the <em>Original Roadkill Cookbook</em>, the <em>International Roadkill Cookbook</em>, and the <em>Roadkill USA Coloring and Activity Book</em>. And, admittedly, when I lived in Malaysia and on the road passed through the unmistakable pong of a dead Sunda stink badger (<em>Mydaus javanensis</em>), would I not spontaneously burst into singing Loudon Wainwright III’s all-time favorite tune, “Dead Skunk in the Middle of the Road (Stinking to High Heaven)”?</p>
+<p>Crude humor aside, I recognize familiar sentiments in the work by artists who are, for lack of a better word, inspired by roadkill. In her “Roadside Memorial Project,” the Kentucky-based artist and activist L. A. Watson has been creating reflective silhouettes of animals, which she installs among the grass in the verges of roads in her home state wherever an animal of that species has been run over. They function both as a warning sign to drivers and as a memorial to the dead individual in question. On the project’s home page, Watson writes:</p>
+<p>The color white was chosen ... because it references the iconography of human roadside memorial crosses and denotes innocence, sacrifice, spirits, and ghostly specters. The installation comes to life at night, and is “turned on” by the passing drivers who illuminate it, many of whom slow down.</p>
+<p>In a similar project, the eco-artist Brian D. Collier builds roadside shrines for animals, complete with the date of death and a color picture of the deceased, akin to the ones we sometimes see erected along the road for people who have lost their lives in traffic accidents. Jane Desmond writes of his work:</p>
+<p>Streetside shrines ... to roadkilled animals may be tiny acts of recognition, but they point to the possibility of greater emotional cognizance of animal carnage on highways. ... Similar shrines ... could clutter the road with the marking of accumulated deaths, too innumerable to count as we go whizzing by.</p>
+<p>And clutter the road with shrines is exactly what my colleague Bram Koese did. Koese is one of the best freshwater zoologists of the Netherlands, specializing in mayflies and caddisflies but with a near encyclopedic knowledge of most other aquatic animals, and terrestrial ones, for that matter. He lives in a town, surrounded by wetlands and canals, some 30 kilometers south of Amsterdam, and takes regular bicycle rides along the Ziendeweg, a narrow road between his hometown and the next. During rush hour many commuters use it to circumvent the traffic jams on the highway. And these speeding cars often hit wildlife, Koese noticed. He saw entire families of graylag geese (<em>Anser anser</em>) and barn swallows (<em>Hirundo rustica</em>) being mowed down.  </p>
+<p>Prompted by these sad encounters, and curious about the actual <a href="https://nautil.us/my-3-greatest-revelations-3-410146/">impact of the traffic on wildlife</a>, he began logging his roadkill sightings on the citizen science platform Observation International. For a whole year, on average every other day, he would ride up and down the road, scanning with a headlamp if it was dark, and record and photograph every dead animal (birds, mammals, amphibians, even the occasional butterfly or migrating crayfish) and its location.</p>
+<p>His sightings amounted to 642 carcasses. The “death list” included 35 mammals, 90 birds, and 515 amphibians, among which were rare and protected species such as the stoat (<em>Mustela erminea</em>), weasel (<em>Mustela nivalis</em>), European polecat (<em>Mustela putorius</em>), tawny owl (<em>Strix aluco</em>), moor frog (<em>Rana arvalis</em>), and natterjack toad (<em>Epidalea calamita</em>). Shocked by the volume of his data, and disenchanted by the lack of response he got from the municipality, Koese then hatched a secret plan for a clever guerrilla campaign.</p>
+<blockquote>
+<p>One roadkill is a tragedy, but a million roadkills are not just a statistic.</p>
+</blockquote>
+<p>Quietly asking around in the neighborhood and among family and friends, at the local nature conservation organization, and at the bicycle workshop, he managed to round up some 25 coconspirators. Together they assembled not one but 642 roadside shrines. Each was made from a one-meter-long stake of live willow wood (leftovers from recent willow coppicing—so they could still take root when stuck into the ground). Friends with a large garden sawed the crossbeams from old floorboards of Koese’s stepfather’s and whitened them, while Koese and his girlfriend whitened all vertical stakes with chalk (it took them 20 days). Each cross would come to represent a separate roadkill exactly at the spot where it had taken place. The name of the species and the date of its demise were stenciled on the crossbeam, and a picture of the live animal was placed next to a QR code that led to the record on the Observation International website, where a photo of the animal in its flattened state could be viewed.</p>
+<p>Installing the crosses turned out to be quite an operation because the team wanted to eschew the use of any motorized road vehicles and also because the COVID-19 regulations required many online briefings to coordinate and discuss the marching orders. On Thursday, May 7, 2021, a friend of Koese’s came with his flatbottom boat. With the help of five workers from the bicycle workshop, they transported all the stakes from Koese’s house to the boat (“The guys found the work a little tedious, but we managed to motivate them with chocolate cake,” says Koese) and then on to the Ziendeweg (which runs parallel to a canal). That evening, a team of three volunteers used chalk to mark all 642 locations on the road, while another team transported the stakes, by boat and carrier cycles, and hid them, with ground drills and sledge hammers, in the bushes at three locations.</p>
+<p>The next morning, at the crack of dawn, 10 two- to three-person teams quietly took their positions along the road, each responsible for the installation of some 60 crosses. Then, using wheelbarrows, a canoe, and the flatbottom boat, volunteers distributed the stakes, drills, and hammers among the groups, while, still in the quiet predawn hour, two volunteers on carrier cycles handed out the crossbeams with the names and the QR codes. Once everything was in place, the teams quickly and simultaneously began hammering away and installing the crosses along the roadside. When the sun was up, and before the rush hour began, it was a magnificent sight, and looked exactly as Jane Desmond had envisaged it: an endless parade of white crosses stretching to the horizon along the four-kilometer-long straight road, making every driver (as well as the local authorities, who learned about it from the local and national media that Koese had notified) painfully aware of the “innumerable accumulated deaths.”</p>
+<p>But not for long. As it turned out, not everybody in the neighborhood was sympathetic toward the campaign, and within a day after they had been set up, all the crosses had been kicked down (perhaps by the same person who had stuffed a recently installed underpass intended for otter crossings with plastic foam and set it on fire). Koese and his team resurrected most of the crosses, only to find them again vandalized the next day. But they were not disheartened: By that time the project had served its purpose. Koese, his team, and their cause were in the news for the whole weekend, the local authorities had been presented both with a letter and a scientific report with a detailed analysis of the findings, and a strong case had been made for the road to be out of bounds for anything but local traffic.</p>
+<p>Koese’s project drives home two things. First, that road ecology, as it is called, is a perfect subject for community science projects. Good online platforms exist for logging roadkill events, <em>and</em> the community group could adopt guerrilla tactics for their campaign that an “official” project would probably not have got away with. (Moreover, these community projects tend to be focused on the impact of traffic on wildlife, whereas many officially approved roadkill monitoring projects are begun for the opposite reason: to control the impact of wildlife on traffic.)</p>
+<p>The second point is that one roadkill is a tragedy, but a million roadkills are not just a statistic. By upscaling from a single roadside shrine in memory of a single deceased animal to a mass grave that showed the actual scale of the problem, Koese and his team were able to make us seamlessly progress from mourning the loss of one individual animal’s life to grasping the danger that entire populations are exposed to. <img alt="" src="../images/nautilus-favicon-14_1112.png" /></p>
+<p><em>Lead photo: Some of the 642 handmade shrines created by biologist Bram Koese, marking roadkilled animals along a Dutch commuter route. ©Bram Koese</em></p>
+<p><em>This story is an excerpt from</em><a href="https://mitpress.mit.edu/9780262049092/the-urban-naturalist/">The Urban Naturalist</a><em>and is reprinted with permission from MIT Press Reader.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

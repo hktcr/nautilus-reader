@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Does Anybody Really Know What Time Is? - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Does Anybody Really Know What Time Is? - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-W7LA</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I’ve been fascinated by time for as long as I can remember. In my undergraduate physics classes, time always lurked in the background—it was the “<em>t</em>” that the professors sprinkled into their equations—but it was never quite clear what time actually was. Years later, I wrote <a href="https://us.macmillan.com/books/9780312603519/insearchoftime/">a book about time</a>, but even with chapters on Newton and Einstein, and a solid dose of philosophy, something was missing.</p>
+<p>For starters, we know clocks and watches work, but how do <em>we</em> tell time? If you’re watching network TV and a commercial break begins, you know you have time to use the bathroom or perhaps make a sandwich—in fact, you can probably arrange to be back in front of the TV just as the ads are ending. What makes you so good at judging these intervals of time?</p>
+<p>I figured that Dean Buonomano, being a neuroscientist, might have some of the answers. Buonomano is known for developing the idea that the key mechanism is not a single clock-like structure in the brain but rather networks of neurons working together, known as “neural dynamics.”</p>
+<p>But as Buonomano sees it, the brain does much more than keep track of time; in fact, it might be said to create it. It’s thanks to our brains that we feel time’s “flow,” even though nothing in physics points to such a flow out there in the world. Perhaps even more crucially, the brain allows us to engage in “mental time travel”—the ability to recall past events and imagine future happenings. This capability, he argues, was essential in shaping humanity’s path from the African savannah to today’s globe-spanning civilization.</p>
+<p>Buonomano, an affable 60-year-old, is a professor in the departments of neurobiology and psychology at the University of California, Los Angeles, where he heads the Buonomano Lab. His most recent book is <a href="https://wwnorton.com/books/Your-Brain-Is-a-Time-Machine/"><em>Your Brain is a Time Machine: The Neuroscience and Physics of Time</em></a>. I recently caught up with Buonomano via videoconference.</p>
+<p><img alt="" src="../images/lfhUmX2Y-Falk_BREAKER.png" /></p>
+<p><strong>FUTURE SHOCK:</strong> Neuroscientist Dean Buonomano says early humans’ first awareness of passing time must have been traumatic. They “must have looked in the future and said, ‘oh shit, I’m going to die.’” <em>Photo courtesy of Dean Buonomano.</em></p>
+<p><strong>You and I have both written books about time—but you’re a neuroscientist and I’m not, so I thought we could start with the brain. Even when I’m in a room with no clocks, I have what seems like a reasonable awareness of how much time has passed. How does the brain do it? I imagine it’s not as simple as having a little clock in the brain. What’s going on?</strong></p>
+<p>The brain has fundamentally different mechanisms to tell time on different timescales. You have a circadian clock; that’s what guides you when you’re hungry, tells you when you go to bed, when to get up. But that clock doesn’t have a second hand; it cannot “tell time.” It’s not going to help you determine the tempo of a song that you’re listening to. So that clock is independent of the other clocks. We also have other clocks, other timers, that guide our ability to have this conversation.</p>
+<p>We know that many of these forms of timing rely on what’s called a “neural population clock”—that’s a circuit of neurons where one neuron can contact and excite another neuron, and another, and another. You can imagine them as falling dominoes. If you have a long line of dominoes, you could use that as a clock, because you could mark time based on which domino is currently falling. So that’s how the brain tells time on the scale of milliseconds, using what we call “neural dynamics.” Neurons make up a dynamical system, and they create spatio-temporal patterns of activity, and we use those spatio-temporal patterns of activity to tell time.</p>
+<p><strong>Although we don’t have a little clock in our brains, maybe we have something like a timer of sorts?</strong></p>
+<p>I think the more accurate way to put it is, your whole brain is a timer. You don’t have one little clock; you have your entire brain. You don’t have a centralized timer. All neurons, in effect, can contribute to timing on an as-needed basis.</p>
+<p><strong>You mentioned our body’s circadian clocks. Can you give a quick explainer of that?</strong></p>
+<p>Absolutely. The circadian clock is probably the timer in the brain that we know most about. It’s basically a biochemical oscillator. It works as a negative feedback loop in which you generate proteins which inhibit the generation of more proteins—and by design, that period is around 24 hours. And you don’t need a brain to have a circadian clock. Plants have circadian clocks, and bacteria have circadian clocks. So, it’s the most primitive of our clocks, and in many ways the most important, because it’s entrained by the rotation of the Earth.</p>
+<p><strong>So how does my brain’s sense of time relate to clock time—time as measured by our clocks and watches?</strong></p>
+<p>We have to <a href="https://nautil.us/a-revolution-in-time-544416/">calibrate our internal clocks</a>, our internal timers, with external “objective” time. If your circadian clock is off, or out of phase, with external time, then you have jet lag. On shorter time scales, everything we’re doing is sort of calibrating our ability to tell time and match it with the objective world. If you’re a musician, you have your internal dynamics that’s driving your ability to generate or produce a musical piece—but you also have a metronome, right? And that metronome serves as a calibration. Thousands of years ago, we didn’t have those external clocks. If you were trying to catch an object in mid-flight or throw a spear at a moving object—those are all timing problems, and you have to time your motor responses in accordance with the laws of physics and the external world.</p>
+<p><strong>Although Hollywood-style time travel remains a fiction, we do have something called mental time travel. What is that?</strong></p>
+<p>Mental time travel refers to the ability to relive things that have happened in the past and to simulate or <a href="https://nautil.us/the-past-is-a-ghost-and-the-future-a-fantasy-1221672/">imagine different future scenarios</a>. Mental time travel is one of the most fundamental or defining cognitive abilities that humans developed. It’s what really allowed us to get where we are. You think of something as simple as agriculture—one of the most important technological advances we ever had. It’s a simple idea, right? Planting a seed and then reaping the benefits of that in terms of assuring the presence of food in the future. But that simple idea really eluded all other animals, and eluded early humans for millions of years. And why is that? I think it’s because it involves mental time travel. Without that ability, it’s hard to say, “Well, I’m going to plant this seed today in order to reap the benefits months or years into the future.” So, this connecting the causal dots between cause and effect over long periods of time is something most animals are largely incapable of.</p>
+<blockquote>
+<p>The accurate way to put it is that your whole brain is a timer.</p>
+</blockquote>
+<p><strong>Why do we think this capability is unique to humans?</strong></p>
+<p>It’s certainly unique in terms of the degree that we can do it. There’s some debate whether <a href="https://nautil.us/the-new-science-of-animal-minds-713384/">other animals can do it</a>. Now, other animals do future-oriented actions; a squirrel will store food, a beaver will build a dam, and birds will build nests. But by most accounts, those are innate behaviors. Animals don’t seem to be aware of why they’re doing it. That’s how evolution works; it creates innate behaviors so that you can do future-oriented things without having to understand why you’re doing them.</p>
+<p>Mind you, although this ability to engage in mental time travel and to see the future had to be incredibly powerful, it was also incredibly traumatic. Some early humans must have looked in the future and said, “oh shit, I’m going to die.” They saw that they’re mortal. This cognitive ability to engage in mental time travel might have initiated or triggered the need for supernatural beliefs like religion. <a href="https://nautil.us/the-worth-of-an-angry-god-237410/">Supernatural beliefs</a> may have developed in part to cope with our ability to engage in mental time travel and to see that we’re mortal. And what better way to do that, than to believe that there’s life after death?</p>
+<p><strong>I’m wondering if the development of language was related to the capacity for mental time travel?</strong></p>
+<p>I agree that mental time travel and language have to be intertwined. To prepare for the future, we need linguistic abilities and language and symbols to plan ahead and to quantify time as it passes. I think those things co-evolved.</p>
+<p>It’s also interesting that when we talk about time, in many cultures, we use spatial metaphors. People have argued that we had [neural] circuits in place to deal with space—left, right, north, south—essential for tracking animals as they migrate over long distances. And then those circuits for space were co-opted or transformed, and allowed us to mentally travel through time. We have the past, we have the present, we have the future. And when you and I talk about time, we often use spatial metaphors. We say, “it was a long day,” or “I’m looking forward to seeing you,” or “In hindsight, that was not my best idea.” So, that’s one of the tools we use to engage in mental time travel, and it goes precisely toward your point of the relationship between mental time travel and language.</p>
+<p><strong>Interestingly, we also use them the other way around, using time to describe space. We’ll say things like “The shopping mall is 10 minutes away.”</strong></p>
+<p>That’s a good example, but there’s not many of those. I think we spatialize time much more than we temporalize space.</p>
+<p><strong>One very basic thing about our experience of time is that it</strong> <a href="https://nautil.us/where-did-time-come-from-and-why-does-it-seem-to-flow-234760/"><strong>seems to flow</strong></a><strong>: The future becomes the present, the present disappears into the past. But that flow is rather slippery. Is there anything out there in the physical world that corresponds to that flow? Or could it be a creation of the mind?</strong></p>
+<p>Time sits at the center of a perfect storm of unsolved scientific mysteries involving free will, consciousness, and the unification of relativity and quantum mechanics. There’s two views.</p>
+<p>One is called presentism; that’s the intuitive view—the view that only the present is real, and the past is no longer real and the future is not yet real. And that we can take actions in the present and modify or change or shape the future. That’s certainly been the dominant view throughout history. Now in modern physics, going back to Einstein, that view began to change.</p>
+<p>Now there’s a tension between neuroscience and physics, with many physicists and philosophers saying that the laws of physics suggest that the presentist view is wrong, and that the correct view is eternalism, also called the “block universe” view. In that view, “now” is to time as “here” is to space. We have no problem saying we both exist in space, even though we’re far apart; you’re in Toronto and I’m in LA. Under eternalism, the same thing is true of time. There would be other “versions” of you in the past or in the future that all coexist.</p>
+<blockquote>
+<p>Perception of time is evolution’s way of allowing us to understand change.</p>
+</blockquote>
+<p>I think the most intuitive way for people to understand this notion—that all of time is laid out in this way—is through the concept of time travel, that is, the <a href="https://nautil.us/a-nonlinear-history-of-time-travel-236118/">Hollywood version of time travel</a>. Under presentism, time travel is 100 percent impossible, because you cannot travel to moments that don’t exist. So all our favorite time travel movies, whether it’s <em>The Terminator</em> or <em>Predestination</em>, are non-starters.</p>
+<p>So, this is a bit of a roundabout answer, but under eternalism, our subjective sense of the flow of time is hard to explain, and some physicists and philosophers view it as an illusion. In other words, since time isn’t flowing in the normal sense [in the physical world], then it must be an illusion imposed by the brain. And this is what causes this tension between neuroscience and physics.</p>
+<p><strong>Sticking with the difference between time and space for a moment: They really do feel quite different, don’t they? After all, I have some control over my position in space—I can move one foot to the east or one foot to the west, no problem. We don’t have that freedom for moving through time.</strong></p>
+<p>I think that’s one of the reasons that some philosophers and physicists embrace eternalism. The laws of physics don’t tell us that there’s anything special about the present moment. Also, the laws of physics are generally time-reversible. You can run Newton’s laws or Einstein’s laws forward or backward, to predict the future or retrodict the past. And then, with relativity theory, we’ve proven that there is no absolute “now.” If I was traveling in a different reference frame at a very high speed, it doesn’t make sense for me to ask, “What is Dan doing now?” because our clocks are ticking at different rates. Some people have taken that to say, well, maybe there is no now; maybe all moments are already “out there.”</p>
+<p>But your point about being able to move in space but not in time certainly is important, and it raises this question of the <a href="https://nautil.us/the-mystery-of-times-arrow-234754/">arrow of time</a>. And physics has answers to that. One of those answers relates to the fact that everything seems to be “flowing” in the forward direction, and that’s due to the second law of thermodynamics [which says that entropy, roughly the amount of disorder of a system, is always increasing], together with the fact that the universe had to start in a very low-entropy regime. So you need those two things, working in conjunction, to explain the arrow of time. But the laws of physics don’t prove one view or the other; they don’t require either eternalism or presentism. These are just interpretations.</p>
+<p><strong>I’m trying to picture this “block universe” suggested by the eternalist view. If past, present, and future are all laid out like a block, how can our present actions affect the future? Isn’t the future already “fixed” in some sense?</strong></p>
+<p>That’s exactly right. Under the eternalist view, <a href="https://nautil.us/yes-we-have-free-will-no-we-absolutely-do-not-431904/">there is no free will</a>. Things have already been, in a sense, predetermined, because they have in a sense already happened. So there is essentially very little place for what most people would call free will.</p>
+<blockquote>
+<p>Neuroscience is the only field in which the thing being studied is doing the studying.</p>
+</blockquote>
+<p><strong>So eternalism challenges our intuitions—but presentism is pretty weird, too. We remember the past, we imagine the future—but it’s hard to pin down just what it is that makes the present moment more real than all those other moments.</strong></p>
+<p>We have to be aware that what we call “the present” is really a window of integration. So now we’re talking about psychology, neuroscience. When you’re hearing me speak, there’s a delay there [due to the finite speed of sound], and your brain sort of integrates this delay. And if we were talking in person, your eyes would receive visual information from my lips moving before your ears heard the sound waves generated by my lips moving. So, your brain is integrating; there’s no single instantaneous present. There’s what we call a temporal window of integration, and then the brain creates this narrative in which all of these things are happening simultaneously. There’s some flexibility there; if you’re in the cheap seats at the symphony, and someone bangs the cymbals together, you see it, but the sound is delayed. But if you’re in the expensive seats up close, then the delay is much less. The notion of the present, as far as the brain is concerned, is flexible and adaptive. But I don’t think it’s mysterious in the sense that eternalism is.</p>
+<p><strong>We might still wonder where our impression of time’s “flow” comes from.</strong></p>
+<p>We evolved to have a sense that the past is no longer real, the present is real, and the future is not yet real, because it’s adaptive. But why is it adaptive? Because it’s real. It’s adaptive because that's how the universe actually works. The argument is not that everything that we perceive has a one-to-one correspondence to the real world, but most of the time it does. <a href="https://nautil.us/the-reality-of-color-is-perception-235560/">Color</a> is a good example: Color doesn’t really exist in physics, but there’s an approximation of color in terms of the wavelength of light. The brain’s hack, evolution’s hack, was to allow us to create little spectrometers. Our conscious perception of time was evolution’s way to allow us to understand how things are changing in the external world, how time is indeed flowing. And it’s adaptive because it does capture a real property of the physical world.</p>
+<p><strong>At the end of the day, do our brains impose some limitations on our ability to answer these deep questions?</strong></p>
+<p>I certainly think they do. I don’t see how it could be otherwise. Our brains are a product of evolution, and evolution selected the cognitive architecture of our brains to survive in a world in which we really don’t live in anymore. It was in a world in which we struggled to survive and to find food and to protect ourselves and to find shelter and to reproduce. We don’t inhabit that world anymore.</p>
+<p>I think any information-processing device has its limitations, and in the case of the human brain, those limitations are crystal clear. For example, quantum mechanics. Clearly, the brain didn’t evolve to have correct cognitive architecture to understand whether a photon is a wave or a particle. And the whole debate about different <a href="https://www.scientificamerican.com/article/the-many-interpretations-of-quantum-mechanics/">interpretations of quantum mechanics</a> is really a neuroscience debate, because it’s really about the limitations of the human brain. But I think we have to be aware that the limitations of the human brain flow over into other fields, and time is one of those fields. Neuroscience is a unique field in that it’s the only field of all of science in which the thing being studied is doing the studying. And that’s not a good setup, because there’s room for biases and limitations.</p>
+<p>But let me say one thing about how to deal with these limitations. I think one of the most powerful tools ever invented to overcome the brain’s limitations is mathematics. Because once you can describe things in a set of equations, it doesn’t matter if we understand them, right? You can just put those equations in a computer, and the computer can spit out what will happen in the future, or what may happen in the future, or what happened in the past.</p>
+<p>Mathematics allows us to go beyond the brain’s inherent limitations. That’s why physics has been as powerful as it is. We basically have this ability to describe everything that’s happening on our planet, short of living inside a particle collider or living beside a black hole, with an incredible degree of precision. Mathematics is what allows us to do that. That’s what the struggle between presentism and eternalism is really about: interpreting mathematics. That’s where we have to be more cognizant of the limitations of the human brain. <img alt="" src="../images/nautilus-favicon-14_1083.png" /></p>
+<p><em>Lead image: fran_kie / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

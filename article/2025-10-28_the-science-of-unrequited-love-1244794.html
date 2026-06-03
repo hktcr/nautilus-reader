@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science of Unrequited Love | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Science of Unrequited Love</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-6VXO</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We’ve all pined for loves that we knew were impossible. Such crushes may burn intensely, particularly when we are young and inexperienced, but they tend to flame out almost as quickly as they ignite. As we grow older, many of us learn to love people who will love us back in equal measure. But some continue to cling to one-sided love affairs. And when this unrequited love becomes obsessive, all consuming, even involuntary and addictive, when it drags on for years, we have left the territory of crushes for a much stranger and more lovelorn land: The land of limerence.   </p>
+<p>The term limerence was coined in the 1970s by psychologist and philosopher of science Dorothy Tennov, who drew on a decade of her own research, including thousands of questionnaires and case studies, as well as autobiographies and published personal journals. She noticed that many people, across a wide range of time periods, backgrounds, and life circumstances, shared unrequited romantic experiences that had some remarkably consistent features. In her 1979 book, <em>Love and Limerence</em>, Tennov defined limerence as “an uncontrollable, biologically determined, inherently irrational, instinct-like reaction.”  </p>
+<p>One of the most quixotic features of limerence is the sufferer’s ability to temporarily satisfy their longing with the imagination. As Tennov writes, people with limerence have an “acute sensitivity to any act or thought or condition that can be interpreted favorably, and an extraordinary ability to devise or invent ‘reasonable’ explanations for why the neutrality that the disinterested observer might see is in fact a sign of hidden passion,” from the object of one’s interest.  </p>
+<p>Circumstances may be ripe today for a surge of limerent love affairs, according to a recent <a href="https://link.springer.com/content/pdf/10.1007/s11896-024-09674-x.pdf">review</a>: It’s easier than ever to feed a romantic obsession with a steady diet of idealized images and accounts of a person’s daily life on social media. And in fact, an entire <a href="https://www.reddit.com/r/limerence/">community</a> of people who suffer from limerence exists on Reddit, with 40,000 weekly visitors. But limerence is not a formal diagnosis. Nor does the condition have any clear overlap with existing clinical disorders, such as erotomania, also known as de Clérambault's syndrome, a paranoid state where a person believes that another is infatuated with them.   </p>
+<p>Despite a shortage of psychological study on limerence, some clear parameters have been established: People with limerence typically pine for affection rather than sex and only sustain these feelings towards a single love object at any one time. One sustaining force is uncertainty about whether one’s affection is returned—she loves me, she loves me not. The more uncertainty, the greater the potential for obsession, rumination, and longing.</p>
+<p>In her popular <a href="https://www.themarginalian.org/2021/11/25/love-and-limerence-dorothy-tennov/">blog</a> <em>The Marginalian</em>, essayist and author Maria Popova writes that limerence is “a style of attachment, the origins of which are still unclear,” and that many people who suffer from it are “otherwise reasonable and high-functioning.” Though race, gender, age, or sexual orientation do not seem to have any bearing on who is limerent, it does seem to tend to afflict more people in creative professions, something she attributes to the fact that,  “the very process of limerence is in a sense a creative process—a process of sustained attention and selective amplification.”</p>
+<p>One of literature’s most classic cases of limerent love might be Jay Gatsby’s obsession with Daisy Buchanan in the 1925 novel <em>The Great Gatsby</em>. To be fair, it isn’t the real Daisy who Gatsby loves. It’s an idealized version of her, what she represents. Daisy does not ultimately return Gatsby’s affection, but his obsession with her consumes his entire life. Author F. Scott Fitzgerald writes, “There must have been moments even that afternoon when Daisy tumbled short of his dreams—not through her own fault but because of the colossal vitality of his illusion.”</p>
+<p>A certain measure of illusion feeds all forms of love, but limerence suggests that too much fantasy ultimately can leave one adrift and unmoored on the high seas of one-way romance. <img alt="" src="../images/nautilus-favicon-14_871.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em>.</p>
+<p><em>Lead image: Nicoleta Ionescu / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

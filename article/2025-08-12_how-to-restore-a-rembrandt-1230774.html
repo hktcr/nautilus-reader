@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science of How Art Restoration Works | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Science of How Art Restoration Works</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-WBEU</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Art can have incredible power over us. Just ask the millions of people who crowd the Louvre for a glimpse at the <em>Mona Lisa</em> or wander through the Vatican to look up at the ornately painted ceiling of the Sistine Chapel.</p>
+<p>Yet even the most timeless and celebrated pieces can be ravaged by the march of the decades and centuries: Oil paint darkens, varnish cracks, textiles disintegrate. Turning back the clock can be complicated—scientifically and culturally. It requires a set of skills ranging from archaeology, chemistry, material sciences, imaging technology, and history.</p>
+<p><strong>How the science of art conservation works</strong></p>
+<p>Conservation starts with material analysis, whether the artwork in question is a textile, sculpture, or painting. “In the beginning of the 18th century, and increasingly into the 19th century, we started to define our practice as science-based, with a sort of rationalist philosophy,” says Glenn Wharton, Chair of the UCLA/Getty Interdepartmental Program in the Conservation of Cultural Heritage. “The idea is driven by this thought that through material analysis, we can know the object, we can know how it was made, how it's deteriorated, and options for conservation treatment.”</p>
+<p>This process can be destructive or non-destructive. A destructive approach might be to remove a tiny chip of paint from a work of art to analyze layers of paint and see how the artist originally constructed the work. But, increasingly, conservators and conservation scientists have been able to adopt technologies to make the analysis process less invasive. They often borrow these technologies from other fields, notably the medical field, says Wharton. CT scanning, for instance, can help doctors peer into bodies, but it can also help art conservation experts find tiny details in artworks, such as fingerprints and tool marks that they couldn’t see with the naked eye—without damaging the work itself.</p>
+<blockquote>
+<p>Analytical techniques zoom in on Rembrant’s artmaking process in new detail.</p>
+</blockquote>
+<p>Operation Night Watch, which aims to rehabilitate Rembrandt’s 1642 famous oil painting, at the Rijksmuseum in Amsterdam, is one the most massive projects to rely on high-tech imaging to preserve a work of art, says Corina Rogge, president of the American Institute for Conservation and director of conservation at Houston’s Menil Collection.</p>
+<p>For this project, experts are combining macro- and micro- analytical techniques—such as hyperspectral imaging, XRF, and XRD mapping—to zoom in on Rembrant’s artmaking process. Hyperspectral imaging captures information across the electromagnetic spectrum for each pixel in an image. XRF, or X-ray fluorescence, determines elemental composition of material, and XRD, or X-ray diffraction, reveals more about the structure of a material. Knowing these details then directs conservators to the best course of action to restore a delicate work of art.</p>
+<p><a href="https://www.rijksmuseum.nl/en/stories/operation-night-watch/story/restoration-rembrandt-nightwatch">For Operation Night Watch</a>, conservators determined that <a href="https://www.rijksmuseum.nl/en/whats-on/exhibitions/operation-night-watch/story/results-of-the-research">there are 10 key elements of the artwork that need fixing</a>, including removing and replacing a crumbly, brittle varnish that casts a gray shadow over the whole painting. To solve this dilemma, experts are gently removing the old varnish by placing non-woven tissue and a minute amount of solvent on tiny sections of the massive artwork, allowing it to dissolve, removing any last bits with a cotton swab under a microscope. They are then applying a new varnish to reinvigorate vibrant paint colorsand breathe some life back into the centuries-old iconic painting. It’s no small feat for the epic work, which measures about 12 by 14.5 feet.</p>
+<p>This restoration process looks different for paintings with different needs—as well as, of course, for textiles, which may require carefully reinforcing a stitch or mending a tear, and for sculptures, which may need help from special adhesives or plaster to stay stable.</p>
+<p><strong>A look to the future—by way of the past</strong></p>
+<p>For almost as long as art has existed, people have been repairing it. So there are vast stores of accumulated knowledge about methods of preserving art. There are also copious records about what a piece of art has already gone through in terms of restoration and conservation. This is where Wharton expects AI to be the most helpful—sorting through the loads of works in a collection, noting what techniques have already been used on it, searching other systems for suitable preservation methods, and sharing that knowledge with experts across the globe.</p>
+<p>Although more high-tech, science-informed art restoration techniques in the future could be a boon to the field, what experts really crave, they say, is more collaboration between scientists, conservators, Indigenous experts, affected communities, and the general public. For instance, Wharton mentions that in the past, solvents used to repair art were incredibly toxic and abrasive, which caused concerns for not just art but also the environment.</p>
+<p>Conservators and conservation scientists have recentered their focus from just what a piece of art is made of and how to keep it in pristine shape, Wharton notes, and are now putting more consideration into the culture from which they originated. “We're still very much science based, but we've also come to realize over time that these objects in our care have values embedded in them,” he adds. “We always try to assess these values as well, which leads us towards communicating with people whose cultural heritage it is.”</p>
+<p>Scientists are also looking to learn about and even adopt more traditional practices of care, Wharton says. “The field is waking up to that now, so we're starting to do a lot of research on just learning how things were cared for locally in the past, and maybe some of these traditions are still alive.” One of his graduate students, for example, brought back a practice of <a href="https://conservation.ucla.edu/2025/05/19/from-neem-leaves-to-sustainable-futures-dr-elizabeth-salmon-on-preventative-conservation/">using neem trees native to India</a> to preserve and keep pests from harming textiles in museum storage, which she had learned during work at the Mehrangarh Museum in Jodhpur, Rajasthan.</p>
+<p>As with most things art, what gets conserved and what doesn't usually comes down to time and money. The number of restoration projects far exceeds the availability of qualified scientists in the field. And historically, it has often been the most valued works owned by wealthy individuals or institutions that were restored, Rogge says. But with the evolving field, this is changing to also include “people whose cultural heritage is being conserved,” Wharton says. Besides, there are also plenty of people <a href="https://www.frieze.com/article/does-art-restoration-risk-erasing-past">who say</a> that, in some cases, a work’s aging is just part of the process. <img alt="" src="../images/nautilus-favicon-14_1022.png" /></p>
+<p><em>Lead image: Bert e Boer / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

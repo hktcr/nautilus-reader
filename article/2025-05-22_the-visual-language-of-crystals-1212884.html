@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Visual Language of Crystals - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Visual Language of Crystals - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-O73Z</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In the startling black and white timelapse video below, potassium phosphate crystals bloom and explode on the screen into a kaleidoscope of patterns and shapes, some jagged as a steak knife, others pillowy like balls of cotton or fresh snow. The video took French audiovisual artist Thomas Blanchard seven months to create: Each crystallization sequence evolved over a period of between 15 and 24 hours, with a single photograph snapped approximately every minute. The whole series is brought to life with a pumping cinematic score by composer Alexis Dehimi.</p>
+<p>To achieve the wild variation in crystalline forms, Blanchard experimented with the saturation of his solution and the type of paper he was using as a canvas. He had to guess at what shapes the crystals would take and position his camera accordingly to capture a precise image. Sometimes the lens would lose focus as the crystals crept across the paper, or he would anticipate that the fractals would crawl to the left and in the end they would blossom to the right instead. Blanchard was rewarded for his patience. “Art is also about taking your time,” he says.</p>
+<p>Blanchard liked the creative control he had over the process of crystal formation, despite the element of chance. He has used timelapse photography to capture the beauty of natural patterns in past work, including videos that focused on the <a href="https://vimeo.com/764883831">blooming of flowers</a> or the <a href="https://vimeo.com/641890592">emergence of a butterfly</a> from its chrysalis. But he often felt that he was more of a spectator than an active creator in those projects, he says. “My ambition is to create works where art and science interact, respond to one another, and grow together,” he says.</p>
+<p>We spoke to Blanchard about how he came to work with crystals, the relationship between art and curiosity, and why humans see the familiar in the abstract.</p>
+<p><strong>What inspired you to make this film about crystals?</strong></p>
+<p>It all started with a children's toy, Sakura's Magic Trees. The principle is simple: You pour a liquid onto a small paper tree, and, as if by magic, cloud-shaped crystals bloom on each branch the next day. After a little digging, I discovered that the substance causing this phenomenon was potassium phosphate. I ordered some powdered form and then began creating my own saturated solutions. Instead of using it on paper trees, I chose to place the solution on blotting paper in Petri dishes to recreate these crystalline “cumulus” clouds on a flat surface, more suitable for photography. As I experimented, I observed that, under certain conditions, the solution overflowed the edges of the box and spontaneously formed magnificent fractals all around. This unpredictable behavior fascinated me. I then experimented by changing the type of paper, the saturation level of the solution, and even the way I applied the liquid. Each time, the resulting crystalline forms were different. That's what captivated me: this mixture of randomness and precision, where chemistry almost becomes a visual language.</p>
+<p><strong>The images are so surprising and dramatic, but the shapes are also reminiscent of other forms in nature: tree branches, snow, shards of glass, heads of broccoli, birds, feathers. Why do you think the eye is drawn to interpret abstract images in this way?</strong></p>
+<p>I think it's natural to see familiar shapes in abstract images. The brain likes to look for meaning in what it sees, like when we look at clouds and see animals or faces. In my images, the shapes often come from natural or chemical reactions, so they sometimes resemble things we already know, such as the mycelium of mushrooms, feathers, or corals. This makes the abstract a little more familiar and leaves room for the imagination.</p>
+<p><strong>What can your images tell us about the science of crystals?</strong></p>
+<p>My images don't try to explain the science of crystals, but they can arouse curiosity. They show how complex structures can emerge from very simple things. They show the beauty of natural organization, the way crystals grow, repeat themselves and form patterns. It can make you want to know more about the physical or chemical laws behind them. Art can be a gateway to science.</p>
+<p><strong>What do you want viewers of this video to see?</strong></p>
+<p>I don't want viewers to see anything specific, but rather to feel something. This film on crystallization is an invitation to contemplate the invisible, to marvel at natural phenomena that are often imperceptible to the naked eye. I hope that by observing these structures come into being and transform, they will have the sensation of seeing life in a different way. I like the idea that everyone can project their own emotions or stories into these images.</p>
+<p><strong>What do you feel when you watch this video yourself?</strong></p>
+<p>When I watch this video, I feel a little outside of time. It's a form of visual meditation. I find myself forgetting that I was the one filming it, as if I'm discovering the images for the first time. There's a raw beauty in these crystallizations, something organic and unpredictable that reconnects me to what's essential. It's both very simple and very complex. <img alt="" src="../images/nautilus-favicon-14_1162.png" /></p>
+<p><em>Lead image: Thomas Blanchard / Behance</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

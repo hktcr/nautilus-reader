@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When We Were Lunch | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When We Were Lunch</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-0BEX</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Alone in a canoe, Val Plumwood was gliding along a channel in tropical Australia’s Kakadu National Park in 1985 when a huge crocodile rammed her. She paddled to the shore as fast as she could, but the crocodile struck the canoe again and again. A thought flashed through Plumwood’s mind: “I am prey.” She grabbed hold of an overhanging tree, hoping to escape onto land.</p>
+<p>“Before my foot even tripped the first branch, I had a blurred, incredulous vision of great toothed jaws bursting from the water,” Plumwood wrote. “Then I was seized between the legs in a red-hot pincer grip and whirled into the suffocating wet darkness.” The crocodile rolled Plumwood underwater, trying to drown her.</p>
+<p>“The roll was a centrifuge of boiling blackness that lasted for an eternity, beyond endurance, but when I seemed all but finished, the rolling suddenly stopped. My feet touched bottom, my head broke the surface, and, coughing, I sucked at air, amazed to be alive. The crocodile still had me in its pincer grip between the legs. I had just begun to weep for the prospects of my mangled body when the crocodile pitched me suddenly into a second death roll.”</p>
+<p><a href="https://www.plumwood.org/">Plumwood</a> surfaced only to be dunked for the third time by the crocodile. But when the croc rolled her above the water yet again, he briefly loosened his jaws, and she managed to scramble to a muddy bank and claw her way up it. After hours of painful struggle through the bush, a park ranger heard her cries for help and, remarkably, she was rescued.</p>
+<blockquote>
+<p>Humans with their laughably blunt teeth and soft bodies are ill-equipped to defend themselves.</p>
+</blockquote>
+<p>Plumwood was an eco-philosopher, deeply attuned to the connectedness of human beings with the natural world. Her survival allowed her to give the rest of us one of the most riveting accounts of what it means to be prey.</p>
+<p>“I glimpsed a shockingly indifferent world in which I had no more significance than any other edible being,” Plumwood wrote. “The thought, ‘This can’t be happening to me, I’m a human being. I am more than just food!’ was one component of my terminal incredulity. It was a shocking reduction, from a complex human being to a mere piece of meat.”</p>
+<p>We may not think about being prey today because humans are the most successful predator on Earth—except for those occasional times when we’ve been taken down by a grizzly bear, lion, hyena, crocodile, or python. Yes, python. As recently as 2024, an Indonesian farmer, reported missing the day before, was exhumed from inside a 16-foot python. (After killing their victims by suffocation, these huge constrictors can dislocate their jaws and swallow a person whole, even if that prey item is larger than the reptile’s head.) But hominins, which includes us, have been prey for most of our existence, dating from when we broke from other primates 7 million years ago, a troubled predator-prey relationship that didn’t end just because we became human.</p>
+<p>Being the hunted has left a deep impact on our personal and collective memories, with imprints that have, in the language of evolutionary biology, been “conserved,” not only in modern mythology but possibly in our genomes as well. It likely drove our ability to control fire, develop ever-more deadly tools, find security in social groups, even walk upright and speak. It also had its downsides: Our innate sense of fear, compounded by stress, which can waylay our bodies and brains, likely evolved from us being mere pieces of meat.</p>
+<p>It wasn’t always thus in the annals of human-evolution research. A drive to kill other animals (as well as each other) was considered key to our past and present. “Man the Hunter” and even “Man the Murderous Cannibal” were ascendant evolutionary tropes when it came to hypothesizing about our earliest inclinations, in popular as well as scholarly thought.</p>
+<p>This perspective was largely initiated by the South African anthropologist Raymond Dart, famous for having discovered a species of Australopithecus (<em>Australopithecus africanus</em>), which lived 3 million to 2 million years ago. Dart’s hyperventilating insistence on our murderous, war-prone prehistoric inclinations was reflected in such influential writings as <em>The Predatory Transition from Ape to Man</em> (1953), and which inspired popular (and grossly misleading) books such as Robert Ardrey’s <em>African Genesis</em> (1977).</p>
+<p><img alt="" src="../images/G56IVbnX-Barash_BREAKER.png" /></p>
+<p><strong>VAL &amp; BIRUBI:</strong>Val Plumwood survived a crocodile attack in 1985 and gave us one of the most riveting accounts of what it means to be prey. The Australian eco-philosopher died from a stroke in 2008. Here she cuddles her foster wombat, Birubi. <em>Courtesy of Plumwood Inc.</em></p>
+<p>Dart also discovered an <em>A. africanus</em> skull designated the “Taung child,” who died at age 3 or 4. Dart dramatically proclaimed the child to have been an early victim of human murder and cannibalism. Subsequent analysis by <a href="https://nautil.us/through-fortitude-or-stupidity-lee-berger-is-rewriting-human-history-235691/">anthropologist Lee Berger</a> in 2006 revealed that the skull shows talon marks around the eye sockets as well as indentations on the base of the skull consistent with injuries incurred by nonhuman primates who are carried off and eaten by eagles and other large predatory birds.</p>
+<p>Nonetheless, the perspective of our ancestors being vicious predators—perpetrators instead of victims—was enthusiastically adopted, in part because it was consistent, as Washington University anthropologist Robert Sussman argues, with “a basic Judeo-Christian ideology of man being inherently evil, aggressive, and a natural killer.” Sussman points out that “to some degree it still dominates much thought by the public as well as professionals.”</p>
+<p>Of late, however, the scientific balance has been shifting, partly inspired by the 2005 book, <em>Man the Hunted</em>, in which Sussman and anthropologist Donna Hart pointed out that most primates are prey rather than predators, a pattern seen in <em><a href="https://nautil.us/portrait-of-the-human-as-a-young-hominin-238483/">A. africanus</a></em> like “<a href="https://nautil.us/lucy-at-50-990900/">Lucy</a>” and her descendants.</p>
+<blockquote>
+<p><em>“The crocodile had me in its pincer grip and pitched me suddenly into a death roll.”</em></p>
+</blockquote>
+<p>Sussman and Hart noted that <em>A. afarensis</em> was an “edge species,” inhabiting borderlines between trees and savanna, likely reverting to the former to sleep and to escape from huge ground-dwelling predators, which were roughly 10 times more abundant than they are today. These included cave lions, dire wolves, hyenas as big as bears, and bears as enormous as North American short-faced bears, which stood 11 feet tall on their hind legs. Tree-climbing ability would likely have been key to survival in such a tough neighborhood.</p>
+<p>Moreover, recent fossils have been suggestive that our ancestors were on the menu for animals, although as with nearly all such data, the sample sizes are small. There’s OH-8, a <em>Homo habilis</em> specimen dated at 1.8 million years old, discovered by the <a href="https://leakeyfoundation.org/">Leakeys</a> in Olduvai Gorge, Tanzania, and whose left foot and detached leg show extensive tooth marks from a crocodile. Plumwood’s experience, it appears, wasn’t unique. Ditto for another victim—labelled OH-35—who was evidently dismembered by one or more crocs, and whose other skeletal parts had been chewed by a leopard-sized carnivore. (It’s also possible, of course, that these early meals involved scavenging on carrion rather than killing live prey.)</p>
+<p>In 2025, scientists from the Institute of Evolution in Africa, Rice University, and the Archaeological and Paleontological Museum of Madrid published computer analyses of <em>Homo habilis</em> fossils (OH-7 and OH-65) that showed with “<a href="https://nyaspubs.onlinelibrary.wiley.com/doi/10.1111/nyas.15321">unprecedented reliability</a>” that our ancestors of 2 million to 1.5 million years ago were food for leopards. The authors argue the new finding is significant because <em>Homo habilis</em>, who made stone tools and ate meat, has long been regarded as the turning point from prey to predator in our evolutionary history. In fact, they write, <em>Homo habilis</em> was “still more prey than predator,” and “unable to fend off top predators from their kills.”</p>
+<p><img alt="" src="../images/Barash_BREAKER-2.png" /></p>
+<p><em>Photo by ambquinn / Shutterstock</em></p>
+<p>Where does this leave us today, experiencing our predator-free lives? We’re a peculiar species, in our anatomy no less than our intellectual accomplishments. Paleoanthropologists have been at pains to figure out how some of our notable traits evolved. Rebranding ourselves as hunted rather than exclusively hunter can help explain those key traits.</p>
+<p>Take <a href="https://nautil.us/what-made-early-humans-smart-238238/">upright posture</a>. Standing on two vertical pillars while nervously scanning the horizon would have given prehumans a literal leg-up when it came to providing an early warning system. After all, it wasn’t just leopards and those saber-toothed terrors that stalked our early environments, but also dire wolves and a whole slew of other fearsome potential perps. Of course, standing upright might have made us more visible to these dangerous predators, but it also could have provided an opportunity to intimidate them. Even today, hikers who encounter a cougar are advised to make themselves as big as possible, to stand up tall, wave their arms, and shout. Did the savanna ring with the yells of our terrestrial antecedents?</p>
+<p>Then <a href="https://nautil.us/we-built-these-bodies-234327/">there are tools</a>. It used to be thought that those much-lauded big brains of ours were a prerequisite for using and, more so, making them. No longer. In the 1960s, <a href="https://nautil.us/the-indomitable-jane-goodall-1240427/">Jane Goodall</a> made the pioneering discovery that chimps not only use sticks to fish for termites, but they first smooth them by stripping away twigs and leaves. Fossil evidence shows that stone tools were constructed and employed as long ago as 3.3 million years (when ancestral hominin brains weren’t particularly impressive). It’s clear that our forebears were not only stone chippers but also makers of obsidian-tipped javelins around 280,000 years ago, as well as being likely <a href="https://nautil.us/the-stick-is-an-unsung-hero-of-human-evolution-236944/">stick sharpeners</a>, the latter first appearing about 300,000 to 400,000 years ago, apparently whittled by early Neanderthals and <em>Homo heidelbergensis</em>. Tools and weapons certainly helped our predecessors fill their bellies and maybe defend against other hominins. But what about also defending themselves to keep from filling the bellies of their predators?</p>
+<p>Once we consider the likely impact of being preyed upon by other creatures no less than preying upon them, many other fundamental human traits take on new meaning. Early communication by gesture and words? Quite likely helpful when it came to group cohesion, sharing information as to food sources along with water holes during drought, achieving social dominance, and the like.</p>
+<p>Oxford University’s Robin Dunbar has made the case that speech originated as cohesion-generating social gossip. But don’t ignore the payoff of being able to broadcast a prompt heads-up when a predator appears.</p>
+<p><img alt="" src="../images/Barash_BREAKER-3.png" /></p>
+<p><em>Photo by Thomas Marx / Shutterstock</em></p>
+<p>Today, many animal species, from birds to primates, use remarkably precise alarm calls to <a href="https://nautil.us/call-of-the-liar-363420/">warn of danger</a>. Vervet monkeys employ three different kinds, each predator-specific: one for snakes (the monkeys look down), one for eagles (up), and one for big cats (clamber into the trees). Would early humans have been less vocally accomplished? Is it unreasonable to hypothesize that predator warning calls were among the first verbalisms used by our hominin ancestors? Imagine yourself back in those early days: What would you consider more important, sharing a bit of gossip or being warned that a saber-toothed cat is around the corner?</p>
+<p>And consider fire. Undoubtedly beneficial when it comes to cooking our own food, making tough carbohydrate-based plant matter as well as animal protein more digestible, nutritional payoffs that, as anthropologist Richard Wrangham has proposed, may have set the stage for our rapid brain development. Imagine our great, great <em>Homo erectus</em> grandparents sitting cozily around a mid-Pleistocene fire, roughly 1 million years ago, cooking dinner and swapping lies. Isn’t it likely that one thing that made those fires so cozy is that they probably kept predators away?</p>
+<p>Even our lauded intelligence and cooperative sociality, which doubtless evolved for many different reasons, would also have been more than trivially useful for hominids and hominins when it came to outsmarting, or at least surviving, our hungry natural predators. (Quick note: “hominid” refers to any member of the great apes—gibbons, orangutans, chimps, gorillas, and humans, as well as their fossil ancestors, while “hominin” refers more narrowly to species in the direct human line. So, all hominins are hominids, but not vice versa.)</p>
+<p>Like most of our primate relatives, human beings with their receding jaws, laughably blunt teeth, and soft bodies, are ill-equipped to defend themselves bodily. Here’s where sociality pays off. A consistent pattern is that relatively defenseless animals are especially likely to live in groups, which facilitates collective defense as well as providing more eyes, ears, and noses to detect danger and sometimes to visually confuse predators when numerous potential victims suddenly disperse. Notably, every species of diurnal, terrestrial primate is group-living. That includes us.</p>
+<p>Some years ago, I was hiking solo in the North Cascades of Washington state when I was surprised to see an odd-looking mammal, strangely flattened horizontally and walking in the snow with a curious rolling motion. A wolverine! It was the first and only time I’ve seen one in the wild. To my subsequent embarrassment, rather than reach for my camera, I reached for my ice ax. Granted that wolverines are known pound for pound to be among the most ferocious mammals, allegedly sometimes chasing grizzlies off a carcass. But they rarely weigh more than 30 pounds and have never been known to attack a human being. What possessed me?</p>
+<p>John Byers, a professor of biology at the University of Idaho, spent decades studying pronghorns, the fastest terrestrial creatures in North America. Noting there currently aren’t any super-fast predators in North America, Byers hypothesized in his book, <em>Built for Speed</em>, that the dazzling velocity of these animals (incidentally, they’re not really “antelopes,” but a kind of goat) is due to them being haunted by the “ghosts of predators past,” now-extinct dire wolves and oversized cats. We’re similarly haunted, which probably explains why a trained biologist gave in to a momentary sense that I was somehow at risk: haunted by the ghosts of predators past.</p>
+<p><img alt="" src="../images/Barash_BREAKER-4.png" /></p>
+<p><em>Photo by Stu Porter / Shutterstock</em></p>
+<p>The impulse to fight or flee is deeply ingrained in our biology by way of a response system involving the amygdala (the brain’s “fear center”) and the hypothalamus, which, among other things, encodes memories of other fear-inducing events, providing context as to whether a current situation warrants special attention. And there’s our crucial adrenocortical axis, a neuroendocrine feedback loop that leads to the release of cortisol, a highly adaptive response to stress.</p>
+<p>Neurobiologist and primatologist Robert Sapolsky has been especially effective in pointing out that stress is the body’s natural response to predators. Stress is “designed to save your neck” in hairy situations by channeling all the energy in your body to fighting or fleeing, <a href="https://nautil.us/ingenious-robert-sapolsky-235013/">Sapolsky has told <em>Nautilus</em></a>. That’s awfully important “when somebody is very intent to eat you.”</p>
+<p>The problem is predator-free modern humans trigger stress in themselves. “That’s the distinctive thing that does us in—that’s not what stress evolved for,” Sapolsky said. “It evolved for dealing with a short-term crisis, yet we turn it on for 30-year mortgages. That’s where you pay the price. There’s virtually no organ system in your body that’s not thrown out of kilter in some way by chronic psychological stress.”</p>
+<p>Ultimately, we can take a healthy lesson from our evolutionary history as prey. Plumwood, who died of a stroke in 2008, wrote that her crocodile encounter italicized for her the reality that she was very much a part of a shared world.</p>
+<p>“It is a humbling and cautionary tale about our relationship with the Earth, about the need to acknowledge our own animality and ecological vulnerability,” Plumwood wrote. The assumption that “animals can be our food, but we can never be theirs,” has disconnected us from the world in which we evolved and continue to inhabit together. We are “animals, positioned in the food chain,” sometimes on top, sometimes not: eater as well as eaten. <img alt="" src="../images/nautilus-favicon-14_647.png" /></p>
+<p><em>Lead image: Kamal15 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

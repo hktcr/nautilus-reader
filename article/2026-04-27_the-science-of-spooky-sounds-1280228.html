@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science of Spooky Sounds | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Science of Spooky Sounds</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-DNAE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Rodney Schmaltz considers himself a pseudoscience guy. He studies “why people believe weird stuff,” he tells me. One of those weird things is why some people believe that houses are haunted by ghosts: jilted brides, lost children, vengeful spirits.  </p>
+<p>Schmaltz and some colleagues hypothesized that infrasound, low rumbling inaudible to human ears, might have something to do with it. This low frequency sound is common in nature, generated by heavy surf, volcanoes, and tectonic plates. Elephants use it to communicate. It’s also produced by ventilation systems, air-conditioning systems, pipes, and traffic.  </p>
+<p>The scientists got some study subjects together and took them on a tour of a commercial haunted house, where they had installed speakers that emitted infrasound.  They wanted to see if the infrasound increased their participants’ fear response, so they used action cameras to measure startle and headbands to measure EEG. But the measurement tools weren’t working—the signals they got were too noisy—so they decided to try their experiment in a more controlled environment.</p>
+<p>For the new study, they invited 36 people, mostly women, to sit alone in a room while they played either calming or unsettling music and, through hidden subwoofers, rumbling infrasound at 18 hertz. (The threshold for human hearing is 20 hertz.) After listening, the subjects were asked to report on their emotional states and to provide saliva samples. What they found is that the participants who had been listening to infrasound—without knowing it—showed higher levels of cortisol in their saliva and reported feeling more irritable. They also reported finding the music sadder and less interesting, regardless of the type of music. While the sample size was small, it offers a preliminary set of data points from which to conduct further studies.  </p>
+<p>I spoke with Schmaltz about why human infrasound studies have had mixed results in the past, the implications of the findings for sitting in traffic, and which haunted places he’d like to research.  </p>
+<p><strong>As you write in your study, research on the impact of infrasound on humans has turned up conflicting results. Why is that?</strong></p>
+<p>Part of it is that it’s hard to measure. It’s hard to do it in these carefully controlled environments. Maybe it’s an effect that only impacts some people, or a fleeting effect. But what we found in our very controlled study is that indeed cortisol levels go up.  </p>
+<p><strong>You chose to layer infrasound over music. Why?</strong></p>
+<p>What we were thinking when we started this study is that maybe the way humans respond to infrasound is a misattribution of arousal. You just feel something. So maybe if you already feel good, you’ll feel better. If you feel scared or sad, you’ll feel worse. That’s why we chose to layer the infrasound over some happy, relaxing music and some kind of unsettling music. But what we found is across the board, people felt worse, or they felt more irritated and annoyed, and the cortisol levels went up, when infrasound was in the mix versus when it was not.  </p>
+<p><strong>Your participants weren’t told whether they were listening to infrasound. Why is this important?</strong></p>
+<p>People basically performed at chance in figuring out if the infrasound was playing or not. The reason that’s important is that it’s not that people can detect it and then say, “Oh, okay, I feel something.” Even at 20 hertz, you might kind of be able to hear it, but we used infrasound at around 18 hertz. It’s pretty tough to detect at that point consciously.  </p>
+<p><strong>The effect that you found was elevated cortisol, as well as general irritability, discomfort, and sadness—but not anxiety. What does that distinction tell you?</strong></p>
+<p>I thought there would be some anxiety, because infrasound causes anxiety in some fish, but it wasn’t there for humans. So that’s something we want to look further into. Maybe anxiety only happens at higher levels of exposure to infrasound. We only used about five minutes. Or maybe it depends on the frequency or the decibel level.</p>
+<p><strong>Read more: “<a href="https://nautil.us/why-we-sense-somebody-who-isnt-there-469446">Why We Sense Somebody Who Isn’t There</a>”</strong></p>
+<p><strong>Are there any evolutionary reasons that humans might respond to infrasound in this way?</strong></p>
+<p>It’s hard to say what’s going on. Maybe there’s something evolutionarily adaptive about it, but I hesitate to say that because we just don’t know. We’ve speculated a bit on that, but I don’t want to go beyond what our data showed.</p>
+<p><strong>Your study measured a pretty small group of people, mostly women, but if the findings are confirmed, what are the practical implications for designing workplaces, homes, or urban environments?</strong></p>
+<p>We need to look at longer-term exposures, but consider something like car traffic. People get irritated in traffic, and there’s a lot of infrasound in traffic, so maybe that’s having an impact. That would be something interesting to look at. Some data shows that people feel more tension when they’re in a more urban as opposed to rural environments.</p>
+<p><strong>There was that mysterious illness called Havana Syndrome in Cuba, and for a while it seemed like some people were attributing it to infrasound. Do you know what the scientific consensus is at this point on whether infrasound was involved?</strong></p>
+<p>I would be surprised. The amount of infrasound you would need to generate those kinds of effects would be absolutely massive. I haven’t looked at the data, so I don’t want to say definitively, but from my take on it, I highly doubt that it would be infrasound.</p>
+<p><strong>You want to look more carefully into whether there are elevated levels of infrasound in allegedly haunted houses. How will you go about doing that?</strong></p>
+<p>Yes, we are now studying places that have reports of a supposed ghost. One of the places we looked at was the Fairmont Banff Springs Hotel. Supposedly it’s haunted by a ghost bride. It turns out that most of the Fairmonts across Canada are haunted by a ghost bride. I suspect we probably won’t find infrasound unless the haunting is meant to be in a basement, because the basements are where you typically find more infrasound.  </p>
+<p>What I think will happen is that we’ll probably be able to at least partially explain a lot of the ghost sightings that are found in basements in places like that. But it might not explain all of them, say something that was on the second or third floor, unless the sightings tend to happen beside a low rumbling pipe and so on. In other words, infrasound isn’t an explanation for all of the sightings. But it could at least be a piece of the puzzle as to why people might think they experience things like a ghostly encounter. They really do physiologically feel something, but it’s not the haunting they think it is. In fact, it may be infrasound.</p>
+<p><strong>But they have to be close to the source for it to have this effect?</strong></p>
+<p>It’s a slow-wave sound, so it does pass through walls. If you’re closer to the source, it would have more of an impact. If you’re a room or two from the source, you might begin to feel something. And as you get closer to the source, theoretically you’d be getting a stronger exposure to the infrasound. You should begin to feel that irritability, that annoyance, and then perhaps attribute it to something that’s paranormal, when in fact it’s not.</p>
+<p><strong>Is there one supposedly haunted place you’re most excited about testing?</strong></p>
+<p>We’re sticking around Alberta for now, just out of convenience. If we find something interesting here, it would be neat to go to the United Kingdom where there are all these older castles. I suspect those may have a lot of infrasound in them, so that would be a lot of fun to research. But I’d like to be sure that it’s worth the investment. If we can see some trends here, then perhaps we’d expand our reach a little bit and go farther afield. <img alt="" src="../images/nautilus-favicon-14_148.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: StockPhotoPro / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

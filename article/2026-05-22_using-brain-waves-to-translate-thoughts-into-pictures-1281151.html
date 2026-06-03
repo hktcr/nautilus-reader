@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Brain Waves to Translate Thoughts into Pictures | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Using Brain Waves to Translate Thoughts into Pictures</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PZAJ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>What if a machine could read your dreams for you, decode the hypnotic visions of a psychedelic trip, or even give shape to the thoughts of a patient locked in a coma or on their deathbed? Suddenly some of the most mysterious and ineffable realms of human consciousness would become surprisingly accessible to us.</p>
+<p>In fact, that fantasy might be a lot closer to reality than many of us think. Physics students from the Stevens Institute of Technology in New Jersey recently trained machine-learning models to reconstruct visual images from recordings of a person’s brain waves. They were able to <a href="https://www.stevens.edu/news/innovation-expo-visual-reconstruction-with-eeg">determine</a> when a person was looking at an image of a pizza, a panda, or another category of object. Others have done the same with fMRI, which tracks blood flow changes that occur when neurons consume energy, but EEG is vastly cheaper and easier to use. One costs in the low hundreds or thousands of dollars; the other is in the range of millions to purchase and thousands to operate. One can be taken home and worn to bed; the other is a massive machine confined to a lab or hospital.</p>
+<p>Because the areas of the brain that create our visual experiences of the world are also used to imagine and to dream, the Stevens Institute students, Isaac Van Benthuysen and Jack Caputo, hypothesize that their approach could eventually be used to reconstruct entire scenes and thoughts that march through our minds when we’re dreaming or in altered states of consciousness. On May 8, the pair presented their work at Innovation Expo, a showcase of student projects.</p>
+<p>I spoke with Van Benthuysen and Caputo, who were just finishing finals at the Stevens Institute, about the inspiration for their project, what makes using EEG so appealing for this kind of thought decoding, how it might be useful for PTSD, and the surveillance risks.</p>
+<p><strong>Read more: “<a href="https://nautil.us/encounters-with-the-posthuman-234320">Encounters with the Posthuman</a>”</strong></p>
+<p><strong>I read that you were inspired to do this study from a dream. What was the dream?</strong></p>
+<p><strong>Issac Van Benthuysen:</strong> It wasn’t a single specific dream that inspired me. It was more just an overall general interest in my dreams. I’ve been having vivid dreams for as long as I can remember and keeping a dream journal for eight years.</p>
+<p><strong>How did the interest in your dreams relate to the study that you did?</strong></p>
+<p><strong>Van Benthuysen:</strong> What we did was try to reconstruct what a person was looking at while they’re awake, but the brain uses essentially the same machinery to represent imagery in dreams and in reality, when it’s awake. Our idea was: If you’re able to reconstruct something that someone’s looking at in real life, you could use that same system to reconstruct what they’re looking at in a dream.</p>
+<p><strong>How closely did your reconstructions of images get to the original?</strong></p>
+<p><strong>Van Benthuysen:</strong> We were able to get pretty good categorical accuracy. But there’s still a gap between the representation and the original image. That was our goal in the beginning—to try to get as pixel accurate as possible. But we found that EEG data just doesn’t have that amount of fine-grained detailed information to be able to directly reconstruct images. That’s not to say it’s impossible to create more accurate images. But no one’s quite figured out how to do it yet. And we have to try some different methods if we’re going to get there.</p>
+<p><strong>What are some of those methods?</strong></p>
+<p><strong>Jack Caputo:</strong> The reason that EEG is really nice is because it’s more portable. But other groups are doing a similar thing with fMRI data instead of EEG data. fMRI can detect exactly where in your brain things are happening, so it has much better spatial resolution, more of that data that’s useful for the reconstruction. So the reconstructions are a lot better. The downside is if you want to use this in the real world, you can’t have fMRI machines everywhere, so the EEG portability is very nice.</p>
+<p>If we were somehow able to make the EEG data and fMRI data represent the same thing—we’d use EEG data for its portability, but then match it against an fMRI model that we’d train ahead of time. You might be able to match the good reconstructions from fMRI with the portability of EEG. That’s one avenue I know some research groups are looking at. Instead of changing or improving EEG or looking at developing a different brain data technique, they’re using existing ones and trying to use little tricks to improve the accuracy.</p>
+<p><strong>Why is portability important for this kind of technology?</strong></p>
+<p><strong>Van Benthuysen:</strong> It just makes it so much more accessible. fMRI is a humongous multimillion dollar machine, whereas EEG is basically a fancy hat. We were using it in the library. There’s absolutely no way we can bring one of the fMRI machines into the library. It’s also a lot cheaper. If you want to be able to reconstruct dreams, doing it with EEG is a lot more practical. You can sleep in it. Or if this were being used to help locked in or paralyzed patients, wearing EEG all the time is much more feasible.</p>
+<p><strong>You were able to reconstruct visual features like color, texture, and shape from the patterns in neural activity. What other kinds of visual and non-visual information can be gleaned from these kinds of brain-wave patterns now? Or is that for the future?</strong></p>
+<p><strong>Van Benthuysen:</strong> It depends on where you place the electrodes. We used electrodes on the back of the head, because that’s where all the visual processing stuff is. But temporal electrodes would be better for decoding speech.</p>
+<p><strong>You mentioned locked in patients and also decoding dreams. What other kinds of things would this technology be most useful for?</strong></p>
+<p><strong>Caputo:</strong> I like to imagine that if this ever gets enough traction to be employed in the real world, we’ll find new uses for it that we wouldn’t even have imagined before. It’s just a new way of being able to see in the brain, so it could lead to other discoveries or a deeper understanding of exactly how the brain works—if not on a physical level, then on a more phenomenological level, where it always gets messy. I’m hopeful that it’ll grow.  </p>
+<p>One other possible use is treatment for PTSD. Today a popular therapy for the condition is dream therapy, or investigating nightmares, and this EEG decoder could also be useful for that. Adding something like this where a therapist would actually be able to see a person’s dreams or a person would be able to get more accurate dream reports that aren’t just limited to their memory could definitely help improve the therapy.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-implant-that-can-control-your-brain-237581">The Implant That Can Control Your Brain</a>”</strong></p>
+<p><strong>The Stevens Institute summary also mentioned that it could be used to provide a visual account of psychedelic journeys, and even the moment of death.</strong></p>
+<p><strong>Van Benthuysen:</strong> What’s interesting about this approach is that we’re very limited in how we can study subjective experiences scientifically today. We can’t make any objective measurements of internal experiences, but if we’re able to decode the visuals that a person is experiencing, that could open up new ways to study subjective experiences.</p>
+<p><strong>What would it take to get from where we are now to the capacity to reconstruct complete thoughts and thought sequences or dream sequences?</strong></p>
+<p><strong>Van Benthuysen:</strong> Reconstructing thoughts, like word-based thoughts—I don’t feel as confident speaking on that, but perhaps more dense EEGs that have closer together electrodes so that we can get better spatial resolution. That’s part of the main problem: EEG has such low spatial resolution— that it’s hard to get the detail we need to make really accurate image reconstructions. But new types of brain imaging are in development that have better spatial resolution and are less cumbersome than a giant fMRI machine. The models that we make are limited by the data that we get, and the data is limited by the technology that we have.</p>
+<p><strong>What are you working on next?</strong></p>
+<p><strong>Van Benthuysen:</strong> I’d like to continue making improvements on this. Our current model targeted the overall color of the image more than other properties. One neuroscientist suggested that we might have better luck trying to identify forms, like the edges of objects. I want to try changing the target that we’re going for to a grayscale image and emphasizing the form. Also, we’re using one of the original AI image generation models, stable diffusion, but we want to make our own image generator.</p>
+<p><strong>Are there any risks to the way this technology might be used?</strong></p>
+<p><strong>Van Benthuysen:</strong> In a surveillance type of way? Yeah, that’s definitely a possibility. I’d hope it doesn’t come to that.</p>
+<p><strong>Caputo:</strong> We already have invasive brain-to-computer interfaces funded by really rich people with maybe not the best motivations, like Neuralink. EEG represents a non-invasive brain-to-computer interface, which has a lot of advantages. But the principle is the same: If you’re able to tap in and get somebody’s thoughts, if you ever reach a point where it works well, it could certainly be used for surveillance. It’s not completely out of the question. <img alt="" src="../images/nautilus-favicon-14_40.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: metamorworks / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

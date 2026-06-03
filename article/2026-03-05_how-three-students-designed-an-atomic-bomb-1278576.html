@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Three Students Designed an Atomic Bomb | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Three Students Designed an Atomic Bomb</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-03-05
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-51MJ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>By the spring of 1964, four countries had developed nuclear weapons—the United States, the Soviet Union, the United Kingdom, and France, with China on the verge of becoming the fifth. With fears of nuclear proliferation spreading in Washington, Pentagon officials had a question: If we were the first country to get nuclear weapons, who would be the last—the nth country? To answer that question they launched the top-secret “Nth Country Experiment” at Livermore Radiation Laboratory in California.</p>
+<p>According to heavily redacted <a href="https://nsarchive.gwu.edu/briefing-book/nuclear-vault/2025-01-23/nuclear-proliferation-and-nth-country-experiment">declassified documents</a> from the project, its aim was “to see if a few capable physicists, unfamiliar with nuclear weapons and with access only to the unclassified technology, could produce a credible weapon design” that would “give a small nation a significant effect on their foreign relations.”</p>
+<p>In other words, could a developing nation produce a nuclear weapon?</p>
+<p>To find out, Livermore assembled a ragtag group of three postdoc physicists selected not for their knowledge of nuclear physics but for their ignorance of the subject. Though they were unfamiliar with the inner workings of a nuclear weapon—one of the country’s most guarded secrets—they were tasked with designing one from scratch. If they had any tests they’d like to run, they were to describe them in written detail and submit them through an intermediary to anonymous bomb designers who would calculate the results and send them back.</p>
+<p><strong>Read more: “<a href="https://nautil.us/edward-teller-tried-to-move-mountains-with-nuclear-bombs-1267177">Edward Teller Tried to Move Mountains With Nuclear Bombs</a>”</strong></p>
+<p>The team did have one edge over the Manhattan Project scientists who created the first atomic bomb—they knew it was possible. Or as one of the physicists, Dave Dobons, later put it in an <a href="https://journals.sagepub.com/doi/pdf/10.2968/059002013">interview</a>, “The big advantage we had over (Enrico) Fermi and <a href="https://nautil.us/edward-teller-tried-to-move-mountains-with-nuclear-bombs-1267177/">(Edward) Teller</a> and those guys was that we knew it could work.”</p>
+<p>They started by hitting the university library, reading anything they could get their hands on about explosives and nuclear physics. Ironically, President Dwight D. Eisenhower’s “Atoms for Peace” program, which aimed to spread non-military nuclear energy to other countries, provided a wealth of information. After all, a fission reactor, they reasoned, was nothing more than a nuclear bomb running in slow-motion.</p>
+<p>In 1967, after three years of part-time work, countless tests, a few controlled explosions, and hours of punch-card computer modeling, they submitted their final design and waited to hear back. They were met with radio silence. Instead, the Pentagon arranged a lecture tour for the trio at an alphabet soup of federal agencies and research institutions, including Los Alamos National Laboratory. There, they briefed officials on their work in the style of a Huntley-Brinkley news report and answered carefully phrased questions from hushed crowds afterward.</p>
+<p>After giving their last briefing at Livermore, they were finally <a href="https://nsarchive.gwu.edu/briefing-book/nuclear-vault/2025-01-23/nuclear-proliferation-and-nth-country-experiment">told</a> by a weapons designer there “that if it had been constructed, it would have made a pretty impressive bang” that would have been “on the same order of magnitude as Hiroshima.”</p>
+<p>The Nth Country Project had ended with the trio demonstrating that any country with access to a library, machined metal, and electronics could design a nuclear weapon. While the team’s four-page bibliography remains classified, they showed that the limiting factor wasn’t scientific know-how. Instead, it was access to fissile material like plutonium and uranium.</p>
+<p>It’s a striking demonstration of the power of applied scientific inquiry, as well as a stark warning about the ease of nuclear proliferation. Even so, since the Nth Country Project, only five more countries have successfully obtained atomic weaponry (China, Israel, India, Pakistan, and North Korea), putting the total number of nuclear powers at nine.</p>
+<p>Whether the tenth country will be the Nth country remains to be seen. <img alt="" src="../images/nautilus-favicon-14_343.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead cartoon by Dave Moynihan</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

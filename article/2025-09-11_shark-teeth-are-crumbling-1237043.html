@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Surprising Fragility of Shark Teeth | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Surprising Fragility of Shark Teeth</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-11
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NZRE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Shark teeth are a marvel of evolution. They are so sharp that many island cultures once used them as weapons and tools to hunt and cut up meat. Unlike human teeth, shark teeth line the mouths of these ocean predators by the dozen, up to 50 rows deep. Baby sharks are born with complete sets so that they can begin hunting from a young age. But these gnashers may be no match for ocean acidity: As climate change gives marine pH a kick, some shark teeth are crumbling.</p>
+<p>That’s according to <a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2025.1597592/full">new research</a> published this week in <em>Frontiers in Marine Science</em>. The ocean <a href="https://www.un.org/en/climatechange/science/climate-issues/ocean">absorbs</a> around 30 percent of the globe’s carbon emissions, which sets off a chemical reaction—when carbon dioxide dissolves in seawater, it becomes carbonic acid which leaves more hydrogen ions in the sea, lowering the pH.</p>
+<p>“Sharks already face overfishing, pollution, and warming seas,” says Maximilian Baum, a biologist at Heinrich Heine University Düsseldorf and the lead author of the study. “If acidification also compromises their teeth, it could reduce their feeding success and overall resilience.”</p>
+<p>Since the beginning of the Industrial Revolution in the mid 18th century, the average acidity of seawater has jumped an estimated 30 percent, with an especially dramatic <a href="https://www.eea.europa.eu/en/analysis/indicators/ocean-acidification">change</a> between the 1980s and now. Some experts predict that ocean acidity will <a href="https://marine.copernicus.eu/ocean-climate-portal/ocean-acidification">double or triple</a> by 2100 unless we drastically cut carbon emissions.</p>
+<blockquote>
+<p>The crumbling teeth are just one more way that climate change is messing with sharks.</p>
+</blockquote>
+<p>This spells a nightmare for sea life, including sharks. Baum first started wondering if increasing ocean acidity could hurt shark teeth after reading a 2019 <a href="https://www.nature.com/articles/s41598-019-54795-7">study</a> demonstrating how their skin denticles are impacted. “That led me to wonder whether oral teeth, especially in species with constant seawater exposure, might show similar vulnerability, because shark teeth are a homologous structure to skin denticles,” he says.</p>
+<p>For the study, Baum collected naturally shed teeth from aquarium-housed blacktip reef sharks and incubated these samples in seawater with different pH levels. He and the research team then analyzed structural changes using imaging and morphological measurements. The teeth exposed to water that was more acidic were clearly more damaged, demonstrating cracks and holes, increased root corrosion, and structural degradation. These findings could apply to other species as well—especially impacting sharks like hammerheads, tigersharks, and bullsharks that swim around with their mouths wide open, a form of passive breathing, Baum adds.</p>
+<p>The crumbling teeth are just one more way that climate change is messing with sharks, making their home less hospitable. Warming oceans make it harder for shark eggs and juveniles to <a href="https://www.sciencedirect.com/science/article/pii/S0141113624001922">survive</a>, increase shark <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4642292/">metabolism</a>—making it more energy intensive to just swim around—and disrupt their <a href="https://sharkresearch.earth.miami.edu/research/projects/climate-change-and-sharks/">migratory patterns</a> and the <a href="https://www.australiangeographic.com.au/blogs/shark-blog/2019/10/climate-change-is-predicted-to-have-a-huge-impact-on-our-sharks/">ecosystems</a> they rely on. More extreme seasonal variations in weather and storms also <a href="https://www.nature.com/articles/s41598-018-37527-1">complicate</a> shark migration patterns and ability to raise their young. Nevermind that fishing pressure has already led to a 71 percent <a href="https://www.nature.com/articles/s41586-020-03173-9">decrease</a> in populations of oceanic sharks and rays since the 1970s.</p>
+<p>The main limitation of the team’s study is that they didn’t look directly at <a href="https://nautil.us/the-shark-whisperer-547680/">living sharks</a>—which may be able to remineralize and replace damaged teeth to avoid the worst of the impacts, but there’s the risk that the energy cost of doing so would be high, said Sebastian Fraune, another study author and professor of zoology at Heinrich Heine University Düsseldorf, in <a href="https://www.frontiersin.org/news/2025/08/27/ocean-acidity-sharks-tooth-damage">a press release</a>.</p>
+<p>Having <a href="https://nautil.us/lessons-for-the-return-of-great-white-sharks-238022/">fewer sharks</a> around is a huge problem for the ocean—as apex predators, they help to regulate the populations of other creatures in their ecosystems. In one example, a <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0001548">decrease</a> in sharks in the Caribbean led to overpopulation of grouper, which then triggered a decline of the parrotfish populations that are responsible for grazing algae from coral reefs—leaving behind too much algae that now blanket some reefs. Another study demonstrated how the loss of sharks off the coast of North Carolina <a href="https://www.science.org/doi/10.1126/science.1138657">cascaded</a> into a complete scallop fishery collapse. Not to mention, <a href="https://nautil.us/humans-are-overzealous-whale-morticians-238529/">like whales</a>, sharks act as <a href="https://www.worldwildlife.org/stories/sharks-are-key-to-the-health-of-our-oceans-and-climate">massive carbon sinks</a> when they die and fall to the ocean floor.</p>
+<p>“Even highly evolved top predators are not immune to human caused ocean changes,” says Baum. “If their teeth are at risk, it shows how deep environmental stress can reach within marine ecosystems. It influences almost everything from the smallest shell to the biggest predator.” <img alt="" src="../images/nautilus-favicon-14_967.png" /></p>
+<p><em>Lead image: GIOVANNI NITTI / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

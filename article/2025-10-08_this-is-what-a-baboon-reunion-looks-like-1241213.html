@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Baboon Family Reunion | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>A Baboon Family Reunion</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-0ZTE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 1984, I set in motion a daring experiment. I translocated—moved from one place to another in the wilds of Kenya—three troops of wild baboons. At the time, no other moving of primates for scientific research purposes had been done. If it couldn’t be done with baboons, then it wouldn’t be a viable conservation and management method for other more specialized monkeys and apes. The first baboon group I moved, the test case, was Cripple Troop.</p>
+<p>When I released Cripple Troop’s males ­after the first translocation, a portion of the troop somehow scattered and vanished. I stayed with the remaining group, trying to concentrate on note-­taking, but worried to distraction about the missing members. If they didn’t make it back by nightfall, if they truly ­were lost, both groups risked predation. Then, near sundown, I looked up and saw the lost ones coming through the grass, as if by chance, but I knew ­they’d been searching for their troopmates. Seeing them, the group I was with froze.</p>
+<blockquote>
+<p>The rounds of embraces, lipsmacks, and grunts ­were unlike anything I’d ever witnessed before or since.</p>
+</blockquote>
+<p>Then, like magnetized bits of iron, the two parts of Cripple Troop rushed to greet each other, not just their friends and ­family, but animals outside their cohorts. Ordinarily, when baboons meet up ­after a brief separation, you’ll hear a casual exchange of grunts. A more prolonged separation might end with lipsmacks and quick hugs as well. This was differ­ent. The rounds of embraces, lipsmacks, and grunts ­were unlike anything I’d ever witnessed before or since, so much like a joyous ­human homecoming. Separation in this strange new setting had clearly led to <a href="https://nautil.us/a-hurricane-strengthened-monkey-friendships-589078/">amplified expressions</a> of relief, pleasure, and connectedness. Reassuringly, I saw that their social world was still intact, despite their lives being thrown asunder—­and maybe it was stronger than before.</p>
+<p>I had found another piece of Darwin’s monkey puzzle. Recall that Darwin had observed an old male baboon risk his life to rescue a young baboon from a pack of dogs, a be­hav­ior he admired but could not fathom. It ­wasn’t any old male, but a male friend of that young baboon. I’m convinced that Darwin saw, but did not recognize, survival through the social—­not survival of the fittest, in the narrow “Darwinian” or sociobiological sense. The translocated baboons survived by collaborating. They relied on shared, portable social knowledge, supplemented with learning from indigenous baboons.</p>
+<p>The Cripple Troop reunion told me that baboons, not just humans, have social emotions that grow from mutual need and interdependence. In fact, it looked to me like feelings of connectedness had underpinned their survival. Put another way, the “social” was a resource that carried them through their adjustment, their terra firma when every­thing ­else had changed. The social group seemed to me an ­actual mechanism of baboon adaptation.</p>
+<p>­Because the group appeared so clearly to be the adaptive vehicle, I realized the benefit of moving entire groups rather than individuals or artificially created groups, in which moves have notorious failure rates. Our natu­ral groups of baboons succeeded beyond all expectations. They knew and trusted each other, and together they met the challenges of learning how to survive in a very differ­ent place.</p>
+<p>I often joke that the baboons read the scientific lit­er­a­ture and then do the opposite. The translocation was one of ­those times. <img alt="" src="../images/nautilus-favicon-14_915.png" /></p>
+<p><em>Excerpted from</em> <a href="https://51bbfb3e.streaklinks.com/Cm78LKOWFk7aQ7W4gA6DAywz/https%3A%2F%2Fwww.press.jhu.edu%2Fbooks%2Ftitle%2F53757%2Fechoes-our-origins">Echoes of Our Origins: Baboons, Humans, and Nature</a> <em>by Shirley C. Strum with Cassandra Phillips. Copyright 2025. Published with permission of Johns Hopkins University Press.</em></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em><a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Shirley Jane Photography / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

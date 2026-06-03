@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can the Brain Survive Cryonic Sleep? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Can the Brain Survive Cryonic Sleep?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-S0GK</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 1999, Swedish radiologist Anna Bågenholm fell headfirst into a frozen Norwegian stream while skiing. She was trapped there for over an hour. Her body temperature dropped to a record low of 56 degrees Fahrenheit, and she showed no signs of life upon rescue. But after deep hypothermic circulatory arrest, she made a near-full recovery, as <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(00)01021-7/abstract">reported</a> in <em>The</em> <em>Lancet</em>.</p>
+<p>Bågenholm’s case raised the possibility that the human brain can survive suspension of function at extreme cold temperatures, long the subject of speculation and science fiction.</p>
+<p>That possibility also sits at the heart of cryonics, the science of low-temperature preservation of biological tissue. Today, hundreds of brains lie in cryonic storage in the United States alone, waiting for science to catch up with the hope of restoring them. Cryonics also aims to find ways to preserve biological tissue for study and for organ transplantation. A recent step in that direction came from a team of German researchers at Friedrich-Alexander University of Erlangen-Nuremberg and University Hospital Erlangen, who successfully preserved mouse brain tissue using a flash-freezing process known as vitrification. Upon thawing, the neurons retained their function. They published their <a href="https://www.pnas.org/doi/10.1073/pnas.2516848123">results</a> in <em>PNAS</em>.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/natures-antifreeze-238274"><strong>Nature’s Antifreeze</strong></a><strong>”</strong></p>
+<p>The core challenge with conventional freezing is ice crystal formation, which ruptures cells. Early experiments in the 1960s and ’70s used cryoprotectants to limit crystal damage, but vitrification, a flash-freezing process that turns tissue into a glass-like solid without crystals, wasn’t achieved until 1985, when scientists used it to preserve mouse embryos. Then, in 2023, the John Bischof Group at the University of Minnesota successfully transplanted vitrified rat kidneys, the first vitrified organs shown to sustain normal function after transplant. And earlier this year, a human embryo stored in vitrification for 30 years was carried to term.</p>
+<p>I spoke with the lead author of the new mouse study, Alexander German, a researcher in the molecular neurology department at University Hospital Erlangen about what applications he sees for the new findings, whether they have a bearing on the preservation of whole humans, and what he thinks about philosopher Martin Heidegger’s argument that the certainty of death gives meaning to life.</p>
+<p><strong>Why did you want to cryopreserve brain tissue?</strong></p>
+<p>On the basic science side of things, we were interested in a fundamental biophysical question: If brain function is an emergent property of brain structure, how far can we recover it from complete shutdown?</p>
+<p>We know that the mammalian brain can return from deep hypothermia, but we didn’t know whether it could recover from a complete arrest of molecular motion or molecular mobility, which can be achieved by vitrification. So the data that we publish in <em>PNAS</em> shows that this is the case: The spontaneous neural dynamics in the tissue reinitiate after complete cessation. But it’s important to say that we didn’t revive a whole human brain or a whole animal brain to consciousness. We only recovered slices.</p>
+<p><strong>Are there specific applications you have in mind?</strong></p>
+<p>The question of application is related to the distribution of tissue donations to scientists, especially human tissue. At the moment, the main way scientists can access brain tissue is when, on rare occasions, some excess tissue is left over after neurosurgery. But it needs to stay fresh, and it isn’t generally available for systematic testing for nonpharmacological compounds.</p>
+<p>This is regrettable because, for instance, in oncology, when you have a tumor cell, it grows rapidly in the dish. You can more easily model the behavior of a tumor cell, and you can then add chemotherapeutics and look how it slows down growth, or can inject it into an immunosuppressed animal and see how fast it grows and do all these things. In neurology, you have a modeling problem because many of these diseases are age related. They only occur in brain tissue that has matured for decades and has been exposed to environmental factors for decades. It’s very difficult to model this in the dish.</p>
+<p>Vitrified brain slices are a potential solution to that problem. They could also help us refine or replace less accurate animal experiments. This is the most immediate and most important application of this research. Organ transplantation is another important application. This is why we’re also investigating heart vitrification, which is another electrically active tissue like brain tissue. It also has action potentials.</p>
+<p><strong>What is vitrification exactly, and why is it an appealing method of preserving tissue?</strong></p>
+<p>Traditional freezing techniques result in the formation of ice in hexagonal lattices. We encounter it in winter, and this is actually forming in the tissues of animals like a Canadian wood frog.However, it apparently requires profound adaptations of the organism to tolerate ice formation. And for mammals, it isn’t a natural survival mechanism to tolerate ice formation in tissues.</p>
+<p>But vitrification doesn’t produce any ice crystals. It’s a process of flash-freezing that relies on high volumes of cryoprotectants. The liquid undergoes a phase transition to a glassy solid state that’s irregular, very similar to the liquid state. You basically don’t see any effects from cooling and rewarming. You only see the effects of the cryoprotectants in terms of toxicity or osmotic volume shifts, which are deleterious to the cells.</p>
+<p><strong>You found that the neurons continued to function after rewarming, and you describe exactly what continues to function, but did they retain 100 percent of their function, or were some things lost?</strong></p>
+<p>Considering the extreme change that this tissue has undergone—replacement of over 50 percent of its water content with solvents, cooling to minus 196 degrees Celsius [negative 384 degrees Fahrenheit], rewarming—it’s reassuring that we found some differences. Possibly larger cells were preferentially damaged by the vitrification process. The surviving cells also show signs of stress, firing more easily than they normally would. In other words, some of the functional properties do change, but the core property of excitability is preserved. The neurons are still able to produce action potentials. The dendrites and axons are still able to conduct excitations in ways that could still support learning and memory functions.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/can-we-stop-time-in-the-body-377844"><strong>Can We Stop Time in the Body?</strong></a><strong>”</strong></p>
+<p><strong>Does what you found suggest that cryogenically preserved and re-warmed brain cells could retain their memories?</strong></p>
+<p>That would be expected, although we didn’t show it directly. Yeah.</p>
+<p><strong>You write in the conclusion, “We demonstrate the brain is remarkably robust, not only to near complete shutdown, but even to complete shutdown and this vitreous state.” And that this reinforces the tenet of brain function being an emergent property of brain structure and hence at the potential of life-suspending technologies. Can you tell me a little bit more about the connections you’re making here?</strong></p>
+<p>A central tenet of connectomics, or structural analysis of brain tissue, is that brain function is an emergent property of brain structure, and that the dynamics of neural activity are a product of the machinery that can be observed in microscopes, with immunofluorescence. The basic assumption of connectomics is that if you acquire enough structural information, including the shape and connection of all neurons and glial cells, and annotate this with sufficient biomolecular information—the identity of synapses, what kind of neurotransmitter they use, the chemical identity, and how strong these synapses are—at some point, you will be able to extract memories and the functionality of circuits from static snapshots of brain structure.</p>
+<p>The alternative would be that this isn’t the case and that there are some aspects of continuous function that are necessary, such as sustained consciousness, memory, personality, like a pendulum that always has to swing. If it’s stopped, it will never start to swing as before. Cumulative evidence seems to argue against this second assumption. For instance, you have the recovery of animals and humans from deep hypothermic circulatory arrest at about zero degrees. You have the recovery of brain activity after anesthesia and epileptic seizures. What this study is adding now is, okay, even when we go to a solid state, where physically there cannot be any reverberating activity, the activity in the tissue can reinitiate and the brain dynamics reemerge.</p>
+<p><strong>But you still don’t know if the activity is the same as before in this particular case.</strong></p>
+<p>You will never know this with certainty as the brain is a nonlinear system. Also, it’s important to say that we’re still at the level of tissue. We’re not at the whole brain.</p>
+<p><strong>How might the translation from mouse to human become complicated?</strong></p>
+<p>The protocol is applicable to human slices. We already have proof of concept that it works well on human brain tissue. We haven’t published it yet, but the data suggests that it works in human tissue. It’s not just a rodent thing.</p>
+<p><strong>Do the findings have any direct implications for cryonics protocols?</strong></p>
+<p>No. There you have a postmortem interval, you use different cryoprotectants, different protocols for perfusion—the process of delivering blood, oxygen, and nutrients to tissues and organs. This isn’t the situation that we model in our study. Also, the cooling and rewarming rates are at their limits for a mouse brain, which is 0.4 grams, and the human brain can be up to 1.5 kilograms.</p>
+<p>But it could have implications for structural brain preservation, which can be performed through chemical stabilization of the connectome that we touched upon earlier. Chemical fixation can be combined with vitrification to optimize the structural and biomolecular stability preserved in the specimen. However, these are different methods from the methods employed in our study. It’s also something that we’re offering to patients as part of a research study that was approved by our institutional review board. But it’s quite technically separate from the <em>PNAS</em> study.</p>
+<p>Fully reversible cryogenic stasis in humans—freezing a living person in a way that you can thaw them out later with no damage—would require scaling up from slices of mouse brain to whole mouse brain to whole rodent. If we decide to go down that route, that would be a monumental challenge for the coming decades. Separately, structural brain preservation—simply preserving the brain’s physical structure rather than reviving it—is already technically achievable, but faces sociological, psychological, medical, and legal barriers rather than scientific ones.</p>
+<p><strong>You write in a paper published last year that no mainstream research funding agency has taken up cryonics yet. What would change that?</strong></p>
+<p>It’s already changing in the private sector. Every nine years, the number of people who are known to have their brains preserved doubles. This is known as Roy’s law.<br />
+Public interest is also increasing, but slowly. To attract mainstream funding, the field has to cross a threshold of scientific legitimacy. If it could demonstrate short-term clinical utility, such as organ banking for transplantation, that would be a start.</p>
+<p><strong>Do you think that we should pursue the preservation and revival of entire humans in such a way that they can be revived? This is something that you addressed in a paper from last year: That it’s very taboo to think about reversing death or defying death. That it’s something that most humans don’t want to think about because it goes against our moral intuitions.</strong></p>
+<p>First, there’s a responsibility to inform the public in a measured way about these possibilities. It’s definitely a technical possibility to have the brain structure preserved today with various providers, including Oregon Brain Preservation, Apex Neuroscience, and others in the United States, or through our clinical study at the University Hospital in Erlangen, Germany.</p>
+<p>At some point, we may be able to recover brain function from this. In one scenario, we could create a whole brain model that simulates not just what the brain looks like structurally but how information flows in cause-and-effect chains across the tissue to a sufficient degree and granularity that personality and memory will reemerge without specific engineering for them. And that therefore we can assume that a related consciousness has reemerged.</p>
+<p><strong>What do you mean by related?</strong></p>
+<p>There are some disputes between philosophers of consciousness. For instance, does the Derek Parfit teletransportation paradox apply here? This is a famous thought experiment in philosophy of personal identity. Parfit asked: If you were disassembled and perfectly reconstructed elsewhere, is it <em>you</em> that arrives, or a copy? It’s assumed that if you faithfully replicate the internal causal structure of a specific brain, and it then exhibits that person’s original personality and memory without being specifically engineered to do so, the internal subjective experience will at least be somewhat related to the original.</p>
+<p>To some people this might be consoling. It might also have interesting applications for enriching the historical record of humanity. If you would be able to talk to some historical persons in this fashion, it might enrich the experience of young pupils. In another, even more ambitious scenario, the brain structure is repaired using <a href="https://www.nature.com/articles/s41557-021-00773-4">Drexlerian nanotechnology</a>—meaning you would regain your original biological substrate, your actual carbon-based brain.</p>
+<p>But these possibilities are currently not realized, and it’s unclear if they can or will ever be realized. It’s conditional on the developmental trajectory of humanity, which cannot be seriously predicted by anybody. By reinforcing the idea that brain function is a product of brain structure, we supply some tiny little bit of evidence for the structural preservation case—that if you preserve the structure well enough, you preserve the person—even if revival technology doesn’t exist yet.</p>
+<p><strong>What do you think about the position of Heidegger, who says that accepting mortality gives life meaning?</strong></p>
+<p>This has been classified as palliative philosophy by Ariel Zeleznikow-Johnston in his recent book <em>The Future Loves You</em>. Personally, I’m reading pessimist philosophers on the human predicament with interest. The impression that I’ve gained from secondary literature is that philosophers have done a lot of work to console us, but this shouldn’t keep us from pursuing medical advances that could correct severely shortened lifespans.</p>
+<p>There are some debilitating and lethal diseases that we currently have no cures for but for which we might expect cures in this century. One example would be rabies. If you get bitten by a rabid animal and you start to develop hydrophobia, the prognosis is bleak. Imagine, for instance, the case of a 20-year-old woman being bitten by a rabid animal and dying in agony from hydrophobia. But mechanistically, we’ve now started to understand the rabies virus quite well, and there are several drugs in the pipeline that very plausibly will be able to stop rabies within this century. If you could suspend the patient even for a few years or decades, you could prolong the life of that patient to a normal human lifespan so she could start a family, have her own kids and grandchildren.</p>
+<p>Apart from that, there are also applications for enhancement and deep space exploration. But I don’t think I need to explain those.</p>
+<p><strong>Would you personally want to be cryopreserved?</strong></p>
+<p>If the alternative were facing certain death, I currently would. It’s important to note that you expose the person to a lot of uncertainty in the future. They become more vulnerable to long-term variance in the developmental trajectory of humanity. There might be risks that we’re not aware of today. In a representative survey of 1,000 Germans, about 22 percent of them said they want to undergo these procedures, the majority of these being male.</p>
+<p>My personal preferences could change in the future. But my professional opinion, as a physician, is that patients with bleak prognosis, and the public in general, should be informed about these possibilities. And these should be discussed in a measured, rational way. And this is what we try to contribute to with our research. <img alt="" src="../images/nautilus-favicon-14_191.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Thomas E. Lee / Adobe</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

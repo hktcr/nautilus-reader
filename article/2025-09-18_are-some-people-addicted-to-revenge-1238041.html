@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Revenge Becomes an Addiction | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When Revenge Becomes an Addiction</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-9EQ8</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>James Kimmel remembers the first time his desire for revenge nearly ruined his life. After years of bullying him, a group of kids in his neighborhood blew up the mailbox at his home in rural Pennsylvania and shot his family’s dog. Taking a gun and following them into the night, the teenaged Kimmel intended to pull the trigger—but stopped himself just in time.</p>
+<p>Kimmel uses this story to open his new book, <em>The Science of Revenge: Understanding the World's Deadliest Addiction—and How to Overcome It</em>. In it, Kimmel, now a lawyer and an assistant clinical professor of psychiatry at Yale School of Medicine, describes how he went from this near-act of devastating violence to collaborating with neuroscientists to understand what drives us to punish people who hurt us.</p>
+<p>He argues that revenge is addictive—not just figuratively speaking, but in a biological sense, much like alcohol and other drugs. His book traces a growing scientific literature indicating that even contemplating retribution against the people we think have wronged us taps into the brain’s reward circuitry. The result is a temporary buzz, followed by a comedown that leaves the brain wanting more.</p>
+<blockquote>
+<p>My revenge-seeking began seeping into all aspects of my life.</p>
+</blockquote>
+<p>In the view of Kimmel and some of his collaborators, this circuitry can push some people into a spiral of increasingly vengeful acts, despite negative consequences for them and the people around them. While “revenge addiction” isn’t a medically recognized term, Kimmel has suggested the condition may have affected numerous historical and current political figures, <a href="https://www.nytimes.com/2025/01/14/opinion/trump-retribution-revenge.html">including U.S. President Donald Trump</a>.</p>
+<p><em>Nautilus</em> spoke with Kimmel about his journey to understand the brain on revenge, society’s attitudes toward those who take it too far, and how everyone can benefit from a bit of forgiveness.</p>
+<p><strong>You speak candidly in the book about your own experience with feelings of revenge, and you include the harrowing story about how you nearly shot some kids in your neighborhood after they killed your family’s dog. How did you go from there to becoming an expert in the science of revenge?</strong></p>
+<p>I wanted to be a farmer. When I had this conflict with the guys that had been bullying me, who were farm kids, I decided that probably wasn’t going to be a career path for me. I knew also that I hadn’t forgiven them: I wanted revenge—I just didn’t want to pay the high price attached to gunning them down. Those two ideas somehow coalesced inside my mind into the idea of becoming a lawyer as a profession in which you can get paid for seeking revenge on behalf of other people.</p>
+<p>I was good at being a lawyer, and it would feel good for periods of time. But then it left me feeling worse, and wanting more. My revenge-seeking began seeping into all aspects of my life. It’s the way that I solved all problems—in my personal life, with my family, with people in the community. It seemed as though I wasn’t able to get rid of it, or when I was able to get control of it, it didn’t last long. I began wondering if I was hooked on something.</p>
+<p>In 2004, I was at the end of writing a book on <a href="https://www.jameskimmeljr.com/books">spiritual teachings and revenge</a> and a <a href="https://www.science.org/doi/10.1126/science.1100735">study came out</a> from the University of Zurich that, for the first time, suggested that when people who have a grievance are given the opportunity to retaliate, this activates a component of the brain’s reward and pleasure circuity—the “go” circuitry that we associate with addicts. That put me on track to believing that maybe I was right.</p>
+<p>I began to reach out to scientists wherever I could, and I asked them to consider the possibility that maybe revenge-seeking could become addictive. They were very much intrigued by it.</p>
+<p><strong>Your book also documents your journey to understand revenge-seeking as a neurological phenomenon. What did you learn?</strong></p>
+<p>We experience real or imagined grievances—perceptions of mistreatment, injustice, humiliation, shame, betrayal, victimization. We experience this throughout our lives, day to day, almost hour by hour in some instances. Those experiences are very painful, and they register inside the brain’s pain network in the anterior insula. The brain needs to process that pain, and it tries to rebalance itself with pleasure. When that occurs, it activates the pleasure and reward circuitry of addiction in the nucleus accumbens and the dorsal striatum. These are very dopamine-rich circuits that provide these temporary surges of pleasure.</p>
+<p>It’s the surge and the subsequent loss of dopamine that creates this experience of craving or desire to hurt the person who hurt us—because when we first experience this dopamine rush, it’s very pleasurable. When you take it away, you want it again.</p>
+<p><strong>What distinguishes a “normal” desire to get back at somebody who you feel wronged you from revenge “addiction” that leads people to commit violent or other crimes?</strong></p>
+<p>Addiction is generally defined as the inability to resist a desire despite the negative consequences. Almost all humans are wired so that if you take an opioid, you’ll experience euphoria and pleasure. But only a fraction of people who try opioids are going to become addicted to them. They’re unable to resist this desire to continue <a href="https://nautil.us/i-am-a-heroin-user-i-do-not-have-a-drug-problem-238127/">taking opioids</a> despite the negative consequences to themselves and other people.</p>
+<p>Revenge-seeking works the same way. Some people can’t control their desire for revenge, despite the negative consequences of pursuing it. Their revenge-seeking behaviors go beyond the rare and occasional retaliatory remark into repetitive behaviors that they have trouble curbing, even though it harms their own relationships, their own goals, the people that they love and spend time with. Some of these people begin to need more and more potent doses, and they turn to things like non-violent sabotage of other people, workplace sabotage or relationship sabotage, and even to minor forms of violence and then major forms of violence.</p>
+<p><strong>Let’s talk more about that. You argue in your book that revenge is a primary cause of all the world’s violence. What about other motivations, such as ideology, greed, or simple hatred?</strong></p>
+<p>These suggested motivations seem to fall into two categories. The primary category is forms of grievance. <a href="https://nautil.us/why-our-brains-crave-ideology-1203194/">Ideology</a>, for instance, or what we call hate crimes, bigotry, racism: Those are all grievances—they’re perceptions that another person has wronged you or is violating important social norms. The other category of alternative hypotheses for violence focuses on the reward circuitry—for instance, sadism and things that are related to the gratification one feels from harming another person.</p>
+<p>Except for people who are sociopaths and <a href="https://nautil.us/what-we-still-get-wrong-about-psychopaths-1226700/">psychopaths</a>—who have different brain structures and only represent a small fraction of the human population—most of us need to have a provoking experience of pain first to activate the reward circuitry linked to revenge. But even serial killers and people who seem truly sociopathic or psychopathic, they eventually will disclose that they <a href="https://nautil.us/why-people-feel-like-victims-238193/">feel they are victims</a> and were wronged first and are doing what they’re entitled to do, which is get the justice they want, justice in the form of revenge. So it really does seem to collapse into this one pathway.</p>
+<blockquote>
+<p>Some people can’t control their desire for revenge, despite the negative consequences of pursuing it.</p>
+</blockquote>
+<p><strong>You have talked about revenge addiction as a public health issue. What kind of solutions would you like to see health experts pursue?</strong></p>
+<p>There was a time when we used to punish drug and alcohol users—criminally punish them—and we would describe their behaviors as moral failures. When scientists discovered the biological underpinnings of substance use disorders, we moved toward a public health approach, trying to prevent, treat, and ultimately maybe cure addiction rather than just continue to punish people for their own illnesses. That, I believe, is the only approach that will help with violence prevention, treatment, and eradication. I know that’s a big goal, but that is absolutely my goal with this work.</p>
+<p>Prevention doesn’t have to replace incarceration for people who present a threat to society. But it’s a different approach. We should view incarcerating people as a self-defense mechanism that protects society from people who are unable to control themselves. Then while they’re incarcerated, we should treat them for that behavior to prevent further violence. The current system is a revenge-based approach. It says: You violated the law, we’re going to punish you now. It just fuels people’s revenge addiction and makes them feel more pain and more desire to retaliate.</p>
+<p><strong>You mention ways individuals can try to break out of revenge mindsets. Could you share some of that advice?</strong></p>
+<p>Recent neuroscience on revenge has led to new research on what happens when we forgive. When you even imagine forgiveness—so you’re not even deciding to fully forgive someone, you just imagine it—we see inside the brain that you're deactivating the pain network, that anterior insula that was lit up by the original grievance. That's the first thing that happens. The second thing that happens is that you deactivate the pleasure and reward circuitry of addiction, the “go” circuitry, so you stop feeling these incessant, nagging, and often dangerous desires to retaliate and punish other people for your own gratification. And then the third thing that happens is that forgiveness activates the “stop” circuitry inside your brain. That’s the prefrontal cortex, which is essential to good decision-making and cost-benefit analysis.</p>
+<p>Forgiveness is a kind of a wonder drug or a human superpower that’s been long relegated only to the spiritual realm. It’s valuable in the spiritual realm, but it has these amazing, empirically observed neuroscientific and biological benefits to the forgiver—not to the person who wronged you. To forgive, it turns out, is a gift to yourself.</p>
+<p><strong>You have been studying revenge for decades. What was the pettiest act of revenge you ever saw somebody mete out against another person?</strong></p>
+<p>Wow, there’s so much … I’ve had a lot of people email me after the book came out with their revenge stories—often they are light, not super-dangerous forms of revenge, and often they seem to occur with romantic betrayal. There was a podcast interviewer who said that after she found out that she was betrayed, she took all the toilet paper from her boyfriend’s home, so that he would have no toilet paper when he went to the bathroom. That’s pretty petty. <img alt="" src="../images/nautilus-favicon-14_949.png" /></p>
+<p><em>Lead image: Warm_Tail / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

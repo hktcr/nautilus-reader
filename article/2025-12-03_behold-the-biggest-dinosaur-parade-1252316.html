@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behold the Biggest Dinosaur Parade | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Behold the Biggest Dinosaur Parade</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-FKZ7</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Dinosaur tracks always make a stir. Fossilized traces of animals that dominated ecosystems long before humans made their appearance on Earth, they’re literally footprints from the deep past.</p>
+<p>Now, researchers have published <a href="https://dx.doi.org/10.1371/journal.pone.0335973">findings</a> in <em>PLOS One</em> that detail their discovery of a new world record for the number of individual dino tracks, continuous trackways, tail traces, and swimming traces.</p>
+<p>“It’s amazing working at this site, because everywhere you look, the ground is covered in dinosaur tracks,” said the lead study author, paleontologist Raúl Esperante of the California-based Geoscience Research Institute, in a <a href="https://www.eurekalert.org/news-releases/1107567?">statement</a>.</p>
+<p>Esperante and colleagues from the United States and Bolivia documented more than 16,000 tracks left by dinosaurs across nine study sites in the Carreras Pampa, Bolivia. Nestled in Torotoro National Park, the study sites are part of a vast exposed area of more than 80,000 square feet, akin to 1.5 football fields. The layer of rock dates to the Upper Cretaceous Period before the cataclysmic asteroid collision that ended the reign of the dinosaurs about 66 million years ago.</p>
+<p><img alt="" src="../images/fig6_BREAKER.png" /></p>
+<p><strong>LEAVE NOTHING BUT (FOSSILIZED) FOOTPRINTS:</strong> Some of the trackways revealed a dinosaur traffic jam on the shore of an ancient lake in what is now Bolivia. Marks made by dragging tails are indicated by the cord in B and the white arrows in D. <em>Photos from Esperante, R.,</em> et al. PLOS One <em>(2025).</em></p>
+<p>The size, shape, and clustering of the tracks tell a story about what dinosaurs were doing at the time. The northwest-southeast orientation of most of the tracks indicated that groups of dinosaurs were walking along an ancient lake shoreline. The overlapping and crossing of trackways show that animals walked by at different times. Some dinosaurs stopped and turned, based on the impressions they left. Amid the dinosaurs at Carreras Pampa were a higher proportion of individuals with long strides, compared to other fossil sites, perhaps due to the types of dinosaurs.</p>
+<p>Although the study did not identify the dinosaurs’ species, the tracks were most likely made by theropods (bipedal ancestors of modern birds), based on the three-toed feet and upright stance. By examining the shapes and relative orientations of their heels and toes, the researchers grouped the tracks into 11 distinct categories. Most tracks were from small to medium individuals, with a foot length up to 11 inches (in humans, such a foot length would be comfortable in a men’s size 14 shoe). And the scientists estimated hip heights to range from 26 inches to no more than 49 inches high (similar to max human hip heights). So, these were a bunch of dinosaurs that varied from dog-size up to human height with big feet that left footprints in the mud around the lake.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-origin-of-the-asteroid-that-killed-the-dinosaurs-889220/"><strong>The Origin of the Asteroid That Killed the Dinosaurs</strong></a><strong>”</strong></p>
+<p>Besides the lakeshore strollers, the trace fossils show that some dinosaurs were running, swimming, and dragging their tails around. The scientists identified a total of 280 elongated grooves as swim tracks from the kicking actions of theropods. The study authors used previously established criteria, such as “the occurrence of three or more sets of scratches shaped curved to the right, alternating with those curved to the left,” to identify the swim tracks.</p>
+<p>“This site is a stunning window into this area’s past,” added Esperante. “Not just how many dinosaurs were moving through this area, but also what they were doing as they moved through.” <img alt="" src="../images/nautilus-favicon-14_716.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Dotted Yeti / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

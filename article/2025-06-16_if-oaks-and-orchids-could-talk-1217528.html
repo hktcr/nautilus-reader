@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Human Music of Oaks and Orchids | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Human Music of Oaks and Orchids</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-2CER</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>On a crisp April morning, Lucas Gutierrez, a multidisciplinary artist based in Berlin, walks over to a 150-year-old oak inside Castello di Potentino’s wine estate in Tuscany. “This branch should work,” he says, and carefully places two small electrodes on each side of a leaf. A few seconds later, the screen of the device attached to the electrodes lights up. “It’s picking something up,” Gutierrez says.</p>
+<p>Plants generate electrical signals when chloride ions and other compounds move across cell membranes during activities like photosynthesis or respiration, the conversion of oxygen and sugars into energy. Similar to an EEG machine, where electrodes are applied to the skull to detect brainwaves, the device used by Gutierrez, which is called a <a href="https://www.midisprout.com/">MIDI Sprout</a>, can detect plants’ electrical signals and convert them into audio files.</p>
+<p>For the past year, Gutierrez has been recording not just oaks, but orchids, vines, and olive trees to map the invisible lives of plants in this part of Tuscany and then translating these recordings into music. Each plant recording is distinct: Younger plants and plants with more leaves tend to be busier with electrical signaling, says Gutierrez. And his recordings of orchids translate into more tonal variation compared with those of oaks. In the case of the Potentino oak, the electric waves pulsing through the branches emerged as an eerie, ethereal low-pitched harmony.</p>
+<p><strong>Oaks</strong></p>
+<p><strong>Orchids</strong></p>
+<p>Gutierrez says he may ultimately turn the various audio samples he collects into a “symphony.” It’s all part of an ongoing project he calls <a href="https://lucasgutierrez.com/denizens/">Denizens</a>, which includes not just translations of plant signals into music but also visual arrangements like laser projections and even textile art. By transforming these frequencies into audio recordings and other media, Gutierrez hopes to gain a new appreciation of the inner lives of plants.</p>
+<p>After recording the oak, Gutierrez says he played the audio track he had created back to Charlotte Horton, the owner of Potentino’s Wine Estate, asking her to guess which plant she was listening to. “She got it right at her first guess,” Gutierrez says. With a sample size of one, and no controls or standards of measurement, his results are more speculative than scientific. But it made him wonder if humans can subconsciously pick up on plant frequencies, and whether “turning them into sounds can help us become aware of it.”</p>
+<p>Gutierrez also started to notice patterns, he says. For example, vine frequencies recorded during the hottest time of the day showed more variation than those captured in the early morning. Wind also seemed to affect the electrical signals he was picking up. “Plants seem to be synched with their surroundings,” Gutierrez says. “With each recording I started to wonder if these variations can be considered a form of language.”</p>
+<p><img alt="" src="../images/Traverso_BREAKER.png" /></p>
+<p><strong>HEARD IT THROUGH THE GRAPEVINE:</strong> Lucas Gutierrez has spent the past year recording electrical signals emitted by plants, including this grapevine at Castello di Potentino’s wine estate in Tuscany. First, he uses AI to spot patterns in the raw data. Then, he looks for a way to represent those patterns musically, choosing scales, rhythms, and keys that fit well with the fluctuations of each data set. <em>Photo courtesy of Lucas Gutierrez.</em></p>
+<p>Gutierrez is not the first to describe plant signaling as a form of <a href="https://nautil.us/guided-by-plant-voices-237798/">language</a>, of course. In recent years, researchers have increasingly begun to talk about the chemical and auditory cues plants emit into their environments using words that are usually applied to humans or the animal kingdom. Words like “<a href="https://nautil.us/what-plants-are-saying-about-us-264593/">communication</a>.”</p>
+<p>Richard Karban, Distinguished Professor Emeritus of Entomology at the University of California, Davis and author of <em>Plant Sensing and Communication</em>, is one of many researchers who have studied plant signaling. He and others have gathered <a href="https://pubmed.ncbi.nlm.nih.gov/24165497/">evidence</a> that plants attacked by herbivores emit VOCs (volatile organic compounds)into the atmosphere that can be detected by neighboring plants, which strengthen their own defense mechanisms in response. Karban believes this is a form of language, though not everyone agrees with him.</p>
+<p>“Some people argue that communication requires a brain,” he says. “And others think that communication requires intentionality.” Plants lack a brain, but intentionality is very hard to prove even for animals or humans, he says. Other scientists have noticed that plants sometimes emit sounds at ultrasonic frequencies when they are water stressed, and that insects may <a href="https://elifesciences.org/reviewed-preprints/104700">rely</a> on these sounds to determine where to lay their eggs.</p>
+<p>During his informal explorations, Gutierrez also noticed that plants seem to react to human acoustic vibrations, something scientists too are <a href="https://nautil.us/plants-have-an-ear-for-music-236386/">exploring</a>. Last summer, he asked a group of local farmer-musicians, the <a href="https://www.visittuscany.com/en/ideas/the-music-of-the-amiata-woods-and-mines/">Cardellini</a>, to sing traditional folk songs in front of a vine row inside Potentino’s estate. Using his MIDI Sprout device, he recorded the electrical frequencies of the vines before, during, and after the singing. “Within 15 minutes of singing the device picked up a big change in activity,” he says.</p>
+<p>“I am not a scientist so I am not looking for definitive data,” he explains, “but it makes sense to me that plants would sense us and react to us,” he says. “I feel like I stumbled on an invisible vocabulary,” he says, “and I hope that by turning it into art we can become more aware of it.”</p>
+<p>A film about Gutizerrez’s Denizens project premiered at the Castello di Potentino Documentary Film Festival in Tuscany last August and will run again from August 7 to 10 of this year during a festival dedicated to the theme of interspecies communication. The project is funded by the winery’s non-profit arm Friends of Potentino, which supports work related to environmental and cultural preservation. <img alt="" src="../images/nautilus-favicon-14_1121.png" /></p>
+<p><em>Lead image by Tasnuva Elahi; with images by Molibdenis-Studio and Gst01 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

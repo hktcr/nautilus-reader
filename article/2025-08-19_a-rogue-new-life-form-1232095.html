@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Microbe Challenges the Definition of Cellular Life | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>This Microbe Challenges the Definition of Cellular Life</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-19
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NPQL</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Scientists recently discovered a microbe with one of the tiniest genomes on Earth. More surprising, the creature is almost entirely dependent on its host: Its genes don’t support any of the functions of metabolism, one of the key processes of life. As such, it challenges fundamental notions of what it means to be a living organism.</p>
+<p>The discovery was “pure serendipity,” says Takuro Nakayama, an evolutionary microbiologist at the University of Tsukuba in Japan. Takayama wanted to study the many microbes that live within a single-celled marine dinoflagellate, <em>Citharistes regius</em>, a kind of plankton. But when he and his colleagues sequenced the genes of this microbial community, they kept turning up tiny, odd chunks of DNA.</p>
+<p>It turns out that these DNA chunks belong to some unusual archaea—a branch on the tree of life populated by single-celled microbes that can often survive in extreme environments. (Archaea are similar to bacteria, but distinct in their structure, genetics, and metabolism.)</p>
+<blockquote>
+<p>How did Sukunaarchaeum end up with such a strikingly tiny genome?</p>
+</blockquote>
+<p>Nakayama and his colleagues proposed the name Sukunaarchaeum mirabile for the newly-discovered microbe: Sukunaarchaeum after the Japanese dwarf deity <em>Sukuna-biko-na</em>, and mirabile for marvelous. At only 238,000 base pairs, the number of genes in the DNA of Sukunaarchaeum is smaller than that of any other known archaea. The scientists described <a href="https://www.biorxiv.org/content/10.1101/2025.05.02.651781v1">their finding</a> in a bioRxiv preprint earlier this year.</p>
+<p>So how did Sukunaarchaeum end up with such a strikingly tiny genome? Over the course of evolution, genetic instructions for life often become increasingly complex. But evolution can also go in the other direction, leading to greater simplicity in the genome. This so-called genomic reduction, where organisms end up with fewer genes than their ancestors, is typically observed in the domains of bacteria and archaea. What struck Nakayama and his colleagues about Sukunaarchaeum was the extent of reduction and specialization in its genes.</p>
+<p>With its stripped down genome, Sukunaarchaeum appears to be completely dependent on its host, <em>C. regius</em>, for essential energy and nutrients. “It likely cannot produce its own cellular building blocks,” notes Nakayama. “No previously discovered microbe has shown such an extreme degree of metabolic dependence.”</p>
+<p>Sukunaarchaeum seems to almost inhabit a new category of life, suspended somewhere between archaea and virus. It is like a virus—typically not considered "living" organisms—in that it has a tiny genome and is totally dependent on its host for metabolism. But unlike a virus, Sukunaarchaeum has its own ribosomes, cellular structures that synthesize proteins, and it can replicate itself without the help of a host.</p>
+<p>To get a sense of just how unusual Sukunaarchaeum is, the researchers decided to scan the oceans for potential relatives. They analyzed environmental genetic sequence data from marine environments all over the world, focusing on spots where <em>C. regius</em> is known to live. Using a database called the Tara Oceans project, they discovered a vast array of sequences that are comparable to that of Sukunaarchaeum, which they hypothesize could represent a new, deeply branching archaeal lineage.</p>
+<p>For Nakayama, this additional finding suggests that many more microbes that challenge the definition of life may be out there, living in what Nakayama calls “microbial dark matter,” or microbes that can’t be cultivated in the lab. “The extreme, virus-like lifestyle we hypothesize for Sukunaarchaeum is a perfect example of the surprising outcomes found in this ‘natural laboratory of evolution,’” he says.</p>
+<p>Mart Krupovic, a virologist and microbiologist at Institut Pasteur in France who wasn’t involved in the study, called the finding “remarkable.” Krupovic has studied giant viruses that, like Sukunaarchaeum, <a href="https://doi.org/10.4161/cib.18624">defy categorization</a>. These giant viruses have evolved larger and more complex genomes that include some of the genes for DNA translation, a characteristic thought to be reserved for cellular life. “I think that is fascinating,” says Krupovic, “how little we still know about the world which surrounds us.”</p>
+<p>Next, Nakayama wants to culture and isolate Sukunaarchaeum in the lab, not just its genes, and take an image or video of it. He hopes this will help him better understand its biology, ecology, and how it is built—how it achieves this curious feat of living on the edge of life. <img alt="" src="../images/nautilus-favicon-14_1008.png" /></p>
+<p><em>Lead image: Elizabeth Ann Stevens / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enlisting Paparazzi to Save a Gigantic Fish - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Enlisting Paparazzi to Save a Gigantic Fish - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-LKYN</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The giant sea bass lives up to its name—the bulky fish can stretch up to nearly 9 feet long and weigh more than 500 pounds. It has a pretty massive fan club, too: The beloved bony fish enchants divers along the coasts of California and Mexico, who love to photograph it. Now, researchers have harnessed the giant sea bass’ celebrity status for science.</p>
+<p>Researchers have tallied the first direct population estimate of the beloved species, thanks to more than 1,600 photographs—a “Facebook of fish”—taken by recreational divers and fishers between 2015 and 2022. This work also adds to recent evidence that the big fish’s population is growing once again, a welcome sign after decades of conservation efforts: The giant sea bass was <a href="https://apistaging.iucnredlist.org/species/20795/9230697">listed</a> as critically endangered in 1996. Fisheries off California’s coast began encountering major declines in the species as early as the 1930s, and the state banned giant sea bass fishing in 1982.</p>
+<p>Giant sea bass have distinctive spots that can serve as “fingerprints,” enabling algorithms to identify individual fish from the Pacific paparazzi photos—a method previously used to study other marine creatures, including <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.1365-2664.2005.01117.x">whale sharks</a> and <a href="https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2024.1362703/full">sand tiger sharks</a>. This technique has been shown to identify individual fish with up to 95 percent accuracy, says study author Andrew Pettit, a marine biologist who conducted the research as a master’s student at the University of California, Santa Barbara.</p>
+<p><img alt="" src="../images/J7dZ6lkj-Glick_BREAKER.png" /></p>
+<p><strong>KING OF THE FOREST:</strong> Giant sea bass are apex predators in the kelp forests off the coast of California, and help to keep these vital ecosystems thrumming. <em>Photo by Barbara Ash / Shutterstock.</em></p>
+<p>After the scientists crunched the data, they determined that some 1,221 adult individual giant sea bass circulated off of Southern California between 2015 and 2022, as <a href="https://www.int-res.com/abstracts/meps/v760/p151-169/">reported</a> in the journal <em>Marine Ecology Progress Series</em>. Earlier estimates had relied on data from fisheries, which report accidental catches of the species, and genetic analyses.</p>
+<p>“The population estimate is responsible and actually good news because genetic evidence had most recently suggested a number nearly half of that,” says Larry Allen, a marine biologist and emeritus professor at California State University, Northridge, who consulted on the research but didn’t participate directly in the study. “The number one question for many of us studying giant sea bass over the past two decades has been, ‘Just how many are there now?’” In 2015, Allen’s <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165783615300011">paper</a> suggested that fewer than 500 giant sea bass lived off the Pacific coast of Southern California and northern Mexico.</p>
+<p>Large fish like the giant sea bass are particularly vulnerable to forces like climate change and overfishing because they grow relatively slowly and reach sexual maturity late in life. That means there are many more opportunities for the fish to die before they mate and have babies. Yet this species also plays a crucial role at the top of the food chain: They are apex predators of both fish and invertebrates in kelp forests and rocky reefs. They keep prey in check, and act as “croppers,” preventing any one species from becoming too abundant and disrupting the ecosystem balance. The fish also hosts tiny parasitic crustaceans, which then become <a href="https://animaldiversity.org/accounts/Stereolepis_gigas/">dinner</a> for the Señorita fish, a type of wrasse that acts as a "cleaner" fish for the giant sea bass.</p>
+<blockquote>
+<p>Giant sea bass have distinctive spots that can serve as “fingerprints.”</p>
+</blockquote>
+<p>The recent photographic analysis provided data not only about the giant sea bass population’s numbers, but also hints at this particular population’s relative isolation. In the waters off the coast of Southern California, fewer than 5 percent of the individuals spotted multiple times were documented traveling long distances. This aligns with genetic analysis studies: Scientists have <a href="https://www.sciencedirect.com/science/article/abs/pii/S0165783615300011">observed</a> low genetic diversity among giant sea bass along the Southern California coast, which could make it tougher for these fish to adapt to a changing marine environment.</p>
+<p>The photo analysis method is a win-win: It’s less invasive than tagging fish and engages the giant sea bass-loving community, says study author Molly Morse, a marine scientist at the University of California, Santa Barbara.</p>
+<p>“They’re such a charismatic species—people spend a ton of money to dive and have the opportunity to meet one,” Pettit says. “We realized that people post all these photos of giant sea bass, so we can just collect this data and analyze it.”</p>
+<p>But relying on diver and fisher photos only paints part of the picture, Ramírez-Valdez says. This biases the data toward fish who live in these particular waters during the summer months and to geographic spots that divers tend to frequent, he says.</p>
+<p>To get a more precise population count, Morse says she and her colleagues plan to track giant sea bass off California’s coast with tags that send real-time data to a satellite system. The researchers also hope to engage with scientists and divers in Mexico. In 2021, Ramírez-Valdez and his colleagues <a href="https://onlinelibrary.wiley.com/doi/10.1111/faf.12594">suggested</a> that the majority of the species actually lives off the Pacific coast in Mexico, and that conservation efforts have overlooked populations just over the border—where they seem to be flourishing.</p>
+<p>Either way, it seems this celebrity fish might still have a big future. <img alt="" src="../images/nautilus-favicon-14_1171.png" /></p>
+<p><em>Lead photo by Douglas Klug</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

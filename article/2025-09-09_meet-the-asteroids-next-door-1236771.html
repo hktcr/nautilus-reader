@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroids Whizzing by Will Get New Closeups | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Asteroids Whizzing by Will Get New Closeups</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7SHE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Rocketing by at tens of thousands of miles per hour, the asteroids visiting Earth’s neighborhood will get a closeup this week. Using radar, scientists will be scanning these space rocks as they whiz by our planet, creating newly detailed profiles of the near-Earth objects for further study.</p>
+<p>The technology, deployed by NASA’s Deep Space Network Goldstone Solar System Radar, recently captured alluring <a href="https://www.jpl.nasa.gov/images/pia26588-nasas-planetary-radar-reveals-peanut-shape-of-asteroid-1997-qk1/">new profiles of asteroid “1997 QK1,”</a> which sailed by Earth last month in its closest approach in more than three and a half centuries. The “peanut”-shaped rock is about 600 feet across, and the more-than two dozen new radar images relayed novel information about its form and spin.</p>
+<p>The radar system can reveal details about <a href="https://nautil.us/how-to-find-and-keep-a-space-rock-486980/">space rocks</a> at a resolution of some 25 feet—not too bad for targets zipping by at such high speeds, often more than a million miles away. The resulting images can tell us a lot about these celestial near-Earth objects, including more information about their size and rotation, as well as their density.</p>
+<p>Many of the objects the radars scan are almost complete unknowns to science. For example, this week, the asteroids the Goldstone radar will be profiling include an object known as “2025 QO1,” which was just discovered this August. It might be about 250 feet across, “but otherwise, nothing is known about its physical properties,” <a href="https://echo.jpl.nasa.gov/asteroids/aug-sep.2025.goldstone.planning.html">NASA reports</a>.</p>
+<p><img alt="Asteroids Whizzing by Will Get New Closeups" src="../images/AkOhfgGl-Courage_BREAKER.png" /></p>
+<p><strong>MILLION-MILE CLOSE-UP</strong>: Scientists are using old tech to get new looks at passing asteroids. This new series of images, taken in late August, reveal never-before-seen details of a "peanut"-shaped asteroid as it flew by Earth. The radar system has a full calendar of other near-Earth objects to scan. <em>Credit: NASA/JPL-Caltech.</em></p>
+<p>Another object up for radar imaging is the 100-plus foot “2025 QV9,” discerned from data collected by the Pan-STARRS 1 telescope in Hawaii just a couple of weeks ago. This might not sound like too hefty of an object, as far as the cosmos go, but, as astrophysicist Paul Sutter <a href="https://nautil.us/humans-could-go-the-way-of-the-dinosaurs-262372/">explained for <em>Nautilus</em></a>, as recently as 50,000 years ago, a 150-foot wide asteroid collided with what is now Arizona, unleashing the energy “equivalent to 600 Hiroshima bombs … [and] a 1,000-mph wind blast more than two miles from the site.”</p>
+<p>Finally, there is “2009 FF,” which was first documented in 2009 by the massive Mount Lemmon Survey in Arizona, an ongoing project that has been particularly successful in locating near-Earth objects. This week’s visit from 2009 FF, which seems to be about 500 feet across, will be the closest it comes to Earth for the next 149 years.</p>
+<p>But even the closest of these, 2025 QV9 will still be at a reasonably comfortable distance from Earth, of about 1.2 million miles.</p>
+<p>Later this month, the Goldstone radar system will also get a chance to scan “2025 FA22,” spotted earlier this year from the Pan-STARRS project in Hawaii and which was previously flagged as a potential impact object. That designation has been downgraded, but at close to 500 feet wide, it is the largest asteroid to get this close (within about half a million miles) to Earth since 2022, and it will likely maintain this designation until 2027. Like so many other near-Earth objects, “little is known about its physical properties,” as <a href="https://echo.jpl.nasa.gov/asteroids/2025fa22.2025.goldstone.planning.html">NASA notes</a>. The upcoming radar imaging will likely reveal more about this close visitor.</p>
+<p>You can see a list of the upcoming objects the radar system will be scanning <a href="https://echo.jpl.nasa.gov/asteroids/goldstone_asteroid_schedule.html">here</a>. And if you want a more in-depth picture of the hunt for potentially Earth-intersecting rocks from space, we have a <a href="https://nautil.us/here-to-save-the-day-521210/">story</a> for you about the people leading this wild effort. <img alt="" src="../images/nautilus-favicon-14_972.png" /></p>
+<p><em>Lead image: Triff / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

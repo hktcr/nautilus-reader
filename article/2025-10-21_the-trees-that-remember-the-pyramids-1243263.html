@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Trees That Remember the Pyramids | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Trees That Remember the Pyramids</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7AXS</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Some trees alive today were young saplings when the Egyptian pyramids were still works in progress. Individual Great Basin Bristlecone Pine scattered thinly across the rocky slopes of Nevada, and Lañilawal—an Alerce Cypress growing in Chile—a tree so grand, it has earned its own mononym. Many others are younger, but ancient still, having erupted out of the ground at the same time as humanity stepped into the Common Era, some 2,000 years ago. Qilian juniper growing along the silk road in China,* Bosnian pine clinging to the marble hills of Mount Olympus, residence of the ancient Greek gods.</p>
+<p>The bodies of these trees carry a record, imprinted in their tree rings, of lives lived in one single spot, under changing weather and climate, through adversity and prosperity, fire and snowstorm, and contact with humans.</p>
+<p>Once you know where to look, you can learn to spot these ancients in the landscape. Often, they will have a twisted sturdy bark, a thick trunk and heavy branches, and a deadened, crooked top. That’s because, once they reach a certain age, trees only grow in girth, no longer in height, and the crown begins to die off as it becomes more difficult to deliver nutrients to these most distant branches. And yet many of these trees will continue to live long into our uncertain climate future.</p>
+<p>Renowned dendrochronologist Valerie Trouet recently put together a collection of essays written by the scientists who study these greats, called<a href="https://greystonebooks.com/products/in-the-circle-of-ancient-trees?srsltid=AfmBOopQLGDsTvyO11gAdFhvnJ5GTlCQQx83f8ToHZn-LfhJqR1Ylpwx"><em>In The Circle of Ancient Trees</em></a><em>.</em> Each essay is dedicated to one of 10 species of tree from far-flung geographic locations, and what their tree rings can tell us about the past and future of the Earth. <em>Nautilus</em> talked with Trouet ahead of the publication about what tree rings can tell us about archaeology, Renaissance furniture, climate change, and William Blake.</p>
+<p><img alt="" src="../images/Kazamia_BREAKEE.png" /></p>
+<p><strong>TREE TALK:</strong>Dendrochronologist Valerie Trouet talked with <em>Nautilus</em> ahead of the publication of her new book <em>In The Circle of Ancient Trees</em> about what tree rings can tell us about our past and our future on Earth. <em>Photo by Bob Bronshoff.</em></p>
+<p><strong>What is dendrochronology?</strong></p>
+<p><a href="https://nautil.us/philosophy-is-a-public-service-237659/">Dendrochronology</a> comes from the Greek words <em>dendron</em> and <em>chronos</em>, so tree and time. And that's what we do as dendrochronologists. We read time through the rings in trees, we read history through trees. But it's not just the number of rings that gives us information, it's also the width of the rings, the density of the wood, all kinds of characteristics that tell us what happened during the lifespan of those trees. This is climate information, but also information about how we as human beings interacted with the trees, and about fires.</p>
+<p>Wildfires, when they don't kill the tree, they leave scars. And through tree ring research, we can date the exact years and sometimes even the season when those trees were scarred. And so we can build a <a href="https://nautil.us/the-ancient-wisdom-stored-in-trees-252713/">whole history</a> of when the big fire years happened, what caused those fire years.</p>
+<p><strong>There is a lot of value then, for climate change research in particular.</strong></p>
+<p>Worldwide, reliable measurements of even the basic weather, like temperature and rainfall, go back to around 1900. So we only have a-hundred-and-something years of data, which is not bad. But at the same time that we started measuring these climate variables, we started messing with our climate. Around 1850, with the Industrial Revolution, is when we started on a grand scale burning fossil fuels, which has been influencing the entire period over which we've been measuring climate.</p>
+<p>So if we want to get an idea of how natural climate change functions, how the climate system works under natural conditions, we need to go further back in time than our actual measurements. We need to find other ways of looking at climate. Tree rings are a very good way of doing that.</p>
+<p><img alt="" src="../images/r5L0OYCu-Kazamia_BREAKER-2.png" /></p>
+<p><em>Image by Blaze Cyan</em>.</p>
+<p><strong>How does dendrochronology fit with other climate science, including a geological perspective on climate?</strong></p>
+<p>I think it's a very good question because I think that's what makes tree rings so valuable as a method. Where we're using tree rings to look at the climate of the past we're looking by and large at the past 2,000 years. We can go further back but it's rare. And so relatively speaking to many geoscientists who look at millions of years, hundreds of thousands of years, that's a very short period. But it is a very important period because it’s a period over which we also know the most about human history. So we can really look at the relationship between climate history and <a href="https://nautil.us/plagues-storms-taxes-and-the-jet-stream-1162209/">human history</a>, if there's a relationship, and how that relationship works. That's one.</p>
+<p>And two, these are timescales that matter to humanity and our individual lives, but also these are the timescales that we can impact with our current policies. Who knows what our climate will look like a million years from now? I mean, will we even be still around? But what our climate will look like 1,000 years from now, we can determine. The CO2 we put out into the atmosphere today will still be in the atmosphere 1,000 years from now. So these are the timescales also for policy that are really relevant.</p>
+<blockquote>
+<p>Wildfires, when they don't kill the tree, they leave scars.</p>
+</blockquote>
+<p><strong>Is a pattern emerging?</strong></p>
+<p>Well, it's similar to what we know from instrumental data [direct measurement of Earth’s climate from instruments such as thermometers and satellites]. For temperature, it is pretty straightforward. Temperature-wise, we're in unprecedented terrain currently, where it's warming up and it hasn't been this warm in the past 2,000 years. That picture is very clear. But really the goal is to add information to what we know from the instrumental period [which only came into full swing in the 1980s, when satellite coverage covered the whole globe], rather than to say, yeah, it's all right, or it's all wrong. It's adding a level of nuance and of detail to what we know.</p>
+<p><strong>I was surprised to learn that a lot of the authors have a background in archaeology. They love trees, but they come to the field because they have an interest in the past. They use tree rings to date Ancestral Pueblan ruins in the American Southwest, or Maori cultural treasures, even Renaissance works of art and furniture made of pedunculate oak.</strong></p>
+<p>A lot of people come through this field of science from an archaeological background because it's not just about trees, it's also about wood. The information that the trees store in their rings remains even when the trees die. When they're being cut, when they're transformed into wooden buildings or wooden beams or even charcoal, we can still use that wood and the rings in that wood to extract information. That allows us to date that archaeological material to the exact year.</p>
+<p><img alt="" src="../images/9rrEI2pG-Kazamia_BREAKER.png" /></p>
+<p><em>Image by Blaze Cyan</em>.</p>
+<p><strong>Is there a shared property that makes certain trees grow incredibly old? What is their secret?</strong></p>
+<p>There are rules and then there are exceptions to the rules. Typically, you will find very old trees in remote places where people over thousands of years have not had easy access to wood. Very often at high elevation and in dry environments, which makes the trees grow very slowly. The paradigm, “live fast and you die young, or you live slow,” it's the same for trees.</p>
+<p>Remote areas that are austere are also a lot harder on organisms that can typically attack trees. So, you have fewer insects, you have fewer grasses and shrubs that can fuel wildfires. But, as I mentioned, there are exceptions.</p>
+<p>One of the chapters in the book is about a bald cypress that grows in the southeast of the United States. They can be up to 2,800 years old—so very old. But they literally grow with their feet in the water. They live in marshes, so they're very unexpected. It's not the kind of environment where you would expect to find these very old trees.</p>
+<p><strong>The book is really at its core about the connections between trees and people. The people telling the stories are the people who are most connected to the trees. It reminded me of some writing by William Blake. In a letter to a friend he wrote “the tree which moves some to tears of joy is in the eyes of others only a green thing that stands in the way.” What else can we do to get people more connected to nature?</strong></p>
+<p>That’s a very good question. On the one hand, there is a growing movement and a growing awe. If you look at how many books have been published about trees in recent years—very good books, very beautiful books, fiction and non-fiction— you know, we've come a long way. Some 100 or 150 years back, much of North America was deforested without even thinking about it. So we've come a long way.</p>
+<p>I think what this book—and the dendrochronological community—can add, and what maybe people don't think about enough, is the time component. You know, some of these trees are 3-, 4-, 5,000 years old. They were around when we were building pyramids, right? And they're still around. They're still alive. They transcend our individual lives and they will still be around, many of them, a thousand years from now. So they are witnesses not just to our past but of the future. And they don't lie. <img alt="" src="../images/nautilus-favicon-14_895.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em><a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a><em>.</em></p>
+<p><em>Blaze Cyan is an artist working within the mediums of drawing, etching, woodcut, and wood engraving. Blaze is a Fellow of the Royal Society of Painter-Printmakers, a member of the Society of Wood Engravers, and also the Arborealists. She lives in London.</em></p>
+<p><em>*As originally published, this article mistaken identified the trees along the silk road as pedunculate oak. This has been corrected.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Measure the Universe | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How to Measure the Universe</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-K091</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Units span the gap between math and reality, between platonic ideals and physical quantities. But what <em>are</em> units? I think it’s one of the most underrated questions in the foundations of physics.</p>
+<p>We use them to measure and study everything from distance to numbers of particles to luminous intensity. In the International System of Units—the established standards for scientific measurements—there are seven types of units: second, meter, kilogram, ampere, kelvin, mole, and candela. Any other units are products of those, such as meters per second squared makes a unit of acceleration. Or kilogram times meter over second square, that’s a unit of energy.</p>
+<p>All of that said, we don’t actually need all those seven units. In fact, I hope to convince you that we don’t need units at all.</p>
+<p>Take the latter four units: ampere, kelvin, mole, and candela. They are actually related to the first three by constants of nature.</p>
+<p>For example, ampere is the flow of charge per second, and if you know the elementary charge, you can define ampere from a velocity times that elementary charge times the number of electrons which has no unit. Kelvin is a temperature, but it’s proportional to energy with the factor being a constant, so it’s really just a convention we even use it. The mole is fixed by Avogadro’s number, and so on.</p>
+<blockquote>
+<p>I hope to convince you that we don’t need units at all.</p>
+</blockquote>
+<p>So this leaves us with seconds, meters, and kilograms—measures for time, length, and mass. We can now express the units of any quantity as a product of those, relying on some exponents and some constants.</p>
+<p>This is where things start to get interesting. Because, as the theoretical physicist Max Planck figured out at the end of the 19th century, all those units that we normally use are really just human baggage. Meters, seconds, teaspoons, gallons per mile, minutes per pint, that’s all politics.</p>
+<p>Planck said, there’s one, and only one, way to make units of length, time, and mass from fundamental constants. And those are the “natural” units that describe our universe. In his 1899 paper presenting the idea, he called them “Natural Measurement Units.” The idea was that measurement systems ought to be guided by the universe itself, rather than, say, the weight of an arbitrary volume of water in France. (I’m looking at you, kilogram—originally defined in the 18th century as the weight of a liter of water.)</p>
+<p>The fundamental constants, then that you construct are the speed of light (that’s <em>c</em>), Planck’s constant (that’s called <em>hbar</em>), and Newton’s constant (that is the strength of gravity, usually denoted capital <em>G</em>).</p>
+<p>Planck said, look, you can combine those three constants to give a mass, a length, and a time, now called the Planck-mass, -length, and -time respectively. And there you have it, units of measurement that align with the workings of the universe itself. No French Revolutionary-era scales required.</p>
+<p>You wouldn’t use Planck units in <a href="https://nautil.us/your-weight-is-about-to-be-redefined-235649/">everyday life</a>, though, because they’re rather impractical. We would have to drag around ridiculous exponents of numbers to the -40 or so just to give the weather forecast.</p>
+<p>Or I should say, you wouldn’t use them in everyday life <em>unless</em> you’re a physicist. But if you were, these are the units you want to work with if you talk about, say, the Big Bang. Or what goes on inside of black holes. Or <a href="https://nautil.us/what-quantum-gravity-needs-is-more-experiments-rp-236406/">quantum gravity</a>, and those sorts of things. Because out there, beyond the reaches of country borders and our outer atmosphere, things like kilograms and seconds stop making quite so much sense. For example, the spacetime curvature at which the quantum effects of gravity become strong is 1 in units of the inverse Planck length square. That might sound complicated, but if you try to do that calculation in the International System of Units, I promise you, it will be a lot messier.</p>
+<p>Here’s another reason I think this existential units question (which you may otherwise brush off as overly esoteric) is so important: Looking more closely, Planck units reveal something very interesting about quantum gravity.</p>
+<p>You can ask for example, what’s the mass that a particle must have so that the quantum uncertainty on the size is below the Schwarzschild radius, the radius at which an object of a given mass will collapse to a black hole, if compressed below it. If that could happen, then the combination of quantum physics and conventional non-quantum physics stops making sense. So this gives you an estimate for when quantum gravity becomes relevant. (This is easy to estimate. Let’s call the mass <em>m</em>. The quantum uncertainty on the size is then Δx = <em>hbar</em> divided by (<em>m</em> times <em>c</em>) Now we want to know when is Δx equal to the Schwarzschild radius related to the mass, which is <em>G</em> times <em>m</em> divided by <em>c</em> square. Insert m, and we can solve for Δx, which is the square root of <em>G</em> <em>hbar</em> divided by <em>c</em> cube. And that is exactly Planck’s length!)</p>
+<blockquote>
+<p>Measurement systems ought to be guided by the universe itself.</p>
+</blockquote>
+<p>What this means is that a particle with such a mass would also be … a black hole. It sits at the intersection of <a href="https://nautil.us/a-wild-idea-to-solve-the-mysteries-of-black-holes-488609/">gravity and quantum physics</a>. We have never measured a particle with such a mass, but they’ve been hypothesized. They’re called Planckions. Some people think that if black holes evaporate, they stop at this size and they leave behind these particles—and those could make up <a href="https://nautil.us/have-we-gotten-dark-matter-all-wrong-356525/">dark matter</a>. I digress, but you see that the question of units is intimately tied into the very foundations of contemporary physics.</p>
+<p>So, practical or not, Planck units have a fundamental relevance because they’re unambiguous. Anyone everywhere who can make measurements can infer them. (Again, you can leave your H2O, measuring cups, and scales at home.) This is why Planck said if there is intelligent life out there, these are the units they’d use—and that we should use them in our communication, too.</p>
+<p>What can we learn from this seemingly very academic exercise? There are a couple things I find fascinating about this.</p>
+<p>The first is that the Planck units are no longer unique. Planck couldn’t have known this, but we now also have the cosmological constant. And you can construct natural units by using the cosmological constant, <em>c</em>, and <em>hbar</em> instead. I think this is an indication that we are actually missing a relation between the cosmological constant and Newton’s constant.</p>
+<p>Another thing I find interesting is the structure that is behind the three units and the fundamental constants they are built up from.</p>
+<p>You see, the speed of light converts time to length. A year is a time, a light-year is a length. The speed of light also converts energy to momentum. You can then take the inverse of time and length and use Planck’s constant to convert that to energy and momentum respectively. What this means is that the speed of light is a map from time to space and back. And Planck’s constant is a map from spacetime to momentum-space and back.</p>
+<p>But then when we introduce Newton’s constant into the equation, we get even wilder things. For example, a time that would give us cubic meters per kilogram per second. This isn’t a unit that we use. Why not? The reason is that Newton’s constant is related to gravity, and for gravity we don’t deal with energy and momentum. We deal with energy density and momentum flux and curvature. Those are defined not as a total, but per volume. They’re densities. And Newton’s constant, divided by the fourth power of <em>c</em> converts spacetime curvature to these densities. This is what appears in Einstein’s equations.</p>
+<p>This tells us that we have a disconnect between this spacetime-momentum space picture that we use in quantum physics and the curvature-density picture that we use in general relativity. I think it’s one of the reasons why we’re having trouble <a href="https://nautil.us/what-physicists-have-been-missing-506607/">squaring quantum physics with gravity</a>. You see, it’s all well and fine to say that a particle with some energy doesn’t have a definite position, as quantum mechanics proposes. But it makes no sense to say that an energy density doesn’t have a position, because the density is a function of the position.</p>
+<p>It might seem like a minor point, but I hope I have convinced you that units are not just here to help us count and measure the things around us—but that by looking within them we may be able to solve some of the biggest questions in physics today. <img alt="" src="../images/nautilus-favicon-14_980.png" /></p>
+<p><em>For more from the author, check out her <a href="https://www.youtube.com/@SabineHossenfelder">YouTube channel</a>.</em></p>
+<p><em>Lead image: Evannovostro / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

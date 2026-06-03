@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let There Be Dark | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Let There Be Dark</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RPDW</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Walking from the RV campground to the village restaurant in the Grand Canyon National Park this winter wouldn’t have been my first choice. But the RV my family had rented wasn’t permitted in the village, and my teenage daughter and I reasoned that it would be better to walk rather than wait 15 minutes for the bus in the cold like the rest of our family. Not long after we started out, I declared we’d made a mistake. The night was pitch black and the sidewalk soon gave way to a ditch where I tripped over dried grasses and fallen branches. I cursed the lack of streetlights.</p>
+<p>I would soon take this all back. Lack of light, especially in our wild places, should be something we cherish. Darkness is good for us.</p>
+<p>The next morning, I set out on my own to walk along the canyon’s South Rim when I came across a plaque stating that the Grand Canyon was an “International Dark Sky Park.” It’s one of the few regions in the world where there is so little artificial light that when the Milky Way peeks above the horizon, its brilliance can be mistaken for dawn. A nonprofit called <a href="https://darksky.org/">DarkSky</a> based in Tucson, Arizona, certifies places such as parks, urban spaces, and wild sanctuaries, committed to night sky conservation. Grand Canyon National Park is one of 139 parks throughout the world, including the Bükk National Park in Hungary and the Iriomote-Ishigaki National Park in Japan, that have the organization’s stamp of approval.</p>
+<p>DarkSky requires that parks use minimal outdoor lighting and softly lit lamps whose beams only point down. In addition, their skies must achieve a magnitude of darkness after nightfall that approaches a visual-band zenith luminance of 22 magnitudes per square arcsecond. Yet such pristinely inky black places are hard to come by since Thomas Edison ruined everything.</p>
+<blockquote>
+<p>Light pollution has increased worldwide nearly 10 percent every year between 2011 and 2022.</p>
+</blockquote>
+<p>Not that DarkSky is anti-lightbulb. Michael Rymer, the nonprofit’s Communities Program Manager, told me their mission is to protect the night from excessive artificial light: “We want to restore natural darkness to the world as much as we can.”</p>
+<p><a href="https://www.science.org/doi/10.1126/science.abq7781">A 2023 study</a> discovered that light pollution has increased worldwide nearly 10 percent every year between 2011 and 2022 and shows no signs of slowing down. In fact, most places on the planet do not experience true nightfall and persist under a shield of artificial skyglow through which only a peppering of starlight meets the naked eye. For many of us, the brightest and most memorable constellations we’ll encounter firsthand are from a plane window—not looking up, but down at the starbursts of cities and hubs. And it’s these terrestrial light displays that are wreaking havoc on the natural world.</p>
+<p>For many species, a naturally dark night sky is crucial for survival. Studies show that light pollution is a contributor to the worldwide <a href="https://www.sciencedirect.com/science/article/abs/pii/S0006320719307797">decline in insect populations,</a> including certain species of fireflies, who rely on the darkness as a backdrop for their lightshows to charm potential mates. It has also <a href="https://www.sciencedirect.com/science/article/abs/pii/S0169534722003329">disrupted</a> the behavior of migratory animals, such as sea turtle hatchlings drawn to streetlights rather than moonlight scattered across ocean waves, or birds who crash into high buildings because of the siren call of city lights. Even the New York City annual September 11 memorial “Tribute in Light” has <a href="https://pubmed.ncbi.nlm.nih.gov/28973942/">cumulatively disoriented more than a million birds</a> who have circled its 4-mile-high beams. Skyglow also deters species from traditional hunting grounds, such as bats and pumas, whose predatory habits rely on the dark. <a href="https://zslpublications.onlinelibrary.wiley.com/doi/full/10.1111/acv.12480">Apparently,</a> some of the most biodiverse regions on Earth are now exposed to light pollution.</p>
+<p>We are also not immune to the negative impact of artificial light. The encroachment of skyglow threatens to compromise astronomical data collected from some of the most powerful telescopes in the world. <a href="https://www.mpg.de/25819822/nobel-laureate-genzel-leads-appeal-to-protect-the-paranal-observatory">A plan</a> is underway to develop a large industrial complex near the Paranal Observatory in the Atacama Desert, which could increase the ambient light pollution by 35 percent. Recent studies suggest that the <a href="https://www.frontiersin.org/journals/photonics/articles/10.3389/fphot.2023.1272934/full">quality of certain lights</a> and <a href="https://www.science.org/doi/10.1126/science.adg5277">skyglow in general</a> contribute to the disruption of circadian rhythms, which correlate with chronic diseases including heart disease, certain cancers, and mental disorders.</p>
+<p>The contemporary Austrian composer Georg Haas has said, “we have lost the darkness in our lives.” In 2001, he wrote a string quartetto be performed in complete darkness. He wanted to disorient listeners and allow them to experience “new and intense artistic adventures.” <em>The New Yorker</em> critic <a href="https://www.newyorker.com/magazine/2013/11/11/darkness-visible-2">Alex Ross wrote</a> of a 2013 performance of the work, “What begins as an experience of deprivation becomes one of radically heightened awareness.”</p>
+<p>Indeed, darkness has been <a href="https://www.sciencedirect.com/science/article/abs/pii/S0272494413000261?via%3Dihub">linked to creativity</a> and shown to be good for our mental and physical health. Some researchers <a href="https://www.sciencedirect.com/science/article/abs/pii/S0272494413000261?via%3Dihub">propose</a> that dim light—or even just thinking of the dark—helps unleash our imaginations and generate new ideas that we might have a harder time doing under bright conditions. Want to solve a stubborn problem? Try inviting the darkness in. A <a href="https://www.sciencedirect.com/science/article/pii/S0272494423002463#:~:text=2.3.,person%27s%20connectedness%20to%20the%20nightsky.">recent study</a> connects exposure to a naturally dark sky with positive emotions such as a <a href="https://nautil.us/more-than-a-feeling-1242661/">sense of awe</a>.</p>
+<p>Our trip to the Grand Canyon wasn’t just about a treacherous walk. I now recall the park’s night sky and the scent of pine and the conical treetops pointing far above my head into the vast cosmos. Looking up, I saw hundreds of brilliant stars in the pockets between shifting clouds—more than I had ever seen. The naturally dark sky has its own illumination—one that inspires wonderment simply by gazing overhead. Just the thought of it brings me joy. <img alt="" src="../images/nautilus-favicon-14_474.png" /></p>
+<p><em>Lead image: Alexey Suloev / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

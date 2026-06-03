@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Art Is Human Art | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>AI Art Is Human Art</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-HD96</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>AI slop is everywhere: <a href="https://www.niemanlab.org/2024/04/from-shrimp-jesus-to-fake-self-portraits-ai-generated-images-have-become-the-latest-form-of-social-media-spam/">Shrimp Jesus</a>, bunnies hopping on a trampoline, hyperreal images of humans with extra fingers or impossible anatomy. But some creative works generated by bots seem to genuinely please human audiences. An AI ’70s-style psychedelic rock band called The Velvet Sundown amassed more than 1 million monthly listeners on Spotify in 2025, surpassing traditional popularity metrics. One AI-generated painting co-produced by an artist named Jason Allen called “Théâtre D’opéra Spatial,” which depicts a grand, surreal futuristic scene in ethereal light, won first place at the 2022 Colorado State Fair.</p>
+<p>AI has also outperformed humans on certain standardized tests of verbal creativity. These and other small successes have prompted plenty of angst: Will AI replace humans in the creative arts? Can we tell the difference between AI and human art? And <a href="https://nautil.us/is-ai-art-really-art-245829">is it even art</a> if humans aren’t making it?  </p>
+<p>But another question has recently emerged in the research, as well: Is the AI playing a genuinely creative role in these pursuits? Some studies show generative AI models actually perform poorly at creating original or novel images, especially when deprived of any significant input from a human. To further test this idea, a team of scientists recently decided to compare the creativity of works created by four groups: human visual artists; non-artists from the general population; generative AI without any human support; and generative AI with human guidance. They gave each group an abstract stimuli and asked them to create a drawing, then graded the output. The drawings were assessed based on whether they were pleasing to the judge, as well as on their vividness, originality, aesthetics, and curiosity.  </p>
+<p>The results, <a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202524142">published</a> in <em>Advanced Science</em>, were clear: The visual artists consistently received the highest score for creativity, followed by the general population, the human-guided AI model, and by a wide margin, the unguided AI model.  </p>
+<p>I spoke with study author Silvia Rondini, a cognitive scientist at the University of Barcelona with a background in modern languages and literature, about the definition of creativity, the differences between verbal creativity and visual creativity, whether the findings suggest that AI has the capacity for true creativity, and her favorite poem.</p>
+<p><strong>In your paper, you define creativity as a process that leads to the production of something both novel and useful. Where does that definition come from?</strong></p>
+<p>That’s the definition of creativity that we adopt in cognitive science. It was developed originally by J.P. Guilford, a creativity scholar. But this definition is still under discussion.</p>
+<p><strong>What parts of it are under discussion?</strong></p>
+<p>Critics argue that it tends to focus more on the products of creativity, rather than the process or the individual at the core of this creative process. But these other dimensions are harder to break into components and to observe. Guilford’s definition is useful in research because it allows you to quantify the results. You can look at and observe an object—whether it’s a verbal or a visual one.</p>
+<p><strong>Researchers have repeatedly found that AI outperforms humans on verbal creativity, as well as a measure of creativity known as divergent thinking. What do we know about why that is?</strong></p>
+<p>A lot of cognitive science research has tested LLMs specifically in divergent thinking, which prioritizes breadth of ideas and unexpected associations. Tasks that measure verbal creativity often focus on this type of divergent thinking. The hypothesis that we laid out in the paper to explain why LLMs might be so good at divergent thinking tasks is that it might just boil down to computational power and the size of the training dataset. Because again, divergent thinking tasks are usually evaluated based on fluency, flexibility, and elaboration, but less so on originality. The main measures are how many ideas are produced, how elaborate these ideas are, and how semantically distant the ideas are. How novel they are is just a small component.</p>
+<p>All of these characteristics are immensely helped by the fact that these LLMs are so powerful compared to humans. It’s much more costly for us to come up with a lot of ideas that are semantically distant from one another. The datasets used to train these LLMs are massive. It’s unthinkable for us humans to compare to it.</p>
+<p><strong>Read more: “<a href="https://nautil.us/is-ai-art-really-art-245829">Is AI Art Really Art?</a>”</strong></p>
+<p><strong>Does the quantity of information a person may have stored in their memory play any role in human creativity?</strong></p>
+<p>Actually, one of the things that makes us so different from LLMs is our generalization abilities. Humans have minds that are adaptive and flexible enough that we don’t need to be exposed to a million novel ideas to be able to create something new. So having less information isn’t necessarily something that inhibits our creative process, but it’s something that LLMs do need because they don’t have this intrinsic flexibility that we do.</p>
+<p><strong>Your main finding was that there’s a huge gap between the creativity of human visual artists and unaided AI models when it comes to creativity, but that AI guided by humans is almost on par with the average, ordinary human. What do you make of that finding?</strong></p>
+<p>All of this research has come out recently talking about how creative LLMs are, how good they’re doing, how they’re taking over the creative field, right? As we know, all these writers and artists have been protesting generative models. So something that we wanted to look at in this study was, “Okay, they can create images, they can create beautiful paintings, but what about the actual agency? How independent are they in this creative process?” Because we don’t want to conflate technical abilities with actual creativity. They’re not the same thing.  </p>
+<p>What our results showed, interestingly for us, was that yes, when we have a human idea introduced in the prompt, as with the guided AI, we do manage to get results that are comparable to the general population, which was one of our study groups. But then the real difference is when we leave the models to “think for themselves.” We don’t give them an idea. We just give them a very basic prompt to stimulate their “imaginations,” a very abstract stimulus with very little content. That’s where they struggle.</p>
+<p>The point that we were able to make and to observe was that yes, they have the potential to simulate when we guide them and when we give them ideas. But when they’re left by themselves, there’s really no autonomous imagination process that’s taking place—not at the present at least.</p>
+<p><strong>We often hear that rules can be liberating for creative artists. For example, Piet Mondrian limited himself to primary colors and right angles. Or some poets deliberately follow the rules of a sonnet or a haiku to spark invention. Is there any parallel there between the constraints of a prompt and these kinds of formal artistic constraints?</strong></p>
+<p>That’s an interesting parallel. As we mention in our paper, scholars believe humans have a tendency toward creativity because we evolved in complex environments. We had to adapt and come up with novel ideas that would help us survive. But these conditions aren’t present in generative AI. They base their functioning on statistical combinations of what they’ve already learned.</p>
+<p><strong>Do your findings suggest that LLMs will never reach human levels of creativity on their own, or is this something that just hasn’t happened yet?</strong></p>
+<p>For the moment, that’s our thought for the kinds of models that we have right now, LLMs, or diffusion models, which is generative AI that creates high quality images, videos, and data. For us, creativity is a process that happens between an agent and the environment. The models that we have at present aren’t having a conscious experience, an autonomous embodied experience of what’s happening. But there are a lot of researchers developing models that mimic neurological functions, that try to basically mimic embodied responses that a human would have. It’s a possibility that might happen in the future.</p>
+<p><strong>You suggest that AI outperforms humans on measures of verbal creativity but not visual creativity because the latter relies on embodied perception, cultural context, memory, and open-ended engagement. That surprised me because I assumed these elements would be central to verbal creativity as well.</strong></p>
+<p>When it comes to verbal creativity in humans, all of those things would be a part of the creative process as well. Because there’s nothing in humans that isn’t embodied, that isn’t based in memory. It’s just how we are. But when it comes to LLMs or generative AI, these aspects aren’t fundamental to using language because the way LLMs learn language for training is by learning the statistical probability of one word following the previous word. With a huge amount of data, they learn to mimic human language. That’s not how we learn language. That’s not how we use language. So that’s not how we use language creatively. For us, it’s a lifelong process of using language in reality.</p>
+<p><strong>Read more: “<a href="https://nautil.us/picassos-got-nothing-on-ai-artists-237633">I Am Not a Machine. Yes You Are.</a>”</strong></p>
+<p><strong>But why is it so different then for visual creativity? How is the training different?</strong></p>
+<p>I think it’s because verbal creativity tasks are mostly directed at the amount of ideas that are generated. The originality of the ideas is a small component. Images are much more complex to render in these kinds of models. In the case of this study, when we show them an abstract stimulus with no information, no semantic content, and ask them to draw from the stimulus, there’s no semantic anchor they can use to skip to a new idea or use as a base to create something more complex. Because what they’re seeing is two lines, a dot, or a semicircle, and they’re just not made to make sense of things that have no content. That’s how we interpreted it.</p>
+<p><strong>You mentioned earlier that there are efforts underway to make AI more embodied and more like the human brain. How far along are those efforts?</strong></p>
+<p>It’s just the beginning. These new types of neural AI, as they’re being called, are at a more theoretical stage, in the sense that it’s only really being discussed whether adding measures of embodiment or measures of emotional appraisal in the stimuli can actually lead to more human-like cognition. So far, the current generative AI models that we have are built from ideas of computational cognition, where we can render human intelligence through statistical relationships, essentially, and recreate thinking, recreate creativity, recreate memory, recreate language.</p>
+<p><strong>Was there anything in the findings that really surprised you?</strong></p>
+<p>I was quite surprised at how close the guided AI group was to the ordinary human performance in terms of the art it created and the rating of the images. I would’ve liked to see more of a gap to make a full statement that they’re not creative. But it was interesting to see that when we guide them, they’re able to mimic us pretty well.</p>
+<p><strong>What do you think the risk is if AI does achieve levels of creativity on par with that of humans?</strong></p>
+<p>At the societal level, I don’t know, but at the individual level, there is so much pleasure that comes from creativity for us humans, whether through doing it or experiencing it, that it would be a sad future if we stopped creating and left creativity to the machines. That’s part of why the original definition of creativity as something both novel and useful is interesting but limiting. If we see creativity as something useful, we forget about the fact that humans like to create. We’re inherently creative beings. It’s a part of us that I don’t think could or should ever die off.  There are a lot of studies that look at how humans perceive AI-generated art. And there is this almost unilateral response from humans. When people are told something was made by an AI, they already don’t like it.</p>
+<p><strong>Are there any questions about AI and human creativity right now that you’re really excited to explore?</strong></p>
+<p>I’m in the cognition and brain plasticity unitat the University of Barcelona, and we’re now continuing with this project, studying imagination, creativity, and pleasure. We want to evaluate whether creativity is more than novelty and utility, whether it’s about rewards. We want to look at the process and the agent in the creative process, and what the phenomenology of it is like instead of just focusing on the output.</p>
+<p><strong>Do you consider yourself a creative person?</strong></p>
+<p>I come from the humanities. I studied literature mostly and then went into cognitive science later on. I still like writing creatively and writing poetry, and I do find science an interesting environment for creativity, because again, you have this set of problems that you have to adapt to dynamically. I try to keep my artistic side alive and also be a scientist.</p>
+<p><strong>Do you have a favorite poem?</strong></p>
+<p>One of my favorite poems from a very long time ago is by Ezra Pound, titled <a href="https://allpoetry.com/A-Girl">“A Girl</a>.” It’s a very short poem. It has very beautiful imagery in it. Pound was one of the first English poets that I read. It still impacts me every time I read it.</p>
+<p><strong>Are there any creative works by AI that have impressed you?</strong></p>
+<p>There are definitely works I’ve enjoyed by artists who use stable diffusion models, for example, or other image generation models. But I wouldn’t say that they’re “made by AI” because there’s a person using that tool, right? It’s not the AI in itself doing anything. I do think they’re amazing tools. They enable creative minds to actualize creative products. So there’s a lot of “AI art” that I do enjoy. But it’s still human art. <img alt="" src="../images/nautilus-favicon-14_233.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: lembergvector / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

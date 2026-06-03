@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Speed Camera for the Universe | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>A Speed Camera for the Universe</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NRUB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The universe is enormous. By the time you finish reading this sentence, it will be even more enormous.</p>
+<p>That’s because the universe is expanding—but not everything is expanding at the same rate. The farther away things are, the faster they’re moving away from us. For every megaparsec (around 3.3 million light-years) of distance from our vantage point, this rate of expansion increases by around 45 miles per second. This rate is known as “Hubble’s Constant,” named after the astronomer Edwin Hubble of space telescope fame, who discovered it in 1929.</p>
+<p>Now, astronomers from the University of Tokyo have developed a novel method called “time-delay cosmography” to get a more accurate measure of the Hubble Constant, publishing their <a href="http://doi.org/10.1051/0004-6361/202555801">findings</a> in <em>Astronomy &amp; Astrophysics</em>.</p>
+<p>Traditionally, the Hubble Constant has been recorded using “distance ladders.” Astronomers pick a relatively close and familiar cosmic entity—a supernova or star—and observe it, then pick one farther away and observe that, and so on, to measure the rate at which they’re traveling away from us.</p>
+<p><img alt="" src="../images/a0oD0pvx-Currie_BREAKER.png" /></p>
+<p><strong>COSMIC DISTORTION:</strong> Eight artificially colored time-delay gravitational lens systems. Each depiction features a massive galaxy in the center, and the surrounding bright spots are images of quasars lensed around the galaxy. <em>Images by TDCOSMO Collaboration et al.</em></p>
+<p>Meanwhile, time-delay cosmography relies on the gravitational lensing of massive objects in space to determine the Hubble Constant. In this method, scientists use a huge galaxy to act as a lens. Super bright objects beyond this galaxy called quasars look distorted because gravity deflects their light. Changes in these distorted images allowed the researchers to measure the difference in time that light from the objects took to reach them.</p>
+<p>Using this clever methodology, the authors arrived at a value for the expansion rate consistent with the Hubble Constant. This could help solve a major cosmic kerfuffle.</p>
+<p>When astronomers measure this rate of expansion using space telescopes (like the one named after Edwin Hubble), they get one number—around 45 miles/second/megaparsec; when they use another method, measuring the cosmic background radiation generated during the early universe, they get a different, smaller number—around 42 miles/second/megaparsec. This discrepancy is called the “Hubble Tension,” and it has attracted much debate about whether it was due to experimental error, or the actual physics of the universe.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/how-much-more-can-we-learn-about-the-universe-236083/"><strong>How Much More Can We Learn About the Universe?</strong></a><strong>”</strong></p>
+<p>“Our measurement of the Hubble constant is more consistent with other current-day observations and less consistent with early-universe measurements,” study co-author and University of Tokyo astronomer Kenneth Wong said in a <a href="https://www.u-tokyo.ac.jp/focus/en/press/z0508_00434.html">statement</a>. “This is evidence that the Hubble tension may indeed arise from real physics and not just some unknown source of error in the various methods.”</p>
+<p>Still, the team stressed that they’ll need to further refine their time-delay cosmography method to get more precise results. Its current precision is at about 4.5 percent, but it would need to reach a precision of around 1 to 2 percent “to really nail down the Hubble constant to a level that would definitively confirm the Hubble tension,” said study co-author Eric Paic, also at the University of Tokyo, in the statement.</p>
+<p>The only real constant in astrophysics? More research is needed. <img alt="" src="../images/nautilus-favicon-14_700.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: ESA/Hubble &amp; NASA, C. Murray, J. Maíz Apellániz</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

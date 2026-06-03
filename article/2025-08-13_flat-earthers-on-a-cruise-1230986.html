@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flat Earthers on a Cruise | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Flat Earthers on a Cruise</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-13
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7P5V</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We have long regarded humans as the most rational of animals. But as polymath <a href="https://nautil.us/the-case-for-professors-of-stupidity-237317/">Bertrand Russell</a> noted, we spend our lives looking for evidence of that claim and find little. On the contrary, we find far more convincing evidence of our tendency toward self-deception. We blame others for our mistakes, rationalize after the fact, and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2663910/">make impulsive choices</a> even when patience would yield better rewards.</p>
+<p>Some behavioral imperfections appear uniquely human. One is what the evolutionist <a href="https://nautil.us/how-discovering-an-equation-for-altruism-cost-george-price-everything-236658/">Bill Hamilton</a> referred to as the nonadaptive strategy of malevolence: harming others with no form of benefit for oneself. Or, in other words, a version of economic historian Carlo M. Cipolla’s third fundamental law of human stupidity, which goes like this: A stupid person is someone who causes losses to others while he receives no advantage and may even experience losses. After all, only humans insult strangers online or back incompetent leaders out of blind loyalty. Much of the damage we do isn’t criminal, but born of sloppiness, ignorance, and sloth.</p>
+<p>Though we behave like know-it-alls, we are easily manipulated and taken in by charlatans of all kinds. We prefer a product that is 80 percent lean to one that is 20 percent fat, and an unnecessary item that costs $9.99 seems cheaper than one that costs $10. We are willing to get into our cars, stand in lines for hours, and squish into horrendous shopping centers to save a pittance on a special offer for snacks dripping with sugar and fat.</p>
+<blockquote>
+<p><em>Homo sapiens</em> is brilliant in calculation yet profoundly limited in foresight.</p>
+</blockquote>
+<p>All of these behaviors illustrate our evolutionary inertia. We are descended from animals that had to make fast decisions—about food, threats, and reproduction. There was no time for deliberation; quick but flawed judgment meant survival. Thus, irrationality, or at least a limited and pragmatic rationality, has made it possible for us to survive (which does not implicitly mean that it is justified today). This compromise between speed and accuracy generates a cascade of imperfections and snap judgments.</p>
+<p>As psychologist Gerd Gigerenzer argues, from our evolutionary past, we have inherited an adaptive, contextual form of reasoning that is neither logical nor probabilistic, but good enough to keep us alive. We’re wired to scan for threats, anticipate others’ behavior, and infer meaning, even when none exists. This explains why we tend to attribute cause-and-effect relationships between totally unrelated phenomena, such as stepping under a ladder and failing an exam, and draw broad conclusions from anecdotes. A great deal of the data from developmental psychology, anthropology, and neuroscience <a href="https://www.nejm.org/doi/full/10.1056/NEJM200409233511326">confirms that</a>, for adaptive reasons that no longer exist, our minds have evolved a strong tendency to distinguish between inert entities, such as physical objects, and entities of a psychological nature, like animate agents.</p>
+<p>We thus are dualists and animists by nature. As a result, we attribute purposes and intentions to things, even when none exist, and imagine hidden motives and conspiracies where there are none. For us, stories always have a purpose, which can be evident or hidden.</p>
+<p>We are, in short, belief machines, and we manufacture a lot of those beliefs. And when belief comforts us or helps us make sense of a chaotic world, we cling to it, no matter how irrational. We’re even willing to endure ridicule, as in the case of flat-earthers who set out on a cruise to reach the ends of the Earth. They never reached it, but afterward, <a href="https://www.denverpost.com/2025/01/17/flat-earth-final-experiment-antarctica-will-duffy/">many found ways to explain why</a>.</p>
+<p>A clear sign of our brain’s flaws is that we often make mistakes even when we know we’re making them. We know perfectly well that we are wrong—or at least, we have all the intellectual and factual tools to understand—but we do it anyway, because admitting it would force us to change. This isn’t just about emotions overruling reason, as they have since the dawn of time. That’s only part of the story.</p>
+<blockquote>
+<p>When we should use our head, we often react instinctively.</p>
+</blockquote>
+<p>There is a deeper evolutionary logic that explains the countless manifestations of human irrationality. Insincerity, the narcissism of gurus, and obscurantism may aggravate it, but they don’t explain it. At the core is a paradoxical defect—an imperfection that helped us survive. Research shows that our brains process thoughts and decisions using two distinct, though interconnected, systems.</p>
+<p>Put simply, the first system is old in evolutionary terms and governs quick, automatic responses—whether in routine or emergency situations—and is primarily connected to the amygdala, cerebellum, and basal ganglia. The second system, primarily connected to the prefrontal cortex, is a relatively recent evolutionary development. It governs our most deliberate actions, those that result from careful and slow evaluation of contextual information. We could call it the logical reasoning system, as it handles the careful analysis of concepts, generalizations, principles, and abstractions.</p>
+<p>Neither system is necessarily more rational or emotional than the other. Both have played a fundamental role in our evolution: first, by providing us with instantaneous evaluations based on experience, which is preferable when the decision has to be taken immediately or is based on a large number of different variables; and second, by offering us the wonders of science and any choice based on reasoned arguments, especially when we are faced with a new problem. We should not consider one to be irrational and the other rational, because reacting instinctively in certain situations is often the most rational choice. At the same time, however, both can cause us to make enormous mistakes because our actions are frequently generated from an improvised middle ground between the two systems.</p>
+<p>In fact, neither has definitive control over the other, and the mutual interferences between intuitions and reflections are about as imperfect as it is possible to imagine for a self-proclaimed “sapiens” mammal. One tries to control the other, while the other tries to condition it. The deliberative system is, in any case, based on data provided by the reflex system, which is not always reliable. When we are greatly fatigued or overloaded with work and stress, we need to count on its reliability, but instead, it gets bogged down in thousands of cumbersome procedures and misfires, and we can be easily manipulated by those who can cleverly exploit the weaknesses of the reflex system. In other words, when we should use our head, we often react instinctively, and vice versa.</p>
+<p>So we must look for perfection elsewhere, perhaps in our “superior” human faculties. What about our memory? Unfortunately, it too is good at spotting patterns, but is short, selective, and unreliable. We reinterpret, misplace, and forget details, especially online, where repeated exposure to a claim <a href="https://thedecisionlab.com/biases/illusory-truth-effect">makes it feel true</a>. This makes us vulnerable to misinformation and ensures we repeat both personal and collective mistakes.</p>
+<p>This is why the decisions we are making today, whose consequences will affect future generations, are unfortunately not a gift left to us by nature. We have to learn to make decisions through education and culture. Evolution favors the present moment, as survival once depended on seizing immediate opportunities. As a result, we lack true foresight—something many recognize when, for example, they delay starting a diet despite knowing they should.</p>
+<p><em>Homo sapiens</em> is brilliant in calculation, curiosity, and technological innovation, yet profoundly limited in foresight, reasoning, and social judgment. At our core remains that imperfection that Holocaust survivor and writer Primo Levi saw nesting in human nature. People are not beasts, wrote Levi in <em>The Drowned and the Saved</em>; they become so in certain conditions and contexts that reduce them to following their basic instincts. We inherit a dual nature, where culture and experience guide us toward better or worse outcomes, underscoring the need for constant ethical vigilance.</p>
+<p>Levi saw technical and narrative invention as forms of tinkering, building on existing materials and constraints, just like evolution itself. For Levi, humanity is capable of both sublime achievement and unimaginable horror. In his appendix to <em>If This Is a Man</em>, he writes that the extermination camps are nonhuman, even counter-human inventions. But there can be no return to Arcadia; we must forge ahead as our own blacksmiths. The only true antidote to falling back into “inhumanism,” according to Levi, is critical and self-critical rationalism. Not a perfect logic, but a skeptical and methodical approach, whose first lesson is simple: Distrust all the prophets that manipulate the imperfections of the human mind. <img alt="" src="../images/nautilus-favicon-14_1020.png" /></p>
+<p><em>This article is excerpted from</em> Imperfect: A Natural History<em>, by Telmo Pievani and is reprinted here with permission from</em> <a href="https://thereader.mitpress.mit.edu/why-human-irrationality-is-evolutionary-not-accidental/"><em>MIT Press Reader</em></a><em>.</em></p>
+<p><em>Lead image: Tasnuva Elahi; with images by Max Filitov and Sudowoodo / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

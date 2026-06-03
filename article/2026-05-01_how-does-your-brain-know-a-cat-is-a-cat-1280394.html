@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does Your Brain Know a Cat Is a Cat? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Does Your Brain Know a Cat Is a Cat?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-01
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-L69S</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>What is a cat, and how do we know when we’ve encountered one?</p>
+<p>This question may be harder to answer than it seems. Neuroscientists Lisa Feldman Barrett and Earl Miller say people typically think about categories such as cat and apple backward—bottom-up instead of top-down.</p>
+<p>In reality, you don’t hear a meow, and see whiskers and paws and <em>then</em> conclude, “Cat!” Before any of this happens, your brain has sent signals about a “cat hypothesis”—and a plan for how to respond to a cat—to your body, based on past experience, Barrett and Miller say. This cat hypothesis, in turn, actively orchestrates what signals your body processes and how. In other words, the brain constructs classifications on the fly, and we’re not even conscious this is happening until after the fact.</p>
+<p>Barrett, a renowned neuroscientist and psychologist at Northeastern University* who has <a href="https://nautil.us/emotional-intelligence-needs-a-rewrite-236720">written</a> for <a href="https://nautil.us/that-is-not-how-your-brain-works-238138"><em>Nautilus</em></a>, teamed up with Miller to review “converging” evidence from a wide range of disciplines: neuroanatomy, electrophysiology, brain imaging, and cognitive science. The pair published their <a href="https://www.nature.com/articles/s41583-026-01036-2">results</a> recently in <em>Nature Reviews: Neuroscience</em>.</p>
+<p>Their new theory of categories has a lot in common with Barrett’s <a href="https://academic.oup.com/scan/article-pdf/doi/10.1093/scan/nsw154/27103603/nsw154.pdf?__cf_chl_tk=jIwCR8i4MzY94qthk2ZX2IddgxMNhiNHDAhuYXfbLlQ-1777575816-1.0.1.1-gHcHPz2WeG.qwD36npE2ggLEzOAOrgtg3t1NuThaCBA">theory of constructed emotion</a>, for which she is best known. She argues that emotions aren’t hardwired universal reactions, but are instead predictions constructed rapidly and in the moment from internal bodily sensations, past experiences, and cultural context. While her work on emotions has been highly influential, it remains an active subject of debate in the field of psychology.</p>
+<p>I spoke with Barrett and Miller about what they call “folk psychology,” and how their theory of categorization relates to so-called beginner’s mind, human bias, and objectivity and mental illness. We also talked about Nobel Laureate Daniel Kahneman’s modes of <a href="https://repository.chds.hsph.harvard.edu/repository/collection/resource-pack-books-on-decision-making-and-thinkin/resource/2767/">thinking fast and slow</a>.</p>
+<p><strong>Why have we been thinking about categorization wrong?</strong></p>
+<p><strong>Lisa Feldman Barrett:</strong> The important thing to understand is that in every field of science—physics, chemistry, biology, psychology, neuroscience—scientists start with their own subjective experiences, and then they go looking for those experiences in the brains and bodies of humans and other animals. And our experience of what happens is that we detect things in the world. We process them in some way. And then we develop a representation of what’s going on, and we compare that to categories that we retrieve, like files from file drawers. It feels like we react to things in the world. But that’s really not what’s happening under the hood.</p>
+<p><strong>Earl Miller:</strong> Brains are really good at deluding themselves. And consciousness is often the story our brain makes up to explain what it just did. We tend to approach everything in terms of folk psychology: “Oh, this is my impression of how it works.” But our impressions are often wrong.</p>
+<p><strong>Barrett:</strong> That’s exactly right. And experiments are designed with those subjective experiences, with that folk psychology, in mind. In categorization studies, they’ll give subjects a bunch of objects or images to sort into categories as if the categories already exist in the world. And we believe that’s not really what’s happening. We drew evidence from a number of different literatures that don’t necessarily talk to each other that all provide different forms of evidence that brains predict. They don’t react to things. The brain runs a model of the sensory surfaces of the body, which is how it knows the world, and this model is directing everything from the start. It’s not like you sense and then you categorize. You construct a category, and then you sense.</p>
+<p><strong>Miller:</strong> It really can’t work any other way, because it takes about half a second for your consciousness to recognize what just happened. Your consciousness is acting very much in the past. It’s way too slow for anything in the real world. Brains have to anticipate and predict. They can’t just react.</p>
+<p><strong>Barrett:</strong> The example I always use is professional baseball. If a batter had to wait to consciously see the ball and then process it and plan an action, they’d miss the ball every single time.</p>
+<p><strong>Does the way the brain forms categories shift at all in novel situations? Lisa, you were just in Japan, and you’d never been before. Is there anything different about how the process works when so much of what you’re experiencing is unfamiliar?</strong></p>
+<p><strong>Barrett:</strong> No, nothing is different. There are two reasons why. One is that when the brain is constructing a category or a set of predictions in a given moment, it’s remembering the ways in which the past is similar to the present. It’s not actually remembering specific episodes, it’s remembering bits and pieces of the past that it can use to construct a set of predictions about what it’s encountering, even if those things are different from anything it’s ever encountered before. This is what cognitive scientists call conceptual combination. This is how you know what Medusa is, even though you’ve never actually encountered a Medusa, but you know what snakes are, you know what a monster is.</p>
+<p>The second thing is that when your brain makes a set of predictions about the world, it’s receiving incoming signals, it’s processing, it’s compressing. But if it’s encountering signals it didn’t predict, or if signals it did predict are missing, it has the capacity to update its predictions. This is what we call controlled processing in psychology, as opposed to automatic processing. Earl’s lab has produced an amazing finding of how this actually might work: When incoming sensory signals match the prediction, the brain cancels those signals, because there’s no new information there. It inhibits them.</p>
+<p><strong>Miller:</strong> Your brain has a limited amount of resources. It can’t process everything that’s coming in. So your brain’s making predictions, and any signal that’s expected isn’t interesting or informative.</p>
+<p><strong>Read more: “<a href="https://nautil.us/that-is-not-how-your-brain-works-238138">That Is Not How Your Brain Works</a>”</strong></p>
+<p><strong>How does this understanding of how the brain works relate to beginner’s mind, where people cultivate an approach to everything that makes it seem fresh and new. I know artists often try to deliberately see things in novel ways, even the familiar things.</strong></p>
+<p><strong>Barrett:</strong> In mindfulness meditation, the ideal situation is to suspend categorization. It’s not possible to do this completely, because if you did, you’d be experientially blind. But what you can do is decide to categorize differently, using finer gradations of detail. For example, you can look at this bottle, and instead of seeing a three-dimensional object, you can see two-dimensional patches of light. That’s what painters do. They’re categorizing now with lots of little details instead of one compressed summary. Beginner’s mind is something similar. You’re not suspending categorization. What you’re doing is you’re categorizing differently.</p>
+<p><strong>Miller:</strong> You’re creating new predictions about familiar things.</p>
+<p><strong>Lisa, you’ve written about how language shapes emotion. Does it also shape the way our brain creates categories?</strong></p>
+<p><strong>Barrett:</strong> Yes, absolutely. Language and words are very powerful features of equivalence that the brain uses to learn and construct categories. This is true in little, 3-month-old babies. They don’t have general knowledge of the world, but they’re using the sounds to form a category. Earl’s lab has been at the forefront of collecting electrophysiological evidence that is the clearest example of that. Back in 2013, Earl first published on <a href="https://www.cell.com/neuron/fulltext/S0896-6273(24)00278-2#:~:text=In%20short%2C%20mixed%20selectivity%20gives,a%20range%20of%20independent%20inputs.">mixed selectivity</a>. [That work showed that single neurons in the brain, especially in the prefrontal cortex, don’t have fixed jobs. Instead, they respond to multiple, often unrelated, task-relevant variables—which would make more sense for a brain that constructs categories on the fly rather than retrieving fixed ones.] Since then, I’ve been reading Earl’s papers, and I’ve been taken by the cleverness and also the broadness of Earl’s thinking. Because if you don’t mind me just saying this, Earl, you have a beginner’s mind when it comes to data. I came to him and said, “You know, this is my idea. What do you think about this?” And he was like, “I have these ideas, too.” It turned out that we had been in our own little worlds working on very similar ideas.</p>
+<p>Folk psychology is a real problem in the study of emotion. For many decades, scientists who study emotion have been looking for these prototypes, a diagnostic pattern for anger, sadness, and fear, as if these were universals. But every study that’s ever been run and carefully analyzed to find that physical fingerprint, can’t find it. In a moment of anger, you don’t always scowl. In fact, people in the west only <a href="https://clbb.mgh.harvard.edu/do-not-rely-on-facial-expressions-for-how-people-are-feeling/">scowl</a> 35 percent of the time when they’re expressing anger. The other 65 percent of the time people are doing something else with their face. A scowl isn’t the universal expression of anger.</p>
+<p>To get around these folk categories for emotion, I decided to instead start with the brain. How is the brain structured? How does it function? How did it evolve? How does it develop from an embryo? This is what led me to what I called the <a href="https://academic.oup.com/scan/article-pdf/doi/10.1093/scan/nsw154/27103603/nsw154.pdf?__cf_chl_tk=jIwCR8i4MzY94qthk2ZX2IddgxMNhiNHDAhuYXfbLlQ-1777575816-1.0.1.1-gHcHPz2WeG.qwD36npE2ggLEzOAOrgtg3t1NuThaCBA">theory of constructed emotion</a>. At a certain point, I realized this isn’t just about emotion. This is how the brain works. This is how a brain constructs a mind.</p>
+<p><strong>Miller:</strong> The problem is that Darwin started it. Darwin wrote about how, “Well, if we’re seeing behaviors in animals that are like what we’re experiencing, they must be having the same conscious experience we have.” But it’s all just construction. You don’t run away from the bear because you feel scared. You run away from the bear, and then you feel scared. If you had to wait until you felt scared, you’d be eaten every single time.These conscious reconstructions of emotions are for creating episodic memories, for future planning. But in the moment, you’re behaving, your consciousness is catching up afterward.</p>
+<p><strong>Barrett:</strong> That’s exactly right. That is actually how it works. If you look at what the brain is doing, the first set of signals are visceral motor signals, signals to control the internal organs of the body that support the skeletal motor movements. You’ve got an axon in the cerebral cortex projecting action plans to the skeletal muscles of the body, and then collateral axons off that main axon sends signals to the sensory parts of the brain. These are predictions about the sensory consequences of those movements. Action planning first, experience after.</p>
+<p><strong>Do Nobel Laureate Daniel Kahneman’s modes of thinking fast and slow have any relationship to how we form categories in the brain?</strong></p>
+<p><strong>Barrett:</strong> Kahneman was super clear that he didn’t think the brain had one biological system for thinking fast and another biological system for thinking slow. He was really clear about that at the beginning of his <a href="https://us.macmillan.com/books/9780374533557/thinkingfastandslow/">book</a>. And everybody who’s written about it since then has completely ignored it. What I’d say is thinking fast is when your brain is predicting well, and the signals are anticipated and everything’s running like clockwork. Thinking slow is when there’s a prediction error and the brain has to adjust.</p>
+<p>He talks about how when you’re thinking fast, you have feelings. When you think slow, you don’t, because it’s more deliberative. But that’s not really correct. You always have feelings. Your brain is always sending signals to your body for motor control, even when you’re sleeping.</p>
+<p>Scientists sometimes get this wrong. They’ll say, “But when you’re sleeping, there’s no communication.” Or: “When you’re in a resting state in a scanner, the brain’s not doing anything.” But yes, it is, it’s attached to your body. It’s always receiving signals from your body and sending signals to your body. You aren’t wired to be able to detect those specific signals. Instead, what your brain does is create a low dimensional set of features that we call affect or mood. So when everything’s going well, you feel pleasant. And when things aren’t going well, when there’s some metabolic inefficiency or there’s a lot of prediction error, you’re feeling unpleasant or distressed. The brain isn’t always telling itself a story about the meaning of those feelings, which is emotion. But those feelings are always there—whether you’re processing fast or whether you’re processing slow. When you’re thinking fast, they often are more in the forefront of attention.</p>
+<p><strong>What does your theory of how categories precede perception tell us about the nature of objectivity and bias?</strong></p>
+<p><strong>Miller:</strong> It tells us a lot about bias. And it doesn’t speak well for objectivity. Just look at eyewitness testimony. Six people see the same accident, and you’ll get six different stories about what happened. Have you ever seen the movie <em>Rashomon</em>? That’s a great example of this, where two Samurai are fighting the field, and the whole movie is about the four conflicting stories that different people have about what happened. That’s our brain generating these constant hypotheses and checking in with the outside world to see if we’re right or wrong.</p>
+<p><strong>Barrett:</strong> To build on what Earl said, the notion of objectivity has changed its meaning from the first glimmers of the scientific revolution. At the beginning of the scientific revolution, a couple hundred years ago, philosophers like Immanuel Kant were aware of the fact that humans can only know the world through pre-conceived categories. They can’t escape those categories. This is the notion of the conceptual veil that you can’t see through. So the definition at that point of objectivity was to reduce your bias as much as possible. That was it.</p>
+<p>In the 19th century, though, scientists got the idea that technology would somehow allow us to get beyond our veil and see the objective world as it actually is. This is a conceit that’s incorrect. It’s premised on a notion that there’s an objective world out there separate from us, and if you use math, if you use cameras, if you use technology, you can get closer to that actual objective truth out there. But to get closer to objective truth, the best you can do is interact with people who have different categories than you do and different assumptions than you.</p>
+<p>From a philosophy of science standpoint, what stands in for objectivity is consensus in a diverse group of people who are being self-critical. In a self-critical dialogue, if you can come to consensus over what the evidence means, you’re further ahead at creating justified knowledge. It sets aside the idea that there is truth with a capital T.</p>
+<p>Taken to its logical conclusion, this position suggests that there’s no reality. But that’s not what we’re talking about here. We believe that reality exists, but it’s perspectival. We’re involved in the patterns that make up reality. They don’t exist independent of us.</p>
+<p><strong>Read more: “<a href="https://nautil.us/emotional-intelligence-needs-a-rewrite-236720">Emotional Intelligence Needs a Rewrite</a>”</strong></p>
+<p><strong>In this paper, you describe depression as a reliance on overly abstract categories and autism as insufficient compression of categories. Would you suggest that mental illness is largely a problem of categorization?</strong></p>
+<p><strong>Barrett:</strong> We’re not reducing everything to this framework, right? But it is the case that any time you have overgeneralization, probably what’s happening is that the features of equivalence that the brain is using are too broad. How many instances of threat have you experienced, heard about, or read about in your lifetime? Thousands probably. So that means that potentially the category the brain is making for threat is very large. The number of action plans that it’s assembling and that the incoming signals will have to choose from is large. That’s very expensive. And often what happens in threatening situations is that the brain won’t even pay that much attention to the incoming signals. This is called context insensitivity, and you see it very much in depression, even in non-threatening situations. You see it in anxiety disorders, too, but it’s been studied very much in depression. It’s very metabolically problematic.</p>
+<p>On the other end, if the brain is using pieces of light all the time for every object it evaluates,what it’s doing is trying to remember an exact match. So there’s under generalization. And that, too, is problematic because it means that the incoming signals remain ambiguous in the absence of a clear prediction. There’s a lot of uncertainty, which is also metabolically expensive. So there’s a sweet spot, right? That sweet spot is probably a sweet range, and where that is, I don’t think we know, and it’s probably different for different people or in different situations.</p>
+<p>But, also, a new way of thinking about something doesn’t have to answer every single new question that it poses. Part of the utility of a new set of ideas is generativity. We can ask new questions that will get us closer to being able to provide an answer.</p>
+<p><strong>It seems that the way our brains categorize can really lead us astray, like with xenophobia or political polarization. What do you make of this problem?</strong></p>
+<p><strong>Barrett:</strong>  Let me just say this: Bias is inescapable.We have to get out of the habit of thinking that bias is necessarily bad. It can often be bad. But if you had no categories, if you were able to really suspend them, all you would hear would be static noise. Flashes of light. It would be William James’ blooming, buzzing confusion.</p>
+<p>The answer here is that you have to cultivate experiences for yourself, whether those experiences are in a laboratory, in the experiments that you design, or out in the real world, that help you to broaden your view of reality, which means making contact with other perspectives. Helen Lino, who’s a feminist philosopher of science, calls this transformative interrogation.</p>
+<p>The incentive structure of science makes transformative interrogation harder to do, but it’s doable. You have to be humble and curious and not allow your feeling of certainty about what is true serve as evidence</p>
+<p>What we have happening now in our political climate is a situation where people are not engaging in transformative interrogation. They’re doing what I’d call a sampling bias—selecting what to pay attention to in a way that will minimize prediction error. This is problematic in many, many ways.</p>
+<p><strong>What impact do you hope this work on categorization will have?</strong></p>
+<p><strong>Barrett:</strong> I’d really love psychology and neuroscience to finally give up folk psychology as a guiding principle. In order to do that, you have to realize you’re doing it in the first place, which is a tall ask for people. What I mean by that is, this view of categorization suggests how a brain functions to create a mind. The brain only knows the world, whatever that world is out there, through the signals of its own body. We can explain any theory of mind with this framework, we can explain how a single human brain plan can produce many kinds of minds. Not just minds with cognition, emotion, and motivation, but minds that don’t use those categories, that use another set of categories completely from different cultural contexts. My hope is that people will keep an open mind when they read this paper. It’s not the final word. I’m sure that as evidence progresses, things will have to be adjusted.</p>
+<p>There is a place for this discussion to also take on more current political issues. I do have thoughts about why people are behaving the way that they are, that are somewhat different from all the other kinds of explanations. But that’s a taller ask, because it’s full of inferences and conjecture. <img alt="" src="../images/nautilus-favicon-14_126.png" /></p>
+<p>*The original version of this article stated that Lisa Feldman Barrett is a Harvard University psychologist and neuroscientist. While Barrett has an appointment at Massachusetts General Hospital, she is a professor at Northeastern University.   </p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Yan / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

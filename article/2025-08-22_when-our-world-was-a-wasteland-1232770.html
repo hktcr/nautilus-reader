@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Our World Was a Wasteland - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When Our World Was a Wasteland - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-ZF3R</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Thirteen-hundred feet under Northern Ireland, Jason Hopps, the engineer and manager of the Kilroot mine, kills the lights of his rusted Land Rover to prove a point. It’s not just dark down here, it’s oblivion. Somewhere above us sheep mow fields of green, bedewed with the thick air of the Irish Sea. But down here in the massive catacombs, there is not a photon to spare. When he turns the lights back on, the world is salt. Pink, brown, translucent crystalline caverns, saline snowdrifts lining the walls.</p>
+<p>“It’s all salt. Salt floors, salt walls, salt ceilings.”</p>
+<p>Headlights on, we wind through some of the 40 miles of open tunnel, arranged like a city grid—one that has been slowly etched out of the bedrock over the past six decades, deep under the Carrickfergus countryside. Driving down the lightless salt boulevards of this lifeless salt neighborhood, we occasionally pass a salt cul-de-sac. At the far end of one, a lonely hydraulic scaler picks at the salt walls with outstretched drill bits, like a titanic praying mantis. Older parts of the mine are backfilled with ash from coal-fired power plants.</p>
+<p>When I tell Hopps I’m from Boston, he asks if I know the Mahoneys and then catches himself. “That’s probably a pretty common name there,” he laughs. The comment is jarring, reminding me that the living world still exists out there, and that we’re not on a mining outpost in deep space. We <em>are</em> in the Triassic Earth, though, deep in the cauterized, supercontinental wilderness of Pangaea—a landscape that was so hostile to life it might as well have been another planet.</p>
+<blockquote>
+<p>Much of tropical Pangaea was an incredibly hot, arid, and barren hellhole.</p>
+</blockquote>
+<p>This ancient palace of salt, the rubble of which one can find each winter scattered on the icy roads of London and New York City, is part of a vast stratigraphy of similar “evaporites” all over the Earth from the age of Pangaea—from Northern Ireland to North Dakota. In southern Kansas salt and gypsum crumble out of Martian-looking rocks, pointing to a tropical environment that had grown almost unimaginably inhospitable by the middle of the Permian.</p>
+<p>Just up the Northern Irish coast, in Larne Lough, the engineering company that built the <em>Titanic</em> eyes a similarly massive vein of Pangaean salt to excavate to store 17 billion cubic feet of natural gas—just as they do in the huge Permian salt caverns of Kansas. Salzburg, Austria, meanwhile, sells its Pangaean salt in upscale boutiques and as blocks upon which to cook steaks. Simply put, salt was all over the supercontinent. This was an ailing world, when Pangaea’s vast, interior was drying up, and covered not with rain-fed lakes and rivers and trees and life, but with ephemeral acidic playas crusted with gypsum and salt, evaporating seas, and stark red deserts unvisited by complex life. Everything was evaporating. It was aridity on a scale unlike anything else in the age of animals.</p>
+<p>Where there were once lush tropical rain forests and amphibian-stocked swamps, by the middle of the Permian (some 299 million to 252 million years ago), these had become what geologist Neil Tabor terms “the wastelands of tropical Pangaea”—a desolate, crimson hellscape with temperatures as high as 163 degrees Fahrenheit. If you found yourself marooned in this inferno and dying of thirst, the only succor was shallow, ephemeral lakes of acid, scattered over some 80,000 square miles of roasting wasteland. These unearthly playas were so caustic that some of them had <em>negative</em> pHs, an extreme phenomenon today only seen in industrial acid mine drainage.</p>
+<p>For tens of millions of years, in other words, much of tropical Pangaea was an incredibly hot, arid, and barren hellhole: a red desert dotted with extremely acid salt lakes and devoid of life. It was this giant arid interior that had major implications for the carbon cycle and for life on Earth.</p>
+<p>Over the long term, the climate state is primarily set by the give and take of outgassing volcanic CO2 on the one hand, and on the other, weathering rocks, which buries that CO2 as carbonate rock like limestone. If these sources and sinks were mismatched by as little as 5 percent from each other, then the biosphere would be destroyed in less than 5 million years, either by lethally high-CO2 heat or a zero-CO2 catastrophe.</p>
+<p>But somehow these sources and sinks have stayed almost miraculously balanced over the long run. Rock weathering provides Earth the thermostat that has (mostly) prevented it from veering off too far in either direction. But dropping into the middle of one of those vast, arid, and unearthly supercontinental interiors of Pangaea, you might notice something (besides the extraordinary heat). More precisely, something that’s missing: There is no weather.</p>
+<p>As long as we live on a plate-tectonic planet, volcanoes won’t ever stop, and they won’t stop venting CO2 to the atmosphere. These emissions are more or less steady—and thank goodness for that—even if they’re sometimes punctuated by especially prodigious volcanic belches that send the temperature soaring. When the planet has become flush with excess CO2, the global water cycle ramps up and the planet warms. And the more CO2-charged rainfall that drizzles on the rocks, chemically weathering them and carrying that carbon off in rivers and on into the ocean, the more of this former carbon dioxide from the air is stored in the ocean, transformed by life in carbonate shells and reefs, and buried on the seafloor, ultimately as limestone . . . and so CO2 levels eventually, over hundreds of thousands of years, fall again.</p>
+<blockquote>
+<p>Our oceans and atmosphere have been remade by life and by plate tectonics.</p>
+</blockquote>
+<p>But what if the weather never reaches those rocks? If CO2-laden rain never falls on the rocks, then there’s nothing for them to react with. And if the rocks don’t weather, and the CO2 isn’t ultimately sequestered, then there is no climate guardrail. The volcanic CO2 isn’t removed from the system, and it will continue to build and build in the atmosphere until disaster strikes. And when disaster does strike, and CO2 keeps rising, there is no lifeline.</p>
+<p>Once you’ve foreclosed huge areas of the Earth’s land surface to weathering by simply starving it of rainfall—as happened in Pangaea’s viciously arid interiors, hundreds of miles from the coast—then the lines of this emergency brake are effectively cut. Moreover, when you bunch all the land on Earth together in one place, as a simple matter of geometry, you reduce the amount of coastline on the planet, which means that you also shrink the expanse of shallow coastal seas into which you might have dumped all this extra carbon offshore, in the skeletons of reefs and in sediments, and sea creatures made of carbon. Then CO2, having nowhere else to go, climbs and climbs in the air as a result, and the world warms.</p>
+<p>What if the rainfall is not reaching the rocks, but there’s also nothing to weather down to begin with? The titanic mountains that were thrust up when Pangaea was being assembled were by then—tens of millions of years into the supercontinent’s lifespan—senescent, worn down, and unimpressive. Worse, virtually no new mountain ranges were being built up anywhere on the planet, and burying CO2 through rock weathering only works if the planet is continually providing fresh new rock to weather, by pushing it into the sky to erode.</p>
+<p>If you don’t push any new mountains into the sky to be weathered away, and the land that does exist has just been sitting there getting the shit kicked out of it for millions of years and becoming chemically inert, it stops weathering. The rocks of Pangaea had been weathered and weathered until they couldn’t weather anymore—shielded by an unreactive patina of exhausted soils. The old rocks were spent, and on this flattened super-continental world, the CO2 had nowhere to go but into the atmosphere, as this geological climate guardrail failed.</p>
+<p>As a result, Pangaea could barely handle the steady background emission of volcanic CO2 without overheating, much less a geohistoric jolt to the system. So when mind-bending volcanoes in what is now Siberia started issuing their reports from the northern wilderness, the planet was more than just doomed. Earth didn’t need much to push it over the edge to begin with, much less some of the most extensive volcanic eruptions in the last half-billion years. But perhaps the most deadly feedback to the carbon cycle in the age of Pangaea was due to something that hadn’t evolved yet.</p>
+<p>Today large parts of the seafloor are draped in chalky carbonate snowfall, the product of massive swirling eddies of planktonic life that pulse the seas green with the seasons, underwrite the oceanic food chain, and die in a marine snowfall that piles up on the seafloor at the rate of 200 megatons per year. These creatures build their shells from the carbonate in the ocean and bring that carbon with them to the bottom of the sea when they die (and eventually become limestone). When that seafloor is occasionally thrust above the surf and into view—as in the staggering white cliffs of Dover, England, which are made entirely from the carbonate-plated skeletons of phytoplankton—it provides a tiny peek at just how massively productive this carbon sink is.</p>
+<blockquote>
+<p>The rocks of Pangaea had been weathered and weathered until they couldn’t weather anymore.</p>
+</blockquote>
+<p>But coccolithophores didn’t exist yet in the Permian. In fact, the first calcifying phytoplankton wouldn’t show up until midway through the Triassic, 25 million years later, and wouldn’t become important in the ocean until well into the age of dinosaurs. As a result, when the sea acidified in the age of Pangaea, there was no thick carpet of carbonate at the bottom of the ocean waiting there to neutralize it—no antacid. Nothing to stem the misery.</p>
+<p>These biological innovations among the smallest creatures in the ocean would reshape the entire chemistry of the oceans. Newly ballasted in minerals, this heavier plankton, which evolved only after the Permian, likely sank faster and farther into the deep before oxygen-burning microbes were able consume it. This pushed a naturally low-oxygen layer of the ocean much farther into the depths of the ocean, helping to ventilate the shallow seas and making them less prone to suffocating bouts of anoxia when the waters warmed and these stifling waters shoaled.</p>
+<p>Paired with the fracturing and fragmenting of the ancient supercontinent, this might even be enough to explain why the last 200 million years have passed almost completely free from mass extinctions, even in the face of occasional climate misadventures.</p>
+<p>It also provides one of the greatest reasons for hope in our own time. With its disparate island continents, an ocean outfitted with a vigorous biological pump of carbon to the depths, and a blanket of carbonate on the seafloor, our planet today seems far more resilient to shocks to the carbon cycle of the sort that would have ended the world hundreds of millions of years ago. Our oceans and atmosphere have been remade by life and by plate tectonics. Perhaps we’re safe.</p>
+<p>Or perhaps this seeming safety is illusory, and we are at the threshold of summoning these very same global catastrophes back from their slumber in the eons. <img alt="" src="../images/nautilus-favicon-14_998.png" /></p>
+<p><em>From</em> <a href="https://www.harpercollins.com/products/the-story-of-co2-is-the-story-of-everything-peter-brannen?variant=42382167638050">The Story of CO2 Is the Story of Everything</a> <em>by Peter Brannen. Copyright © 2025 by Peter Brannen. Excerpted by permission of Ecco, an imprint of HarperCollins Publishers.</em></p>
+<p><em>Lead image: Sahara Prince / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

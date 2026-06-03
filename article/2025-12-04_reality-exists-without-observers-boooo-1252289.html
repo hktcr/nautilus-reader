@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reality Exists Without Observers? Boooo! - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Reality Exists Without Observers? Boooo! - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PL9S</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I’ve never been a sports fan, let alone a rabid one, but I think I finally know what it feels like. I was reading a new book, <em>Portals to a New Reality</em>by Vlatko Vedral, when I found myself shouting at the page the way sports fans scream at TVs. When Vedral, a physicist at the University of Oxford, wrote that the Copenhagen interpretation of quantum mechanics “contains a great number of misconceptions about what the world is made of and how to understand its most fundamental processes,” I felt my blood pressure spike. When he claimed, “Quantum physics does not need observers,” I leapt out of my seat. “Yeah? Try saying that to Niels Bohr’s <em>face</em>!”</p>
+<p>Vedral’s is one in a slew of recent books that cast Bohr, Werner Heisenberg, and colleagues as cartoonish villains looming over quantum physics, making the theory seem more woo-woo than it needs to be. Vedral is basically Team Many Worlds (though he doesn’t like the name), which pits him against Team Copenhagen’s insistence that observers play a fundamental role. In Copenhagen, one needs an observer to get a measurement outcome (the particle is either here <em>or</em> there; Schrödinger’s cat is either alive <em>or</em> dead), while in Many Worlds, there’s never a single outcome, only an alive cat in one world and a dead cat in another. Since every possible outcome happens, there’s no special part for observers to play. “Making measurements in quantum physics is like any other quantum process, nothing more,” Vedral writes. Or, as I once heard physicist Brian Greene (another Many Worldser) put it, quantum measurement is “just stuff interacting with stuff.”</p>
+<p>This no-nonsense take (if believing in infinite branching parallel realities in which every possible version of you is having every possible experience can be considered no-nonsense) is intended to sound more scientific and staider than their caricature of Copenhagen, in which, as Vedral puts it, “reality does not exist when no one observes it.”</p>
+<p>Only here’s the thing. Every time an interpretation of quantum mechanics claims to banish observers, it ends up hiding them somewhere in the theory or sneaking them in through the back door. Which, if we’re trash-talking, might lead a spectator to suggest that these theorists pack up their many worlds in their many suitcases and go crawling back to Denmark.</p>
+<blockquote>
+<p>I leapt out of my seat. “Yeah? Try saying that to Niels Bohr’s <em>face</em>!”</p>
+</blockquote>
+<p>Here’s what the <a href="https://nautil.us/when-reality-came-undone-796994/">Copenhagen interpretation</a> actually says. When two objects interact—say, a measuring device and the thing it’s measuring—there’s no way to neatly decompose that combined system back into two individual objects. They’re entangled. Enmeshed. That’s thanks to the finite value of Planck’s constant—the smallest possible unit of “action,” a quantity in physics that measures how a system’s potential and kinetic energy trade off over time. Because Planck’s constant can’t be further divided, it imposes a kind of graininess on the situation that prevents us from being able to carve up the interaction in an unambiguous way, as if it’s possible to know which part belongs to which. In fact, it prevents us from talking as if there were ever two independent objects at all. We don’t start with objects, which then interact; we start with interactions, which we then have to dissect into objects. Only there’s no clear way to do it.</p>
+<p>It’s a situation not unlike that in relativity, where, thanks to the finite speed of light, there’s no preferred way to decompose spacetime into space and time. In quantum theory, thanks to the finite Planck’s constant, there’s no preferred way to decompose an interaction into anything. To get a specific measurement outcome—the particle’s position is <em>x</em> or its momentum is <em>p</em>—we have to decide which part of the interaction to call the “particle” and which part to call the “apparatus.” Since nature offers no single True-with-a-capital-T way to do that, we just have to wing it and remember that the outcome we get doesn’t reveal some pre-existing fact about the world, but creates a new fact relative to the context of the measurement and our arbitrary decision as to how to divvy it up.</p>
+<p>So when Team No Observers say that quantum measurements are “just stuff interacting with stuff,” what they mean is, we don’t have to make that decision. A particle hits a measuring device, the two become entangled, and that’s the end of the story. Only that <em>can’t</em> be the end of the story. It can’t even be the beginning of the story. Because who decided which part to call the “particle” and which to call the “measuring device” if all that exists is one big, entangled mess? If you already sectioned off a piece of world and labeled it “measuring device” before you ran the experiment, then you snuck in an observer at the start. If not—if all you have is entanglement—there’s simply no measurement outcome <em>at all</em>. Not in this world, and not in any other.</p>
+<p>At this point, the Many Worlds fans in the bleachers might start chanting “Decoherence!” But decoherence—the process by which quantumness leaks out into the larger world, leaving behind the appearance of an objective thing—requires, you guessed it, an observer. It’s the observer who partitions the world into the system under study and its environment, which is defined as whatever part of the world the observer chooses to ignore. Only then can quantum correlations from the system slip away into the crowded environment and disappear out of sight. Should the observer decide to keep tabs on the environment, too, there’s no more decoherence.</p>
+<p>That’s the trouble with the “no observers” story—you can’t tell it from the inside out. You can’t start with a world, already divvied up into space and time, containing distinct systems and measuring apparatuses and environments, and then talk about objects interacting and getting entangled, because in the “no observers” story, none of those things can be defined in the first place. As a Many Worldser, you can’t even define a “world” or a “branch of the wavefunction” without bringing in an observer. That’s why American physicist Hugh Everett, when he proposed what’s now known as Many Worlds, didn’t talk about worlds branching into parallel realities so much as <em>observers</em> branching into parallel states of having observed or not observed different outcomes. It’s why Vedral dislikes the name “Many Worlds.”</p>
+<p>So why does Vedral want so badly to banish observers from quantum physics? He works in quantum information theory, where he designs experiments to show that quantum effects, which we usually observe in microscopic systems, operate at larger scales still—in molecules, viruses, even people. But for that to work, he says, observers can’t play a special role; they have to be treated quantum mechanically, like everything else. When we “take seriously the idea that the world is even more quantum than most physicists realize,” Vedral writes, we will finally make progress in physics, ultimately uniting quantum mechanics with our understanding of spacetime and gravity. But Copenhagen and its observers, he says, are standing in the way.</p>
+<p>“The Copenhagen interpretation has contributed a great deal of force to the consensus in physics today that quantum physics is too 'weird' to work at macroscopic scales, and that quantum effects at the macro level are not accessible by experimentation,” Vedral writes.</p>
+<p>This is a total misunderstanding. Bohr made it clear that the macroscopic measuring device, even the observers themselves, can always be described by quantum mechanics. Quantumness, Bohr wrote, “equally affects the description of the agency of observation and the object.” Likewise, “An independent reality in the ordinary physical sense can neither be ascribed to the phenomena <em>nor to the agencies of observation</em>.” It’s quantum all the way up. The point of Copenhagen was never to deny that, only to explain, <em>given</em> that, why we still seem to get measurement outcomes. I’m sitting here. The cup is over there. There are no half-dead-half-alive house cats half-walking around.</p>
+<blockquote>
+<p>If we’re trash-talking, theorists might pack up their many worlds and go back to Denmark.</p>
+</blockquote>
+<p>Team Many Worlds, on the other hand, can’t account for why anything seems like anything. Because without observers, the only ingredient left is a single, universal wavefunction—a giant entangled state—which, technically speaking, is just a vector endlessly rotating in an abstract mathematical void for eternity. Nothing happens. There’s nothing in it. No particles, no physicists, no cups, no cats. Not the appearance of measurement outcomes. Not the branching of worlds. Nothing to see, and no one to see it. Giving up observers, then, amounts to giving up empirical science. And regardless of one’s feelings about a certain Danish physicist, that’s a weird move to make, considering the very theory you’re using to posit the existence of your eternal vector was arrived at through experiment and observation.</p>
+<p>Of course, Vedral wants his own experiments to have outcomes, so he’s forced to do what everyone does and sneak observers back into the picture. He assures us this is no big deal, no threat to the inherent quantumness of reality. Where we draw the line between observer and observed, he insists, is “completely arbitrary.” Well, yes. That was Copenhagen’s whole point. These divisions aren’t objectively given. Observers have to make choices, to forge the fault lines of the world.</p>
+<p>But words like “choice” make physicists nervous, so they soothe themselves by making Copenhagen seem more mystical than it is. Surely the <em>moon’s</em> there when no one’s looking, they love to say with a roll of the eyes.</p>
+<p>Let’s put this moon thing to rest. It’s true. We can’t say the moon is there if no one’s observing it. Neither can we say that the moon’s <em>not</em> there if no one’s observing it. It’s not as if the sky is empty until someone gazes upward and a moon suddenly pops into existence. It’s that we can’t say anything about the moon as an independent object, because quantum theory doesn’t grant us independent objects, only measurements that we can slice into moons. We are no longer “in a position to speak of the autonomous behavior of a physical object,” Bohr wrote. “Such an analysis is inprinciple excluded.”</p>
+<p>Our very concept of a <em>thing</em>—an atom, a chair, a planet—is rooted in the assumption, Bohr said, “that it is possible to distinguish sharply between the behavior of objects and the means of observation,” which, in quantum mechanics (given the finite value of Planck’s constant), it’s not.</p>
+<p>So, the issue isn’t that objects in the world are out there doing weird quantum things until they meet the stern gaze of an observer and magically fall into line. The issue is that our entire framework of a world that comes pre-carved into objects was wrong from the start. Copenhagen’s rivals are right to suggest that the interpretation is radical—but not for the reasons they’d have you believe. It’s not radical because it ascribes some reality-creating power to the minds of observers. It’s radical because it undermines the very categories according to which we’ve organized the world ever since the 17th-century origins of modern science.</p>
+<blockquote>
+<p>Interpretations that banish observers end up sneaking them in through the back door.</p>
+</blockquote>
+<p>Vedral seems to think we could get back to those categories—to a fully objective world of “stuff interacting with stuff”—if only we could re-engineer our brains to perceive the world’s quantumness directly. “We would need to integrate specially designed microchips that carry out these quantum measurements in conjunction with the existent machinery of our brain,” Vedral suggests, noting that this would provide “an experience that corresponds more closely to fundamental reality than drugs could ever offer.”</p>
+<p>Of course, one would need observers to define objects like brains, microchips, and measurements before our new quantum perception could take effect. But then what? Would we apportion the world differently—defining different objects, blurring their borders, redrawing the very boundaries of ourselves? Trippy, sure—but still in the Danish spirit.</p>
+<p>I agree with Vedral that there are deep questions still in need of answers. That no interpretation of quantum mechanics has quite yet won the game. So, while there’s no universe in which you’ll catch me wearing the Many Worlds’ team jersey, I’m not rocking Team Copenhagen’s either.</p>
+<p>Personally, I’m rooting for <a href="https://nautil.us/my-quantum-leap-238433/">QBism</a> (formerly Quantum Bayesianism), an interpretation that starts in Copenhagen by way of Texas and ends up, among other places, in Boston, with Christopher Fuchs, co-captain of the team, taking heed of the profound metaphysical lesson in Copenhagen—that we can’t think of ourselves as standing apart from a ready-made, objective world describable in third person—and putting observers and their decision making front and center.</p>
+<p>The QBists added to Copenhagen elements of decision theory, personalist Bayesian probability, quantum information theory, and early American pragmatist philosophy until, as Fuchs puts it, “We were left with an interpretation of quantum theory that was very different from Bohr’s, though the roots have always remained visible.” At its heart, QBism is about how agents, by acting on the world, by carving up reality, participate in the incessant churn of novelty and creativity that spills out of a universe that’s ever on the make.</p>
+<p>But QBism is an unfinished project, which means I’m still watching the game, still shouting at the TV. Does the observer carve herself out of the world through her actions? Is that the very essence of what it means to be an observer? How do different observers, carving along different seams, navigate their differences? “I believe that if the development of atomic physics has taught us anything,” Bohr told Heisenberg, “it is that we must learn to think more subtly.” I suppose that’s not only the art but the sport of it. <img alt="" src="../images/nautilus-favicon-14_717.png" /></p>
+<p><em>Lead image by Tasnuva Elahi; with images by Natalya Kosarevich, cybermagician, and zombiu26 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

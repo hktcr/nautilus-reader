@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Get an Elephant’s Attention | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How to Get an Elephant’s Attention</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-02
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-4PG3</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>If you’re looking to chat with an elephant, make sure to do it face-to-face. These creatures seem to communicate best with people whose bodies and faces are turned toward them, according to recent <a href="http://doi.org/10.1038/s41598-025-16994-3">research</a> on Asian elephants published in <em>Scientific Reports</em>.</p>
+<p>When studying visual communication in animals, scientists have primarily focused on species, such as non-human primates, that have developed complex socialization cues. <a href="https://nautil.us/the-communication-we-share-with-apes-237540/">Chimps</a>, for instance, have been observed communicating via <a href="https://www.theguardian.com/science/article/2024/jul/22/chimpanzee-communication-quick-fire-humans-study">hand gestures</a>. Even after years of study, it’s still unclear how such visual cues evolved—for a better grasp on these behaviors, scientists are looking beyond the usual suspects.</p>
+<p>Elephants, for instance, primarily draw upon sound and smell cues to converse with peers—<a href="https://nautil.us/the-paradox-of-the-elephant-brain-235882/">elephants’ brain areas</a> associated with these senses are much bigger than their visual cortex. Still, elephants have been observed incorporating certain visible signals when socializing, including moving their ears and trunks.</p>
+<p>To understand African elephants’ comprehension of visual attention from people, scientists previously studied their food-seeking behavior toward a human experimenter. African elephants tended to display more visible signals toward this person when she angled her face and body toward them, according to a 2014 <em>Biology Letters</em> <a href="https://royalsocietypublishing.org/doi/10.1098/rsbl.2014.0428">paper</a>. This suggests that “elephants understand the importance of visual attention for effective communication,” the authors of that paper wrote.</p>
+<p>But little is known about this phenomenon among these elephants’ Asian cousins. Asian and African elephants split some 5 to 7 million years ago, and have since encountered different social and ecological contexts that may influence their behaviors in unique ways. In a similar experiment to the <em>Biology Letters</em> study, researchers based in Japan, the United States, and Thailand <a href="http://doi.org/10.1038/s41598-025-16994-3">observed</a> 10 captive female Asian elephants as they signaled a person for food.</p>
+<p><img alt="" src="../images/aR9R3fPk-Glick_BREAKER.png" /></p>
+<p><strong>PRETTY PLEASE:</strong> In the recently published study, elephants standing behind a net were prompted to signal for food from a person who took on a variety of positions. <em>Photo courtesy of Kyoto University and Hoi-Lam Jim.</em></p>
+<p>At a conservation camp in Thailand, Hoi-Lam Jim, an animal behavior and comparative cognition researcher at Kyoto University in Japan, was separated from each elephant by a volleyball net. Jim showed the elephant food on a wooden tray, then placed the tray on the ground, prompting the pachyderms to request a snack  by moving their trunks and heads. Then, Jim assumed one of four postures for 20 seconds—face and body turned toward the elephant, just face <em>or</em> body turned toward the elephant, or both turned away from the elephant. To set a baseline during each elephant testing session, Jim also set down the food and hid behind a patch of grass, gauging how the animals reacted to no human presence.</p>
+<p>Scientists recorded the elephants’ reactions, and determined that elephants made the most visible food-seeking gestures when both the experimenter’s body and face were turned toward these animals. While body orientation seemed to have a slightly stronger effect than face orientation, “neither face nor body orientation alone was sufficient to increase gesturing,” the study authors wrote. They also noticed that the frequency of the elephants’ gestures when Jim was turned away was similar to when Jim was absent altogether.</p>
+<p>“We were surprised to find that the elephants did not gesture simply because a human was present," Jim said in a statement.</p>
+<p>These recent results align with the earlier findings on African elephants, along with a 2004 <a href="https://link.springer.com/article/10.1007/s10071-004-0214-2">study in apes</a>. Yet it’s also possible that apes can better read human faces than elephants can because they are more visually similar to their own, Jim and her co-authors propose. It’s important to keep in mind that these experiments mostly involved captive animals, who are accustomed  to spending time with people—interspecies interactions outside of captivity may depend more on humans’ overall body language and appearance than their faces, because wild elephants don’t tend to get close to humans.</p>
+<p>For example, the Maasai people of Kenya and Tanzania have come into increasing conflict with elephants as human infrastructure expands; in an experiment, elephants were <a href="https://pubmed.ncbi.nlm.nih.gov/17949977/">found</a> to respond more aggressively to the red color worn by the Maasai than a neutral white color.</p>
+<p>But when communicating with members of their own species, elephants might be more sensitive to visual attention from faces, the authors point out. In a <a href="https://www.nature.com/articles/s42003-024-06133-5#Sec16">study</a> on African savanna elephants, these animals seemed to prefer giving silent, visible gestures when greeting peers who were looking directly at them, and switching to noisy and tactile behaviors for their less attentive herdmates.</p>
+<p>The latest study adds to growing evidence on elephant intelligence, but there is still much to learn. Going forward, Jim and her colleagues want to dive into other aspects of Asian elephants’ smarts, including cooperation and their grasp of delayed gratification. <img alt="" src="../images/nautilus-favicon-14_919.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em></p>
+<p><em>Lead image: Decha Kiatlatchanon / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>These Bats Are Fond of Cuddling | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>These Bats Are Fond of Cuddling</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-2G1R</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>One of the largest and most formidable hunters in the world of bats also appears to be one of the cuddliest. Spectral bats—whose scientific name is worthy of a horror movie: <em>Vampyrum spectrum—</em>have wingspans of up to three feet, and for dinner they tend to gobble down birds, rodents, and even some other mammal species, including other bats. But at home with the family, they are fond of cuddling, wrapping wings and limbs around each other, as well as sharing food, and they invest heavily in child rearing.</p>
+<p>When Marisa Tietge, a research assistant and doctoral student at the Leibniz Institute for Evolution and Biodiversity Science in Germany, stumbled upon a cozy roost of four spectral bats in Costa Rica, she knew she had to take a closer look. The species is quite shy and difficult to find, making these bats tough to research.</p>
+<p>“I didn't really have any expectations,” she says. “This is a blank sheet of paper—everything that we now record is new.”</p>
+<p>Spectral bats are special for many reasons—their inclination to hunt for their food, their monogamous mating style, and the way that they live in small families that include both the male and female parents and their offspring. This is pretty different from <a href="https://nautil.us/the-social-life-of-bats-373018/">social behavior</a> in most other bats, which often involves one male defending a territory with several female companions. (Only 16 out of the 84 species of bats whose mating patterns have been <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11327276/">studied</a> form monogamous pairs.)</p>
+<blockquote>
+<p>“These apex predators have such soft and gentle behaviors, and they’re so social."</p>
+</blockquote>
+<p>“I think one typical picture that people have about bats is like these big clusters of bats hanging together in a cave or in a group—like 50 bats or maybe hundreds or thousands of bats,” Tietge says. “This is often the case, but then in this species, it's not the case.”</p>
+<p>Tietge repeated visits to the roost to accustom the bats to her smell and presence. Eventually, the bats didn’t even disperse or fluster at all when she approached with her headlight. The next step was to set up motion-sensed wildlife cameras in the hollowed-out tree that the bat family called home. Her analyses of the video footage were <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0321338">recently published</a> in <em>PlosOne.</em></p>
+<p>What she discovered was a picture of domestic bliss—videos demonstrated that the bats would often groom each other and often even greeted their family members with vocalizations and a hug-like action, <a href="https://nautil.us/why-bats-are-flying-machines-536244/">wrapping their wings</a> around the other's body, when they returned to the roost after hunting or exploring. At night while they slept, the creatures formed what Tietge dubbed a “cuddle ball”: a four-way hug that included wing wrapping and touching snouts. The two baby bats were of different ages and stayed with their parents for up to two years—a long childhood compared to other bat species.</p>
+<p>Another fascinating behavior Tietge captured is the sharing of food. A parent would often come in, bearing a small rat or bird to eat, and essentially transfer that food to their offspring, helping ease the transition from milk to meat. Spectral bats may be big in terms of bats, but the prey they hunt is still quite large in comparison, so it’s a learning process to latch onto food while also keeping their wings open so they can eat, says Tietge. These meals can take 30 to 40 minutes.</p>
+<p>This wasn’t the only moment of food-related cooperation. When the female parent was still weaning a pup, her partner would come back to the roost bearing gifts of prey to keep the mom’s nutrition up while she was taking care of the baby. In fact, on some occasions, when the bats brought back food to eat, the other bats already knew the intended consumer for that tasty tidbit, says Tietge. Instead of swarming the incoming bat for a bite of delicious prey, the creatures understood the context of that snack and whether or not it was intended for them, kind of like a label on yogurt in the office fridge or the name on an UberEats order.</p>
+<p>There are several reasons why spectral bats may have such strong and cooperative relationships with their families, which Tietge credits to their role in the ecosystem. While many bats are foragers, the spectral bats are hunters which requires an entirely different set of skills and often a longer learning process. The cozy, cooperative relationship within the family gives pups time and support to learn the complex set of skills that they need to survive and succeed in their unique circumstances.</p>
+<p>“I think it's so cool and fascinating that these apex predators have such soft and gentle behaviors, and they're so social,” Tietge adds. “I hope this kind of shows to people that bats aren’t mysterious, dangerous creatures. There’s a lot that we can relate to, and there’s even parallels to our own behavior.” <img alt="" src="../images/nautilus-favicon-14_969.png" /></p>
+<p><em>Lead image: Marisa Tietge, CC-BY 4.0</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dying Children Who Suddenly Wake Up | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Dying Children Who Suddenly Wake Up</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-8F9M</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For centuries, across cultures, those attending the dying have <a href="https://www.sciencedirect.com/science/article/abs/pii/S0167494311001865?via%3Dihub">noted</a> flashes of sudden mental clarity and physical capability in the days and hours just before death. Many of the dying individuals had diagnoses of neurodegenerative disease, or other neurocognitive problems, or illnesses that would seem to have made such coherence impossible. Suddenly, and without any satisfactory medical explanation, the patients seem themselves again. It happens not just in adults, but in <a href="https://med.virginia.edu/perceptual-studies/wp-content/uploads/sites/360/2024/01/Roehrs2024_Terminal-Lucidity-in-a-Pediatric-Oncology-Clinic-1.pdf">children</a>, particularly after medical treatment possibilities have been exhausted and the patients are on palliative care.  </p>
+<p>In one case reported in the medical literature, a 3-year-old girl with liver and pulmonary failure from an immune disorder stopped speaking, eating, or responding to family or caregivers until her doctors shifted her to palliative care. That night, nurses and parents witnessed her wake up, request her usual toys and food, and ask to see her parents. She used logical full sentences, prayed for all the important people in her life, seemed aware of her impending death, and reassured her parents not to worry about her. Then she returned to her comatose state and never re-awoke, dying just days later in cardiac arrest.  </p>
+<p>Some neuroscientists have suggested that reports like these might simply reflect a natural desire on the part of family or caregivers to make sense of death—that the witnesses allow their own minds to fabricate something that <a href="https://preservinghope.substack.com/p/is-terminal-lucidity-real">isn’t real</a>. But as more and more cases are systematically reported and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11100277/">catalogued</a>—one prospective <a href="https://www.cambridge.org/core/journals/palliative-and-supportive-care/article/abs/lightening-up-before-death/335C20296BFD5B36976D5C8B4CA8B680">study</a> found that caregivers reported such episodes in 6 of 100 hospice deaths—they’ve begun to attract more rigorous study.</p>
+<p>A number of overlaps have been found between the features of such so-called terminal-lucidity experiences and near-death experiences, in which people who come close to death report certain phenomena that they remember later, such as seeing dead loved ones or beings of light and experiencing great peace, joy, and clarity. Some neuroscientists and neurologists have detected surges of electrical activity in the brains of dying <a href="https://www.pnas.org/doi/10.1073/pnas.2216268120">humans</a> and <a href="https://www.pnas.org/doi/10.1073/pnas.1308285110">animals</a>, potentially related to loss of oxygen to the brain, and have hypothesized that these surges might produce some of the features of the near-death experience and of terminal lucidity. But this idea hasn’t been tested.</p>
+<p>Recently, a team of researchers began a series of studies of terminal lucidity in children. In one of the studies, they <a href="https://journals.sagepub.com/doi/pdf/10.1177/00302228251391552">examined</a> how caregivers respond to watching a dying child have such an episode. I spoke with study author Natasha Tassell-Matamua, a psychologist who specializes in near-death experiences at Massey University in New Zealand, about what kinds of clues these phenomena might offer to how consciousness works and how the findings could inform end-of-life care.</p>
+<p><strong>What does terminal lucidity look like in a child? What exactly are caregivers witnessing in those final hours or days?</strong></p>
+<p>As far as we can determine from our really small sample, it looks very similar in children to how it looks in adults. Children might suddenly have this return of mental clarity. They may not have been able to converse, for example, for a period of time, and they’ll suddenly begin to talk like they did before they were sick. They might speak to their parents and say, “I’m going to go now,” or, “I’m going home,” and “You’ll be okay, mom and dad.”</p>
+<p>That signifies some awareness of their impending death, but also some level of emotional intelligence, to be able to reassure their parents that they’ll be okay. They might talk about seeing, for example, some deceased relative and saying, “Oh, grandma’s here, and I’m gonna be okay because she’s going to take me.” That tends to happen quite a lot.</p>
+<p>So there can be the return of physical, but also verbal, abilities and emotional recognition and reassurance given to the parents. Some children, it’s almost like they wait for the parents to go, and then they’ll say to the nurses, “Tell my parents I’m gonna be okay, but I’m going now.” Those are some of the most common manifestations in children.</p>
+<p><strong>How do we define terminal lucidity? I know there’s been considerable debate about that question.</strong></p>
+<p>As a team, we landed on a definition of terminal lucidity being an unexpected surge of mental clarity in the moments leading up to death. Of course, we had our own internal debates about things like, what do “the moments leading up to death” entail? Because people have these experiences seconds, minutes, hours, or sometimes even days before they die. We did land on five days before death being the amount of time that we would include.</p>
+<p>Then, of course, we had a lot of debates on our team about what is mental clarity? And we discussed that there would have to be a decline in cognitive functioning for us to classify any of these experiences as an “unanticipated” surge of mental clarity. There would have to be a medical decline or one that was noticeably significant to others. In a lot of the cases that we reported on, the children had been in a comatose or semi-comatose state before they had their experience just before death.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-afterlife-is-in-our-heads-240441/">The Afterlife Is in Our Heads</a>”</strong></p>
+<p><strong>How do you reconcile what’s being observed during these periods with our current understanding of brain function and disease progression?</strong></p>
+<p>I don’t know if there is a point of reconciliation. For some of the cases, I think the assumption is that something neurological has happened, and then the children have been able to recognize mum and dad, for example. So an argument can be put forward that something’s happening in the brain and this clarity returns momentarily for whatever reason. It’s a bit like the near-death experience. There are plenty of theories—that people are just saying what they expect at death, or that they’re reporting that because they’ve been culturally conditioned to think that’s what’s gonna happen. But there’s a load of neurological explanations as well: a lack of oxygen or too much oxygen. But not necessarily anything that’s been proven to account for those sorts of things. It’s the same with terminal lucidity.  </p>
+<p><strong>In the paper you point out that estimates suggest 2 to 6 percent of all dying people have episodes of terminal lucidity, but that perhaps the rates are higher, either because we don’t know what to look for or because so many people, when they’re dying, are given certain kinds of drugs. Still, that’s a pretty low percentage. Is there any kind of explanation or hypothesis about why such a small fraction of people might experience it?</strong></p>
+<p>There is a potential for underreporting in western contexts, much like with near-death experiences. Underreporting because there could be stigma associated with these types of experiences. And people could be witnessing something but not necessarily recognizing it as what we would call terminal lucidity. It may be explained away by medical personnel as the drugs they were on. In other cultural contexts, like in Maori culture in New Zealand, which is a cultural group that I’m a part of, it’s very normative for people to speak about these kinds of experiences, to witness them, and to be perfectly fine with them.</p>
+<p><strong>What implications does the phenomenon have for how we think about consciousness and brain function?</strong></p>
+<p>There’s still a lot more research to do and part of my response will be clouded by personal opinion. I think these experiences, particularly in the case of adults with dementia—where there is known brain degeneration, actual physical evidence of that—challenge our existing theories or models that say consciousness requires healthy brain function. These experiences, at least in adults, can happen in the presence of some quite severe degeneration. So maybe we need to be looking at other hypotheses about consciousness and how it all works.</p>
+<p><strong>Why did your team feel that the impact on caregivers was a subject that needed to be explored?</strong></p>
+<p>There had been some previous research in adults that looked at the impact of witnessing terminal lucidity, but nothing in children. We wanted to know, what are the implications for caregivers who witness it? How could that information be useful for end-of-life care? Do caregivers know enough about terminal lucidity? Do they see it as a normal part of the dying process or as something else?</p>
+<p><strong>This study is part of a larger project that aims to investigate terminal lucidity in children. What kinds of things are you hoping to learn?</strong></p>
+<p>What are the characteristics? Do the experiences manifest the same in children as adults? As far as we can tell, they appear to, but even though they might manifest the same, the people who are often interpreting the experiences are adults, so we can’t really make any claims about the phenomenology of the experience for the kids. It could be quite different. Part of our rationale was to look at the experiences and then revisit our definition of terminal lucidity, because at the moment, we’re working with this very generic definition that’s limited in many ways by how we define mental clarity and then how we define duration. But also, how do these experiences relate to what are currently termed deathbed visions? Is terminal lucidity this discreet thing, or is it just part of this continuum of experiences of consciousness that happen in relation to death? We feel children have been ignored in this area, and yet they’re an important population to look at.</p>
+<p><strong>Do you see a lot of overlap between terminal lucidity and near-death experiences in terms of content or anything else?</strong></p>
+<p>I do, personally. And near-death experiences are my primary area of research, so I feel like I’ve got a lot more familiarity with that. I see the overlap definitely in terms of the phenomenology, not necessarily in terms of how it manifests in the moment, but in terms of what people report. There are a lot of similarities, particularly in the awareness or perception of deceased others or beings of light. The feelings that are often reported with terminal lucidity: peace, joy, happiness, the beam of light. The experience of moving through a tunnel—we don’t have that in any of our children’s cases, but we do see that in some adult cases of terminal lucidity and near-death experience that have been reported to me.</p>
+<p>So there is a lot of overlap. Is it just part of this greater continuum of experiences of consciousness, exceptional experiences in relation to death?</p>
+<p><strong>Has anyone studied the neurology of these experiences to see if there’s also a neurological overlap?</strong></p>
+<p>As far as I’m aware, no. I think that would be huge news if that were to be verified.</p>
+<p><strong>Has anyone tried to monitor the brains of children while they’re going through these experiences?</strong></p>
+<p>I don’t know. Certainly, with regard to near-death experiences and adults, yes, there have been studies that have looked at all sorts of things physiologically. But I don’t know with regard to terminal lucidity, although that would be a really interesting study to do.</p>
+<p><strong>How might what you find out about terminal lucidity in children shape end-of-life care protocols?</strong></p>
+<p>This is a more personal opinion, but shared by others within our team as well. We feel like terminal [lucidity] is probably a normal part of the dying process, and some of this is anecdotal as well. It seems to provide a lot of reassurance for parents. It can provide, at least subjectively, a greater sense of coping with the death of a child. But we think maybe it’s a normal part of the dying process that should be allowed to unfold naturally.  </p>
+<p>So what implications might this have for the escalation or not of medication? Again, this part is anecdotal, but speaking to people in pediatric oncology, there’s a sense among nurses in particular, not necessarily doctors, that an escalation of medication isn’t necessarily a good thing for the child, but also for the parents at the end of life, who may want to have those final moments.</p>
+<p><strong>How has doing this research changed your own thinking about death or what it means to be human?</strong></p>
+<p>Like many of our participants, it’s probably just confirmed a lot of things for me regarding the importance of spirituality, and however that manifests for people, even if that just means finding meaning and purpose in everyday life. Because I think if you have that meaning and purpose in everyday life, then at that end-of-life stage, that moment of clarity allows you to feel like whatever’s being lived has been lived well. But I’m very interested in learning what these experiences mean for our understanding of consciousness, and our understanding of who we are as humans and how we function.</p>
+<p><strong>Is there anything that you wish the general public understood about terminal lucidity that they don’t grasp now?</strong></p>
+<p>I hope there would be more of a normalization around these experiences. Because in some cultures they’re very normalized and understood. And in others not so much. I would hope people could understand that these are experiences that can provide comfort for the child or adult who is dying, but also comfort for those who are witnessing it, if they’re open to that, and that there doesn’t necessarily need to be a medical explanation for them. They can just be experiences that can be interpreted by the witness in whatever way provides meaning for them. <img alt="" src="../images/nautilus-favicon-14_451.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Jorm Sangsorn / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

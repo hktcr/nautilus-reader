@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can I Give You Some Advice? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Can I Give You Some Advice?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-6H32</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I’d tell you not to read this article, but you’d probably ignore me and simply decide for yourself.  Even if I listed some well-founded reasons to dissuade you—shouldn’t you really be doing something else? Aren’t you driving right now?—you’re likely to disregard it and press ahead.</p>
+<p>You wouldn’t be alone. As it turns out, most of us tend to blow off even good advice and decide most questions for ourselves.</p>
+<p>These findings come from a <a href="https://royalsocietypublishing.org/doi/10.1098/rspb.2025.1355">sweeping new study</a> led by University of Waterloo psychologist Igor Grossmann, that suggests our instinct to politely nod along to the advice we hear and then carry on with our own judgment isn’t just a personal quirk. It’s something we all do.</p>
+<p>Involving more than 3,500 adults across a dozen countries, the research Grossmann and his collaborators conducted shows that when people—from big, technologically advanced cities to humble Amazonian villages—face tough decisions, they are far more likely to rely on their own intuition or reasoning than to take guidance from friends, family, or experts. Even in interdependent cultures that prize group harmony, self-reliance proved more durable than the advice of others. For better or worse, it’s our own counsel that we trust most.</p>
+<blockquote>
+<p>The majority preferred to shoulder the burden themselves.</p>
+</blockquote>
+<p>“Realizing that most of us instinctively ‘go it alone’ helps explain why we often ignore good counsel, be it for health tips or financial planning, despite mounting evidence that such counsel may help us make wiser decisions,” Grossman told me over email.</p>
+<p>To examine this, Grossmann and an international team of collaborators set up a simple experimental questionnaire asking participants to envision tricky dilemmas. A team of anthropologists, linguists, and psychologists helped adjust the questions so they were relevant to the society where they were being asked. For instance, where the participants led agricultural lifestyles, they were asked how they would invest a windfall, buying an orchard or a herd of cattle. Other more urban socio-economic groups were asked how they would decide which university to attend or where they would choose as a travel destination.</p>
+<p>The researchers also probed decisions that would involve making choices that might disadvantage the one doing the choosing—whether to help a neighbor with their farm before the rainy season sets in, which might put tending to your own harvest in jeopardy, or whether to help an academically struggling friend during your own study time. The respondents were equally male and female and ranged in age from 20 to 40 with educational levels ranging from primary school through graduate degrees.</p>
+<p>Participants were then asked which of four strategies they would use to make their decisions. Would they deliberate privately? Follow intuition? Seek advice from friends or family? Turn to the wisdom of their larger group by, say, throwing the question to social media? By giving subjects a menu of possible strategies, the researchers could see which approaches felt most natural. Participants were also asked to evaluate how good they felt about their own selections.</p>
+<p>What emerged was a striking consistency. Across cultures, ages, and social backgrounds, self-reliant strategies—deliberating alone or trusting intuition—topped the list. Seeking advice came in a distant second. In fact, only about one in 10 participants reported that consulting others would be their <em>primary</em> approach to handling a tough decision. The majority preferred to shoulder the burden themselves—and they felt good about it to boot.</p>
+<blockquote>
+<p>We expect others to make their choices differently than we do.</p>
+</blockquote>
+<p>There were some slight divergences when it came to what sort of dilemma was being considered, Grossmann told me.</p>
+<p>“People were more likely to discount others’ perspectives when it came to decisions involving social dilemmas—helping a friend or protecting one’s own interests—as compared to a choice between equally attractive options, for instance, which university to go to,” he wrote me. “But even in the latter case, people still favored self-reliant decision strategies.”</p>
+<p>And while the preference for self-reliance remained general across all cultures, Grossmann told me that the strength of that preference depends on where one comes from. Culture “controls the volume knob, dialing up that inner voice in highly independent societies and softening it somewhat in more interdependent ones,” he wrote.</p>
+<p><strong>Advice For Thee, But Not For Me</strong></p>
+<p>What’s ironic is that we expect others to make their choices differently than we do. When respondents were asked to guess what other people in their society would do when presented with the various test dilemmas, they expected other folks to take a friend’s advice just as often as they expected them to deliberate in solitude. In other words, our own thinking is important to <em>us</em>, but other people perhaps need a little more guidance—advice for thee, but not for me.</p>
+<p>According to neurobiologist <a href="https://nautil.us/we-could-have-been-warthogs-1204057/">Robert Sapolsky</a>, who was not involved with the study, this sort of <a href="https://nautil.us/why-your-brain-hates-other-people-236659/">egocentrism</a> regarding our own thinking is central to why self-reliance makes more sense to us in our decision-making.</p>
+<p>“When comparing the conclusions you reach on your own compared to those offered by experts, you know what your internal process was in getting to that decision and can never know theirs,” he told me. As Sapolsky pointed out to me, the heat of the moment is when we’re most likely to default to self-reliance. “This is another manifestation of the tendency to make a bad decision during stress,” he said.</p>
+<p>This points to an interesting problem: The moments when advice might help us most—whether it’s about our money, or our careers, or perhaps the emergence of a once-in-a-generation public health emergency—seem to be the ones where we’re least likely to take it.</p>
+<p>“What we see is that in the context of difficult decisions, people prefer to deliberate on <em>how</em> to decide about the choices by themselves even if it goes against what others may recommend them,” Grossmann told me. “And that is indeed problematic, because psychological distance, as stimulated by considering views of others, can be a really great way to see the big picture of the issues at hand, especially in the heat of the moment.”</p>
+<p>So, is there really any point in offering advice? Grossmann says yes. But his study proposes that we need to think hard about how advice is framed and delivered. “Now, here are some other things you may consider based on what others thought about it, too … Something like this, perhaps?”</p>
+<p>But, hey. If, against my early advice, you’ve read this far, well done. Sometimes keeping your own counsel really is best. <img alt="" src="../images/nautilus-favicon-14_964.png" /></p>
+<p><em>Lead image: Anton Vierietin / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

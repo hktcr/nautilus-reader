@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art and Science in a Grain of Sand - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Art and Science in a Grain of Sand - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-07
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-U92I</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Science and art are, in many ways, parallel forms of inquiry: They arise from the human imagination, profoundly shape our understanding of the universe, involve experimentation, and rely on manipulating Earthly materials. These commonalities are the focus of writer and director Mark Levinson’s award-winning 2024 documentary <em>The Universe in a Grain of Sand</em>. Though the title comes from the poetry of William Blake, who believed that scientific reductionism destroys imagination and meaning, Levinson’s film places science and art in conversation with one another, both conceptually and visually. Each vignette effortlessly illuminates the next.</p>
+<p>In one segment, for example, a voice-over tells us that the prime scientific idea underlying our digital age is that every type of information can be fully expressed by discrete units, such as zeroes and ones. Meanwhile, the screen fills with colored dots arranged in apparently random blocks. But as the camera pulls away, the dots merge to reveal that they form Georges Seurat’s famous pointillist painting of Parisians enjoying a beautiful park, <em><em>A Sunday Afternoon on the Island of La Grande Jatte</em>.</em> The echoes are unmistakable. The many scientists and artists who parade through the film also offer their perspectives on what science and art share, and the value of that sharing. MIT neuroscientist Sarah Schwettmann, for example, finds that the underlying questions motivating both fields “concern the fundamental nature of the human relationship to the world.”</p>
+<blockquote>
+<p>For me, a script was a theory of the universe, the human universe rather than the physical one.</p>
+</blockquote>
+<p>Levinson himself has deep personal knowledge of both science and art: He earned a Ph.D. in theoretical particle physics at the University of California, Berkeley in 1983, then radically changed direction to work in film. He filmed his first documentary <em>Particle Fever</em> at CERN just as the Higgs boson was being discovered there. This bit of serendipity, and Levinson’s fine cinematic eye and ear for physicists and physics, brought the film wide recognition and awards.</p>
+<p>I spoke with Levinson about the kinship between science and art,the importance of materials to both disciplines, and the ways in which human progress marches toward a unification of man, nature, and machine.</p>
+<p><strong>What made you choose film as your artistic medium?</strong></p>
+<p>What I got interested in about film was not as a medium to explain science. Eastern European cinema was my entry! I saw these incredibly complex, serious, and brilliant Polish, Russian, and Hungarian films produced under restrictive political conditions. I wanted to make films about the complexity of modern life. My first film was a fictional story about former Russian dissident artists and how they made art. [This film was called <em>Prisoner of Time</em>.]</p>
+<p><strong>So you shifted from a primarily scientific mindset to a cinematic and artistic one. How did that go?</strong></p>
+<p>As a graduate student in theoretical physics I was sitting in a room with a pencil and paper, trying to come up with theories of the universe. Then I started writing a script and I was still sitting in a room with a pencil and paper. For me, a script was a theory of the universe, the human universe rather than the physical one. And then you go out and shoot the film, which is like doing an experiment. Manifestly it seems like it’s this unbelievable change, but it didn’t feel like it when I was in it.</p>
+<p><strong>Your first idea for</strong> <strong><em>Grain of Sand</em></strong> <strong>was to show art and science through films that experiment with the medium itself in a scientific way, but you ended up with a more expansive view of science and art in the film, across disciplines. How did that come about?</strong></p>
+<p>I initially thought of experimental film because I knew that some early film pioneers manipulated “materials”—a germane theme of the film—and their work appears in my film. But I have also been struck by the interesting concurrence of the move to more abstraction in both art and physics in the same era, the early 1900s. Another factor was my familiarity with Andy Goldsworthy’s land art, and its resonance with the film. His line that he’s “trying to understand the stone” was gold for me! But during the editing of the film, I kept introducing the art earlier and earlier, to try to make it more expansive!</p>
+<blockquote>
+<p>I would love for people to see science and technology not as threatening and alien.</p>
+</blockquote>
+<p><strong>Instead of simply explaining how science and art work or how they echo one another, your film seems to want to just show the disciplines in action close up, and let viewers draw their own connections. Is that a fair summary?</strong></p>
+<p>Yes! The film, in a sense, was an experiment in showing art and science instead of explicitly explaining them.</p>
+<p><strong>The title</strong> <strong><em>The Universe in a Grain of Sand</em></strong> <strong>metaphorically evokes science at the tiny scales of neurons and digital chips. The film notes also that sand is the natural source of silicon, the semiconductor in those chips. Does the metaphor describe art-making, too?</strong></p>
+<p>In making the film I had this sudden realization: We don’t really think of all the high-tech things around us as connected to nature. But they <em>are</em> nature and that became a very strong thematic element of the film. But it also resonated for me with the idea that artists work with materials that are based on nature and understanding the properties of nature. “Sand” for me is representative of Earth.</p>
+<p><strong>What do you hope that general viewers, scientists, and artists take away from your film?</strong></p>
+<p>I would love for people to see science and technology not as threatening and alien, but as a reflection of our fundamental desire to understand the world around us. I would like people to see our progression as in some sense a unifying of nature, humans, and machines. I’d like artists to see the beauty of science. I’d like people (especially scientists) who may have dismissed art to perhaps come to see it in a new light, as presenting a different, but useful perspective. <img alt="" src="../images/nautilus-favicon-14_1085.png" /></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

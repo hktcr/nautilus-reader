@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Really Is Where the Heart Is | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Home Really Is Where the Heart Is</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-20
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-X53K</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It was a time of many homes.</p>
+<p>For more than two years, I cycled between house sitting gigs, AirBnBs, spare rooms, and friends’ couches. What I remember about these places is less their physical quirks than the sounds, or lack of sounds, that permeated them. The stillness of the lakeside bungalow in small-town Georgia where I spent seven days writing. The thrashing of the south England sea, lulling me to sleep in the dark Bournemouth winter nights. The cackle of kookaburras waking me at 5 in the morning in Brisbane, Australia.</p>
+<p>Unmoored after a breakup with my fiancé and the end of a Ph.D., I had chosen to lean into displacement and transition. At final count, the number of places I parked my suitcase over those itinerant years totaled 38. I roamed across multiple continents, packed and unpacked my things every few months, booked dozens of planes, trains, and buses, said “nice to see you again” and “goodbye” in almost the same breath.</p>
+<p>Last year, I finally took a job in the Netherlands and found a studio overlooking a quiet Amsterdam canal. It seems I might stay a while. I now have favorite coffee shops, good friends, a routine that connects me to this place. But am I really at home?</p>
+<p>My recent jag of rootlessness may lie at an extreme. But the experience of leaving one home to set down roots in another, and the deep need to feel a sense of belonging wherever you live, is a human universal. It is central to some of our most celebrated works of literature—Gabriel García Márquez’s <em>One Hundred Years of Solitude</em> or Homer’s <em>The Odyssey</em>. Where we live—or, rather, <em>how we feel about</em> where we live—can profoundly shape our sense of ourselves and our well-being. These deep ties between sense of home and sense of self render all the more tragic the forced emigration—from politics, war, or other violence—that currently pervades the globe.</p>
+<p>But what determines that sense of home—how we feel about where we live? And why does a sense of being at home, when we do find it, often feel so visceral?</p>
+<blockquote>
+<p>The uniquely Finnish word kalsarikännit captures the distinct experience of getting drunk at home, typically alone in some state of undress.</p>
+</blockquote>
+<p>Matt C. Howard, a professor at the Mitchell College of Business at the University of South Alabama, has been researching health and well-being for almost a decade. He recently started studying the meaning of home because it is an experience so fundamental to our daily happiness, he says, but which is rarely considered from a psychological perspective. For many people, Howard says, feeling unsettled in life may be a sign that one or more of their basic psychological needs are unfulfilled. “If you’re a person who feels like you’re lacking something in life, maybe the thing you’re lacking is [that] you really haven’t identified your home,” he says.</p>
+<p>Recently, Howard decided to take a comprehensive look at the relationship between home and well-being. In a <a href="https://journals.sagepub.com/doi/10.1177/00332941251329850">paper</a> published last year, he reviewed more than 600 studies that consider the meaning of home. These included empirical and conceptual papers spanning almost six decades, covering more than a dozen disciplines, such as urban geography and women’s studies, and examining people from over 50 countries. Over and over again, a common pattern emerged. Home is not just a place that keeps us warm, dry, and sheltered, but somewhere we feel competent and in control of our lives, where we can express our identities and values, and feel connected and supported.</p>
+<p>What Howard found maps onto what psychologists call basic psychological needs theory, <a href="https://psycnet.apa.org/record/2002-01702-001">developed more than 20 years ago</a>. Now one of the most well established motivation theories in contemporary psychology, it proposes that three fundamental needs govern most of our decisions in life, driving us to pursue certain goals over others and, in turn, influencing our physical and psychological well-being. Those three needs are competence, autonomy, and belonging. Howard’s research suggests this same theory can help explain what makes us feel connected to a place—sometimes on an almost instinctual level—and why that feeling is so crucial to our well-being. “If you don’t have those needs [met], that leads to stress,” he explains. If you do have those needs met, it’s much easier to feel happy and comfortable in your own skin.</p>
+<p><strong>A home inside the mind</strong></p>
+<p>The central role our homes play in our lives can be seen in the architecture of the brain itself, says Kübra Gülmez Karaca, a neuroscientist at the University Medical Center Utrecht, in the Netherlands, who studies how memories are formed, stored, and retrieved.</p>
+<p>“There is no single region, but a whole network of cells distributed all across the brain that helps us remember our homes,” she says. This network includes specialized place cells that correspond to specific locations we’ve been, grid cells that <a href="https://www.nature.com/articles/nature03721">help us create mental maps</a> of our environments, and border cells that store information about spatial boundaries and edges. <a href="https://www.nature.com/articles/s41586-024-07139-z">Studies in mice</a> have even found evidence of corner cells that help us take stock of—you guessed it—the corners in our surroundings.</p>
+<p>“Each memory leaves a physical trace,” Gülmez Karaca says. “A footprint of experiences in the brain.”</p>
+<p>Yet despite our rich spatial memory infrastructure, not all places are remembered equally. For instance, many of us would struggle to describe the inside of a café we visited just a month ago, but can easily recall elements of our childhood home in intense detail. The smell of coffee brewing downstairs in the morning, for example, or the telltale creak of that one, loose floorboard at the end of the hall.</p>
+<p>“Home memories are interesting because even though they happened such a long time ago, we can still recollect them vividly,” says Gülmez Karaca.</p>
+<blockquote>
+<p><em>There is no single region, but a whole network of cells distributed all across the brain that helps us remember our homes.</em></p>
+</blockquote>
+<p>This intensity is likely due to the emotional significance of our homes, and the many important moments we’ve experienced there. All day long, our brains take in information about what we are experiencing, what time it is and where we are, and—crucially—how we feel as a result. The hippocampus knits all these different pieces of information together, forming what are known as episodic memories.</p>
+<p>When those daily experiences also happen to be emotionally charged, this process can become amplified. Powerful stress hormones like noradrenaline are released in the brain, <a href="https://www.sciencedirect.com/science/article/pii/S0001691807001278?via=ihub">committing those moments to memory</a> in a more visceral way than we tend to do with less emotionally-loaded experiences.</p>
+<p>What’s more: Recalling the moment later or revisiting the place we first experienced it can reactivate the neural “footprint” of that memory. The reactivation then further <a href="https://www.nature.com/articles/s41386-025-02122-2">embeds the experience</a>—and the emotions we’ve associated to it—into our minds.</p>
+<p>The connection between memory and emotion is one reason some of our most traumatic experiences can continue to haunt us for years, but also why—over time—the places we live in can become so deeply imprinted in our minds.</p>
+<p>“When those experiences accumulate, especially if they’re emotionally meaningful, the place becomes familiar, and personally significant, and may start to feel like ‘home,’ ” Gülmez Karaca says. In this sense, home can be dynamic: an ongoing process of building and rebuilding memory and meaning.</p>
+<p><strong>Finding home wherever we are</strong></p>
+<p>Perhaps because home is so fundamental to our basic needs, people will go to great lengths to cultivate a sense of home in even the most challenging circumstances. “Everybody has an innate sense to build home,” says Cheyenne Greyeyes, a Plains Cree researcher who has studied Cree <a href="https://radicalhousingjournal.org/2022/what-is-home/">conceptions of home</a> along with co-author Celina Vipond. “We are humans, we continue to try to find home wherever we are.”</p>
+<p>The link between home and belonging is embedded in the Cree language itself, as seen by the close relationship between the words for “my home” (<em>nîkihk</em>) and “my mother” (<em>nikâwiy</em>). These linkages appear in other languages too: In Chinese, for example, the words “family” and “home” <a href="https://www.sciencedirect.com/science/article/pii/S1353829225000905">share the same character</a> 家 (<em>Jia</em>). Meanwhile, the uniquely German word <em>heimat</em> refers to the “<a href="https://www.researchgate.net/publication/351116402_Lexicography_listed_by_theme">place to which one feels one belongs</a>”—a sense of home that extends beyond the walls of the physical structure a person lives in.</p>
+<p>Other cultures similarly have untranslatable words that reflect the connection between our homes and our basic psychological needs. For instance, the Old English world <em>hām</em> was first used to describe <a href="https://www.psychologytoday.com/us/blog/language-in-the-wild/202311/why-is-going-home-so-important-to-us">a wider community or village</a>, rather than an individual dwelling, reinforcing the connection between home and belonging. In a somewhat unconventional expression of autonomy, the uniquely Finnish word <em>kalsarikännit</em> (<a href="https://www.researchgate.net/publication/351116402_Lexicography_listed_by_theme">literally translating to “underpants intoxication”</a>) captures the distinct experience of getting drunk at home, typically alone in some state of undress.</p>
+<blockquote>
+<p>Home is not just a place, it is also a process.</p>
+</blockquote>
+<p>These linguistic relationships point to the centrality of home in many cultures, but also the wide range of ways we experience home. A sense of belonging is not just about the relationships we cultivate with family, friends, pets, or even online communities. Possessions and routines can also play a critical role when we’re nesting in a new place: We furnish our apartments with objects that remind us of who we are and where we come from, or find rootedness through simple familiar activities, like cooking a meal or settling in with a good book. Even idols and passions can bring a sense of home. As one participant in <a href="https://www.tandfonline.com/doi/abs/10.1080/17450128.2024.2402396">a study of Indonesian youth</a> explained, the South Korean boyband “BTS is a group whose members can make me feel like I am at home, with a sense of comfort, unconditional love, and understanding.”</p>
+<p>These varied <a href="https://www.sciencedirect.com/science/article/pii/S0147176721001620">strategies</a> for building a sense of home underscore a key finding of <a href="https://www.sciencedirect.com/science/article/pii/S1353829225000905">Angela Cui’s work</a>: Home is not just a place, it is also a process. Cui is an assistant professor at the Chinese University of Hong Kong, where she has been studying the home building strategies of people living in transitional housing due to mental health issues. Through interviews with 60 residents, she and co-author Jialing Wu have uncovered insights that challenge longstanding understandings of how people create a sense of home in a new or unfamiliar environment.</p>
+<p>Cui explains that prior studies have tended to frame home-building as either a linear process or a process of “compensation.” In the linear process, people identify their goal—what they think would make them feel at home—and then slowly, consistently work toward it. For instance, a person who values comfort might find home by buying a plush mattress or particularly cozy couch. The compensation process, on the other hand, requires shifting our priorities. In this case, a person might live in a place that doesn’t quite align with what they value, but they compensate for it by focusing on qualities of their home that do meet their needs. For example, they may feel their home is too small to entertain guests but remind themselves that it allows them to live close to their best friend.</p>
+<p>While people in Cui’s research also used these strategies, they described a third, until now unrecognized strategy: “You can extend the scale of your home,” she explains. “[Or] you can shrink [it], bring your feeling of at-homeness inside yourself.” This ability to shift our concept of home has also been documented in <a href="https://www.sciencedirect.com/science/article/pii/S0147176721001620">studies of migrants</a>, who similarly find ways to develop trust and rootedness in their new country, stay connected to their culture, and express their identity—even when that identity is threatened by their new context.</p>
+<p>It feels paradoxical: On the one hand, we can expand our definition of home to include our wider community, cultivating the social connection that is so <a href="https://www.researchgate.net/publication/269930525_Psychological_home_and_well_being">crucial to our well-being</a> even when we live alone. On the other, we can retreat into our shells, shutting out the world to create a sense of control when our physical surroundings fail to provide it.</p>
+<p>Yet it is exactly this fluidity that makes the concept of “home” so powerful. Yes, home is a place: a physical structure, a dwelling, maybe a neighborhood or community. But it is also an experience, a memory, a feeling, and, perhaps most importantly, an ongoing practice of creating the conditions we need to be happy and well—wherever we are.  <img alt="" src="../images/nautilus-favicon-14_395.png" /></p>
+<p><em>Lead image: Jorm Sangsorn / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

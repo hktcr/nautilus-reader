@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlings Don’t Deserve Their Bad Reputation | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Starlings Don’t Deserve Their Bad Reputation</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-04-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PUDW</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>After European starlings were introduced in Central Park in New York City in the late 1800s, they marched across America like a conquering army. They were ravenous, loud, tenacious, and quick to breed. Hundreds became thousands became millions and, in time, hundreds of millions. In the air, great flocks swirled in mesmerizing clouds like giant ribbons of black smoke writhing above the horizon in a rhythm only they seemed to understand. On the ground, the effect was much more sobering. Starlings could descend on a crop and eat a year’s worth of effort in a day or two. City trees swayed under the smothering weight of roosting starlings, and buildings and sidewalks were coated with excrement. Sometimes they stayed for weeks or months or even longer. They seemed as fickle as they were fearless. A nuisance at best, they bordered on apocalyptic when viewed through the darkest lens.  </p>
+<p>Within decades of being introduced, starlings were among the most numerous birds in America and also one of the most hated. Indeed, famed biologist Rachel Carson once quipped that the starling “probably has fewer friends than almost any other creature that wears feathers.” Later, another writer said, “Francis of Assisi, if he ever tangled with them, might have been tempted to whittle himself a slingshot.”</p>
+<p><img alt="" src="../images/Stark_BREAKER.png" /></p>
+<p><strong>ON THE WING:</strong> Scientists have been studying how starlings so successfully spread across North America. Rapid genetic changes have helped them, as have the starling’s larger brain size compared to other birds and an uncanny knack for survival in different types of environments. One study found that starling wings in the United States have become more rounded since their arrival, which may allow them to take off at steeper angles and gain a slight advantage in escaping predators. This photo is of a starling wing from Washington D.C. that’s now part of the collection at the National Museum of Natural History. <em>Credit: Smithsonian Institution.</em></p>
+<p>As the starlings proliferated, people attempted in vain to keep them away using creative, audacious, and occasionally absurd techniques, including nets, itching powder, live owls, fake owls, mechanical hawks, firecrackers, and flashing lights. They tried draping buildings with electrified wires, oiling ledges, blasting recorded noises from speakers, and even strewing dirty underwear in a tree. Countless men armed themselves with fire hoses or shotguns, and cash bounties were offered. The military was called in, as were the top minds in wildlife biology. Chemical poisons were developed specifically to kill starlings, airline engines had to be redesigned after a horrific crash in Boston, and crews were hired every fourth January in Washington D.C. to keep them out of the trees lining the streets of the presidential inauguration parade route. More experiments were conducted, better ways of killing devised, reports written, curses cast, congressional inquiries made. Through it all, exasperation multiplied as starlings moved, expanded in range and numbers, and persisted, mysterious as always in their fluid flocks, stubborn as stone, reliable as the tides.</p>
+<blockquote>
+<p>They tried blasting recorded noises from speakers, and even strewing dirty underwear in a tree.</p>
+</blockquote>
+<p>It wasn’t so long ago that a group of international scientists named starlings as one of the top hundred “<a href="https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1023&amp;context=nwrcinvasive">invasive alien species</a>,” those considered the most dangerous and damaging for their ability to “establish, thrive, and dominate in new places.” They shared the list with some of the most infamous invasive plants, animals, and fungi, including brown tree snakes, feral pigs, avian malaria, mosquito fish, leafy spurge, and crazy ants.</p>
+<p>We’ve seen in recent decades what invasive species can do, including kudzu vines that choke plants in the South, zebra mussels that clog water intake pipes in the Great Lakes, brown tree snakes that make a meal out of native birds in Guam. Some 60 percent of wildlife extinctions can be partially attributed to invasive species. I haven’t found any reports that starlings in North America are <a href="https://wkoenig.cornell.media3.us/K120TA_03.pdf">threatening</a> to drive any species into oblivion (at least, not yet), but the other damage and distress they’ve provoked have been pretty clear over the past century or more.</p>
+<p><img alt="" src="../images/Stark_BREAKER-4.png" /></p>
+<p><strong>PRANK CALLER:</strong> One of the most popular ways to shoo starlings was blasting recordings of starlings in distress. Sometimes the noise was projected through speakers on mounted trucks, such as during 1954 experiments to clear starlings from Philadelphia City Hall. Other times, records of distress calls were given to people in the neighborhood, who would throw open their windows and turn up the volume in the early evenings as starlings arrived to roost in trees. Some of the records used during experiments in Denver in the early 1960s are in the archives at the U.S. Department of Agriculture’s National Wildlife Research Center in Fort Collins, Colorado. USDA Public Archives. <em>Photo by Mike Stark.</em></p>
+<p>I’ll admit to mixed feelings about <em>Sturnus vulgaris</em>. Like so many things when it comes to nature, it’s complicated, but I can’t help but sometimes root for the underdog, especially species that seem to be under relentless pursuit by people. Where so many see an obnoxious pest, I find myself looking closer at starlings’ iridescent feathers and the speckles that call to mind an abundance of stars in the night sky. I love that they walk with one foot in front of the other, looking more like a wobbly toddler than an elegant and distinguished bird. To me, their <a href="https://nautil.us/the-unintended-beauty-of-starlings-237727/">murmurations</a> at dusk are works of art, even more precious because their giant collective shapes are so liquid and fleeting. The fact that they can mimic the sounds of so many animate and inanimate objects—the tweet of a key fob and the notes of a Mozart composition—never gets old. Even the cacophony of thousands in a roost is something to admire, sheets of furious noise like something from John Coltrane’s last years that turned so many people off, blasts of sonic eruptions that insist on being heard. So much of the human world has become about control and predictability. It’s good to be reminded that nature, too, will have its say. And shouldn’t it?  </p>
+<p>I know there has been a cost from starlings, but we can’t disown the fact that we purposely brought them to North America. They were captured in their homeland, transported across the ocean, and turned loose on foreign soil. No starling asked to come here, as far as I know, so it seems unfair to view them with contempt for being themselves in a land that was never their home. What were they supposed to do? Our culpability can be expanded for making the continent more hospitable to starlings by mowing down forests, building cities, and plowing up wild land. We assembled airports, opened massive cattle operations, seeded orchards, erected intricate buildings, and planted towering neighborhood shade trees—each another enticement for these birds determined to evolve right alongside us. Predictably, we grew annoyed and responded with poisons, explosives, goo, noise, and all manner of deterrents. Starlings answered with perhaps their most potent trait: a stubborn iron will to simply carry on, year after year, decade upon decade. But they’re diminished for now, a shadow of their heyday in North America, victims of the human condition, which seems to bring low so many other wildlife species. <img alt="" src="../images/nautilus-favicon-14_1223.png" /></p>
+<p><em>Excerpted from</em> <a href="https://www.nebraskapress.unl.edu/bison-books/9781496242020/starlings/">Starlings: The Curious Odyssey of a Most Hated Bird</a><em>, by Mike Stark.</em></p>
+<p><em>Lead image: Albert Beukhof / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wild Fish Can Recognize Human Divers | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Wild Fish Can Recognize Human Divers</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-WKL6</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Biologist Alex Jordan was working in the Mediterranean Sea in Corsica, France, testing the abilities of different species of fish to solve complex underwater puzzles, when an annoying problem kept creeping up: Other fish would seemingly swarm the area as soon as they saw him, interfering with the strict parameters of his project.</p>
+<p>“It’s very challenging to do a controlled experiment when that happens,” says Jordan, a biologist at the Max Planck Institute of Animal Behavior in Germany.</p>
+<p>Jordan and his colleagues believed that the fish were swimming over to him because they recognized him in the water. Researchers had already shown that some fish can <a href="https://www.pnas.org/doi/full/10.1073/pnas.2208420120">recognize themselves</a> in mirrors and reflective surfaces and that archerfish, known to have impressive visual cognitive abilities, can recognize <a href="https://www.nature.com/articles/srep27523">human faces</a>. But what about an entire human in a wetsuit, wearing a mask, swimming through their home?</p>
+<p>“People were talking about it in forums and bulletin boards, and in hobbyist magazines, but it had never been scientifically nailed down, and certainly not in the wild,” says Jordan.</p>
+<p>So he decided to try to test the phenomenon himself. Members of his team spent 12 days training two species of sea bream, a small silvery rounded fishcommon to the shallow waters of Corsica, to follow a diver. They lured the fish with food and then gave the food to those that followed the diver as they swam away. Later, another researcher joined, wearing either the same dive suit and mask or one with completely different fins and patches.</p>
+<blockquote>
+<p>“Doing stuff in the wild is hard.”</p>
+</blockquote>
+<p>The team took video footage of the fishes’ responses, documenting whether they followed the original trainer who would reward them or the other diver, who also carried food, but did not offer it as a reward. Over the course of 30 trials with each outfit, the fish overwhelmingly followed the original diver when the decoy was dressed differently—but not when they were dressed identically. The findings, published last month in the journal <a href="https://royalsocietypublishing.org/doi/10.1098/rsbl.2024.0558"><em>Biology Letters</em></a>, suggest the fish were using visual cues from the dive gear to recognize the human researchers.</p>
+<p>Jordan says he strongly believes that, given more time, the fish would be able to pick up more subtle clues about people in the water—hair color or eye color—to differentiate between individuals, even when they are wearing the same dive suit. Fish vision is tetrachromatic, compared to humans’ trichromatic powers, meaning that fish have many more types of light detecting cells in their retinas: They can detect 100 million color variations, compared to the 1 million that most humans can see.</p>
+<p>“The world of color for them is very important, especially for these shallow water fish,” says Jordan. “We are exploring just how far they can go in this realm.”</p>
+<p>Calum Brown, a biologist at Macquarie University in Australia who has studied fish intelligence, points out that scientists did similar experiments in the lab 60 years ago, testing fish abilities to discriminate between two divers based on differences in their dive suits. But Jordan’s study is the first to test these abilities in the ocean, says Brown, who was not involved in the research: “What is cool is that this was done in the wild.” The distinction matters because lab fish behavior could be influenced by habituation to humans.</p>
+<p>Brown has previously <a href="https://link.springer.com/article/10.1007/s10071-021-01488-2">lamented</a> in review papers that very few studies of fish cognition are ever conducted in the wild, or even take wild-caught fish as their subjects. Instead, most use captive or pet shop fish strains to study intelligence. This study changes that, he says. “Doing stuff in the wild is hard,” he says.</p>
+<p>Jordan says while this study focuses on bream, he believes many species of fish are capable of recognizing people. He and his team have observed cichlids in Lake Tanganyika in eastern Africa and wrasse in Corsica swarm human divers in the same way that the bream did.</p>
+<p>Jordan believes that the breams’ ability to recognize divers suggests fish are <a href="https://nautil.us/fish-are-not-insentient-dullards-300702/">more cognitively complex</a> than they get credit for. The narrative has long been that fish have three-second memories, or <a href="https://nautil.us/even-worms-feel-pain-238436/">don’t feel pain</a>, or are simply driven by the demands of the group, says Jordan.</p>
+<p>“I think that’s a mistake,” he says. “They recognize their social partners. They remember interactions. They fear certain things. They like certain other things. They can solve puzzles. They're living this incredibly rich life, and yet still in science and in the public realm, we treat them as anonymous.” <img alt="" src="../images/nautilus-favicon-14_1241.png" /></p>
+<p><em>Lead image: AaronChenPS2 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

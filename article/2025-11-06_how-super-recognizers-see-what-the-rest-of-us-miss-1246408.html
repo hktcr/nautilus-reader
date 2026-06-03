@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Super Recognizers See What the Rest of Us Miss | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Super Recognizers See What the Rest of Us Miss</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GKLX</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Some people never forget a face. A brief encounter at a party can be enough for them to imprint that person’s visage in their minds so indelibly that they recognize it years later—enough even to pick the person out in a sea of faces on a city street. People with this uncanny ability are known as super-recognizers. They make up 1 to 2 percent of the population, and their talents are thought to be inherited through genetics rather than learned.</p>
+<p>It’s a skill that is in demand. Super-recognizers are <a href="https://nautil.us/human-super-recognizers-see-faces-better-than-ai-312487/">better than AI</a> at many facial recognition tasks, and people who score highly on facial recognition tests can get professionally licensed, which allows them to work with law enforcement.</p>
+<p>Recently scientists figured out how they do it: It’s less about how much information about a face they can absorb and process in their brains than about the quality of the information they take in. The researchers <a href="https://doi.org/10.1098/rspb.2025.2005">published</a> their results in the journal <em>Proceedings of the Royal Society B: Biological Sciences.</em></p>
+<p>“Super-recognizers don’t just look harder, they look smarter. They choose the most useful parts of a face to take in,” said James Dunn, a research fellow in the School of Psychology at the University of New South Wales Sydney and lead author on the research, in a <a href="https://www.eurekalert.org/news-releases/1104508">statement</a>. “<a href="https://www.unsw.edu.au/newsroom/news/2022/09/good-face-recognisers-can-learn-faces-from-fragments">Our previous research shows</a> super-recognizers make more fixations and explore faces more broadly. Even when you control for the fact that they’ve looked at more parts of the face, it turns out what they are looking at is also more valuable for identifying people.”</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/human-super-recognizers-see-faces-better-than-ai-312487/"><strong>Human Super-Recognizers See Faces Better Than AI</strong></a><strong>”</strong></p>
+<p>The researchers used eye tracking on 37 super-recognizers, mapping where and for how long they looked at photos of faces on a computer screen. They did the same for 68 people with average facial recognition abilities. They then fed the information they had gathered from the different groups of participants into nine different neural networks that had been trained to recognize faces and asked the AI networks to decide whether two faces belonged to the same person.</p>
+<p>“AI has become highly adept at face recognition,” Dunn said. “Our goal was to exploit this to understand which human eye patterns were the most informative.”</p>
+<p>The AI was much better at matching faces when fed the super-recognizers’ eye tracking patterns than that of average recognizers. This was true even when the total amount of visual information was the same and even when the face was partially hidden from view.</p>
+<p>One reason super-recognition might be difficult to learn is that, while some features are more critical for recognition on average, such as the eyes, evidence suggests that features that are most helpful for recognizing and identifying any particular face will differ from one person to the next. This may be why super-recognizers focus their gaze broadly across the face rather than most entirely on critical individual features.</p>
+<p>The findings upend earlier assumptions about why super-recognizers are so super at recognizing faces: It’s about differences in how they encode information on the retina rather than how they process visual information after it reaches the brain.</p>
+<p>The researchers note that their study focused on facial recognition in still images, whereas future studies could look at how super-recognizers are able to identify faces in changing context such as video.</p>
+<p>Either way, it seems you can’t hide from a super-recognizer.  <img alt="" src="../images/nautilus-favicon-14_832.png" /></p>
+<p>Are you a super-recognizer? Take one of these tests:</p>
+<p><a href="https://facetest.psy.unsw.edu.au/">The UNSW Face Test</a> (University of New South Wales)</p>
+<p><a href="https://www.bbk.ac.uk/psychology/psychologyexperiments/experiments/facememorytest/startup.php?r=8&amp;p=0&amp;d=1&amp;dn=0&amp;g=0&amp;m=68f7d848edeaebd6cc29371b806b3017">The Cambridge Face Memory Test</a> (Birbeck University of London)</p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em>.</p>
+<p><em>Lead image: Fractal Pictures / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

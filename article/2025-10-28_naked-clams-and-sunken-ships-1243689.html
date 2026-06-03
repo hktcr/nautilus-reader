@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naked Clams and Sunken Ships | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Naked Clams and Sunken Ships</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-3F0K</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Fifteenth-century explorer Christopher Columbus was certain that his expedition had been cursed. Sailing across the Caribbean Sea with four ships in his fleet, a series of brutal storms kept the flotilla at the mercy of the wind, rain, thunder, and waves for nearly three months, preventing the vessels from reaching safe harbor. As he wrote in a letter in 1503, “It seemed as if it were the end of the world.”</p>
+<p>Under the chaotic waves, a more insidious threat was destroying his ships from within. Like a Biblical swarm set loose in the ocean depths, thousands of hungry worm-like animals gnawed at the wooden boards of his hulls. The ravenous beasts could grow to a foot in length in just six months. “My ships were pierced by borers more than a honey-comb,” Columbus later wrote.* “With three pumps, and the use of pots and kettles, we could scarcely clear the water that came into the ship, there being no remedy but this for the mischief done by the ship-worm.”</p>
+<p>Battered by storm and made porous by the shipworm, Columbus’ ships were left stranded on an island that would come to be known as Jamaica. In an age before iron and steel hulls, his plight was a common experience for any voyage; if you build something out of wood and soak it in the ocean for long enough, it will get eaten by shipworms. From the Ancient Greeks to the Spanish Armada, boat-builders not only had to make a vessel sea-worthy but also attempt to make it shipworm-proof. Hulls were <a href="https://www.usni.org/magazines/proceedings/1952/july/history-prevention-fouling#:~:text=The%20Vikings%20of%20the%2010th,fell%20quite%20generally%20into%20disuse.">coated</a> in tar, animal hair, seal oil, lead, copper, and, in the 15th century, a second layer of wood that was bolted to the outside the actual hull—a sacrificial offering to the insatiable wood-boring worms of the ocean.</p>
+<blockquote>
+<p>Just as shipworms did not exactly evolve to eat ships, they are also not exactly worms.</p>
+</blockquote>
+<p>Even today, shipworms eat piers, breakwaters, and pilings. At a cost of <a href="https://www.nytimes.com/2019/09/13/nyregion/ny-harbor-wood-eating-shipworms.html">$300 million</a>, the foundations underneath Brooklyn Bridge Park, for example, are presently being wrapped with concrete or coated with epoxy resin in order to stop these animals from collapsing this sprawling structure near New York City’s iconic span into the East River.</p>
+<p>Just as shipworms did not exactly evolve to eat ships, they are also not exactly worms. Members of the <em>Teredo</em> genus, these animals are mollusks most closely related to clams. The two valves of their shell aren’t used for protection but as sharp jaws able to scrape through even the toughest oak. Their long, worm-like body is protected by the burrow it excavates in a piece of wood—whether a floating ship, a pier piling, or a sunken tree trunk.</p>
+<p>It was the shipworms’ insatiable appetite for all things wooden that caught the attention of David Willer, a scientist who studies sustainable aquaculture at the University of Cambridge. Fast growing, able to subsist entirely on wood, and with little investment in a biologically costly large shell, the animals seemed to him an intriguing and promising candidate for a big problem: Helping to feed the world. He suggests they might be an unlikely means for tackling far reaching problems of hunger, malnutrition, and a global food system that contributes about <a href="https://ourworldindata.org/environmental-impacts-of-food">26 percent</a> of humanity’s greenhouse gas emissions. In other words, he sees the shipworm very differently from the mariners who have long cursed the animals: not as scourge but as savior. With this in mind, he has a rebranding suggestion: When prepared for human consumption, he calls them “naked clams.”</p>
+<p>Shipworms don’t dine on ships out of spite. For those organisms that can stomach it, wood is nutritious stuff. It is made from lignocellulose, a natural polymer composed of closely packed chains of cellulose wrapped in a mesh of lignin and hemicellulose. Hard to break, it is even harder to digest. But for any organism that has evolved the ability to do so, the rewards are well worth their efforts. Cellulose is the most abundant biological polymer on Earth, and it is made entirely from repeated linked molecules of glucose—sugar. “If you think of an ice lolly,” says Simon Cragg, a researcher who studies wood-borers at the University of Portsmouth, “the biggest energy potential is in the little stick.”</p>
+<p>To turn wood into glucose, the ancestor of modern shipworms (and a deep-sea group of Teridinids known as Xylophagids) formed an alliance with bacteria that are capable of digesting lignocellulose. While symbiotic relationships are common across the tree of life—grass-digesting bacteria inside the rumen of cows and sheep, for example—the shipworms’ alliance is a bizarre one. Their symbiotic bacteria are kept separate from the digestive system, contained within cells in their gills, which span most of their body’s length. “It’s the equivalent of us having bacteria in our lungs that provide us with the ability to digest our food,” says Reuben Shipway, a shipworm taxonomist who, in 2021, co-founded the Naked Clam project with Willer. They aim to spin up an entirely novel sector of the robust global aquaculture market by capitalizing on the shipworm’s unique biology. “They’re the only animals that do this.”</p>
+<p><img alt="" src="../images/iqUueZXU-Riley_BREAKER.png" /></p>
+<p><strong>WHAT'S IN A NAME?:</strong> When preparing shipworms for human consumption, David Willer calls them "naked clams" to make them seem more palatable. And a fancy presentation, like in this shipworm dish, doesn't hurt either. <em>Courtesy of David Willer.</em></p>
+<p>Crucially, only the enzymes that can break down wood enter the digestive system from a shipworm’s gills, a hypothesis first proposed by a scientist in the 19th century but <a href="https://royalsocietypublishing.org/doi/full/10.1098/rspb.2022.1478">only confirmed in 2022</a>. What may seem unnecessarily complex is actually an evolutionary sleight-of-hand that favors the shipworm. Keeping their bacterial helpers away from their woody banquet, the host organism retains <a href="https://pdf.sciencedirectassets.com/272030/1-s2.0-S1367593115X00056/1-s2.0-S1367593115001246/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjELv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEjWiCMYeyVnVWWQtrrGa3AnS18AoEjaJPpa3NIj%2F3dTAiEAwq%2Fe%2FfCkQ%2Be8VGZhJiVohh%2BIP3F2cOUR0czOT%2BMBwygquwUI1P%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAFGgwwNTkwMDM1NDY4NjUiDC2vRkHOD4dsF%2FSQjSqPBTbp7KRxDmDfDCg3eSrA0YsXOScPe%2BMBBtpMO1IaaePSBGdjpqmGIfrKEJKjBdvghXP27wSjmU3XDYfIxyTEu%2BRcTICD5xjAYCIcGcAk9WvZqaFc%2FpiEZjODZ3FRSfBGvRyIHI987fiGsPkIWy2Os1uZafLLXGNy%2FVQwUSyaZrjngWLrrNIwfa%2BB%2FI4wvsP6%2B6aWlfqHhSY%2BMVifjvMTrEWiW6bzZrd7914ujMdcBYf0%2F7o0RxNEXO2iDjT07KoAV2AFORdd6EzapuzpfiI8HN4lJXXepHGjI%2BTAQ14bV8QrWtk7PVVw%2FyyDV9iz3d0G4VoTPBBJv3ZBt39VhpD8j3ukGTnTR8zfxBXT%2B6DQv13rSNGKXGA5uhtmHV6S2U%2Bsg8tqyp3%2BoXusqfvW0i4buECDDrlhEJs3u9SQibIWdzbSPUobvPqFPDucHmjh7AYisSCFkVL9MqjshV5yCPEtGvB9IUKgtLzJKYAWCZzpX95Grm9evMWazjVmpCeF096cPlPdvE%2BPd%2Fm54o8SyW2%2BJwhgFu4%2Fk4YL4Kd9lp1GNsI%2Fv%2FHIJVcAk2qdU%2B8%2FO0HoeAExKZbFMLvfN4ull0E1VrrG93Bmx5lRoKyat6RLVMnPWOr26puQcVZRDqjFHw8CQtrTaFUJs8g6u0jXEcZbp9Z%2BTwDlVuq0iiDr8WRhQGILrLZULbooHBkva3bGuzQGZ81WnMENsEearn02qE6cffdvw8nHgk1IsgpPmYRtt65UIz380iOMP0blXRDKeU1O3hetSC1rQjeKoQJNM3IuyvVrMz083VS3HmhKZnwLRIA8n3FPLJUZN8yxpphsqAQxgGgWUPaseYxQp3tchNAD2u1AJAw8kO7ezer3DtDis1Iwg8usvQY6sQHZmGRuUF%2FAqhoZOC2jA2fQmjxtVi9RRMhWr6eD0jOqw7B9v79q9y3%2BW7FjfFVPfubyVormSNTyNQzYJ%2BhzovdgNebfuZRsqDUexSwJE5cKzIbZXK7tMDRCZ4yTXfjGO4F1VPzDcc8Xlc55LvZ1BVlwEIot8aDrKql%2F1qMz%2FohEj5WA42IREI1tzYwypVeb%2BGa%2FAYArLvDnVyMv2jFNwoy5uN7qRE8qCmDYayyICa0nU6U%3D&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20250211T111800Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Credential=ASIAQ3PHCVTY6WGPCZDU%2F20250211%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=cedcff64edb35084cffd5c431f5c2df8816f65b29a88e1b8c4ab7b34082b694b&amp;hash=886cb88ca7978031e125e6554c249b8e1270206f0e92cbcffc2b35fd39ab6c2f&amp;host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&amp;pii=S1367593115001246&amp;tid=spdf-511721ab-c790-4fdf-8d25-8cd8f2f38c96&amp;sid=4c8ff495719b59480188e5a1fd6fd03ba2f0gxrqb&amp;type=client&amp;tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&amp;ua=1d045e51555301095d040a&amp;rr=9103ef8ed8d493e3&amp;cc=gb">control of the riches</a>, keeping their bacterial symbionts just happy enough on scraps while they consume the lion’s share of the sugar.</p>
+<p>With these tactics and when surrounded by their food, shipworms can grow up to <a href="https://iadns.onlinelibrary.wiley.com/doi/full/10.1002/fft2.487">20 times faster</a> than the blue mussel, a commercially grown bivalve eaten across the globe. This extreme growth rate, combined with its bottomless appetite for the indigestible, also makes shipworms one of the elite oceanic recyclers, able to transform a sunken tree trunk into a protein-rich buffet that can, in turn, help feed their predators and surrounding ecosystems.</p>
+<p>All of these ideas coalesced into an unconventional plan in Willer’s mind. Why not grow these naked clams as an even more efficient food source? Perhaps in shipping containers or along coastlines. This, he thinks, could help feed the 1o billion or so people projected to live on Earth by 2050, and also tackle the increasing rates of food poverty and malnutrition in the shorter term.</p>
+<p>The history of shipworm aquaculture predates Willer’s naked clam project. Actually by quite a bit. Roughly 8,000 years ago, in what could be the first form of aquaculture, Indigenous people living in and around what would later be named Sydney, Australia, sunk branches and trunks of swamp oaks to grow their own local supply of shipworms. The name of these people—the <a href="https://raco.cat/index.php/coolabah/article/view/327763"><em>Cabrogal</em></a>—literally means “the shipworm clan.” In Southeast Asia, shipworms are still harvested from mangrove roots at low tide and eaten raw with a sprinkling of salt, chili, and calamansi (a citrus fruit similar to lime). Known in Thailand as <em>tamilok</em>, they are also eaten in stews and battered like calamari. Shipworms are even added to <em>halo-halo</em>, a popular type of ice cream in the Philippines.</p>
+<blockquote>
+<p>When prepared for human consumption, Willer calls them “naked clams.”</p>
+</blockquote>
+<p>Shipworms are also reasonably nutritious. Willer’s own analyses have found that naked clams are high in DHA omega acid, contain more protein than beef, and, like other animal-based products, offer micronutrients such as vitamin B12, selenium, iron, and zinc.</p>
+<p>Willer says that he seeks to expand the appetite for shipworms across the globe. Willer enjoys eating them raw, himself, describing it as a true connoisseur: “a bit like a whiskey that holds onto the taste of wood.” Working with professional chefs, Willer is also developing some modern twists on this seafood. Battered and fried, chopped into meat-style chunks, or packed into burgers, modern processing could enhance the flavor of shipworms while also making them more approachable to Western consumers. He has even experimented with injecting garlic butter microcapsules into tanks containing shipworms, a flavoring that is then suffused throughout the naked clam’s body.</p>
+<p>If Willer manages to get widespread shipworm aquaculture off the ground, it would join a rapidly growing sector in the global food production landscape. From a few million tons in 1950, aquaculture now produces more than 90 million tons of fish and mollusks every year across the world.</p>
+<p>But this surge in popularity—salmon, for example, is now being grown from Norway to Chile—has also led to widespread environmental concerns. Producing 1 kilogram of farmed salmon, for instance, requires catching and processing 4 kilograms of smaller fish pulled from some of the most productive food webs in the oceans. As Patricia Majluf, a biologist and vice president focused on Peru at the international conservation advocacy organization Oceana, and her colleagues <a href="https://www.science.org/doi/10.1126/sciadv.adn5650">wrote</a> in the journal <em>Science Advances</em> in 2024, “most of this global supply, especially of FO [fish oil], now being used by the aquaculture industry purportedly to ‘contribute to global food security’ is, in fact, primarily being used to produce high-value, globally traded seafood that benefits only the few who can afford it.”</p>
+<p>Eating lower in the food chain can be less environmentally damaging than eating large predatory fish (such as salmon and tuna) because smaller fish require fewer inputs of food and can grow and reproduce faster, bolstering their recovery from potential <a href="https://nautil.us/how-indigenous-knowledge-could-save-fishing-1212406/">overfishing</a>. And growing and consuming any bivalve is often even more sustainable. As an additional environmental asset, bivalves also reduce levels of dissolved nitrogen and phosphorus, compounds that can fuel toxic algal blooms.</p>
+<p>But even these apparent benefits and a long history of shipworms as food doesn’t mean that more people will accept them, even with their rebranding. “It is difficult to predict consumer acceptance,” Birgit Rumpold, a researcher who studies insects as food at Technical University of Berlin, tells me via email. “In the end, [the] key factor is always taste. But <a href="https://nautil.us/why-we-love-to-be-grossed-out-237708/">disgust</a>, food neophobia, and food culture are also of great importance.” She adds that, like with <a href="https://www.theguardian.com/environment/2025/jun/25/eating-insects-meat-planet">insects</a>, shipworms could also be grown to feed other animals or farmed fish.</p>
+<p>In 2026, Willer has plans for his first large-scale aquaculture project, an underwater farm of mussels, shipworms, and marine algae called sugar kelp common in Asian cuisine on the north coast of Devon in southwest England. With long stretches of sandy beaches, this area is famous for its relentless wind and waves, a place where the Atlantic Ocean meets the land with a running hug. Setting sail from western Spain in the 15th century, the waves that Columbus first met would have been much the same. But here, the shipworm is far from a scourge but instead an unlikely glimmer of hope. <img alt="" src="../images/nautilus-favicon-14_888.png" /></p>
+<p><em>Lead image: Ekaterina Gerasimchuk / Shutterstock</em></p>
+<p><strong>Footnote</strong></p>
+<p><em>*While Columbus’s legacy is tarnished by the cruelty and callousness he showed the Indigenous people he encountered in the New World, he did keep good ship’s logs, some of which were preserved, giving us a window into nautical troubles of the time.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

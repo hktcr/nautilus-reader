@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why We Might Not Find Life on Titan - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why We Might Not Find Life on Titan - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-04-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-9YZQ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>If there’s any life on Saturn’s moon Titan, then there’s probably not very much.</p>
+<p>Astrobiologists have been hopeful that Titan hosted life ever since scientists detected signs there of a subsurface ocean layer during the <a href="https://nautil.us/voyagers-ready-to-go-dark-1166780/">Voyager fly-bys</a> of Saturn in the 1980s. The possibility was further supported by data gathered during the Cassini mission, the NASA space probe that explored the Saturn system from 2004 until 2017.</p>
+<p>But a new study, published in <a href="https://iopscience.iop.org/article/10.3847/PSJ/adbc66"><em>The Planetary Science Journal</em></a>, suggests Titan does not have enough food in its underground ocean to support substantial life. The researchers calculated how many microbes could live there by estimating levels of a chemical called glycine, an amino acid that some types of bacteria here on Earth use as a source of both carbon and energy, on Titan. By “fermenting” glycine, such bacteria can break it down for food without needing any oxygen, which is otherwise required by most microbes on Earth. (Glycine is also used in the human body to make proteins and for other cellular functions, and we usually get it by eating meat and dairy products.)</p>
+<p>The team of researchers calculated that there could only be enough glycine in Titan’s underground oceanto support at most 100 quadrillion microbial cells, which equates to around 15 pounds of biomass in total, or about the size of a small dog. Such a small amount doesn’t completely rule out the possibility that there is microbial life on Titan—a few specialized microbe species on Earth boast an even smaller total biomass—but it’s not promsing.</p>
+<p>“Such a tiny biomass would average less than one cell per liter of water over Titan’s vast subsurface ocean,” says University of Arizona theoretical ecologist Antonin Affholder, the study’s lead author. By comparison, a single <a href="https://news.uchicago.edu/story/one-scientists-quest-map-trillions-microbes-great-lakes">drop</a> of water from Lake Michigan contains roughly 1 million bacterial cells and 10 million bacteriophages.</p>
+<p>Outside Earth, Titan may be the most interesting place in the solar system. It’s about one and a half times the size of Earth’s moon and it’s the only other body known to possess liquid lakes or seas, not just underground but on its surface. It also has a thick atmosphere that creates <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-earth-060115-012428">clouds</a> and perhaps even a sort of rain. The fact that Titan has such a varied geography and what seems to be a chemical cycle on its surface—akin to the water cycle here on Earth—makes it an exciting subject of study for  planetary scientists. But Titan’s atmosphere is unbreathable nitrogen and methane and the surface is exceptionally cold, with an average surface temperature of -290 degrees Fahrenheit; and so the lakes and rain are mostly liquid methane and the surrounding dunes are sands of water ice and frozen hydrocarbons.</p>
+<blockquote>
+<p>Such a tiny biomass would average less than one cell per liter of water over Titan’s vast subsurface ocean.</p>
+</blockquote>
+<p>What Affholder and his colleagues found could further the hunt for microbial life elsewhere in the solar system. The study’s calculations of an upper limit for the biomass in Titan’s underground ocean could be tailored for other moons. Scientists are fairly certain that not just Titan, but also Saturn’s moon Enceladus and Jupiter’s Europa have underground oceans; and that others probably exist beneath the frozen surfaces of the moons Mimas around Saturn, Ganymede and Callisto around Jupiter, and Triton around Neptune.</p>
+<p>The researchers identified glycine fermentation as perhaps the best source of food for microbes in Titan’s underground ocean, because there’s little sign of any other chemicals  that could provide the oxygen needed for other food-producing processes. The researchers considered both the amount of glycine leaking from Titan’s core, at the bottom of its deep ocean; and the amount of glycine forming on the moon’s surface, where it could then be carried through the icy crust by meteorite impacts—a frequent occurrence amid the moons of Saturn. The study also draws attention to two byproducts of glycine fermentation—methane and hydrogen—that have both been detected in plumes of water spewed into space from the ocean beneath the ice of Enceladus.</p>
+<p>NASA plans to explore the surface of Titan in the 2030s with its flying Dragonfly probe. But Affholder says the Dragonfly mission is concerned with the chemistry of Titan’s surface and won’t sample the underground ocean, which scientists think starts about 100 miles down and could be 100 miles deep. (Titan’s crust is much thicker than the crusts on Europa or Enceladus, which might be just a few miles thick in some places.)</p>
+<p>Ralph Lorenz, NASA’s <a href="https://science.nasa.gov/mission/dragonfly/">mission architect for Dragonfly</a>, who was not involved in the study, notes in an email that the study’s estimates are based on little-understood factors that the Dragonfly mission will address, such as the abundance of glycine on Titan’s surface and the extent to which it could be carried down into an underground ocean by meteorite impacts. Lorenz, who is a Johns Hopkins University planetary scientist, adds that while the study’s conclusions may not look great for life on Titan right now, the moon’s rates of glycine production and exchange could have been higher in the past, and could be higher in other places that resemble Titan throughout the universe today.</p>
+<p>The <a href="https://nautil.us/searching-for-life-under-a-methane-rain-302557/">Dragonfly probe</a> will explore Titan’s surface for a little more than three years before its <a href="https://science.nasa.gov/planetary-science/programs/radioisotope-power-systems/overview/">nuclear battery</a> runs out. Flying on Titan is much easier than on Earth, thanks to the moon’s low gravity and dense atmosphere, and the mission scientists and engineers hope Dragonfly will examine all sorts of locales on the distant moon, as we continue our search for life—even if the chances of finding it are very small. <img alt="" src="../images/nautilus-favicon-14_1206.png" /></p>
+<p><em>Lead image: mihmihmal / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

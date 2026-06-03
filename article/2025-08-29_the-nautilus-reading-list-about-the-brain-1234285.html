@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brain Is Wider Than the Sky | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Brain Is Wider Than the Sky</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RJWN</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Poet Emily Dickinson's famous line that the brain is wider than the sky captures the 10 books featured here. They are more than manuals to axons, dendrites, synapses, and neurotransmitters. They take us inside the brain to show us how it intersects with the world outside it. These books, fiction and nonfiction alike, remind us that stories shape how we learn and remember. Of course, they represent only a fraction of literature on the brain. We chose them because they evoke themes we love to cover in <em>Nautilus</em>—<a href="https://nautil.us/where-did-the-brain-come-from-380114/">brain evolution</a>, <a href="https://nautil.us/finding-the-neural-correlates-to-consciousness-is-still-a-good-bet-352054/">consciousness</a>, <a href="https://nautil.us/to-be-more-creative-cheer-up-235233/">creativity</a>, <a href="https://nautil.us/the-new-science-of-animal-minds-713384/">animal intelligence</a>—and because they are beautifully composed and written. The brains behind them have a touch of the poet themselves.</p>
+<p><img alt="" src="../images/3YJwypRe-breaker-1.png" /></p>
+<p>Penguin Random House</p>
+<p>The brain was an organ in our heads that only specialists understood until British neurologist Sacks appeared in the 1980s to fascinate us all with case histories of his patients with brain disorders like visual agnosia and Tourette's Syndrome. Damaged parts of the brain and the strange behaviors they induced informed neurology and led to a better understanding of the brain. Sacks' talent at weaving neurology into stories of people like a music teacher who can't properly contextualize things—one day he reaches for his hat to leave Sacks' office but grabs his wife's head instead—remains nonpareil. In writing about brain disorders, Sacks widened our understanding of being human.</p>
+<p><img alt="" src="../images/jW2DQGzJ-breaker-2.png" /></p>
+<p>Hachette Book Group</p>
+<p>The late philosopher's 1991 book is the maypole around which debates about consciousness revolve. <a href="https://nautil.us/10-brilliant-insights-from-daniel-dennett-567922/">Dennett</a> didn't buy that consciousness emerged from a mysterious theater of the mind. That consciousness was a "<a href="https://nautil.us/is-the-hard-problem-really-so-hard-421778/">hard problem</a>" or an <a href="https://nautil.us/a-clash-of-perspectives-on-panpsychism-237719/">essence of the universe</a>. He maintained that consciousness, that qualia—the redness feeling of red—could be traced to the material brain. Consciousness and all varieties of thought or mental activity "are accomplished in the brain by parallel, multitrack processes of interpretation and elaboration of sensory inputs," he wrote. To this day, philosophers of the mind must <a href="https://nautil.us/i-never-stopped-learning-from-daniel-dennett-569904/">reckon with Dennett</a> and his illustrious body of work.</p>
+<p><img alt="" src="../images/XfRhVgmW-breaker-3.png" /></p>
+<p>Hachette UK Limited</p>
+<p><a href="https://nautil.us/antonio-damasio-tells-us-why-pain-is-necessary-236956/">The eminent neuroscientist</a> at the University of Southern California explains that the brain is not the director in the movie of our lives but is influenced by the actors in the body itself. The biological interplay, in which the body strives to maintain a healthy homeostasis, gives rise to feelings that are the real heroes in our prosperity as a species. Descartes had it wrong. His famous dictum should be, I <em>feel</em>, therefore I am. "Feelings have not been given the credit they deserve," Damasio writes. It's feelings that gave rise to science, medicine, religion, and art.</p>
+<p><img alt="" src="../images/AI71eweV-breaker-4.png" /></p>
+<p>HarperCollins Publishers</p>
+<p><a href="https://nautil.us/ingenious-lisa-feldman-barrett-236538/">Neuroscientist Barrett</a> makes a compelling case that emotions are not an innate circuit in our brain triggered by experiences. Rather, they are concepts that our individual brains fashion, with threads of memory, to make sense of current situations. "From sensory input and past experience, your brain constructs meaning and prescribes action," Barrett writes. "With concepts, your brain makes meaning of sensation, and sometimes that meaning is emotion.” For the other side of the argument, that emotions are universally innate, read the equally compelling <a href="https://www.penguinrandomhouse.com/books/622175/awe-by-dacher-keltner/"><em>Awe</em></a> by <a href="https://nautil.us/the-dark-side-of-awe-503557/">Dacher Keltner</a>, a professor of psychology at the University of California, Berkeley.</p>
+<p><img alt="" src="../images/ZCubbjJA-breaker-5.png" /></p>
+<p>Macmillan Publishers</p>
+<p><a href="https://nautil.us/our-magnificent-ocean-889177/">Powers</a> won the 2006 National Book Award for this novel that explores <a href="https://nautil.us/to-understand-facebook-study-capgras-syndrome-236173/">Capgras syndrome</a>, a rare form of brain damage that cuts off perception from emotional connection. The novel's main character survives a car crash but doesn't recognize his sister who lovingly cares for him. He treats her as a kind stranger. <em>The Echo Maker</em>, named after a Native American term for sandhill cranes, unreels as a metaphor for what happens when our deepest feelings for others and our environment become severed from our supposedly rational minds. Powers amplified that theme in his hugely popular novel, <a href="https://nautil.us/the-woman-redeemed-by-trees-237040/"><em>The Overstory</em></a>.</p>
+<p><img alt="" src="../images/7qLM5NTO-breaker-6.png" /></p>
+<p>Macmillan Publishers</p>
+<p>The vivid writing alone by the University of California, Berkeley, professor of psychology distinguishes her groundbreaking appreciation of the kid brain and how it experiences the world more colorfully than adult gray matter. Children and adults, Gopnik writes, "are different forms of <em>Homo sapiens</em>." Children have "equally complex and powerful minds, brains, and forms of consciousness, designed to serve different evolutionary functions." Such as? "Children are the R&amp;D department of the human species—the blue-sky guys, the brainstormers. Adults are production and marketing. They make the discoveries, we implement them."</p>
+<p><img alt="" src="../images/4l6Dyrd6-breaker-7.png" /></p>
+<p>Macmillan Publishers</p>
+<p><em>Other Minds</em> is incredible because <a href="https://nautil.us/what-it-feels-like-to-be-an-octopus-235844/">Godfrey-Smith</a> convinces us that cephalopods like the octopus have active minds, subjective experiences, and their own consciousness. Octopuses are exploratory and curious, always seeking novelty, Godfrey-Smith tells us. "These features are reminiscent of what Stanislas Dehaene associates with consciousness in human mental life." (Cognitive scientist Dehaene's book <a href="https://www.penguinrandomhouse.com/books/308282/consciousness-and-the-brain-by-stanislas-dehaene/"><em>Consciousness and the Brain</em></a> could also be on this list.) The invertebrate octopus developed along an evolutionary path wholly apart from us vertebrate primates, Godfrey-Smith informs us, and so is "probably the closest we will come to meeting an intelligent alien."</p>
+<p><img alt="" src="../images/ycthHrnQ-breaker-8.png" /></p>
+<p>Macmillan Publishers</p>
+<p><a href="https://nautil.us/ingenious-robert-burton-234532/">Neurologist Burton</a> probes the question: What does it mean to be convinced? His answer: "Despite how certainty feels, it is neither a conscious choice nor even a thought process." It arises "out of involuntary brain mechanisms that, like love or anger, function independently of reason." This "feeling of knowing" guides both humanity's wonders and follies. <em>On Being Certain</em> is alive with stories from science and art, politics and law, to reveal that if there is one thing about which we can be certain it's that certainty is <a href="https://nautil.us/our-brains-tell-stories-so-we-can-live-237501/">a story</a> written by our brains—an awareness that Burton writes could lead to a humbler, wiser world.</p>
+<p><img alt="" src="../images/Tu2NjbUT-breaker-9.png" /></p>
+<p>Penguin Random House</p>
+<p>What's so extraordinary about the Nobel laureate's eighth novel is the voice of its narrator, Klara, an Artificial Friend, a humanoid robot. Klara's observations of people and the environment, especially the sun, which the solar-powered Klara calls "he," are innocent and unaffected; you feel Klara learning, becoming more conscious, although you never forget Klara's a machine. <a href="https://nautil.us/why-conscious-ai-is-a-bad-bad-idea-302937/">Anil Seth</a>, a professor of cognitive and computational neuroscience, who probed the nature of consciousness in his book, <a href="https://nautil.us/we-are-beast-machines-238325/"><em>Being You</em></a>, calls <em>Klara and the Sun</em> an "emotionally devastating fictional account of what AI consciousness might be like, if it were conscious—and, more so, a reflection back onto how we understand our own selves and our own conscious minds."</p>
+<p><img alt="" src="../images/3MpRKfzs-breaker-10.png" /></p>
+<p>Simon &amp; Schuster</p>
+<p><em>The Mind Electric</em>, published earlier this year, is a revelation. It's the first book by Anand, an assistant professor of neurology at the Boston University School of Medicine and a neurologist at the Boston Medical Center. She weaves her experiences with patients afflicted with a strange and awful array of brain disorders—“The student lost her vision so gradually, so insidiously, that not until days after the symptoms first began did she realize that she had been struck blind"—with her own family history, fables, medical history, and literature. Anand writes, "The <a href="https://nautil.us/your-brain-wants-a-linear-story-469444/">human desire for narrative</a>, the impulse to tell and hear stories, is both universal and inexorable, coded into our brains so deeply across multiple networks that it often survives and even surges after the most devastating of brain injuries." That transcendence shines through <em>The Mind Electric</em>. <img alt="" src="../images/nautilus-favicon-14_988.png" /></p>
+<p><em>Lead image: Solarisys / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

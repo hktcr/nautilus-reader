@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why We Misunderstand Psychopaths | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why We Misunderstand Psychopaths</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-JHME</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 2009, MRI research on psychopathy was presented for the first time in a United States courtroom in the homicide case State v. Brian Dugan. Since then, neuroimaging research on psychopathy appears to have <a href="https://cognitiveresearchjournal.springeropen.com/articles/10.1186/s41235-019-0179-y">made its way into the court system</a> with increasing frequency, although little is known of its true extent.</p>
+<p>While the idea of psychopathy as a “brain disorder” has a long history and has been studied using various technologies, it wasn’t until the year 2000 that scientists began to rigorously test it using structural and functional MRI methods. Since then, dozens of MRI studies have been published, yet the most reasonable conclusion to draw from this research is that no reliable evidence has emerged to corroborate the idea that psychopathy—as measured by the Psychopathy Checklist (PCL)—is correlated with brain abnormalities of any kind.</p>
+<p>Overall, the experimental results are predominantly nulls with a few statistically significant but inconsistent effects (often in opposing directions), which might be better explained as a byproduct of confounding variables unrelated to psychopathy, such as substance misuse, medication, or head trauma.</p>
+<p>This conclusion raises an important question: If there has never been any clear evidence of brain abnormalities in psychopathic persons, why do so many scientists keep portraying psychopathy as a neurodevelopmental disorder?</p>
+<blockquote>
+<p>No reliable evidence corroborates the idea that psychopathy is correlated with brain abnormalities of any kind.</p>
+</blockquote>
+<p>While some reviewers began to voice hesitancy about the inferential value of the MRI research during the 2010s—including Michael Koenigs and colleagues in 2011 and later Stephanie Griffiths and Jarkko Jalava in 2017—others appear to have kept repeating statements that express little doubt about linking psychopathy to brain abnormalities. For example, in <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.654336/full">a study</a> I conducted with Jarkko Jalava, Stephanie Griffiths, and Emma Alcott, we found that between the years 2000 and 2022, at least 45 review studies were published, the vast majority of which describe the MRI neuroimaging evidence as supportive of the brain-disorder view of psychopathy.</p>
+<p>What strikes me as particularly curious is that this pattern deviates from what I found when examining other areas of research, such as dangerousness, treatment, and moral capacities. In those domains, the review literature has historically been accurate, often pushing back against the mainstream portrayal of psychopathic individuals as untreatable, morally deficient, and inherently dangerous. In those cases, the problem tends to lie with a small number of researchers and practitioners promoting exaggerated views that contradict the broader scientific consensus.</p>
+<p>In short, the science has always been accurately summarized in the review literature, where the misleading depictions of psychopathy have originated elsewhere. But with the brain-disorder question, the review literature appears to have gotten it systematically wrong. This is particularly problematic because it is usually this type of literature that forensic practitioners and legal decision-makers rely on when they seek information about psychopathy.</p>
+<p>It seems to me that we cannot rule out the possibility that these tendencies are driven (at least in part) by the phenomenon of scientific spin, the practice where scientists make their experimental work look “better” than it actually is. One reason we cannot rule out scientific spin is that it has already been documented to have had a broad impact on the behavioral and social sciences; therefore, it would be odd if it had not also impacted psychopathy research.</p>
+<p>For example, a 2012 study by Leslie John and colleagues surveyed 2,155 anonymous psychology researchers and found that <em>more than half</em> of the respondents admitted to having used <a href="https://www.cmu.edu/dietrich/sds/docs/loewenstein/MeasPrevalQuestTruthTelling.pdf">several spin tactics</a> (e.g., selectively excluding experimental data that contradicts the researchers’ theory).</p>
+<p>There might be many reasons why scientists resort to spin tactics, but a central motivation appears to be simple “careerism,” where scientists are <a href="https://thereader.mitpress.mit.edu/perils-of-publication-and-citation-bias/">disproportionately rewarded</a> if they find and report statistically significant and exciting results as opposed to using their work to promote cautious messages and (boring) null findings.</p>
+<p>To probe this theory that psychopathy research is colored by scientific spin, Jarkko Jalava, Stephanie Griffiths, Emma Alcott, and I <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.654336/full">designed a study</a>  to test if authors of review studies were selectively reporting results that made the neuroscientific research, as a whole, look more robust than it actually is. In other words, we wanted to test whether the problem lay solely in <em>interpreting</em> the neuroscientific evidence, or whether it was also a matter of <em>selectively presenting</em> the evidence in a way that made it appear better than it actually was.</p>
+<p>To do this, we first identified all structural MRI research on PCL psychopathy published since 2000, which amounted to 38 studies. We then cataloged all the effects from each study to calculate the proportion of null findings across these studies. Out of a total of 791 effects, we found that 64.10 percent were nulls. Thereafter, we took all the review studies published in the same period and calculated the proportion of null findings reported in these publications. If the review literature did a decent job at communicating the basic insights from the field, review studies should then report numbers that mirror the true proportion of nulls. However, what we found was that the nulls had virtually disappeared from the review literature, as if the review literature acted as a sift, like a miner panning for gold in a river.</p>
+<blockquote>
+<p>With the brain-disorder question, the review literature appears to have gotten it systematically wrong.</p>
+</blockquote>
+<p>Across a total of 45 review studies, authors were on average only reporting 8.99 percent null effects. The picture was even more skewed in focused reviews, such as those investigating the effects from the amygdala region, where the average null reporting dropped to 2.59 percent (compared to a 2022 study, which <a href="https://pubmed.ncbi.nlm.nih.gov/36116578/">found the true proportion</a> of structural MRI nulls to be 70.37 percent). In reviews tailored to making recommendations to forensic practitioners and legal decision-makers, the null proportion was 5.39 percent.</p>
+<p>An equally interesting finding was that 19 review studies (42 percent) did not report a single null finding, which should have been a major red flag for experts in charge of the peer-review process (it is well known that neuroimaging studies almost always find some null effects). This latter observation suggests more systemic problems with spin, where peer reviewers appear to tolerate the practice.</p>
+<p>Of course, it is inherently difficult to determine whether the systematic omission of null effects from the review literature is an act of scientific spin or simply an honest mistake of overlooking null effects, or a mixture of both. And perhaps it does not matter what the reason is because, whether the problem boils down to an issue with scientific spin or honest mistakes, the reality is the same: For the past two decades forensic practitioners and legal decision-makers would have been misled if they had followed due diligence and relied on the review literature when seeking information about neuroimaging research about psychopathy. The good news is that in the past years, we have seen the publication of high-quality review studies, where authors are now paying more attention to the extent of nulls.</p>
+<p>However, even as the review literature is slowly correcting, readers should be aware that spin about the brain-disorder view of psychopathy is not a problem limited to the scientific peer-reviewed literature. It is arguably more <a href="https://www.newyorker.com/magazine/2008/11/10/suffering-souls">rampant in public media</a>, including op-eds and <a href="https://www.theatlantic.com/health/archive/2014/01/life-as-a-nonviolent-psychopath/282271/">journalistic interviews</a>, as well as in popular books about psychopathy, sometimes <a href="https://www.amazon.com/Psychopath-Whisperer-Science-Without-Conscience/dp/0770435866">written by leading scientists</a>. A search on YouTube and TikTok will readily yield hundreds of videos (amassing millions of views) where experts are explaining how psychopathy is caused by a brain abnormality, and it is not uncommon for TV documentaries about psychopathy to include a segment with MRI research.</p>
+<p>A prototypical example of a documentary that I often show to my students (as an example of scientific spin) is a 2014 production by the Canadian Broadcasting Corporation—the national television station in Canada—titled <a href="https://www.cbc.ca/player/play/audio/1.2852132"><em>The Psychopath Next Door</em></a>, which features various leading scientists in the field. In this documentary, one expert is on record saying that psychopathic persons have “degraded connections in the brain,” which causes their brains to be “hypersensitive to reward” and “undersensitive to the suffering of others.” What is interesting about this comment is that a couple of years before this documentary was released, the same expert <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3120921/">coauthored a review article</a> that concluded that neuroimaging research is “remarkably heterogenous.”</p>
+<p>Perhaps the strongest evidence of spin comes from the book publishing industry, where some researchers have signed popular science contracts on psychopathy and are encouraged to write more compellingly to boost sales. This creates a tension, as the push for excitement can easily slip into scientific spin, a line that is often thin and difficult to navigate. I do not mean to say that there is something problematic about simplifying science for the sake of making it more entertaining, but the problem with this popular genre is that the way psychopathy is described in these books often migrates into the scientific disciplines and legal practices as students and professionals may use these sources as a stepping stone in their quest to better understand the subject matter. There are many examples of what appears to be spin from this domain, but it is interesting to observe that the most cited and probably most widely distributed titles all build on the narrative about psychopathic persons having brain abnormalities.</p>
+<p>For instance, the most popular book about psychopathy, Robert Hare’s <em>Without Conscience</em> (from 1993), begins with an alluring anecdote about how EEG neuroimaging technology has documented extreme brain abnormalities in psychopathic persons, so much so that Hare claims to have had one of his scientific papers rejected because the EEG data from psychopathic persons were so abnormal that the journal editor would not believe that it was retrieved from human beings.</p>
+<p>Similarly, the book <em>The Psychopath Inside</em> by James Fallon (from 2013) conveys an admittedly absorbing story about how Fallon himself, a neuroscientist, accidentally discovered that he was a psychopath by studying his own MRIs. Lastly, in <em>The Psychopath Whisperer</em> by Kent Kiehl (from 2014), the narrative centers around neuroimaging research on psychopathic persons, of which the author, a leading expert, writes that the “consistency of their [psychopathic persons’] brain abnormalities never ceased to amaze me.”</p>
+<p>The ideas conveyed in these popular books are, of course, scientifically untenable, and they arguably border on sheer make-believe. While they are undoubtedly entertaining, they come across as a form of spin that ends up doing a disservice to forensic practitioners and legal decision-makers as they perpetuate scientifically misleading views. <img alt="" src="../images/nautilus-favicon-14_1052.png" /></p>
+<p><em>This article was adapted with permission from an</em> <a href="https://thereader.mitpress.mit.edu/the-neuroscience-of-psychopathy-has-a-spin-problem/"><em>excerpt</em></a> <em>in MIT Press Reader of</em> <a href="https://mitpress.mit.edu/9780262552202/psychopathy-unmasked/">Psychopathy Unmasked</a><em>.</em></p>
+<p><em>Lead image: Polinmrrr / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

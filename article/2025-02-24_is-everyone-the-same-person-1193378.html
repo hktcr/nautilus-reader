@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Everyone the Same Person? - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Is Everyone the Same Person? - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-24
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-FITF</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In everyday life, we all take for granted a certain conception of our <em>selves</em>. I think of myself, first, as an entity that endures from one moment to the next; despite all the changes life inevitably brings, I remain the same person over time. Second, I think of myself as a distinct person. I am I, you are you, and we are all different from each other.</p>
+<p>From time to time, we might still reflect on whether we always must remain the same person throughout our lives. We might wonder whether a dramatic life event, a neurodegenerative disease, or amnesia could genuinely turn someone into someone else. Some of us might also have been exposed to the Buddhist doctrine of <em>anatta</em> or no self, according to which there is fundamentally no self or personhood at all.</p>
+<p>In philosophy, as well as science fiction, we also encounter scenarios such as the <em>Star Trek</em> teletransporter, or someone splitting into multiple copies, in which it is highly unclear whether, or as which one, the original person survives, leading some to question whether our sense of identity corresponds to anything real. The suspicion can be deepened by evolutionary psychology and neuroscience, in which our concept of the self is often theorized as a mere construct, selected for by evolution for its survival value rather than reflection of reality.</p>
+<blockquote>
+<p>The view we are “all one” seems most often reported after a psychedelic trip.</p>
+</blockquote>
+<p>But to question whether we are all distinct persons occurs to far fewer of us. If it does, the possibility may strike us altogether incoherent. After all, our thoughts and experiences are clearly distinct—we cannot directly access the contents of each other’s minds in the same way we access our own. There is no telepathy or mind-reading. What could it even mean to say we are all one person when we undeniably have separate minds?</p>
+<p>Yet, the idea appears across philosophical traditions. Arthur Schopenhauer, a 19th-century German philosopher, claimed we are all manifestations of the same underlying phenomenon, somehow seeking to experience itself as separate individuals. He was long preceded, though, by a similar view recurring in the Hinduistic Vedas: that our <em>true selves</em> (<em>Atman</em>) are all the same and identical to a single universal consciousness (<em>Brahman</em>, in turn identified with God). In other words, whereas Buddhism sees the self as an illusion, Hinduism declares it permanent and immortal, although we still suffer an illusion by conceiving of it as individual.</p>
+<p>For a real understanding of how this could be true, however, the Hindu texts largely point toward meditation and spiritual practice, because the doctrine of a shared, universal self is considered not truly graspable by rational thought. Schopenhauer does not fully resolve its paradoxes, either. In today’s West, the view that we are somehow “all one” seems most often reported as a realization following a psychedelic trip, incommunicable to those who haven’t shared a similar experience.</p>
+<p>Must the idea remain mystical? Perhaps not—or at least much less than one might think. In recent decades, a few philosophers within the contemporary Western tradition have looked at it with new eyes. According to their arguments, the view that everyone is the same person is not only perfectly coherent, but also quite plausible.</p>
+<h5><strong>The Individual Self View</strong></h5>
+<p>Let’s lay out the possibilities. If we are not all the same person (the shared self view) we are either different persons (the individual self view) or not really persons at all, at least not in any enduring sense (the no self view). I’m here using “person” as a synonym for “self” or “the <em>I</em>”, whatever its nature may be; it does not imply any special psychological capacities or social roles.</p>
+<p>According to the individual self view, every human or other conscious being is a unique enduring person. But what could it be that makes me, or anyone else, the same person over time—today, tomorrow, in 10 years, as well as yesterday and presumably back to the day I was born—while still separating me from everyone else?</p>
+<p>The traditional answer is to invoke something like a soul, somemental thing that has my experiences, thinks my thoughts, and remains the same even as these experiences and thoughts change. But as the Enlightenment philosopher David Hume pointed out, no such soul or subject seems to be observed introspectively. Turning our gaze inward, we only observe our thoughts and experiences, flowing by in an ever-shifting stream, but no unchanging thing that has them.</p>
+<p>What if we rather think of the self as a physical entity, such as the brain or body? This just raises the question of what makes something the same brain or body over time. Most cells in our body are continually replaced, and for those that aren’t, such as neurons, their underlying biomolecular constituents still are. In the teletransporter scenario, in which your body is destroyed on Earth but an exact copy instantly assembled somewhere else, many of us can also imagine remaining the same person even if all our physical constituents are replaced at once. Or consider uploading our minds on a digital computer or replacing one’s biological neurons one by one with silicon ones. If we think we could survive—that is, <em>you</em> would go on existing—in these cases, it shows that we don’t really consider any of our physical features essential to ourselves.</p>
+<blockquote>
+<p>Egoism would be not only morally unjustified but altogether irrational.</p>
+</blockquote>
+<p>Another option is to identify ourselves with a mental or psychological process—a series of thoughts and experiences connected in the right way. John Locke, another Enlightenment philosopher, held that to exist in the future simply means that there will exist someone with memories of your current experiences and actions. According to other thinkers, the continued existence of your self might also depend on further connections, such as being influenced by your current goals, intentions, and aspirations, or having a similar personality.</p>
+<p>But we can imagine remaining the same person even if such psychological connections are broken. Would we really consider even complete amnesia, in which most if not all of them are lost, equivalent to dying? Imagine that you were about to take a pill that would wipe all your memories, as well as reset your goals and personality. Afterward, you would go through painful surgery without anesthesia (this example is adapted from the philosopher Roderick Chisholm). In this scenario, most of us would be worried not just about the impending memory and personality loss, but also the pain to be experienced. And not just in the altruistic way that one might worry about any person experiencing pain, but in a self-interested way: You would fear that <em>you</em> would be in pain, not just lament that <em>someone</em> will.</p>
+<p>Another problem facing the individual self view is that most features or connections that may seem unique to us, whether psychological or physical, can be shared between what we would consider different persons. Our DNA, for example, remains constant throughout our lives, but it is also shared between identical twins without making them the same person.</p>
+<p>More generally, imagine an entire human being dividing in two “like an amoeba,” as the philosopher Derek Parfit put it, and then regrowing the missing half. Or consider split-brain cases, in which patients have had their corpus callosum, which connects the left and right brain hemispheres, severed. (It’s controversial whether this leads to a splitting of consciousness, but suppose it does.)</p>
+<p>What happens to the original person who existed before the split? Do they continue as just one of the halves? That seems arbitrary. Will they die and be replaced by two new ones? That seems implausible, because if after the split only one half survived, we would not hesitate to judge that the original person continues as that one. So why should the original person stop existing just because the other half also survives? The final option is that the person continues as both. But each new half would have an entirely separate consciousness. The person would be in two places at once.</p>
+<p>All of a sudden, we are approaching the shared self view. If the same person can be in two places, what stops them from being everywhere—or in all conscious beings—at once? But if we assume, as most philosophers do, that the self cannot be shared, its basis appears to elude us. There is no feature or relation to be found, be it physical or mental, that always characterizes or connects what we may consider an individual person and never anything else.</p>
+<h5><strong>The No Self View</strong></h5>
+<p>The next possibility is that the self simply doesn’t exist. That is, we may feel like we remain the same person over time—perhaps for evolutionary reasons—but we actually don’t. This is the no self view.</p>
+<p>Given this view, there may be future beings continuous with you. They may resemble you physically and mentally, or be influenced by your current goals and intentions, but they would not strictly be identical with you.</p>
+<p>This has radical implications. Most strikingly, it completely undermines egoism. If there is no <em>you</em> in the future, there is simply nothing to be egoistic on behalf of. A future being merely continuous with you may evoke your altruism much more strongly than others, much as you pay more attention to your family and friends than to strangers, but that is a fundamentally different type of concern from the egoistic one.</p>
+<p>At first, one might think of this as great news. If there is no enduring self or ego, egoism is not only morally unjustified but altogether irrational. If we can fully appreciate this insight on a psychological level, we should think the world would be a much better place. The insight might also liberate us from our petty self-concerns that mainly cause us worry and suffering. Claims like this can be recognized from the teachings of Buddhism.</p>
+<p>But the no self view could also inspire a more nihilistic outlook. Rather than increasing one’s concern for everyone, it might decrease one’s concern for one’s self. That is, it could simply make us stop caring about our own future because it will not really be ours. Indeed, given this view, none of us would have any future at all—we exist simply in this isolated moment, only to instantly die and be replaced.</p>
+<p>These or other difficult consequences of the no self view are not reasons to reject it—a view can be correct even if we deeply wish it weren’t. At the same time, we are not forced to accept it—since even if we cannot identify a basis for an individual self, that is not the only kind of self there could be.</p>
+<h5><strong>The Shared Self View</strong></h5>
+<p>What could it even mean that we are all one person? In the short story by Andy Weir, <a href="https://www.galactanet.com/oneoff/theegg_mod.html">“The Egg,”</a> a 48-year-old man dies, but wakes up in an afterlife where he is greeted by a mysterious being. The being tells him he has been reincarnated many times before, and will proceed to be reincarnated again, until he has lived the lives of every human being.</p>
+<p>Unlike how we typically think of reincarnation, in this story, one is not restricted to being reincarnated as someone born after one’s death—the man is reincarnated as all of the people he co-existed with during his own lifetime, including his own family and friends. The shared self view posits something very similar, but with one extra twist—the man is <em>already</em> incarnated as everyone. That is, according to the shared self view, the same person lives through every life <em>at once</em> rather than one after the other.</p>
+<p>At first blush, this view is completely at odds with what we observe. If you are the same person as everyone else, then everyone’s experiences are your experiences. Shouldn’t you then be aware of all these experiences, like a security guard watching a dozen different camera feeds at once?</p>
+<p>But even if you need to be aware of all your experiences, you don’t need to be aware of themall at once. Consider your past experiences. You were of course aware of these experiences as they were happening, but at present, you are at best indirectly aware of them via memory. Other past experiences you have no memory of, such as early childhood experiences or unremarkable everyday events. Or consider dreams. Every night, most people have elaborate dreams that upon waking are completely forgotten, and while having them we also forget everything about our waking lives.</p>
+<blockquote>
+<p>A welcome consequence of the shared self view is you get eternal life.</p>
+</blockquote>
+<p>The shared self view can be understood as saying that the experiences of every conscious being are yours, not in the way your current experience is yours, but in the way your <em>past</em> experiences are yours; more specifically, your completely unremembered past experiences, such as your forgotten dreams.</p>
+<p>One might object that this sort of disconnect or mutual unawareness can only hold between the same person’s experiences at different times, not at the same time. So it doesn’t explain how we are all having separate experiences right now. But all these experiences still occur in different places, such as in different human beings or brains. If the same person can have disconnected, mutually unaware experiences at different times, perhaps they can also be had in different places?</p>
+<p>These points have been made, in various ways,by contemporary defenders of a shared self, such as Arnold Zuboff, Daniel Kolak, and Bernardo Kastrup. They show how it is at least coherent that we are all the same person. But is there any reason to think it might be true, in the absence of a mysterious being telling us so, as in Weir’s short story, or some other mystical revelation?</p>
+<p>To defend an individual self, one would have to identify some feature—either physical or mental—that is always present throughout a human lifespan, but cannot also be shared with other individuals. To support the existence of a shared self, we instead need to look for something that all humans invariably do share.</p>
+<p>As Zuboff argues—echoing both Schopenhauer and the Vedas—there is a clear candidate for such a feature. At any point of your existence, you will be having a conscious experience (or at least the potential for it, as in deep sleep as opposed to death). All your conscious experiences are such that you have to be directly aware of them (at least at the time, and place, they are occurring). That is, your experiences always have a subjective presence<em>,</em> a kind of luminosity with which they shine and appear right before you.</p>
+<p>But this kind of subjective presence is surely not unique to those experiences you ordinarily consider yours. If other beings have experiences at all, they must be subjectively present in exactly the same way. If subjective presence is what makes an experience yours, it follows that every experience is yours, and that you are therefore everyone. As Zuboff puts it, every experience comes with a sense of being “for me,” and rather than separating us, this is what unites us.</p>
+<p>One might object that your experiences are not merely subjectively present, but subjectively present to <em>you,</em> whereas mine are subjectively present to me<em>.</em> Subjective presence is therefore not the very same phenomenon in each of us.</p>
+<p>But what is this <em>you</em> that your experiences are present before? As shown by the problems of the individual self, it can’t be associated with any specific psychological or physical features, as you can imagine remaining the same even if almost everything about you changed. If anything, then, this <em>you</em> seems like nothing more than a pure point of view, with no discernible further properties. Unlike a soul—of the sort dismissed by Hume—this point seems built into experiences themselves; it is not an entity separate and independent from them, and it has no unique features or identity.</p>
+<p>The insight that you, insofar as you can know or observe yourself, are really nothing more than a witnessing, featureless point, is frequently reported as revealed in meditation, but it also seems noticeable just from ordinary introspection. It follows that even if the experiences of others are present to a point of view, that would not make them any different from your experiences, because their points of view would be exactly indistinguishable from yours. According to the shared self view, moreover, these points of view are not merely indistinguishable but the very same, in the same way we typically think our own past, present, and future points of view are.</p>
+<p>In this way, the shared self view can be seen to rest on observation and analysis of our own subjective experience—the ordinary, non-mystical experience that everyone has. It is also compatible with modern science. Modern science poses severe challenges to the individual self by finding no indications of an immaterial soul. It also offers explanations of how we can feel like sharply divided individuals without this actually being so. But modern science does not debunk the existence of consciousness, nor the fundamental sameness of its inherent quality of subjective presence.</p>
+<p>Like the no self view, the consequences of a shared self can be viewed as both good and bad. Unlike the no self view, a shared self clearly supports altruism or a sense of universal compassion, rather than nihilism, as the alternative to egoism. If we are all fundamentally the same person, the only rational thing would be to care about the experiences of every conscious being as though they are your own, because that is what they actually will be. Similarly, you yourself will directly experience every consequence of your own actions. It is hard to imagine a stronger argument for compassionate, moral behavior.</p>
+<p>As another welcome consequence you also get eternal life, or at least something very close: As long as there are any conscious beings around, with subjectively present experiences, you will continue to exist.</p>
+<p>The flipside is that you will also experience more suffering than you could ever imagine, since every experience is yours, including the most absolutely horrifying. It can also induce a sense of deep cosmic loneliness, as fundamentally speaking, there is nobody around but you.</p>
+<p>But as before, difficult implications are not enough to make a view implausible. It just means we—you, I, <em>Atman</em>, consciousness, everything—need to figure out how to live with it. <img alt="" src="../images/nautilus-favicon-14_1259.png" /></p>
+<p><em>Lead image: Hooppe / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

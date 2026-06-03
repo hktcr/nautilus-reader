@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Owe It All to Figs | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>We Owe It All to Figs</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-82OC</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><em>Ripe apples drop about my head . . . The nectarine and curious peach Into my hands themselves do reach.</em></p>
+<p>—Andrew Marvell, “The Garden”</p>
+<p>When you bite into an apple, a pear, or a peach, you bite into the result of thousands of years of interactions between these fruits and primates. When you let a fig squish in your mouth, you are savoring an even more ancient story. These moments of pleasure are reenactments of a kind of jungle theater that has played out again and again for tens of millions of years. But it didn’t start this way.</p>
+<p>Before the fruit, in a beginning, all of the seeds that dangled from trees fell from those trees. These were gravity’s seeds. They might be pushed this way or that by the wind or fall into the river and drift along shores, but that was all for their travels. Most fell below their mother tree. In her shade, they died. Mother plants sometimes smother. This was long the fate of plant progeny. Some trees evolved seeds with wings, that they might be carried a little farther, but only when the winds willed.</p>
+<p>Then, some plants evolved fruits. Fruits were a radical evolutionary innovation; they surrounded seeds and attracted animals in order that those animals might consume them and ingest their seeds. They called out, “Eat me.” This was their proclamation made in the form of bold colors, scents, and even flavors. Some of the seeds were ground up by the teeth of those animals. Others died in their guts. A few survived. Each bit of feces deposited by a fruit‑eating bird or mammal was pregnant with the potential of a forest.</p>
+<blockquote>
+<p>A forest can walk across a landscape in the gut of a primate, traveling one defecation at a time.</p>
+</blockquote>
+<p>Then came our kind, not the first humans, not yet, but instead the first of our extended family, the first primates. They evolved in the tropics, around 60 million years ago, in the shadow of the extinction of the dinosaurs. Those first primates have been hypothesized to have consumed the fruits of trees as well as flowers, and then, also, insects attracted to fruits and flowers. Over the succeeding tens of millions of years, some of the descendants of those first primates became more dependent on fruits. Meanwhile, many trees grew increasingly dependent on those fruit‑eating primates for dispersal of their seeds; this was a relationship of mutual benefit and dependency. The primates lived in the trees the way that the protist <em>Mixotricha paradoxa</em> lives inside a termite, or the way that cilia-like spirochetes live on the protist. Conversely, like the spirochetes living on the protist, the primates helped the trees to move. Metaphorically, a forest can walk across a landscape inside the gut of a primate, traveling one defecation at a time.</p>
+<p>It is likely that our shared ancestor with all other apes, a kind of ur-ape, ate leaves, bark, and insects, but especially fruit. So, too, for our much more recent ancestor, the most recent common ancestor of chimpanzees and humans. Paleoanthropologists refer to this species, which lived 5.5 to 7.5 million years ago, as the Chimpanzee‑Human Last Common Ancestor, or CHLCA; for ease, let’s call them chilcas.</p>
+<p>In broad strokes, the diets of chilcas were likely similar to those of chimpanzees. The primatologist Christophe Boesch began studying chimpanzees in the Taï National Park in Côte d’Ivoire in the 1970s. He studied those Taï chimpanzees in detail, but then also went on, with a large team, to study chimpanzees across Africa. Through this larger project, called “The Cultured Chimpanzee,” Boesch and his colleagues, collaborators, and mentees have demonstrated that chimpanzee cultures, and hence diets, vary from one community to the next.</p>
+<p>Many but not all chimpanzee communities use sticks to eat ants. Others use sticks to eat termites. Many use sticks to access honey. Some use sticks to kill and eat bush babies. Bush babies are small, big-eyed, nocturnal primates with adorable little hands that look, yes, like furry babies living up and among the trees. Some chimpanzees love to eat them. Other chimpanzee populations use sticks to gather and eat algae.</p>
+<p>Others hunt colobus monkeys. Chimpanzee diets are varied. Yet The Cultured Chimpanzee collective found that, despite this variation, chimpanzee populations share a dependence on fruit. More than anything theirs is a diet of fruit, and especially figs. Red figs. Green figs. Plump purple figs. Small figs and enormous figs. Chimpanzees include figs in 80 percent of their daily meals during the long fig season. An average daily chimpanzee diet often includes hundreds of individual figs.</p>
+<blockquote>
+<p>Chilcas and other ancient fruit‑eating primates gardened their own worlds.</p>
+</blockquote>
+<p>Figs were also a key fruit of the ancient garden planted by chilcas. And it was a garden. Ancient chilcas ate figs and deposited their seeds. Those seeds grew, eventually, into trees. The more figs the chilcas ate, the more fig trees they planted, until the forests they lived in abounded (as they still do today) with figs. The fig trees also supported the insects and colobus monkeys that, if they were like chimpanzees, the chilcas might have also eaten.</p>
+<p>By gardening fig trees and other tree species with delicious fruits, chilcas and other ancient fruit‑eating primates gardened their own worlds. Scholars, depending on their field, sometimes call this “world-making,” “niche construction,” or “ecosystem engineering,” analogies drawn from literature, art, and engineering, respectively. This “making” is passive on behalf of the primates. They don’t actively choose to make forests. But as I’ll discuss, many of the other steps humans took in partnering with other species weren’t necessarily active either.</p>
+<p>In general, where primates are more abundant, so, too, are the fruit trees whose fruits they like to eat. Primates grow their own forests by “planting” the seeds of their preferred fruits; they can even create new forests when they move into the open habitats at the edge of the tree line. When primates become rare, so, often, do the fruit trees that depend upon them. When giant lemurs went extinct in Madagascar, the large‑fruited species that depended upon them became rarer. You can’t have arboreal primates without their trees, and, in some cases, you can’t have the trees without the primates.</p>
+<p>Both primates and trees also have other mutualistic partners. Primates depend not only on fruits, but also, just like termites, on their gut microbes. It is these gut microbes that convert the fiber in figs into energy. Chilcas, we can infer, depended upon their gut microbes to help them digest their food. They depended on their microbes to help defend them against pathogens. Such microbes helped to keep them alive, and so one might say that they also help to keep the figs around. When one species (one of the chilcas’ gut microbes) affects another species (say, a fig species) via its effect on an intermediate species (the chilcas), ecologists describe these effects as “indirect.” The living world is full of Rube Goldberg-like indirect effects that, though sublime, are hard to study, and harder to describe.</p>
+<p>As for the figs, they often depend on other seed dispersers such as bats and birds. They depend on fungi that connect to their roots and give them access to the nutrients in deeper, smaller interstices in soil and rock (in exchange for sugar or fat). And they depend on wasps that pollinate their flowers. It is these wasps, called agaonids, or fig wasps, that know the subtlest arts of fig making. Nearly all <a href="https://nautil.us/the-incredible-fig-238265/">species of figs</a> are pollinated by these tiny wasps. Fig wasps and fig trees appeared to have evolved simultaneously some 85 million years ago. They evolved in relation to each other. As fig trees have diverged, so too their wasps.</p>
+<p>They also evolved to be dependent on one another. This dependence is very particular and relates to the details of fig flowers. Fig flowers dwell inside a spherical structure called a syconium (plural, syconia), from the Greek, <em>sykē</em> (<em>συκῆ</em>), for “fig.” The word is thought to derive from a connection to Sykeus, one of the few Titans to survive the war against the Olympian gods. After the war, Zeus continued to pursue Sykeus. Sykeus fled to the bosom of his mother, the Earth goddess, Gaia. For his own protection, Gaia turned Sykeus into a fig tree draped with Earth-shaped syconia, now named in his honor.</p>
+<blockquote>
+<p>Nature can be, at once, red in tooth and claw and collaborative.</p>
+</blockquote>
+<p>The details of fig pollination vary depending upon the fig and wasp species. Some fig species have separate male and female syconia; in others, the syconia are all hermaphrodites. Some fig wasps accidentally disperse pollen; others do so with an active care. In all cases, each syconium contains tens to hundreds of flowers that have the potential to collectively bear seed.</p>
+<p>The syconium and its flower-world are entered by way of a small hole, termed the ostiole, exactly the width of a tiny pregnant female wasp—or, rather, a wasp minus its wings, which the wasp may shed upon entering, never to fly again. Once in the syconium, the female wasp pollinates some flowers. She lays her eggs in others of the flowers. She then dies, inside the fig. Her eggs become larvae, then adults, all while still inside their flowers, which by then have become a kind of botanical crèche that the plant makes in response to the wasps’ presence. The wingless adult males emerge first and mate with the winged females while they are still in their swaddling. As the now‑pregnant female wasps emerge, they become coated in pollen from new male flowers within the syconium. They then crawl out of the syconium through holes that the males dig, holes wide enough to accommodate the female wasps and their wings; this is the males’ last useful act. The exiting females then carry the fig pollen with them as they go on to look for their own forever homes.</p>
+<p>When a chimpanzee bites into a fig, it bites into this complex biology. The same is true when you bite into a wild fig. Parenthetically, I have had the chance to work with Hjalmar Kühl and Mimi Arandjelovic, now leading The Cultured Chimpanzee project, to use samples of chimpanzee feces to decode new mysteries of chimpanzee lives. We have found that we can see the biology of figs, fig wasps, and chimpanzees excrementally. Chimpanzee feces contain the DNA of figs, fig wasps, and the parasites that attack fig wasps. This DNA is evidence that the chimpanzees eat not only the remains of baby wasps but also the bodies of the male wasps and the mother wasps, both of which die in the fig. The bodies of the wasps are protein rich, though, and so fig fruits are quick to metabolize them and turn their nitrogen and phosphorus into added resources in the fig. The figs, as a result, are more nutritious than they would be without their wasps.</p>
+<p>As for fig wasps that don’t pollinate enough flowers, they suffer. Fig trees retaliate against such freeloaders. They drop their unpollinated syconia with the mother and baby wasps inside; the fallen fruits rot. The wasps die. Charles Darwin and Lynn Margulis were both right: Nature can be, at once, red in tooth and claw and collaborative.</p>
+<p>At some point, maybe in the time of chilcas, or maybe a little later, our ancestors left the trees to live more on the ground. Some 4.5 million years ago, in what is now Ethiopia, fossils indicate the presence of a human relative named <em>Ardipithecus ramidus</em>, shortened to “Ardi.” Ardi had hands that were not as adapted to climbing as those of chimpanzees. Ardi’s legs and feet, meanwhile, were slightly better adapted to walking than those of chimpanzees. Ardi might have been one of our ancestors, or simply a relative alive alongside our ancestors. Regardless, once our ancestors did begin to spend more time on the ground, they would have faced the same tradeoffs Ardi faced. They almost certainly still ate fruits, but, like Tantalus, they would have struggled more to reach them. The figs on the highest branches would have become a sweetness just beyond reach. <img alt="" src="../images/nautilus-favicon-14_963.png" /></p>
+<p><em>Excerpted from the book</em> <a href="https://www.hachettebookgroup.com/titles/rob-dunn/the-call-of-the-honeyguide/9781541605756/">The Call of the Honeyguide</a> <em>by Rob Dunn. Copyright © 2025 Available from Basic Books, a division of Hachette Book Group Inc., New York, NY, USA. All rights reserved.</em></p>
+<p><em>Lead image: Erich Karnberger / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

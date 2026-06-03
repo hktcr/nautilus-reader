@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasting Tomorrow | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Tasting Tomorrow</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-26
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-F1B8</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In the Mexican city of Puebla, every family has a recipe for tinga. There might be disagreements about whether the stew should be made with chicken or beef, and some might quibble about the chipotle peppers, which can be smoked or sweet. But every poblano knows to serve tinga with corn tortillas. Last November, I was offered something different. The tortillas were made with teff flour from Ethiopia.</p>
+<p>At the same meal, I also ate tamales, another Mexican staple, conventionally filled with corn masa. The dough I tasted had a similar texture, but not quite the same flavor, because it was made with Ethiopian chickpeas.</p>
+<p>I admit that I was not an innocent bystander. In fact, I was <a href="https://nautil.us/philosophy-is-a-public-service-237659/">an instigator</a> of this culinary experiment, one of dozens I’ve co-organized worldwide. Tasting Tomorrow (as we’ve dubbed it) is an attempt to figure out how heritage cuisine might withstand the impact of climate change, and how peoples from Mexico to Spain to India might cope with the stresses and strains on traditions that literally and figuratively sustain them.</p>
+<blockquote>
+<p><em>Is it the flavor? The texture? The way it’s served at a family gathering?</em></p>
+</blockquote>
+<p>Nearly a decade ago, I started exploring the kinds of infrastructure that hold communities together. At the time, concern about extreme weather was mostly directed toward bridges and tunnels. Although these will certainly be imperiled in the future—and some have already crumbled—my focus has been on <em>cultural</em> infrastructure, the customs and rituals that help people live meaningful lives and relate to each other. I’ve come to believe that these qualities will ultimately matter more than feats of engineering, because they’re the foundations of cooperation. And none of these customs are more universal—or more primal—than food.</p>
+<p>Heritage cuisines are highly vulnerable to global warming because their core ingredients are adapted to historical weather conditions. Maize is indigenous to Mexico. The corn in tamales and tortillas was first consumed because it was readily available. As the climate changes, those staples are unlikely to grow where they have in the past, at least without technological interventions that could redouble troubles, such as diverting rivers for irrigation. Shipping customary crops from afar exacts another environmental cost, equally steep, since transportation requires energy, typically in the form of fossil fuels. In other words, the global challenges of food and water insecurity are especially profound in terms of familiar foods and the sense of security they provide.</p>
+<p>At the University of Maryland and North Carolina State University, my colleagues Matt Fitzpatrick and Rob Dunn have developed a method known as climate analogue modeling to forecast changes to natural ecosystems. Their models use the United Nations’ IPCC data to predict future climates based on geography. Based on predictions of the weather in many locations 70 years in the future, they’ve identified locations today with equivalent weather conditions. The information is useful for conservation efforts—and future foodways.</p>
+<p><img alt="" src="../images/PyG3IZu5-Keats_BREAKER.png" /></p>
+<p><strong>MEXICAN FOOD REMIX:</strong>On the Mexico City campus of the Tecnológico de Monterrey, faculty experiment with alternative versions of traditional Mexican dishes using ingredients from Yemen, such as eggplant and bulgur. Yemen is a climate analogue for Mexico City. <em>Photo by Isra Bistrain.</em></p>
+<p>To see the future of San Francisco, look to Tangiers, Morocco. Saudi Arabia provides a good approximation of the Iberian Peninsula of Spain in seven decades. Nagaland, in the far northeast of India on the border of Myanmar, is anticipated to have the climate of the Khyber Pakhtunkhwa province of Pakistan, close to the border of Afghanistan. And Ethiopia is a reasonable proxy for Puebla. Seasonal temperatures and rainfall are both salient factors. San Francisco is expected to be more than 6 degrees Fahrenheit warmer and 13 percent wetter in winter. Puebla is expected to be nearly 8 degrees Fahrenheit warmer and 4 percent drier in summer.</p>
+<p>These predictions necessarily make myriad assumptions about political decisions. Indeed, the forecasts might motivate policy changes if presented in ways that people can experience in the present—notably, in the food they eat. Tasting Tomorrow is motivated by mitigation as much as adaptation. Substituting ingredients from climate analogue locations, we’re trying to figure out how to maintain culinary traditions in the future. But we also want people to let people taste the differences for themselves, something that cannot be done with raw data.</p>
+<p>In Puebla last November, nearly 30 locals gathered at the Museo Urbano Interactivo to argue about what makes a dish like tinga uniquely poblano. Is it the flavor? The texture? The way it’s served at a family gathering? Based on these criteria, they cooked new versions of tinga incorporating ingredients we imported from Ethiopia, seeking to retain the qualities they most valued. They also made Ethiopian versions of tamales, cemitas, and mole de pollo, all of which were served at a community gathering. For a city as traditional as Puebla, the response was astonishingly positive. We didn’t get run out of town. The manager of a local restaurant quietly took note of the recipes.</p>
+<blockquote>
+<p><em>Unfortunately for the future of the planet, the cheese was delicious.</em></p>
+</blockquote>
+<p>Collaborating with local people is the crux of Tasting Tomorrow. Their tastes and traditions guide every decision. In Nagaland, for instance, Indigenous cooks tried replacing wild rice with millet from Pakistan. (Responses were mixed. “Perfectly soothing,” said one. “I didn’t enjoy it,” another retorted.)</p>
+<p>We’ve also worked with award-winning restaurants. During the Dubai Future Forum a couple years ago, we partnered with a chef from the Iberian Peninsula on a version of Manchego cheese, substituting the usual sheep’s milk with camel’s milk from the Gulf. At a ticketed dinner, elite guests digested a future that is highly probable unless people in their position take action. (Unfortunately for the future of the planet, the cheese was delicious.)</p>
+<p>The simultaneous need for mitigation and adaptation presents a paradox, since success of the latter diminishes the urgency of the former. Although Tasting Tomorrow does not resolve this paradoxical situation, I have witnessed the impact of putting unfamiliar ingredients in people’s hands, and encouraging them to try foods that are just noticeably different. The effect is to activate their sense of agency. A small choice, such as the decision to stuff a tamale with chickpeas instead of maize, initiates a cascade of larger considerations. Participants recognize that they have options, and experience the power of creativity to make the most of a bad situation.</p>
+<p>Recently in San Francisco, the city I call home, I’ve begun to take the opposite approach, seeking to meet the paradox from the other end. I’ve started to distribute packets containing seeds to grow tangerine plants, a staple crop in Tangiers, one of San Francisco’s climate analogues. Each packet is printed with instructions directing the recipient to retain the seeds as a form of insurance for future generations, in case climate change continues unabated. The envelope in which they’re sealed is presented as a challenge to everyone living in the present: What actions are people willing to take to alter the planetary climate trajectory, ensuring that the packet will never need to be opened?</p>
+<p>I still have a hankering for those teff tamales, but the seed packets feed a different part of the imagination. As important as it may be to collectively cook up palatable futures, it’s also essential that we communally hunger for a tomorrow that tastes like today. <img alt="" src="../images/nautilus-favicon-14_650.png" /></p>
+<p><em>Lead image: Barak Shrama</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

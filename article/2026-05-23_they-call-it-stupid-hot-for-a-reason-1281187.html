@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>They Call It Stupid Hot For a Reason | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>They Call It Stupid Hot For a Reason</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7R1G</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://knowablemagazine.org/content/article/living-world/2026/heat-waves-scramble-animal-minds-trigger-aggression"><em>This article</em></a><em>originally appeared in</em> <a href="https://knowablemagazine.org/">Knowable Magazine</a>.</p>
+<p>On a blazing hot day in South Africa, female southern pied babblers can’t think straight. The medium-sized black-and-white birds are trying to get at tasty mealworms behind a see-through barrier. On cooler days, the birds can quickly figure out that all they have to do is go around the small wall of plastic. But when the mercury goes up, the birds just keep stubbornly pecking at the barrier.</p>
+<p>That experiment is part of a growing body of research showing that animals get their minds muddled during heat waves. When it’s hot outside, birds struggle to learn, dogs bite more often, goat-like chamois pick fights. This is bad news not just for those who get on Fido’s toasted nerves. If the animals can’t stay alert enough to find food or avoid predators, their chances of survival go downhill, says <a href="https://www.babbler-research.com/">Amanda Ridley</a>, a behavioral ecologist at the University of Western Australia who coauthored the pied babbler study.</p>
+<p>With climate change making heat waves more common, such cognitive impairments across the animal kingdom could ripple through entire ecosystems, putting already fragile species at greater risk. If pollinators forget which flowers to visit, crops and wild plants may fail. If birds can’t find food as easily, their young may not survive. And on a warming planet, a sharp mind is particularly vital. “A changing climate means that your ability to behaviorally adapt is even more important,” Ridley says.</p>
+<p><strong>Hotheaded</strong></p>
+<p>There is plenty of evidence that animals are affected by heat. Birds, for example, spend <a href="https://www.researchgate.net/profile/Caterina-Funghi/publication/331134650_High_air_temperatures_induce_temporal_spatial_and_social_changes_in_the_foraging_behaviour_of_wild_zebra_finches/links/5ce40a7c458515712eba1e25/High-air-temperatures-induce-temporal-spatial-and-social-changes-in-the-foraging-behaviour-of-wild-zebra-finches.pdf">less time looking for food</a> and <a href="https://www.sciencedirect.com/science/article/pii/S0003347216300653">feeding their young</a>; they even <a href="https://d1wqtxts1xzle7.cloudfront.net/68193981/auk0770-libre.pdf?1626708981=&amp;response-content-disposition=inline;+filename=Males_with_larger_bills_sing_at_higher_r.pdf&amp;Expires=1750677124&amp;Signature=RrSMrY5WAi501KsLMrWQG4lNj2x36nzcVmdxHr-x3-UvRcAGcmowoSlClMpsHAbyT7vCj1NaffTPR3-AMSpVmwGy7nji52VSaTcQ6i0qjY6PSnAHC~LB59Mt7kjnxlR2dM4lXJwJLYU9SuPWPFtfQJhnE5EPQ-PQuwCWqicEHHtNRVedM~sL6Bxda7iW7dX0EvbH1bjqHFcOnj5ltfU1FkJrT8Iu31nsVn90-7QF5ZuOCx0g0oen3Cm5M8Tz5qQ-g51enjSNzr4mo9Dr8orBzG8VP-JF6V7ekAZdzkPok2fI8F1LjUbbhz7mxNiZJPpfmdpGOATMrm1nmWWGv~9eqg__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA">sing less</a>. Instead, they’ll sit around for hours with wings spread to dissipate the heat, and pant with their beaks wide open. Some animals retreat to shade or hide in cool burrows—again, skipping meals. Bees, meanwhile, splash their faces with droplets of water midflight when the weather is sizzling. This way, “they get convective cooling for their brain,” says <a href="https://www.su.se/english/profiles/e/emba0578">Emily Baird</a>, a neuroscientist at Stockholm University.</p>
+<p>Some of the first hints that hot temperatures can mess up minds, however, came from studies on humans. Back in the 1800s, Belgian astronomer Adolphe Quetelet noticed that violent crime in France <a href="https://www.taylorfrancis.com/chapters/edit/10.4324/9781439817803-6/development-propensity-crime-1842-quetelet">peaked in the summer</a>. Later studies linked high temperatures with <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2799635">gun violence</a>, mental-health-related <a href="https://jamanetwork.com/journals/jamapsychiatry/fullarticle/2789481">hospital admissions</a>, <a href="https://www.sciencedirect.com/science/article/abs/pii/S004896971832583X?via=ihub">suicide</a>, and <a href="https://www.researchgate.net/profile/Sefa-Awaworyi-Churchill/publication/365433355_Temperature_shocks_and_gambling/links/6379591254eb5f547ce6ff05/Temperature-shocks-and-gambling.pdf">gambling</a>. When it’s hot, people have trouble <a href="https://europepmc.org/article/med/3916261">making decisions</a>, and their <a href="https://www.researchgate.net/profile/Richard-Silberstein/publication/223719587_Evaluation_of_cognitive_performance_in_the_heat_by_functional_brian_imaging_and_psycometric_testing/links/5e4b5f7a458515072da6f46e/Evaluation-of-cognitive-performance-in-the-heat-by-functional-brian-imaging-and-psycometric-testing.pdf">memory suffers</a>. For students at schools without air conditioning, a school year just one degree Fahrenheit hotter <a href="https://www.aeaweb.org/articles?id=10.1257/pol.20180612">reduces test scores</a> by 1 percent, a study found.</p>
+<p>Increasingly there’s evidence that other species may also be more aggressive when mercury shoots up. A 2023 study that combed through nearly 70,000 reports of dogs biting people across eight United States cities, from Chicago to Baltimore, found that such incidents were more likely to happen on <a href="https://www.nature.com/articles/s41598-023-35115-6">hot, sunny and smoggy</a> days. The risk was 10 percent higher on a 90-degree day than on a 60-degree day—and not only because people are more apt to venture out for walks when the sun is shining (the researchers controlled for seasonal effects in their data).</p>
+<p><img alt="" src="../images/Goldenjuliefish_breaker.png" /></p>
+<p><strong>FRESH FISH:</strong> Golden julie fish like the one in this photo will dial up their aggressive posturing toward images of themselves in a mirror when water temperatures warm. <em>Credit: ipman65 / Adobe Stock.</em></p>
+<p>Still, the scientists were unable to determine whether dogs get more aggressive as it gets hot, or if cranky humans provoke more attacks. “It’s likely that both humans and dogs get stressed and more irate at higher temperatures,” said Clas Linnman, a neuroscientist at the University of Miami and a coauthor on the study.</p>
+<p>And it’s not only dogs: A 2025 study out of China showed that many animals, including snakes and cats, are more inclined to bite people when it gets hot.</p>
+<p>Animals also seem to lose their cool with each other, especially if there is food involved. Scientists used binoculars and spotting scopes to spy on wild goat-like chamois that feed on protein-rich plants on the slopes of the Italian Apennine Mountains. More than 1,600 hours of observations over two summers revealed that when temperatures rose from 54 to 64 degrees Fahrenheit, vegetation grew scarcer, and <a href="https://www.sciencedirect.com/science/article/pii/S0048969723004047#bb0530">chamois aggression in turn shot up</a>. The animals became territorial over patches of food, they assumed threatening postures, chased each other—attacks that, at times, escalated. The study authors predict that chamois aggression will go up 50 percent by 2080 due to climate change.</p>
+<p>VIDEO</p>
+<p><em>Credit: Knowable Magazine / YouTube</em></p>
+<p>The small tropical fish called a golden julie also gets confrontational in the heat. Ordinarily, when a golden julie is placed in front of a mirror, it sees its reflected image as a stranger and shows some hostility, raising its fin, for example. But if the normally 78-degree water is raised to a hot 84 degrees, the fish is more likely to get aggressive, and may bite and slap its tail against the mirror, as it tries to scare or attack the reflected image.</p>
+<p><strong>Cognitive problems</strong></p>
+<p>Heat waves can also hamper the ability of animals to learn, as Ridley and her colleagues observed with the southern pied babblers. In one of their experiments, the birds were presented with a simple wooden block with two holes drilled in it, each covered with a lid. If the bird pecked at the lid, it would rotate, revealing either an empty hole or a tasty mealworm (the babblers, Ridley says, “are highly motivated by mealworms”). One lid was dark, and the other a lighter shade of the same color. During heat waves, the birds needed twice as many trials to learn that the mealworm was always hidden under the lid of the same shade.</p>
+<p><img alt="" src="../images/p-pied-babbler-task-heat-breaker.png" /></p>
+<p><strong>HIDDEN SNACKS:</strong> A wild pied babbler investigates a contraption that holds a tasty mealworm beneath one of two lids. The birds can learn to associate a lid of a particular color shade with the mealworm treat, but when it’s very hot, it takes the birds much longer to do so. <em>Credit: C. Soravia et al / Royal Society Open Science 2025.</em></p>
+<p>Another group of scientists<a href="https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ece3.7194">tested zebra finches</a>, pretty Australian songbirds, and discovered that if temperatures are high, they too have cognitive problems. When figuring out how to get a mealworm out of a see-through tube with an opening at one end, they would just keep pecking on the tube, says study coauthor <a href="https://derryberrylab.wordpress.com/liz-derryberry/">Elizabeth Derryberry</a>, an evolutionary biologist at the University of Tennessee, Knoxville. It’s the bird equivalent of “banging your head against a brick wall,” she says.</p>
+<p>Adding to the tally, several years ago researchers showed that when the heat is on, <a href="https://jneuroinflammation.biomedcentral.com/articles/10.1186/s12974-015-0324-6">mice have trouble</a> finding their way around a maze and forget objects they’ve seen the day before. More recently, researchers found that <a href="https://jneuroinflammation.biomedcentral.com/articles/10.1186/s12974-015-0324-6">male guppies</a>, popular aquarium fish, also have trouble getting through a maze after spending several days in heat-wave-like 90-degree water, even if the prize for getting it right is a virgin female—which they tend to find particularly attractive.</p>
+<p>For animals such as fish and insects that can’t control their body temperature, heat waves could be particularly detrimental. “Changes in air temperature will affect brain temperature,” says Baird. A hotter brain could hinder the functioning of nerves, and that, she says, “might affect sensing, memory, and learning.”</p>
+<p>When Baird and colleagues <a href="https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/gcb.16196">tried to teach bumblebees to associate sweet sucrose with the color blue</a> and bitter quinine with yellow, most of the bumblebees learned the trick at 77 degrees, but fewer than half managed to do so at 90 degrees. Such impaired cognition could spell trouble in the field: If the insects forget which flowers they should pollinate (in the case of bumblebees, these include tomatoes and blueberries) or how to get back home with nectar, not only will the <a href="https://knowablemagazine.org/content/article/food-environment/2024/air-pollution-is-bad-for-pollination">pollinators suffer</a>, but human agriculture too, Baird says.</p>
+<p>Heat appears to dangerously diminish animal vigilance as well. In Ridley’s recent experiments, once mercury in the Kalahari Desert reached 96 degrees Fahrenheit, <a href="https://royalsocietypublishing.org/rsos/article/12/10/251260/236073/Investigating-the-relationship-between-heat">pied babblers lost their ability to properly respond to predators.</a> In their studies, researchers lured birds toward a mystery shape covered in a sandy-colored blanket, using worms as bait. Once a babbler approached, the scientists would reveal what was hidden underneath: either a taxidermied cat-like carnivore called a genet, or a similarly sized and colored wooden box. The birds got scared of the genet in cooler temperatures—they’d call out, scan their surroundings, or simply flee. But once it got hot, they behaved similarly whether they were facing the carnivore or the box. Ridley suggests that this could translate into higher chances of fatal predator attacks as heat rises, which could harm populations of babblers and other prey species.</p>
+<p>These studies are not just abstractions. In the Kalahari, where southern pied babblers use their wits to search for worms, temperatures are rising <a href="https://www.seh.ox.ac.uk/blog/climate-research-in-the-kalahari-desert-the-kapex-field-campaign#:~:text=The%20Kalahari%20Desert%20in%20Southern,leading%20to%20more%20intense%20droughts.">twice as fast</a> as the global average. In tropical rivers, where male guppies seek mates, <a href="https://www.nature.com/articles/s41467-025-66868-5">heat waves are growing longer and more intense</a>. It’s the same story across much of the planet—temperatures climb, and animal thinking becomes strained, potentially putting species at risk. The effects may be magnified in certain areas <a href="https://knowablemagazine.org/content/article/living-world/2022/urban-evolution-species-adapt-survive-cities">such as cities</a>, which often exhibit even warmer temperatures than non-urban areas. If anything, Ridley says, “We are probably underestimating the impacts of increased heat on animal minds.” <img alt="" src="../images/nautilus-favicon-14_37.png" /></p>
+<p><a href="https://knowablemagazine.org/content/article/living-world/2026/heat-waves-scramble-animal-minds-trigger-aggression"><em>This article</em></a><em>originally appeared in</em><a href="https://knowablemagazine.org/">Knowable Magazine</a><em>, a nonprofit publication dedicated to making scientific knowledge accessible to all.</em><a href="https://knowablemagazine.org/newsletter-signup"><em>Sign up for</em>Knowable Magazine’<em>s newsletter</em></a><em>.</em></p>
+<p><em>Lead image: Mathias and SN / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

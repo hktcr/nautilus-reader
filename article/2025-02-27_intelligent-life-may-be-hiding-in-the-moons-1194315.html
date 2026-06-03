@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Life May Be Hiding in the Moons - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Intelligent Life May Be Hiding in the Moons - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-WQ1H</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In the search for extraterrestrial life, planets take all the glory. We yearn to see worlds that mirror our own. The idea that Earth-like planets are out there, potentially playing host to thriving forms of alien life, is attractive. But in this search for a foil of our own rocky planet, there may be plenty of life in other star systems sprinkled among the moons.</p>
+<p>Our own moon, given its lack of surface water, active geology, or an atmosphere, might have given previous generations of scientists a mistaken sense of other satellites’ possibilities. The past few decades have opened our eyes. The discoveries of Titan’s nitrogen-rich atmosphere (the only one in the solar system apart from Earth’s) and its liquid ethane and methane oceans, and Europa’s water ocean lurking under just a few miles of ice, show that these moons have some of the key elements for life. Extrapolating them to slightly more favorable conditions, it appears that moons actually might represent the most robust habitats in the galaxy.</p>
+<blockquote>
+<p>Giant planet moons needn’t rely so heavily on a star for warmth.</p>
+</blockquote>
+<p>As usual, science fiction has beaten us to the punch. There are dozens of books and movies in which aliens (or humans) live on giant planet moons. Moon worlds include that of Kurt Vonnegut’s <em>The Sirens of Titan</em> (which hosts the Tralfamadorians, who also appear in <em>Slaughterhouse-Five</em>) and Europa from Arthur C. Clarke’s <em>2010: Odyssey Two</em>, in which an advanced civilization broadcasts: “ALL THESE WORLDS ARE YOURS—EXCEPT EUROPA. ATTEMPT NO LANDING THERE.” It’s hard to imagine a stronger (fictional) endorsement of the suitability of giant planet moons for life.</p>
+<p>Using some simple math, we can calculate how likely it is that life might arise on these faraway gas giants’ moons.</p>
+<p>From a physical standpoint, giant planet moons offer a significant benefit for life: a different source of heat than we have on Earth. Here, an external heat source, our sun, maintains clement conditions on the surface, and an internal source a few thousand times smaller drives geological activity including plate tectonics, our planet’s long-term climate regulator. Earth’s internal heat comes from leftover energy from the giant collisions that formed Earth—now trapped in the core—as well as from the slow decay of long-lived radioactive isotopes mainly found in the mantle and crust.</p>
+<p>Giant planet moons needn’t rely so heavily on a star for warmth. Internal heat is also generated through tidal dissipation, which comes from internal friction as the moons’ rocky innards are continuously deformed and rubbed against each other. This is most clearly seen on Jupiter’s moon Io, the most volcanic world in the solar system. Io’s orbit around Jupiter is oval-shaped due to the gravitational influence of Jupiter’s other large moons, Europa and Ganymede. Each of these moons is so close to Jupiter that they feel strong tidal forces—a stretching effect arising from the difference in gravity on opposite sides of a body. Each moon is tidally deformed by Jupiter to a degree that depends on how close it is to the planet. But since each moon’s orbit is not a circle, their distances from Jupiter are always changing, so the moons are continuously squished into different shapes.</p>
+<p>The resulting internal friction generates heat that, in the case of Io, gets released through about 400 volcanos spread across its surface. While Io’s massive volcanism actually does not make it a great candidate for life, a lower level of internal heat can be a boon. Europa and Ganymede are tidally heated by Jupiter through the same process as Io, but to a lesser degree. The internal heat is essential in preventing their vast subsurface oceans from freezing. On a large rocky moon, tidal heat might even drive plate tectonics.</p>
+<p>Elsewhere in the galaxy, giant-planet moons could, in the simplest scenario, enjoy very Earth-like conditions. Throw in some floating islands and long-limbed blue people, and you’ve essentially got <em>Avatar</em>’s Pandora; or some forests and Ewoks, and you nearly have <em>Star Wars</em>’ Endor. This scenario was <a href="https://www.nature.com/articles/385234a0">studied</a> by astronomers Darren Williams and Richard Wade and atmospheric scientist Jim Kasting in 1997, shortly after the discovery of the <a href="https://www.nature.com/articles/Art1">first gas-giant exoplanets</a> in the mid-1990s. The researchers showed that a moon with at least 20 to 30 percent of Earth’s mass can hold onto a thick atmosphere and remain geologically active for the age of the solar system.</p>
+<p>A series of papers studied the possible climates of such worlds, and <a href="https://ui.adsabs.harvard.edu/abs/2017A%26A...601A..91D/abstract">found</a> that, under certain conditions, they can also retain liquid water on their surfaces. This is the chief criterion in the definition of the so-called “habitable zone,” the ring of orbits around a star to which life-bearing planets are presumed to be confined. Taking into account factors such as tidal heating, giant planet moons may actually have <a href="https://ui.adsabs.harvard.edu/abs/2013MNRAS.432.2994F/abstract">two habitable zones</a>—one related to the planet-star distance (for external heat) and another related to the moon-planet distance (for internal heat).</p>
+<blockquote>
+<p>Elsewhere in the galaxy, giant-planet moons could enjoy very Earth-like conditions.</p>
+</blockquote>
+<p>Giant-planet moons can have a downside for life, however. Jupiter’s moons, for instance, are blasted with high-energy particles accelerated by the planet’s magnetic field, the strongest in the solar system (besides the sun’s). This is not an insurmountable problem, as any moon with a strong enough magnetic field could protect itself from this radiation. Ganymede’s magnetic field could shield an atmosphere, but it doesn’t have much of one. And many gas giants likely don’t have magnetic fields nearly as strong as Jupiter’s. Saturn’s, for instance, is far weaker by comparison, less than 5 percent as strong as Jupiter’s, due simply to its lower mass and its interior composition.</p>
+<p>A second vision for life on giant planet moons is to dive deeper (literally), into their subsurface oceans. If life can thrive in these oceans, such as those on Europa, Ganymede, Titan, and Callisto, it would enjoy some distinct advantages. Since tidal heating is efficient, a moon can be far smaller than a planet and still maintain habitable conditions. Saturn’s moon Enceladus is only 311 miles in diameter but has a subsurface ocean. The oceans on Jupiter’s moons are protected from the dangerous radiation environment by a layer of ice that ranges in thickness from a few miles to hundreds of miles, depending on the moon.</p>
+<p>Subsurface oceans may in fact be more robust habitats than planetary (or lunar) surfaces. In a 2011 <a href="https://iopscience.iop.org/article/10.1088/2041-8205/735/2/L27">paper</a>, computational planetary scientist Dorian Abbot and cosmologist Eric Switzer showed that an ice layer just a few miles thick slows down the escape of heat enough that liquid water can stay in the subsurface of an Earth-sized planet for billions of years, even in the absence of tidal heating or a nearby star. If a larger version of Europa or Ganymede were tossed into the permanent darkness of interstellar space (perhaps during a <a href="https://nautil.us/were-it-not-for-cosmic-good-fortune-we-wouldnt-be-here-238484/">dynamical instability</a> among giant planets), its subsurface liquid ocean would still persist. And if Jupiter itself were ejected from the solar system, all of its moons, thanks to tidal heating, could keep their oceans far beyond the lifetime of the sun.</p>
+<p>Unfortunately, life in subsurface oceans is almost impossible to detect from afar. Astronomers and science-fiction writers have speculated for more than 50 years about life in Europa’s oceans, but we still haven’t been down there to check. NASA’s Europa Clipper mission will arrive in the Jupiter system in 2030, orbit Europa, and make detailed measurements of its ice shell with the goal of understanding the moon’s potential habitability. But even this mission does not include a lander, so it cannot directly test whether any life might be lurking beneath the surface. NASA’s Dragonfly mission to <a href="https://nautil.us/searching-for-life-under-a-methane-rain-302557/">Saturn’s moon Titan</a> (scheduled to launch in 2028) will fly through the moon’s atmosphere and explore its chemistry, but is similarly unlikely to make a direct detection of life.</p>
+<p>Astronomers have found about a dozen candidate moons around exoplanets, or exomoons. Most were identified using NASA’s Kepler space telescope, by precisely characterizing dips in starlight as a planet (and perhaps a moon) blocks a small portion of the star. Given the subtle nature of these signals, none has been confidently claimed as a discovery; they all remain candidates, and many (perhaps all) may simply be statistical noise masquerading as exomoons.</p>
+<p>Two exomoon candidates stand out, both detected by astronomers Alex Teachey and David Kipping, in papers from <a href="https://www.science.org/doi/10.1126/sciadv.aav1784">2018</a> and <a href="https://www.nature.com/articles/s41550-021-01539-1">2022</a>. If confirmed—other astronomers have <a href="https://www.nature.com/articles/s41550-023-02148-w">raised doubts</a>—these candidates would represent the tip of a very strange iceberg. Both moons appear to be the size of Neptune orbiting Jupiter-sized gas giants, some 5,600 and 8,200 light-years away. However, these don’t seem like good candidates for life, given that they wouldn’t even have solid surfaces due to their large amount of gas. Like Neptune or Uranus, these “moons” likely have such thick atmospheres that the pressure would be too high for life on the surface below. Of course, it remains possible they could host their own satellites, or <a href="https://academic.oup.com/mnrasl/article/483/1/L80/5195537">submoons</a>, that could be better candidates for life.</p>
+<p>These huge exomoons might just represent rare objects that are easy to detect. In similar fashion, “hot Jupiters”—gas giants that orbit 100 times closer to their star compared to Jupiter—were the first exoplanets to be detected. But we now know that they are far less common than gas giants at Jupiter-like orbital distances. Most exomoons, models suggest, should be closer to the sizes of Jupiter and Saturn’s moons.</p>
+<blockquote>
+<p>It seems to be nearly as probable to find life on an exomoon as on an exo-Earth.</p>
+</blockquote>
+<p>Which brings us to the big question: Are there potentially more life-bearing moons out there than rocky planets? A rough formula could help answer this. The Drake equation has famously tried to make an estimate of the number of civilizations in the galaxy by multiplying a string of rough parameters. For our simplified purposes here, we’ll include: the number of stars in the galaxy (Nstars), the fraction of stars that host a rocky planet of roughly Earth’s size within its habitable zone (fEarth), and the probability of advanced life arising on a rocky planet (lifeEarth). To estimate the number of life-bearing planets in the galaxy (NEarth), we can use the following equation: NEarth = Nstars x fEarth x lifeEarth.</p>
+<p>There are about 100 billion stars in the Milky Way, so Nstars = 100 billion. The factor fEarth is about 20 to 50 percent, suggesting that our galaxy contains 20 to 50 billion rocky planets in the habitable zones of their stars. Life seems to have taken hold on Earth fairly quickly after it formed. The earliest unambiguous fossils are 3.8 billion years old, just 700 million years into our planet’s history. And a 2024 <a href="https://www.nature.com/articles/s41559-024-02461-1">study</a> of microfossils by paleobiologist Edmund Moody and colleagues found that the last universal common ancestor—the relative that all life on Earth shares—probably lived about 4.2 billion years ago, a paltry 300 million years or so after the planet formed.</p>
+<p>The rapid arrival of microbial life on Earth hints that it may arise readily on other rocky planets. But complex animals, with hardy exoskeletons, did not appear on the scene until the Cambrian explosion another 1.5 billion years later (538 million years ago). And, of course, it took another 537.99 million years for a technological civilization to emerge (or less if Earth hosted a previous advanced civilization in our past—the so-called <a href="https://nautil.us/could-an-industrial-civilization-have-predated-humans-on-earth-352964/">Silurian hypothesis</a>).</p>
+<p>The slow emergence of multicellular life could mean that animals and technological civilizations are extremely rare outcomes on rocky planets. The Search for Extra-Terrestrial Intelligence, or SETI, has been looking for the signatures of advanced civilizations for decades <a href="https://nautil.us/new-telescopes-will-help-us-setl-259464/">without a compelling signal</a>. Yet SETI has only peeked at a tiny fraction of our galaxy, so it is hard to draw a firm conclusion. There are about 250,000 stars within 250 light-years of the sun. We might expect to have detected a signal if there were another civilization on one of them, but we haven’t.</p>
+<p>Let’s use that to put an upper limit on our lifeEarth factor of 1 in 250,000. As a lower limit, we know of at least one advanced civilization (ours), so it can’t be less than 1 in 100 billion. Altogether, our equation finds that the number of advanced civilizations in the Milky Way living on rocky planets is between 1 and 200,000.</p>
+<p>But what is the likelihood that moons could host advanced life? We’ll call on a similar (also somewhat simplified) exercise; we’ll need: the fraction of stars that host a giant planet in or outside the habitable zone (fgiant), the average number of moons per giant planet (Nmoons), and the probability of life emerging on a giant-planet moon (lifemoon). So to calculate the number of habitable giant-planet moons (Nhabmoon), we can use this equation: Nhabmoon = Nstars x fgiant x Nmoons x lifemoon.</p>
+<p>Between 1 percent and 10 percent of the galaxy’s 100 billion stars host a gas-giant planet (fgiant). Moon-forming simulations find that an average of 4 to 5 moons form around a gas giant (so Nmoons = 4 to 5). This implies that our galaxy contains 4 billion to 50 billion gas-giant moons. So far, we don’t have any strong indicators that the possibility of life developing on a gas-giant moon should be different than on a rocky planet, so let’s set lifeEarth = lifeMoon. This puts the number of exomoons likely to host advanced civilizations in the Milky Way, Nhabmoon, between zero and 160,000.</p>
+<p>Given the numbers, it seems to be nearly as probable to find life on an exomoon as on an exo-Earth. This essentially doubles the potential abodes for life in the galaxy, as long as we expand our viewpoint on what a life-bearing “world” looks like, as astronomers are indeed doing.</p>
+<p>As with the upcoming missions to more closely study the giant-planet moons in our own star system, the allure of exomoons is also palpable nowadays, with researchers studying their <a href="https://iopscience.iop.org/article/10.3847/1538-4357/ad2843/meta">formation</a>, <a href="https://www.aanda.org/articles/aa/pdf/2024/04/aa48604-23.pdf">detectability</a>, and <a href="https://academic.oup.com/mnras/article/530/4/4331/7663586">possible climates</a>. But we haven’t found any yet, simply because they are not stable around most of the exoplanets that we’ve discovered. Current detection techniques are far more effective at finding exoplanets close to their stars (such as hot Jupiters), but <a href="https://ui.adsabs.harvard.edu/link_gateway/2020AJ....160..194T/PUB_HTML">tidal effects</a> between the star and host planet destabilize the orbits of large moons around exactly those planets. Upcoming instruments, such as the European Space Agency’s PLATO space telescope, set to launch in 2026, should give astronomers a better chance of finding planets at orbital distances large enough such that, if an exomoon is there, it should be stable and detectable.</p>
+<p>I’m eager to imagine what the sky on such far away moons might look like. On one hemisphere, a giant planet would loom in the sky and barely move, because tides cause a moon’s rotation to be locked to its orbit. This is why, from Earth, we can only see one face of our moon (except for some wobbling at the edges caused by the moon’s not-quite-circular orbit). The other hemisphere of a giant-planet moon never sees its host planet. The day is set by the time it takes to complete an orbit around the giant planet, not the star. The moons also likely pass through the planet’s massive shadow every orbit. This would be more immersive than an eclipse on Earth, because the shadow is much larger than the moon itself.</p>
+<p>Some astronomers estimate that we will have catalogued 100,000 exoplanets by the year 2050, many of them on wide enough orbits for moons to be stable companions. In a <a href="https://www.mdpi.com/2218-1997/10/3/110">paper</a> published last year in the journal <em>Universe</em> (that admittedly inspired parts of this article) titled “The ‘Drake Equation’ of Exomoons—A Cascade of Formation, Stability, and Detection,” Hungarian astronomer Gyula Szabó and colleagues wrote: “If the detection rate of exomoons is on the order of a few percent, we can expect dozens or maybe hundreds of confirmed exomoons” in a quarter century. While these exotic worlds will never replace our own, they offer the promise of a glimpse into life as we <em>don’t</em> know it. I can’t wait. <img alt="" src="../images/nautilus-favicon-14_1256.png" /></p>
+<p><em>Lead image: Stockbym / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

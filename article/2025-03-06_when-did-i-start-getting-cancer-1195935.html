@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Did I Start Getting Cancer? - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When Did I Start Getting Cancer? - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-OZYS</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It’s impossible to know exactly when each of the five mutations happened. When, deep in my marrow, one thing after another went awry, and divided my life. Like all people who have been ill, my life is split into Before and After. The mutations must have happened in the Before, because that’s how leukemia works.</p>
+<p>Did a mutation occur the summer Before, when my gallbladder inexplicably started to act up, when I got a surprisingly terrible case of hand-foot-mouth virus for an adult? Perhaps one occurred in college, silently changing my future while I took my first organic chemistry lab, casually flirting with my graduate TA and being careless with a solvent. Maybe the first mutation occurred when I was 2 years old, wearing footie pajamas soaked in flame retardant, as was the norm in the mid 1970s. Is it possible, even, that the mutation happened generations before I was even born, perhaps when my grandmother worked in her family’s dry-cleaning shop, the chemicals triggering a change deep in one of her cells that eventually lead to her death, my father’s, and nearly mine? Buried in these questions is, of course, the deeper question of why. It is even more unknowable than when.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>Since my diagnosis in March 2013, science has leaped forward in understanding how leukemia, or blood cancer, forms. All blood cells are born from a particular type of stem cell found in the bone marrow called a hematopoietic stem cell. Over five generations, hematopoietic stem cells differentiate into red cells, carrying oxygen; platelets, allowing clotting; and the myriad types of white blood cells, mounting immune responses.</p>
+<p><img alt="" src="../images/Keimowitz_BREAKER.png" /></p>
+<p><strong>HER OWN SLEUTH:</strong> After she was diagnosed with leukemia, Alison Spodek, an associate professor of chemistry and Director of Environmental Studies at Vassar College, became determined to uncover the genetic suspects behind it. <em>Photo by Karl Rabe / Vassar College.</em></p>
+<p>Diagrams of this process look like a family tree, with one ancestor spawning many different descendants. The ancestor cell is pluripotent, meaning it can form all types of blood cells; each generation down is a little less powerful, and a little more specific. Some generations become stem cells for one or more specific cell types. The final generation are our blood cells that are constantly dying and being replaced, unable to have offspring of their own. The constant cycle of blood death and replacement makes blood donation possible and explains why every person has, and needs, hematopoietic stem cells.</p>
+<p>The process of each generation of hematopoietic cells becoming something new relies on the central dogma of molecular biology. This dogma states that genes are found on DNA and encode instructions; when these instructions are transcribed, they become RNA, which in turn is translated into proteins. If the gene, found on DNA, is a blueprint for a doghouse, the RNA is the shopping list you take to the hardware store, and the protein is the doghouse you build. Different genes encode different proteins (building projects, like bookshelves and tables), such as enzymes used in digestion, collagen found in hair and nails, and even proteins that interact with DNA, turning on and off genes for yet other proteins. Imagine if you could build something that would then influence the blueprints for your next project!</p>
+<p>Mutations are copy-editing mistakes in the DNA instructions, and happen frequently as cells divide and differentiate. Many mutations get corrected quickly by the mind-blowingingly complex self-correction systems within our cells. Some do not. Some mistakes are random. Some mistakes are prompted by exposures to DNA-damaging substances, like solvents and radiation. Some mistakes don’t matter, while others have <a href="https://www.science.org/doi/10.1126/science.aaa9119">profound consequences</a>—like leukemia.</p>
+<p><strong>One: The Censor</strong></p>
+<p>In February 2013, when I first became ill, breathless, pale, and feverish, no one could have even tried to answer the questions of when the first mutation happened, or what it was. But in August, just six months later, while I was hospitalized for a terrifying bout of pneumonia that occurred after chemotherapy annihilated my immune system, a group of scientists submitted a paper to <em>Nature</em> that began to answer this question. By the time the <a href="https://www.nature.com/articles/nature13038">paper</a> was accepted for publication in January 2014, I had received a hematopoietic stem cell transplant, often referred to as a bone marrow transplant. This transplant was the brutal, lifesaving process in which the contents of my bone marrow were completely obliterated by chemotherapy and radiation. The goal was to destroy every hematopoietic stem cell in my body, most especially those harboring these mutations, and then replace them by infusing healthy stem cells from an unknown donor through a line in my chest.</p>
+<p>The authors of that <em>Nature</em> paper showed that acute myeloid leukemia, the type of leukemia I had, begins with a mutation in one of the hematopoietic stem cells, decades before illness. Slowly, over these decades, some perverse version of survival of the fittest means that the clones of this stem cell overtake the bone marrow, and all the blood formed thereafter shares that mutation.</p>
+<p>This mutation, found to lay the groundwork for acute myeloid leukemia, is in a gene named <em>DNMT3A</em>. <em>DNM3TA</em> codes for a protein that controls hematopoietic stem cells’ differentiation into specialized blood cells. It does this by <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3201818/">tagging the genes</a> of these cells, indicating which genes to activate and which to suppress. Thanks to this powerful protein, which acts as a censor, one daughter of a stem cell can read only the instructions to become a red blood cell, while another daughter can read only the instructions to become a platelet.</p>
+<blockquote>
+<p>“Just a little cancer” is as ludicrous as “just a little pregnant.”</p>
+</blockquote>
+<p>Although this mutation is <a href="https://onlinelibrary.wiley.com/doi/10.1111/joim.13236">passed</a> from one generation of cells to its daughters, it is not passed from one human generation to the next, so I can let my dry-cleaning ancestors off the hook. Instead, I imagine that a mutation to <em>DNMT3A</em> occurred when I was a child. This mutation gave rise to a protein that didn’t censor the cell differentiation genes in quite the expected manner. This alone wasn’t enough to cause acute myeloid leukemia, but it was a start.</p>
+<p>Because the importance of this gene wasn’t known to science when I was first ill, my bone marrow was never examined for this mutation. Its presence or absence in my body is unknown, and now probably unknowable. This mutation, and all that followed, have been eradicated from my blood and my marrow, overtaken by the benevolent invaders of donor cells.</p>
+<p><strong>Two: The Eraser</strong></p>
+<p>Leukemia is a surprisingly common diagnosis, afflicting more than 1 in 100 people in the United States. This is due in large part to the relatively small number of genetic mutations required to start leukemia. Some tumors in the lungs average more than eight mutations per million letters in the genetic code; acute myeloid leukemia averages fewer than 1 mutation per million letters. An average of only 13 mutations are found in leukemia patients’ cells, and of those, five mutationsare <a href="https://www.nature.com/articles/nature12634">found</a> on average in the coding regions of DNA that make proteins.</p>
+<p><em>TET2</em> is another gene that codes for a protein that in turn modifies the activity of other genes; it is the first domino in an elaborate Rube Goldberg machine. When mutated in a hematopoietic stem cell, it can persist in the marrow for decades. If <em>DNMT3A</em> makes the censor protein, blacking out genes so that only the appropriate differentiation genes are read, <a href="https://www.nejm.org/doi/10.1056/NEJMoa0810069"><em>TET2</em> makes the eraser protein</a>, following behind <em>DNM3TA</em> and removing the censor marks willy-nilly.</p>
+<p>It was January 2013, Martin Luther King Day. Before. I was supposed to march in honor of Dr. King, but the weather was cold, and I had a chill in my bones I couldn’t shake, so instead I stayed home and made zucchini carrot mini-muffins for my children, ages 1 and 5. The 5-year-old thought the muffins were pretty cute, and we took some whimsical pictures of them with little Lego people scaling them like mountain climbers.</p>
+<p><em>TET2</em> was <a href="https://www.nature.com/articles/leu2011326">suspected</a> in my leukemia, and its presence bodes ill for the long-term. Since the genetic test for it wasn’t approved until after I was deeply and gratefully in remission, we’ll never know. I imagine that by that chilly January Before, it too was present in my body, slowly setting the stage.</p>
+<p><img alt="" src="../images/Spodek_BREAKER-2-1.png" /></p>
+<p><em>Illustration by Maria Fedoseeva.</em></p>
+<p><strong>Three: The Shepherd</strong></p>
+<p>A few weeks later, President’s Day 2013, when it was still Before, my husband and I met some old friends for dinner halfway between our homes, about an hour drive for each couple. We ordered fish and wine, and talked about our children and our jobs, as people in their mid-30s do. By the time the waiter asked if we wanted dessert, I was shivering and feverish, chilled to the bone and feeling deeply unsettled. My husband paid our share and we drove home quietly.</p>
+<p>By this time, my hematopoietic stem cells must have been misreading instructions; instead of five generations to form perfect daughters, these stem cells were rushing, pushing out immature and dysfunctional blood cells known as blasts. Between a malfunctioning censor protein and a misbehaving eraser protein, the genetic instructions in my marrow had become a garbled mess.</p>
+<p>Two generations below the hematopoietic stem cells, in a precursor cell for certain white blood cells called a GPM, the <a href="https://www.nejm.org/doi/10.1056/NEJMoa1301689">most crucial mutation</a> had already occurred. This mutation was in a gene called <em>NPM1</em>, encoding a multifunctional protector and shepherd protein called nucleophosmin. Nucleophosmin <a href="https://www.nature.com/articles/s41467-019-09745-2">shepherds cells</a> through their replication, allowing the GPMs to multiply and become functional white blood cells known as myeloid cells. By mid-February, my nucleophosmin was also out of commission. Healthy nucleophosmin acts as a shepherd in part by <a href="https://www.nature.com/articles/s41375-024-02476-4">protecting</a> tumor-suppressor proteins. If nucleophosmin is the shepherd, these proteins are the sheepdog. Without the shepherd, the sheepdog can be distracted, and the sheep (those crucial myeloid cells) can be attacked by a roaming coyote.</p>
+<p><strong>Four: The Drill Sergeant</strong></p>
+<p>In early March, 2013, still Before though barely, my marrow was full of blasts, trying to skip a generation or two of differentiation and bursting free into my blood, unbeknownst to me. I walked up the two flights of stairs from my office at Vassar College to a colleague’s office and had to sit down when I got there, I was so winded. Just a cold I can’t shake, I told her, but she gave me a puzzled, worried look nonetheless.</p>
+<p>After another week I was teaching my chemistry classes sitting down, finding that I no longer had the breath to speak and stand at the same time. What was unknown to me then was that the deep fatigue was due to a steady decrease in my oxygen-carrying red blood cells, meaning no matter how fast or hard I breathed, I simply could not get enough oxygen. The immature white blood cells, those blasts, were dominating my marrow, pushing out the ancestors of all other types of cells.</p>
+<p>The last Wednesday Before, I drove home and was so exhausted by the 30-minute drive that I vomited as soon as I pulled in. I walked upstairs, crawled into bed, and while my husband got the kids to sleep, I called my best friend. I know it’s supposed to be hard, I said, weeping. With the kids. The job. But I don’t think it’s supposed to be <em>this</em> hard. I got off the phone and started Googling my symptoms. Recurrent fever. Swollen lymph nodes. Fatigue. Pale skin. I took note of the terrible list of possible diagnoses and told no one.</p>
+<blockquote>
+<p>Maybe the first mutation occurred when I was 2 years old, wearing footie pajamas soaked in flame retardant.</p>
+</blockquote>
+<p>That Friday I had my blood drawn, and that Sunday the doctor’s office called me, even though they were closed. She had seen the results. Your blood counts are very off, she said. You need to go to the emergency room. With those words, the Before ended. I wouldn’t leave the hospital for the next seven weeks.</p>
+<p>The next day I had my first bone marrow biopsy, in which a needle so large it looked like a leather punch was pushed into the back of my pelvis. It’s a procedure nearly as dreadful as it sounds. Under a microscope, the abnormalities of my cells were immediately evident; there were far too many of them crowded together chaotically, and at least one in five was a large lumpy blob—a blast. It wasn’t until my second biopsy, less than a week later, at a more specialized hospital, that anyone would start looking for the genes that had started this all dozens of years ago and maybe, just a few weeks before.</p>
+<p>One of the most significant findings in my marrow was an absence. Not just the absence of red blood cells, making it hard for me to breathe, or the absence of platelets, making me bruise and bleed easily, but the absence of a mutation. The <em>FLT3</em> mutation is <a href="https://www.mdpi.com/2072-6694/15/8/2312">found</a> in almost a third of acute myeloid leukemia patients: It is one of the <a href="https://www.frontiersin.org/journals/oncology/articles/10.3389/fonc.2020.612880/full">most common</a> mutations, and the most dreaded. The protein made by <em>FLT3</em> is a signaling protein, telling the cell when to grow, to divide, to survive, and to die; it’s a drill sergeant, controlling each movement of the developing white blood cells. In its mutant form, it’s a deranged drill sergeant, marching its troops right off a cliff. The mutant form of <em>FLT3</em> is described in one <a href="https://ashpublications.org/blood/article/108/12/3654/22697/Clinical-implications-of-FLT3-mutations-in">paper</a> as a “poor prognostic indicator.”</p>
+<p>When I first started chemotherapy I participated in a clinical trial, swallowing a shot glass of bitter clear liquid each morning. It felt like a little offering of hope from the future. More concretely, it was a <em>FLT3</em> inhibitor, a <a href="https://www.nature.com/articles/s41375-018-0357-9">muzzle</a> for the deranged drill sergeant. When we received the results of my genetic testing telling me I did not have the <em>FLT3</em> mutation, I was oddly disappointed to no longer receive my futuristic daily cocktail. But my overwhelming sense, in a season in which I received so much bad news, was profound relief at yet worse news avoided.</p>
+<p><strong>Five: The Bouncers</strong></p>
+<p>Over the next two years I had almost two dozen more bone marrow biopsies. With the early ones, we asked, <em>How many blasts are left?</em> <em>Did the chemotherapy work? Are the healthy blood cells growing back?</em> More sensitive lab tests are necessary to look for mutations rather than cells, so when the answers to the first questions were encouraging, the pathologists started looking for <em>NPM1</em>, the <a href="https://ashpublications.org/blood/article/136/15/1707/461241/NPM1-mutated-acute-myeloid-leukemia-from-bench-to">most characteristic mutation</a> of my disease. Its absence would mean we were seeing only donor cells. With these biopsies we asked not, <em>Has the disease returned</em> but, <em>Will the disease return?</em> There’s a comfort in the idea that these tests can answer that question, and of course, the deeper question underneath: <em>How long do I have?</em> The answer to this question, like the why, is fundamentally unknowable.</p>
+<p>I had another biopsy in March 2014, one year into the After. This was six months after my bone marrow and hematopoietic stem cells were obliterated by high dose chemotherapy and radiation, six months after I received hematopoietic stem cells from a stranger. This stranger, a woman across the country, gave me a new set of cells, and with them their functions: censors, erasers, shepherds, and drill sergeants.</p>
+<blockquote>
+<p>The genetic instructions in my marrow had become a garbled mess.</p>
+</blockquote>
+<p>Like the previous dozen or so biopsies, the cells appeared normal, but unlike anything in the past 10 months, the genes did not. <em>NPM1</em> was detected in my marrow, a flaw reasserting itself. I asked my doctor, hands and feet icy from terror, whether the disease was returning. We don’t know, she said. Some mutations, if they reappear, mean the disease is back. Others are <a href="https://rupress.org/jem/article/213/8/1513/42086/Genetically-distinct-leukemic-stem-cells-in-human">meaningless</a>. What about <em>NPM1</em>, my mutation? She told me she didn’t know—no one did.</p>
+<p>More than 10 years later, I combed my medical records and saw what she didn’t tell me then. The return of <em>NPM1</em> is a sign of “minimal residual disease,” the <a href="https://www.nature.com/articles/s41375-021-01222-4">medical term</a> for “just a little cancer.” It’s as ludicrous a proposition as “just a little pregnant.”</p>
+<p>The best explanation for what happened is that at least one single, microscopic hematopoietic stem cell with my mutations—<em>DNMT3a</em>, <em>TET2</em>, <em>NPM1</em>, and unknown others—made it through all the treatment. The very malfunctions that made that cell deadly also <a href="https://www.nature.com/articles/nature22993">made it powerful</a>, and it grew once again, multiplied enough to be detected on the lab test.</p>
+<p>This time, six months post-transplant, I had backup. The donor hematopoietic stem cells had colonized my marrow and produced generations upon generations of healthy blood cells. These were the bouncers, waiting at the door of the night club. When someone inside got rowdy, the bouncers kicked them out. The healthy white cells now recognized my new blasts for the <a href="https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2017.00496/full">enemies they were</a> and destroyed them.</p>
+<p>I had my 25th, and very last, bone marrow biopsy nearly two years into the After, the week before another Martin Luther King Day, this one in 2015. That was 10 years ago, and I am cured.</p>
+<p>A patient diagnosed with acute myeloid leukemia today could be tested for as many as <a href="https://onlinelibrary.wiley.com/doi/10.1111/ejh.13272">50 mutations</a>. Each gene tested gives a little information to the patient, a better sense of risk. But it can’t answer the most fundamental question: <em>How long do I have?</em> No one knows the answer to that question—not doctors, or patients or people living in the Before, blithely unaware of the possibilities.</p>
+<p>More importantly, each new piece of information gives the possibility of a more tailored treatment, of drugs that target each gene and protein. The <a href="https://ashpublications.org/ashclinicalnews/news/7921/Which-Inhibitor-Should-Be-Used-to-Treat-FLT3"><em>FLT3</em> inhibitor</a> I briefly took as part of the experimental trial has come to market and is muzzling rogue drill sergeants for patients every day.</p>
+<p>The standard of care, however, remains a stem cell (bone marrow) transplant. For patients like me, nothing works as well as wiping the marrow clean and bringing in a new army of cells from <a href="https://ashpublications.org/blood/article/143/19/1881/515986/Transplant-in-AML-just-follow-the-NPM1-guide">another person</a>. No one can predict the future, but I don’t imagine this will change anytime soon. No matter how much genetic knowledge we gain, we still need each other. <img alt="" src="../images/nautilus-favicon-14_1250.png" /></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

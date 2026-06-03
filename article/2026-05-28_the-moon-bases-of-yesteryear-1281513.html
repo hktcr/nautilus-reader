@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Moon Bases of Yesteryear | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Moon Bases of Yesteryear</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-MQMY</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The idea of lunar habitation is having a moment. But United States government officials have been thinking about the possibility of erecting a moon base for longer than you might suspect. Yes, NASA did lay out its most <a href="https://www.npr.org/2026/05/27/nx-s1-5836209/nasa-moon-base-plans">current plans</a> for a habitable lunar facility this week. But NASA and other U.S. entities have been dreaming of housing humans on (and under!) the surface of the moon since the late 1950s.</p>
+<p>The earliest plans for a moon base came from the U.S. Air Force, which envisioned the Lunex Project in 1958. Predating the Apollo Program, which eventually landed the first humans on the lunar surface in 1969, Lunex sought to establish an underground Air Force base on the moon by 1967-68 that could house 21 people. While crude <a href="https://en.wikipedia.org/wiki/Lunex_Project#/media/File:LunexSpacecraft.png">drafts</a> of the Lunex Lunar Lander survive, the project was eventually abandoned, as was 1959’s Project Horizon, a similar concept from the U.S. Army to establish a fort on the moon by 1967.</p>
+<p>After the space race was won by NASA and Apollo, plans for a moon base were revived in the 1980s with the agency’s feasibility study of building an 18-person lunar outpost by sometime between 2005 and 2015. Like its predecessor concepts, the so-called Johnson Space Center Moon Base never came to fruition. But NASA would not be deterred from its dreams of lunar habitation.</p>
+<p><strong>Read more: “<a href="https://nautil.us/should-people-live-on-the-moon-257145">Should People Live on the Moon?</a>”</strong></p>
+<p>And the next effort to imagine a moon base gave birth to the most interesting conceptual mockups of such a structure. From 1989-1993, NASA embarked on the Space Exploration Initiative at the behest of then-president George H.W. Bush, who kicked off the program in a speech on the steps of the National Air and Space Museum in Washington, D.C., on July 20, 1989, the 20th anniversary of the Apollo 11 moon landing. The decade-long effort would construct a base of operations on the moon that would facilitate “a journey into tomorrow—a journey to another planet—a manned mission to Mars,” Bush said.</p>
+<p>The Space Exploration Initiative, which was mothballed by Bill Clinton shortly after he took office, did spawn some beautiful drawings of what a moon base and associated vehicles might have looked like if the program would have continued.</p>
+<p><img alt="" src="../images/Grant_BREAKER_8171a0.png" /></p>
+<p><strong>ISS LIKE:</strong> This sketch of an early lunar outpost design employs a modular concept: Much like the design principles used to construct the International Space Station, a connecting tunnel to the left permits the outpost module to connect to landers, rovers, or other modules. Standardized racks hold hardware dedicated to crew health, life support, and habitation. <em>Credit: NASA / Cicorra Kitmacher.</em></p>
+<p><img alt="" src="../images/Grant_BREAKER-2.png" /></p>
+<p><strong>INFLATABLE HOME:</strong> This lunar base concept houses six to 12 people in an inflatable spherical habitat about 52.5 feet in diameter. The crew would sleep in the lowest levels. The middle levels could house hydroponic gardens and  small animals, with the uppermost level serving as a gym, complete with banked running track, easier to navigate in reduced gravity. <em>Credit: NASA / Cicorra Kitmacher.</em></p>
+<p><img alt="" src="../images/Grant_BREAKER-3.png" /></p>
+<p><strong>ROVERING IN STYLE:</strong> This beefy rover could have handled long-duration treks across the moon, carrying 4 crew members for up to 2 weeks. An airlock could serve as a docking port to the lunar base. <em>Credit: NASA / Cicorra Kitmacher.</em></p>
+<p>NASA has conducted additional feasibility studies and generated more conceptual mockups between then and now, and the current plan, which is part of the Artemis program, seeks to send humans back to the moon by early 2028. Then, the fixed Foundational Surface Habitat of the Artemis Base Camp is scheduled to come online, with the help of private space companies, sometime in the 2030s. If and when we see a base rise from the moon’s dusty soil (regolith, for you lunerds) it will be built on decades of ideation and experimentation. <img alt="" src="../images/nautilus-favicon-14_17.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: NASA / Cicorra Kitmacher</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

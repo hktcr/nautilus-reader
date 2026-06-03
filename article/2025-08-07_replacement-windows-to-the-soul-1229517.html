@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replacement Windows to the Soul - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Replacement Windows to the Soul - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-07
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-TSE5</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Four thousand years ago, a woman had a very fancy artiﬁcial eye that she probably wore while she was alive. It was possibly made of natural tar and animal fat or maybe bitumen paste; it had a gilded surface and a central circle where the iris would be, with lines radiating outward, sunlike. Gold wires inside the eye imitated capillaries. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4449516/">Archaeologists discovered this item</a> in 2006 during an excavation of Shahr-e Sukhteh, otherwise known as the Burnt City, in what is now Southeastern Iran. The woman had been six feet tall and around 30 years old when she died. The prosthetic was in her left eye socket.</p>
+<p>An <a href="https://pubmed.ncbi.nlm.nih.gov/19831305/">even older eye was found in a skeleton in Spain</a>. This one was estimated to be 7,000 years old. However, it could not have been worn comfortably and was placed backward in the socket, probably after the man’s death.</p>
+<p>Eye makers for millennia, then, have been trying to re-create the expressionist power of one of the human body’s most complex and emotionally meaningful organs.</p>
+<blockquote>
+<p>Ocularists are nearly as rare as astronauts.</p>
+</blockquote>
+<p>Histories of artificial eyes tend to start with the ancient Egyptians, who were pretty good at making eyes for mummies. They “removed the eyes of the dead, poured wax or plaster into the orbits, and then inserted precious stones to simulate the iris,” <a href="https://catalog.nlm.nih.gov/discovery/fulldisplay?docid=alma991815853406676&amp;context=L&amp;vid=01NLM_INST:01NLM_INST&amp;lang=en&amp;search_scope=MyInstitution&amp;adaptor=Local%20Search%20Engine&amp;tab=LibraryCatalog&amp;query=lds56,contains,Eye,%20Artificial,AND&amp;mode=advanced&amp;offset=30">according to one history</a>. But they weren't all that sophisticated in their techniques for the living: an eye-size piece of clay painted to look like an eye and then secured over the socket with a piece of flesh-colored cloth. Those histories usually jump over centuries—to the mid-1500s—before describing any real progress, particularly in the design of an ocular prosthetic meant to fit into the socket rather than in front of it.</p>
+<p>The 16th-century French military surgeon Ambroise Paré is often noted as the first to describe replacement eyes in use at the time, though he made no claim to have invented them. One was a metal prosthetic—perhaps gold—meant to fit under the eyelids to cover a shrunken eye. Paré called this type of eye a “hyplepharon.” For someone whose bad eye wasn’t shrunken and so didn’t allow room for anything else in the socket, there was an “ekblepheron”: a steel spring that wrapped around the head and widened into an oval surface at the front end. The oval was covered in leather and painted with the image of an eye and eyelids. Not surprisingly, both types were clumsy and uncomfortable, and neither created much or any illusion of reality. Few people wore either.</p>
+<p>Later in the 16th century, the Murano glassmakers of Venice introduced glass eyes: thin and fragile shells not much more comfortable, by any accounts, than the metal ones. Nonetheless, Venetian eyes were the best a one-eyed person could get for more than a century. Even when Paris became the dominant source of prosthetic eyes in the early 19th century—eyes there were porcelain—the product was frequently disappointing. “Very inferior articles,” an article in 1856 about new developments in eye design called those earlier eyes. They consisted of “an oval shell, exactly like half of a bird’s egg.” They “varied only in size and colour, the same piece being used for both the left and right side.” Such a primitive and simplistic design “gave the wearers much pain, produced a staring effect, and imparted to the face a repulsive aspect.”</p>
+<p>I learned about the ancient artiﬁcial eyes during a gathering of contemporary eye makers in 2023 in Las Vegas. A woman named Emily Brunson, who was in the middle of her ﬁve-year apprenticeship to become a professional eye maker, gave a presentation. The room was ﬁlled with eye makers who seemed to appreciate the deeply historical roots of their work.</p>
+<p>Today, we call professional eye makers ocularists. They work in a ﬁeld called ocularistry. They are not doctors. They have a variety of backgrounds: sometimes sculpture or painting, sometimes medical illustration, sometimes special-eﬀects makeup artistry, sometimes something completely unrelated to eye making. Most often, they are self-employed, owners of their own small businesses, or work for a self-employed ocularist. Almost always, you’ll ﬁnd their offices in medical parks next to those of orthodontists, veterinarians, optometrists, urologists, allergists, dermatologists. Sometimes they’ll be in brick buildings by themselves on thoroughfares near shopping malls and fast-food restaurants or on the sixth ﬂoor of a building downtown. Many times, an ocularist will belong to a family with generations of ocularists, the older teaching the younger, the business passed on like an heirloom. You can ﬁnd third-generation and even ﬁfth-generation ocularists.</p>
+<blockquote>
+<p>They don’t fall out of sockets and roll across ﬂoors because they are not round.</p>
+</blockquote>
+<p>And yet ocularists are nearly as rare as astronauts. Fewer than 200 certiﬁed ocularists scatter themselves across the United States. The most populous states (California, New York, Texas) might have a dozen each, and more rural states (Utah, Kansas, Vermont) might have one, maybe two, sometimes none. Around the world, their numbers are equally small, or even much smaller. In India, for instance, for a population of 1.4 billion, there are only about three dozen ocularists.</p>
+<p>The eyes ocularists make now are not like the one belonging to the woman from the Burnt City, and they’re certainly not like those in some common popular-culture representations. For instance, they don’t, as in some cartoons and movies, fall out of sockets and roll across ﬂoors, horrifying those whose feet they rumble past, because they are not round. Nor are they clear plastic, ﬁlled with circuitry, simultaneously space-agey and gumbally, like the “bionic visual cortex terminal” from <em>The Six Million Dollar Man.</em> That device, we learn from the show’s intro, when Steve Austin is being rebuilt after barely surviving a crash of his test plane, connects by some cord directly backward into his occipital lobe. No.</p>
+<p>Nor is a “glass eye,” most of the time, even glass. The dominant material these days is acrylic, although glass eyes are still being made.</p>
+<p>Most importantly, maybe, the eyes that ocularists make do not yet restore vision, especially not with a zoom ratio of 20.2 to 1, like Austin’s bionic eye. They might do so someday, and scientists have made small steps in that direction. For now, though, the function of a prosthetic eye is much less physiological than it is artistic. It is meant not to create vision but to create illusion, not to see but to shape how its wearer is seen.</p>
+<p>There are a couple of reasons most people know little about prosthetic eyes or where they come from. First, there is that small number of eye makers. Second, if a prosthetic eye is made to be as realistic as possible and to ﬁt well, no one will know it exists. Ocularists’ goal is <em>not</em> to call attention to their work. (There are exceptions for people who want “fun” eyes—ones decorated with sports logos or a heart or pretty much anything else that can be painted on a small space.)</p>
+<p>Soon after I got my own prosthetic eye in 2009, a cashier at the grocery store said, “You have the most beautiful blue eyes,” and I thanked her and asked if she could tell which one was real. I was still in the initial euphoria of having the gift of the eye, and I couldn’t help bragging, though she had no idea what I was talking about, and she seemed only a little less confused when I tapped my ﬁngernail against my eye so she could hear the click.</p>
+<p>My experience with getting an eye was one of intimacy and gratitude. Visits to my ocularist from the time of my eye’s creation—which took two days—through every annual polishing have been long stretches of personal attention and care that seem increasingly rare in a medical world of high volume, crazy insurance regulations, and systemic stress. Maybe the extended eye contact required is a big reason for that. Maybe it’s the fact that handcrafting and hand painting an eye takes hours. Maybe it’s that the profession asks its practitioners to employ not only their technical and artistic skills but also their skills of listening and empathy. My ocularist has told me that his business is “probably 75 percent psychology and 25 percent an actual product that I make.” The healing to which an artiﬁcial eye contributes is never merely aesthetic.</p>
+<p>The expressive power of real eyes can be frustratingly elusive in the making of an artiﬁcial eye. Damage to an eye socket—from an accident, a ﬁre, cancer—is sometimes so extensive that an ocularist cannot achieve full harmony and symmetry and what seems in the best cases like magic.</p>
+<p>Still, magic does often happen.</p>
+<p>I’ve spent years trying to understand how this magic happens—why people have tried to replicate lost eyes for millennia, and how, for someone missing an eye or burdened by a disfigured one, an artfully crafted and generously given artificial eye can help heal. Not by restoring perfect function, but by easing the trauma that touches the very core of a person’s identity. <img alt="" src="../images/nautilus-favicon-14_1032.png" /></p>
+<p><em>This article is adapted from</em> <a href="https://mitpress.mit.edu/9780262049832/eyes-by-hand/?_gl=1*gy0qa*_ga*MTYxMDY0NDI0OS4xNzEwNzk2NjA2*_ga_LKJ2S6BH0S*czE3NTQ0MDE2MjckbzE0MCRnMCR0MTc1NDQwMTYzMCRqNTckbDAkaDA.">Eyes by Hand: Prosthetics of Art and Healing<em>,</em></a><em>by Dan Roche, and was reprinted with permission from</em> <a href="https://thereader.mitpress.mit.edu/the-ancient-art-and-intimate-craft-of-artificial-eyes/"><em>MIT Press Reader.</em></a></p>
+<p><em>Lead image: ExVoto78 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

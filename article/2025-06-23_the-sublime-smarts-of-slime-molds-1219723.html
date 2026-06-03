@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sublime Intelligence of Slime Molds | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Sublime Intelligence of Slime Molds</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-WUHG</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Slime molds can be more dazzling in appearance than their name suggests. Like fungi, these difficult-to-classify organisms reproduce with spores, and to release these spores, they grow fruiting bodies in a wide array of shades and textures. Some resemble <a href="https://www.biographic.com/undertakers-of-the-forest/">peacock-iridescent disco balls on stalks</a>; or miniature red, gold, and orange popsicles. Others, like this <em>Badhamia utricularis</em> photographed by Andy Sands, look like tiny tangerines or juniper berries.</p>
+<p>Most are miniscule, at least in the early stages of life. To find them, Sands, a United Kingdom-based photographer, <a href="https://youtube.com/watch?v=tkKKMl-Mk24">advises</a> budding slime-mold photographers to do as he does: “get a pair of strong reading glasses, a magnifying glass, and a flashlight, and crawl around under holly bushes for hours on end.”</p>
+<blockquote>
+<p>Scholarly manuscripts from ancient China describe one species as “demon droppings.”</p>
+</blockquote>
+<p>Slime molds are protists—a mishmash of eukaryotic organisms that are neither animals, plants, nor fungi. Their spores germinate to form amoeba-like or flagellated cells, which can merge into a zygote, and eventually grow through mitosis into one giant, creeping cell with multiple nuclei, called a plasmodium. Depending on the species, a single plasmodium can cover an area of more than 108 square feet, the size of a small bedroom.</p>
+<p>The many shapes and shades of slime molds—there are more than 900 species worldwide—have led to an equally arresting array of common names. <em>Fuligo septica</em>, for instance, forms a chunky, bright-yellow mass, which Indigenous people of Mexico have called “moon’s excrement.” Scholarly manuscripts from ancient China, meanwhile, describe what is likely the same species as “demon droppings.” Today, it is more widely referred to as “dog-vomit” or “scrambled-egg” slime mold. Other species have earned such charming sobriquets as “wolf’s milk,” “chocolate tube,” and “pretzel.” One Arkansas-based researcher had a friend <a href="https://www.newyorker.com/magazine/2003/11/03/no-respect-2">suggest</a> that the whole cryptic group would be much better described as “sub<em>lime</em> molds.”</p>
+<p>These remarkable creatures do more than rack up nicknames. They also challenge the conventional scientific wisdom that an organism must have a central nervous system to learn and to <a href="https://nautil.us/the-biologist-blowing-our-minds-323905/">show intelligent behaviors</a>. One well-studied species, the yellow <em>Physarum polycephalum,</em> can find the <a href="https://www.biographic.com/lens-of-time-slime-lapse/">most efficient path</a> to food through a maze. Various researchers have also placed little piles of food on flat maps of Tokyo, Canada, the U.K., and Spain and shown how <em>Physarum</em> navigate between hubs in ways that mirror those regions’ modern transportation networks or follow routes of comparable efficiency.</p>
+<p>In another experiment, researchers presented the species with various food mixtures. The <em>Physarum</em> specimens first explored each mixture, then consistently chose the one with the most ideal nutrient balance. In still other experiments, the organism used its own slime paths to remember where it had been. <em>Physarum</em> can also habituate to stimuli, such as a novel chemical, proceeding more cautiously and slowly across a surface where the chemical is present but learning to ignore it over time if repeated encounters lead to no ill effect. A habituated slime mold can even pass on what it has learned to another plasmodium by fusing with it.</p>
+<p>Whether these experiments confirm that slime molds are sentient is hard to say. But it does call into question the need to sort all organisms into tidy categories.  <img alt="" src="../images/nautilus-favicon-14_1108.png" /></p>
+<p><em>This story originally appeared in</em> <a href="https://www.biographic.com/slime-sense/">bioGraphic</a><em>, an independent magazine about nature and regeneration powered by the California Academy of Sciences.</em></p>
+<p><em>A lifelong naturalist, Andy Sands has been photographing wildlife for more than 25 years. His passion is British wildlife, and he particularly enjoys photographing birds in song, the small mammals that we seldom see, as well as insects and other invertebrates, documenting their lifecycles and behavior. Being an experienced field naturalist has enabled him to take intimate portraits of wild animals in natural surroundings. In recent years he has focussed extensively on coverage of fungi and slime molds.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

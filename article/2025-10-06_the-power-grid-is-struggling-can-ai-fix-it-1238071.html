@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Power Grid Is Struggling | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Power Grid Is Struggling</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-IM4O</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="" src="../images/schmidt-banner-1_2.png" /></p>
+<p>The power grid is a puzzle. A patchworked network of hard infrastructure, software, and growing demands at nearly every node. It was a difficult enough system to operate when the inputs were regular. Now, however, as more fluctuating—but increasingly essential—renewable sources, such as wind and solar enter the grid, the equation gets even messier. How can the dated grid evolve to keep pace with the future?</p>
+<p>Some researchers are turning to AI in a bid to help keep the lights on.</p>
+<p>Most power grids in the <a href="https://www.landapp.com/post/the-history-of-the-power-grid-in-the-united-states">United States were built before the 1970s</a>—when power came from coal and gas plants that ran all day and all night with fairly clockwork predictability. So power grids were designed to take energy from those centralized, stable sources and distribute it around the country on one-way, road-like cables. Job done.</p>
+<p>Now energy isn’t generated just in a handful of coal- or natural gas-based power plants. It is absorbed from the sun in solar panels across countless rooftops or farmed from the wind with thousands of turbines dotting rural fields. This means there are loads of scattered and disconnected points of entry to the power grid, and energy is flowing in several different directions and not just one unified stream.</p>
+<p>These new <a href="https://nautil.us/the-road-less-traveled-to-fusion-energy-237835/">clean energy sources</a> also aren’t always on. Weather is fickle: Wind comes and goes, and the sun rises and sets every day, but sometimes it is cloudy. And we don’t yet have adequate energy storage technology. We can’t reliably and at scale store excess sparks from an extra sunny week, or dip into a reserve when the gods of wind aren’t in the mood for gusts.</p>
+<blockquote>
+<p>Spain and Portugal had massive blackouts in which 55 million people were left powerless.</p>
+</blockquote>
+<p>All of this is at fundamental odds with how the current energy grid works. “The grid requires this really perfect balance between demand and supply,” says Anna Scaglione, a professor of electrical and computer engineering at Cornell University.</p>
+<p>And this is being additionally challenged with an increase in energy demands. In 2024, humanity’s need for energy <a href="https://www.iea.org/reports/global-energy-review-2025">spiked by about 4.3 percent</a>, according to the International Energy Agency—that’s nearly <em>double</em> the yearly average from a decade prior.</p>
+<p>More everyday vehicles and appliances now run on electricity as opposed to gas. Even coping with climate change pulls more power: <a href="https://ember-energy.org/latest-insights/heat-and-power-impacts-of-the-2025-heatwave-in-europe/?">The summer 2025 heatwaves in Europe</a> increased the daily power demand by up to 14 percent. And some U.S. states <a href="https://archive.ph/aDAjP">are now using fossil-fuel plants</a> to make enough electricity to produce electric vehicles. Daily tech, too—from video streaming to AI chatbots—demands still yet more power, with data centers forecasted to increase energy demand by <a href="https://www.iea.org/news/ai-is-set-to-drive-surging-electricity-demand-from-data-centres-while-offering-the-potential-to-transform-how-the-energy-sector-works">a whopping 20 percent by 2030</a>, when they’ll likely be consuming globally as much energy as the whole country of Japan does today.</p>
+<p>“When we switch the lights on, we are not aware, but sometimes there is congestion on the grid,” says Scaglione. And that congestion, when taken to the extreme, can bring whole systems down.</p>
+<p>As a result, sometimes entire countries are left struggling to keep the lights on. For example, this spring, Spain and Portugal had <a href="https://www.theguardian.com/environment/2025/apr/29/what-caused-the-blackout-in-spain-and-portugal-and-did-renewable-energy-play-a-part">massive blackouts</a> in which 55 million people were left powerless because their grid struggled to handle renewable energy’s swings (among other technical issues). Blackouts like these are going to become <a href="https://www.businessinsider.com/blackouts-power-outages-more-common-climate-change-electric-grid-infrastructure-2023-3">increasingly more common</a>, says Scaglione, if we don’t upgrade our grids in thoughtful ways.</p>
+<p>Improving outdated grids to meet the twin challenges of increasing demand and fluctuating, distributed inputs requires a lot of strategy and complex computation. But scarcity is the mother of invention, and energy experts around the world are adding more computing power through AI to tackle different challenges at each step of the system.</p>
+<p>On one level, evolving the grid is about incremental physical improvements. For example, bolstering the capacity to transmit energy from the places where renewables are burgeoning. “We need to build out new transmission corridors to access renewable-rich zones, like the Great Plains and parts of the Midwest and the Southwest,” says Tyler Norris, a doctoral student and grid transition researcher at Duke University’s Nicholas School of the Environment. And implementing better conductors that can carry more energy overall, Norris says, “basically installing a fatter wire that can accommodate more power.”</p>
+<p>Better storage capacity, too, will help, holding onto energy while it is plentiful and not in high demand. This means improving and scaling up traditional lithium battery banks, as well as developing new forms of energy storage, such as <a href="https://arxiv.org/abs/2505.04391?">solid-state sodium-based batteries</a> (sodium is far cheaper, safer, and more widely available than lithium) and <a href="https://www.sciencedirect.com/science/article/pii/S0378775325019597">vanadium redox flow batteries</a>, which work by storing energy in liquid electrolytes instead of solid electrodes like in lithium batteries.</p>
+<p><img alt="" src="../images/T3aTExA5-Quaglia_BREAKER.png" /></p>
+<p><em>Credit: Fahroni / Shutterstock.</em></p>
+<p>We can also improve how we draw electricity from the grid. Human societies tend to fall into relatively broadly predictable patterns, so there are times of known higher energy use—like frigid winter mornings, between 6 a.m. and 9 a.m., which is what most power grids are tailored to cover—and known lower ones. “About 80 percent of the time, a third of the power system sits unused,” says Norris. “That’s a really inefficient use of resources.”</p>
+<p>Smart devices can automatically adjust things like thermostats to adapt and adjust around peak energy-use times to put less strain on grid demands—and hopefully help avoid large-scale blackouts. “You are going to obviously notice if the light is not on, but as long as your air conditioner keeps you within your comfort temperature, you don’t notice when the vent is activated or not,” says Scaglione. That’s true of anything that is thermostatically controlled, including air conditioners, water heaters, and heat pumps. These can be designed to make the temperature just right while there is less congestion on the grid, and right before energy rush hours.</p>
+<p>Electric vehicle charging hubs can also work similarly, with smart timers that gauge the amount of demand on the grid and charge when there is lower need. “There is going to be a lot of technology that will be integrated more into general appliances,” says Scaglione. “It will be interestingly orchestrated by these algorithms that will use some artificial intelligence to make predictions about energy use.”</p>
+<p>But more improvements will come from optimizing within the grid itself—using AI to improve the grid’s situational awareness and near-term prediction of power production and demand; planning and building out grid infrastructure and markets; and streamlining operations by improving real-time decision-making, says Priya Donti, an assistant professor at MIT’s electrical engineering and computer science department and the Laboratory for Information and Decision Systems.</p>
+<p>Donti is a 2023 AI2050 early career fellow, a program in Schmidt Sciences that asks researchers to imagine the year 2050, where AI has been hugely beneficial, and to pursue projects that help society realize this. The program funds senior researchers and early career scholars for two years to address a wide range of global challenges in AI.</p>
+<p>Already, artificial intelligence can help quickly crunch the numbers to predict how much renewable energy production the grid will have—by more accurately forecasting weather and climate, for instance—and how much demand it is likely going to have, again, by forecasting weather and similar factors.</p>
+<p>For planning, AI can also be used to speed up simulations for how to schedule power on the power grid in real time and applications that simulate what the grid will need in order to be most efficient as it expands. For example: Where should new branches of the grid be built, and how big should they be to accommodate possible renewable inputs and likely energy demands in the future? “That’s like seeing how the effects of your algorithm play out over a longer time horizon,” says Donti—predictive power our previous tech didn’t have.</p>
+<blockquote>
+<p>AI can help by more accurately forecasting weather and climate.</p>
+</blockquote>
+<p>But even with the most highly tuned AI programs predicting what the grid will need, not everything will go to plan. And AI can also help the grid respond to unforeseen situations in real-time.</p>
+<p>“There are some true physics that govern how the [power grid] behaves, but we use all sorts of approximations to solve them,” says Donti. “The gap between those approximations and reality is becoming more and more punishing as we’re starting to deal with a system that’s more complex.”</p>
+<p>So Donti’s laboratory is working to create faster, more accurate algorithms for power grid management while maintaining physical realism. While current grid algorithms use approximations that sacrifice accuracy for speed—flattening non-linear physics into linear equations that are easier to solve using traditional computational techniques—her AI-powered algorithms are equipped with more realistic features that are true to the complicated intricacies of the physics at hand. She trains AI models ahead of time to learn almost all of the possible grid scenarios and optimal responses, so that solutions can be applied more quickly than if it were trying to solve the original problem from scratch every time, Donti says. “Now you have almost like a bucket of strategies,” says Donti. “Then in real time, when you see a particular problem happen, you’re like, ‘Oh, I’m just going to pull this out of my bucket of strategies.’ ”</p>
+<p>This also involves increasing how much flexibility we give the grid. Instead of checking in on the grid’s performance at intervals of hours or even days, as many of our systems are currently programmed to do, embedding AI in the operational algorithms can help move toward a future where they are checking on the grid almost continuously, looking for changes or problems right on the spot.</p>
+<p>Donti compares it to scheduling your week—you might think you know what your week is going to look like, but if anything comes up in real time, you usually adjust accordingly. “You go based on what’s actually happening,” says Donti. Now imagine that you are restricted, so that if something comes up urgently, you cannot deal with it immediately and schedule the rest of your day around it. “You’re like, nope, you’re not due to reassess what your schedule looks like for another 50 minutes,” Donti says—that’s what the grid is like now, and what AI could help overcome.</p>
+<p>“We could get different components of the power grid to be able to reassess how the grid is coordinated, given real-time information,” says Donti. AI can help devices like batteries and generators make immediate decisions about storage and power creation based on current grid conditions.</p>
+<p>This level of real-time reactivity also enables having a more distributed grid. Instead of everything needing to be centralized, there could be small, scattered AI systems that integrate information from local community needs and then make changes just to that segment of the grid—not having to go all the way back to centralized power, and, in an extreme example, shutting down the whole country’s electricity if something goes wrong.</p>
+<p>Donti and others are hoping AI can help pave the way for a more resilient energy future. Still, there is work to be done, and in order to create and validate machine learning algorithms in these areas, you need good data and good simulation environments to test out all of these algorithms and see if they work, says Donti.</p>
+<p>“Our simulation tools right now are fairly early, and so we are just looking at a longer, longer horizon,” says Donti. “On the other hand, I think we can’t really afford a longer horizon, so there has to be some really deep intervention to try to really improve the state of data and simulation environments.”</p>
+<p>Plus, she and other scientists haven’t forgotten that the very data centers needed to run AI are also, ironically, one of the largest things currently causing strain on the grid. So data centers will also have to lead the way in how they optimize their energy use, says Scaglione, because they’ll need to make sure they’re not weighing down the very system they are trying to improve. <img alt="" src="../images/nautilus-favicon-14_948.png" /></p>
+<p><em>Lead image: metamorworks / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

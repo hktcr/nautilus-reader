@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Bought a Robot Cat for My Rabbit - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>I Bought a Robot Cat for My Rabbit - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-DWGB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For a while, as part of a research project on care robots in Sweden, I had <a href="http://www.parorobots.com/">Paro the seal</a> in my house. I had borrowed Paro from a roboticist colleague, and the seal had a longer-than-planned layover with me because of the COVID-19 pandemic.</p>
+<p>Neighborhood children were often around and showed fleeting interest in the robot. Our free-range rabbit in the house, Topsey, was wholly unimpressed (“Topsey is sad because we are paying too much attention to the robot,” said one of the more empathetic children). I don’t think Topsey felt bad about the very small amounts of attention the robot was getting. I suspect that at times, Topsey was glad something else was attracting the kids’ attention.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>Curious about how other children might respond, I brought the seal over to a friend’s house. Her 11-year-old petted Paro as instructed, to trigger the various sensors integrated into its whiskers and body. She tried to be polite and make some positive comments and even asked a few questions about how it worked. The 6-year-old watched his sister interact with the robot, and, like their cat, quickly lost interest.</p>
+<p>About a year later, after having returned the seal to my roboticist colleague, my research project bought an orange tabby cat robot. This “Joy for All” companion robot, created by the company Ageless Innovation, is supposed to help people living with dementia feel calmer, offer a sense of companionship, and provide opportunities to give care by interacting with a lifelike “cat.” Our research team was going to use it for a pop-up exhibition on care robots at a local museum, but before that event, I used the tabby cat to create a TikTok page called <a href="https://www.tiktok.com/@robot_meets_pet/">Robot_meets_pet</a>.</p>
+<blockquote>
+<p>I’m going to go out on a limb here and say that the pets didn’t even recognize the robot as an animal.</p>
+</blockquote>
+<p>Over the course of a morning, I filmed while various pets met the robot. I started with the pandemic rabbit we already had at home. It was utterly disinterested and I ended up with heaps of boring footage. But TikTok is a platform that rewards very short video clips, so I eventually had enough material to put up a few segments that made it look like the rabbit and the cat were interacting.</p>
+<p>This having been so successful, I decided to expand my experiment to other pets and see how they interacted with the robot. My inclusion criteria were two: 1) Who do I know that lives close by and has a pet? 2) Do I know them well enough that I can ask them to let me film their pet with a robot for TikTok? These criteria led to a TikTok feed that included films of robot-animal interactions with two rabbits, three cats, and two dogs. I almost got permission to film a hamster, but the mother of the hamster’s family was trying to keep her 9-year-old off TikTok and thought it would be pedagogically difficult to argue that the hamster could be on it but not the child. I had to agree. And to be honest, by the time the hamster appeared as a possibility, I was getting a little bored with filming pet–robot interactions to upload on TikTok, addictive as the platform is claimed to be.</p>
+<p>Now, you may legitimately be wondering what all this has to do with a scientific study of care robots. Bear with me …</p>
+<p>For one thing, an obvious observation is that the baby seal and the cat robot are designed to be readable and intelligible to human ways of sensing and perceiving the world, and that these might be very different for animals. Not that the robots were particularly interesting to the children—or most of the grown-ups who came in contact with them, if I’m honest. But they were at least intelligible as a robotic seal and cat. No one questioned which animal the robot was trying to look like.</p>
+<p><a href="https://lede-admin.nautil.us/wp-content/uploads/sites/70/sites/3/nautilus/Oskar7.mov"></a></p>
+<p>But I’m going to go out on a limb here and say that the pets didn’t even recognize it as an animal. With each pet, I filmed a lot of noninteractions to get the few seconds of “interaction” that I would then cut, put to music, and upload. (Full disclosure: Sometimes I had to hide pet food behind the robot’s ears or under its paws to get those clips, giving weight to the adage, “Don’t believe everything you see on social media.”)</p>
+<p>I decided to try to make sense of the robot–pet interactions in my head and not just on TikTok, so I turned to Animal–Robot Interaction (ARI) literature. It struck me that some of the research questions and methods I encountered there were quite similar to the research I had encountered in much of the Human–Robot Interaction (HRI) literature about emotions and our relationship to robots.</p>
+<p>If I were to make a sweeping generalization about the field, intelligibility is a primary concept in ARI, just as in HRI. For animal–robot interactions to work, robots must be able to read what the animal is thinking, feeling, and doing, and the animal <a href="https://www.researchgate.net/publication/47784663_A_General_Methodology_for_the_Control_of_Mixed_Natural-Artificial_Societies">must be able to understand cues</a> presented to it by the robot.</p>
+<p>This is, of course, not the same as the animal believing the robot is an animal, just like humans do not need to believe a humanoid robot is a human to interact successfully with it. Belief is assumed to be suspended in much HRI research. But in ARI, the cues from both the animal and the robot are meant to be intelligible. In a way, this is not much different from foundational understandings in human–robot interactions, strengthening the claim in many humanities and environmental fields that humans should analytically be considered an animal and that the distinction we make between them is an outdated (and dangerous) remnant of the Enlightenment, modernism, or colonialism.</p>
+<blockquote>
+<p><em>The thought of cockroaches near me being controlled by a robot, on behalf of a human, truly terrifies me.</em></p>
+</blockquote>
+<p>Robotic imaginaries—the ways we envision what robots are and what they might do—<a href="https://www.upress.umn.edu/9781517902988/the-robotic-imaginary/">also appear in ARI</a>. One study <a href="https://www.science.org/doi/10.1126/science.1144259">constructed robot cockroaches</a> that, through acting as “agent provocateur, were able to modulate group decisions from within.” The thought of cockroaches near me being controlled by a robot posing as one of their own, on behalf of a human, truly terrifies me.</p>
+<p>Another robotic imaginary in ARI was engaged by research <a href="http://doi.org/10.1162/isal_a_00396">that implanted robotic devices</a> in large groups of animals to try to manipulate the animals en masse. Here, for example, one finds work to regulate and direct bee behavior (individually and at the colony level) by a robotic device that modulates the hive environment with vibrations and heat. This reminded me that Paro and the cat robot both vibrated, in mechanical ways and not necessarily intentionally. But they did not give off heat. Would heat have helped make them intelligible to my neighborhood pets? Do the humans who interact with Paro and the cat robot wish for this?</p>
+<p>I also discovered work with fish using movement cues from robots—a fishlike robot implanted into a group of fish (often zebra fish)—to try to get the fish to alter their schooling movements <a href="https://link.springer.com/article/10.1007/s11721-017-0153-6">according to inputs from the robot fish</a>; a <a href="https://www.researchgate.net/publication/50345614_The_PoulBot_A_mobile_robot_for_ethological_studies_on_domestic_chickens">robot that interacted with domestic chickens</a>, both observing what the chickens were doing through visual and audio cues, and modulating chicken behavior, including producing imprinting; and research that showed how real rats <a href="https://www.rockingrobots.com/research-a-step-towards-natural-interaction-between-robots-and-animals/">could be trained to follow robot rats</a>. The result of many of these experiments is an observable behavioral response in the animal, but the goal is successful integration, called “bioacceptance.” This distinction finds parallels in HRI, as when a person who is being directed by a humanoid robot does what the robot tells them to do versus accepting the robot as a companion.</p>
+<p>Why would we want to study (and manipulate) the animal–robot relationship? Well, there are a wide range of reasons, from the use of robots to control animals in military and “security” contexts (my affective discomfort with that cockroach imaginary recurs as I write this), to the use of robots to control (and improve the lives of?) animals in industrial-scale agricultural practices, to the idea that robots could help protect endangered wildlife (presumably by monitoring poaching). As with the reasons given to study and develop the human–robot relation, the social implications and predicted impacts given for experimenting with the animal–robot interaction varied widely.</p>
+<p>Many of these possible scenarios are in the very distant future, so it makes sense to think of them, too, as robotic imaginaries. Sometimes this imaginary would suggest that robots might make it easier to design controlled experiments of animal behavior, <a href="https://www.researchgate.net/publication/347325291_Animal-in-the-Loop_Using_Interactive_Robotic_Conspecifics_to_Study_Social_Behavior_in_Animal_Groups">especially the social behavior of animals</a>. With the robot, the researcher <a href="https://link.springer.com/article/10.1007/s00422-018-0787-5">can control at least one element of a relation</a>, both in the “controlled variable” sense of control and as in actually controlling the animal.</p>
+<blockquote>
+<p><em>Just because rats can learn to follow a robot rat doesn’t mean they think of it as a rat.</em></p>
+</blockquote>
+<p>Controlling the animals is a subfield of ARI that uses cyborg versions of animals. While most of the robots used in ARI studies are regular, stand-alone (or swim attached to a robotic arm) robots, some of them are actually robotic components incorporated into an animal to control the animal’s <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0147754">nervous system</a>, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0924424716300528">muscles</a>, or <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0150667">antennae</a> with electronics, producing so-called cyborg or biohybrid organisms from cockroaches, beetles, lizards, rats, pigeons, and so on.</p>
+<p>For example, researchers have <a href="https://link.springer.com/article/10.1007/s00422-018-0787-5">incorporated a speech translator module in the brain of a rat</a> that generates electric stimuli in the rat brain and, thereby, controls its motion, translating human speech commands into electronic signals. The same thing has, in a simpler form, <a href="https://ieeexplore.ieee.org/document/6022965">also been performed on carp</a>. In addition to using these types of robots for animal behavior experiments, these biohybrid organisms can (in the imaginary, at least) be used for other human ends by working to produce a mobile sensor network for tasks like environmental monitoring or the location of survivors. Military uses of these cyborgs are also apparent in some of this research.</p>
+<p>In many ways, the reasons given for ARI research may not be too far from some of the imaginaries we have with care robots for humans. We are told that they can help protect (often older) people by ensuring they are safe in their homes or care environment, or by governing their intake of medicine and food, or by engaging them in beneficial exercise or being social companions. And in ARI as in HRI, studying how people interact with the robots is different from knowing how they really feel as a result of that interaction.</p>
+<p>Apart from biohybrid or cyborg robots, though, stand-alone robots are often used to try to communicate with or send signals to animals. This was a reflection that I thought might help me find potential answers to why the robots were so uninteresting to my neighborhood pets.</p>
+<p>In contrast to the interactions I observed with the cat robot’s meetings with my neighborhood pets, it is possible to produce animal–robot interactions that engage the animal. Robot movement <a href="https://www.sciencedirect.com/science/article/abs/pii/S0003347206000261">can teach finches</a> to mimic the foraging motions of a robot finch, displaying what could be interpreted as mirroring, something many people do with their human conversation partners. Temperature can be used to induce chicks to imprint and <a href="https://iopscience.iop.org/article/10.1088/1748-3190/11/1/016007">bond with a robot</a>. Is this a type of affinity? Love perhaps? And <a href="https://www.researchgate.net/publication/2620993_Experiments_in_Automatic_Ock_Control">ducks can be herded in particular directions with a robot</a>, possibly anthropomorphized as fear? Other studies have looked <a href="https://hrilab.tufts.edu/publications/morovitzetal17vihar/">at how dogs interact with robots</a>, when the robot is imitating a human in speech or movement (speech seemed to work better).</p>
+<p>In a lot of the animal–robot interaction work I read, robot movement seemed to be a prioritized area of research. Sometimes these cues were also, experimentally, paired with audio/vocal cues, which made me wonder if the cut between a movement cue relying on visual sensing (an expanding and contracting vocal sac) and an audio cue (the sound from/associated with this) was more of a distinction made by us as human researchers than by the amphibian being sent the signals.</p>
+<p>Robot movement is also a subarea of human–robot interaction research, which focuses on how robots are perceived by humans. Here one finds similar questions and goals, like increasing the usefulness and acceptance of pet companion robots by improving the robots’ touch engagement in different ways, especially in situations that are designed to build trust and empathy. Thus, parallels exist between how we imagine robots communicate with us and how they communicate with nonhuman others. Research on how humans respond to robotic arm movements, for example, tests the importance of minor changes in movement styles for acceptance. By extension, perhaps if the seal or the cat moved more like a seal or a cat, they would have appealed to the real pets in a different way.</p>
+<p>In one of the recent overviews of the field, however, it is noted that just because rats can learn to follow a robot rat doesn’t mean they think of it as a rat. We can observe animal behavior, but explaining what understandings and emotions are behind that behavior is a completely different matter. How an animal really feels when it is receiving and interpreting signals is impossible to say—only to impose.</p>
+<p>Arguably, it would be a very big step for me to claim to know the emotional life of the pets I filmed (a step best left to children with no theoretical qualms about imposing anthropomorphical or epistemological leaps, like the 6-year-old and his cat).</p>
+<p>But one thing I can note is that the films on my TikTok did seem to generate a lot of emotion from the human viewers. There was an oddly large number of people who emoted with a heart (the TikTok version of a “like”) to the videos I posted. I quickly gathered over 1,000 followers, and within an hour of an upload, hundreds of people had viewed my videos, dozens of which had felt impelled to give it a heart. I felt like a TikTok star! Until I realized how many followers real TikTok stars have. Then I felt like a middle-aged academic with an odd TikTok account.</p>
+<p>Yet, somehow, in my unreasonable expectations of what I could generate with these TikTok videos, I had hoped that I would be able to start a conversation about the robot—maybe even about our robotic imaginaries and the relations we see (or don’t see) being made between the pets and the robot. I thought maybe the flood of responses would be a valuable, rich, body of text about how we felt about that relation, which I could mine to say something novel and intelligent about the robot–human–nonhuman–more-than-human–relation.</p>
+<p>I was wrong.</p>
+<p>The short videos I posted (some of which even asked questions like: “What is the rabbit thinking?” or “Is this love?”) generated a grand total of (at the time of writing) six comments, of which five were a series of happy emoji and one was a question about ownership of one of the cats. Of course, this says much more about the TikTok platform (and the subset of users directed toward my postings) than about the robot–pet relation. But, nonetheless, it did not generate a body of empirical material I could use to say anything about what we or pets think about the robot–pet relation.</p>
+<p>One reflection made when reading studies about animals and robots is that the idea of a robot interacting with an animal (and pets, specifically) produced feelings in me. Reading the results of studies about the robot–animal relation triggered emotions that were mildly uncomfortable (sometimes not even mildly). In the articles that discussed the use of robots to manipulate large groups of animals (fish, birds, insects) with the obvious potential to be weaponized, or even just to lead to easier industrial fishing practices, a feeling of unease and sadness was triggered in me. And discussions about implanting electronics in the brains of rats and fish made me deeply uncomfortable about the use of animals in this research.</p>
+<p>But perhaps I was most unsettled by the articles that talked about doing robot experiments with dogs, those that tried to test if dogs responded better to robots calling them or if they responded better if a human was in the loop. I felt a feeling of repulsion, sadness, and unease as I read about these studies. The dogs had been taught and trained to respond to us, as companions. I felt that trying to get the dogs to behave in a similar way with a robot was … sad? Disloyal? Unethical? Abusive? Something the fox would have advised the Little Prince against doing?</p>
+<p>And I wondered if I would feel this way about the idea of leaving my aging mother to a robot companion, even one that she recognized as a soft, purring cat.</p>
+<p>(Yes. I think I would.) <img alt="" src="../images/nautilus-favicon-14_1158.png" /></p>
+<p><em>This <a href="https://thereader.mitpress.mit.edu/the-weird-world-of-animal-robot-research/">excerpt</a> is reprinted with permission from MIT Press Reader.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are Humanoid Robots the End of Human Work? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Are Humanoid Robots the End of Human Work?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-EF3G</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Almost a decade ago, <em>The New Yorker</em> ran a <a href="https://www.newyorker.com/culture/cover-story/cover-story-2017-10-23">cover</a> showing a busy city street crowded by human-shaped robots and other whirring creatures. The drab machines amble down a sidewalk drinking coffee, checking cell phones, walking tiny robot dogs—and dropping coins in the cup of a shaggy human who sits begging for spare change. The image struck a chord. Fear was in the air, then as now.  </p>
+<p>The worry that our robot progeny will make us obsolete has lurked in the cultural imagination since the word robot was first <a href="https://thereader.mitpress.mit.edu/origin-word-robot-rur/">coined</a> in a Czech play published in 1920, over a century ago. But as advances in artificial intelligence and robotics accelerate at a bewildering pace, it has increasingly seemed like our moment of reckoning might be upon us. In 2013, a widely cited <a href="https://oms-www.files.svdcdn.com/production/downloads/academic/future-of-employment.pdf">report</a> out of the University of Oxford predicted that nearly half of all jobs were at risk due to machine learning and so-called “mobile robotics.” And though subsequent analyses pushed back on those findings—the Organisation for Economic Cooperation and Development, for example, <a href="https://www.oecd.org/en/publications/the-risk-of-automation-for-jobs-in-oecd-countries_5jlz9h56dvq7-en.html">put</a> the number as low as 9 percent—the original figure has lingered in the zeitgeist.    </p>
+<p>Then came ChatGPT and Tesla’s humanoid “Optimus” robot, which was wildly hyped by Tesla CEO Elon Musk—though he’s well-known for his over-promising, among other things. Footage of an army of humanoid robots <a href="https://www.youtube.com/watch?v=nzflxCHT4vw">marching</a> in sync through a Chinese warehouse began making the rounds on the Internet, shared widely on social media and in the headlines. Soon the job-cutting began. In recent months, a number of companies, including Amazon, have made mass cuts to their workforces, <a href="https://www.cbsnews.com/news/ai-layoffs-2026-artificial-intelligence-amazon-pinterest/">citing the efficiencies of AI</a>. This week, Meta <a href="https://www.npr.org/2026/05/20/nx-s1-5826917/meta-layoffs-ai-jobs">cut</a> 8,000 jobs, or 10 percent of its workforce, to refocus on AI. One November 2025 study found a 16 percent <a href="https://digitaleconomy.stanford.edu/app/uploads/2025/11/CanariesintheCoalMine_Nov25.pdf">decline</a> in certain entry-level positions since ChatGPT’s release. In recent commencement speeches, some speakers have hailed the AI revolution, only to be met with choruses of <a href="https://nautil.us/commencement-boos-for-ai-platitudes-1280992">boos</a>.  </p>
+<p>This may be the beginning of a total transformation of the workforce—but for better or for worse? New technologies have historically created as many jobs as they destroy once the dust settles. But some have argued that this is the first time automation is tackling both physical work and cognitive, creative work at once. Previous transitions also played out <a href="https://issues.org/david-autor-economist-ai-future-work/">over generations</a>, giving displaced workers time to land on their feet.  </p>
+<p>Recently, thousands of robotics engineers gathered at a conference in China, and one of the panels consisted of a staged debate: Would humanoid robots replace most human workers by 2050? The vast majority of the thousands who attended voted no before the debate even started, and even more of them voted no when the arguments were complete. Take that, robots.  </p>
+<p>American inventor, artist, writer, and professor of robotics and automation at University of California, Berkeley, Kenneth Goldberg co-authored a <a href="https://www.science.org/doi/10.1126/scirobotics.aeh6422?adobe_mc=MCMID%3D67005598899726954193151062168080570320%7CMCORGID%3D242B6472541199F70A4C98A6%2540AdobeOrg%7CTS%3D1779318201">viewpoint</a> about the session in the journal <em>Science Robotics</em>. I spoke with Goldberg about what robots are bad at, why he and his colleagues voted no, and the future of work.    </p>
+<p><strong>You were just at a robot conference in China where there were dancing robots, boxing robots, and garment-folding robot competitions. I wondered if there were any robots that really impressed you.</strong></p>
+<p>There were humanoid robots everywhere you looked. Also, many new robot hands that were impressive. But the thing to keep in mind is that while robots are very good at locomotion and acrobatics ...  </p>
+<p><strong>Acrobatics?</strong></p>
+<p>Backflips, synchronized dancing. You’ve seen the Chinese New Year videos? Just search online for humanoid backflips, and you’ll see dozens of <a href="https://www.youtube.com/shorts/gRHKvBJ1Y24">videos</a>. Robots can also now <a href="https://www.cnn.com/2026/04/19/china/china-robot-half-marathon-intl-hnk">run</a> a half marathon faster than a human. But that doesn’t mean they’re equally good or even close to humans in terms of dexterity.</p>
+<p><strong>Why is dexterity so important for the kind of labor that would replace a human?</strong></p>
+<p>This ability to reliably manipulate objects with hands is important for many jobs, from agriculture to zookeeping.</p>
+<p><strong>I was personally kind of shocked to read that 80 percent of the 3,000 attendees, people who work in robotics, at this debate session said that robots wouldn’t replace human workers soon. Did that number surprise you?</strong></p>
+<p>No, it didn’t. Experts who study humanoid robots understand that they currently have many limitations. But there’s a huge disconnect between the popular impression and the reality of where robots are today. It’s important to convey to the public that although they see humanoids doing certain things, like running and doing backflips, these robots still can’t tie a sneaker or chop vegetables.</p>
+<p><strong>Is there any chance that there’s a shared blind spot among the people who were in that room? The 3,000 robotics researchers are people whose careers depend on the field being taken seriously but not overhyped to the point of backlash</strong><strong><em>.</em></strong></p>
+<p>I see your point, but I don’t think it’s a shared blind spot. The technology is just not there yet. And these are all people who actually work with robots, so they’re very familiar with the limitations. It’s very unclear when humanoid robots will be able to do work that humans can do. Maybe a humanoid can do something like a night watchman where it’s just walking around. But when you think about a humanoid robot, let’s say in your home, or a factory or a coffee shop, you want it to do all kinds of things on its own.</p>
+<p><strong>What is the actual definition of a humanoid robot?</strong></p>
+<p>Essentially a robot that looks like a human, with a head, body, legs, two arms, and hands with fingers. Over 100 companies are now making different humanlike robots, and they all have a kind of similar look.</p>
+<p><strong>I was thinking a humanoid robot might be something that also relied on AI for human-like intelligence.</strong></p>
+<p>Humanoid is just the shape. Then how do we get it to work or do something? That’s a whole different question. There are many different ways a humanoid could be programmed. We’ve had humanoid robots, by the way, since the science-fiction movie <em>Metropolis</em>. The word robot was coined in 1920 in a science-fiction play, so people have been talking about humanoid robots for a very long time—long before AI. AI is clearly needed to control humanoid robots. But there are different types of AI, including agentic coding, which is now being explored as an alternative to large vision-language-action models.</p>
+<p><strong>Read more: “<a href="https://nautil.us/how-human-is-human-1270990">How Human Is Human?</a>”</strong></p>
+<p><strong>One of the panelists mentioned that the costs of using a humanoid robot to do work would exceed human wages, especially in places like China. But then China is also where almost 80 percent of these humanized robots are being built. How do we square those two things?</strong></p>
+<p>They’re being built, but they’re not being deployed to do useful work. That’s not really happening today. So the question is, when will that happen? It depends. People will buy some humanoid robots as novelty items in their homes. That certainly will happen. And we already have <a href="https://nautil.us/how-to-build-a-trustworthy-robot-1280550">digital companions</a> for elderly people, things like Paro the seal or a box that sits on your counter. But these aren’t humanoid robots. And for something like physical therapy, it would be a while before it would be safe enough to have a robot helping someone with a disability because they’re very vulnerable.</p>
+<p><strong>One of the panelists, Andra Keay, argued that in countries such as the United States, overall employment levels weren’t that affected by earlier revolutionary technologies, such as the car or the cell phone. But are humanoid robots really comparable to those earlier technologies?</strong></p>
+<p>That was a really good insight Andra had. She was looking at the history of the automobile. When automobiles first came out, people thought that it was basically going to wipe out a lot of human workers—all the blacksmiths,buggy drivers, and horse trainers. But what happened instead was that cars created many, many new jobs: People had to build the roads, make the cars, the gas industry, all the motels. It was a net plus for jobs. Andra’s beautiful insight is that if you look at the unemployment rate in the U.S. over the past hundred years, it’s pretty much stayed constant even with the development of all these inventions and radical technologies—the car, the airplane, radio, television, the computer, the Internet, the cell phone. None of them wiped out jobs. We have a lot more people in the U.S. than we ever did, and the unemployment rate is still about 4 percent.</p>
+<p>There are a lot of misperceptions. People look at all these robots and think, “This is going to wipe out jobs.” But if you look deeper, and the economists agree with this, it's not so clear at all. And from a technology perspective, I’m arguing that the robots aren’t capable of doing human-level work. In almost all cases right now, there’s going to be a lot of challenges. If they ever do get to that point, there may be lots of other jobs created.</p>
+<p>The other thing is there’s a big change in demographics. Thirty years ago, there were six people working for every retired person. Today, only three people are working for every retired person in the U.S., and this is going to get worse. We have an aging population. Who’s going to take care of all the senior citizens like me? We have a shortage of human workers. It’s important to push against the conventional wisdom that you hear over and over again. And by the way, I understand why you’re surprised because <a href="https://www.nytimes.com/2026/05/03/opinion/ai-jobs-unemployment-silicon-valley.html"><em>The New York Times</em></a>, <a href="https://www.newyorker.com/culture/cover-story/cover-story-2017-10-23"><em>The New Yorker</em></a>, and everywhere else is <a href="https://www.newyorker.com/magazine/2019/03/04/are-robots-competing-for-your-job">publishing</a> this mantra that robots are going to take over all the jobs.</p>
+<p><strong>Well, part of it is the fear of AI, right?</strong></p>
+<p>Yes. There’s a lot of fear that AI would <a href="https://www.nytimes.com/2024/03/22/opinion/ai-jobs-comparative-advantage.html">take over jobs</a> but that hasn’t happened so much yet. It may take over certain jobs. But anything that involves customer service, you really want people in the loop. When I have to go over and order my coffee on my own, I don’t like it. I prefer to have a human take my order. I also think for anything that involves dexterity—the trades, such as being a carpenter, plumber, electrician, car mechanic, even building or remodeling a home—we will need human workers for a very long time.</p>
+<p><strong>Some of the people on the panel argued that robots</strong> <strong><em>will</em></strong> <strong>eventually be able to take over most labor-related tasks and then free humans to pursue more meaningful activities. I know you’re predicting that’s a long way off, if it arrives at all. But what more meaningful activities might those be?</strong></p>
+<p>Robots can make certain tasks easier. For example, you’re a journalist. And I don’t think your job is going away at all. But, for example, you may want to transcribe this conversation, right? In the past you had to sit down and do it manually, word by word, and it wasn’t very fun. It was a tedious task. It took a lot of time that you could better spend on doing other things, like thinking about things, doing research, and talking to people. But now you actually have that pretty much automated, so it didn’t replace you, but it made you better at what you do.</p>
+<p><strong>So no one is arguing that robots would eventually replace labor entirely, leaving humans to focus on leisure time? I think labor is pretty meaningful for a lot of people.</strong></p>
+<p>No, I don’t think anyone wants that. People like to work, and we need more humans to care for the elderly. We have a shortage of nurses. They won’t be replaced with robots. But robots could monitor a patient while a nurse takes a nap. I’m an optimist. I hear the concern. I really do. I don’t want to lose my job, either. As a teacher, I think about that, too. But my students, in my experience, want a human teacher. They’ll watch videos, but they also want a human. Because they learn better when a human teacher is engaged.</p>
+<p><strong>Why do you think the numbers shifted to 90 percent from 80 percent by the end of the debate? What happened?</strong></p>
+<p>People responded to the argument that Andra made, in particular, about how the unemployment rate has stayed constant through all this innovation, historically. Of course, some things may change. There will be some disruption in the middle—and certainly computer-science students coming out right now are having a harder time getting jobs than they did five years ago because of AI. That’s true. But they’re adapting, and there’s gonna be new jobs and opportunities. It’s not this job apocalypse that people talk about as if it’s imminent. <img alt="" src="../images/nautilus-favicon-14_45.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: srdesignhouse / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

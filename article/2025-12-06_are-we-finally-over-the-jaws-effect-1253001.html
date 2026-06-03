@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are We Finally Over the “Jaws Effect?” | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Are We Finally Over the “Jaws Effect?”</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-LMUH</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The movie <em>Jaws</em> has been terrifying moviegoers since it hit theaters 50 years ago. Now, the <a href="https://nautil.us/the-shark-whisperer-547680/">reputational damage</a> the horror film inflicted on actual sharks may be beginning to wane.</p>
+<p>In <a href="https://www.tandfonline.com/doi/abs/10.1080/10871209.2014.844289">several studies</a> on <a href="https://www.sciencedirect.com/science/article/abs/pii/S0308597X2100422X?via%3Dihub">public perceptions</a> of sharks over the past decade, participants tended to report moderate to high levels of fear, often <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0202971">linking</a> sharks with words like “blood” and “death.” This highlights a prevalent misconception, given that shark attacks on people are <a href="https://www.floridamuseum.ufl.edu/shark-attacks/yearly-worldwide-summary/">extremely rare</a> around the globe. But a new paper paints a more complex picture of humans’ evolving attitudes toward sharks.</p>
+<p>In an online survey of 371 people, mostly from Australia, the United States, and the United Kingdom, more than two thirds of respondents used neutral terms to describe sharks, according to <a href="https://connectsci.au/wr/article/52/11/WR25068/252056/Describe-sharks-in-three-words-investigating-the">results</a> published in the journal <em>Wildlife Research</em>. Scientists from the University of South Australia asked the participants to describe sharks using just three words. The most common answers were “teeth,” “ocean,” and “predator.”</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-shark-whisperer-547680/"><strong>The Shark Whisperer</strong></a><strong>”</strong></p>
+<p>The researchers used various techniques to analyze the emotional motivation behind more than 1,000 submitted words. For instance, the team divided the words into categories, such as shark conservation and benefits to humans, that they labeled as positive, neutral, or negative. The majority of words—67.5 percent—fell in neutral categories. The neutral terms included “teeth,” “ocean,” and “surfing.” Meanwhile, 17.5 percent were considered positive, like “majestic” and “cute,” and 15.3 percent were considered negative, including “blood” and “killer.”</p>
+<p>The researchers also ran the words through a sentiment analysis algorithm, which linked around 30 percent of them to fear—with  the second most prevalent emotion, joy, tied to about 17 percent of all submitted words.</p>
+<p>“The findings highlight that public perceptions of sharks are more nuanced than the stereotypical ‘menacing predator’ narrative often seen in the media,” said study co-author Brianna Le Busque, an environmental scientist at the University of South Australia, in a <a href="https://www.unisa.edu.au/media-centre/Releases/2025/jaws-impact-may-be-wearing-off-as-shark-perceptions-soften/">statement</a>.</p>
+<p>Still, the paper has limitations. This was a relatively small sample size, and the majority of participants were female and in their 20s.</p>
+<p>The short text responses examined in this study could offer a more convenient alternative to the interviews commonly used to glean public opinions on wildlife and conservation, the authors noted. These methods can require a lot of time from researchers and participants and can prove expensive.</p>
+<p>Scientists are continuing to refine their understanding of people’s views toward sharks, and similar work regarding all sorts of species <a href="https://www.tandfonline.com/doi/full/10.1080/10871209.2024.2318330">lacks standardized measurements</a>. But it’s crucial to track this information, because public opinion <a href="https://www.sciencedirect.com/science/article/abs/pii/S0308597X17303056">bolsters conservation policy</a>, and unpopular efforts can fail to take off or backfire.</p>
+<p>This work is particularly urgent surrounding sharks. They have been long overlooked in conservation, and more than 37 percent of shark and ray species are threatened with extinction—due in large part to overfishing. But recently, our finned friends did get some good news: More than 100 governments <a href="https://www.nytimes.com/2025/12/02/science/wildlife-trade-cites-sharks-rays.html">voted</a> to protect shark and ray species with falling population numbers, perhaps another sign of increasing goodwill toward these once-maligned creatures. <img alt="" src="../images/nautilus-favicon-14_701.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Hermanus Backpackers / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

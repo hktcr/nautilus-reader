@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Inner Lives of Cells - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Inner Lives of Cells - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-4J3O</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://knowablemagazine.org/content/article/technology/2025/super-resolution-microscopes-reveal-new-details-cells"><em>This article</em></a><em>originally appeared in</em> <a href="https://knowablemagazine.org/">Knowable Magazine</a>.</p>
+<p>Using a tiny, spherical glass lens sandwiched between two brass plates, the 17th-century Dutch microscopist <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10458164/">Antonie van Leeuwenhoek</a> was the first to officially describe red blood cells and sperm cells in human tissues, and observe <a href="https://royalsocietypublishing.org/doi/10.1098/rstb.2014.0344">“animalcules”—bacteria and protists</a>—in the water of a lake.</p>
+<p><a href="https://royalsocietypublishing.org/doi/10.1098/rsob.150019">Increasingly powerful light microscopes</a> followed, revealing cell organelles like the nucleus and energy-producing mitochondria. But by 1873, scientists realized there was a limit to the level of detail these instruments could reveal. When light passes through a lens, the light gets spread out through diffraction. This means that two objects can’t be distinguished if they’re less than roughly 250 nanometers (250 billionths of a meter) apart—instead, they’ll appear as a blur. That put the inner workings of cell structures off limits.</p>
+<p>Electron microscopy, which uses electron beams instead of light, offers higher resolution. But the resulting black-and-white images make it hard tell proteins apart, and the method only works on dead cells.</p>
+<p>Now, however, optics engineers and physicists have developed sophisticated tricks to overcome the diffraction limit of light microscopes, opening up a new world of detail. These <a href="https://royalsocietypublishing.org/doi/10.1098/rsta.2021.0110">“super-resolution” light microscopy</a> techniques can distinguish objects down to 100 nanometers and sometimes even less than 10 nanometers. Scientists attach tiny, colored fluorescent tags to individual proteins or bits of DNA, often in living cells where they can watch them in action. As a result, they are now filling in key knowledge gaps about how cells work and what goes wrong in neurological diseases and cancers, or during viral infections.</p>
+<p>“We can really see new biology—things that we were hoping to see but hadn’t seen before,” says molecular cell biologist Lothar Schermelleh, who directs an imaging center at the University of Oxford in the United Kingdom. Here’s some of what scientists are learning in this new age of light microscopy.</p>
+<p><strong>Overcoming the diffraction limit</strong></p>
+<p>Super-resolution microscopy uses a variety of techniques to detect detail that would normally be hidden by the diffraction limit, Schermelleh explains. Single-molecule localization microscopy, for instance, takes advantage of the fact that spots on an image are easier to localize with precision when they appear in isolation rather than clustered together. Scientists label the molecules of interest with fluorescent tags designed to spontaneously emit light. As the probes twinkle on and off, computational models estimate exactly where each molecule is located—and reconstruct a high-resolution image of the sample.</p>
+<p>Another technique, stimulated emission depletion, scans the samples with lasers that are surrounded by a second, donut-shaped ring of lasers that cancel out the fluorescent light around the area of interest, sharpening the microscope’s resolution. A third method, called structured illumination microscopy, illuminates samples with a striped pattern of light. These stripes interfere with the light emanating from the sample in ways that allow scientists to infer additional detail about the image.</p>
+<p>The fundamentals of these techniques were developed in the early 2000s, but they’ve only recently become widespread and accessible enough for biologists to use routinely, Schermelleh says. “We now have lots of projects that use super-resolution microscopy as a genuine tool for biological discovery,” he says, “not just for making nice images.”</p>
+<p><strong>Revising biology textbooks</strong></p>
+<p>These techniques have already revealed new cell structures. Scientists have discovered that neurons have a unique kind of scaffold, called the <a href="https://pubmed.ncbi.nlm.nih.gov/34085116/">membrane-associated periodic skeleton</a>, or MPS, which provides rigidity and form and <a href="https://www.science.org/doi/10.1126/science.aaw5937">helps to regulate the signals</a> that pass from one neuron to the next and to maintain the cells’ overall function. “The MPS is involved in almost all the neuronal functions,” says Columbia University neurobiologist Victor Macarrón-Palacios, who recently reported with colleagues that a particular protein, paralemmin-1, is responsible for <a href="https://www.science.org/doi/10.1126/sciadv.adt3724">organizing the intricate structure of the MPS</a>.</p>
+<p><img alt="" src="../images/9gXXxEnk-Zimmer_BREAKER.png" /></p>
+<p><strong>SECRET SKELETON:</strong> Specialized microscopy techniques have revealed that nerve cells have a special type of internal skeleton called the membrane-associated periodic skeleton. The well-ordered nanoarchitecture of this skeleton is regulated by a protein called paralemmin-1 (fluorescently labeled in this image). <em>Credit: Victor Macarrón-Palacios / Max Planck Institute for Medical Research.</em></p>
+<p>Other cell structures, too, turn out to be more complex than they seemed. Earlier in 2025, biophysicist Melike Lakadamyali of the University of Pennsylvania and colleagues discovered that organelles called lysosomes, whose textbook role is to break down waste material in cells, can <a href="https://rupress.org/jcb/article/224/1/e202403116/277059/Heterogeneity-of-late-endosome-lysosomes-shown-by">have different combinations of proteins on their surfaces</a>. This likely relates to additional functions that specific lysosomes have, such as sensing nutrients and repairing broken membranes.</p>
+<p>Scientists also have been studying how organelles interact with one another. Cell biologist Jennifer Lippincott-Schwartz of the Howard Hughes Medical Institute’s Janelia Research Campus in Virginia, for instance, is scrutinizing the structures that <a href="https://knowablemagazine.org/content/article/living-world/2022/mitochondria-origin-eukaryotes">mitochondria</a> use to dock onto the protein-making endoplasmic reticulum, which supplies calcium and fats to mitochondria.</p>
+<p>Such studies might help reveal the causes of disease. Last year, Lippincott-Schwartz learned that <a href="https://pubmed.ncbi.nlm.nih.gov/38267577/">mutations in the <em>VAPB</em> gene</a>, which is believed to contribute to the <a href="https://knowablemagazine.org/content/article/health-disease/2024/did-eating-false-mushrooms-cause-als-french-village">nerve-killing disease amyotrophic lateral sclerosis</a> (ALS), may interfere with the ability of the endoplasmic reticulum to connect to mitochondria, she says. This could alter the function of these powerhouses and help explain <a href="https://knowablemagazine.org/content/article/health-disease/2025/awakened-viral-jumping-genes-role-in-alzheimers-als">how ALS arises</a>. “We’re just learning what these various genetic mutations that underlie some of these diseases are actually doing at the cell biological level.”</p>
+<p><strong>Gazing into human DNA</strong></p>
+<p>Scientists have also been peering into the nucleus and studying the DNA inside it. Human DNA, if removed from a single cell and stretched out, would span about two yards. To squeeze inside the nucleus, it wraps itself around <a href="https://knowablemagazine.org/content/article/living-world/2024/histones-do-a-lot-more-than-regulate-genes">proteins called histones</a>, creating a string-of-beads combo known as chromatin. The chromatin further loops and twists, to form our chromosomes.</p>
+<p>Chromatin loops and bunches, or domains, can only be studied in detail with super-resolution microscopy, for instance by tagging segments of DNA with fluorescent probes, says Schermelleh, who has been studying how the <a href="https://www.science.org/doi/10.1126/sciadv.aba8811">material arranges itself in 3-D</a> in mammalian cells. “The size scale is just below the diffraction limit, so it couldn’t be assessed before.”</p>
+<p><img alt="" src="../images/tWL252h4-Zimmer_BREAKER-2.png" /></p>
+<p><strong>FINE FOCUS:</strong> Within a fibroblast cell nucleus, the DNA-binding histone protein called H2B is fluorescently labeled in yellow. The top half was imaged with conventional wide-field fluorescence microscopy; the bottom half was imaged with super-resolution microscopy. <em>Credit: M.A. Ricci et al / Cell 2015.</em></p>
+<p>Research by Lakadamyali has revealed, for instance, that the DNA-histone strings of beads organize into <a href="https://www.sciencedirect.com/science/article/pii/S0092867415001324">much more variable structures</a> than scientists had assumed, with some regions of DNA more tightly packed than others.</p>
+<p>This packaging determines how accessible a given region of DNA is. And that’s important, because different cells in the body, say heart cells or neurons, use only a specific subset of their genes. The ones they use are left in a looser, more accessible state, while the silenced ones are packed tight.</p>
+<p>In 2015, Lakadamyali found that embryonic stem cells, which can develop into any cell type, <a href="https://www.sciencedirect.com/science/article/pii/S0092867415001324">have a very loose chromatin structure</a> compared to more specialized cells, which have silenced the genes they don’t need. “We can actually determine whether a cell is a stem cell or a differentiated cell based on the spatial organization of chromatin,” says Lakadamyali, who coauthored a 2023 <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-biophys-111622-091212">overview of super-resolution techniques</a> in the <em>Annual Review of Biophysics</em>.</p>
+<p><strong>Improving cancer therapies</strong></p>
+<p>Scientists are also examining cells affected by disease. For example, biophysicist Markus Sauer of the University of Würzburg in Germany is studying certain receptor proteins on the surfaces of cancer cells that are used as targets in cancer-killing therapies. For blood cancers, for instance, scientists have genetically engineered immune cells to find and kill cancer cells that have specific surface proteins.</p>
+<p>But the techniques commonly used to analyze the proteins on patients’ cancer cells and match patients with effective therapies don’t give a full picture, Sauer says. That was illustrated back in 2015, when physicians discovered they could successfully treat patients with the blood cancer multiple myeloma with <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1504542">therapies that target a receptor called CD19</a>—even though CD19 hadn’t been spotted on multiple myeloma cancer cells with standard methods.</p>
+<p>Sauer and colleagues found in 2019 that the <a href="https://www.nature.com/articles/s41467-019-10948-w">CD19 proteins were clearly visible</a> with super-resolution microscopy. They learned that to do their killing job, the immune therapies require as few as 10 CD19 proteins among hundreds or thousands of other proteins on a cancer cell surface.</p>
+<p><img alt="" src="../images/Zimmer_BREAKER-3_1.png" /></p>
+<p><strong>PROTEIN UNIVERSE:</strong> A new microscopy technique can light up the protein CD-19 on the surface of cancer cells. Detecting the protein, shown here on a cell from a patient with multiple myeloma, helps determine which patients could benefit from CD-19-targeting therapies. <em>Credit: Markus Sauer.</em></p>
+<p>These microscopy techniques can be used to better match patients to effective therapies, Sauer says. His more recent research has <a href="https://ashpublications.org/blood/article/138/19/1830/476427/Siglec-6-is-a-novel-target-for-CAR-T-cell-therapy">identified a new receptor protein</a> for therapies to target, and helped <a href="https://www.science.org/doi/10.1126/science.adq4510">elucidate the exact process of tumor killing</a>—knowledge that could help improve the potency of immune therapies. “You have to visualize those processes at molecular level,” he says.</p>
+<p><strong>Filming viral invasions</strong></p>
+<p>The wily tricks viruses use to infect human cells and reproduce are also under investigation. Understanding such dynamics could help scientists develop new antiviral medicines, says virologist Christian Sieben of the Helmholtz Centre for Infection Research in Germany.</p>
+<p>Earlier in 2025, for example, Sieben reported how the <a href="https://knowablemagazine.org/content/article/health-disease/2025/scientific-facts-about-h5n1-bird-flu">influenza A virus</a> infects human cells. By tagging viral and human proteins, he and colleagues watched the virus first latch onto single receptor proteins on the cell surface. The virus then waited until other receptor proteins, moving around in the fluid cell membrane, accumulated nearby. Only <a href="https://www.nature.com/articles/s41467-025-58935-8">when the virus attached to multiple receptors</a> could it enter the cell, Sieben and his colleagues learned.</p>
+<p>And in 2024, a team of scientists at Stanford University examined how the <a href="https://knowablemagazine.org/content/reports/special-report-reset">COVID-19 virus</a> replicates inside human cells. Using fluorescent tags to label the virus’s genetic material, biophysicist Leonid Andronov and colleagues found that <a href="https://www.nature.com/articles/s41467-024-48991-x">SARS-CoV-2 makes a bubble</a> with a double membrane in which it copies its genetic material. This probably prevents destruction by the cell, Andronov says.</p>
+<p><img alt="" src="../images/Zimmer_BREAKER-4_1.png" /></p>
+<p><strong>SNEAK ATTACK:</strong> When the COVID-19 virus is being copied in human cells, it hides from the cell’s immune system by wrapping itself inside double-membrane bubbles, seen as clumpy aggregates of the virus’s fluorescently labeled genetic material. The cell’s nucleus appears as a dark circle in the middle. <em>Credit : L. Andronov et al / Nature Communications 2024.</em></p>
+<p>As more and more scientists use super-resolution microscopy to illuminate the goings-on inside cells, how much more detail can they expect to see? Refinements like creating smaller fluorescent probes—so that one can label multiple sites along a single protein—could push the resolution further, Lakadamyali says.</p>
+<p>Perhaps one day super-resolution advances might rival those of electron microscopy. After all, just two decades ago, “we didn’t know that we could break the diffraction limit,” she says. “We’ve made so much progress in a 20-year period. I think it’s possible.” <img alt="" src="../images/nautilus-favicon-14_1063.png" /></p>
+<p><em>Lead image: Powerful microscopes are affording new views of cellular processes. These include details of DNA replication in the nucleus of a mouse cell shown at left; the cell’s replication machinery appears green, already-replicated DNA is red and DNA bundled into chromatin is blue. At center, the cytoskeleton’s actin fibers in mouse connective tissue cells are seen in yellow; cellular DNA is stained blue. Shown at right is a human cell dividing in two; its genetic material is labeled in red, and the spindle apparatus that pulls the sister chromatids apart is labeled in green. Credit: Lothar Schermelleh.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Does Your Personality Put You At a Higher Risk of Dying? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Does Your Personality Put You At a Higher Risk of Dying?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-19
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-3MMN</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The study of personality type is probably as old as humankind. Ancient Greek scholar Hippocrates chalked up differences in temperament to imbalances in the body’s constituent fluids, the four humors—blood, yellow bile, black bile, and phlegm.</p>
+<p>Today, we have the so-called big five personality traits, developed by psychologists in the 1990s: neuroticism, extraversion, openness, agreeableness, and conscientiousness. But what, if anything, do these personality traits have to do with our health? One group of researchers took this question to a logical extreme, asking how they might influence our risk of death.</p>
+<p>To answer that question, they analyzed pre-existing data about the big five personality traits of more than a half million people across four continents, representing in aggregate almost 6 million total years of life, and more than 40,000 deaths. Some traits were clearly more closely associated with early death than others. They published their <a href="https://psycnet.apa.org/fulltext/2026-99529-001.html">findings</a> in the <em>Journal of Personality and Social Psychology.</em></p>
+<p>“Our work shows that how we think, feel and behave is not only linked to life satisfaction and social relationships, but also to how long we live,” co-author Máire McGeehan, a psychology researcher at the University of Limerick, said in a <a href="https://www.ul.ie/news/groundbreaking-university-of-limerick-research-reveals-personality-traits-are-powerful">statement</a>.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/how-to-tell-if-youre-dead-1218090/"><strong>How to Tell If You’re Dead</strong></a><strong>”</strong></p>
+<p>According to their results, higher neuroticism—anxiety, worry, and emotional instability—may be associated with earlier death, but this effect seems to be stronger in younger people. Higher conscientiousness, or a tendency to be organized and self-disciplined, on the other hand, was associated with lower risk of death. So was extraversion, a preference for social engagement and activity, though primarily in Australia and North America. Openness and agreeableness didn’t have much impact either way.</p>
+<p>“It is important to emphasize that these effects are similar in size to those of commonly considered public health determinants, such as socio-economic status,” said McGeehan.</p>
+<p>There are all kinds of ways personality could influence our health and risk of death, the researchers point out, given documented links between personality and health behaviors, coping processes, stress responses, and other biological processes. A person’s neuroticism and conscientiousness, for example, might influence whether they smoke or exercise regularly, try drugs, schedule preventive health screenings, have a healthy diet, or drink a lot of alcohol. Personality traits have also been linked to specific biological and clinical markers of inflammation, hormonal balance, and cardiovascular health, all of which are critical to longevity, they note. And in fact, the associations they found between risk of death and neuroticism and conscientiousness were partly accounted for by health-related factors such as smoking and cardiovascular health—the effect size was reduced when these factors were taken into account.</p>
+<p>But why would extraversion help only Australians and North Americans stave off the cold grasp of death? The authors suggest it may have something to do with how particular cultures reward different kinds of behaviors. In more individualistic cultures, for instance, it could lead to greater social integration and higher economic rewards.</p>
+<p>Particularly, given these cultural differences, one limitation of the study is that it only included samples from the United Kingdom, Europe, North America, Australia, and Japan, and so primarily represented high income countries with predominantly white populations. Countries in Asia, Africa, and South America were excluded. Future studies could extend the analysis to these other parts of the world and also look at how personality changes over one’s lifetime influence mortality risk, they suggest.</p>
+<p>Fortunately, plenty of research suggests personality is not as static as we once thought. So the results don’t doom anyone to a fixed fate, but they could help some people find a better way to behave—and live. <img alt="" src="../images/nautilus-favicon-14_633.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Credit: Rawpixel.com / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

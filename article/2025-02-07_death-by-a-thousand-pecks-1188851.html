@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gulls Pecks Killing Baby Whales | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Gulls Pecks Killing Baby Whales</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-07
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-4IAE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>From a whale watching boat near Valdes Peninsula in Argentina, marine biologist Maria Piotto observed a mother-calf pair of southern right whales. As the calf splashed around in the water playfully, a kelp gull hovered overhead and persistently swooped down to nab at the breaching baby whale’s flesh. The gull was attacking with such intensity, Piotto says, “that I thought the gull must be getting a really considerable meal.”</p>
+<p>Piotto, a doctoral candidate at the National University of Cordoba in Argentina, wondered what impact this harassment was having on baby whales. From June to December, southern right whales migrate from the frigid Southern Ocean to the warmer waters off the Valdes Peninsula to mate and rear calves. The decade spanning 2003 to 2013, however, saw an unusually <a href="https://www.int-res.com/abstracts/meps/v493/p275-289/">high number</a> of calf deathsin the region compared to previous decades.Piotto says she was curious to know how much of a role the gull attacks played.</p>
+<p>To find out, Piotto and colleagues analyzed data from three different sources for the period from 1995 to 2019: observations of whale-gull interactions in the Peninsula Valdes, calf necropsies from a southern right whale monitoring program, and annual aerial surveys showing how many calves were born each year in the region. After running statistical models, she <a href="https://www.int-res.com/articles/feature/m746p001.pdf">found</a> that calves born in a year with average gull harassment for the period were 2.26 times more likely to die than those born in a hypothetical year with no harassment.</p>
+<p>“That’s huge,” says Piotto. Gull attacks may not be the only or even the main cause of calf death, she says, but they appear to be an important contributing factor, particularly for deaths occurring toward the end of the calving season, in October.</p>
+<blockquote>
+<p>Researchers can identify a right whale there based on the swath of lesions left behind by hungry gulls.</p>
+</blockquote>
+<p>Gulls have been observed harassing southern right whales since the 1970s, and Piotto says that in those earliest decades, they primarily targeted the mothers. Then the whale moms began to alter their behavior to avoid bites, adopting a “crocodile pose” in which they arch their backs like a banana to prevent birds from landing on them. They also began coming up for air differently, says Piotto, angling themselves so only their blowholes breached the surface of the water.</p>
+<p>The gulls then began targeting the newborns. By the 2000s, calves had three times as many gull-inflicted wounds and lesions as their mothers. The gull attacks not only create wounds that can become infected, they reduce time for nursing and resting for both calves and mothers. From calf necropsies, researchers found indicators of chronic stress, immune dysfunction, and adrenal failure.</p>
+<p>“You can imagine that if you’re trying to sleep and you’re getting harassed all the time, you’re losing your energy,” says Kate Sprogis, a whale researcher at the University of Western Australia who was not involved in the study. Sprogis says she can identify a right whale from the Valdes Peninsula based on the swath of lesions left behind by hungry gulls.</p>
+<p>Researchers have carefully studied seabird attacks on southern right whales in Argentina for many years, says Sprogis, but more recently, similar phenomena have been recorded in other parts of the world: giant petrels <a href="https://hakaimagazine.com/news/peck-by-peck-seabirds-are-eating-live-whales/">snacking</a> on sperm whales in the South Atlantic, kelp gulls <a href="https://www.tandfonline.com/doi/abs/10.2989/1814232X.2015.1071718">pecking</a> out the eyes of cape fur seals in Namibia, silver gulls <a href="https://marinebioacoustics.wordpress.com/wp-content/uploads/2020/10/harkness-and-sprogis.-2020.-gull-harassment-of-humpback-whales.-marine-and-freshwater-research.pdf">feasting</a> on humpback whales off the coast of western Australia.</p>
+<p>“Around the world, it’s becoming something to potentially have to look out for,” says Sprogis. She and Piotto are concerned that seabirds feasting on marine mammals could be a result of explosions of gull populations due to the growth of landfills. In Western Australia, for example, near where the gulls are attacking the humpbacks, open-pit landfills and discards from fishing fleets are leading to runaway growth in gull populations. Some of these gulls then learn to feed on whales, the theory goes.</p>
+<p>In the Valdes Peninsula, a fisheries waste site and a boom in tourism near one of the study sites led to a rapid increase in landfill there. A 2004 <a href="https://www.researchgate.net/publication/8660269_Fish_waste_as_an_alternative_resource_for_gulls_along_the_Patagonian_coast_Availability_use_and_potential_consequences">study</a> estimated that the amount of landfill generated from fish processing plants in Chubut province, where the Valdes Peninsula is located, could sustain between 100,000 and 200,000 gulls, depending on the year. Monitoring of kelp gull populations on the coasts of the province show that populations of most gull colonies grew steadily in the 1980s and '90s.</p>
+<p>Piotto and her team found that whale attacks in the Vales Peninsula area peaked in 2011, with birds pecking calves nine times an hour on average in one of two study areas, the Golfo Nuevo. The rate of attacks on calves in the Golfo Nuevo fell to four times an hour in 2014, coinciding with a gull culling program introduced around the same time.</p>
+<p>For future research, Sprogis and Piotto say they want to better understand how waste management could impact the relationship between gulls and marine life. Reducing human garbage on land might save vulnerable whales from an early death at sea. <img alt="" src="../images/nautilus-favicon-14_1269.png" /></p>
+<p><em>Lead Photo by Nahuel Robledo</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

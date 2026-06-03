@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Life Thrives in Impossible Places | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Life Thrives in Impossible Places</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-9LH3</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="" src="../images/GNDSeJdJ-1.png" /></p>
+<p>I was sitting in my garden with a bowl of ice cream in near-total darkness not long ago. It was just after 10pm, not late by any standards except those of a new parent. My two-year-old daughter was asleep upstairs, but who knew for how long, or how many times she might wake up. Still, my desire to witness one of the greatest evolutionary paradoxes on Earth was stronger than the  pull of my bed.  </p>
+<p>I had been speaking to scientists who study the vision of a common, but rarely observed, type of moth: The elephant hawkmoth. This <a href="https://nautil.us/the-secret-lives-of-moths-1202648/">moth</a> doesn’t just have nighttime vision, it can see color even on a moonless night. Big cats, bulbous-eyed monkeys, and owls all have excellent eyesight to locate and catch their nocturnal prey, but they are all guided by shades of black and white.</p>
+<p>What this insect does every summer night was once thought impossible. The species, <em>Deilephila elpenor</em>, was first <a href="https://nautil.us/the-animals-that-exist-between-life-and-death-1202592/">named</a> by Carl Linneaus in 1758, but only in 2002 was its color vision discovered. As Almut Kelber wrote—perhaps with a hint of exasperation at our own anthropocentrism—that year in the journal <a href="https://www.nature.com/articles/nature01065"><em>Nature</em></a>: “Humans are color-blind at night, and it has been assumed that this is true of all animals.” But her experiments with a halogen bulb and a range of UV filters demonstrated that these animals could pick out their favorite yellow flowers at light levels akin to dim starlight, a simulated nighttime 100 million times darker than a sunlit day.   </p>
+<p>Put another way, these insects were choosing their favorite flower without the light of the moon or sun. They were using the scraps of photons from distant stars. Considering that the closest star system is more than four light-years away, this means that elephant hawkmoths are using a source of illumination that first shined forth from a distant star long before their great-great-grandmoths were born.</p>
+<blockquote>
+<p>Little by little, the bird balloons outward, its angular silhouette cultivating curves.</p>
+</blockquote>
+<p>Relying on so few photons for color vision means that elephant hawkmoths are using summation, a process similar to long exposure photography. By pausing their photosensitive cells until they’ve been bathed in enough photons, they can create a blurry but still accurate image of flowers and their colors. But Eric Warrant, a vision scientist at Lund University and colleague of Kelber’s, told me that even this might not fully explain nighttime color vision. “I don’t think it’s the whole picture,” he said.   </p>
+<p>Wondering whether I should finish the whole tub of ice cream and call it a night, I heard a loud thrumming noise coming over our garden wall. An elephant hawkmoth was flitting among the honeysuckle flowers, and I tried to get close enough to decipher any color. I couldn't. Grabbing my daughter’s crab net I wondered whether I could catch the insect and take a look with my phone’s flashlight. But I hesitated. Guided by distant stars and seeing colors that I could no longer discern made this animal seem almost mythological in that moment. To ensnare it, even for an instant, seemed akin to caging a unicorn.</p>
+<p>Only the width of my pinky finger, this insect was part of a story much larger than myself, a marriage of millions of years of evolution and the nuclear fusion of distant stars. And so I stood, green net in my hand, a half-eaten tub of ice cream steps away, my eyes barely able to discern the elephant hawkmoth as it flew back over the wall into the darkness.</p>
+<p><img alt="" src="../images/NMhcBjLU-2.png" /></p>
+<p>With a speckled brown plumage and a long, slightly upturned beak, the bar-tailed godwit is an unremarkable-looking shorebird. Every year, it forages for worms and clams buried in the mudflats of the Arctic and its physique starts to change. Little by little, the bird balloons outward, its angular silhouette cultivating curves. The breast muscles suddenly seem to engulf the entire body. The bird metamorphoses into a softball shape, only with a beak sticking out the front.   </p>
+<p>It hasn’t actually become more muscular, though, as its flight muscles have been idle for months. Instead, it has become obese. By the end of the boreal summer, more than 50 percent of its body weight is fat (morbid obesity in humans is defined as 40 percent of body weight). In order to take off, one Arctic researcher told me, the birds often need to wait for an updraft.</p>
+<p>And yet, the bar-tailed godwit is an extraordinary athlete. While these birds don't travel as far as some other migrating birds—just between <a href="https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2021.685764/full">Alaska and New Zealand</a>—they do it all in one go. A non-stop, trans-Pacific flight that can take eight to nine days. Powered by their enormous deposits of fat, these birds are essentially “obese super athletes,” as one researcher <a href="https://pubmed.ncbi.nlm.nih.gov/29514885/">puts it.</a></p>
+<blockquote>
+<p>I found one water bear in a clump of cushion moss outside our kitchen window.</p>
+</blockquote>
+<p>The difference between obesity in humans and obesity in the animal kingdom is twofold. The first, and best known, is where the fat is deposited. We store fat around our organs (so-called visceral fat), which can restrict their function, while birds—and whales and bears—store their fat under their skin, subcutaneously, which can help protect against the cold. But for obese athletes like the bar-tailed godwit, fat is stored in 16 locations around the body, including around the intestines.   </p>
+<p>It is how they transport this fat around the body that is so important. Just as oil sits atop a glass of water, fats can’t flow through a (largely water-based) bloodstream the way sugars do. They are insoluble. To get around this, migrating birds like bar-tailed godwits pump their bodies full of molecular guides—known as lipoproteins—that can latch onto fats (or lipids) that are released from their storage sites, shepherding them to where they are needed: primarily the lungs and flight muscles.</p>
+<p>“And that’s where mammals fall behind,” says Chris Guglielmo, a researcher at University of Western Ontario who studies migratory birds. “We’re terrible at the transport side [of utilizing fats]. Even when we run <a href="https://nautil.us/how-to-run-across-death-valley-in-the-summer-1234390/">marathons</a>, we have to rely on glycogen and glucose ... we don’t rely on fat very well.”</p>
+<p><img alt="" src="../images/h8ieQoQO-3.png" /></p>
+<p>First seen <a href="https://nautil.us/the-animals-that-exist-between-life-and-death-1202592/">under a microscope in the 1770s</a>, water bears have long stumped scientists and enthusiasts alike. How can a squishy, adorable animal less than a millimeter long <a href="https://nautil.us/live-tiny-die-never-behold-the-toughest-animal-on-earth-236506/">survive</a> boiling, freezing to near-absolute zero temperatures, and radiation blasts that would kill a human in seconds?</p>
+<p>In recent years, scientists working on two species of <a href="https://nautil.us/the-water-bear-from-first-look-to-facebook-1215227">tardigrade</a>—<em>Hypsibius exemplaris</em> and <em>Ramazzottius varieornatus</em>—have found that their endurance derives from two sources: They produce extraordinary levels of <a href="https://pubmed.ncbi.nlm.nih.gov/38614079/">repair</a> proteins to patch up their internal machinery and possess another protein, unique to them, that thwarts destruction in the first place, aptly named the <a href="https://www.nature.com/articles/ncomms12808">damage suppressor</a>.</p>
+<p>To talk of tardigrades is to be suffocated by superlatives. They possess the kind of indestructibility typically reserved for comic book heroes. It is easy to forget that these creatures are real, that they inhabit this Earth, that they are our neighbors and distant relatives in the Kingdom Animalia. And that they are abundant: Wherever there is water you will likely find water bears, from meltwater pockets in Greenland's glaciers to the moss growing on the wall outside your home. With a $10 microscope, I found one in a clump of cushion moss outside our kitchen window.  </p>
+<p>The two laboratory favorites—<em>Hypsibius</em> and <em>Rammazotius</em>—are representatives of a large and ancient phylum that includes 1,380 known species. Tardigrade taxonomists think at least twice that number exists. While those species living on land have been most closely studied and sampled, water bears also inhabit marine ecosystems—particularly within the grains of sand in the seabed. Whereas most land-based species have claws at the ends of their legs, marine species have sucker-like discs that allow them to trundle along the seafloor.</p>
+<p>And then there’s the aptly named <em><em>Tanarctus</em> bubulubus</em>. Discovered in the seabed off the coast of the Faroe Islands, this marine species of water bear has 16 to 20 balloon-like organs attached to its rear end, elaborate structures that the animal uses as buoyancy aids in the water and adhesive anchors in the sediment. Floating through the depths, this water bear looks forever ready to celebrate a birthday party. Indeed, just knowing that <em>T. bubulubus</em> is tumbling somewhere out there in the middle of the ocean seems a fact worthy of celebration. <img alt="" src="../images/nautilus-favicon-14_927.png" /></p>
+<p><em>Enjoying</em> Nautilus<em>? Subscribe to our free newsletter <a href="https://nautil.us/newsletter/">here</a>.</em></p>
+<p><em>Lead image: Imogen Warren / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

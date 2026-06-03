@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eat Like a Neanderthal | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Eat Like a Neanderthal</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-05OC</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Roughly 120,000 years ago, in what would someday be Spain, a group of Neanderthals prepared their supper. That night’s menu did not feature mammoth, or any other big game.</p>
+<p>Instead, as dusk descended, some individuals tended tortoises, crackling belly-up on the fire. Others used flint knives to quarter rabbits for roasting and marrow. A pack of youngsters returned to the cave, perhaps with a haul of chestnuts and hackberries they had picked downslope. Scraps from that night’s feast mingled with remains from many meals left in their cave-dwelling—destined to be unearthed by archaeologists at the turn of the 21st century.</p>
+<p>Researchers studying this site, known as Bolomor Cave, recovered bones from about 30 different animals from one layer of debris. Examining the location of butchery nicks, burns, and bite marks on the bones, the scientists have gleaned ways Neanderthals prepared the various delicacies—tortoises roasted shell down, rabbits sectioned so that their hindlimbs could yield marrow and forelimbs roasted meat, and so forth. Pollen found in the same layer indicates a bounty of edible plants, including wild relatives of strawberry, carob, and olive surrounding the cave, all within sediments likely accumulated 124,000 to 119,000 years ago.</p>
+<blockquote>
+<p>Evidence remains spare for thoughtfully composed, Neanderthal-made dishes.</p>
+</blockquote>
+<p>The variety of foods and preparation methods at Bolomor defies a longstanding misconception about Neanderthal diets: For decades, many scholars insisted that our evolutionary cousins were carnivores, preying on Ice Age animals like woolly mammoth and giant deer. According to this view, such a narrow, meat-dependent diet contributed to the species’ demise. Neanderthals went hungry when their game became scarce due to changing climate or the arrival of more skilled hunter-gatherers, <em>Homo sapiens</em>.</p>
+<p>Now, researchers who grant Neanderthals greater dietary breadth outnumber those who don’t. Neanderthals “lived over an enormous stretch of time, over quite a wide area,” says University of Glasgow archaeologist Karen Hardy. They “adapted what they liked eating to what was available.”</p>
+<p>With their status as quintessential carnivores dissipating, Neanderthals are now known to have tapped diverse natural resources—<a href="https://www.pnas.org/doi/10.1073/pnas.1016868108">date palm</a>, <a href="https://www.nature.com/articles/srep05971">pigeons</a>, <a href="http://doi.org/10.15184/aqy.2022.143">legumes</a>, <a href="https://www.science.org/doi/10.1126/science.aaz7943">crabs</a>, and more—rendered into meals with forethought and culinary skill. The accruing evidence still falls short of a Neanderthal cookbook, but new finds (culinary and beyond) reveal these Stone Age peoples were far more sophisticated in their tastes and traditions than once thought.</p>
+<p>Evolving from earlier human species, Neanderthals were roaming Europe by roughly 200,000 years ago. Their kind inhabited a panoply of habitats and an expanse from Iberia to Siberia and into Southwest Asia. During the Ice Age’s harshest spells, some Neanderthal communities trudged across frozen grasslands, tracking herds of prey. Other groups, who enjoyed the temperate climes that came with warmer episodes woven through the Ice Age, probably munched strawberries and took dips in the sea.</p>
+<p>Despite their long-held residence across much of Eurasia, Neanderthals disappeared about 40,000 years ago. The reason or reasons why they went extinct remains disputed. Over the years, researchers have blamed everything from a super-volcano to carnivore competition to turf wars with <em>H. sapiens</em>—who happened to settle in Europe about 10,000 years before Neanderthals’ demise.</p>
+<p>Overly rigid diets has been another fatal flaw perennially ascribed to Neanderthals. “Huge amounts of animal bones have been found at Neanderthal sites, and these have been interpreted quite correctly, probably, as food,” says Hardy. Consequently, through much of the 20th century, Neanderthals were cast as dedicated carnivores focused on large game—the bones of which weather the millennia more easily than those of small animals such as tortoises and hares. Likewise, detecting traces of fruits, nuts, and other plant-based perishables is much more difficult than uncovering, say, a fossil mammoth bone bearing marks of butchering with stone tools.</p>
+<blockquote>
+<p>Wild game is notoriously lean. But maggots pack plenty of fat.</p>
+</blockquote>
+<p>In the early 2000s, the idea of exceptionally meaty Neanderthal diets was seemingly supported by stable isotopes analysis—a then-cutting-edge method in archaeology that compares isotopes, atoms with the same number of protons but different numbers of neutrons, in fossilized remains. Because the neutron count alters an atom’s mass, various isotopes move through reactions with differing ease, so their levels can reflect the diet, environment, and other characteristics of an individual when they were alive. Of particular use for diet are ratios of nitrogen isotopes, which shift with each step of the food chain: Animals who subsist on a diet heavy in plant materials have lower ratios of nitrogen-15 to nitrogen-14 than those whose diets are high in meat, for example. Researchers found that Neanderthal bones yielded high 15N/14N ratios, on par with those measured in the bones of carnivores, such as lions and wolves—but this result too was misleading.</p>
+<p>As the methodology matured, its practitioners realized other factors, such as cooking food, can shift those nitrogen isotope values. Some researchers also questioned whether nitrogen in bones disproportionately reflects the animal protein in a person’s diet. “The initial idea that Neanderthals were high-level carnivores, which is completely incorrect, was then consolidated and supported by this slight misreading or misuse of the stable isotope analysis,” says Hardy, a scholar who studies how past humans used plants for food, medicine, and crafts.</p>
+<p>Plus, Neanderthals probably could not have survived as long as they did eating lion-like amounts of meat. Considering their large brains, hardy physiques, and physically active lifestyles, Neanderthals needed between 3,100 and 6,700 calories daily, according to estimates made by <a href="https://www.sciencedirect.com/science/article/abs/pii/S0047248421001573">Hardy and others</a>. (For comparison, professional rugby players with similar builds and BMIs as Neanderthals consume between 2,400 and 4,400 calories per day.) Of those calories, only up to about 35 percent could come from protein—that’s about 300 grams or seven chicken breasts. Any more protein, in living people and presumably Neanderthals, would overtax the liver, leading to a buildup of ammonia and amino acids in the blood. To meet their caloric needs, Neanderthals must have regularly eaten carbohydrates, found in plants, not meat.</p>
+<p>The notion that big game dominated Neanderthal diets, however, persists in the popular imagination and among some scholars—despite a couple decades of mounting evidence for plant and small animal fare as core ingredients on the Neanderthal menu. To discover botanical remnants, archaeobotanists like Hardy just had to search for the right traces in the right places.</p>
+<p>Starch grains, pollen, and other botanical bits have survived, charred in fires, smeared onto stone tools, and even embedded in tartar on Neanderthal teeth. Analyses of this fossilized plaque have found starches from date palm, tubers, wild relatives of grains like barley, and more. “That’s kind of undeniable evidence of food, or it’s as close as we can get,” says Rebecca Wragg Sykes, archaeologist and author of <em>Kindred: Neanderthal Life, Love, Death, and Art</em>.</p>
+<p>Other ingredients in Neanderthal meals remain harder to prove, but their consumption may have left clues. “There are these invisible paleo-menu items that should be considered,” says Melanie Beasley, a biological anthropologist at Purdue University.</p>
+<p><strong>To really get a sense of what life in the past was like, try <a href="https://nautil.us/the-taste-of-prehistory-1255416/">some Neanderthal recipes</a> yourself.</strong></p>
+<p>Attempting to understand Neanderthals’ carnivore-like nitrogen ratios, Beasley stumbled onto one of those invisible items: maggots. For a <a href="https://www.science.org/doi/10.1126/sciadv.adt7466">study published in 2025</a>, she analyzed nearly 400 fly larvae, plucked over two years from carcasses decomposing at a forensic research center in Tennessee.</p>
+<p>The maggots gave nitrogen ratios much higher than the carcasses they were munching; a human who routinely ate those maggots <em>along with the rotten meat</em> would develop higher nitrogen values than someone who ate just the meat. Plus, the plump fly larvae would offer a nutritional perk: Wild game is notoriously lean, with its fat mostly concentrated in bone marrow and grease. Neanderthals may have struggled to get enough of this essential nutrient from hunks of meat. But maggots pack plenty of fat.</p>
+<p>Although many societies regularly snack on maggots and other insects, the critters rarely appear on plates in the United States or Europe. Perhaps that is why past researchers studying Neanderthal foods—scholars primarily from the U.S. and Europe—didn’t consider insects when trying to make sense of the isotope data. “It comes back to our lack of imagination, depending on what culture you grow up in,” says Wragg Sykes. “Whatever food is not familiar to you, you don’t necessarily look for that.”</p>
+<p>The (metaphorical) Neanderthal pantry may indeed have been diverse and well-stocked. But evidence remains spare for thoughtfully composed, Neanderthal-made dishes. Maybe they gnawed on wild boar and chomped mushrooms but never thought to stew the foods together.</p>
+<p>The <a href="https://doi.org/10.15184/aqy.2022.143">best direct evidence</a> that might be used to reconstruct Neanderthal cuisine comes from a lump of charred food, recovered from 70,000-year-old sediment layers excavated in northern Iraq’s Shanidar Cave. When researchers viewed the specimen under a microscope, they recognized edible wild grasses and crushed seeds of a legume such as lentil. The ancient morsel suggests Neanderthals mashed the ingredients into something like a pancake, probably roasted on a rock positioned near a fire.</p>
+<p>Other indicators of Neanderthal culinary skills, such as boiling, require extrapolation. Scientists have never found evidence of ceramic pots at a Neanderthal dig site, but the extinct humans could have heated food in water using baskets, birch bark vessels, or animal skins—perishable containers that would have decomposed long ago. Though vanished, these cooking implements are nevertheless suggested by indirect clues: Some starch grains stuck in Neanderthal plaque bear telltale deformities caused by boiling or near-boiling water. And, alongside an ancient lake in what is now Germany, researchers recently uncovered bones from more than 170 mammals, smashed into tens of thousands of pieces, most fragments smaller than a pinky’s width. Larger bone pieces probably were broken for marrow, while these tiny bits served another purpose: Neanderthals likely boiled the bits to render their grease, for a much-needed fat supply 125,000 years ago, archaeologists concluded in a 2025 <a href="https://www.science.org/doi/10.1126/sciadv.adv1257"><em>Science Advances</em> paper</a>.</p>
+<p>In 2020, <a href="https://doi.org/10.1038/s41598-020-61839-w">researchers reported</a> finding what could be the world’s oldest surviving string—an eyelash-length twisted fiber, stuck on a stone tool used by Neanderthals between 41,000 and 52,000 years ago. Though it’s unknown how this particular twine was used, its existence means Neanderthals could have crafted textile clothing, bags, nets, mats, or even boats, say the scientists. To make the string, it seems Neanderthals stripped the inner part of tree bark, soaked the fiber for days, and then twisted, folded, and spun the strands into a three-ply cord. Similar ingenuity went into their preparation of birch tar, a natural glue derived from tree bark, likely used to attach stone points to wooden spears. According to <a href="https://doi.org/10.1007/s12520-023-01789-2">a 2023 analysis</a>, Neanderthals distilled tar from rolled-up bark, buried under a campfire—the hot, low-oxygen conditions needed to prepare the adhesive just right.</p>
+<p>Both the birch tar and string resulted from multi-step processes, which researchers doubt any one individual could have invented on their own, in one go. Years of tinkering and perfecting probably led to protocols, which were then shared across the community and years.</p>
+<p>“If we understand and accept that they were able to assess quality and experiment with different materials for technological reasons, then it makes complete sense that you would be doing that for dietary purposes as well,” says Wragg Sykes.</p>
+<p>Knowing Neanderthals had this potential, they may well have made recipes from a wealth of ingredients they are presumed to have consumed: tortoises and tubers, greens and boiled grease, mammoths and maggots. Passed down over generations, those meals might have spawned regional tastes and traditions. Perhaps a gastronomic trip through Neanderthal times would have offered tastes as complex and varied as a culinary tour put on by <em>H. sapiens</em>. At the very least, it seems an overly restrictive diet did not usher Neanderthals’ demise.  <img alt="" src="../images/nautilus-favicon-14_643.png" /></p>
+<p><em>Lead image: leehak / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

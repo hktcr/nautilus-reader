@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Lynch Opens a Portal to Our Minds - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>David Lynch Opens a Portal to Our Minds - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-01-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7VFZ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>When filmmaker David Lynch died this month, I mourned not just the loss of a great talent, but also a fresh way to understand people’s minds. I’m a social and cultural psychologist, and I study how people go about making sense of their lives. My students and I had discovered that Lynch’s work makes for powerful psychological stimuli in the lab to reveal some of the inner workings of the mind.</p>
+<p>I’m particularly interested in what happens when we fall into a state that philosopher Albert Camus called “<a href="https://nautil.us/ingenious-albert-camus-236684/">the absurd</a>,” when we realize that we are unable to continue making meaning in our lives. Sometimes we reach a point where nothing seems to make sense any more. And it turns out that studying this particular state helps reveal how our minds work. Lynch’s films offer a portal to this unsettling state of mind.</p>
+<p>In our research we’ve found that our minds have a sense-making system that helps us to navigate our worlds. Our brains are receiving a constant stream of sensory input, and our sense-making system is always monitoring things to ensure that everything we’re experiencing adds up, and that we understand what is going on. It is a homeostatic system and it operates much like a thermostat, getting triggered only when we encounter something that doesn’t make sense. In these situations, a network of neural connections in the brain called the <a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2023.1133367/full">salience network</a> sends us a signal, like a red flag waving in front of our face, indicating that something is wrong and we need to figure it out.</p>
+<blockquote>
+<p>We gain insight into our sense-making system when we’re left dumbstruck.</p>
+</blockquote>
+<p>Much of the time, things unfold for us about as we expect, and we’re able to feel that we can generally predict and control what is happening in our lives. We turn the key in our ignition and the car starts; we say hi to a salesperson and they smile back; we step outside on a September afternoon, and the sun is shining bright. But every now and then we encounter something that sharply violates our expectations, leaving us in a state where we are at a loss for what to do: when we turn the key in our ignition we hear a screeching noise; the salesperson responds to our greeting by telling us to go f*ck ourselves; or we step outside to an unexpected September blizzard.</p>
+<p>In these kinds of situations our sense-making system gets tripped, and we are left in somewhat of a daze, trying to figure out what is going on. We need to regain the feeling that we’re able to understand what happens to us, and this can require some psychological work. Most of the time, the anomalies we encounter are quite straightforward, and we can piece things together and figure out what is wrong. Our sense-making system then gets reset and we can continue to go about our daily lives.</p>
+<p><img alt="" src="../images/Heine_BREAKER.png" /></p>
+<p><strong>DIRECTING THE ABSURD:</strong>David Lynch, who started making feature-length films in the 1970s, had a certain genius touch for manipulating our emotions. <em>Photo by Drop of Light / Shutterstock.</em></p>
+<p>We can get better insight into how our sense-making system operates if we encounter things that aren’t so easy to resolve, where we’re left dumbstruck without an obvious way forward. But it’s hard to engineer situations in the psychology lab that can drop people into “the absurd”—at least not in a way where we can reliably study how the mind responds.</p>
+<p>Over the years, we have tried a range of different tactics to make our participants feel meaningless and left wondering “WTF?,” so that we could investigate how the sense-making system operates. We have had our participants be unwitting participants in a magic trick where we swapped the experimenter that they were talking to with another person dressed in the same clothes (remarkably, very few people consciously notice the <a href="https://www2.psych.ubc.ca/~heine/docs/transmogrify.pdf">switch</a>). We have also played blackjack with our participants with cards that have the colors reversed, with red clubs and black diamonds (again, almost no one consciously notices what is <a href="https://heinelab-psych.sites.olt.ubc.ca/files/2021/07/2018-Working-Memory.pdf">wrong</a>). Arguably, though, our most effective way to get people into the absurd was to have them watch a clip from one of Lynch’s films.</p>
+<blockquote>
+<p>You’d be surprised how deeply disturbing <em>Rabbits</em> can be to watch.</p>
+</blockquote>
+<p>Lynch started making feature-length films in the 1970s and had a certain genius touch for manipulating our emotions. As his biographer, Chris Rodley, noted, “the indefinable ‘mood’ or ‘feeling’ Lynch seeks to convey is linked to a form of intellectual uncertainty—what he calls being ‘lost in darkness and confusion.’” From Lynch’s vast catalog of surreal and dreamlike offerings—from the disturbing thriller, <em>Blue Velvet</em>, to the mystery horror-drama of <em>Twin Peaks</em>—we selected a clip from the beginning of his 2002 short film <a href="https://youtube.com/watch?v=drjQfQtv2BQ"><em>Rabbits</em></a>.</p>
+<p>The film, which at first resembles a sit-com, has characters in rabbit costumes engaged in what seems to be a conversation—except that nothing that they say has any relation to what their partners are saying. Their disjointed exchange is interrupted by random laugh and applause tracks, which are separated by long, portentous pauses with an eerie background soundscape. The film completely lacks a narrative—nothing ever really happens. But you’d be surprised how deeply disturbing it can be to watch.</p>
+<p>Our research found that the key emotion underlying our feelings when things don’t make sense is <a href="https://nautil.us/why-we-hear-voices-in-random-noise-236399/">the uncanny</a>, in which we feel disoriented and unnerved. According to Sigmund Freud, we feel the uncanny when we experience the juxtaposition of the familiar alongside the unfamiliar. Many people reported feeling this during the height of the lockdowns in the COVID-19 pandemic, when the usually bustling streets of hometowns around the world remained strangely silent. It’s the feeling we get when we see a robot that looks almost human—but moves in disturbingly nonhuman ways. We’ve assessed people’s uncanny feelings in several studies with a psychological measure that we created, where people are asked how much they are feeling alienated or creeped out. But the highest level <a href="https://heinelab-psych.sites.olt.ubc.ca/files/2025/01/2023-Uncanny-Feelings.pdf">we’ve ever measured</a> was when our participants watched part of Lynch’s <em>Rabbits</em>.</p>
+<p>The uncanny and discombobulating effects of this film reveals something important about the ways that people strive to maintain meaning in their lives. We find that when participants experience that WTF sensation, and can’t figure out what is going on, they are prompted to find other ways to <a href="https://www2.psych.ubc.ca/~heine/docs/2013%20Acetaminophen%20and%20David%20Lynch.pdf">regain</a> a sense of meaning.</p>
+<blockquote>
+<p>Lynch had a certain genius touch for manipulating our emotions.</p>
+</blockquote>
+<p>Our research found that one reaction that people have to these experiences with the nonsensical is that they become more committed to the other beliefs that they have in their lives. So religious people become more religious, liberals become more liberal, and conservatives become more conservative. By doubling down on their beliefs, people can feel that they understand the world again, thereby dispelling their bothersome uncanny feelings, and resetting their sense-making system. I suspect that part of the reason that the world is so polarized these days, is because there is so much upheaval going on in the world (climate change, COVID-19 pandemic, AI threatening our jobs), which keeps tripping our sense-making system, and leading us to become exaggerated versions of ourselves in response.</p>
+<p>Lynch’s films are noteworthy for eliciting such strong feelings perhaps because we’re often not sure how to make sense of what we’re experiencing, as the individual parts of the scene don’t always seem to quite fit together. This might be because the characters seem to be focused on irrelevant topics, such as the Man From Another Place talking about flavors of gum coming back in style in <em>Twin Peaks</em>; or because different scenes don’t seem to have any logical connection to each other, as in the latter half of <em>Mulholland Drive;</em> or because what we are seeing is just too outrageously nonsensical, such as a roast chicken reanimating into a twitching, oozing mess in <em>Eraserhead</em>. We may feel horrified, revolted, in awe, or just confused, but without being able to resolve what we’re seeing, our intense feelings often stay with us long after the credits have stopped rolling.</p>
+<p>Lynch was famously reluctant to explain his films. The closest that I ever heard of him offering a perspective on his work was in an interview where he described a time when he was enjoying a clear spring day, transfixed by a beautiful cherry tree in full bloom. But when he looked closer, he saw that the trunk was oozing some black and yellow pitch that was covered with red ants. “I discovered that if one looks a little closer at this beautiful world,” he <a href="https://www.theparisreview.org/blog/2018/03/20/david-lynchs-night-truths/">said</a>, “there are always red ants underneath.”</p>
+<p>Rest in peace, David Lynch. Thanks for leaving us with your beautiful and masterful films. You made us confront some of our most potent emotions, and your work illuminated some of the darker recesses of our minds. <img alt="" src="../images/nautilus-favicon-14_1276.png" /></p>
+<p><em>Lead image: fran_kie / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

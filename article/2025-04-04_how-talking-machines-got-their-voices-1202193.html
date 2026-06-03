@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Biases in Our Talking Machines | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Gender Biases in Our Talking Machines</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-04-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NJ27</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Imagine yourself in the cockpit of a fighter jet, practicing maneuvers over the desert of the American Southwest. Suddenly your altimeter reading is falling, and you must act quickly. The complex panel of instruments in front of you should be second nature to use, but in the moment of crisis, the panels blur together, and your muscle memory must take over. You begin to make adjustments to solve the problem while simultaneously considering the worst-case scenario. A voice interrupts you, firm but calm, in a soothing alto that reminds you of your mother: “Pull up … Pull up … Pull up,” it repeats, and you do what the voice commands, avoiding disaster.  </p>
+<p>In the 1970s, as McDonnell Douglas was developing the F-15 Eagle fighter jet, testing revealed to engineers that pilots’ reactions to warning lights were too slow, especially as the cockpit display increased in complexity. In addition, the development of “heads up” display technology meant that pilots increasingly received information about their aircraft within their field of vision instead of having to look down at a panel of meters and lights. Engineers were concerned that a cacophony of warning bells and buzzers would just add confusion to the mix.</p>
+<p>Testing by the U.S. Air Force had shown that a verbal warning system would be more effective—that a human voice breaking into the cockpit would convey a sense of urgency, as well as offer clear and unambiguous directions at the point of need. Systems using recorded warnings had already been installed in some aircraft in the 1960s, but voice synthesis promised to make voice warning systems lighter and more reliable.</p>
+<blockquote>
+<p>Over the last several years, there has been a shift toward often younger, male-sounding synthesized voices for many applications.</p>
+</blockquote>
+<p>Engineers purportedly chose a female voice for the warnings because they believed it would stand out to male fighter pilots. A <a href="http://airspeedonline.com/2014/02/kim-crow-the-original-bitching-betty-audio-episode-show-notes/">young actress was recruited</a> to record a series of words that were integrated into the warning system of the F-15. That actress, Kim Crow, recalls that after one of the test flights, the pilot was asked how everything worked; he said, “It was wonderful, except for that Bitching Betty.” The name stuck.</p>
+<p>According to “Green’s Dictionary of Slang,” a “Betty,” meaning an attractive woman, came into use with reference to long-suffering Stone Age housewife Betty Rubble from the cartoon <em>The Flintstones</em>. In the days of recorded warning systems, the B-58 Hustler flight crews <a href="https://hushkit.net/2018/02/05/f-15-pilot-shares-the-history-of-bitchin-betty/">referred to that aircraft’s warning system as “Sexy Sally.”</a> There were also systems that used male voices, the nickname for which was “Barking Bob.” Although “Bitching Betty” seems derogatory, some pilots <a href="https://www.marinecorpstimes.com/news/your-marine-corps/2016/03/14/woman-behind-the-f-a-18-s-bitchin-betty-voice-retires/">have said</a> that they use it as a term of endearment; the voice warnings can save their lives, after all.</p>
+<p>Until the 1980s, consumer-grade synthesized voices were in a pitch range that most listeners associated with a male gender. These voices didn’t come close to approximating the prosody or timbre of human voices, but they could produce recognizable language and were often identified with the personal pronoun “he.” Early attempts at synthesizing female-sounding voices consisted of scaling the formants—the peak frequencies that define vowel sounds—of the “male” voice, but this did not succeed in “[turning the male voice] into a convincing female speaker,” as MIT research scientist Dennis Klatt <a href="https://sail.usc.edu/~lgoldste/Ling582/Week%2013/Klatt1987.pdf">noted</a>.  </p>
+<p>Meanwhile, recordings of female voices providing information and instructions in urban environments—public transportation and security announcements, vending and automatic checkout and teller machines—became increasingly common and were chosen to forge what one scholar called a “<a href="https://insensitivityreaders.com/2017/12/07/soft-coercion-the-city-and-the-recorded-female-voice/">soft coercion</a>.” These are voices that tell you where to go, what to do, and how to behave in order to move in an orderly way through the urban environment, and they are meant to maintain calm efficiency, not unlike Bitching Betty.  </p>
+<p>In November 1983, <em>The</em> <em>New York Times</em> published an editorial by sociologist Steven Leveen under the title “<a href="https://www.nytimes.com/1983/11/12/opinion/technosexism.html">Technosexism</a>.” Leveen noticed that there were “millions of mechanical objects” now speaking “through the new technology of speech synthesis,” including computers, clocks, elevators, automobiles, vending machines, and even bathroom scales. He was concerned that they were perpetuating cultural stereotypes by “associating females with low-level service jobs, while associating males with tasks that are broader in range and higher in status.”</p>
+<p>Leveen had done a little bit of research before writing his editorial. He was aware that synthesizing a higher-pitched voice was actually more “expensive,” that it required more data be stored “on a microchip,” and he was aware that product developers were willing to absorb that cost because of market research. Most of the “market research” in Leveen’s examples amounted to assumptions about gender roles gathered through interviewing mostly professional men. A video game developer: “Have you ever been to a baseball game with a female announcer?” An executive from National Semiconductor: “the [supermarket scanner] systems use exclusively female voices because the male voice … sounded ‘just a little bit strange.’” Coca-Cola vending distributors (mostly male): “felt the male voice was not as pleasing.” And Chrysler, which incorporated a “male” voice into its 1983 cars because testers had stated that when a female voice told them their car’s oil pressure was low, it “hit [them] the wrong way.”</p>
+<blockquote>
+<p>Although “Bitching Betty” seems derogatory, some pilots have said that they use it as a term of endearment.</p>
+</blockquote>
+<p>Leveen concluded that “it’s not a coincidence that males are usually the ones purchasing the systems, and that they find female voices more desirable,” although this preference was domain specific. His concern was that the gendered voice distribution between low-status and higher-status applications would “subtly influence our children’s beliefs about which activities and careers are open to them.” Leveen’s concerns about “technosexism” in the 1980s are often echoed in today’s critiques of female-sounding voice assistant applications like Siri, Alexa, and Cortana, all originally defaulted to female in the United States. While his argument didn’t gain much traction at the time, it foreshadowed ongoing debates about gender and technology.  </p>
+<p>But over the last several years, there has been a shift toward often younger, male-sounding synthesized voices for many applications, including domestic and customer service assistants: In 2015, the United Kingdom grocery chain Tesco changed the voice of all its self-checkout machines from female to male; IBM’s Watson modeled the vocal quality of the typical <em>Jeopardy!</em> winner—an educated white man in his mid-20s to 40s, and then <a href="https://www.ibm.com/history/watson-jeopardy">became a <em>Jeopardy!</em> champion itself</a>; Jibo, a social robot for the home, was supposed to be another member of the family, and developers chose a friendly and enthusiastic young adult male voice for it modeled on Michael J. Fox’s performance of Marty McFly in the <em>Back to the Future</em> films; and Apple offers several voices for Siri, including male- and female-sounding voices with subtle characteristics of African-American Vernacular English, and no longer defaults to the original female unless the user chooses it. According to the <em>Guinness Book of World Records</em>, <a href="https://www.guinnessworldrecords.com/world-records/most-downloaded-sat-nav-voice">the most downloaded sat nav voice</a> before Google Maps became widely used for personal navigation was the animated oaf Homer Simpson, as voiced by Dan Castellaneta.  </p>
+<p>Despite this shift, giving a system a voice—whether a stereotypical “smart wife” or the dulcet tones of Morgan Freeman—reinforces the illusion that corporate informational interactions are personal, and personal interactions are purely informational. Put another way, changing the sound of Siri’s voice (something that is easy to do) doesn’t change the fact that Siri is the “voice” of a U.S.-based technology corporation that manifests a great deal of power by controlling the information collected and provided through Siri. Tech corporations prioritize using our biases for their benefit, while dismissing the reinforcement of stereotypes as a cultural problem rather than a technological one.</p>
+<p>Of course, the cultural problem can <em>be</em> a technological problem. We learn to value the humanity of people that we perceive as different from ourselves through experience. As synthesized voices become common, replacing with networked technologies what might have previously been interactions with other people, we lose exposure to the vocal diversity and expressiveness of other human beings and risk losing some of our capacity to truly understand one another. The temptation to simulate human expressiveness through technology only deepens this disconnect, opening the door to manipulation and deceit rather than fostering meaningful connection. <img alt="" src="../images/nautilus-favicon-14_1228.png" /></p>
+<p><em>This article was adapted with permission from an excerpt of</em> <a href="https://mitpress.mit.edu/9780262546355/vox-ex-machina/">Vox ex Machina: A Cultural History of Talking Machines</a> <em>published by</em> <a href="https://thereader.mitpress.mit.edu/bitching-betty-speaks-how-talking-machines-got-their-gendered-voices/"><em>MIT Press Reader</em></a><em>.</em></p>
+<p><em>Lead image: RoseRodionova / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

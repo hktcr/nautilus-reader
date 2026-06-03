@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cancer No One Can Explain | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Cancer No One Can Explain</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-24
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-KFAX</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Aside from potty-training toddlers, almost nobody likes to talk about their poop. This is particularly true if something is wrong with it. But for a lot of young people today, that’s becoming a problem, says Leah Biller, an oncologist in the Young-Onset Colorectal Cancer Center at the Dana-Farber Cancer Institute in Boston. “We all should be looking at our poop,” she tells me.</p>
+<p>Since the mid 1990s, rates of colorectal cancer have been surging in people under 50, and no one really understands why. Those born in the 1990s are now roughly twice as likely as those born in the 1950s to develop colorectal cancer. It’s the leading cause of cancer-related death in men and women under 50 in the United States. Many of these patients get diagnosed late, after the cancer has progressed significantly.</p>
+<p>They ignore the signs, and so do their doctors. “I often hear from my patients things like, ‘Oh, I saw someone for diarrhea and then I was constipated, and then maybe I had a little blood when I was wiping, but I didn’t really think it was anything. Then I forgot about it, and I didn’t wanna talk about my poop because that felt weird,’” says Biller.</p>
+<p>She and others like her are working to diminish the stigma and get the word out—and awareness is growing. Some clues are also emerging in the data to explain the rise of these cancers in young people, she says, but there’s still a lot we don’t know. I spoke with Biller about the impact of the so-called Western diet on cancer risk, emerging microbiome research, and what makes colorectal cancers especially devastating for younger people.  </p>
+<p><strong>We continue to hear that there’s no single smoking gun for the rise in colorectal cancer in young people. But what’s your leading hypothesis right now about what’s actually driving it?</strong></p>
+<p>That’s the question on many peoples’ minds. There are a lot of things that we think increase the risk. Some studies have shown that sedentary behavior and sugar-sweetened beverages increase risk. Obesity, which has been increasing, raises the risk. But these things don’t explain the vast majority of patients I see in the clinic.  </p>
+<p>One of the areas that we’re most excited about exploring more is the microbiome—the constellation of bacteria and organisms that reside primarily in your gut but also inhabit other bodily tissues. Some studies have compared older colorectal cancer patients to younger patients and found that the younger patients had less diversity in the microbiome, which is also a sign of overall poorer health. There are also differences in the types of bacteria that younger patients who have colorectal cancer have in their guts compared to older patients.</p>
+<p><strong>What explains these differences in the microbiome, and how do we intervene?</strong></p>
+<p>We think dietary changes, medications, and factors from childhood might impact someone’s microbiome in ways that increase the risk of a younger person developing colorectal cancer. But we’re still very much learning. The long story short is that there’s a lot that we don’t know. We’ve identified associations but that doesn’t mean it’s the cause. I can’t tell people, “Just don’t do this, and you’re gonna be fine.”</p>
+<p><strong>Have researchers identified anything else in early childhood among these cohorts, like antibiotics or C-sections, that could have played a role?</strong></p>
+<p>Antibiotics is a really interesting one. There’s so much more antibiotic use today, especially in childhood in younger generations. But the data hasn’t been a slam dunk here. Some studies suggest maybe there’s an association, but others do not, so I certainly don’t think that’s the whole story.</p>
+<blockquote>
+<p>“I didn’t wanna talk about my poop because that felt weird.”</p>
+</blockquote>
+<p><strong>You’ve done a lot of work with childhood cancer survivors who later develop colorectal cancer. What did that research reveal?</strong></p>
+<p>Yes, this is called therapy-associated polyposis. I work in our high-risk genetics group, while also taking care of patients who have colorectal cancers. And we were seeing people that had had a history of childhood cancer—Hodgkin’s is probably most common—where they got treatment like chemotherapy or radiation, and then decades later start developing numerous polyps that look very out of proportion to what you’d expect. We’re trying to understand why this happens. Not everyone who had childhood cancers gets it. And treatments for those cancers have improved. A lot of radiation was given in the ’80s and ’90s. The radiation is a lot more focused now for many people so the outcomes may be different.</p>
+<p><strong>What methods of manipulating the microbiome are being considered?</strong></p>
+<p>The idea is that maybe you can take a capsule that has the good bacteria in it. Something more advanced than your standard over-the-counter probiotic. This isn’t for people who have colon cancer, but just in general—we’re trying to understand, can you repopulate a microbiome? That may be something in the future that we all take in the mornings to help our microbiome.  </p>
+<p>There are also certain foods that may be helpful for the microbiome. Something called resistant starch, which we recommend for people who have a particular genetic syndrome called Lynch syndrome.We might discover other dietary things that support a happier and healthier microbiome. But how to manipulate it and at what age you’d have to manipulate it, these are some of the questions we have.</p>
+<p><strong>I’ve read that the connection between red and processed meat and colorectal cancer is one of the best-established diet-cancer relationships in all of oncology. Is that still the case?</strong></p>
+<p>It’s one of them. A lot of the things we associate with colorectal cancer came from a study of a cohort of over 120,000 registered nurses called the <a href="https://nurseshealthstudy.org/">Nurse’s Health Study</a>, which launched in 1976. They looked at things like consumption of processed and red meat, butter, high-fat dairy, sugar-sweetened beverages, what we sometimes call a Western diet. These things were all associated with increased risk. They also measured sedentary behavior by clocking the amount of TV someone watched, which is scary, because screen time is increasing for everyone. But this was a prospective cohort study where people were asked to recall their childhood behaviors, and memory is faulty. What would be ideal is if we could follow people in real time and measure all of these things. We also need to track much more diverse populations.</p>
+<p><strong>The rise is happening in 27 different countries simultaneously, but it does seem to be more pronounced in the West. What does that global pattern tell us that just looking at American patients couldn’t?</strong></p>
+<p>The risk is highest in higher income countries where obesity is higher and sedentary behavior is greater. So that pattern lends more credence to the idea that these things may be playing a role.</p>
+<p><strong>Do we know anything new about why younger patients present with more advanced disease?</strong></p>
+<p>One is that they’re not diagnosed in the same way. The guidelines now recommend colonoscopies for average risk individuals at age 45. But young people who find blood in their stool or have irregular bowel patterns, tend to assume it’s a hemorrhoid or Irritable Bowel Syndrome. Patients and their providers don’t have colorectal cancer high on the list of possibilities, so they’re later to diagnosis. I often hear from my patients things like, “Oh, I saw someone for diarrhea and then I was constipated, and then maybe I had a little blood when I was wiping, but I didn’t really think it was anything. Then I forgot about it, and I didn’t wanna talk about my poop because that felt weird.”</p>
+<p>By the time the cancer is found, unfortunately, it’s often because something else happened. The cancer grew to such an extent that it started causing more clear-cut problems: abdominal pain after the liver becomes involved, or anemia, because they’ve lost so much blood slowly over time. They have significant fatigue that makes it difficult to do things.</p>
+<p><strong>Read more: “<a href="https://nautil.us/when-did-i-start-getting-cancer-1195935/">When Did I Start Getting Cancer?</a>”</strong></p>
+<p><strong>Has awareness among primary care doctors and patients improved?</strong></p>
+<p>The media coverage helps. We’re all trying to get the word out that this is something important. I’ve given talks to different primary care groups. My sense is that the primary care folks are hearing it and seeing it. Patients, too, which is great. There’s still a stigma about bowels and poop. People don’t want to talk about it. But we all should be looking at our poop. We should be making sure that we talk to our doctors about it.</p>
+<p>Another thing that’s important is knowing your family history of polyps and colon cancer. A lot of people are shy to talk about these things. Certain generations didn’t talk about medical issues in families. But it’s important to share that information because it could impact someone’s assessment of their risk and when they should start doing colonoscopy screening. It should be something people do at Thanksgiving dinner. Everyone goes around the table and talks about when your last colonoscopy was.  </p>
+<p>Colonoscopies are really the only screening tool that can not only diagnose a cancer, but also prevent it. Because not all polyps will turn into cancer, but if that polyp is removed, then it’s definitely not gonna turn into cancer. Unfortunately, sometimes you really do need to advocate for yourself. The system isn’t always designed to meet you where you’re at. But if you don’t feel like your body is right, you need to say something. You know your body best.</p>
+<p><strong>Is young onset colorectal cancer harder to treat, or is it just generally caught later?</strong></p>
+<p>I would say generally caught later. It does tend to have different mutational signatures which affect some of the treatments that you can give. There have been studies that have shown that we definitely treat younger patients more aggressively. They get more lines of therapy, which is in part because you just want to throw everything you can to support them and they’re well enough usually to handle it. But it’s not always clear that the outcomes are better, even though they’re getting more intensive regimens. Does that reflect a more aggressive underlying biology? We don’t know.</p>
+<p><strong>Given what we do know, what are the best preventative measures a person in their 20s or even younger can take?</strong></p>
+<p>None of this is gonna sound revolutionary, but don’t smoke cigarettes. Drink limited alcohol or no alcohol. This is good for many reasons, but particularly from a cancer risk standpoint. Try to have a healthy body, which means eating fewer processed meats, less of the bad Western diet things, more whole foods and physical activities and less sedentary behavior. These are all things that are probably good for us for many reasons. They align with less risk for developing young onset colorectal cancer, and they just make you healthier and stronger so you can take whatever is coming. And as I said, just being aware of your body and symptoms and saying something if you have diarrhea and then constipation. A little bit of blood is hopefully just a hemorrhoid, but it’s good to get it looked at just to make sure.</p>
+<p><strong>Is there something that your young patients are most underserved on?</strong><br />
+One of the real challenges for younger patients is that they have a lot of responsibilities that are different from those of older adults. Many have younger children and older parents that they need to manage. They’re also trying to balance financially, working and making sure that they can provide for their families. People are starting their careers, or in the early phases of their careers, and it’s hard to take a step back to deal with treatment.</p>
+<p>There are also some tough family-planning conversations. With younger patients—and this is particularly true for rectal cancer—we use radiation to the pelvis, which leads to infertility. Some young people learn they have cancer and then hear, “Ok, we need to freeze your eggs right away.” If the uterus is radiated, women can’t typically carry a child. There’s a lot of fertility implications of pelvic radiation that you don’t think about. Having to act on family planning right away, when you’ve just learned you have cancer, is very challenging. <img alt="" src="../images/nautilus-favicon-14_380.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: James Lewi / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coral Reefs Are at a Tipping Point | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Coral Reefs Are at a Tipping Point</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-14
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-DQMZ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://nautil.us/products"><img alt="" src="../images/upcoming-issue-banner_79713e.png" /></a></p>
+<p>When I slide off the tiny panga, the water feels warmer than the air. It is late January in the Caribbean, and I am about to snorkel around a patch of reef immediately off the coast of Puerto Morelos in Mexico, a fishing village south of Cancun, the buzzy hub for tourists on the Yucatan Peninsula.</p>
+<p>I’m at the northernmost point of the Mesoamerican Barrier Reef system, which extends for 700 miles and runs the coastline of four nations. It is second in size only to the Great Barrier Reef in Australia and is considered among scientists to be a harbinger for warm water coral reefs globally.</p>
+<p>In 2025, <a href="https://global-tipping-points.org/">Global Tipping Points</a>, an international group of scientists led by Tim Lenton of the Global Systems Institute at the University of Exeter in England, warned of the collapse of six major Earth systems due to global warming. The systems include the Greenland Ice Sheet, Amazon Rainforest, ocean circulation, and coral reefs. The scientists state that reefs are the first major Earth system to have breached a point of no return.</p>
+<p>“We can no longer talk about tipping points as a future risk,” Lenton told <em>The Guardian</em>. “The first tipping of widespread dieback of warm water coral reefs is already under way.”</p>
+<p>Few reefs are as degraded as the one at Puerto Morelos. After 30 years of continuous study, local scientists have documented every shift in its decline. The 2025 Global Tipping Point study states the Mesoamerican Reef “faces collapse with devastating impacts.”</p>
+<p><img alt="" src="../images/pq-1_f5d7ec.png" /></p>
+<p>And yet when I dip my head into the water, the reef looks both beautiful and eerie. Enormous corals each the size of a Volkswagen Beetle give shape to the seafloor. These are <em>Orbicella</em>, large stony species, which over centuries built this reef. On closer inspection it is clear their surfaces are smudged with slimy algal growth. The fretted inundations, the ridges and crowns that give corals their elaborate outlines, look blunted over by some ugly, destructive carelessness. Still, fish continue to take residence inside their nooks and crannies; colorful, curious, otherworldly.</p>
+<p>Within a quick half hour, I have seen hundreds of animals including groupers, angelfish, eagle rays, and lobster. My fellow snorkelers are thrilled. They snap underwater images they plan to share on social media, they tell me, as highlights of their trip. It is hard to immediately judge from their colorful photos if the corals are alive or not, and our guide, Xavier, who has been leading tours in these waters since the 1980s, chooses not to discuss it. Who can blame him? Telling the tourists that an international body of scientists has just declared the reef dead on arrival would not be good for business.</p>
+<p>But in fact the reality about coral reefs is too complex and uncertain for binaries like living or dead, scientists in Puerto Morelos tell me. To call this moment in time a tipping point is to effectively close the book on coral reefs, precluding the resilience that has allowed them to persist against all odds since they first formed on Earth more than 400 million years ago.</p>
+<p>The idea of a “tipping point” in Earth systems is relatively recent. The insight that shocks to natural ecosystems can upend their stable states of existence dates to research by theoretical ecologists in the 1970s. But the ecologists didn’t invent the term. Its origin can be traced to Morton Grodzins, a political scientist at the University of Chicago who, in the late 1950s, studied the “tipping point” of racial segregation in American neighborhoods.</p>
+<p>Decades later, the concept caught the eye of writer Malcolm Gladwell, whose titular bestseller popularized the idea that small social phenomena could turn contagious. The book offered an appealing one-shoe-fits-all logic, applying the same mechanics to viral fashion trends as it did to the spread of syphilis in Baltimore or the falling crime rates of 1990s New York. It spotlighted small incidences with “massive, disproportionate effects” on the behavior of large cohorts of people. The term itself proved to be as viral as the trends Gladwell described.</p>
+<p><img alt="" src="../images/Kazamia_BREAKER.png" /></p>
+<p><strong>REEF OUTREACH:</strong> Esmeralda Pérez-Cervantez of the National Autonomous University of Mexico strives to educate locals about their neighboring reef. She holds a plaster cast of a critically endangered starlet coral that children will decorate at an upcoming science fair. <em>Credit: Elena Kazamia.</em></p>
+<p>In the 2000s, Lenton introduced “tipping point” into climate science. He calls it a “nudge,” a tiny push that hurls a complex system from a balanced state to another. A pushed chair has a tipping point—the threshold it crosses when going from balancing upright to falling. Global warming is destabilizing natural ecosystems like coral reefs, causing escalating, irreversible damages.</p>
+<p>Corals have an unusual relationship with death. Lorenzo Alvarez-Filip, a marine ecologist and researcher at the Reef Systems Unit of the National Autonomous University of Mexico (UNAM), affectionately calls corals “monsters.” As living things go, they defy easy categorization.</p>
+<p>A coral is indeed a kind of mythological creation of interacting organisms living in a precarious equilibrium—part animal, part plant, and even mineral. (Roman poet Ovid described coral as “stony stalks” animated by the slain Medusa’s head, which Perseus placed on a bed of seaweed.) A colony of polyps, which are close relatives of sea anemones, makes up the animal part. Polyps are tiny, but visible to the naked eye. They coat the coral’s surface, and gradually build a skeleton beneath them, into which they can retreat when startled. The animal tissue of a coral is skin deep, and when the polyps die, only limestone remains. Its deposition is continuous over decades, sometimes centuries. Some living corals are millennia old.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-ocean-apocalypse-is-upon-us-maybe-542800">The Ocean Apocalypse Is Upon Us, Maybe</a>”</strong></p>
+<p>To survive, polyps depend on algae for energy. It is these “zooxanthellae” which give coral their bright color. When a coral first coalesces into being, in a process that is mostly mysterious to scientists, baby polyps absorb algae from the water around them and stitch them into their tissues. The algae provide 90 percent of the energy the polyps need for life through photosynthesis—the process typified by plants. They get the remaining 10 percent by feeding on drifting plankton, which they digest in a rudimentary gut.</p>
+<p>In this way, corals are nature’s true chimeras, a rich blend of species making up a composite organism. The symbiosis includes other players, including bacteria, whose role is an active subject of research.</p>
+<p>When a coral “bleaches,” its zooxanthellae are released back into the water column, leaving the polyps looking paler, or bone white if the evacuation is total. There is disagreement among scientists on whether zooxanthellae are expelled by the polyps, or if the algae escape the partnership.</p>
+<p><img alt="" src="../images/pq-2_cbf2a2.png" /></p>
+<p>“Bleaching” gets all the bad press about coral reefs, symbolized by widespread photos of the once-colorful reefs looking pale and lifeless. But in fact, paling is a natural part of a coral’s life, triggered by seasonal warming. “It’s a beautiful equation,” says Anastazia Banaszak.</p>
+<p>Banaszak is a senior researcher at UNAM who specializes in coral reproduction. During a paling event, normally during summer, “the corals spawn and produce new babies,” she explains. Coral polyps release millions of tiny eggs and sperm. The eggs match with sperm in water columns and produce larvae, which now have premium access to potential symbiotic algae (having been bleached out of the adult corals). The larvae, called planula, settle to the ocean floor, and begin their fight for a chance at maturing into adult coral on the reef. Meanwhile, once the water cools, some algae return to the adult colonies, restoring the reef’s hue and color.</p>
+<p>Coral death, in fact, is a protracted event. It is a gradual undoing of a colony that normally relies on steady seasonal rhythms and capricious partnerships with zooxanthellae. A large coral can survive disease or heat stress, emerging as a mosaic of living polyps alongside skeletal patches. In severe cases, through a process not fully understood by scientists, all the polyps die of starvation, waiting for algae that never return to the partnership.</p>
+<p>Banaszak, who has studied the Mesoamerican Reef for more than 20 years, tells me that warm water reefs like the Mesoamerican are slow growers and vulnerable to heat and stress. “They are already at the edge of their thermal tolerance,” she says. “Corals are very sensitive organisms.”</p>
+<p>On an overcast, windy afternoon, I meet Alvarez-Filip in his UNAM office in Puerto Morelos. He specializes on the dynamics of change in reef ecosystems and is widely held as an authority on the Mesoamerican Barrier Reef. He is also one of the authors of the Global Tipping Points report.</p>
+<p>Principled with his remarks, with dark warm eyes, Alvarez-Filip is a strict adherent to the scientific method. As a young boy he followed his mother on her field trips, a scientist collecting data on biodiversity in the coastal Pacific forests of Mexico. When he started working on the reef in Puerto Morelos, after completing his doctorate in 2010, “the corals were already very degraded,” he says. The primary cause, as he saw it, was pollution.</p>
+<p><img alt="" src="../images/Kazamia_BREAKER-2.png" /></p>
+<p><strong>THE HEAT IS ON:</strong> Lorenzo Alvarez-Filip of the National Autonomous University of Mexico, an authority on the Mesoamerican Barrier Reef, says the effects of a recent marine heatwave shocked him: “Even the fish looked dizzy and exhausted, swimming in a trance.” <em>Credit: Elena Kazamia.</em></p>
+<p>In Puerto Morelos, as in most reefs that lie close to urban centers, the damage to corals is persistent. “First came the building of Cancun,” Alvarez-Filip says. The development of the tourist destination in the 1970s, he says, flushed sewage into the reefs. Then came fertilizer run-off from agricultural expansion in the Yucatan. In 2018, an epidemic of Stony Coral Tissue Loss Disease swept through the area. “This disease killed hundreds and thousands of corals in small areas in a matter of weeks,” Alvarez-Filip says. Its cause, likely a virus, has never been fully resolved.</p>
+<p>For years, Alvarez-Filip says, he was weary of scientists crying wolf about coral reefs as a result of climate change. But an event that started in 2023 changed his mind. An extreme marine heatwave that lasted for two years burned through the reef. Water temperatures exceeded 35 degrees Celsius (95 degrees Fahrenheit), wiping out adult corals that had survived all the previous shocks. It was a staggering anomaly of sea warming that exceeded 4.8 degrees Celsius above average.</p>
+<p>“Even the fish looked dizzy and exhausted, swimming in a trance,” Alvarez-Filip says. “This is what many scientists were predicting—that climate change will occur in extreme events rather than in this gradual thing. And what happened was a really extreme event.” This time the wolf was real.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-algae-that-might-save-earths-coral-reefs-260517">The Algae That Might Save Earth’s Coral Reefs</a>”</strong></p>
+<p>Alvarez-Filip says he has been studying future projections of ocean temperatures, when severe heatwaves are predicted to come strong and in quick succession. He and his colleague Banaszak both see this as snuffing out the potential for substantial growth. “I have seen millions of corals dying,” Alvarez-Filip says. “When I extrapolate my data, this becomes millions and millions of corals dying over hundreds or thousands of kilometers. This is the scale of the problem.”</p>
+<p>A dying coral reef can retain its skeletal structure before turning into rubble and continue to provide coastal protection against waves and support a thriving fish community. But in many ways the reef is already a goner, beyond recovery, Alvarez-Filip says. It has crossed its tipping point. “I know that my sons will not see these corals again,” he says. “This is the window that is closed.”</p>
+<p>The next morning in Puerto Morelos, things look a little brighter. In the hallways of UNAM hangs a map that pictures the world according to corals. Strewn across the globe’s vast seascape are wispy and colorful strokes that denote reefs. Continents look like afterthoughts. The reefs appear like cities which are home to more than a quarter of all the fish in the ocean. But much of the diversity of the corals remains unexplored.</p>
+<p>On campus, I sit down with Esmeralda Pérez-Cervantez, a softly spoken fieldwork technician. She is busy making plaster casts of various coral species for local schoolchildren to color during an upcoming local festival of women and girls in science. Much of her work at UNAM involves scuba diving to document coral health and abundance along vast transects of the Mesoamerican Reef. Over thousands of dives, Pérez-Cervantez has witnessed firsthand the death of countless adult coral colonies. But Pérez-Cervantez wants to tell me about the juveniles she sees.</p>
+<p>“There are tiny, tiny corals that we can see growing on the seafloor,” Pérez-Cervantez says. “And they withstand the bleaching, they withstand the diseases. It sounds very clichéd, but when you see the little baby coral child, I see hope in them.”</p>
+<p><img alt="" src="../images/pq-3.png" /></p>
+<p>Most surveys of reefs, which become the bedrock of academic studies, don’t focus on juveniles, Pérez-Cervantez says. These are young corals smaller than 1.5 inches in diameter that have found a foothold on the seafloor. They’re difficult to spot during a dive, often lying obscured by seagrasses. “Sometimes I move the grass with my hand, and there it is. A coral baby. I am always surprised,” Pérez-Cervantez says.</p>
+<p>Because juveniles are the offspring of adults who have survived warming, they hold the most potential for developing tolerance to future climate change. A product of natural selection, they represent the reefs’ true shot at continuity.</p>
+<p>Claudia Padilla Souza says the reefs will indeed persevere. For her Ph.D. at UNAM in the early 1990s, Padilla Souza was diving on the Mesoamerican Reef to document its corals. Following her degree she spent almost 30 years as a researcher in Mexico’s Institute of Fisheries studying corals, queen conch, and king crab. Padilla Couza left academia in 2024 to focus on coral restoration projects in the area. Today she is the research and development director of the Reef Aquaculture Conservancy.</p>
+<p>On the outskirts of Puerto Morelos, Padilla Souza’s home is nestled in the Mayan Forest, thick with the sounds of birds, and other creatures I couldn’t name. We meet at sunset, and I am immediately struck by her energy. She sees the big picture.</p>
+<p>“I’m very sure that the corals can surprise us about what they can do,” she says. “Corals have been on the Earth for too many millions of years. A lot of things happen in all this history. Corals change, but they don’t disappear.”</p>
+<p>Padilla Souza doesn’t buy the idea that coral reefs have crossed a tipping point. “It is an arbitrary point,” she says. “The problem for us is that we are seeing it over our timescales, a very short time. We are so egocentric that way.” Padilla Souza prefers to think of ecological change as it is enacted over geological periods. “Species need to adapt, evolve, and I think corals are not going to disappear, they are going to change.”</p>
+<p>But the corals do need our help now, Padilla Souza says. Recovery will come naturally when we alleviate at least some of the pressures the reef is under from pollution, disease, or warming. “The last partner we need for the collaboration is nature itself. We need to help nature, not manipulate it,” she says.</p>
+<p>Leaving Puerto Morelos the next day, I think about the lonely grief that Alvarez-Filip and Banaszak expressed to me. Few of us have breathed air underwater or seen the magnificence of light mixing with sound and color on a tropical reef. Alvarez-Filip and Banaszak have swum in the reefs for most of their lives. I understand why Alvarez-Filip uses the language of loss to “honor the dead colonies,” to “tell their stories.” Banaszak told me she can no longer bring herself to dive on the reef, such is her pain.</p>
+<p>The tipping point narrative is a projection of the catastrophe in store for the world’s warm-water reefs. But it is most confident when it speaks of the present moment, rather than as a forecast on the future of ecosystems we have barely begun to explore. There is a danger in the simplicity of its sticky shorthand; we risk blinding ourselves to the subtle mechanics of ecosystem resilience, something we are only beginning to measure. This could prove to be the coral reef’s greatest untold story. Something worth fighting for, even if the ending lies beyond our lifetimes. <img alt="" src="../images/nautilus-favicon-14_76.png" /></p>
+<p><em>Lead photo courtesy of Lorenzo Alvarez-Filip / BARCO Lab</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

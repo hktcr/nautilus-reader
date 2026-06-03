@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Did This Drawing Preserve Leonardo da Vinci’s DNA? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Did This Drawing Preserve Leonardo da Vinci’s DNA?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-07
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-C01A</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>If <em>The Holy Child</em>, a famed Renaissance-era sketch of Baby Jesus, could speak, what would it tell us?</p>
+<p>Scientists recently gathered some tantalizing clues. Many attribute the red-chalk drawing—which features an angelic infant with eyes cast downward, plump cheeks, and lips drawn into a pout—to the great Renaissance master and Italian polymath Leonardo da Vinci, potentially as practice for later works depicting the Baby Jesus. Features such as left-handed hatching, a Da Vinci trademark, were thought to give away his authorship. But the drawing’s true creator is still in doubt: Some claim a student of da Vinci’s could have sketched it.</p>
+<p>Now scientists from the field of so-called arteomics, or the study of biological traces on artworks and other cultural artifacts, are eyeing tiny bits of DNA swabbed from the work and testing them in a lab to try to solve the mystery. They recently published their <a href="https://www.biorxiv.org/content/10.64898/2026.01.06.697880v1.full.pdf">findings</a> in a bioRxiv preprint that hasn’t been peer-reviewed yet.</p>
+<p>What emerged from the DNA analysis: faint Y-chromosome markers that fall within a lineage common in parts of the Mediterranean where da Vinci was from, a subtle hint that Leonardo may be the true author, after all. But the scientists point out that the signal is weak. They also found DNA that seemed to come from a wide variety of people who may have touched the object over the centuries, even modern handlers of the artwork.</p>
+<p><strong>Read more: “<a href="https://nautil.us/bring-us-your-genes-235523/">Bring Us Your Genes</a>”</strong></p>
+<p>“Establishing unequivocal identity … is extremely complex,” David Caramelli, an anthropologist and ancient DNA specialist at the University of Florence, who works with the Leonardo da Vinci DNA Project, told <a href="https://www.science.org/content/article/have-scientists-found-leonardo-da-vinci-s-dna"><em>Science</em></a>. Because the team was explicitly looking for da Vinci’s DNA, and focused at least in part on Y-chromosomes found only in male lineages, the DNA collection was performed exclusively by female scientists. This way, they reasoned, there would be less risk of contamination.</p>
+<p>DNA samples from da Vinci himself have been hard to come by because his remains were reportedly scattered during the French Revolution and he had no known direct descendants. But scientists from the Leonardo da Vinci project might eventually be able to compare the samples extracted from the Holy Child drawing against Y chromosome DNA from living descendants of Leonardo’s father, who were recently identified, or from the tombs of relatives of the artist.</p>
+<p><em>The Holy Child</em> drawing was just one of many works and objects that the team analyzed. They also examined archival letters written by a cousin of Leonardo’s who shares a common ancestor in Tuscany, drawings on paper by other artists—Filippino Lippi, Andrea Sacchi, and Charles Flipart, to use as non-Leonardo comparisons—as well as a series of more functional controls: the frame that stored the drawing, environmental surfaces from the sample collection rooms in the United States and Italy, commercially acquired art from the same time period, and cheek swabs of other humans. The Y-chromosome markers they found in the drawing were compatible with paternal-line patterns found in the other Leonardo-associated objects.</p>
+<p>Human DNA wasn’t the only sign of life to emerge either. Each object contained a whole world of genetic material from fungi, viruses, plants, and bacteria that seemed to spin a kind of life story. The mixes of DNA varied from piece to piece and seemed to relate to what the object was made of, how it had been stored and conserved, how often it had been handled and by whom.</p>
+<p>Some suggestive details that emerged from this biological cacophony: The scientists identified citrus DNA on the Holy Child drawing, historically plausible because it was culturally important in the gardens of the Medici family, who were key patrons for da Vinci. But they emphasized that plant DNA can come from many sources, including dust, conservation, and handling.</p>
+<p>The team also reported DNA of Leptospira, which causes a zoonotic bacterial disease and is consistent with rodent-rich environments that might have existed in Tuscany during da Vinci’s time. Another provocative find: the DNA of plasmodium, a genus of a single celled parasite that causes malaria, in swabs of the letter. This was a significant, but preliminary, observation given that malaria was historically endemic to parts of Italy and had been found in Medici remains.</p>
+<p>The da Vinci effort “opens a whole new world” for the study of art provenance, chemist Stefan Simon, director of the Rathgen Research Laboratory at the National Museums in Berlin, who is not affiliated with the project, told <em>Science</em>.</p>
+<p>If the scientists can identify da Vinci’s DNA, it might even help us understand what made him such a keen observer of nature. In fact, some scientists believe he had special powers of perception that were rooted in biology. <img alt="" src="../images/nautilus-favicon-14_579.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

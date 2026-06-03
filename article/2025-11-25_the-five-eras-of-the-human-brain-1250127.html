@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Five Eras of the Human Brain | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Five Eras of the Human Brain</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-UH0V</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Aging tends to roll out in reasonably clear tiers: naïve childhood, the feral teen years, exuberant young adulthood, pragmatic middle-age, sage elderhood, and if you’re lucky, the superager summit. But apparently, the brain keeps its own calendar. According to a new study, it moves through five stages marked by dramatic turning points.</p>
+<p>Scientists compared MRI diffusion scans of more than 3,800 people, ranging from newborns to 90-year-olds. The <a href="https://dx.doi.org/10.1038/s41467-025-65974-8">findings</a>, published recently in <em>Nature Communications</em>, reveal central nervous system hubs that grow and reorganize on a timeline that doesn’t map neatly onto the milestones we celebrate<em>.</em> At ages 9, 32, 66, and 83, our brains change costumes.</p>
+<p>“We know the brain’s wiring is crucial to our development, but we lack a big picture of how it changes across our lives and why,” Alexa Mousley, a Ph.D. student at the University of Cambridge and co-author on the paper, said in a <a href="https://www.cam.ac.uk/stories/five-ages-human-brain">statement</a>. “This study is the first to identify major phases of brain wiring across a human lifespan.”</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/my-visit-with-my-dead-fathers-brain-1207680/"><strong>My Visit with My Dead Father’s Brain</strong></a><strong>”</strong></p>
+<p>The first chapter is brief but intense, lasting from infancy through age 9, when our brains are generally in a phase of consolidation, pairing away excess synapses developed in the brains of babies. Meanwhile, grey and white matter grow rapidly, and the brain’s distinctive folds begin to stabilize. By around the end of the first decade on Earth, our cognitive capacity has leapt forward—and it arrives with increased risk of mental health disorders. The lights get brighter but so do the shadows. This age aligns with the onset of puberty, bringing major changes to hormones.</p>
+<p>Though we tend to think adolescence ends the moment we step out of our parents’ homes and start paying the bills, our brains seem to disagree. Through our 20s and early 30s, white matter continues to grow and the connections across brain regions become more selective, enhancing cognitive performance. According to the researchers, age 32 is the “strongest topological turning point” of the lifespan. This is when the brain stops rearranging the furniture and settles in for a while.</p>
+<p>These findings align with the “plateau in intelligence and personality” that previous studies have identified in this stage of adulthood.</p>
+<p>During this extended period, one of the longest and most stable in our brains’ lives, different regions of the brain begin to cordon themselves off and communication between them diminishes.</p>
+<p>Then at age 66, the brain shifts again, but this time the transition is more subtle. White matter starts to fray, and connectivity begins to ebb. The researchers note that this is an age when people face higher risk of developing conditions such as hypertension that can speed neurological decline. It’s less a sudden plot twist than a shift in the lighting.</p>
+<p>The final era remains the least understood, largely because comparatively few people have made it this far with brains healthy enough to image. But the pattern is clear: At around age 83, whole-brain connectivity tends to continue to fall, and the architecture that once wired us to the world is more likely to begin to slip.</p>
+<p>As Mousley puts it, recognizing these distinct stages—rather than imagining the brain as a slow, steady descent or rise—could help pinpoint when and how its wiring becomes vulnerable to difficulties with attention, language, memory, and other behaviors.</p>
+<p>Aging in the brain, it seems, isn’t so steady at all. It’s a punctuated parade of eras until the lights go out altogether. <img alt="" src="../images/nautilus-favicon-14_746.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em><a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Lightspring / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

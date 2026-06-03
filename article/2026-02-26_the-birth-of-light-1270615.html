@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Birth of Light - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Birth of Light - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-26
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-AUMI</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The universe began with a bang, and for the first few hundred million years, there was nothing but hydrogen and some helium atoms moving through the void. Then something happened. Somehow, in the roiling soup of plasma and free electrons suffusing the Big Bang’s embers, clouds of molecular hydrogen drew close enough together to ignite. The first stars were born.</p>
+<p>Just to imagine such objects blinking into existence, let alone describe them using theoretical astrophysics, was revolutionary not very long ago. But today, astronomers are on the cusp of actually seeing these earliest stars. Through the James Webb Space Telescope, humans are newly capable of peering back through almost all of time, penetrating the expanding universe, past uncountable galaxies and nebulae and stars and their planets, to glimpse the first light to ever shine forth.</p>
+<p>These luminous bodies, called Population III stars, represent not only the earliest light in the primordial universe but also our own beginnings. They were the first stars to fuse hydrogen and helium into heavier elements. They forged oxygen, carbon, silicon, and iron (what astronomers call “metals”) for the first time, deep in their massive stellar hearts. Their deaths set the course of the universe, led to the origin of our sun and, eventually, to life on Earth. Finding them and modeling their birth and death is therefore a way of understanding the deepest roots of everything that came after them.</p>
+<p>Throughout 2025, astronomers shared a flurry of research papers on a preprint server and at scientific meetings, posing that some galaxies in JWST data could be radiating light from these primordial stars. But few researchers have agreed on any one claim. Meanwhile, theorists continue refining their expectations for what these stars should look like when their faint glows are captured by JWST’s sensitive instruments.</p>
+<p>The difficulty and the importance of finding Population III stars makes them a sort of a “holy grail” among astronomers, says Pierluigi Rinaldi, an astronomer at the Space Telescope Science Institute in Baltimore.</p>
+<p>“The people who see Population III stars will be the people who get a Nobel Prize,” he says.</p>
+<p>Before the Earth, before the sun, before the sun’s stellar ancestors, and long before even the Milky Way, the universe was wildly different. During the “cosmic dark ages,” a period that lasted about 50 million years after the Big Bang, no stars shone. Influenced by gravity, dark matter—invisible, mysterious stuff we cannot directly study—was beginning to shepherd visible material together. Gas and dust started to clump, although their accumulation was altered by supersonic flows of gas still streaming forth from the Big Bang. Sometime between 50 million and 100 million years after the Big Bang, the clumps became concentrated enough, and dense enough, to collapse into the first stars.</p>
+<p><img alt="" src="../images/Bolye_BREAKER.png" /></p>
+<p><strong>A USEFUL CLUSTER:</strong> This galaxy cluster, called MACS J0416, helped astronomers magnify and study the more distant LAP1 galaxy, which may contain some of the first stars ever formed in our young universe. <em>Credit: NASA.</em></p>
+<p>These first stars are called Population III stars because of a somewhat backward ordering system. They are made only of primordial hydrogen and helium, which they forged into heavier elements such as carbon, oxygen, and iron. (“Metals” to astronomers describe any elements with more neutrons than hydrogen or helium.) The next stars to form were Population II, still old and scant in these heavy materials. And most stars now, for example our sun, are Population I stars, rich in heavier elements—the stuff that makes rocks, trees, diamonds, and us.</p>
+<p>The sun and all other stars like it are made from the remains of their ancestors. As the Population III stars died, their hearts seeded the cosmos with every other element in the known universe. Although they are the long-lost progenitors of today’s matter, massive Pop III stars were likely not super common in the infant universe.</p>
+<p>“We don’t expect lots of them to be forming, so it’s just going to be harder to see them,” says Mike Boylan-Kolchin, an astronomer at the University of Texas at Austin. “You’re helped out because they are more massive, so they should shine brightly, but seeing them unambiguously is hard.”</p>
+<p>Theorists think Pop III stars could have been enormous, with masses the equivalent of 100 suns or more, and short-lived—flaming out within a few million years, incredibly fast for a star. They would have died in titanic explosions that could have cooled down those Big Bang-induced supersonic flows of gas and helped galaxies chock-full of stars to form even faster.</p>
+<p>“The small structures where the Pop III stars first form are the building blocks of the galaxies. They are the little bits that build up the next generation,” says Eli Visbal, an astronomer at the University of Toledo in Ohio. “If you want a complete picture of galaxy formation, in particular how early galaxies form, you want to understand the initial conditions of the Pop III stars.”</p>
+<blockquote>
+<p>Humans are newly capable of peering back through almost all of time to glimpse the first light to ever shine forth.</p>
+</blockquote>
+<p>Astronomers used to think we would never be able to see them because they are so old, and therefore so far away. The oldest objects in the universe are far away, of course, because the universe is expanding in all directions. This also means the light from very early stars has been stretched to longer wavelengths as it traveled to telescopes that are either Earth-bound or Earth-adjacent.</p>
+<p>But JWST was specially designed to detect longer wavelengths of light, specifically in the near-infrared range of the electromagnetic spectrum. The Hubble Space Telescope can see deep into the universe, but it only perceives the light we can see, optical light. And previous generations of infrared telescopes, like the Spitzer Space Telescope, did not have JWST’s sensitivity or power.</p>
+<p>By using JWST instruments to study starlight’s composition, a technique called spectroscopy, astronomers can look for high concentrations of helium and hydrogen that could hint at the presence of primordial stars. But even JWST has a hard time distinguishing the oldest starlight ever produced. Though a few astronomers have claimed to pinpoint evidence of Pop III stars, it will be hard for anyone to convince the broader astrophysics community that JWST has really found a galaxy harboring them because it would be such a consequential find, says Claire Williams, a theoretical physicist at the University of California, Los Angeles who studies Pop III stars.</p>
+<p>Still, some evidence is mounting.</p>
+<p>In 2023, astronomers led by Roberto Maiolino at the University of Cambridge in the United Kingdom used JWST to <a href="https://www.aanda.org/articles/aa/full_html/2024/07/aa47087-23/aa47087-23.html">observe</a> a galaxy called GN-z11, which Hubble found in 2015 and which dates to just 400 million years after the Big Bang. They argued that the helium signature in GN-z11 suggested small clusters of Population III stars within it.</p>
+<p><img alt="" src="../images/Bolye_BREAKER-2.png" /></p>
+<p><strong>A STAR DIES:</strong>Pop III stars would have died much like this much closer and younger one, a mere 26,000 light-years away from Earth, in massive supernova explosions that would spew metals that would serve as the building blocks of stars we see today. <em>Credit: X-ray: NASA/CXC/MIT/L.Lopez et al.; Infrared: Palomar; Radio: NSF/NRAO/VLA.</em></p>
+<p>Other teams use a trick of gravity, predicted by Albert Einstein, to magnify and study distant stars. Also in 2023, astronomers led by Eros Vanzella at the National Institute of Astrophysics in Bologna, Italy, used a galaxy cluster called MACS J0416 to <a href="https://www.aanda.org/articles/aa/full_html/2023/10/aa46981-23/aa46981-23.html">study a faraway galaxy</a>. The galaxy cluster’s gravity warped the light of a more distant galaxy, the way a magnifying glass distorts and enlarges an object. Einstein predicted this “gravitational lensing” effect in 1915, and it has since been confirmed and used by Vanzella and other astronomers. Vanzella and his team dubbed the more distant galaxy “LAP1,” for “lensed and pristine 1,” finding that the system contained a huge amount of hydrogen and only a small amount of oxygen, hallmarks of primitive stars. It has two components, LAP1-A and LAP1-B.</p>
+<p>JWST can image the LAP1 system as it appeared very early in the universe, during the epoch of reionization. In this period, the first stars had been born, and their sparkling light was charging all the neutral gas left over from the Big Bang. It is a tricky epoch to study, but a crucial one for understanding the first stars and their influence.</p>
+<p>JWST’s sensitive starlight-sifting spectroscopy instruments and the incorporation of lensing make these elemental measurements possible. The output of these analytical techniques read something like a barcode, where the signature of a star’s light describes its chemical contents.</p>
+<p>In July 2025, astronomers led by Kimihiko Nakajima at Caltech <a href="https://arxiv.org/abs/2506.11846">examined the distant object again</a>. Based on LAP1-B’s barcode, there are no detectable metals in the galaxy. Nakajima and his colleagues argued it is actually a cluster of Pop III stars, adding up to about 2,700 suns worth of material. Astronomers now think LAP1-B is the most chemically primitive star-forming galaxy yet identified, and several teams of researchers are hard at work, further scrutinizing its light.</p>
+<p>Visbal says he believes LAP1-B is the first object that meets the criteria for a Pop III star-hosting galaxy.</p>
+<p>“The most compelling reason to me is just the amount of stars that are implied by how bright the object is,” he says. It would only take 10 stars, each weighing about 100 times the sun, to create the light shining forth from LAP1-B. That’s a good thing. A galaxy crowded with stars has likely had more time to form those stars, which means the earliest generation—Pop III stars—had likely begun dying, or at the very least blowing some metals around through their stellar winds.</p>
+<p>“You don’t have a lot of time before you transition from Pop III to Pop II, ” he says. “We may be very close to the first star formation event in this location.”</p>
+<blockquote>
+<p>Population III stars represent not only the earliest light in the primordial universe but also our own beginnings.</p>
+</blockquote>
+<p>But not everyone is convinced the LAP1 system contains primordial stars. Williams, a theorist, says there could be other strange explanations for the unique chemical fingerprints of the galaxies. Some signatures that could appear to be Pop III stars might actually be Pop II stars, lurking behind a galaxy that absorbs their heavy-metal barcodes, for instance. Or what looks like a Pop III star could be a Pop II star with unexpected spectral characteristics, she says.</p>
+<p>“Maybe there’s a weird Pop II, and that is still more likely than a Pop III,” she says. “We probably have these objects that tick a lot of the boxes of Pop III stars, but the level of confidence is not there.”</p>
+<p>Other astronomers suggest that these systems might not contain stars at all, but that the barcodes could just be light from gas clouds. What’s more, there could be other Pop III candidates already lurking in JWST’s trove of data. One such object, dubbed <a href="https://iopscience.iop.org/article/10.3847/1538-4357/ade9a1">GLIMPSE-16043</a>, contains telltale spectral signatures of very young stars and seems to have very little metals. It contains “textbook features” expected of a Pop III galaxy, such as this paucity of metals and other signatures indicating the presence of hot, young stars, according to astronomers led by Seiji Fujimoto of the University of Toronto.</p>
+<p>Pop III stars set the course for everything in the universe that came after them, including the cosmic mix of ingredients that ultimately led to us. And finding them could shed light not only on our origins but on some of the strangest questions in modern physics.</p>
+<p>The early, weird universe—the one devoid of stars and their light—was still full of something, just something that did not glow. We call this stuff dark matter, because we quite literally can’t see it, though its gravitational influence is profound. Physicists have been trying to unmask it by looking for tiny particles, including weakly interacting ones that might have strange states of being that make them undetectable to us.</p>
+<p>Pop III stars could actually shed light on the question of dark matter detection, according to Visbal. In simulations, Pop III stars form in small galaxies, their mass organized by small clumps of invisible dark matter. Their existence in certain circumstances could help physicists probe the very nature of dark matter.</p>
+<p>One theory for dark matter calls for particles that are so small, they are altered by quantum mechanical effects. At universal scales, where halos of dark matter sculpt the fates of entire galaxy clusters, these effects can become noticeable, Visbal says. Dark matter halos that contain very low-mass particles could be subject to quantum mechanics’ uncertainty principle—the fact that it is impossible to measure both the exact momentum and position of an object at the same time—and would create a “fuzzy” structure that alters how galaxies grow. Such fuzzy dark matter structures would guide the development of galaxies differently than expected normal, cold dark matter.</p>
+<blockquote>
+<p><em>During the “cosmic dark ages” no stars shone.</em></p>
+</blockquote>
+<p>“So the objects where you would form Pop III stars in would no longer exist. And it would change where these first formed,” he says. “It is sort of a missing window. Since we don’t know what dark matter is, we should leave no stone unturned.”</p>
+<p>Whether or not anyone has found a galaxy containing true Pop III stars—and whether or not they can tell us anything about dark matter—the fact that the hunt is even possible is thrilling for many astronomers. JWST’s ability to search for Pop III characteristics is just one example of how the 4-year-old telescope is upending humanity’s understanding of the cosmos.</p>
+<p>“Astronomy is really fun because these big observatory projects get built, and then all of a sudden, every field gets revolutionized,” Williams says. “It’s not like individual groups making a new experiment, or developing a technique. We are all basking in the glory of this new thing that comes online.”</p>
+<p>Williams started her Ph.D. program right before JWST launched in December 2020. She shared her first presentation a couple months afterward, studying galaxy simulations in the very early universe, only a few million years after the Big Bang. Her professors were skeptical, arguing that no one would be able to observe anything that occurred in such ancient epochs. But when the first images came down from JWST, they showed galaxies blazing just 300 million years after the Big Bang—way earlier than anyone expected was possible. Suddenly Williams’ very young universe simulations didn’t seem so far-fetched at all.</p>
+<p>“It was a fun experience as a student, to come into this world just as this total revolution in what was possible was happening,” she says.</p>
+<p>Some theorists say that the definitive discoveries of Pop III stars and other far-off phenomena are still a decade or two away. Future space telescope missions may be the ones to finally glimpse the first stars ever.</p>
+<p>A mission called Hyperion, proposed and led by astronomers at the University of Arizona and Columbia University, would study star formation in the local—meaning, more recent—universe to better understand how hydrogen gas turns the creation of stars on and off. Understanding those mechanisms could inform our understanding of how the first stars may have formed, too.</p>
+<p>But the very earliest era of time, a few tens of millions of years after the Big Bang, is the best hope for finding the first stars, says Boylan-Kolchin. JWST is more of a wayfinder for a possible future telescope, in that sense.</p>
+<p>“We now know how to look, and where to look,” he says. “That makes it easier for people to come up with the technology to follow this up and say for sure, ‘This is a Pop III star.’ ”</p>
+<p>One day, maybe soon, someone will be able to do that. Some future astronomer will be able to point to an image of an unspeakably distant, achingly old galaxy, and sift its ancient light. They will find nothing but the signature of hydrogen, the universe’s first element and the stuff from which we all came, and trace that light to the very first stars—the ancestors of everything that has shone since. <img alt="" src="../images/nautilus-favicon-14_369.png" /></p>
+<p><em>Lead image: This artist’s conception depicts how the formation of the universe’s first stars may have appeared. Dense clouds of hydrogen and helium likely collapsed inward, increasing pressure and temperature until hydrogen atoms began to fuse, giving birth to the first light in a dark void. Credit: NASA, STScI A. Schaller.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

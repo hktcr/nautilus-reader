@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tortoises That Inspired Modern Robotics | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Tortoises That Inspired Modern Robotics</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-19
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-02KY</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A pioneer in the study of brain activity went on to <a href="https://www.bristol.ac.uk/news/2008/212017945378.html">create</a> the first autonomous robots—a pair of charming tortoises that knew their way around a room.</p>
+<p>Neurophysiologist W. Grey Walter was born on this day in 1910 in Kansas City, Missouri. After studying at Cambridge University, he joined the research team at Maudsley Hospital in London. There, he built machines that measured electrical activity in the brain.</p>
+<p>Electroencephalography (EEG), which records this data via electrodes placed on the scalp, was first <a href="https://www.sciencedirect.com/science/article/abs/pii/S096758680500398X">envisioned</a> in 1929 by German psychiatrist Hans Berger. He tried to accomplish this with an existing instrument called a galvanometer.</p>
+<p>VIDEO</p>
+<p><strong>ROBO-REPTILES</strong>: Walter demonstrates his tortoise bots. <em>Credit: skitterbot / YouTube.</em></p>
+<p>Soon after Berger’s paper was published, scientists sought to learn how EEG could be used with patients. At Maudsley Hospital, neuropsychiatrist Frederick Lucien Golla <a href="https://collection.sciencemuseumgroup.org.uk/people/ap28659/walter-william-grey">supported</a> Walter in creating more advanced EEG devices. Over the next few decades, Walter made major strides in EEG research. In 1936, for example, he became the first to identify a brain tumor via the technique. He also <a href="https://royalsocietypublishing.org/rsta/article-abstract/361/1811/2085/51771/Exploration-and-high-adventure-the-legacy-of-Grey?redirectedFrom=PDF">discovered</a> brain waves known as delta waves, which are <a href="https://theconversation.com/alpha-beta-theta-what-are-brain-states-and-brain-waves-and-can-we-control-them-219236">associated</a> with deep sleep.</p>
+<p>For Walter’s next feat, he delved into the burgeoning world of cybernetics, or “the scientific study of control and communication in the animal and the machine,” <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/pamm.201900108">according to</a> the movement’s founder, Norbert Wiener. Researchers in this field hoped to learn more about animal behavior through machines.</p>
+<p>Along those lines, Walter <a href="https://home.csulb.edu/~wmartinz/content/w-grey-walter-and-his-turtle-robots.html">designed</a> robots to illuminate the inner workings of animals’ brains. Walter had <a href="https://www.bristol.ac.uk/news/2008/212017945378.html">hypothesized</a> that connections between a minimal amount of brain cells could direct complex behaviors, an idea that he explored with tortoise-like bots.</p>
+<p>He built his first iterations, Elmer and Elsie, between 1948 and 1949. At the time, new developments in electronic motors and computers <a href="https://americanhistory.si.edu/collections/object/nmah_879329">made</a> it possible to mimic animal intelligence. Elmer and Elsie had brains made of two vacuum tubes, which Walter equated to neurons. These slow-moving bots had a plastic shell and tortoise-like appearance, though their name <a href="https://www.theguardian.com/science/2000/dec/07/robots">stemmed</a> from an <em>Alice in Wonderland</em> character.</p>
+<p><strong>Read more: “<a href="https://nautil.us/what-we-misunderstand-about-robots-1219038/">What We Misunderstand About Robots</a>”</strong></p>
+<p>They moved about with three wheels, and <a href="https://home.csulb.edu/~wmartinz/content/w-grey-walter-and-his-turtle-robots.html">interacted</a> with their surroundings based on the senses of touch and sight. The robot’s “eye,” a rotating photocell, looked around for light. Another sensor detected whether the shell had run into something, which prompted the bot to turn away. The system enabled the robo-reptiles to explore a room, and even directed them to visit a hutch to recharge their batteries. This robot “explores its environment actively, persistently, systematically as most animals do,” <a href="https://home.csulb.edu/~wmartinz/content/w-grey-walter-and-his-turtle-robots.html">according to</a> Walter.</p>
+<p>They even had free will, Walter <a href="https://cse-robotics.engr.tamu.edu/dshell/cs689/papers/walter50imitation.pdf">suggested</a> in a 1950 issue of <em>Scientific American</em>, and sometimes did the unexpected; for example, the robot <a href="http://www.bcp.psych.ualberta.ca/~mike/Pearl_Street/PSYCO452/pdfstuff/Supplements/MindsAndMachines.pdf">started</a> “flickering, twittering, and jigging like a clumsy narcissus” in front of a mirror, he noted. “The behavior of a creature thus engaged with its own reflection is quite specific, and on a purely empirical basis, if it were observed in an animal, might be accepted as evidence of some degree of self-awareness.” Walter thought of them as the beginnings of a new species, which he called <em>Machina speculatrix</em>.</p>
+<p>With his next tortoise, Walter wanted to instill memory into the device. It was known as <em>Machina docilis,</em> a word that translates to teachable in Latin. This model had similar inner workings, but it also included a sound detector. <em>M</em>. <em>docilis</em> could be trained to learn specific behaviors spurred by light, sounds, or bumping into objects, a process inspired by Pavlovian learning. In fact, Walter had even <a href="https://www.rutherfordjournal.org/article020101.html">met</a> Russian physiologist Ivan Pavlov during his youth.</p>
+<p>Walter <a href="https://www.theguardian.com/science/2000/dec/07/robots">inspired</a> future generations of scientists by blending biology and robotics, and he showed that even simple machines can behave surprisingly—an early foray into the field of artificial intelligence that today dominates our daily lives. <img alt="" src="../images/nautilus-favicon-14_398.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: UWE Bristol</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

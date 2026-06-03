@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Magical Realism of Myriam Wares - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Magical Realism of Myriam Wares - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-01-20
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-D3O2</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><em>This article is part of series of</em> Nautilus <em>interviews with artists, you can read the rest <a href="https://nautil.us/art-science/">here</a>.</em></p>
+<p>Browsing through Myriam Wares’ art is like wandering through a dream. Familiar objects loom over alien landscapes, faceless figures navigate impossible architecture, and the boundaries of the natural and supernatural blur. For Ware, whose illustrations have appeared in <em>The Verge</em>, <em>The New York Times</em>, and <em>Nautilus</em>, creating these magical realms involves careful planning. Unlike how we reconstruct dreams after waking—stitching together fleeting details and residues of emotion—Ware thoughtfully curates symbols to convey feelings and ideas. She recently sat down to answer our questions about her creative process, the difference between digital and analog painting, and the future of art.</p>
+<p><strong>What drew you to the arts in the first place?</strong></p>
+<p>I think I’ve always been an illustrator at heart. If I look back, I started drawing before I even spoke my first word. As a child, I spent a lot of time copying illustrations from my picture books. My father had an M.C. Escher book lying around the house; I remember being so fascinated by the artist’s impossible universe. It was my dream to one day be able to create my own world.</p>
+<p>Coming out of high school, I had no idea what I wanted to do for the rest of my life, so I signed up for a fine arts program, then later switched to commercial illustration. I wasn’t thinking so far ahead back then, I just continued doing what I did best. Things eventually fell into place, and I started freelancing full time soon after graduating.</p>
+<p><img alt="" src="../images/Myriamwares_sample-2_2025.jpg" /></p>
+<p>The Verge: The walls of Apple's garden are tumbling down. <em>Image courtesy of Myriam Wares</em>.</p>
+<p><strong>Can you walk us through your process?</strong></p>
+<p>My process is always on and running in the back of my mind. Despite having a style that leans more towards surrealism, much of my inspiration comes directly from the observable world. I make it a point to take some time away from my computer and spend some time outdoors. I’m always accumulating a bank of visual images in my mind for future use, which I refer to when the time comes to sit down and do the work.</p>
+<p>More concretely, I have <a href="https://ca.pinterest.com/myrillustration/_saved/">dozens of Pinterest boards</a> full of reference photos of plants, fruits, architecture, classical artworks, and so on. This has become my own personal library of symbolism. Creating an illustration, in a way, is translating an idea or feeling into an image. When given an assignment, the first step consists of pinpointing what needs to be communicated, then figuring out how to say it using symbols rather than words.</p>
+<p><strong>How do you work through a creative block?</strong></p>
+<p>I find getting to work regardless gets me out of it. I start drawing without giving too much thought about whether what I’m doing will be good or not. I find action naturally leads me out of any block or anxiety I might have about a given piece. Having a routine also helps. If I get into the habit of producing work during the same period of time every day, inspiration flows more naturally. If instead I wait for inspiration to strike before getting to work, I’ll be waiting for a long time.</p>
+<p><strong>A lot of your work features surreal elements, how would you describe your aesthetic?</strong></p>
+<p>I hear my work referred to as surrealism a lot—and use the label myself sometimes. I definitely take some inspiration from surrealist painters, notably Magritte. I love how he twists familiar objects in unexpected ways, offering us new ways to look at reality.</p>
+<p>Some other surrealist painters used a more spontaneous "automatic" approach to painting, which I don't relate to as much. I'm rather intentional about the elements I include in my work and ponder their meaning a lot. Perhaps the label “magical realism,” or just “symbolism,” would be better suited.</p>
+<p><img alt="" src="../images/Myriamwares_sample-1_2025.jpg" /></p>
+<p><em>Image courtesy of Myriam Wares</em>.</p>
+<p><strong>Not long ago you started painting again after working exclusively in digital. What was that like?</strong></p>
+<p>Refreshing. I love working digitally, but I find myself longing for a time before technology became so present in our lives, when you could just sit with a painting for a while. After a few years of constantly producing work under tight deadlines, it’s easy to get the feeling of mass-producing one’s own work.</p>
+<p>Painting has a grounding effect on me, similar to meditation. Everything takes twice as long to do and mistakes aren’t so easily erasable, so every move needs to be carefully considered. I try to carve some time out of my hectic schedule to paint a bit every month. Little by little, between client commissions, I’d like to build up a collection of paintings and see where that leads me.</p>
+<p><strong>You created the cover for <em>Nautilus</em> Issue 32, “<a href="https://nautil.us/dawn-of-the-heliocene-237963/">Dawn of the Heliocene</a>,” about how the next geological epoch should be named for humans’ harnessing of solar energy. What about that story captured your imagination?</strong></p>
+<p>I remember being mesmerized by Summer Praetorius' beautifully written and deeply personal piece, which centers around the sun and our use of its energy. She makes a case for why we should name the new geological epoch Heliocene, rather than the more somber Anthropocene.</p>
+<p>The sun is the protagonist of the story, which inspired me to place it at the center of the composition. I wanted to represent it as both a healing force and a potentially destructive one. We can choose to move forward using the sun's energy in a harmful way via fossil fuels, which the author refers to as “trapped sunlight,” or in a new and cleaner way via solar panels.</p>
+<p>The plant that grows amongst the rubble is symbolic of life's persistence through past cataclysmic disasters. Illustrating it person-shaped conveys that humans can be adaptable in much the same way in the face of future challenges.</p>
+<p><img alt="" src="../images/MyriamWares-cover-Dawn-of-the-Heliocene-scaled.jpg" /></p>
+<p>Nautilus: Issue 32 cover. <em>By Myriam Wares</em>.</p>
+<p><strong>Is there anything you think scientists can learn from artists—or vice versa?</strong></p>
+<p>I’ve often heard that the best scientists, like artists, are creative souls. On the other hand, I think great artists are investigative about the world that surrounds them, as are scientists. Both certainly have an inexhaustible curiosity for the world and seek to understand it more deeply. Perhaps we are more alike than conventional wisdom would presume.</p>
+<p><strong>Over the past 10 years or so there have been a lot of technological changes in how art is created and disseminated—the rise of generative AI, the proliferation of social media, more advanced digital tools, and so on. As an art history enthusiast, what do you think the future holds for art and artists?</strong></p>
+<p>This is a complex and polarizing question, which no one can answer with certainty. Personally, I’m not worried that AI will ever replace artists. That said, it will likely have a certain impact on the creative world.</p>
+<p>For example, I'm now seeing some people approach me with AI-generated briefs to illustrate in my own style. I’m not quite sure what to make of this new occurrence, but I personally do not see much value in including AI in my process, considering doing such a thing was unheard of just one year ago. This removes the artist from parts of their process, which usually impacts the final piece for the worse.</p>
+<p>I think anyone alive has had the experience of being profoundly moved by a work of art—and knows quite intuitively that machines fall flat in that regard. The creative process is a deeply personal one that should involve the artist from start to finish.</p>
+<p>My real fear is not that computers will replace art, but rather that the perceived value of creative work might diminish, considering the production cost of AI-generated visuals is extremely low. Unfortunately, we cannot control the spread and use of new technologies. What we can do is focus our creative efforts on what makes us better than computers. I wouldn’t worry too much about the rest.</p>
+<p><img alt="" src="../images/Myriamwares_sample-5_2025.jpg" /></p>
+<p><em>Image courtesy of Myriam Wares</em>.</p>
+<p><strong>Do you have any upcoming projects you’re excited about?</strong></p>
+<p>I’m fortunate enough to have a collection of inspiring commission pieces to work on, including book covers, beer labels, and a vinyl record. Beyond those, I’m excited to continue working on my personal projects and paintings.</p>
+<p><em>Interview by Jake Currie.</em></p>
+<p><em>Lead image courtesy of Myriam Wares.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

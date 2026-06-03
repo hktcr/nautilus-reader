@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Queer Lives of Frogs | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Queer Lives of Frogs</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-WCZ2</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For the last 30 years or so, well-intentioned toxicologists and environmental scientists have been expressing serious concerns about the harmful effects of chemical pollution on frogs. At the start of his career, environmental scientist Max Lambert wanted to be part of this effort. “It just so happened,” he told us, “that the chemicals [my supervisor] was looking at … were related to sexual development.” Lambert did not set out to become a frog sex scientist, but toxicological methods led him there nonetheless.</p>
+<p>In the late 1990s and early 2000s, toxicological research tended to report “sex-reversed” (males who had become females) and “intersex” frogs (individuals with egg-producing cells in their testes, for example) in highly polluted environments, whether simulated in laboratory experiments or found in the wild. Researchers concluded that chemical exposures cause “sex-reversal,” leading to skewed sex ratios—too many females!—in wild frog populations. Other biologists also noted male-male sexual encounters among chemically-exposed frogs (primarily in the laboratory), and interpreted this same-sex sexual behavior as evidence of chemical-induced harm.</p>
+<p>Lambert’s <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1501065112">2010s research</a> on American green frogs fit right into this pattern. He found that, in suburban ponds, frog populations had more females than males, compared to the frog populations found in more rural ponds. To a toxicologist, the obvious explanation for this pattern would have been chemicals present in suburban waters. And like others before him, Lambert could have assumed that suburban ponds were more polluted than rural ponds, concluded that chemical pollution was “feminizing” male frogs, and left it at that.</p>
+<blockquote>
+<p>Sex changes don’t necessarily preclude reproduction but might alter it in as-yet-undocumented ways.</p>
+</blockquote>
+<p>But Lambert didn’t leave it at that. He noticed that, although it was true that there were more female frogs in suburban ponds, these ponds actually had <em>less</em> skewed sex ratios than rural ponds. The difference in sex ratios he’d observed stemmed from the fact that rural ponds had, in fact, too many males.</p>
+<p>How did these different sex ratios come to be? Lambert started to track frog sex ratios at the egg, tadpole, and adult stages in suburban and rural ponds. What he found was entirely unexpected. Regardless of chemical exposure, American green frog tadpoles were “just <a href="https://peerj.com/articles/6449/">switching sex</a> pretty much everywhere,” which could lead to the presence of egg-producing cells in testes. <a href="https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2021.756476/full">Sex changes at the tadpole stage</a> appeared to result from <a href="https://nautil.us/the-sex-problem-with-sea-turtles-1110822/">temperature changes</a> rather than exposure to hormone-interfering chemicals. Frog populations’ “surplus” of females, meanwhile, seemed to have more to do with higher rates of male mortality rather than male-to-female sex changes. What is more, intersex frogs could still produce offspring, contrary to concerned biologists’ claims that the presence of “transgender” frogs necessarily signaled species decline.</p>
+<p>So as Lambert put it, tadpoles that switch sex are “making it to adulthood, becoming sexually viable, and reproducing successfully. And that’s interesting because a lot of research on … sexual abnormalities suggests those animals are inferior, they can’t mate, no one wants them, they’re going to be unloved for the rest of their lives. [But] they’re probably actually doing just fine out there and you couldn’t really tell the difference anyway.”</p>
+<p>Meanwhile, unbeknownst to Lambert, feminist science studies scholar Melina Packer was engaged in a queer feminist analysis of the science of toxicology. Packer had become increasingly fascinated, and disturbed, by the unarticulated assumptions that supported both toxicological experimentation and anti-toxics advocacy alike. One particularly present assumption focused on hormone-interfering chemicals and their purported effects on sexualized behaviors.</p>
+<p>The assumption goes like this. Toxicologists assumed that male laboratory rats engage in more “aggressive play” behaviors than their female counterparts because, well, boys will be boys. Toxicologists next determined that a male rat exposed to an estrogenic toxicant had been “feminized” (which the toxicologists interpreted as abnormal and harmed) because he appeared to engage in less aggressive play after being exposed. The extrapolation followed, then, that male humans will be feminized by exposure to estrogenic chemicals, and that this feminization is—naturally—a bad thing.</p>
+<p>But is it? Why were scientists assuming that sex and gender are binary? Why, Packer asked, were they proceeding under the assumption that male = masculine = aggressive, while female = feminine = passive? What does “aggressive play” even mean, and how can one recognize it? How can one generalize from a captive, laboratory rodent’s highly constrained behaviors (not to mention their highly contrived genetics!) to wild rodents, never mind humans? And what’s so threatening about supposedly feminized (human) males anyway, especially if feminization means <em>less</em> aggression?</p>
+<p>To be clear, Packer wasn’t arguing that we shouldn’t be concerned about highly <a href="https://heat-death.ghost.io/america-inflamed/">toxic substances permeating our environments</a> and harming our health without our consent, all to chemical corporations’ great profit. But she was certain that there had to be a way both to conduct research and express alarm over toxic environmental pollution, all <em>without</em> naturalizing stereotypical and binary human gender roles across different animal species.</p>
+<p>An eventual cross-disciplinary collaboration between Lambert and Packer made more explicit the queer approach that Lambert’s previous research had, in some ways, implicitly adopted. Lambert had questioned several assumptions that well-meaning biologists had previously left unquestioned, namely: 1.) that queer sex among frogs is unnatural, 2.) that tadpole sex changes are unnatural, and 3.) that intersexed frogs are not only unnatural but also cannot reproduce. In some ways, Lambert’s earlier research on frog sex was squarely situated within dominant narratives. For example, he used terms such as “demasculinized” frogs, which treats variation in sexual expression as a pathology, though such terms are—unfortunately—standard in his field. But ultimately, Lambert remained open to alternative possibilities for frog physiology and sexual behavior.</p>
+<p>So what would the queer feminist approach to frog sex be?</p>
+<p>For one, it would not immediately assume that changes in frog sex are a bad thing in and of themselves. It would instead work to uncover how chemically polluted waters are actually harming organisms (including the people, animals, and plants who ingest the water through osmosis, drinking, eating, swimming, and more). A queer feminist approach also would not frame chemically-poisoned frogs as pitiable freaks of nature, as well-intentioned scientific and media coverage tends to do.</p>
+<p>We cannot emphasize enough that a queer feminist approach <em>does not dismiss the reality that chemical exposures are indeed harmful to frogs, and may even harm reproductive health</em>. Indeed, by paying close attention to this very reality, scientists can focus on the effects of toxic chemical exposures that <em>are</em> demonstrably life-threatening (such as DDT’s <a href="https://daily.jstor.org/the-case-of-the-thinning-eggshells/">weakening of raptor eggshells</a>) while linking those chemical exposures to specific chemical manufacturers and specific governments’ lax chemical regulations.</p>
+<p>Scientists adopting this queer feminist approach also have reason to renew their attention to animals’ basic biology, asking questions like: How and why does temperature have an effect on tadpole sexual expression? Why are male frog mortality rates higher than those of females? And, given that sex changes don’t necessarily preclude reproduction but might alter it in as-yet-undocumented ways, what are the implications of global warming for frogs thriving well into the future?</p>
+<p>Lambert’s openness to the messiness of life took him from being someone who uncritically aligned himself with the mainstream scientific story that male frogs are “feminized” by hormone-interfering chemicals to someone who embraces queer feminist possibilities for frog physiology and sexual behavior, and subsequently finds data that support alternative explanations, thus adding to our knowledge of basic biology. It’s this openness to possibility about the natural world that we hope readers will carry with them as they read “Feminism in the Wild,” and long after.</p>
+<p>As Lambert put it, “Be open to surprises … biology will surprise you. Let the animals tell you something different about the world than what you thought.” He was talking about frogs, of course. But also about the many, many other animals who don’t live quite the way we might expect. <img alt="" src="../images/nautilus-favicon-14_939.png" /></p>
+<p><em>This article was reprinted with permission from</em> <a href="https://thereader.mitpress.mit.edu/the-queer-lives-of-frogs/"><em>MIT Press Reader.</em></a> <em>It was first published in the newsletter</em> <a href="https://heat-death.ghost.io/the-feminists-salmon/"><em>Heat Death</em></a><em>, and is adapted from Kamath and Packer’s book</em> <a href="https://mitpress.mit.edu/9780262049634/feminism-in-the-wild/?ref=heat-death.ghost.io">Feminism in the Wild: How Human Biases Shape Our Understanding of Animal Behavior</a><em>.</em></p>
+<p><em>Explore other stories about sex dynamics in the wild on</em> Nautilus:</p>
+<p><em>“</em><a href="https://nautil.us/overthrowing-the-patriarchy-through-ecstatic-sex-238510/"><em>Overthrowing the Patriarchy Through Ecstatic Sex</em></a><em>”</em><br />
+<em>“</em><a href="https://nautil.us/maybe-playing-dead-will-get-him-to-leave-you-alone-423950/"><em>Maybe Playing Dead Will Get Him to Leave You Alone?</em></a><em>”</em><br />
+<em>“</em><a href="https://nautil.us/why-are-so-many-animals-homosexual-235815/"><em>Why Are So Many Animals Homosexual?</em></a><em>”</em><br />
+<em>“</em><a href="https://nautil.us/these-males-are-cheating-animals-235153/"><em>These Males Are Cheating Animals</em></a><em>”</em><br />
+<em>“</em><a href="https://nautil.us/the-wisdom-of-gay-albatrosses-238536/"><em>The Wisdom of Gay Albatrosses</em></a><em>”</em></p>
+<p><em>Lead image: HermadiyansyahPutra / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

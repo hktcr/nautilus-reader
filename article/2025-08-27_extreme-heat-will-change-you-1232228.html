@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extreme Heat Will Change You | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Extreme Heat Will Change You</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-ZE8B</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The human body is a wonder of adaptations, with clever ways of surviving in even some rather extreme environments. Including fairly extreme heat. Our skin’s blood vessels swell to expel excess warmth. Sweat glands release droplets of water that free heat as they evaporate. And deep inside of us, still more machinery is hard at work to keep the body operating smoothly.</p>
+<p>But as global temperatures rise and summer heatwaves become the norm in more places, scientists and clinicians are grappling with an insidious and increasingly urgent question: What happens when the cells inside our bodies get too hot—and how does that affect long-term health?</p>
+<p>At extreme temperatures, molecules responsible for preventing the harmful effects of heat start to malfunction. Changes also appear at the level of DNA, modifying the genetic material in a way that may be detrimental to health—and possibly even increase the speed at which we age.</p>
+<p>“Heat is a very powerful stressor,” says Pope Moseley, a lung and intensive care physician and biomedical sciences researcher at Arizona State University. The evidence Moseley and fellow scientists are gathering suggests that we’re only just beginning to understand the damaging effects of hyperthemia, he adds. “I think we really underestimate heat.”</p>
+<p>When the temperature in cells rises beyond normal operating levels, proteins—large molecules whose intricate configurations determine their function—begin to unfold. As heat intensifies, more of these structures become misshapen. If left unchecked, this process can hinder the healthy functioning of a cell and eventually <a href="https://www.science.org/doi/10.1126/science.aai7825">cause it to perish</a>.1</p>
+<p>There are mechanisms in place to prevent cells from meeting this untimely demise. Some of the most important players in this process are heat shock proteins: a set of molecules that were discovered as the result of an experimental error.</p>
+<p>It was the early 1960s, and Italian geneticist Ferruccio Ritossa was studying gene expression in the salivary glands of fruit flies. One day, he noticed something strange. He had been studying chromosome “puffs,” segments of DNA where genetic information is being actively transcribed and translated to synthesize proteins, and an unusual pattern of puffs had appeared. As it turned out, a colleague of his had inadvertently <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC248460/">changed the temperature</a> in the incubator where the fruit fly larvae were kept.2</p>
+<blockquote>
+<p>The biological changes lingered long after the mercury dropped.</p>
+</blockquote>
+<p>When Ritossa probed this unexpected finding, he discovered that when the fruit fly larvae’s ambient temperature was increased from the usual 77 degrees Fahrenheit to 86 degrees, something changed. In the regions of DNA where the puffs had been observed, the production of RNA, which works as an intermediary molecule between DNA and proteins, appeared to speed up. This puzzling observation, which Ritossa dubbed the “heat shock response,” proved an early clue that there were foundational changes deep inside the body under hotter conditions.</p>
+<p>About a decade later, a group at the California Institute of Technology <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3273555/">discovered</a> heat shock proteins—the molecules that were the product of this flurry of RNA synthesis.3 Researchers have since learned that heat shock proteins exist in all organisms, from single-celled bacteria to multicellular mammals. Although typically silent, these molecules kick into gear when cells exceed their normal temperatures and help refold unfolded proteins. Heat shock proteins also work in concert with another important cellular process—<a href="https://www.tandfonline.com/doi/full/10.1080/15548627.2015.1009776">autophagy</a>, which removes degraded proteins and other cellular debris—to maintain quality control.4</p>
+<p>But when temperatures get too high, these protective systems may begin to break down.</p>
+<p>At the Human and Environmental Physiology Research Unit at the University of Ottawa, adults young and old come to endure high temperatures for uncomfortably long stretches of time. For a recent experiment, participants were invited to sit in a climate-controlled chamber set at 104 degrees Fahrenheit for nine hours. These conditions “gives us a kind of worse-case scenario” of what someone might experience <a href="https://nautil.us/humid-heat-can-kill-us-much-faster-than-we-thought-415997/">during a heatwave</a>, explains James McCormick, a postdoctoral researcher there.</p>
+<p>To examine the effects of these conditions at the cellular level, McCormick and his colleagues studied blood samples taken before and after the heat exposure. They <a href="https://journals.physiology.org/doi/full/10.1152/japplphysiol.00411.2023">reported</a> that, after the nine hours, immune cells of older adults—those 61 years and older—appeared to be less effective at clearing out damaged proteins (a dysfunctional autophagy response).5 This was evidenced by an increase in a molecule called p62, which tags proteins for removal and is destroyed when autophagy occurs. It appeared to accumulate in older adults’ cells, but not in those of younger adults.</p>
+<p>The older adults’ cells also showed other changes that weren’t seen in their younger counterparts: There was a reduction in some heat shock proteins, as well as signs of increased apoptosis—the process through which the body kills off unwanted or malfunctioning cells—and inflammation. These cellular changes may not have immediate effects, but they make people more vulnerable to negative health impacts, such as heat stroke, when exposed to extreme temperatures for multiple days, according to McCormick.</p>
+<p>McCormick and his colleagues are now investigating what happens during these lengthier heatwaves: In an ongoing experiment, they’ve asked participants to remain in heat chambers for three consecutive days.</p>
+<p>“There are so many different facets of the body, at least at the cellular level, that are affected by heat,” McCormick says. “There are a lot of areas that still need to be explored.”</p>
+<p>Heat may also leavemarks on our cells at a deeper level: our very DNA.</p>
+<p>While our foundational genetic code remains relatively stable throughout life, molecules that decorate the long strands of DNA—and play a critical role in determining which genes become activated—are much more malleable. Their architecture can shift throughout a person’s life, influenced by the environment.</p>
+<p>These epigenetic changes can have a broad range of effects, including disease risk and aging—and can even be passed down to future generations.</p>
+<p>On one hand, researchers have found that, at least in some animals, epigenetic changes can increase resilience to heat. Scientists have discovered that under certain circumstances—such as when temperatures gradually increase over time—heat can lead to changes that boost the responsiveness of heat shock proteins, enabling animals such as ants, rats, and humans to <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9529784/">respond more efficiently</a> to subsequent exposures to heat.6</p>
+<blockquote>
+<p>Heat may also leave marks on our cells at a deeper level: our very DNA.</p>
+</blockquote>
+<p>However, when temperatures get too high too fast, problems emerge. Thomas Clanton, a professor of applied physiology and kinesiology at the University of Florida, and his team have observed that mice that have undergone heat stroke—induced through intense exercise at high temperatures—exhibit differences in methylation, the process by which chemicals known as methyl groups are tagged onto DNA sequences, which, in turn, affects how genes are expressed. In 2020, Clanton and colleagues <a href="https://physoc.onlinelibrary.wiley.com/doi/10.1113/JP280518">reported</a> that the immune cells of rodents who experienced heat stroke showed different methylation patterns than the animals who had not.7 Thirty days after recovering from heat stroke, the animals’ cells still showed differences in the expression of heat shock proteins, showing that the biological changes lingered long after the mercury dropped.</p>
+<p>And, when these animals were exposed to endotoxins, molecules found on the outer coatings of bacteria, at the month mark, they mounted weaker immune responses than their counterparts. Which suggests that hyperthermia may lead to dysfunction in the immune system as well. There are hints of this in humans: Some studies have reported that infections are particularly common in people who are hospitalized for heat stroke, suggesting that hyperthermia may lead to immunosuppression, according to Clanton. But more research is still needed, he adds.</p>
+<p>Seeing such evidence of heat-related epigenetic changes in mice and other animals, Eun Young Choi, a postdoctoral associate, and Jennifer Ailshire, a professor of gerontology and sociology, both at the University of Southern California, set out to examine whether extreme temperatures may also affect the human epigenome.</p>
+<p>In a <a href="https://www.science.org/doi/10.1126/sciadv.adr0616">study</a> published earlier this year, the duo reported that, after analyzing blood samples from more than 3,600 adults over the age of 56 across the United States, those who had experienced long-term exposures to extreme temperatures showed epigenetic changes indicative of accelerated aging.8</p>
+<p>Aging leads to changes in DNA methylation, and scientists have used these patterns to develop so-called “epigenetic clocks” that can predict a person’s disease risk and lifespan. Residents of places with 140 or more days of temperatures exceeding 90 degrees Fahrenheit per year experienced more than a year of additional biological aging compared to those living in places with fewer than 10 days of that sort of heat. These differences persisted even after taking into account other factors, such as socioeconomic status, physical activity, and smoking and alcohol use.</p>
+<p>How these signs of molecular aging link to specific health outcomes remains to be seen—but these results are in line with other studies that have linked higher temperatures to more rapid aging at the molecular level.</p>
+<p>“The key message from our findings is that heat could be affecting healthy populations in ways that we can’t see,” Choi says. On levels that remain hidden.</p>
+<p>Many unanswered questions remain when it comes to the molecular effects of heat stress in the human body. But researchers hope that the knowledge being accumulated will lead to new interventions that help improve heat resilience as our world warms.</p>
+<p>Studies show, for example, that there are ways to increase heat tolerance. One method is through exercise. During heat stroke, the reduction in blood flow to the gut can cause the intestinal wall to become leaky, allowing endotoxins to leak out into the blood stream, triggering an immune response that can turn deadly. Moseley and his colleagues <a href="https://journals.physiology.org/doi/full/10.1152/ajpregu.00039.2011">have found</a> that exercising in reasonable heat—safely and for limited periods—activates the release of heat shock proteins and can tighten the lining of the gut, lessening these harmful impacts of extreme heat.9 But physical exertion during heatwaves can be dangerous, Moseley says. “If you’re in Phoenix and you decide you want to exercise, but it’s 105 degrees outside, that’s not a good idea.” The line can be fine between heat-training and overheating.</p>
+<p>Researchers are also exploring whether there might be drugs that can stimulate cells’ protective mechanisms against heat. This is very much in its infancy, because scientists are still trying to better understand what happens to cellular processes under extreme conditions, McCormick says. “Everyone’s looking for some kind of breakthrough to try to protect people.” Especially as summers continue to grow hotter.</p>
+<p>While interventions to improve heat resilience at the individual level—as well as efforts to build better, safer infrastructure—might someday help keep people cool during heatwaves, these biological and built solutions have their limits. To circumvent the worst outcomes for our warming planet, humans will ultimately need to address the causes of warming, rather than just its consequences, Moseley says. We’re trying to adapt our way out of extreme heat, he adds. “But we can’t.” <img alt="" src="../images/nautilus-favicon-14_1006.png" /></p>
+<p><strong>References</strong></p>
+<ol>
+<li>
+<p>Leuenberger, P., <em>et al.</em> Cell-wide analysis of protein thermal unfolding reveals determinants of thermostability. <em>Science</em> <strong>6327</strong>, eaai7825 (2017).</p>
+</li>
+<li>
+<p>Ritossa, F. Discovery of the heat shock response. <em>Cell Stress Chaperones</em> <strong>2</strong>, 97-98 (1996).</p>
+</li>
+<li>
+<p>De Maio, A., Santoro, M.G., Tanguay, R.M., &amp; Hightower, L.E. Ferruccio Ritossa’s scientific legacy 50 years after his discovery of the heat shock response: a new view of biology, a new society, and a new journal. <em>Cell Stress Chaperones</em> <strong>17</strong>, 139-143 (2012).</p>
+</li>
+<li>
+<p>Dokladny, K., Myers, O.B., &amp; Moseley, P.L. Heat shock response and autophagy—cooperation and control. <em>Autophagy</em> <strong>11</strong>, 200-213 (2014).</p>
+</li>
+<li>
+<p>McCormick, J., <em>et al.</em> Physiological responses to 9 hours of heat exposure in young and older adults. Part II: Autophagy and the acute cellular stress response. <em>Journal of Applied Physiology</em> <strong>135</strong>, 688-695 (2023).</p>
+</li>
+<li>
+<p>Murray, K.O., Clanton, T.L., &amp; Horowitz, M. Epigenetic responses to heat: From adaptation to maladaptation. <em>Experimental Physiology</em> <strong>107</strong>, 1144-1158 (2022).</p>
+</li>
+<li>
+<p>Murray, K.O., <em>et al.</em> Exertional heat stroke leads to concurrent long-term epigenetic memory, immunosuppression, and altered heat shock response in female mice. <em>The Journal of Physiology</em> <strong>599</strong>, 119-141 (2020).</p>
+</li>
+<li>
+<p>Choi, E.Y. &amp; Ailshire, J.A. Ambient outdoor heat and accelerated epigenetic aging among older adults in the U.S. <em>Science Advances</em> <strong>11</strong> (2025).</p>
+</li>
+<li>
+<p>Kuennen, M., <em>et al.</em> Thermotolerance and heat acclimation may share a common mechanism in humans. <em>Regulatory, Integrative, and Comparative Physiology</em> <strong>301</strong>, R524-R533 (2011).</p>
+</li>
+</ol>
+<p><em>Lead image by Tasnuva Elahi; with images by Quality Stock Arts and Igrapop / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

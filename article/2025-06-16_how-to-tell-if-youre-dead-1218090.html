@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How To Tell If You’re Dead - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How To Tell If You’re Dead - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7XMB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Jimo Borjigin never intended to study death. Back in the mid-2010s, the  consciousness researcher at the University of Michigan Medical School in Ann Arbor was instead interested in circadian rhythms, the internal cycles that regulate our physical, mental, and behavioral states throughout each day. The circadian clock is a bit of a black box, Borjigin says, so to study it she and her team developed an automated system to continuously monitor neurotransmitters that regulate circadian rhythms in rats.</p>
+<p>Over the course of her research, the scientists tracked the animals for weeks at a time, and Borjigin began to notice something unusual. A few of the animals died while under observation, and when they did, the researchers’ sensors recorded a massive and unexpected <a href="https://www.pnas.org/doi/full/10.1073/pnas.1308285110">spike in serotonin</a> for up to 30 seconds after their hearts stopped beating. In humans, <a href="https://www.uptodate.com/contents/serotonin-syndrome-serotonin-toxicity/print">serotonin dysregulation</a> has been linked to intense hallucinations, but Borjigin didn’t know what to make of such a finding in the context of rats. Or in death. Like any good scientist, she looked to the literature.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>“I was sure we must know everything there is about the death process already, but when I went looking for evidence of this serotonin spike, I found nothing,” she says. “Looking into the research on death more broadly, I was shocked at how little we truly understand about this thing that happens to every one of us.”</p>
+<blockquote>
+<p>“Cadavers are often in a state of reversibility for hours, if not days, postmortem.”</p>
+</blockquote>
+<p>The experience prompted a shift in Borjigin’s research focus, and today she studies consciousness in relation to death and <a href="https://nautil.us/the-afterlife-is-in-our-heads-240441/">near-death experiences</a>. In 2023, she and her colleagues published a <a href="https://www.pnas.org/doi/full/10.1073/pnas.2216268120">contentious finding</a>: that humans, like her rats, also experience a dramatic shift in brain activity when we die. The team monitored four comatose patients as they were taken off life support, and in two cases, detected a spike in gamma waves—the fastest type of brain wave, most active during periods of intense focus or problem solving—in a part of the brain correlated with dreaming, visual hallucinations, and altered states of consciousness. “To me, this suggests a covert consciousness that is not usually observed by bystanders who might otherwise look at a person and think they are unresponsive,” she says. “If that’s true, it definitely makes me think we need to revisit our definition of death.”</p>
+<p>While Borjigin acknowledges that her work is preliminary, her observations and others like them show just how blurry the line between life and death has become, and how much science still stands to learn about such a pivotal event. As technological advances increasingly allow researchers to study death—including interventions that now allow for the use of so-called living cadavers in scientific research—so too have they necessitated new, oftentimes fraught conversations about the nature of death, its biological and societal underpinnings, and whether existing legal definitions are in alignment with current medical standards.</p>
+<p>“The somewhat contentious space that we’re in right now is that we have different ways that we can say that someone is dead, and not all of them agree with each other. There are legal definitions and medical ones, social definitions, and many different religious interpretations,” says L. Syd M. Johnson, a neuroethicist at SUNY Upstate Medical University in Syracuse. “It’s a surprisingly complicated question, but that also makes this an exciting time to be considering it.”</p>
+<p>Across many cultures, life has been linked not to our bodies, but to intangible souls, and so questions of death remained most squarely in the purview of religious representatives. Early definitions associated with Western religions in the mid 1700s timestamped death using the soul’s departure from the body. It wasn’t until about a century later that the first biological description of death—the cessation of heart action and breathing—appeared in a medical text, 1873’s <em>Manual of Medical Jurisprudence</em>, written by Alfred Swaine Taylor, a British toxicologist and medical writer. This so-called cardiopulmonary concept dominated scientific thinking for the next century, and remains the most common criteria by which doctors declare someone dead today.</p>
+<p>But medical advances, including interventions such as CPR and organ transplantation and the emergence of technologies including ventilators and defibrillators, have increasingly clouded that definition. People who might once have died from drowning or heart failure can now be resuscitated, receive an organ transplant, or even have their circulation artificially maintained. Death, many scientists now argue, is better thought of not as an absolute, but as a complex and evolving process that can sometimes be reversed with proper care.</p>
+<p>“Irreversibility is just a reflection of a lack of medical treatments, which we’re developing more of all the time,” says Sam Parnia, a clinician at NYU Langone Medical Center in New York City who focuses on cardiac arrest. “We see now that death is a continuum, and cadavers are often in a state of reversibility for hours, if not days postmortem.”</p>
+<p>The emergence of neuroscience as a <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6939484">discipline</a> prompted even more rethinking on death. In 1968, a committee based at Harvard University met to establish a definition centered around neurological criteria. In their <a href="https://jamanetwork.com/journals/jama/article-abstract/340177">final report</a>, the group described death, in part, as an “irreversible coma,” a term they used somewhat interchangeably with what we would today refer to as brain death.</p>
+<p><img alt="" src="../images/Heidt_BREAKER.png" /></p>
+<p><em>Illustration by Ellen Weinstein</em></p>
+<p>Not everyone <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/hast.943">agreed with this approach</a>, with one researcher <a href="https://link.springer.com/article/10.1007/s12028-018-0579-8">calling the recommendations</a> “a bane for bioethicists from day one.” At the time, the question of when to stop providing life support was not clearly differentiated from the question of when a patient was dead, and the group’s chair, Harvard anesthesiologist Henry Beecher, referenced a hypothetical future in which “hopelessly unconscious” patients would take up space in hospitals at enormous cost. Others were hesitant to declare death too soon, however, worried that premature declarations could be rushed to kickstart the harvesting of organs for donation.</p>
+<p>Some of this contention was settled with the passing of the <a href="https://www.uniformlaws.org/committees/community-home?CommunityKey=155faf5d-03c2-4027-99ba-ee4c99019d6c">Uniform Determination of Death Act</a> (UDDA) in 1981, a model United States law intended to help states craft their own unified policies. The UDDA sought to bridge the cardiopulmonary and brain-based concepts, defining death as <em>either</em> the irreversible cessation of circulatory and respiratory functions <em>or</em> the irreversible cessation of all functions of the entire brain, including the brain stem. This latter point acknowledges that it’s the brainstem that controls essential, automatic functions such as breathing, heart rate, and blood pressure, and its inclusion places the UDDA more in line with a “whole-brain” approach rather than a “higher brain” model focusing on consciousness as a hallmark of life. Today, medical professionals use UDDA criteria when declaring someone dead, kickstarting the legal, social, and clinical processes that come next, including organ donation, mourning rituals, and the settling of a person’s personal affairs.</p>
+<p>The UDDA has generally been successful in its purpose for the past 40 years, says David Magnus, the director of the Stanford Center for Biomedical Ethics in California, even though it too has garnered its share of controversy. “The UDDA is an amazingly successful policy—tens of millions of people die each year, and we’re generally not arguing over that because of the criteria we have,” he says. “Having said that, a feeling has grown over time that there’s a lack of fit between the actual language of the law and the details of clinical practice, such that we’re now reconsidering our definitions once again.”</p>
+<p>Many of the arguments around how we define death stem from a lack of consensus over what tests or metrics should be used to verify that death has occurred, and how much philosophy should factor into medical or legal decisions.</p>
+<p>For example, since the passing of the UDDA, researchers have found that the hypothalamus—a brain region that regulates appetite, sleep, and hormone release—often continues to function for longer than the rest of the brain after death. This prolonged hypothalamic activity results from that region receiving some blood flow from a different source than the rest of the brain. While most blood flow makes its way to the brain from the carotid arteries in the neck, the hypothalamus is also supplied via a network of arteries at the base of the brain called the circle of Willis. Medical professionals largely agree that a functioning hypothalamus isn’t a meaningful sign of life, but some physicians have suggested that an additional test for this should be added to the criteria for declaring death. Doing so would necessitate rewriting the UDDA, however, and its reference to a cessation of function across the entire brain.</p>
+<p>Piotr Nowak, a bioethicist at Jagiellonian University in Kraków, Poland, notes that there are also several cases over the past few decades that show how ambiguities in laws about determining clinical death can create confusion. Many questions involve considerations of consciousness—a more philosophical aspect that does not come, yet, with its own set of medical tests.</p>
+<p>Among the most famous of these cases involves <a href="https://muse.jhu.edu/article/839286">Jahi McMath</a>, a California teenager who was declared brain-dead in 2013 at the age of 13 following complications from a tonsillectomy. Her family resisted the declaration, and McMath was kept on life support for another four years, continuing to develop, undergoing puberty, and appearing to demonstrate some responsive behaviors, such as small movements and sporadic changes in her heart rate, before dying from liver failure in 2018. McMath’s story echoes others in which people have regained consciousness following long periods of brain death, alongside animal studies showing that at least some brain function <a href="https://www.nature.com/articles/s41586-019-1099-1">can be restored</a> in pigs hours after death. “It’s clear our understanding of our own mind remains incomplete in ways that make medical and policy choices difficult,” Nowak says.</p>
+<blockquote>
+<p>“We still have no idea how it is that something like a brain cell can create something like a thought.”</p>
+</blockquote>
+<p>In response to the changing medical landscape, including clinical innovations and what they have revealed about the human brain, bioethicists, medical professionals, lawyers, representatives from advocacy groups, and others have been coming together to rethink what brain death actually means. One group, called the <a href="https://jamanetwork.com/journals/jama/article-abstract/2769149">World Brain Death Project</a>, has been working to establish an international framework for brain death, while in the U.S., a group met in 2021 to gauge whether an update to the UDDA might now be needed. The group agreed on the necessity of an update but failed to reach a universal agreement, and today, the law remains as originally written.</p>
+<p>Even so, Magnus, who participated in the discussions, says the meetings were productive and worthwhile in bringing together the leading minds pondering the question of death and how we define it. Magnus, for example, was able to introduce his own definition, called the <a href="https://www.neurology.org/doi/10.1212/wnl.0000000000200024">neuro-respiratory concept</a>, that he says could clarify some of the current confusion. Under these criteria, a person can be declared dead if they suffer a brain injury “leading to permanent loss of the capacity for consciousness, the ability to breathe spontaneously, and brainstem reflexes”—wording that Magnus says would bring the law into alignment with the most common criteria for declaring deaths used by medical professionals today.</p>
+<p>Such discussions are particularly critical right now, he adds, because the advent of successful experimentation with brain-dead bodies in fields as disparate as organ transplantation and drug delivery has returned this question to the public spotlight. In 2016, for example, a company called Bioquark announced a controversial plan to regenerate neurons in the brains of recently-deceased patients by injecting their brains with stem cells and other materials. While the company’s attempts were ultimately unsuccessful, the underlying work lives on in the research of one of its original physicians, who has since carried out similar experiments on roughly 30 cadavers as recently as last year. And in 2024, a pig liver was successfully transplanted into a living cadaver—with permission from the clinically dead person’s family—and continued to function for 10 days before being removed.</p>
+<p>“There are all the medical and legal reasons we need a standardized definition of death that at least most of us can agree on, but there’s also an ethical reason when it comes to communicating with families and with the public,” Magnus says. “When you’re working in such a fraught area as this, a lack of clarity can lead to some murky ethical choices that we need to be able to defend.”</p>
+<p>Some believe that sitting with uncertainty about when death occurs may ultimately allow us to gain new insights into this process and transformation that we might not see otherwise.</p>
+<p>Steven Luper, a professor of philosophy at Trinity University in San Antonio, Texas, says that there’s a growing sentiment that the moment of death—perhaps the most personal experience there is—should be left to each of us to decide and communicate through a family member, religious figure, or end of life doula. “The goal for uniform criteria is to really help out the medical profession and the law, and some people have said that’s not a good enough reason to deprive people of their liberty,” he says. “Rather, some believe we should allow each person to define their own interpretation based on their personal narratives and world views.”</p>
+<p>Researchers are also increasingly interested in bringing a scientific perspective to debates long considered the realm of philosophy, particularly around the idea of consciousness, which is inextricably linked to questions of life, identity, and death. One barrier to this type of research is the lack of reliable metrics for studying consciousness. In fact, Parnia notes that today, there is no <a href="https://nautil.us/inside-the-big-bet-on-consciousness-1207750/?_sp=96c2a4d1-823f-4f9c-ae22-7057df33b7de.1746656259171">definitive evidence</a> that consciousness even emerges from the brain. “We still have no idea how it is that something like a brain cell can create something like a thought,” he says.</p>
+<p>In a large, <a href="https://pubmed.ncbi.nlm.nih.gov/37423492/">multicenter study</a> published in 2023, Parnia and his colleagues analyzed patterns of brain activity—including delta, theta, and alpha waves, which together dictate brain activity and various states of arousal—in patients experiencing cardiac arrest, which Parnia says is biologically “indistinguishable from death.” The results suggest that consciousness and awareness may occur as long as an hour after a person’s heart has stopped beating. Furthermore, the brain wave patterns the team detected using electroencephalography (EEG) may be the first reliable biomarkers capable of measuring consciousness over time.</p>
+<p>Charlotte Martial, a neuroscientist in the Coma Science Group at the University of Liège in Belgium, is similarly interested in what we can learn about death from studying moments when people are potentially conscious but largely unresponsive, such as when they are <a href="https://nautil.us/under-anesthesia-where-do-our-minds-go-238501/">under general anesthesia</a> or experiencing cardiac arrest. These types of experiences, she says, can function as a sort of proxy for studying <a href="https://linkinghub.elsevier.com/retrieve/pii/S1364-6613(19)30312-2">the moments surrounding death</a> under laboratory conditions, rather than relying on isolated case studies with small numbers of patients. Currently, Martial is probing whether <a href="https://nautil.us/out-of-your-head-791745/">psychedelic experiences</a> can <a href="https://www.nature.com/articles/s41582-025-01072-z">fulfill this role, too</a>, by inducing states similar to near-death experiences that patients can then share details about with scientists.</p>
+<p>“Medicine has defined these criteria for brain death, but we don’t yet understand everything about the subjective experience of that,” she says, adding that developing empirical methods for studying something like a near-death experience could help scientists better understand the distinctions between consciousness and responsiveness, and what that means for our clinical concepts of death.</p>
+<p>Borjigin’s early discoveries about the potentially altered states in her lab rats’ brains during death continue to inspire her search for understanding. One of her working hypotheses suggests that perhaps the brain takes a more active role in how death progresses than we give it credit for. But furthering her research won’t be easy. Borjigin and others continue to face a scarcity of funding and a lot of misconceptions about the nature and purpose of their research. Death remains a contentious and hard-to-define process.</p>
+<p>Still, understanding what happens to each of us in our final moments, crossing the borderlands between life and death, would seem a worthy inquiry. “Even as we’re still trying to wrap our own heads around it,” Borjigin says, “it seems undeniable to me that something worth looking at is going on here. <img alt="" src="../images/nautilus-favicon-14_1118.png" /></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

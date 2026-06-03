@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Horses Make Two Sounds at Once - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Horses Make Two Sounds at Once - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-26
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-5BMB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We’ve all heard a dramatic horse whinny in an exciting scene in a movie, or in <em>Bridgerton</em> if that’s your thing. These whinnies include both low throaty notes and higher-pitched sounds. A <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(26)00004-7">study</a> published earlier this week in <em>Current Biology</em> explored the vocal mechanics behind these complex horse whinnies. They found that a single whinny can include simultaneous low and high sounds, suggesting that horses have a richer spectrum of calls than other mammals.</p>
+<p>The low sounds in horse whinnies are at a frequency of about 200 Hz, like <a href="https://www.rapidtables.com/tools/tone-generator.html?f=200">this tone</a>, while the high sounds are in the bird-song range, exceeding 1,000 Hz like <a href="https://www.rapidtables.com/tools/tone-generator.html?f=1000">this tone</a>. The low sounds have been readily attributed to vibrations of vocal tissue in the larynx, akin to how human speech is produced. Folded vocal cords in both humans and horses vibrate when air passes through them. But the more inscrutable high sounds in whinnies were unexplained until now.</p>
+<p>Researchers from Denmark, France, Switzerland, and Austria used both live horses and larynxes removed from dead horses to analyze their acoustics. “Solving this biomechanical puzzle required combining approaches from veterinary medicine to acoustic physics,” explained lead study author and behavioral ecologist <a href="https://www1.bio.ku.dk/kalender/phd/phd-defence-romain-lefvre_/">Romain Lefèvre</a>, then a Ph.D. student at the University of Copenhagen in a <a href="https://www.eurekalert.org/news-releases/1116037?">press release</a>.</p>
+<p><strong>Read more: “<a href="https://nautil.us/i-know-how-the-caged-bird-jams-466036/">I Know How the Caged Bird Jams</a>”</strong></p>
+<p>By blowing helium, which facilitates a higher speed of sound than air, through the excised larynxes, the researchers demonstrated the distinction between the two overlapping sounds of a whinny. The mysterious high sounds in whinnies proved to be laryngeal whistles. Known from some rodents, these whistles are produced from turbulent airstreams moving through the larynx. Horses are the first large mammal found to make such sounds, and the only animal known to do so while also also producing sounds from vocal fold vibrations.</p>
+<p>When helium passed through the larynx, the pitch of the whistle went up, while the vocal cord vibration sound stayed the same. “The frequency shift was immediately obvious, and we knew we’d solved the mystery,” said study author and cognitive scientist <a href="https://becogbio.univie.ac.at/people/scientific-staff/tecumseh-fitch/">William Tecumseh Fitch</a> of the University of Vienna. “We were thrilled!”</p>
+<p>The study authors hypothesize that the complex horse whinny, consisting of overlapping sounds, likely evolved for simultaneous communication of multiple messages. What those messages consist of remains to be determined. Przewalski’s horses, close cousins of domestic horses, also make high whistling sounds, while the more distantly related donkeys and zebras do not.</p>
+<p>“We now finally know how the two fundamental frequencies that make up a whinny are produced by horses,” said study author Elodie Briefer of the University of Copenhagen. “In the past, we found that these two frequencies are important for horses, as they convey different messages about the horses’ own emotions. We now have compelling evidence that they are also produced through distinct mechanisms."</p>
+<p>Finally, we’re a step closer to understanding the message coming straight from the horse’s mouth. <img alt="" src="../images/nautilus-favicon-14_367.png" /></p>
+<p>Enjoying Nautilus? Subscribe to our free newsletter.</p>
+<p><em>Lead photo by Elodie Briefer</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

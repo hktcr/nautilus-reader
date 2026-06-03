@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chimps Can Change Their Minds. Why Can’t We? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Chimps Can Change Their Minds. Why Can’t We?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-O8U4</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Humans aren’t always the rational creatures we like to think we are. If a belief helps us feel good, we often hold onto it—even in the face of evidence to the contrary. Sometimes, we manage to spin new information in ways that <a href="https://nautil.us/why-our-brains-crave-ideology-1203194/">will support our belief</a> rather than change our minds. Just watch any episode of <em>Seinfeld</em>: This human weakness is one of the biggest drivers of the show's comic relief.</p>
+<p>But the ability to change one’s mind may be more widespread than we thought. Even chimps—our closest relatives—can do it, according to a new <a href="https://www.science.org/doi/pdf/10.1126/science.adq5229">study</a> in <em>Comparative Cognition</em>. The researchers, from the United States, Europe, and Uganda, tested whether chimps were able to evaluate different kinds of evidence about where they would find a piece of food. What they found is that the chimps could rationally weigh new and old evidence and change their assumptions. Maybe humans should take a cue from their cousins, in that case.</p>
+<p>Thinking about and revising one’s beliefs are forms of meta-cognition—thinking about thinking—and whether nonhuman animals can do this without language has been the subject of a longstanding debate. It’s a question that stretches back at least to Charles Darwin, who, in his revolutionary <em>The Descent of Man</em>, warned that for evolutionary theory to hold up, nonhuman apes would have to possess certain forms of intelligence.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/reason-wont-save-us-237580/"><strong>Reason Won’t Save Us</strong></a><strong>”</strong></p>
+<p>In a series of five experiments, the scientists behind the new paper presented groups of 15 to 23 chimpanzees living at the Ngamba Island Chimpanzee Sanctuary in Uganda with pieces of food and then hid the food in different locations in identical containers. The chimps were given sequential cues about these hiding places—some stronger than others—and prompted to make choices. For example, in the first experiment, actually seeing the food in a container was classified as strong, while hearing the food rattling around in a container was weak. After the chimps made a first choice, they were prompted with new evidence—weak or strong, novel or redundant—and allowed to revise their choice or stick with the original decision.</p>
+<p>What they found is that the chimps made rational choices two or three times more often than non-rational ones in all the treat-finding scenarios. The results show the chimps tended to assess the quality of the evidence, were sensitive not only to the type but also the quantity of evidence, and were able to learn to avoid misleading evidence. “Chimpanzees did not attribute a fixed value to each type of evidence; instead, they weighed the relative strength of evidence,” the authors write.</p>
+<p>Are these chimps more rational than George Costanza? Quite possibly. At the very least, the findings are a reminder that changing one’s mind need not always be so difficult.  <img alt="" src="../images/nautilus-favicon-14_842.png" /></p>
+<p><strong>More from</strong> <strong><em>Nautilus</em></strong> <strong>about chimp cognition:</strong></p>
+<p><strong>“<a href="https://nautil.us/chimps-and-the-zen-of-falling-water-235527/">Chimps and the Zen of Falling Water</a>”</strong></p>
+<p><strong>“<a href="https://nautil.us/empathy-morality-community-cultureapes-have-it-all-234306/">Empathy, Morality, Community, Culture—Chimps Have It All</a>”</strong> Primatologist Frans de Waal takes exception with human exceptionalism.</p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a><em>.</em></p>
+<p><em>Lead image: KensCanning / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How All Those Forever Chemicals End Up on Your Plate | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How All Those Forever Chemicals End Up on Your Plate</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-1PU6</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>After teeny ocean organisms pick up lingering forever chemicals swirling in water, these man-made substances travel up the food chain—from, say, krill, to anchovies, to the tuna that we place in our grocery carts.</p>
+<p>These chemicals, also known as per- and polyfluoroalkyl substances or PFAS, are used in more than 200 categories of manufactured products. They’re valued for their water-repelling abilities and heat resistance—but they also stick around in soil, air and water across the globe and don’t degrade over time due to their super strong chemical bonds. Scientists have documented PFAS in the environment in regions as remote as <a href="https://www.nature.com/articles/s43247-025-02535-3">Antarctica</a>.</p>
+<p>Now, scientists have found that concentrations of some PFAS double on average each time the substances creep up one rung of the food chain, findings <a href="https://www.nature.com/articles/s41467-025-65746-4">reported</a> in <em>Nature Communications</em>. These increases seem to occur when animals absorb the compounds quicker than they can metabolize or expel them.</p>
+<p>An international team of scientists analyzed how PFAS moved across more than 100 food webs spanning land and water. Gathering data from 64 studies, they conducted the first meta-analysis of data on PFAS accumulation across food chains around the world. The researchers hoped to clear up inconsistencies in past research, which has pointed to both <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304389420316046?via%3Dihub">minor amounts</a> of PFAS accumulating in some food webs and <a href="https://pubs.acs.org/doi/10.1021/acs.est.3c02361">massive</a> build-up in others.</p>
+<p><strong>Read more: <a href="https://nautil.us/can-humanity-stem-the-plastic-tide-1230748/">“Can Humanity Stem the Plastic Tide?”</a></strong></p>
+<p>The researchers traced levels of 72 different types of PFAS, and found that increases from one rung of the food chain to the next depend on the substance. For example, F-53B, a chemical used to manufacture some machine parts, showed the highest average increase—around three-fold from prey to predator. F-53B was designed as a less toxic alternative to a substance that’s restricted or banned in many countries. But like several of these new alternatives, its concentration multiplied as it stepped up the food chain at a greater rate than the predecessor.</p>
+<p>“Given what we know about PFAS toxicity from other studies, these extreme accumulation rates in top predators suggest serious health risks,” said paper co-author Lorenzo Ricolfi, a Ph.D. student who studies PFAS contamination at the University of New South Wales in Australia, in a <a href="https://www.unsw.edu.au/newsroom/news/2025/12/pfas-concentrations-can-double-with-every-step-up-the-food-chain">statement</a>. “This creates a cascading ecological risk: apex predators face disproportionately high exposure even in relatively low-contaminated environments.”</p>
+<p>Scientists have <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7906952/">linked</a> PFAS exposure in humans to a whole host of conditions, including liver disease, kidney disease and cancer, but no definitive evidence that it causes these diseases exists yet. Still, PFAS have been detected in blood samples taken from <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9035516/">people</a> and <a href="https://www.ewg.org/interactive-maps/pfas_in_wildlife/map/">animals</a> around the world.</p>
+<p>Ricolfi and his co-authors hope this research helps propel changes in policy governing the kinds of PFAS that accumulate most between predator and prey, especially the unregulated chemicals examined in the paper. And with these results, they’re particularly concerned about the newer chemicals brought to market to substitute for banned ones.</p>
+<p>“Urgent research into health impacts of these new chemicals is needed before they become as ubiquitous and problematic as the PFAS they're replacing,” Ricolfi said. <img alt="" src="../images/nautilus-favicon-14_617.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: William Buelow Gould / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

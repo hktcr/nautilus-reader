@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conspiracy Theorists Can Be Deprogrammed - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Conspiracy Theorists Can Be Deprogrammed - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-J7KY</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Humans love their conspiracy theories. The Apollo moon landings were faked by covert agents in NASA to broadcast America's technological prowess over Soviet Russia. (It was too expensive and risky to actually go to the moon.) Big Pharma covers up cures for diseases to boost their bottom lines with ineffective vaccines. The United States government secretly allowed 9/11 to take place to justify its preplanned war on the Middle East. Area 51 in Nevada is a secret military base that hides alien spaceships. Actual aliens, too.</p>
+<p>As we've heard time and again, conspiracies are a devil to untangle from <a href="https://nautil.us/novak-djokovic-and-the-healing-water-crystals-238422/">people's identities and what they want to believe</a> about the world. Anyone trying to contest them is seen as part of the Deep State cover-up. Many interventions have been tried over the decades—offering counterarguments or priming participants to engage in analytical thinking—but a 2023 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10075392/">review</a> of 25 studies found that most existing methods of changing conspiracy beliefs don't work.</p>
+<p>This year, though, two studies conducted by psychologists from MIT and Cornell University suggest that when artificial intelligence presents sufficient counterfactual evidence, believers are more apt to change their minds. The first study, <a href="https://www.science.org/doi/10.1126/science.adq1814">published in <em>Science</em></a>, drew from data from over 1,000 participants. The researchers found that subjects reduced their belief in their chosen conspiracy by, on average, 20 percent after conversing with ChatGPT4-Turbo, a large language model built by OpenAI that had absorbed knowledge from the Internet through April 2023.</p>
+<blockquote>
+<p>The chatbot was transformative. People now doubted their conspiracy theory.</p>
+</blockquote>
+<p>The fact that ChatGPT "knows so much, that it has memorized the internet, it can leverage all of these very specific facts to help people change their beliefs," says Thomas Costello, lead author of both studies, an assistant professor of psychology at American University and research associate at the MIT Sloan School of Management.</p>
+<p>The researchers didn't plant conspiracy theories in participants' heads; rather, the participants were asked to imagine and cite an example where a powerful group was acting secretly and with malevolent intent. If the participant’s answer fit the mold of conspiracy theory, they were asked to rate the degree to which they believed in the theory on a scale of 1 to 10. Then ChatGPT went to work to dissuade them, using counterfactual evidence and Socratic questioning, all the while building rapport with the “believers.” The AI conversed in a friendly rather than confrontational manner. Following the conversation, the participant was asked to rate their belief in the conspiracy theory again, with follow up after two months.</p>
+<p>For a quarter of participants, a conversation with the chatbot was transformative. Their belief in the conspiracy theory fell below 5 on a scale of 1 to 10, which meant they went from believing in the theory to doubting it. Another quarter of participants simply ended up feeling more tentative about their belief. “For the people who were very versed in their conspiracy theory, we still got an effect on average,” says Costello of the AI intervention.</p>
+<p>Costello's and colleagues' initial study got a lot of media coverage when it was released. One <a href="https://www.washingtonpost.com/opinions/2025/02/26/ai-research-conspiracy-theories/">intriguing take</a> was a <em>Washington Post</em> column by cognitive psychologist and poker champion <a href="https://nautil.us/the-resulting-fallacy-is-ruining-your-decisions-236901/">Annie Duke</a>. She wrote AI worked so well at changing study participants' minds because they "were not interacting with a human, which, I suspect, didn’t trigger identity in the same way, allowing the participants to be more open-minded." When you’re interacting with AI, she continued, "you’re not arguing with a human being whom you might be standing in opposition to, which could cause you to be less open-minded."</p>
+<p>I asked Costello if people could be obstacles to convincing others to change their minds, and if the neutral robot is more effective. Costello said he heard that theme often after his initial paper was published. So, he and his colleagues decided to test it.</p>
+<blockquote>
+<p>The idea that AI was effective because it was free of human bias was not born out.</p>
+</blockquote>
+<p>In that follow-up study, currently under peer review, study participants were told that AI would try to persuade them not to believe the conspiracy theory. Participants were also told to try and convince the AI that their conspiracy theory was true, and AI would in turn try and convince them of the error of their ways. The explicitly adversarial frames to these interchanges, the authors believed, would dispel the idea that the AI was unbiased. Like a human, AI was driven to win the argument.</p>
+<p>But this difference didn't affect the findings, as participants appeared to trust the information, regardless of the chatbot’s intentions. The point that people themselves tarnished information, Costello says, was not born out by the study's findings. "Our finding that the experiment works just as well when the participant thinks they're talking to another person indicates that people are changing their minds in response to information, rather than primarily because they trust AI."</p>
+<p>So, do moon-landing conspiracists simply need to sit down with ChatGPT to be convinced their theory is bollocks? If only it were that easy.</p>
+<p>Kerem Oktar, a cognitive scientist at Princeton, who studies society and beliefs, echoes the point that beliefs run to the core of people's beings. A "functional belief," for instance, ties people to their communities, families, religions, and <a href="https://nautil.us/why-america-is-ripe-for-election-conspiracy-theorizing-238034/">political groups</a>. Breaking those allegiances would come with a personal or social cost that people aren't willing to gamble on. “If a belief holds functional value, you shouldn't expect just an informational intervention to have a large and robust effect," Oktar says.</p>
+<p>Oktar also points out that people hold "ontological beliefs," which, he explains, "capture the idea that some things are fundamentally subjective or unknowable.” For instance, some climate-change deniers believe that the climate is too complex to be studied with the tools available to scientists. “That allows you to discount the current state of the evidence or consensus with regards to the facts about the climate,” Oktar says.</p>
+<p>It's true, Costello says, a talk with ChatGPT is not going to rid the world of conspiracy theories or always talk true believers off the edge of their flat Earth. But the studies demonstrate that AI is an effective tool for combating misinformation; what's more, they underscore a larger message. "Believers can revise their views if presented with sufficiently compelling evidence," Costello says. <img alt="" src="../images/nautilus-favicon-14_1180.png" /></p>
+<p><em>Lead image: Olena Yefremkina / shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

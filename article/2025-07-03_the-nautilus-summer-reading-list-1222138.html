@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nautilus Summer Reading List - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Nautilus Summer Reading List - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-VDVS</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>An extraordinary vacation is one that opens the mind. When turning the corner in a new place brings a shift in perspective that sparks surprise and delight—and, if you’re lucky, even wonder. At <em>Nautilus</em>, we find that great books can do the same thing. In recent months, we’ve read dozens, and it’s our pleasure to bring some of our favorites to you.</p>
+<p>In their pages, we’ve journeyed to the poles of the planet with renowned evolutionary biologist Neil Shubin, sat alongside monks with author Pico Iyer, and taken flight with starlings across history. Novelist Nnedi Okorafor has transplanted us into the mind of an author who tries to write a new kind of story—one which causes the lines between fiction and reality to blur; and we unearthed a 1970 book by a curious physician who fleshes out the strange land of our own anatomy.</p>
+<p>Happily, it’s easier to pack more books into a season than vacations—and they make some of the best traveling companions. We hope you enjoy the new perspectives as you turn the many corners of these pages.</p>
+<p><img alt="" src="../images/GNxCQ4pR-1.png" /></p>
+<p>W. W. Norton &amp; Company, Inc.</p>
+<p>Read <a href="https://nautil.us/argue-your-way-to-a-fuller-life-1182850">an interview</a> with <em>Open Socrates</em> author Agnes Callard.</p>
+<p><img alt="" src="../images/OpiWhcKn-2.png" /></p>
+<p>Papadakis</p>
+<p>Read <a href="https://nautil.us/finding-strange-beauty-in-food-1186944/">an interview</a> with <em>Food Planet Future</em> author Robert Dash, and see some of the intriguing images from the book.</p>
+<p><img alt="" src="../images/6MghASay-3.png" /></p>
+<p>The National Book Foundation</p>
+<p>Read <a href="https://nautil.us/the-body-has-a-head-1208884/">a review</a> of <em>The Body Has a Head</em>—“the most absolutely wild book I have ever read about the human body and mind,” according to editor at large Kevin Berger.</p>
+<p><img alt="" src="../images/4kz9J07D-4.png" /></p>
+<p>Tin House</p>
+<p>Read <a href="https://nautil.us/i-can-feel-your-human-fingers-1197831">an excerpt</a> from <em>No Less Strange or Wonderful</em> about an unexpected encounter with a theme park character and the meaning of truth.</p>
+<p><img alt="" src="../images/MpG1BfcT-5.png" /></p>
+<p>Penguin Random House</p>
+<p>Read <a href="https://nautil.us/pico-iyers-wide-awake-silence-1177556/">an interview</a> with <em>Aflame</em> author Pico Iyer.</p>
+<p><img alt="" src="../images/6avM2rMR-6.png" /></p>
+<p>The MIT Press</p>
+<p>Read <a href="https://nautil.us/i-bought-a-robot-cat-for-my-rabbit-1213169">an excerpt</a> from <em>How That Robot Made Me Feel</em>, about when the author got a robot cat for her rabbit.</p>
+<p><img alt="" src="../images/2yTZxLj4-7.png" /></p>
+<p>Penguin Random House</p>
+<p>Read the “<a href="https://nautil.us/why-germs-love-our-collective-amnesia-1209112/">3 Greatest Revelations</a>” author Thomas Levenson experienced while writing <em>So Very Small</em>.</p>
+<p><img alt="" src="../images/mDNP5HYg-8.png" /></p>
+<p>HarperCollins Publishers</p>
+<p>A story within a story that will have you questioning the nature of storytelling itself—and will leave you thinking about what it truly means to be human.</p>
+<p><img alt="" src="../images/zjP9Z2AX-9.png" /></p>
+<p>Penguin Random House</p>
+<p>Read <a href="https://nautil.us/the-extraordinary-imperiled-science-at-the-end-of-the-earth-1198787/">an essay</a> by evolutionary biologist Neil Shubin about why the budget cuts for Antarctic research spell disaster.</p>
+<p><img alt="" src="../images/JC1eLQU3-10.png" /></p>
+<p>The University of Nebraska Press</p>
+<p>Read <a href="https://nautil.us/the-starlings-curious-odyssey-1202795/">an excerpt</a> from <em>Starlings</em>, about one of the United States’ most despised birds.</p>
+<p><em>Lead image: Solarisys / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

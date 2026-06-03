@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Penguins Don’t Fly | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why Penguins Don’t Fly</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-L0SM</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Sixty-six million years ago, flocks of aquatic birds living on the coast of New Zealand witnessed one of the most momentous events in the history of our planet. Halfway around the world, an asteroid nearly six miles in diameter walloped the Yucatan Peninsula, clouding the atmosphere with ash and depriving plants of sunlight. Global food webs collapsed, extinguishing the dinosaurs that had ruled the Cretaceous landscape, as well as the mosasaurs and plesiosaurs that terrorized the seas.</p>
+<p>It was a good day for New Zealand seabirds. Within several million years, their progeny would become apex predators, claiming the oceanic niche formerly held by reptiles.</p>
+<p>They became penguins.</p>
+<p>Given that the seabirds probably weighed a couple of pounds at most, a lot had to happen for them to conquer the oceans. The most significant move was to give up flight. Without aerodynamic constraints, their bodies could expand and their bones could grow denser, qualities that supported deeper diving over longer spans of time. As their joints stiffened, they learned to fly through water. Wings became flippers.</p>
+<p>The evolution of flippers is a classic case of exaptation, a phenomenon in biology that has much to teach our own species. Humans have been on Earth for just a moment in evolutionary time. Other species have been coping with calamitous change for eons. As we confront an existentially threatening transformation of our own making, it’s time to recognize their innate ingenuity.</p>
+<p><strong>Read more: “<a href="https://nautil.us/famous-for-being-indianapolis-234523">Famous for Being Indianapolis</a>”</strong></p>
+<p>There is a precedent for this way of thinking. For nearly a century, engineers have looked to other life forms as inspiration for new products. (Velcro was inspired by the stickiness of thistles.) But we need to elevate biomimicry beyond product design. We need to apply biomimicry <em>systemically</em>. Humans can learn new forms of governance from bacteria and slime molds. We can pick up insights about property rights from mesquite trees. And from penguins, and their shape-shifting exaptation, we can discover new approaches to building cities that are more adaptable to individual communities in changing environmental conditions. We can learn to design for exaptability.</p>
+<p>As defined by the paleontologists Stephen Jay Gould and Elizabeth Vrba in the 1982 article that introduced the term <em>exaptation</em> to science, exaptations are “features that now enhance fitness but were not built by natural selection for their current role.” The basic structure for the flipper was initially selected for soaring; the wing was exapted for swimming.</p>
+<p><img alt="" src="../images/pq1_1.png" /></p>
+<p>Claiming that <em>exaptation</em> is distinct from <em>adaptation</em>—representing nothing less than “a missing item in the taxonomy of evolutionary morphology”—Gould and Vrba offered multiple examples. Bones might have originated as organs for cartilaginous sea creatures to store minerals critical for metabolic activity and only later became structural support for life on land. Feathers might have originated as downy insulation, eventually exapted by birds taking wing (only, in the case of penguins, to be exapted for insulation again).</p>
+<p>In each of these cases, Gould and Vrba argued, the function didn’t arise through the gradual accumulation of minor mutations characteristic of adaptation. On the contrary, the opportunity to occupy a new environment was exploited by sudden repurposing of an existing apparatus. “We suspect that the conceptual framework of modern evolutionary thought, by continually emphasizing the supreme importance and continuity of adaptation and natural selection at all levels, subtly relegated the issue of exaptation to a periphery of unimportance,” they wrote. Without an appropriate word, a crucial mechanism of biology was consistently overlooked.</p>
+<p>Articulation of the elusive concept didn’t begin with penguins—or with volant birds or lungfish. Gould exapted the process from architecture, taking inspiration from St. Mark’s Cathedral in Venice.</p>
+<p>The great dome of St. Mark’s is lavishly decorated with Christian iconography, a spectacular mosaic organized in quadrants corresponding to four towering arches. Each intersection of the arches creates a spandrel—or, more technically, a pendentive—a tapering triangular space containing a biblical motif. To an eye untutored in structural engineering, the spandrels might be interpreted as framing devices for the artwork. In a lecture delivered at the Royal Society several years before he authored his defining paper with Vrba, Gould observed that fore-fronting the mosaic “would invert the proper path of analysis.” As spaces to be filled, the spandrels prompted the imagery. And the arrangement of arches formed the spandrels themselves.</p>
+<p>Presuming feathers to be a steady adaptation to volant living, or flippers to be an outgrowth of deepwater diving, would likewise conflate the order of events, misinterpreting avian evolution. Like a Byzantine mosaic artist, biology simply took advantage of what was already present.</p>
+<p><img alt="" src="../images/Keats_BREAKER_3ecb20.png" /></p>
+<p><strong>CHURCH AND TRAIT:</strong> Triangles formed between arches at St. Mark's Cathedral in Venice, while not key to the architecture, were adopted by artists for mosaics. Biology likewise takes advantage of traits already present. <em>Credit: swisshippo / Adobe Stock.</em></p>
+<p>The spandrels of St. Mark’s also show that an exaptation need not appropriate a useful trait but can equally employ contingency or accident. The penguin genome is messy, including many inadvertently duplicated genes. Unnecessary for survival, some of this genetic code can be co-opted if an environment is altered (such as New Zealand in the aftermath of an asteroid strike). What applies to penguins applies to every species.</p>
+<p>Although the term exaptability has not been used in biology, Gould and Vrba anticipated the concept when they wrote of the “need to recognize the central role of ‘cooptability for fitness,’” acknowledging the vast pool of nonadaptive traits to be “a source of raw material for further selection.” Lacking essential functionality, accidentally acquired features are especially flexible. Unlike wings, which had to lose their capacity for flight to become effective flippers, there are no inherent trade-offs when functionless features are co-opted.</p>
+<p>Of course, exaptation also acts on traits previously adapted for unrelated functions, such as the capacity for flight given up by Cretaceous New Zealand seabirds. As straightforward as it may be for functionless features to attain utility, functions that can be given up are probably the largest source of raw material for further selection, and the most salient to consider when imagining new approaches to architecture.</p>
+<p><img alt="" src="../images/pq2_1.png" /></p>
+<p>New Zealand seabirds cannot have known that a niche would open up if they let go of aerodynamics. When the asteroid struck, they didn’t have a conversation about the probability that mosasaurs and plesiosaurs would go extinct. Instead, each generation probably spent a little more time underwater, diving deeper and returning uneaten. Becoming more seaworthy and less flightworthy were part of the same gradual process. Feathers morphed. Joints fused. Bodies elongated.</p>
+<p>By the Eocene, some 10 million years after the atmosphere went dark, the largest penguins were six-and-a-half feet tall and could penetrate depths of 1,600 feet. That’s nearly three times deeper than the range of 18-inch-tall thick-billed murres, one of the penguin’s closest flightworthy relatives today. What made the wing exaptable, paradoxically, is that it was adaptable. The preadaptation, as can be witnessed in murres’ awkward diving and flight, was for the appendage to be optimal for nothing.</p>
+<p>That is not good engineering, at least in the way human engineers and builders are trained today. Engineering and building are supposed to be parsimonious. Under the influence of technology, modern architecture and urban planning achieve performance at the expense of possibility.</p>
+<p>All buildings are predictions,” wrote Stewart Brand in <em>How Buildings Learn</em>. “All predictions are wrong.” Published in 1994, Brand’s book makes no mention of exaptation, but many of the principles Brand espoused are consistent with exaptability. For instance, structures should be “overbuilt.” They should have spatial diversity and a “loose fit.” That’s because “all buildings grow.” Brand took this to be “a universal rule—never acknowledged because its action is embarrassing or illegal.”</p>
+<p>Laws that restrict adaptation are as detrimental to exaptation as technological prejudices. The informal settlements where infrastructure is most mutable are professionally denigrated and legally precarious. Many names for them, such as <em>slum</em> and <em>shantytown</em>, are pejorative. Other names assert their illicit status. For instance, <em>muhoga chongchakji</em> is Korean for “settlement without permission.”</p>
+<p>One of the few places in which architects and planners have attempted to learn from communal improvisation is Iquique, Chile, where the architecture firm Elemental built 93 “half” houses in 2003. Designed by Alejandro Aravena and incidentally embodying some of Brand’s principles, the subsidized homes were intentionally left incomplete so that families could fill empty modules according to their needs and following a few collectively decided rules. Some residents built extensions for children, later exapted as sublets.</p>
+<p><strong>Read more: “<a href="https://nautil.us/imitation-is-the-sincerest-form-of-environmentalism-237989">Imitation Is the Sincerest Form of Environmentalism</a>”</strong></p>
+<p>Other settlements of half houses have subsequently been built elsewhere in Chile and Mexico. But they remain anomalous—unusual enough for Aravena to win a Pritzker Prize—and their exaptability is merely a matter of leaving negative space for timely creativity.</p>
+<p>To work at scale, giving cities the resilient flexibility they’ll need to withstand climate change without wasteful demolition, exaptability will need to be the architectural default, legally mandated in building codes and applied to public works. Buildings should be structural pastiches, integrating multiple architectural traditions to address myriad possible futures. Infrastructure should have redundancies comprising reconfigurable modules, all exaptable at a moment’s notice.</p>
+<p>If all buildings are predictions, so too are the laws that govern their construction and configuration. These predictions are also bound to be wrong, misguided in the long term.</p>
+<p>There are cases in which laws have been exapted in the past. Class action lawsuits used today to aggregate large numbers of claims were originally intended only to combine complaints by established social groups, such as peasants in an English village. Or take a constitutional example: The right to privacy derives from the “penumbras” of written guarantees, such as the Fourth Amendment protection against unreasonable search and seizure. British common law could not have predicted the social mixing of classes. The Framers could not have anticipated threats people would face online, where governmental surveillance can be undertaken with ruthless efficiency. In both cases, exaptation made old laws fit new circumstances.</p>
+<p>Laws are exaptable when their penumbras are broad. The penumbra of a law is broadened with ambiguity. Exaptability is undermined when courts focus on the intentions of legislators, basing interpretation on teleology.</p>
+<p>Of course, laws are created, unlike penguins. The point is that penguins would never have arisen if the teleological worldview of Creationism were true. The New Zealand seabirds would have been fixed for eternity as God’s immutable invention, never taking advantage of the asteroid strike that cleared the Cretaceous oceans. Acting as if laws were unauthored may be a legal fiction, but it’s a useful one.</p>
+<p><em>Aptenodytes forsteri</em> is the largest penguin alive today. Popularly known as the emperor penguin, the species is several feet shorter and dozens of pounds lighter than the great penguins of the Eocene. The smaller size coincides with marine mammals growing to become apex predators. Since then, humans have become even more of a problem, accelerating global warming to such an extent that <em>Aptenodytes forsteri</em> recently landed on the IUCN Red List of Threatened Species.</p>
+<p>Everything changes in time. In the future, flippers could be exapted as wings. Penguins, to the best of my knowledge, are open to this possibility. <img alt="" src="../images/nautilus-favicon-14_69.png" /></p>
+<p><em>Adapted from</em> <a href="https://berggruen.org/library/a-field-guide-to-more-than-human-governance">A Field Guide to More-Than-Human Governance</a><em>, published by the Berggruen Press.</em></p>
+<p><em>Lead image: mdurinik / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientists are People, Too | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Scientists are People, Too</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-11
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-QZBF</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It’s no secret that we’re in an era of endemic skepticism toward science. You see it in the news every day. Figures at the apex of government disregarding decades of well-established medical evidence. The defunding of university research programs and dismantling of medical infrastructure. Scientific experts replaced in agency leadership posts by the discredited and the woo. Suffice it to say that, regardless of its manifold benefits we enjoy every day, science is on its heels.</p>
+<p>There are many reasons for this, but according to Alan Lightman and Martin Rees, much of the problem comes down to the fact that the general public simply doesn’t have a good understanding of what science is and what scientists do. With their new book <a href="https://www.penguinrandomhouse.com/books/770138/the-shape-of-wonder-by-alan-lightman-and-martin-rees/"><em>The Shape of Wonder: How Scientists Think, Work, and Live</em></a>, they aim to correct this by exploring the scientific life, from the real inspirations and experiences of wide-ranging scientists, to how the scientific method is practiced, to how science is leveraged in our culture and institutions.</p>
+<blockquote>
+<p>Scientists have the same emotions, jealousies, ambitions, and passions as other people.</p>
+</blockquote>
+<p>The author duo is more than equipped to provide such insight. Lightman has held prominent science faculty positions at Harvard and MIT and serves on the United Nations Secretary-General's Scientific Advisory Board. Rees is the recipient of the prestigious Wolf Prize in Physics, served as Master of Trinity College in Cambridge, and spent 30 years as the United Kingdom’s Astronomer Royal. And both have hobbies, struggles, aspirations, and fears just like anyone else. They are scientists with specialized knowledge, but also humans with everyday impulses.</p>
+<p>“Scientists are people,” Lightman told <em>Nautilus</em>. “They are concerned about their society like the rest of us.” Many of those unfamiliar with science, however, have become mistrusting of its practitioners’ motivations. As Lightman explains below, the solution will involve greater transparency between scientists and the public, hopefully propagating an appreciation of the value science can offer for the good of all.</p>
+<p><strong>Throughout the book, you dive into a lot of different scientists' individual stories. Were you struck by any one in particular?</strong></p>
+<p>We profile a number of scientists in the book—some well-known, some people you've never heard of—to help humanize scientists. I was most impressed by the neuroscientist Lace Riggs, who works at MIT's McGovern Center for Brain Science. She grew up in a very rough neighborhood in Southern California. Her family was swept up by drug addiction, mental illness, and suicide. Her father left early, her mother struggled, and they moved from one apartment to the next when they couldn't pay rent. Yet somehow she got to community college, then went all the way to a Ph.D. in neuroscience, and is now a postdoctoral fellow at MIT doing original research on drugs that will help people with mental disabilities and addictions. I'm impressed by her story because she was motivated by something that happened in her childhood, but also because she overcame incredible obstacles to get a Ph.D. in science and become a researcher at a leading institution, starting off in the worst conditions imaginable. That really says a lot about the human spirit.</p>
+<p><strong>What do you think the general public most misunderstands about what it means to be a scientist?</strong></p>
+<p>Understanding that scientists are human beings—that we have the same emotions, jealousies, ambitions, and passions as other people. Scientists are often set aside as being different. Scientists have specialized knowledge, and everybody recognizes that science and technology are very important factors in driving our world today. The fact that this certain group of people have specialized knowledge makes others worried and suspicious, skeptical, uneasy. But I think that if people—meaning a certain fraction of the country—understood that most scientists are working for the good of society, that might eliminate some of the skepticism.</p>
+<p><strong>You wrote how science used to be part of the American identity. How has that changed over the years?</strong></p>
+<p>In the 19th century, there were a number of scientific projects led by the National Geological Survey; the telegraph, railroads, and a number of other big projects associated with a young country exploring and improving. Science and technology were really part of the growth of the United States, and became part of our self-identity as a country of entrepreneurs, risk takers, adventurers. Until very recent years, that was part of our national identity. Google and Apple and the laptop computer, the transistor—all of that came out of the United States.</p>
+<p>But if we start making the U.S. an unpleasant place for entrepreneurs to work, then all of that talent is going to leave our country. And it already has started. There are some scientists, technologists, and engineers who have left the United States because it's no longer a wholesome and welcome environment to work in. I'm not so concerned with our competitive position relative to other countries. I don't think that we have to be the best at everything. But I do think that our own standard of living and quality of life is going to diminish if we lose our talented scientists and technologists, including in the medical field.</p>
+<p><strong>The book lists several key scientific challenges looming over the present and near future. Which of these do you think are the most pressing?</strong></p>
+<p>Artificial intelligence. It's developing so rapidly that even leaders in the field don't know when certain benchmarks are going to occur. It's changing everything in ways we can't possibly imagine. Not only the workforce, but new drugs are being discovered much more rapidly because a computer can test lots of different configurations of molecules very quickly. We're going to have androids around the house pretty soon, some of them might look like human beings. We're going to have computer chips that connect our brains directly to the internet. We already have the capacity to implant electrodes in people's brains so that they can move a robot arm by pure thought. That technology is already 10 years old. So I would say artificial intelligence is changing our world more dramatically and swiftly than anything else.</p>
+<p>After that, I would put neuroscience. There's a lot of new research being done about the brain and the interface between the brain and the computer. I think it's side-by-side with artificial intelligence. We're learning more and more about how to modify the brain as well. All of this is really changing who we are as human beings. We're evolving to something you might call <em>Homo-techno</em>: part human, <a href="https://nautil.us/encounters-with-the-posthuman-234320/">part machine</a>. It's changing our conception of who we are as individuals and as a species. It's almost impossible to imagine what it will be like in just 100 years from now.</p>
+<blockquote>
+<p>Science and technology were once part of our self-identity as a country of entrepreneurs, risk takers, adventurers.</p>
+</blockquote>
+<p><strong>You write that many of the challenges we face involve time scales of many decades. Why is it important for the public to understand that?</strong></p>
+<p>It's important to understand that they're much longer than the period of four years of a political figure. Most politicians are concerned, and naturally so, about being re-elected. They're worried about the immediate future. An environmental issue that's not going to happen for 15 years is not really of much concern to them in terms of their professional life. It may be a personal concern, but it's not something they want to invest in. They're going to invest in what it takes to get re-elected. And so the time horizons of our political leaders are relatively short compared to the time horizons of, for example, climate change. Artificial intelligence is developing so rapidly that it is within the time frame of an elected official, and I think some are concerned with that. But there are developments in neuroscience, for example, that have longer timescales, and climate science for sure. The public needs to understand that we need to think about these things happening on longer timescales, even if our politicians are not. Politicians are ultimately subject to the vote of the electorate, so if the electorate <a href="https://nautil.us/with-regard-to-the-invisible-1231926/">understands these things</a>, maybe we can get the politicians to understand as well.</p>
+<p><strong>Prior to the scientific method, statements about the physical world were assessed based on the authority of the speaker, as you note in the book. Lately it seems like we’re reverting back to that, at least on a political level. Does that sound accurate?</strong></p>
+<p>I would absolutely agree with that, yes. And we don't have to name names, we know who we're talking about. <em>You don't need to know anything else, just listen to my voice</em>. Well, that's going to lead to a lot of trouble. Because once we start departing from evidence-based thinking we will be going on assumptions that are not validated by experiment. Climate change, depleting natural resources of our environment—we need bona fide scientists working on those problems <a href="https://nautil.us/the-extraordinary-imperiled-science-at-the-end-of-the-earth-1198787/">who understand them</a>. We need chemists and physicists and climatologists working on those problems. Without them, we're gonna go back to the dark ages. We're really going backwards now in so many areas, but the mistrust of scientists is one of the areas that can have a domino effect.</p>
+<p><strong>How does science win back the public trust?</strong></p>
+<p>By showing that most scientists are working for the benefit of their societies. I'm a member of a small U.N. committee advising the Secretary-General on how to restore trust in science. We're instituting local community forums in different countries, addressing local problems like polluted drinking water or grazing disputes, and showing how science helps solve those problems. That shows on a very local, community level how scientists work for the benefit of society. We need a lot more of that kind of thing.</p>
+<p><strong>Some people assert that scientists get into the field for big grant money. Where did they get this impression?</strong></p>
+<p>It's part of the politicization of many aspects of science. I don't know why particular scientists are thought to work just for the money, but I've interviewed many scientists, and I think I probably know a lot more scientists than the people who make those claims. I've lived in the scientific community myself, and I know the vast majority of scientists are working either for the benefit of society or for pure intellectual curiosity, but not for money and not for power. Money and commercial interests have gotten very mixed up with our politics for a number of years, so I think it's natural that some people who are skeptical of scientists would blame it on their being pawns of financial or political interest.</p>
+<p><strong>What roles do skepticism and competition play in science?</strong></p>
+<p>Most scientists I've known are competitive, and that's a good thing because it gets people to do their best. Scientists critique each other's work. The scientific method, in which we revise our theories when they disagree with experiment, arises from the community of scientists. Individual scientists can become emotionally involved and cling to pet theories even after they’re disproved, but inside the community we are very hard on each other. If someone claims a result and wants to win a Nobel Prize, I'm going to try to reproduce that experiment and prove them wrong. That’s the spirit of science. <img alt="" src="../images/nautilus-favicon-14_966.png" /></p>
+<p><em>Lead image: Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

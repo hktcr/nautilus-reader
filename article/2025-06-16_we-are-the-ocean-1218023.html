@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Are the Ocean - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>We Are the Ocean - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PY4V</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The sun was setting on the ocean, but the voice of Whaia was rising. The singer from New Zealand, rooted in Maori and Pasifika ancestry, was lifting our spirits with incantations that soared into wordless melodies that crested and fell like ocean waves. The spell was sustained by Scottish sound artist Brian d’Souza, performing under the name Auntie Flo, conjuring the sea in electronic, undulating soundscapes.</p>
+<p>I was among listeners in Nice, France, in the Theatre de Verdure, an outdoor amphitheater on the coast of the Mediterranean Sea. It was the first evening of the United Nations Ocean Conference, a five-day gathering of world dignitaries, conservationists, scientists, and academics, meeting and sharing plans to conserve our troubled oceans. For the five days, Theatre de Verdure was known as Nautilus Village. In collaboration with the United Nations and the city of Nice, <em>Nautilus</em> hosted music, films, and discussion panels under the Côte d’Azur sky.</p>
+<p>The Indigenous singer and sound artist were not headliners at the conference. But their evocation of our innate connection to the ocean was a theme that ran through the heart of its speeches and conversations.</p>
+<p>“The ocean is the lifeblood of our planet,” Antonio Guterres, United Nations Secretary-General, said in his opening remarks. “It produces half of the oxygen we breathe, nourishes billions of people, supports hundreds of millions of jobs, and underpins global trade. For many, the ocean is more than a source of food and livelihood. It shapes cultures, anchors identities, and feeds the soul.”</p>
+<p>I appreciated that Guterres then went goth on the gathered.</p>
+<p>The ocean is under siege, he said. “Fish populations are collapsing due to reckless illegal fishing and overexploitation. Climate change is driving ocean acidification and heating—destroying coral reefs, accelerating sea level rise, and threatening communities worldwide. And plastic pollution is choking marine life and infesting our food chain—ultimately ending up in our blood and even our brains. When we poison the ocean, we poison ourselves.”</p>
+<blockquote>
+<p>“Those who contribute negligibly suffer the most,” said the prime minister of Tuvalu, a tiny Pacific island.</p>
+</blockquote>
+<p>What was the source of the poison? “Its name is greed,” Guterres said. “Greed that sows doubt, denies science, distorts truth, rewards corruption, and destroys life for profit.”</p>
+<p>There was another name for poison at the conference. Dignitaries were reluctant to mention it. But it was apparent to most everybody, and on occasion, speakers, shaking their heads and mumbling in resigned desperation, did let the name slip: the United States.</p>
+<p>The U.S. had a negligible presence at the conference. Trump administration plans to fuel up oceangoing heavy equipment to <a href="https://nautil.us/the-oceanic-fallout-of-deep-sea-mining-252542/">mine seabeds</a> for minerals, along with strafing public budgets for ocean and climate change research, were black smudges on the restorative blue vision of the conference.</p>
+<p>Ninety-five countries signed a global treaty to reduce <a href="https://nautil.us/plastic-is-the-oceans-new-junk-food-236157/?_sp=b98a2751-7b38-44a3-b833-1c5532f2567a.1750063009208">plastic pollution in the ocean</a>. The U.S. produces the most plastic waste on the planet, 40 million tons annually, 20 percent of which spends its eternal days in the entrails of the ocean. The U.S. did not sign the plastics treaty.</p>
+<p>Fifty countries and the European Union have ratified the “High Seas Treaty,” an ambitious plan to protect 30 percent of the ocean by 2030 (2.8 percent is protected now). The treaty would bind countries to enter an agreement to protect the ocean under plans that transcend national borders. With 60 signatories, the High Seas Treaty would be implemented by the United Nations. The U.S. did not ratify. So far, neither have China and India.</p>
+<p>“It’s considerably difficult to work on the ocean right now when the United States has withdrawn from almost everything,” Olivier Poivre D'Arvor, the special envoy of the French Republic, said during his wrap-up of the conference to the press. (He spoke in French; I’m quoting the English translator I heard in headphones.)</p>
+<p>Difficult because, as we know, the U.S. is one of the three industrial powerhouses that blast most of the greenhouse gases into the atmosphere, whose fallout is unraveling the ecological health of the ocean. “It’s suffering from high fever and now we see oceans under the threat of dying—we are simply condemned to work together collectively,” said Jean-Noël Barrot, France’s Minister for Foreign Affairs, in an impressively impassioned speech.</p>
+<p><img alt="" src="../images/vgsFtzx9-Berger_BREAKER.png" /></p>
+<p><strong>THE TWO CULTURES:</strong> During his wrap-up of the ocean conference, Olivier Poivre D'Arvor, the special envoy of the French Republic, compared scientists fleeing the U.S. today to artists coming to France in the early 20th century in search of freedom. <em>Photo by Kevin Berger.</em></p>
+<p>Indeed, the participation of industrial giants like the U.S., China, and India in international efforts to nurse the ocean back to health are paramount. Without them, small countries, especially island nations, can do little but canvass for international funds to build barricades to stem the rising sea. When it comes to the causes of global warming, and oceans storming island shores, “Those who contribute negligibly suffer the most,” said Feleti Teo, prime minister of Tuvalu, a tiny country of nine islands, located between Hawaii and Australia, often seen as a microcosm of what dire climate change looks like now.</p>
+<p>Special Envoy Poivre D'Arvor is a cultural man of presence in France: a novelist, literary scholar, theater producer, and French ambassador for maritime matters around the world; he has been the president of France’s National Navy Museum for the past decade. “The real damage in the U.S. is to science culture,” he said. He added that American scientists were coming to France in search of the “same kind of freedom that American artists once did.”</p>
+<p>I assume Poivre D'Arvor was referring to Black Americans fleeing Jim Crow laws in the first half of the 20th century, such as jazz artists Josephine Baker and Duke Ellington, writer Langston Hughes, and painter Loïs Mailou Jones. Who knows if scientists will now find the same receptive audiences in labs and universities? But it was a surprisingly poignant comparison.</p>
+<p>Although the international effort to reverse the damage being done to the ocean is stymied by the absence of the U.S., “We can advance our progress without them,” Poive D’Arvor said defiantly. The High Seas Treaty is on the verge of being fully ratified without the U.S., and its implementation, Poive D’Arvor said, would be “a victory for science.” Referring to the Nice conference as a whole, he said, “We did what we had to do here.”</p>
+<p>It’s easy to take a cynical view. All the good will and international plans at the conference can be capsized like a tiny sailboat by the hurricane of oil companies, plastic manufacturers, consumerism, and intransigent politicians.</p>
+<p>Speaking as one person in attendance, though, I felt better about the world than I have in a long time. It was such a relief to have slipped as if through a magic door out of the oppressive climate of authoritarianism, ignorance, and us-versus-them hatred and fear. How amazing it was to be in a community of people of every race and creed—smart, considerate, dedicated people thinking beyond themselves. The incantatory spell of the singer Whaia wasn’t broken for five whole days. We were all connected by the spirit and redemption of the ocean. <img alt="" src="../images/nautilus-favicon-14_1120.png" /></p>
+<p><em>Lead art: Singer Whaia and sound artist Brian d’Souza on stage at the “Nautilus Village” during the United Nations Ocean Conference in Nice, France. Photo by Kevin Berger.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

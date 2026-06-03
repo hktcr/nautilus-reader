@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Is Mirror Life? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What Is Mirror Life?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RC7S</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 1958, Bizarro made his way into comic strips—an inverted Superman who lives on a planet called Htrae, which is governed by laws opposite of those governing Earth. “I was striving, you might say, for that mirror-image,” <a href="https://www.cbr.com/superman-bizarro-disputed-creation/">said</a> comic book writer Alvin Schwartz, who claimed to have come up with the idea for Bizarro.</p>
+<p>Now, scientists are pursuing what could be called nature’s Bizarro: Some labs want to construct cells with molecules mirroring natural ones, a controversial and difficult feat that poses an ethical predicament. Today, scientists <a href="https://essl2025.org/agenda">met</a> at the Engineering and Safeguarding Synthetic Life 2025 conference in the United Kingdom to mull them over.</p>
+<p><strong>What is mirror life?</strong></p>
+<p>But to wrap our heads around this, it’s important to grasp a concept called <a href="https://nautil.us/the-anatomical-quirk-that-saved-dr-no-951705/">chirality</a>. All of Earth’s living beings contain certain molecules that are “left-handed” or “right-handed,” a phenomenon first observed by French chemist Louis Pasteur in 1848. Amino acids and proteins are lefties, while DNA, RNA, and their fundamental ingredients are righties. It’s not clear how life came to be this way, but scientists have <a href="https://pubs.acs.org/doi/full/10.1021/acsearthspacechem.2c00032">proposed</a> some <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6396334/">explanations</a>.</p>
+<p>We do know that chirality can influence various physiological happenings. For example, one gene <a href="https://www.pbs.org/newshour/science/how-a-snails-shell-gets-its-twist">causes</a> some snails species’ shells to spiral in the opposite direction of that of other snails, even within the same species. This phenomenon can also affect drug delivery. In a tragic example, a sedative drug called thalidomide once sold around the world was made of up two mirror-image molecules. The left-handed molecule worked as intended, while the right-handed companion unexpectedly caused birth defects in the children of pregnant women taking it.</p>
+<p><strong>Why mirror life could be useful</strong></p>
+<p>Now, scientists hope to reverse nature’s handedness in search of the drugs of the future. Medicines made with mirror molecules could, theoretically, work more effectively over time. Unlike those used in regular drugs, these unusual molecules may not be quickly degraded by enzymes.</p>
+<p>Over the past few decades, chemists have figured out how to concoct right-handed proteins by harnessing certain chemical reactions.In 2022, a team in China made enzymes that can generate mirror-image RNA—such work brings us closer to the production of an entire mirror cell, a goal that might arrive in as soon as 10 years. This would translate to “a second tree of life,” synthetic biologist Kate Adamala <a href="https://www.nytimes.com/2024/12/12/science/mirror-life-microbes-research.html">told</a> <em>The New York Times</em> last year.</p>
+<p>Some teams even considered building mirror bacteria, before swearing off such work once the full extent of the risks became clear. Conceivably, such mirror bacteria could work as tiny living factories that crank out mirror nucleic acids and proteins and aid drug development and manufacture. A debate currently rages over whether increasingly sophisticated mirror life research should be restricted<strong>.</strong> “Such mirror organisms would constitute a radical departure from known life,” Adamala and her co-authors <a href="https://www.science.org/doi/10.1126/science.ads9158">wrote</a> in a 2024 paper published in <em>Science</em>.</p>
+<p><strong>The controversy with mirror cells?</strong></p>
+<p>A major sticking point with this work: If mirror bacteria escaped the lab, we’d be in big trouble. Such self-replicating creatures would “likely be invisible to many of the processes nature has evolved that keep a species in check,” synthetic biologist John Glass <a href="https://asm.org/articles/2025/may/mirror-bacteria-reflecting-alternate-chirality">told</a> the American Society for Microbiology recently.</p>
+<p>Over the past few years, other experts have sounded the alarm on the potential harms of creating mirror cells. In the <a href="https://www.science.org/doi/10.1126/science.ads9158">2024 <em>Science</em> paper</a>, Glass, Adamala, and others noted that such bacteria could sneak past immune system protections and possibly trigger “lethal infections” in humans, animals, and plants. Plus, today’s antibiotics might not work against them. While these scientists initially doubted the feasibility of creating mirror bacteria, they acknowledge that recent innovations make this seem increasingly likely.</p>
+<p>In Manchester, U.K., scientists <a href="https://essl2025.org/agenda">convened</a> to untangle this controversial research, delving into the “safety, ethics, and science diplomacy” of synthetic life such as mirror cells. And later this month, the U.S. National Academies of Sciences, Engineering, and Medicine will <a href="https://www.nationalacademies.org/our-work/mirror-image-biology-pushing-the-envelope-in-designing-biological-systems-a-workshop">also gather</a> to gauge how this work might be governed.</p>
+<p>Glass and his co-authors assert that, to keep us all truly safe, we should proceed with this research cautiously, while giving “the global research community, policy-makers, research funders, industry, civil society, and the public” the time and space to “chart an appropriate path forward.”</p>
+<p>For a deep dive on mirror life, and a profile of one of its pioneers, you can read our Print Edition 52 cover story: "<a href="https://nautil.us/mirror-image-life-412729/">Mirror Image Life</a>." <img alt="" src="../images/nautilus-favicon-14_944.png" /></p>
+<p>Editor's Note (September 25): This story has been updated to reflect the fact that some of the researchers who had previously considered producing mirror organisms have hit the brakes on such research as broad recognition of the risks of the work has spread through the field.</p>
+<p><em>Lead image: Lightspring / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

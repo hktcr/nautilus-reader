@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Might Not Harm Us in the Way You Think | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>AI Might Not Harm Us in the Way You Think</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-19
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-3FHX</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Humanity has long feared the corrupting influence of new technologies. This truism is as ancient as Socrates—as old as writing itself.</p>
+<p>“This discovery of yours will create forgetfulness in the learners' souls, because they will not use their memories,” Socrates <a href="https://www.gutenberg.org/files/1636/1636-h/1636-h.htm">warned</a> in 360 B.C., one of the earliest known criticisms of writing—yet it’s only preserved today because Plato jotted it down.</p>
+<p>More than 2,000 years later, we can easily swap the ancient philosopher’s critique of writing for the collective agita surrounding new-fangled technologies that have stoked fears of cognitive decline. The printing press, the television, the internet, social media. Most recently, generative artificial intelligence tools like ChatGPT have rekindled this millennia-old panic.</p>
+<p>Technologies we’ve used for decades, such as <a href="https://www.science.org/doi/10.1126/science.1207745">Google search</a> and <a href="https://www.tandfonline.com/doi/abs/10.1080/13875868.2021.1969401">navigation</a> <a href="https://www.tandfonline.com/doi/full/10.1080/00330124.2018.1479970">apps</a>, have also prompted <a href="https://nautil.us/what-searchable-speech-will-do-to-you-235609/">warnings of disruptions</a> to cognitive processes, such as memory and spatial orientation. But some researchers think generative AI, which has only become widely accessible over the past few years, could cause unprecedented damage in the long run. That’s because our chats with chatbots can feel like genuine conversations with fellow humans whom we trust—and it can be tricky to verify what these tools tell us.</p>
+<blockquote>
+<p>Overreliance on chatbots could degrade skills essential to people’s professions.</p>
+</blockquote>
+<p>This is particularly concerning because chatbots are increasingly <a href="https://www.newsguardtech.com/ai-monitor/august-2025-ai-false-claim-monitor/">spitting out misinformation</a>, but in the confines of convincing, human-like interactions. AI chatbots “are not just repositories of information; they simulate human conversation, adapt to user inputs, and can provide personalized responses,” according to a <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11020077/#s9">2024 paper</a> published in <em>Frontiers in Psychology</em>. “This dynamic interaction could lead to a different kind of cognitive reliance compared to static information sources.”</p>
+<p>The power we give to chatbots is “like the power we give to other people,” Olivia Guest, a computational cognitive scientist at Radboud University in the Netherlands, says. “That’s what’s very scary.”</p>
+<p>To get a better grasp on generative AI’s impacts on our brains, small studies over the past few years have collected both quantitative and qualitative data like brain scans, survey results, and performance on various tasks. Such research has suggested that using chatbots and other generative AI tools may, at least over the short-term, <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2025/01/lee_2025_ai_critical_thinking_survey.pdf">worsen problem-solving skills</a>, provoke <a href="https://arxiv.org/pdf/2412.09315">mental “laziness,”</a>  and <a href="https://arxiv.org/pdf/2506.08872">harm our ability to learn</a>, among other impacts.</p>
+<p>Overreliance on chatbots could even degrade skills essential to people’s professions, says Iris van Rooij, a computational cognitive scientist also at Radboud University.</p>
+<p>By depending on chatbots to read, write, code, or perform other critical work for us, we lose out on opportunities to practice these essential functions, she says. And when our expertise erodes, it becomes harder to spot errors made by chatbots that would be indistinguishable to non-experts—prompting a “downward spiral.”</p>
+<p>But it’s important to take recent findings regarding the dangers of chatbot use with a grain of salt, says Sam Gilbert, a cognitive neuroscientist at University College London. He contends that it would be tricky to conduct “proper” controlled experiments to definitively link the regular use of any widely adopted technology like AI chatbots with long-term detrimental effects on our minds—this would require comparing people who have had sustained exposure to specific technologies to those who haven’t used them at all.</p>
+<p>Finding an unexposed comparison group for chatbots at this stage would be difficult, and because the chatbots have only been widely accessible for a few years, it’s too soon to measure long-term effects. Plus, Gilbert says, it would be “unethical” to deny people access to any technology in a long-term randomized trial.</p>
+<blockquote>
+<p>Chatbots are increasingly spitting out misinformation.</p>
+</blockquote>
+<p>Gilbert <a href="https://pubmed.ncbi.nlm.nih.gov/27542527/">studies</a> the concept of “cognitive offloading,” the process of easing one’s mental strain with the help of external aides, be it a pen and paper or a chatbot. Transferring information from our minds to a screen isn’t necessarily harmful, Gilbert has <a href="https://www.sciencedirect.com/science/article/pii/S0010027724000696#s0080">found</a> in his research, and can even free up space in our brains for other information.</p>
+<p>Ultimately, alarmist claims that we’re vulnerable to “digital dementia,” a concept popularized in 2012 that ties overreliance on technology to cognitive decline, are supported by “extremely weak evidence,” Gilbert says, due to the lack of controlled experiments. Meanwhile, some studies that have followed older adults for up to two decades have <a href="https://www.nature.com/articles/s41562-025-02159-9">found</a> that use of digital technologies that preceded chatbots is actually associated with lower risk of cognitive impairment.</p>
+<p>Gilbert also cautions that realtime shifts in cognitive activity gleaned from brain scans of subjects actively using generative AI don’t necessarily point to long-term perils, but rather momentary changes during a specific task. “It just tells us about how people are using their brains to approach one particular challenge,” Gilbert says. “We need to be very careful about how we interpret that evidence, and there is certainly no neural evidence that I know of to suggest that technology is harming our overall cognitive skills.”</p>
+<p>Still, we should check whether AI tools actually provide us better content than our own noggins could when, say, writing an essay or drafting a work proposal, he says. Gilbert recommends taking stock of your mental toolbox—a process known as <a href="https://nautil.us/do-you-want-ai-to-be-conscious-236578/">metacognition</a>, or thinking about how you think. It’s important to get a good handle on your abilities, such as writing or memory capacity, before you lean too far into outsourcing certain tasks to a chatbot or any other digital resource. It goes both ways, Gilbert explains: Someone who’s overconfident in their memory skills, for example, could forgo digital reminders and forget to take their medication.</p>
+<p>“I don’t think people should completely avoid offloading,” Gilbert says. “I do think it’s important to get a good handle on your own abilities without a tool—and the success with that tool—to find out whether it truly helps you.”</p>
+<p>Across academic fields, views on AI use more broadly diverge sharply. While some researchers hold that responsible applications of AI tools like chatbots can complement human smarts, both Guest and van Rooij take a different view: They say that chatbots, in their current forms, fail to offer any tangible benefit due to their technical shortcomings and are “actively harmful,” according to Guest. Along with researchers from Europe and the United States, Guest and van Rooij recently <a href="https://zenodo.org/records/17065099">urged</a> against “the Uncritical Adoption of 'AI' Technologies in Academia.” They wrote:</p>
+<p>“We can and should reject that AI output is ‘good enough,’ not only because it is not good, but also because there is inherent value in thinking for ourselves. We cannot all produce poems at the quality of a professional poet, and maybe for a complete novice an LLM output will seem ‘better’ than ones’ own attempt. But perhaps that is what being human is: learning something new and sticking with it, even if we do not become world-famous poets.” <img alt="" src="../images/nautilus-favicon-14_778.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: ollagery / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

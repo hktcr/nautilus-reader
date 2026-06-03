@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Map of Everyday Morality from the r/AITA Subreddit | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>A Map of Everyday Morality from the r/AITA Subreddit</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-772R</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Am I the asshole “for confronting my brother after he proposed at my graduation dinner, even though I asked him not to?” So reads the headline on a recent post in a Reddit discussion board known as r/AITA, an acronym for Am I the Asshole? The subreddit is billed by its moderators as, “A catharsis for the frustrated moral philosopher in all of us, and a place to finally find out if you were wrong in an argument that’s been bothering you.” It has 24 million members, or “potential <a href="https://nautil.us/how-to-tell-if-youre-a-jerk-236100/">assholes</a>,” as it calls them. According to her fellow posters, the <a href="https://www.reddit.com/r/AmItheAsshole/comments/1kmcxlx/aita_for_confronting_my_brother_after_he_proposed/">recent graduate</a> was definitely <em>not</em> the asshole.</p>
+<p>The r/AITA subreddit recently became fodder for a large-scale scientific investigation of everyday morality. Researchers from the University of Pennsylvania and other institutions used the Internet forum to create a taxonomy of the kinds of ethical decisions people are faced with in their daily lives, with a special focus on how a person’s relationships shape their moral thinking. The researchers, who published the <a href="https://academic.oup.com/pnasnexus/article/4/5/pgaf119/8124984?login=false">work</a> in <em>PNAS Nexus</em>, assigned 29 dilemma types to six distinct moral themes: honesty, relational obligation, social norms, fairness and proportionality, harm and offense, and feelings.</p>
+<p>The findings suggest that people put dishonesty—cheating, lying, and secret violation—at the top of the list of morally egregious behaviors, ahead of acts of intentional harm. Being judgmental came in third place. The most frequent concerns involved family (21 percent), the workplace (8.4 percent) and weddings (4.2 percent). Of the thousands of moral dilemmas contained in the dataset, more than 80 percent of those quandaries involved people with an identifiable social relationship, while the types of dilemmas faced varied depending on that relationship.</p>
+<p><img alt="" src="../images/UosD3PP3-French_BREAKER.png" /></p>
+<p><strong>TAXONOMY OF VIRTUE:</strong> A semantic map of the moral dilemmas described across 369,161 posts and 11 million comments on those posts published between April 4, 2018 and July 25, 2021 on r/AITA. The most frequently occurring situations pertained to family (21 percent), the workplace (8.4 percent), and weddings (4.2 percent). <em>Credit: Yudkin et al.</em></p>
+<p>According to the researchers, while moral psychology has been studied intensively for hundreds of years, most experimental research has relied primarily on posing hypothetical decisions to study participants that involve “raceless, genderless strangers” and extreme situations, such as murder or incest. This narrow methodology left a gaping hole in our understanding, neglecting the more-mundane but likely more-universal conflicts we tend to navigate in our daily lives and the ways these are shaped by the people closest to us.</p>
+<p>The dataset of Reddit comments used in the study was huge: The researchers employed natural language processing tools to analyze 369,161 posts and 11 million comments on those posts published between April 4, 2018 and July 25, 2021 on r/AITA. They then used qualitative and quantitative methods to test and refine a list of the most commonly occurring dilemma types in a subset of these data and extrapolated this to the full list using supervised machine learning. A follow-up study, in which they surveyed a representative sample of the United States population, confirmed that the findings also apply to the general population.</p>
+<p>The researchers acknowledge the limitations of their approach: The r/AITA user base skews toward individuals aged 18-29 years old, and questions framed around whether someone is the asshole cannot cover the full scope of moral concerns. The findings may also be less representative of collectivist societies that place greater emphasis on social obligation, relational harmony, and filial piety.</p>
+<p>But the analysis does provide a quick map of where and when people are most likely to wag a finger in their daily lives. Or when, as one commenter on the recent graduate's Reddit post noted, someone else "is most definitely the A-hole." <img alt="" src="../images/nautilus-favicon-14_1174.png" /></p>
+<p><em>Lead image: cosmaa / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chernobyl, 40 Years Later | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Chernobyl, 40 Years Later</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-N3BE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>This week marks four decades since the meltdown of the Chernobyl nuclear reactor in what was then the Soviet Union and is now the Ukraine. The accident happened on April 26, 1986 and became known to the wider world on April 28, when radiation levels spiked at a nuclear power plant in Sweden, more than 620 miles away.</p>
+<p>The ensuing days, weeks, and months would reveal the extent of the catastrophe, which started with a test gone awry. Operators of the plant were running a simulated accident where they needed to cool down one of the nuclear reactors after a drop in power.  But when the reactor was powered down to the appropriate test level, the power suddenly dropped to just above shutdown. Operators, trying to increase power to the reactor, removed several control rods, which led to an extremely unstable state. The reactor’s intensified nuclear chain reaction led to uncontrolled boiling of coolant, which caused steam to build up, rupturing the walls that contained the nuclear fuel, and releasing those materials into coolant channels, which also ruptured.</p>
+<p>Explosions and the meltdown of the reactor destroyed the reactor building. As the reactor core burned, the fire released at least 5 percent of the reactor core and spewed radioactive material across a wide swath of Europe and the Soviet Union. In relatively short order, Soviet response teams set up an exclusion zone that would eventually span more than 35 miles around the plant as they evacuated more than 100,000 people. Years after the accident, more than 200,000 additional people were resettled into less-contaminated areas in nearby regions.</p>
+<p><strong>Read more: “<a href="https://nautil.us/chernobyls-hot-mess-the-elephants-foot-is-still-lethal-234678">Chernobyl’s Hot Mess, “the Elephant’s Foot,” Is Still Lethal</a>”</strong></p>
+<p>Official estimates of the death toll are disputed, but a World Health Organization report from 2006 states that 30 power plant employees and firefighters died in the accident and immediately after. Several more people died from other causes related to the Chernobyl accident in the years after it occurred.</p>
+<p>Chernobyl stands as one of the costliest disasters ever. A 2016 literature review from the University of Southern California’s Institute on Inequalities in Global Health <a href="https://globalhealth.usc.edu/wp-content/uploads/2016/01/2016_chernobyl_costs_report.pdf">estimated</a> those costs to be $700 billion over 30 years. “Of course, the costs will continue to mount, reflecting the need to maintain the plant, the withdrawn land, and persistent health consequences,” the authors of the report wrote.</p>
+<p>Chief among those consequences has been a dramatic uptick in thyroid cancers among children and young people exposed to fallout from the Chernobyl accident. A 2004 paper in <em>Radiation Research</em> <a href="https://pubmed.ncbi.nlm.nih.gov/15332999/">suggested</a> that children who received higher doses  of radiation from Chernobyl had an incidence of thyroid cancer that was 45 times higher than those who got the lowest dose considered in the study.</p>
+<p>But the exclusion zone, which still exists around Chernobyl, has recently yielded some ecological surprises. Researchers have been studying ecosystems in the exclusion zone, where intense radiation persists, for decades. They’ve found troubling signs of the disaster’s impact on nature, such as tumor-riddled birds, radiation-tolerating fungus, and even <a href="https://nautil.us/the-paradox-of-the-radioactive-boars-376225">radioactive boars</a> as far afield as German forests.</p>
+<p>The exclusion zone also harbors populations of animals and plants that appear to be thriving, most likely due to the lack of humans and despite the radioactive fallout that blanketed the area. To be sure, the input of radiation changed the immediate landscape, selecting for some tree and animal species over others. Keystone predators, such as brown bears and wolves returned to the land surrounding the ruined nuclear plant, sometimes after absences of decades. And their prey species abound as well. "It's teeming with trees and wildlife but it's not the same as it was before the accident,” McMaster University radiobiologist Carmel Mothersill recently <a href="https://www.bbc.com/future/article/20260424-chernobyl-wildlife-forty-years-on">told</a> the BBC.</p>
+<p>As researchers continue to tease apart the ecological dynamics and public health challenges set in motion by one of history’s biggest human-made disasters, we remember the week that started it all. <img alt="" src="../images/nautilus-favicon-14_134.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Sid10 / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

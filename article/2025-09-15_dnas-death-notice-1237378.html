@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA’s Death Notice | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>DNA’s Death Notice</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PF72</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Imagine being able to see what Rosalind Franklin saw, when she and a graduate student first imaged the structure of DNA—and then study the intimate handwritten notes on the back of it.</p>
+<p>Now, in fact, you can. A trove of landmark historical science images and artifacts (which also include notebooks, handwritten annotations, and even an inside joke or two), have recently joined the collection of the Science History Institute, a Philadelphia-based museum and library, which is working on making them widely available to the public.</p>
+<p><img alt="DNA'S FIRST CLOSE-UP: This historic DNA X-ray diffraction pattern, known as &quot;Photograph 51,&quot; was generated in 1952 by Rosalind Franklin and her grad student Raymond Gosling at King's College London. Annotations by Franklin and her colleague Aaron Klug grace the back of the image, which finally resolved the long standing question of DNA's structure, the double-helix. Image courtesy of the Science History Institute." src="../images/franklin_breaker1.png" /></p>
+<p><strong>DNA'S FIRST CLOSE-UP:</strong> This historic DNA X-ray diffraction pattern, known as "Photograph 51," was generated in 1952 by Rosalind Franklin and her grad student Raymond Gosling at King's College London. Annotations by Franklin and her colleague Aaron Klug grace the back of the image, which finally resolved the long standing question of DNA's structure, the double-helix. <em>Image courtesy of the Science History Institute.</em></p>
+<p>The crown jewel of the collection so far is, of course, the image produced in 1952 by <a href="https://nautil.us/one-of-the-most-egregious-ripoffs-in-the-history-of-science-238331/">X-ray crystallographer Rosalind Franklin</a> and her grad student Raymond Gosling showing the double-helical structure of a DNA molecule. The “Photo 51” image, which was Franklin’s own personal copy and is annotated with handwritten notes on the back, will be the centerpiece of a new exhibition at the Science History Institute museum planned for fall 2027, which will mark the 75th anniversary of “Photo 51.”</p>
+<p>The newly acquired collection features laboratory devices used by Franklin and Gosling in their seminal research, as well as letters, photographs, and other materials from the pair and from other notable molecular biologists of the era. You can also find pictures of Franklin on vacation and even <a href="https://digital.sciencehistory.org/works/j8nmuvy">a death notice</a>, written in jest, for DNA’s helix structure (a delightful reminder that even <a href="https://nautil.us/the-prizefighters-543303/">Nobel-worthy</a> scientists <a href="https://nautil.us/scientists-are-people-too-1237050">like to have a bit of fun</a> here and there).</p>
+<p><img alt="VACAY BEFORE BREAKTHROUGH: This vacation shot of Franklin was taken by her friend and collaborator in 1950, two years before she created “Photograph 51.” Photo by Vittorio Luzzati, courtesy of the Science History Institute." src="../images/franklin-breaker2.png" /></p>
+<p><strong>VACAY BEFORE BREAKTHROUGH:</strong> This vacation shot of Franklin was taken by her friend and collaborator in 1950, two years before she created "Photograph 51." <em>Photo by Vittorio Luzzati, courtesy of the Science History Institute.</em></p>
+<p>“We see this as a seed collection that will inspire further growth as we preserve the history of the life sciences for a global audience,” David Cole, president and CEO of the Science History Institute, said in a <a href="https://www.sciencehistory.org/about/press/science-history-institute-acquires-molecular-biology-archive/">statement</a>. The History of Molecular Biology Collection was recently acquired from the J. Craig Venter Institute, and staffers at the Science History Institute are at work digitizing the materials it contains, providing free access through their website.</p>
+<p>In the meantime, there are more than 140 items already available to peruse and glimpse the inner workings of the people who coaxed revolutionary insights from the hidden worlds that surround us.  <img alt="" src="../images/nautilus-favicon-14_962.png" /></p>
+<p><em>Lead image courtesy of Science History Institute</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

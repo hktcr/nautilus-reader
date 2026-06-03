@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bats That Glow | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Bats That Glow</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-U3N1</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Bats are sometimes called the “<a href="https://kinema.com/events/The-Invisible-Mammal-Bat-Week-iehbpf">invisible mammal</a>.” Their nocturnal lifestyle, combined with their silent hunting strategy and hidden haunts make them obscure to all but the most dedicated chiropterologists. But new light is being shed on the typically shadowy mammal, and just in time for <a href="https://batweek.org/">Bat Week</a>.</p>
+<p>Six species of North American bats recently managed to surprise researchers who learned that the flying mammals emit an eerie green glow after being illuminated with ultraviolet light. Checking 60 separate museum specimens, scientists working at the Georgia Museum of Natural History found that all of them glowed a shade of green under the ultraviolet light. Although several insects, plants, and mammal species—including flying squirrels and pocket gophers—have been shown to <a href="https://nautil.us/seeing-through-animal-eyes-509263/">glow</a>, this is the first time that researchers have documented the phenomenon in North American bats. They published their <a href="https://onlinelibrary.wiley.com/doi/10.1002/ece3.71885">findings</a> in <em>Ecology and Evolution</em>.</p>
+<p>Interestingly, the bats all seemed to glow in the same spots, specifically on their wings and hind limbs. Because they all glowed in the same way with the same hue, the authors suggested that the function of the characteristic is not to differentiate species or sexes. “It’s cool, but we don’t know why it happens,” said Steven Castleberry, study coauthor and University of Georgia biologist, in a <a href="https://news.uga.edu/bats-glow-under-uv-light/">statement</a>. “What is the evolutionary or adaptive function? Does it actually serve a function for the bats?” Castleberry and his colleagues posit that the glow may be a remnant of some ancient adaptation retained by numerous bat species, but add that studying it in living bats might yield more information as to its ecological function.</p>
+<p><img alt="" src="../images/Rie7t0nj-Grant_BREAKER.png" /></p>
+<p><em>Photo by Mickey Samuni-Blank / Wikimedia Commons</em></p>
+<p>The mammals have other tricks up their sleeves. In a survival struggle between bats and rats, researchers have highlighted some clever behavioral changes. Things can get rather testy between Egyptian fruit bats and black rats where their ranges overlap. They compete for food and sometimes even prey upon each other. It turns out that the fruit bats change the way they forage depending on the abundance of rats—and of their shared resources.</p>
+<p>Researchers at Tel Aviv University studied hundreds of hours of video of a semi-natural bat colony for seven months and noticed that bats altered their feeding strategies in unexpected ways from winter to warmer months. In winter, when rats—which sometimes prey on bats—and food were both scarce, bats behaved skittishly, landing less frequently and showing heightened vigilance, which decreased their feeding efficiency. But when the weather warmed, and the bats’ chances of encountering food and rats increased, they landed and fed more often. This time of year also saw an increase in bat-rat interaction, with bats boldly attacking the rodents at times.</p>
+<p>The researchers published their <a href="https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-025-02380-y">results</a> in <em>BMC Biology</em>. “We tend to describe relationships between different species in simplistic terms—either as competition or predation,” said study coauthor and Tel Aviv University bat biologist <a href="https://nautil.us/ai-could-help-humans-understand-animals-1211108/">Yossi Yovel</a> in a <a href="https://english.tau.ac.il/research/bats_confront_rats">statement</a>. “This study shows how complex such relationships can be and how animals are able to adapt their response strategies to changing circumstances.”</p>
+<p>As new insights into the physiology and behavior of bats emerge, scientists are also discovering entirely new species. Researchers studying bats from the tropical forests of the Philippines have formally named six new species. All of the new-to-science bat species are so-called tube-nosed bats, members of genus <em>Murina</em>. Scientists with the Royal Ontario Museum, the Field Museum in Chicago, and Lawrence University in Wisconsin, used several methods, including morphological analysis and genetic testing, to confirm the classification of the new species, which all subsist on a steady diet of insects in their protected forest home. “It has been a long and slow process of discovery, but these six previously unknown species show clearly just how wonderfully extensive Philippine biodiversity is,” Lawrence Heaney, Curator Emeritus of Mammals at the Field Museum and coauthor of the <em>Zootaxa</em> paper <a href="https://mapress.com/zt/article/view/zootaxa.5691.1.1">detailing</a> the discovery, in a <a href="https://phys.org/news/2025-10-species-forests-philippines.html">statement</a>.</p>
+<p>As you progress through Bat Week 2025, spare a thought for these oft-maligned marvels of nature. They may be spooky to some, but they are also a source of continuing scientific surprises. <img alt="" src="../images/nautilus-favicon-14_875.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em>.</p>
+<p><em>Lead image: Ecology &amp; Evolution</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

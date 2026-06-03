@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dreams of a Bumblebee in Autumn | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Dreams of a Bumblebee in Autumn</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-11
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-X33W</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>When I was younger, autumn’s beauty was uncomplicated. Now I’ve reached the age when autumn is a reminder of mortality. Gloriously turning leaves foreshadow their own fading; cool breezes promise the coming cold. The people I love will die and so will I, whispers the season, and on those bittersweet days I take solace in New England asters: a tall, purple-blossomed perennial found across much of the United States and Canada, blooming in early autumn and remaining in flower until the season’s end, long after other blossoms are a sun-hazed memory.</p>
+<p>They’re beautiful, but that’s not the only comfort asters bring. I love them because they ease the passage of bumblebees from this life. By mid-autumn the life cycle of their colonies is nearly finished; the workers who foraged so tirelessly all summer have only a few weeks or days left. So too the male bees who are born in late summer, departing soon after to find queens with whom to mate before spending their own final days alone on the landscape.</p>
+<p>For them the asters are a last source of pollen and nectar. The bees who consume them have only a few days left, but at least their stomachs will be full. And when I walk along my driveway on late autumn evenings, I see bumblebees lying atop the asters, sometimes two to a blossom, the petals embracing them as sunlight fades. At night they will sleep there, and some will die when the temperature falls—but at least they will do so on a bed of pollen, their senses and perhaps even their dreams suffused with its smell and taste. I like to think they will be content.</p>
+<blockquote>
+<p>The sleep of bumblebees resembles our own, alternating between a deep slumber and REM.</p>
+</blockquote>
+<p>Now, some people might be reluctant to think that a bee would experience all this in a relatable way. They might catch themselves in that moment of kinship and think they are being too sentimental. Yet research on the minds of bees gives us this permission—not to think of them as tiny humans, necessarily, but to speculate about what they think and feel as they rest on those asters.</p>
+<p>Much is known about the brains of bees, whose anatomy and chemistry in many ways resembles our own. Studies of bee behavior show the resemblance is more than superficial. <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(17)31017-5">Countless experiments</a> describe their ability to learn and remember; more fundamentally, bees are able to direct their attention selectively—a hallmark of subjective consciousness. They also have emotions: the capacity to experience not only life’s physicality, but its feelings.</p>
+<p>This was first explored in two now-classic studies of what are known as cognitive biases: the tendency to view ambiguous situations in an optimistic or pessimistic light. In humans, these biases often reflect our moods. A happy person will see the proverbial glass as half-full, while an unhappy person will see it as half-empty. In honeybees <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3158593/">this was tested</a> by teaching them to associate different scents with tastes—one with a sweet solution, another with a bitter brew—and then presenting them with an intermediate odor.</p>
+<p><img alt="" src="../images/gbW1lAuq-Keim_BREAKER-1.png" /></p>
+<p><strong>BROKEN DREAMS:</strong> Studies show pesticides can disrupt the normal sleep patterns of bees, causing them to slumber more in daytime and impairing their ability to forage. A field of asters like this one in Maine can offer bees a final peaceful rest. <em>Photo by Brandon Keim.</em></p>
+<p>After their colony was shaken, simulating a predator attack, bees hesitated to approach the uncertain smell. In short, they appeared to be in bad moods. Another, similar <a href="https://www.science.org/doi/10.1126/science.aaf4454">study of bumblebees</a> found that, having first received a sugary treat, they were more likely to investigate an ambiguous cue. The findings moved bees beyond the raw momentary feeling of pain or pleasure and into a more truly emotional territory, the sort of steady state one could imagine after a good meal.</p>
+<p>The findings were made in a laboratory, of course, rather than directly testing whether a bee sipping nectar from an aster is happy. “There is no data, no study, no demonstration,” says Mathieu Lihoreau, an evolutionary biologist who studies insect cognition at the University of Toulouse in France, and the author of <em>What Do Bees Think About?</em> “But it’s very likely.” Not only should bumblebees take pleasure in their aster meals, Lihoreau says, but the blossoms offer the comfort of familiarity. They know the flowers well. “If you are in a familiar place, and you know all the stimuli, then we as humans feel better,” he says. Though it’s too soon to “say with certainty that they feel the same, it’s a possibility.” And not only are the asters familiar; they are warm. Over the course of a day their blossoms absorb the October sun’s rays, raising their temperature above the surrounding air by several degrees. Bumblebees, whose bodies may be even warmer than our own, generate their own heat by vibrating their flight muscles. The extra heat should be welcome on a cool evening.</p>
+<p>As night falls, the flowers’ petals close around the bumblebees, offering the comfort of a warm embrace—perhaps intimating the press of bodies in their colony—as they fall asleep. For insects do in fact sleep, and the sleep of bumblebees also <a href="https://royalsocietypublishing.org/rstb/article/380/1939/rstb.2024.0302/235190/The-exploration-of-consciousness-in-insectsThe">resembles our own</a>, alternating between a deep slumber and a shallower, more mentally active state that seems akin to REM sleep, with our rapid eye movements replaced by a twitching of antennae. Which poses the question: Do those sleeping bees dream?</p>
+<p>In humans, dreams occur in both deep and REM sleep, though it’s the latter that we recall most vividly. The dreams are a manifestation of what occurs in our brains at these times: Deep sleep seems to be a period of memory consolidation, when a brain replays events from the day, saving the most salient information and pruning what can be discarded.</p>
+<blockquote>
+<p>What might a bumblebee dream of? Perhaps the flowers they have visited, the path to get there.</p>
+</blockquote>
+<p>Researchers have <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(15)01223-3">explored the deep-sleep state</a> of honeybees, using an odor associated with a training task to enhance the sleeping insects’ memories of what they had learned. When tested upon waking, the bees’ recall was boosted in comparison to bees who did not receive that odor prompt. The same phenomenon is seen in similar experiments with humans, leading the researchers to conclude that deep sleep for bees is, as it is for us, a time for processing memories.</p>
+<p>“In deep sleep, their muscles are fully relaxed and their antennae and body sink to the ground,” says Hanna Zwaka, a neurobiologist at the Leibniz Institute for Neurobiology in Germany, who led the study of sleeping honeybees. “What does that have to do with dreaming? We believe that some of our dreaming could reflect similar reactivations.”</p>
+<p>Less is known about the active sleep state in bees, but one theory holds that REM sleep—its dream-saturated mammalian analogue—occurs while a brain optimizes its models of the world. Rather than reviewing a day’s memories, the REM-sleeping brain runs simulations reassembled from previous experiences, preparing itself to better navigate an unpredictable world upon waking. Active sleep has not been studied in bees, but it has been documented in fruit flies.</p>
+<p>“The brain looks like it’s still awake, but the fly is unresponsive to the outside world,” says Bruno van Swinderen, a neurobiologist at the University of Queensland in Australia who has studied sleep and cognition in flies. “They’re in some kind of altered state that is basically similar to what we think is happening in REM sleep.” The same likely occurs in bees, he says.</p>
+<p>And what might a bumblebee dream of? The moments of their life, perhaps: the flowers they have visited, their taste and smell. The paths they followed to get there. Other bees they have known. Zwaka thinks bees “might dream about anything they have learned—colors, odors, or places.” Perhaps, says Zwaka, my bumblebees atop their asters dream of their warm home.</p>
+<p>I wonder whether, much as our own dreams may incorporate some stimulus from the external world—a song drifting through an open window, mysteriously woven into the dreamtime narrative—so might the same happen to a bee. The warm aster blossom embrace, the full stomach, every sense pervaded by the flowers that are so central to their existence: How could a dream in such conditions be anything but beautiful?</p>
+<p>Late in autumn, when only a few asters remain in flower and the days feel suddenly short, I walk by them each evening and morning, looking for bees and hoping for just one more day before the hard frost that will bring their final sleep. Of course, the days will run out; rather than being revived by the sun, they will fall from the flowers. Foreknowledge and its sadness are inescapable. But at least there is this small peace, this kind departure for the bumblebees whose efforts have helped the world bloom.</p>
+<p>Not many animals die so well. Most will die of disease, injury, starvation, or predation. And as much as we want to believe that humans have exempted ourselves from this cruel fact of life, our own deaths are frequently protracted and painful. To see an aster, though, is to know that at least someone is departing with grace. To tend asters is a gesture of hope, a small and profound act of benevolence.</p>
+<p>It is winter now. The asters have turned brown and dormant. Bumblebee queens are dormant too, nestled in the burrows from which they will emerge in tandem with spring’s first flowers. The blossoms and their bees are a memory and an anticipation, but the days are getting longer. Soon it will be time for planting. <img alt="" src="../images/nautilus-favicon-14_444.png" /></p>
+<p><em>Lead image: Brandon Keim</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

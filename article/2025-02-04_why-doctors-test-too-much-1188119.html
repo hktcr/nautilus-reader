@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Overtesting Is Still a Problem | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Medical Overtesting Is Still a Problem</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-JOO6</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The toddler squirms around in her mom’s lap as I walk into the exam room. The reason for the appointment: “Fatigue for two weeks.”</p>
+<p>In medicine, “fatigue” has a list of causes that is longer than the length of a doctor’s white coat.</p>
+<p>On average, a million doctor-patient visits take place each day in the United States, and these often start with very general, vague complaints like fatigue, abdominal pain, or headache. Most of these visits will conclude with a doctor ordering laboratory, radiology, or other tests to dig deeper for a cause. These tests give us the ability to peer inside the human body with remarkable breadth and depth, to provide our patients with a diagnosis and ways to treat it. With a diagnosis comes certainty and a way forward.</p>
+<p>But in our efforts to care for our patients and provide that certainty, it seems we are overtesting them. A 2021 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8685650/#s5">analysis</a> of healthcare testing over a 15-year period revealed “substantial overuse of diagnostic testing … across healthcare settings.” The rate of overuse varies by specialty and setting but is especially high for pre-surgery blood tests and EKGs and for back pain imaging. Overtesting is not a new problem, either: Over a decade ago, researchers <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0078962">estimated</a> that 20 percent of medical diagnostic tests were unnecessary.</p>
+<blockquote>
+<p>Because time is something doctors don’t have a lot of, we compensate by ordering a battery of tests.</p>
+</blockquote>
+<p>All of this testing not only costs our healthcare system and patients in time and money—insurance reimbursements and patient copays—it can also do real-world harm to our patients. It increases the possibility of false positive results, which may lead to still more testing, creating a vicious cycle. It can drive misdiagnosis, followed by unnecessary prescriptions and even surgery. It can expose patients to unneeded radiation from X-rays and scans, and anemia from repeated blood draws. It can also cause unnecessary anxiety, with patients spending sleepless nights worrying about their health, and taking precious time away from their lives to make endless hospital and doctor visits.</p>
+<p>So what drives us to overtest?</p>
+<p>Most every doctor visit starts with a conversation with the patient to uncover the “history of present illness” and pinpoint the possible underlying causes for whatever malady they may present. After that conversation and a physical exam, the conscientious doctor puts together a list of potential causes for the symptoms. That “differential diagnosis,” as we call it, prompts us to order specific tests, with more to come if we need to look further for answers. Beyond diagnostic testing, of course, doctors also test to prevent disease (a mammogram to look for early signs of breast cancer) and to see if what we are doing is working (checking blood levels of a medicine to make sure it is working without becoming toxic).</p>
+<p>Plenty of guardrails have been established to help doctors make good decisions about which tests to order. For many medical problems, guidelines or algorithms developed by experts offer explicit guidance. During my pediatric residency, for example, new research standards were set for the evaluation of infants with a fever: Depending on their age (under a month, between 1 and 3 months, and over 3 months), specific blood, urine, and even cerebrospinal fluid tests were recommended to establish the cause of the fever. Every time I saw a baby with a fever, I followed these standards reflexively. Likewise, the protocols are very clear around preventive screening for prostate cancer or for sexually transmitted diseases like gonorrhea or chlamydia.</p>
+<p>But illness is rarely clear cut, and when the answer isn’t obvious it can take a lot of time to thoroughly understand the patient’s experience. Because time is something doctors don’t have a lot of, we compensate by ordering a battery of tests.</p>
+<p>Financial pressures for doctors and teams play a part. In many emergency rooms, for example, just walking through the door earns a patient a blood draw or X-ray before a consultation with a doctor because it allows for faster decision making, and less time per patient in exam rooms, all of which keeps generating revenue for the hospital. (The per-patient money generated on a hospital or emergency bed may, in the calculations of a hospital accountant, make up for the cost of overtesting).</p>
+<blockquote>
+<p>As much as we want to imbue medicine with a sense of the absolute, what happens in the exam room is cloudy.</p>
+</blockquote>
+<p>In that same vein of efficiency, the advent of the electronic medical records enabled doctors to order tests with the click of a mouse or a tap on their smartphones. Some sets of tests can now be ordered all at once, or even repeatedly, to check a patient’s progress over time. But a technology that was meant to save time also drives excessive testing. I recently learned that women admitted to the hospital to give birth still automatically receive COVID-19 testing even if they are completely free of symptoms. During the pandemic, such universal testing helped to prevent hospital-wide outbreaks of Covid. Today, the consensus is that only testing of patients with symptoms makes sense. Even though policies have been updated, our systems lag, the box remains pre-checked and testing continues.</p>
+<p>Many doctors also practice defensive medicine, ordering tests to mitigate malpractice risk. And, in an era when medical information is widely available via the internet via Google or ChatGPT, and online review sites like Yelp, patients come to the doctor’s office with strong opinions about what their doctor ought to order for them. In these cases, doctors may feel pressure to order tests as a customer service, often irrespective of any clinical need. Of course, experience and intuition also play a role in the practice of medicine, and so some newer doctors will order more tests than more seasoned ones. These days when I see an infant with a fever, I trust my instincts and examination skills more than I did earlier in my career.</p>
+<p>Patients come to us seeking an answer, seeking certainty, about what ails them. But when we overtest, we create unnecessary uncertainty. A cautionary<a href="https://www.nejm.org/doi/10.1056/NEJMp1409841">tale</a> out of South Korea from 10 years ago vividly illustrates the problem. Its lessons still resonate today. Like in the U.S., South Korea’s citizens benefit from advanced testing technologies, such as ultrasound. It turns out, though, that doctors were overusing ultrasound to screen for thyroid cancer (in the U.S., we do not do this kind of screening). An analysis found that of the 40,000 people given a diagnosis of thyroid cancer, only about 300-400 actually had it.</p>
+<p>Patients have shared with researchers how grueling endless testing can be: “It was difficult in terms of work, in terms of just organizing your daily life around having to go and get another bloody test,”the patient said. It caused great anxiety, gave rise to a sense of futility. Another likened her experience to stepping through a minefield. “Oh my God! What are they going to find?” she said. “It’s kind of like a bomb … I know it’s there—when’s it going to explode?”</p>
+<p>Efforts to test less in medicine are underway. The <a href="https://pubmed.ncbi.nlm.nih.gov/37170760/">best</a> involve getting a group of doctors in a practice or health system together to agree that certain tests have limited value and should be ordered less or not at all and then assessing the impact of a change on patient care (this <a href="https://www.nejm.org/doi/full/10.1056/NEJMc1507622">happened</a> in South Korea for thyroid cancer screening). One group, The American Board of Internal Medicine, has designed an education campaign for both doctors and patients. Certain health systems, including mine, have started to edit their electronic ordering systems by removing low-value tests from the menu or switching off default orders.</p>
+<p>But knowing when and what to test is a problem without an easy fix: Certain areas of medicine actually suffer from undertesting. While not as well understood as overtesting, researchers have identified some standout examples. In primary care, echocardiography is often <a href="https://pubmed.ncbi.nlm.nih.gov/29440142/">underutilized</a> to confirm diagnoses of heart failure, as are pulmonary function tests for asthma or chronic lung disease. Other studies suggest emergency rooms and hospitals underutilize tests to diagnose urinary tract infections, HIV, and disorders of blood clotting.</p>
+<p>The potential reasons for undertesting are many. Some experienced doctors may feel overconfident in their clinical intuition and skills. Others may lack information about the state-of-the-art for a particular disease. Or maybe our patients fail to tell us the whole story. Take, for example, the teenager who comes in with abdominal pain but doesn’t admit to being sexually active. We may fail to order a test because we know that insurance won’t reimburse enough or at all for the cost to do it: Ultrasounds to perform echocardiograms and pulmonary function testing equipment are quite costly.</p>
+<p>Evidence <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2822867#:~:text=A%202023%20study2%20found,value%20screening%20tests%20and%20treatment.">suggests</a> that doctors also order fewer tests to help diagnose the ailments of people of color compared with white patients. This may be due to racial bias as well as to medical mistrust by minorities, some of whom refuse our testing recommendations out of suspicion. Whatever the causes, missing a diagnosis is a patient’s—and a doctor’s—worst nightmare.</p>
+<p>The problem, then, is a Goldilocks one. We can’t go too big. We can’t go too small. We can’t be too confident and undertest, and we can’t be too nervous and risk averse and overtest. We have to put patients first no matter the economic incentives and pressures. We have to keep up with the latest science and apply intuition. We have to know that any two patients, even those with the same problem and symptoms, may have different needs despite the algorithm. We have to acknowledge that as much as we want to imbue medicine with a sense of the absolute, what happens in the exam room is cloudy.</p>
+<p>We need to figure out what’s just right. This is the art of medicine.</p>
+<p>Which brings me back to my toddler with fatigue. Through my questioning and exam, I was able to learn that this little girl had spent a good chunk of the holiday season staying up later than usual to have fun with family. Her regular sleep schedule was off. But I also learned that she consumed a lot of milk for a child her age, which can increase the risk of anemia, and in turn lead to fatigue. I was told the family had a history of hypothyroidism, but I surmised it was unlikely for this little girl given she did not have other symptoms of it.</p>
+<p>I was able give the child’s mom a reassuring answer: I thought some sleep training was in order and that over a few days, she’d be her exuberant toddler self again. I also ordered a test to check her for anemia. Rather than subject her to repeat trips to the phlebotomist, I added a thyroid test. Just in case. <img alt="" src="../images/nautilus-favicon-14_1271.png" /></p>
+<p><em>Lead image: AtlasbyAtlas Studio / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

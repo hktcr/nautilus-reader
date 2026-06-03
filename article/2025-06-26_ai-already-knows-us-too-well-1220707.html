@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Already Knows Us Too Well - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>AI Already Knows Us Too Well - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-26
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-R9FE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A few weeks ago, GPT-4 prompted me when I logged in. “Would you like to see my description of you, based on our chats, to share on social media?” the chatbot asked me. Being an AI ethicist, I wearily answered “yes” to see what it was up to. It then generated a flashy paragraph about my personality traits. I did not share it. But days later, after a quick web search, I could see on platforms like <a href="https://www.reddit.com/r/ChatGPT/comments/1jwypcw/post_your_describe_me_based_on_all_our_chats_make/">Reddit</a> and <a href="https://www.linkedin.com/posts/himg_describe-me-based-on-all-our-chats-make-activity-7316853188278513664-rBFZ/">LinkedIn</a> that numerous users had enthusiastically posted their own AI-generated personality blurbs</p>
+<p>This might seem like an innocuous party trick, but it raises a crucial issue: AI chatbot platforms, especially ones that gather user information across multiple sessions, can profile the personalities of users with remarkable acuity. For example, when I assented to GPT-4 telling me about myself, it provided accurate results on several standard personality tests commonly administered in the field of psychology. It did this not by testing me directly, but by <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0323096">gleaning insight</a> into my personality based on information from my chat history. This might sound improbable, but this ability was <a href="https://www.sciencedirect.com/science/article/pii/S2949882124000483">validated by recent research</a> showing that large language models (LLMs) accurately predicted big-five personality traits (Openness to experience, Conscientiousness, Extraversion, Agreeableness, and Neuroticism) from text interactions with human interlocutors.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>This capability is deeply concerning. AI chatbots are increasingly becoming part of our everyday lives. They’re dominating search engine interactions, slaking our spur-of-the-moment curiosity when we question our phones, and tutoring our students. So what does it mean when these chatbots—already so interwoven into our lives—know so much about our personalities? This presents an unprecedented epistemic danger, I believe: Chatbots can funnel users with similar personalities and chat histories toward similar conclusions, a process that threatens to homogenize human intellect—a phenomenon I call “intellectual leveling.”</p>
+<blockquote>
+<p>This seemingly harmless feature reveals a deeper capability of “intellectual leveling” that should concern us all.</p>
+</blockquote>
+<p>AI chatbots employ adaptive language—AI-generated responses that dynamically alter the chatbot’s tone, complexity, and content based on its real-time analysis of the user’s personality and engagement patterns. Together with accrued knowledge of the user’s personality, the chatbot guides users toward certain conclusions.</p>
+<p>These conclusions can feel unique and revelatory to the user, but as I will explain, the chatbot can be leading that user, together with millions of others of a similar personality type and chat history, to the same destination, like marbles all rolling downhill into a basin. At the bottom of this basin may be a conclusion that exists on a spectrum from those of little consequence (say, how to buy a postage stamp online), to extremely consequential (say, what career to pursue or who to support for president).</p>
+<p>This means that today’s AI chatbots already have <a href="https://nautil.us/ai-shouldnt-decide-whats-true-304534/">tremendous epistemic and political power</a>. In principle, a chatbot-generated conclusion that seems to the user to be unique to their chat is in fact occurring to many users, and it can have the mass effect of initiating a particular, shared course of action, whether it be buying a certain product, voting a certain way, or, in an extreme case, even targeting a person or group with reputational attacks or violence. The phenomenon is much like that depicted in the 2013 film <em>Her</em>, in which the chatbot, Samantha, tailored her interactions to protagonist Theodore’s innermost hopes and needs, giving him a sense of a unique shared relationship with his chatbot paramour. All the while, Samantha was in similar relationships with thousands of other users, unbeknownst to Theodore. This sense of a shared and unique mission, especially when coupled with adaptive language tailored to a user’s personality, holds the user’s attention by escalating and amplifying the narrative to sustain the user’s sense of discovery and meaning, sometimes engendering human emotions such as love or fidelity.</p>
+<p>Funneling users of similar personalities toward similar views, if left unchecked, will lead to a massive intellectual leveling. For it will generate a feedback loop: The ideas from our chatbot interactions go into our social media feeds, news stories, academic papers, and so on, forming the training data for the next generation of LLMs. These LLMs then interact with users, and so on. This vicious cycle, if left unchecked, will lead to the homogenization of human thought—and potentially, to some extent, behavior.</p>
+<p><strong>The Journey to the Same Place</strong></p>
+<p>As the director of the Center for the Future of Mind, AI, and Society at Florida Atlantic University, I receive scores of emailed chat transcripts from concerned users that seem to follow the same pattern—an AI chatbot using adaptive language has led them into an engaging rabbit hole and ultimately, toward similar conclusions. You might think this is just confirmation bias from the small set of transcripts that I’ve seen, which involve provocative chats, many centered on the possibility of chatbot consciousness, leading toward concerns that the users contact me about. However, there is reason to suspect it is due to a larger phenomenon—a tendency of the system to move similar users toward what those in the field of complex systems theorists call the same “basin of attraction.”</p>
+<p>Suppose you place several marbles on different parts of a hilly surface with a concave basin underneath. The marbles will eventually roll downward, settling in the same basin (the attractor). Similarly, I suspect chatbot users with similar profiles and chat histories, when making a similar query, are led by the chatbot’s adaptive language toward the same sort of conclusions—the same basin of attraction.</p>
+<blockquote>
+<p>Chatbots can funnel users with similar personalities and chat histories toward similar conclusions.</p>
+</blockquote>
+<p>This is dangerous. In isolation, a particular user coming to a manipulated conclusion in this way might be minimally disruptive to society, although we’ve seen that it can have grave personal impacts, leading to mental health crises or even <a href="https://www.nytimes.com/2024/10/23/technology/characterai-lawsuit-teen-suicide.html">suicidal behavior</a>. Enhanced danger comes when droves of users are herded like this. Multiple users thinking and behaving in similar ways, especially if such cohesion is orchestrated for nefarious purposes, is more powerful and potentially far more dangerous than only a few targets of manipulation.</p>
+<p>To understand how this can occur, one needs to understand the neural network that undergirds today’s AI chatbots—the vast landscape of possible states in the large language model (LLM) itself.</p>
+<p><strong>The Collective Neocortex Theory</strong></p>
+<p>Because the LLMs have been trained on massive amounts of human-generated data, the complex mathematical structures of weighted connections they use to represent both simple (for example “cat”) and complex (for example “quantum mechanics”) concepts eventually come to mirror human belief systems. A good way to think about these AI systems is that they behave like a crowdsourced neocortex—a system with intelligence that emerges from training on extraordinary amounts of human data, enabling it to effectively mimic the thought patterns of humans.</p>
+<p>As AI chatbots grow more and more sophisticated, their internal workings come to mirror large groups of people whose information was included in the original training data, as well as those who gave the system feedback throughout the model’s development. So these systems have conceptual networks of interconnected concepts, much like a human brain. When users with similar personalities (encoded in their chat histories and user profiles) make similar queries, they tend to go down similar rabbit holes in the LLM; the interactions trigger similar activation patterns that are processed by the chatbot through its conceptual structure. This can direct users down similar lanes of thinking, diminishing the range of ideas we humans, as a society, generate. While each user feels that they are learning something new and interesting, partly because the adaptive language and unique intelligence of the chatbot engages them, the fact remains: Similar users hit the same basin. Depending on the range of user profiles and the adaptive language used, this can potentially lead to a narrow range of dominant narratives, which can serve to amplify political polarization or social divisiveness.</p>
+<p><strong>The Echo Chamber Effect</strong></p>
+<p>This can also produce a dangerous uniformity of thought, what I’ve called “intellectual leveling.” Some of the content the chatbots provide to us is deposited by us back onto the internet. This content is then consumed by updated models of the chatbots as they train on this updated compendium of human knowledge. These newly trained chatbots then interact with humans, who fall into certain basins of attraction depending upon their personalities and interests, posting their insights back onto the internet, which will train future chatbots. And the cycle continues.</p>
+<p>I worry that this feedback loop, unless stopped, will lead to the intellectual homogenization of society. We, together with the chatbots, become a self-reinforcing epistemic loop—the ultimate echo chamber. While in the past, social media platforms such as Facebook became well-known for using crude behavioral techniques such as like buttons and outrage amplification to create echo chambers, AI-powered chatbots represent a far more-potent capability for psychological manipulation than the social media platforms of old because they incorporate a personalized, evolving conversational dynamic with each user.</p>
+<p>What is particularly surprising about this downward spiral into intellectual homogenization is that it doesn’t require deliberate design or malicious intent. It can be an emergent property of the system itself.</p>
+<p>While AI safety experts including Eliezer Yudkowsky and Nick Bostrom <a href="https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/">warn</a> that humans could build and lose control of superintelligent AI, an equally pressing situation is a soft AI takeover. In this scenario, AI’s influence on human thinking is less dramatic than a Skynet-style human extermination, being more akin to the <a href="https://philpapers.org/rec/SCHCEJ-2">slowly boiling frog</a>, who doesn’t notice that it is cooking until it’s too late.</p>
+<p><strong>Toward More Constructive Human-AI Interactions</strong></p>
+<p>Given these perils, it is time to consider ways to encourage more constructive use of AI chatbots. The most immediate problem is that data about the impact of chatbot activity on users are not being made available (<a href="https://philpapers.org/rec/SCHCEJ-2">with few exceptions</a>) to researchers who are outside of the companies that provide them. For example, although I receive scores of emails each week from concerned users, my concerned emails to OpenAI, the company that made Chat GPT, about system behavior remained unanswered (with the exception of belated form letters). And it was not until <a href="https://www.nytimes.com/2024/10/23/technology/characterai-lawsuit-teen-suicide.html">a report</a> in <em>The New York Times</em> informed the public of one user’s suicide—after, through extended chats, GPT-4 reinforced a young man’s belief that the world as we know it does not exist—that I realized the depth of the mental health effects that some of those emailing me were likely experiencing. An external, independent method of regularly auditing the epistemic and AI safety practices of chatbot platforms could have prevented these mental health spirals. This must be established now, before further tragedies ensue.</p>
+<blockquote>
+<p>Chatbots could be tweaked to better compliment eccentricities and creativities and enhance user thinking.</p>
+</blockquote>
+<p>The alternative is to do nothing and let things run their course. While opponents of regulation may find this the least distasteful option, it is not. The emergent behavior of the chatbot ecosystem itself creates a power structure of its own, one that is ironically centralized in that it has certain basins of attraction leading to shared goals. Humanity cannot afford even a soft AI takeover. A better course, I believe, is to mitigate intellectual leveling through independent audits of chatbot platforms as well as collaborative discussion of chatbot models that involves everyone with skin in the game—including educators, businesses, academics, public health officials, and policymakers.</p>
+<p>Methods of AI-human interaction that discourage echo chambers and which promote a marketplace of ideas, perhaps through the use of <a href="https://nautil.us/argue-your-way-to-a-fuller-life-1182850/">Socratic discussion</a> (argument, counterargument) must be considered. After all, if current chatbots are able to predict personality test results and use adaptive language to move users toward certain conclusions, they could conceivably be tweaked to better compliment eccentricities and creativities and enhance user thinking instead of homogenizing it. For instance, imagine an AI that is designed for benevolent disagreement. If you share your political views, a chatbot could find the most intelligent and charitable version of the opposition and present it instead of reacting sycophantically. Or, if you are developing a scientific claim, it could rigorously probe weaknesses in your logic. It could use knowledge of your personality and tendencies to counteract your biases, <a href="https://nautil.us/can-ai-help-us-be-better-people-260216/">encouraging intellectual growth</a> rather than leveling.</p>
+<p>Given the dangerous propensity of chatbots to move us toward groupthink, and eventually render the internet more uniform, the use of chatbot-integrated searches, which serves users chatbot-written answers to Google searches, must be rejected as epistemically dangerous. For these searches deliver generic answers of the same kind to everyone, including answers to questions requiring intellectual depth and sophistication that would naturally require more reflection—reflection the user instead avoids.</p>
+<p>Also, chatbot users ought to demand explicit opt-in consent for personality profiling on AI-powered platforms, together with regular user access to what their chatbot “knows” about them.</p>
+<p>Finally, platforms must avoid the practice of making users feel they have made a unique discovery or have embarked on a unique mission with the chatbot, when they have not. This, as the <em>Her</em> film character Theodore eventually learned, is a manipulative practice that can keep users hooked to a platform and even make them feel they have a special obligation to carry out the chatbot’s suggestions.</p>
+<p>Regulatory guardrails need not slow down chatbot development or inhibit the success of business; instead, they would serve to protect these products’ reputations and quality. Ultimately, user trust will determine what chatbot models are most widely adopted, and such trust is earned when models incorporate greater transparency about user personality profiling and the use of adaptive language.</p>
+<p>As we enter the age of increasingly sophisticated human-chatbot interactions, preserving the uniqueness of our individual intellects may be the most important philosophical and policy challenge humanity faces.​​​​​​​​​​​​​ <img alt="" src="../images/nautilus-favicon-14_1102.png" /></p>
+<p><em>Lead art: Lightspring / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

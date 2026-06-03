@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Animals Navigate Darkness | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Animals Navigate Darkness</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-FPWB</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The body may know where we’re going before our eyes do, building maps of the world that rely on a kind of internal GPS rather than on landmarks or other visual cues. This process, known as path integration, allows the brain to track each step and turn you make, updating your position in time and space—even in the dark.</p>
+<p>Certain neurons in the hippocampus known as place cells are central to this process in the brain. They activate at specific locations regardless of whether an animal can see their surroundings, relying on internal cues to decide which spots get special consideration. Working together, the neurons fire in patterns that track the passage of time and distance during movement.</p>
+<p>A team of scientists from the Max Planck Florida Institute for Neuroscience have recently uncovered new details about how these internal maps work: Rather than using a single internal clock, the brain uses two interacting sets of excitatory and inhibitory neurons in the hippocampus. The researchers published their <a href="https://www.nature.com/articles/s41467-025-67038-3">findings</a> in <em>Nature Communications</em>.</p>
+<p>Scientists have long known that the hippocampus helps animals navigate, and that some neurons fire up at specific places they visit. “However, in environments full of sights, sounds, and smells, it is difficult to tell whether these neurons are responding to those sensory cues or to the animal’s position itself,” explained Yingxue Wang, a neuroscientist at the Max Planck Florida Institute of Neuroscience and a paper co-author, in a <a href="https://mpfi.org/a-built-in-odometer-new-study-reveals-how-the-brain-measures-distance/">statement</a>.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-woman-who-got-lost-at-home-235768/"><strong>The Woman Who Got Lost at Home</strong></a><strong>”</strong></p>
+<p>To cut through the noise, the researchers worked with mice, whose hippocampal circuits can be recorded and manipulated with great precision. They first trained the mice to run fixed distances along a virtual linear track to reach a reward. The track didn’t feature any obvious landmarks or visual cues, which forced the mice to rely on internal estimates of distance and time. While the mice ran through the course, the researchers recorded activity across hundreds of neurons. Then they used light to mess with certain inhibitory circuits and test how those disruptions shaped the animals’ sense of time and distance.</p>
+<p>Once they had collected the recordings, two distinct patterns emerged. One set of excitatory neurons called PyrUp was activated all at once at the start of movement and then gradually faded, each at its own pace. Taken together, this staggered activity appears to give the brain something to measure against, letting it know how far along the journey the animal has traveled. Another set, known as PyrDown excitatory neurons, showed the opposite pattern, quieting down at the start of movement and then gradually ramping back up. This activity helped mark the start of a new journey, preventing the brain from mixing one trip with the next.</p>
+<p>From there, the team used light to silence two kinds of inhibitory neurons in the brain: SST neurons, which help stabilize the brain’s internal timing signals, and PV neurons, which act as a kind of reset button. When these neurons were silenced, the mice misjudged distance or time without changing their running speed. That finding reinforced the idea that PyrUp and PyrDown neurons encode internal measures of time and space, rather than movement itself. Additional control experiments confirmed that the effects weren’t due to motor problems, visual deficits, or altered expectations of reward.</p>
+<p>If similar patterns are found in people, they might help explain why people with Alzheimer's disease and other types of dementia often become disoriented even in familiar places—and could point toward new therapeutic targets for restoring that lost sense of where we are. <img alt="" src="../images/nautilus-favicon-14_651.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Rudmer Zwerver / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

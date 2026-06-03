@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Time Is Cultural-Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Sleep Time Is Cultural-Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-B9KW</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In Japan, late nights are a way of life—the final trains of the night are often packed with people traveling back home in the midnight hours from work or a night out. In fact, studies consistently find that people living in Japan get far fewer winks per night than people living in other parts of the world. And yet, Japan also has the longest average <a href="https://www.nature.com/articles/s41430-020-0677-5.pdf">lifespan</a> of any of the world’s most advanced economies. There are a lot of elderly people out and about.</p>
+<p>This presents a paradox. Sleep research has consistently shown that people who sleep fewer hours suffer poorer health outcomes and even live shorter lives. So how can Japanese people sleep so little and still seem to thrive into old age?</p>
+<p>Christine Ou, an assistant professor at the University of Victoria School of Nursing in Canada, together with her husband Steven Heine, a professor of cultural psychology at the University of British Columbia, decided to dive into this question of how culturally distinct differences in sleep duration impact health with a study of 5,000 people from 20 different countries.</p>
+<p>“Essentially, we asked: Is there a universal amount of sleep that’s healthiest for everyone, or does that ideal vary by country?” says Ou. “And do people feel healthier when their sleep matches what’s typical or expected of a culture?”</p>
+<blockquote>
+<p>You can’t use eight hours as a magic number.</p>
+</blockquote>
+<p>Together with a team of other researchers, they found that the range of sleep time varied widely from 6 hours and 18 minutes per night for Japan to 7 hours and 52 minutes per night for France (the United States was near the low end of the spectrum of sleep duration, with about 7 hours each night).</p>
+<p>But when they looked at the relationship between individuals’ health and their sleep habits, controlling for factors like smoking and dietary nutrition, they found the amount of sleep needed for optimal health was lower for people from countries with shorter average sleep times. They also found that people from countries that have shorter average sleep durations did not have shorter life expectancies, nor higher rates of heart disease or diabetes. These short-sleeping cultures actually had lower rates of obesity than people living in countries with longer average sleep times.</p>
+<p>“This suggests that we are learning how to sleep from our culture, and that is shaping the processes of our sleep,” Heine says. The <a href="https://www.pnas.org/doi/10.1073/pnas.2419269122">research was published</a> in the journal <em>PNAS</em> last month.</p>
+<p>The team of researchers also found that people tended to be healthier if their sleep habits closely matched the norms of where they were living than if they diverged. This aligns with <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5023492/">other research</a>, they say, that shows that when people fit in culturally with others in the places where they are living—in what they eat or how they show emotions—their health is better overall.</p>
+<p>It’s not just a matter of genetics. The behavior, and the physiological response to it, may well be learned, the researchers suggest. Having a sleep schedule that is aligned with that of others in one’s community could help reduce stress related to scheduling, they suggest. “Our basic physiological needs are shaped by how we interact with our cultures,” says Ou.</p>
+<p>A person’s needs can also shift when they move to a new area with a distinct culture, they say. A <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0250671">previous study</a> from the group showed university students in Japan slept an hour less than university students in Canada—but still felt less sleepy and had better health—while East Asian Canadian students had sleep behaviors and attitudes that were more similar to those of European Canadians. “That suggests that we are shaped by our local culture in terms of how we go about sleep,” Heine says.</p>
+<p>Heine says the findings raise interesting questions for future research, and hit on a broader phenomenon. “The way we get our sleep needs met is shaped by cultural learning,” he says. “There's no single ideal amount of sleep that’s best for everyone. So you can’t use eight hours as a magic number.”</p>
+<p>The team is planning a future study to look into variations in the different sleep stages people go through over the course of a night—like deep sleep versus lighter sleep. For example, Heine wonders if cultures that sleep fewer hours may enter deep sleep faster than others—so that “French people probably are spending more time in some of the lighter stages of sleep than, say, Japanese people.”</p>
+<p>Anders Fjell, a psychologist at the University of Oslo in Norway, says the study was new in using cross-cultural comparisons to show that sleep has an important cultural component. “The study shows that the most healthy people have different sleep durations related to how society looks at the importance of amount of sleep,” he says.</p>
+<p>He adds that the findings suggest that natural variation in sleep duration does not have a strong causal effect on health, and instead varies as a function of individual and cultural factors. Sleep duration “should not only be considered from a biomedical point of view,” he says.</p>
+<p>Most people are still sleeping too little, says Ou—the study findings also suggested that the average sleep duration for each of the countries was lower than what is optimal for one’s health in that country. So although there is no single amount of sleep that is ideal for everyone in the world, most people could benefit from some extra rest, say Ou. No matter where you live or when you go to bed, she says, “you’re probably not getting enough sleep.” <img alt="" src="../images/nautilus-favicon-14_1116.png" /></p>
+<p><em>Lead image: jenny on the moon / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

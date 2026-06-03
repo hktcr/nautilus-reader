@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Dark, Unvaccinated Future | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Our Dark, Unvaccinated Future</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-05
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-EHDM</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>On the final night of her pediatric residency in the mid-1970s physician Kathryn Edwards stood by the bedside of a dying toddler. A bacterial infection, Haemophilus influenzae type B or Hib for short, raged through the young girl’s bloodstream, inflaming the membranes around the brain and spinal cord. That night, realizing a vaccine could have saved the child’s life, Edwards resolved to devote her career to developing vaccines for children.</p>
+<p>In the 1970s and ’80s, 20,000 children younger than 5 became infected with invasive Hib each year in the United States, and about 1,000 died. In 1987, the introduction of an effective Hib vaccine soon dropped those numbers by <a href="https://www.cdc.gov/pinkbook/hcp/table-of-contents/chapter-8-haemophilus-influenzae.html">99 percent</a>, down to single digits per year, the cases almost exclusively occurring in unvaccinated or undervaccinated children.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>But today, more than 45 years after that terrible night, Edwards fears that the pre-vaccine era could return. “We are in a very scary time,” says Edwards, an expert in childhood respiratory disease and vaccine safety who recently retired from Vanderbilt University Medical Center. “We have to realize these diseases are the bad ones. We really don’t want them to come back.”</p>
+<p>But they are back. Diseases that the U.S. had all but eliminated decades ago through mass vaccination campaigns have returned. Measles is surging and whooping cough is close on its heels, with cases <a href="https://stacks.cdc.gov/view/cdc/182652">tripling</a> in many states over the past year. That’s an ominous trend, says Amy Edwards, an associate professor of pediatrics at Case Western Reserve University School of Medicine. “When you see whooping cough on the rise and measles on the rise, you know the vaccination rate is high but dropping. Then come the rest.”</p>
+<blockquote>
+<p>Vaccinations in the U.S. would plummet. Death, illness, and disability would surge.</p>
+</blockquote>
+<p>“The rest” is a long list of names that were once destined for the dustbin of history—polio, diphtheria, hib disease, rubella, and more—each accompanied by horrible complications, including blindness, brain injury, paralysis, and life-long chronic illness and disability. “We have tens of thousands of history and medical books that describe the horrors of some of these diseases,” says Daniel Pastula, chief of neuroinfectious diseases and global neurology at the University of Colorado. “And we don’t see them anymore because of vaccines.”</p>
+<p>Vaccines protect both the vaccinated individual and the population at large, because if enough people are immune to an infectious disease, that contagion cannot easily spread from one person to another. Yet vaccination rates that began declining during the <a href="https://nautil.us/how-the-coronavirus-stays-one-step-ahead-of-us-238343/">COVID-19 pandemic</a> have continued to drop, putting the population at risk for the resurgence of these illnesses. But how quickly could that happen, and what are the most pressing dangers?</p>
+<p>Through discussions with doctors, infectious disease scientists, and public health officials—including some who witnessed the damage wrought by these illnesses before vaccines were available—<em>Nautilus</em> explores what could happen next, and how it might be prevented.</p>
+<p><strong>Cascading Contagions</strong></p>
+<p>Declining vaccination rates might paradoxically be a consequence of vaccines’ incredibly successful and safe track records: Most people alive today have no first or even secondhand experience with many of these illnesses. But other factors are also at play, including vaccine hesitancy fueled by rampant vaccine misinformation.</p>
+<p>Additionally, work by the current U.S. Secretary of Health and Human Services, Robert F. Kennedy Jr., to rewrite decades of vaccine policies is actively changing the landscape of vaccine availability and access. For example, experts interviewed for this article unanimously expressed support for—and fear of losing—the Vaccines for Children Program, established by Congress in 1994 to provide vaccines to low-income children at no cost. That program alone distributes more than 70 million pediatric vaccines each year and is estimated to have prevented 508 million illnesses, 32 million hospitalizations, and saved more than 1.1 million lives since its inception.</p>
+<p>The program is funded and run by the U.S. Centers for Disease Control and Prevention (CDC), which has experienced major funding cuts and layoffs under Kennedy’s supervision. It <a href="https://www.cdc.gov/vaccines-for-children/about/index.html">covers</a> the cost of vaccines recommended by the Advisory Committee on Immunization Practices (ACIP) —a body that Kennedy gutted in June and filled with his own appointees, some of which have expressed vaccine skepticism. If the administration or ACIP were to restrict or abolish the Vaccines for Children Program or the vaccines it offers, vaccinations in the U.S. would plummet. Death, illness, and disability would surge.</p>
+<p>Already, vaccination rates in the U.S. are dropping. Declines in vaccination began during the pandemic, when social isolation and disruptions in healthcare coverage led to fewer people being vaccinated for a host of diseases those years. But even as the pandemic ended, vaccination rates <a href="https://www.cdc.gov/mmwr/volumes/73/wr/mm7338a3.htm">continued to decline</a>. In the 2024-2025 school year, for example, <a href="https://www.cdc.gov/schoolvaxview/data/index.html">record numbers</a> of unvaccinated children entered schools: More than 280,000 kindergarteners in the U.S. did not complete the measles, mumps, and rubella (MMR) vaccine series. Compared to the year before, exemptions from one or more vaccines among kindergartners increased in 36 states and DC, with 17 states reporting exemptions exceeding 5 percent. And there is no end in sight. In early September, Florida’s surgeon general <a href="https://www.nytimes.com/2025/09/03/us/florida-vaccine-mandates.html">announced</a> that the state planned to end all vaccine mandates, including those for schoolchildren.</p>
+<p>If vaccination rates continue to drop, eliminated diseases will come roaring back. First to return: measles.</p>
+<p><strong>Measles</strong></p>
+<p>Measles is one of the world’s most contagious diseases. It is especially dangerous for young children and people with weakened immune systems, and the complications are severe, including deafness, blindness, and brain damage. Additionally, measles poses a unique threat to the immune system: Like a guided missile, measles virus specifically targets immune system cells responsible for remembering past illnesses. So following measles infection, an individual’s immune system has severe amnesia for <a href="https://www.science.org/doi/10.1126/science.aaa3662">two to three years</a>, with little <a href="https://www.science.org/doi/10.1126/science.aay6485">memory</a> of how to protect itself from common pathogens. This, in turn, leads to an overall higher risk of death from other infections.</p>
+<p>In 2000, the World Health Organization declared the U.S. measles-free, but the tide quickly turned. Since 2019, MMR vaccination rates have <a href="https://jamanetwork.com/journals/jama/fullarticle/2834892">declined</a> annually nationwide. As of September 3, more than 1,431 measles cases have been <a href="https://www.cdc.gov/measles/data-research/index.html">reported</a> this year—more than any year in three decades—and there are still four months left in 2025. Cases are rising so quickly, in fact, that earlier this year, the Johns Hopkins Bloomberg School of Public Health and the International Vaccine Access Center released a <a href="https://publichealth.jhu.edu/ivac/resources/us-measles-tracker">U.S. Measles Tracker</a>—a mapping tool that is eerily reminiscent of COVID-19 trackers during the pandemic.</p>
+<blockquote>
+<p>We’ve reached a pivotal point in this cascade of returned diseases.</p>
+</blockquote>
+<p>“We’re really on a tipping point for measles,” says Nathan Lo, an assistant professor of infectious diseases at Stanford University. “It is already at risk for returning to become a commonplace disease.” At current vaccination levels, measles will become endemic—that is, consistently present and circulating in the U.S. population—in 25 years, resulting in more than 850,000 cases and 2,250 deaths, according to an April modeling <a href="https://jamanetwork.com/journals/jama/fullarticle/2833361">study</a> from Lo and Stanford epidemiologist Mathew Kiang. If there is a 10 percent decline in vaccination rates, measles could skyrocket to 11.1 million cases over the next 25 years. And if there were a dramatic 50 percent decline, measles would be endemic in just 5 years, with 51.2 million cases over a 25-year period.</p>
+<p><strong>Whooping cough</strong></p>
+<p>Whooping cough, also called pertussis, is another vaccine-preventable disease that’s been raging back: As of Aug. 23, 2025, there have been 19,159 <a href="https://stacks.cdc.gov/view/cdc/231649">reported cases</a> of pertussis in the U.S. this year—almost 2,000 more than the same period last year, according to the CDC. At this rate, the U.S. could reach 70,000 pertussis cases by the end of the year, according to one recent <a href="https://abcnews.go.com/Health/whooping-cough-cases-doubled-year-cdc-data-shows/story?id=121118803">prediction</a>.</p>
+<p>Pertussis, with its uncontrollable, violent coughing, is likely to spread quickly because it is almost as contagious as measles. Protection against pertussis from a combination vaccine against tetanus, diphtheria, and pertussis—a shot routinely administered to people of all ages, including during pregnancy and as a standard series starting in infancy—<a href="https://publications.aap.org/pediatrics/article-abstract/137/3/e20153326/81397/Waning-Tdap-Effectiveness-in-Adolescents?redirectedFrom=fulltext">declines quickly</a>, from 70 percent efficacy in the first year after vaccination to less than 10 percent after four years. And while vaccinated individuals rarely show symptoms, they can <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4626586/">still transmit</a> the bacteria to others.</p>
+<p>Pertussis can be severe in infants, especially those who are too young to be immunized. But current CDC numbers indicate that <a href="https://www.cdc.gov/fluvaxview/coverage-by-season/pregnant-april-2024.html">roughly</a> <a href="https://www.sciencedirect.com/science/article/pii/S0264410X24013665">40 percent</a> of expectant mothers do not get vaccinated against it. When that happens, or when a parent declines to vaccinate their infant with the three recommended doses, that infant is immediately at risk. In 2024, <a href="https://www.cdc.gov/pertussis/media/pdfs/2025/01/pertuss-surv-report-2024_PROVISIONAL-508.pdf">six infants</a> in the U.S. died of whooping cough, and that number is poised to rise rapidly if more parents opt against vaccination, or vaccine mandates are weakened,  as the bacteria spreads.</p>
+<p><strong>Influenza</strong></p>
+<p>It often gets passed over because of its common seasonal influx, but influenza still causes some 6,300 to 52,000 deaths each year in the U.S. And this infectious agent is just a season away from spiking to record levels if vaccination rates decline further.</p>
+<p>Last year’s hospitalization rate during flu season was the highest it has been in <a href="https://www.cdc.gov/fluview/surveillance/2025-week-17.html">15 years</a>, and vaccination rates for flu have been <a href="https://www.cdc.gov/fluvaxview/coverage-by-season/2023-2024.html">steadily declining</a> year after year. That trend will likely be exacerbated by Kennedy’s order delivered earlier this year to the CDC to <a href="https://www.npr.org/sections/shots-health-news/2025/02/19/nx-s1-5302906/cdc-flu-vaccine-campaign-terminated">halt</a> a popular publicity campaign encouraging people to get the seasonal flu vaccine. “Flu is definitely something that can quickly come back and be more severe,” says Kathryn Edwards. Flu vaccination is recommended each year for everyone over 6 months of age.</p>
+<p><strong>Rubella, Hib, and meningococcal disease</strong></p>
+<p>After the speedy reemergence of measles, pertussis, and flu, experts forecast the slower rise of three more vaccine-preventable diseases: meningococcal disease, a bacterial infection that leads to outbreaks of meningitis and can be deadly within hours of symptom onset; Hib disease, the bacterial infection known to spread in daycare centers, and which was once the most common cause of meningitis; and rubella, a viral illness that can cause serious defects or death in developing fetuses. In the Stanford modeling study, if childhood vaccination rates drop an additional 20 percent, rubella rates begin to climb. “That’s really a scary future that we hope does not come to pass,” says Lo.</p>
+<p><strong>Pneumococcal disease, mumps, chickenpox, and hepatitis</strong></p>
+<p>One of the harder-to-spot outbreaks will be pneumococcal disease, says Amy Edwards, as there are more than 100 strains of the causative bacteria. And pneumococcal vaccines—which are recommended for children under 5, adults over 50, and others with certain risk factors—protect against only the 15 to 20 most deadly strains. Because there are already occasional outbreaks in the U.S. from strains not covered by the vaccines, Edwards notes, public health officials might not immediately notice if one of the more invasive, deadly strains, typically prevented by vaccination, begins to take hold.</p>
+<p>Pneumococcal bacteria spreads through direct contact with saliva or mucus, and serious infection can lead to pneumonia, meningitis, or bloodstream infections. In 2024, 14 inmates at a correctional facility in North Carolina became ill with suspected pneumococcal disease. A CDC <a href="https://www.cdc.gov/eis-conference/php/media-resources/rapid-prophylactic-vaccination.html">investigation</a> identified the cause as serotype 4, a serious strain that causes high percentages of pneumococcal disease. That strain was not one of the strains included in the most recently recommended vaccine, PCV21.</p>
+<blockquote>
+<p>An influx of patients with vaccine-preventable diseases will strain already struggling hospitals and medical centers.</p>
+</blockquote>
+<p>As if this list weren’t already long enough, next will come mumps and chickenpox, which have rare complications, including brain inflammation and severe skin infections, respectively, and hepatitis B, which used to be one of the most common causes of liver failure and sometimes required liver transplants in babies.</p>
+<p>We’ve reached a pivotal point in this cascade of returned diseases. If Americans are able to improve vaccination rates over the next five years, that will be the worst of it. But if vaccination rates continue to drop, “we start to get into some of the scarier ones,” says Amy Edwards. Namely, the resurgence of polio and diphtheria.</p>
+<p><strong>Polio</strong></p>
+<p>Kathryn Edwards remembers being in elementary school when a friend became seriously ill with polio, and Edwards walked around her neighborhood collecting dimes in the original “March of Dimes” to fund the development of a polio vaccine at the behest of President Franklin D. Roosevelt. It was the era of “polio summers,” when towns closed movie theaters, public swimming pools, schools, and churches to prevent transmission of the virus, which affects nerves in the spinal cord or brain stem, leading to paralysis, trouble breathing, and sometimes death.</p>
+<p>Largely thanks to an oral version of the vaccine, the U.S. eliminated polio in <a href="https://www.chop.edu/vaccine-education-center/vaccine-details/polio-vaccine">1979</a>. Since routine immunization against polio was introduced worldwide in the 1970s, the global incidence of cases of the disease has decreased by 99 percent. But predicting what might happen in the U. S. if polio vaccination rates were to dramatically decline is shrouded in some uncertainty, due to a change in the type of vaccine administered.</p>
+<p>Until 2000, children in the U.S. were vaccinated with an oral polio vaccine (OPV), made from live polio virus in a weakened form. That vaccine protects the immunized person and, because that person sheds weakened virus, helps expose and immunize those around them as well.</p>
+<p>On rare occasions (about 1 in every 2.4 million doses of OPV), the weakened virus reverts to a “strong” virus and can cause a case of the disease, occasionally leading to paralysis. Therefore, since 2000, in an effort to eradicate poliovirus globally, the U.S. switched to using an inactivated polio vaccine (IPV), which cannot revert to cause the disease. That means every immunized person born in the past 25 years has received the IPV vaccine, which does not offer the benefit of secondary protection. Because of this, we don't fully understand what percentage of a community needs to be vaccinated to prevent the spread of polio, says Roland Sutter, who served as chief of the Polio Eradication Branch of the CDC from 1997until 2001 and then as a coordinator of the Global Polio Eradication Initiative with the World Health Organization. If polio vaccination rates were to considerably decrease, “it’s quite unpredictable what is going to happen,” he adds. “This is uncharted, new territory for polio.”</p>
+<p><strong>Diphtheria</strong></p>
+<p>In the 1920s, diphtheria was one of the most <a href="https://historyofvaccines.org/history/diphtheria/overview">common causes</a> of illness and death among children in the U.S. This serious bacterial infection creates a gray, leather-like coating in the mucus membranes lining the throat and nose, obstructing breathing. “It is terrifying to watch a child not be able to breathe,” says Amy Edwards, who has treated children with diphtheria in sub-Saharan Africa. “Even if with modern technologies we can save them, it is horrible to watch a kid be in the ICU for a week.”</p>
+<blockquote>
+<p>“We are a stone’s throw or a plane ride away from whatever infectious disease emerges next.”</p>
+</blockquote>
+<p>Thanks to widespread uptake of the diphtheria vaccine, the last U.S. <a href="https://www.cdc.gov/diphtheria/php/surveillance/index.html">confirmed case</a> of respiratory diphtheria was reported in 1997, though the bacteria that cause the disease still circulate in other countries. According to the Stanford modeling study, if vaccination coverage drops 35 percent below current levels, diphtheria will begin a slow but steady return.</p>
+<p><strong>Reversing Course</strong></p>
+<p>While it is now often—but not always—possible to save children sick with diphtheria or many of the other vaccine-preventable illnesses, they often require intensive healthcare interventions. For instance, babies under 6 months old with whooping cough need prolonged pediatric ICU stays, often hooked up to a ventilator or even a heart-lung bypass machine. Because of this, an influx of patients with vaccine-preventable diseases will strain hospitals and medical centers already struggling with staffing and funding shortages since the pandemic. And these live-saving procedures are not without risks and potential long-term health effects.</p>
+<p>Additionally, new restrictions on Medicaid payments included in President Donald Trump’s sweeping budget bill signed into law this summer, will likely lead to significantly less revenue for hospitals, which will in turn have fewer staff and resources to care for patients. “If we start taxing a healthcare system that is already broken with sicker and sicker kids, you’re putting pressure on a system that’s already crumbling,” adds Amy Edwards.</p>
+<p>Another overarching concern is the spread of vaccine-preventable illness around the rest of the world. In June, when Kennedy withdrew a $1.2 billion funding pledge from GAVI, a leading international vaccine organization, global health leaders were stunned and worried. The U.S. cannot keep itself safe from infectious diseases in isolation, says Sutter. If international health systems are less equipped to prevent infectious diseases, those diseases will spread, mutate, and arrive on U.S. shores. “This is one world,” says Sutter. “We are a stone’s throw or a plane ride away from whatever infectious disease emerges next.”</p>
+<p>Facing the potential return of these once-prevalent diseases, it feels at once bewildering and reassuring to know we already have the tools to prevent them. “Vaccinations are the greatest testimony to scientific advancements in medicine, particularly pediatric medicine, that we’ve ever seen,” notes Kathryn Edwards. “We have got to work very hard to make sure some of these things that could happen, don’t happen.”</p>
+<p>Parents want to keep their children safe and healthy, and most parents trust their primary care physicians, so experts recommend that pediatricians and other healthcare providers always ask if children are fully vaccinated. And parents should feel encouraged to discuss the relative risks and benefits of vaccines and infectious diseases with their doctors, says Pastula. “Any healthcare provider would be happy to walk through that,” he says.</p>
+<p>The good news is that even a small boost in vaccination rates could make a big difference. For example, a modest 5 percent increase in vaccination rates over 25 years would reliably prevent measles from returning to endemic levels, says Lo. “A pretty small fraction of the population could make a big difference for the United States.”</p>
+<p>Preventing a new wave of old diseases will require the government and public to support and raise vaccination rates to high coverage, yet all signs suggest that U.S. health agencies and public sentiment continue to head in the opposite direction. “I worry about it greatly,” says Kathryn Edwards. “We need to share the clear message that the benefits [of vaccines] are really much greater than the risks.”</p>
+<p>Because, at the very least, we can all agree on one thing, adds Amy Edwards: “Kids shouldn’t die. Any child dying is one too many.” <img alt="" src="../images/nautilus-favicon-14_976.png" /></p>
+<p><em>Lead image: Thechildrenshospital / Wikimedia Commons</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

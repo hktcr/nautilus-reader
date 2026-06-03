@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Monsters Came for Mathematics - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>When Monsters Came for Mathematics - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-13
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-QDQD</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="" src="../images/SgJ7AjPw-1.png" /></p>
+<p>My background is in mathematics, which has a reputation for being a solid, sturdy subject. Once something has been proven, it generally stays true forever. But in the course of researching my book, I came to realize that even in mathematics, certainty can be a dangerous thing. In the 19th century, several key mathematical theorems began to unravel. For two millennia, European mathematicians had taken inspiration from the natural world. As a result, they had concluded that certain things were intuitively obvious: Geometric shapes obeyed rules like “the whole is larger than the part” and rates of change followed the smooth motion of a falling object. But when dealing with infinities or abstract dimensions, these assumptions no longer held. By the 1870s, mathematicians had discovered awkward theoretical counterexamples, like a part that was the same size as the whole, and a motion—known as a “nowhere differentiable function”—that was never smooth.</p>
+<p>As I dug deeper while writing my book, I found myself wondering whether other cultures had relied so heavily on real-life geometry, inspired by the natural world, when developing their concepts of mathematical truth. China had embraced concepts like negative numbers—an abstract concept that cannot be easily visualised—much earlier than in Europe, because their early texts focused on problems involving fortunes and debt. It turns out that the reliance on geometric intuition had effectively been a Trojan horse for European mathematicians, smuggling flawed assumptions into their work. In the 19th century, some established researchers dismissed the emerging counterexamples as “<a href="https://archive.org/details/sciencemethod00poinuoft">monsters</a>” and “an outrage against common sense”; they were nuisances to be shunned.Butover time, <a href="https://nautil.us/maths-beautiful-monsters-234859/">these monsters</a> became unavoidable—and even useful. Modern research now relies on these once-undesirable ideas: Astrophysics requires non-standard geometric rules, while probability theory is built on endlessly unpredictable changes.</p>
+<p><img alt="" src="../images/Kucharski_BREAKER.png" /></p>
+<p><strong>TRUTHINESS:</strong>Adam Kucharski says that though misinformation is clearly an enormous problem in our current era, not enough attention is given to the equally troublesome matter of excessive doubt about true information. Telling people you can’t believe anything on social media could backfire, he says. <em>Photo courtesy of Adam Kucharski.</em></p>
+<p><img alt="" src="../images/YW7EWYAe-2.png" /></p>
+<p>Over the past decade, I’ve spent a lot of time writing about—and in some cases building—AI algorithms. One thing that’s often bugged me is why seemingly advanced AI can occasionally make such basic errors. Take image recognition. <a href="https://arxiv.org/abs/1412.6572">Famously</a>, the addition of a faint digital watermark can cause an AI classifier to confuse an image of a panda for a gibbon.</p>
+<p>While writing my book, I interviewed <a href="https://arxiv.org/abs/2211.00241">Tony Wang</a>, an AI researcher who’d become interested in two specific hypotheses to explain these errors. First, it could be that the algorithms were implicitly mimicking the fast, instinctive mental processing that can also lead humans to a bad snap judgement. This would suggest an algorithm that reflected a bit more on its decisions could avoid such errors. The second possibility was that AI just isn’t good enough yet, and a truly “superhuman” version would outgrow these errors.</p>
+<blockquote>
+<p>Modern research now relies on once-undesirable ideas.</p>
+</blockquote>
+<p>To test these hypotheses, Wang and his colleagues focused on the complex game of Go, which has been mastered by AI in the past decade. They started by training an “adversarial” algorithm that searched for flaws in top Go-playing AI software. Eventually, they found two absurd strategies that could beat the software—the sorts of strategies that even an amateur human wouldn’t be fooled by. Yet the “superhuman” AI player remained highly confident of victory, right up to the moment it lost.</p>
+<p>This suggested that neither hypothesis was correct. Even the reflective AI capable of playing a game as complex as Go wasn’t safe, and seemingly “superhuman” software still fell for ridiculous tricks. No matter how intelligent an AI appears, unexpected weaknesses may be inevitable.</p>
+<p><img alt="" src="../images/UXAFsS3s-3.png" /></p>
+<p>When I began writing <em>Proof</em>, the effect of misinformation—particularly during the worst months of the COVID-19 pandemic—was very much on my mind. In January 2021, rioters were storming the United States Capitol while Covid deniers were harassing medics outside hospitals. Why do so many people believe things that aren’t true?</p>
+<p>Today, much attention is given to misinformation, and the supposed flood of falsehoods online. In response, researchers and policy makers have sought ways to reduce false beliefs. But the more I looked, the more this simple story unravelled. A vocal minority do consume extreme amounts of false information and conspiracy theories online, but the broader picture shows most people still <a href="https://www.nature.com/articles/s41586-024-07417-w">engage</a> far more with trustworthy news sources than dubious ones.</p>
+<blockquote>
+<p>“To doubt everything or to believe everything are two equally convenient solutions.”</p>
+</blockquote>
+<p>This imbalance leads to a problem: If a study only measures belief in false content, an intervention that reduces belief in <em>all</em> information will appear to be <a href="https://www.nature.com/articles/s41562-023-01667-w">successful</a>. Telling people “you can’t trust anything you read on social media” might protect them from lies, but it also may have the pernicious side effect of undermining their trust in the truth.</p>
+<p>In the early 20th century, mathematician Henri Poincaré noted that “To doubt everything or to believe everything are two equally convenient solutions.” The dominant focus in recent years has been on the risk of believing too much, but I’ve realised not enough attention has been given to the threat of excessive doubt. We must look at the deeper reasons that people disengage with true information and disregard valid evidence and experts.</p>
+<p>The relationship between truth and trust will become more challenging as science becomes more complex. Poincaré was once described as the “last universalist”; no mathematician since has excelled in all areas of the field as it existed at the time. Put simply, there are now just too many mathematical topics to master. The same is true of other scientific fields. From climate analysis to AI, even experts must heavily specialize. Now, more than ever, science and technology rely on building and maintaining trust—in experts, in institutions, and in machines. <img alt="" src="../images/nautilus-favicon-14_1123.png" /></p>
+<p><em>Lead image by Tasnuva Elahi; image by wickerwood / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

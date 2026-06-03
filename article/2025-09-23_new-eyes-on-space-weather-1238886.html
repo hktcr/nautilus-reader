@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Eyes on Space Weather - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>New Eyes on Space Weather - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-NZZA</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The sun is, for now, a reassuringly stable star upon which to hang our fates. But that doesn’t mean it doesn’t have <a href="https://nautil.us/the-sneaky-force-behind-our-suns-violent-outbursts-392415/">its moods</a>.  </p>
+<p>Take last week, for example, when a “STRONG Geomagnetic Storm ALERT” was <a href="https://www.swpc.noaa.gov/news/g3-strong-geomagnetic-storm-levels-reached">issued</a> by the U.S. National Ocean and Atmospheric Administration’s Space Weather Prediction Center. The <a href="https://nautil.us/tiny-jets-on-the-sun-power-the-colossal-solar-wind-302580/">sun’s flareups</a> send charged particles spewing into space, where some cross paths with us. They can dance through our atmosphere, creating dazzling <a href="https://nautil.us/how-the-night-sky-speaks-to-us-772258/">aurora borealis shows</a>. They can also make satellites, GPS systems, radio signals, and power grids go on the fritz.</p>
+<p>To better monitor this far-away—but impactful—weather, the United States is scheduled to launch <a href="https://www.nasa.gov/news-release/nasa-sets-launch-coverage-for-space-weather-missions/">three new instruments</a> into space this week.</p>
+<blockquote>
+<p>“Watching these far-off storms from a distance is enthralling.”</p>
+</blockquote>
+<p>One is a spacecraft known as NOAA’s <a href="https://www.nesdis.noaa.gov/news-events/swfo-l1-launch">Space Weather Follow On-Lagrange</a> (named for its targeted home of an orbit about 1 million miles from Earth called Lagrange Point 1). From there, it will watch our sun, helping to spot solar storms far ahead of time. These potentially damaging bursts of particles can take as few as 15 hours or so to reach Earth, so any additional lead time can allow satellite and power grid operators time to take protective measures. (Although, until we figure out how to <a href="https://nautil.us/speaking-with-whales-899775/">talk with them reliably</a>, whales and other cetaceans may continue to get <a href="https://nautil.us/whales-run-aground-by-the-sun-1211535/">thrown off course by these sorts of disruptions</a> in Earth’s magnetic forces.)</p>
+<p>Another craft, the <a href="https://science.nasa.gov/mission/carruthers-geocorona-observatory/">Carruthers Geocorona Observatory</a>, will turn its eyes on the Earth’s exosphere, the top layer of our atmosphere, to study how all kinds of space weather influences life on our planet—including that <a href="https://nautil.us/how-nearby-stellar-explosions-could-have-killed-off-large-animals-237309/">from much farther away</a>.</p>
+<p>VIDEO</p>
+<p><em>Credit: YouTube / NOAASatellites</em></p>
+<p>The third, called the <a href="https://science.nasa.gov/mission/imap/">Interstellar Mapping and Acceleration Probe</a> from NASA will train its observations much more distantly, to the heliosphere, the protective layer of plasma that surrounds our solar system. Created by the sun’s own solar winds, this layer also happens to help shield our cozy system from outside cosmic radiation.</p>
+<p>Other researchers are working to enlist AI models to create better space weather forecasts. <a href="https://iopscience.iop.org/article/10.3847/1538-4365/adf436">A new paper</a>, published last week in <em>The Astrophysical Journal</em>’s <em>Supplement Series</em> presents a model that forecasts solar wind up to four days out with the help of a new neural network. This could go a long way, the authors note, because “the physical processes responsible for the solar wind acceleration and variation are not completely known,” they write. And currently, forecasts of two to four days ahead of time are “challenging.”</p>
+<p>But watching these far-off storms from a distance is enthralling. Years ago, I got a chance, as a journalist, to drop by NOAA’s Solar Weather monitoring office in Boulder, Colorado. A massive central screen dominated the room, showing in real-time the sun’s swirling storms and ropy coronal mass ejections. These days you don’t need press credentials to watch the cosmic theatrics. NOAA provides it all <a href="https://www.swpc.noaa.gov/communities/space-weather-enthusiasts-dashboard">for home viewing</a> as well.</p>
+<p>Offline, this current solar storm has also promised the potential for more chances to see an early fall display of northern lights (yes, NOAA has <a href="https://www.swpc.noaa.gov/products/aurora-viewline-tonight-and-tomorrow-night-experimental">a forecast for that too</a>). And if you listen closely, you might even be able<a href="https://nautil.us/the-northern-lights-make-music-504237/">to hear the</a> cosmic crackles of the auroras. <img alt="" src="../images/nautilus-favicon-14_934.png" /></p>
+<p><em>Lead image: NOAA/BAE Systems Space &amp; Mission Systems</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

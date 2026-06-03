@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Search of the First Animals - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>In Search of the First Animals - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-04-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-J47Q</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Near the tops of some of the most remote peaks in the Canadian Rockies, well above the tree line, jagged limestone and shale rocks known as the Little Dal Group preserve the remains of 900-million-year-old reefs. Today the sun doesn’t fully set over the fossil reefs on summer nights—they lie just south of the Arctic Circle. But millions of years ago, these reefs grew in a tropical sea not far from the equator. The movements of tectonic plates later transported them north, and then the plates collided to form these spectacular peaks.</p>
+<p>Scientists have long believed the Little Dal reefs were built entirely by microbes—mats of cyanobacteria that grew upward into mounds. That’s how reefs were built for almost 2 billion years, long before animals began to populate the planet. But in 2021, Laurentian University geologist Elizabeth Turner published a <a href="https://www.nature.com/articles/s41586-021-03773-z.pdf">paper</a> describing something unexpected she discovered while peering at Little Dal rocks through her microscope: small structures that could be the fossil remains of sponges, simple seafloor invertebrates that are thought to be among the first <a href="https://www.nature.com/articles/s41586-021-03773-z">animals</a> to evolve on Earth.</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>If Turner is correct, animals may have evolved some 300 million years earlier than we thought—before, instead of after, Snowball Earth, when the planet was repeatedly covered in ice, and possibly slush. Such a massive shift in timing could alter our understanding of the conditions necessary for complex animal life to evolve.</p>
+<blockquote>
+<p>Animals may have evolved some 300 million years earlier than we thought.</p>
+</blockquote>
+<p>“Finding the first form of animal life is really important, because that gives us a timeline,” says University of Washington paleontologist Akshay Mehra. Based on Turner’s discovery, Mehra and a team of other scientists traveled to the Little Dal region last summer for two weeks, to investigate whether the reef was in fact once home to simple sponges.</p>
+<p>Precisely when sponges began to slink onto the scene was already a subject of much debate. Some <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/brv.12090">fossil sponges</a> have been identified  in rocks in Iran and <a href="https://www.nature.com/articles/s41586-024-07520-y">southern China</a> that formed between 538 and 551 million years ago during the Ediacaran Period, a time when life diversified with many unusual soft-bodied forms that have since gone extinct. But scientists have also found fossils in older, 760-million-year-old rocks in Namibia that some believe may be sponges. Meanwhile, molecular clock calculations—which are based on rates of mutation in DNA and other biomolecules—point to a start date for the creatures of up to 800 million years ago. But without actual fossil evidence, molecular clock calculations are just estimates.</p>
+<p>If sponges did evolve at this earlier date, then they not only weathered the wild climate swings of the Snowball Earth period. They also predated by hundreds of millions of years the so-called <a href="https://nautil.us/strange-worms-are-taking-their-place-on-your-family-tree-235848/">Cambrian Explosion</a>—a time of rapid evolution starting 540 million years ago when many of the animal groups alive today arose, including the distant ancestors of snails, squids, worms, insects, spiders, and crabs. Like all animals, sponges develop multicellular bodies from a fertilized egg, but we still don’t know exactly how life made this leap from simpler unicellular forms.</p>
+<p>“It isn’t crazy to think that animals may have a substantial pre-Ediacaran history as many, but not all, molecular clock estimates for animal antiquity suggest that the kingdom began to diversify 700 to 800 million years ago,” says Harvard University paleontologist Andrew Knoll, who is not involved in the Little Dal research, in an email. Theoretically, sponges and other early animals could have survived Snowball Earth, says Knoll. After all, at least some bacteria and eukaryotes made it through the icy conditions, he says. But if sponges did arise 900 million years ago, then the molecular clock estimates for the oldest animals are off by at least 100 million years. He thinks it’s “a stretch.”</p>
+<blockquote>
+<p>The scientists hiked up through short scrubby pine trees, sometimes following paths forged by wild sheep.</p>
+</blockquote>
+<p>Mehra was joined at Little Dal last summer by Dartmouth College geologist Justin Strauss, Williams College micropaleontologist Phoebe Cohen, and five other collaborators. After months of planning and consultation with the local Sahtú Dene First Nations communities, helicopters shuttled them into a high alpine valley in late July where they set up camp. The fossil reefs towered about 2,000 feet above their cluster of colorful tents. To make sense of the reefs at a large scale, they flew drones up and around the outcrops, taking photos that would later be digitally stitched together to create a model.</p>
+<p>Each day after breakfast, the scientists hiked up through short scrubby pine trees, sometimes following paths forged by wild sheep. They climbed above the tree line to the ancient reefs, toting rock hammers, sample bags, and backpacks that were heavy with rock samples by the end of the day. “Everything you want to collect, you’re carrying on your back,” says Strauss. “We would divvy up the rocks as equitably as possible, sometimes according to whose knees hurt the most,” says Cohen. In total, they collected about 400 pounds of rocks, enough to fill nine five-gallon buckets.</p>
+<p>Over the next few years, Mehra, Cohen, Strauss, their students, and collaborators will analyze the rocks and fossils. They will use isotope analyses to determine the age of the rocks and investigate single-celled fossils under microscopes. The fossils in question were not made of mineral, and so cannot be dug out of the rocks, but are instead preserved as microscopic impressions. To analyze these impressions, Mehra will use a machine that grinds a few microns off a rock, take a photo of the surface, and then repeat the process again and again until the rock and ancient fossils are reduced entirely to dust. Mehra and his collaborators will then use the photos to create digital 3-D models of the fossils, which they will scour for the patterns of canals and chambers typical of sponges.</p>
+<p>“If these are true mixed microbial-animal reef systems, it’s a really interesting ecology to be studying, especially if these are the first ones,” says Strauss. (Today, reefs are often built by coral invertebrates, in collaboration with algae and other microorganisms.) But even if the fossils they collected are not ultimately sponges, Cohen believes the Little Dal reefs could have set the stage for the evolution of animals. By 900 million years ago, life on Earth was becoming more complex—with a diversity of bacteria and eukaryotes, organisms whose cells have a nucleus inside a membrane. Many questions remain about how ecosystems populated only by microbes became hospitable to other forms of life, such as eukaryotes, she says. If the fossils are not, in fact, sponges, they could still offer some clues to the evolution of complex life. Says Cohen, “In some ways, it’s almost more interesting if they were not made by animals.” <img alt="" src="../images/nautilus-favicon-14_1209.png" /></p>
+<p><em>Lead image: Lillac / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tourist Draw of Melting Glaciers | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Tourist Draw of Melting Glaciers</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-13
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-UFF8</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Glaciers are no strangers to paradox. Perched at the boundary between heaven and Earth, these frozen rivers of ice are inhospitable to most forms of life, and yet they’re the source of life-giving water for millions of people in the mountains and valleys below. They’re ancient remnants of the last ice age, and move so slowly that it’s imperceptible to the eye. At the same time, they’re dynamic, breathing systems that are powerful enough to reshape landscapes and sustain entire ecosystems.</p>
+<p>Today, these frozen monuments themselves are dying off, disappearing one by one, ravaged by climate change. And tourists are flocking to them, desperate to glimpse what will soon be gone. Globally, the 10 most visited glaciers now attract almost 14 million visitors a year. They take bus tours, scenic flights, Arctic cruises, and guided treks and climbs into the ice.</p>
+<p>This is known as “last-chance” tourism, and it presents another paradox: Many of the tourists who visit have to travel long distances by plane to see the glaciers, resulting in carbon emissions that further accelerate climate change and contribute to glacier loss. While some glacier tourists return home inspired to take environmental action, so far, the research is unclear on whether this translates into real behavioral change. And many of the economic benefits go to foreign tour operators.  </p>
+<p>I spoke with Emmanuel Salim, a mountaineer, professor of geography at the University of Toulouse in France, and the author of a new <a href="https://www.nature.com/articles/s41558-025-02544-2">paper</a> in <em>Nature Climate Change</em>, about what is happening to the places and people that depend on glacier tourism, glacier funerals, and what he feels when he visits a glacier.</p>
+<p><strong>You describe glacier tourists as potentially “loving glaciers to death.” Is last-chance tourism inherently paradoxical?</strong></p>
+<p>In a way, yes. First, people are driven by this idea of seeing something that will disappear, in the case of the glaciers, because of climate change. But to do that they often engage in long-haul travel by plane, which has a high carbon footprint. So they come to see something that’s dying because of climate change, but they increase the problem of climate change with their travel. That’s the first paradox. And there is another one: We see that most of the people who are interested in this idea of last-chance tourism are people who already know that climate change is happening. It’s people who know that humans are responsible for climate change. And despite this knowledge, they decide to take a plane to go see a glacier that’s dying. So there are these two paradoxes that are clearly linked to the rise of last-chance tourism.</p>
+<p><strong>You noted a couple of cases in the paper where glacier tourism did have some positive impacts. Switzerland’s Glacier Initiative used tourism to shift policy, for instance, and the Glorious Glacier Ride, which raised money for carbon removal. How are these efforts different from last-chance tourism, and is there any lesson that we can take from them?</strong></p>
+<p>The point is that some people are using glaciers as a political symbol to fight climate change. Under the Glacier Initiative, people hiked around a glacier to encourage the population to vote for the climate law in Switzerland. The Glorious Glacier Ride raised money for a carbon-removal project, even if there are plenty of questions about the efficacy of that. So there are these different dynamics.  </p>
+<p>There are also tourism operators who adapt the local landscape for economic reasons, which sometimes leads to maladaptation. We wanted to highlight this kind of conflict between people who come to see the glacier, who are connected with something global, and people who manage the glaciers that are connected to something very local.</p>
+<p><strong>As you note in the paper, there’s a growing phenomenon of hosting funerals for glaciers around the world, a kind of ecological and political theater. What do you think of that as a form of activism?</strong></p>
+<p>This is a different form of tourism that’s called dark tourism, where people go to have a connection with something that’s disappearing or with bad events that happened, like at Auschwitz. I think the first glacier funeral happened in 2019 in Iceland. This year I counted 10 different events. So this is something that’s growing, and more and more people are coming to commemorate the end of the glacier, to be together. Maybe in the years to come, some places will move from this kind of last-chance dynamic to a kind of dark-tourism dynamic.</p>
+<p><strong>Perhaps the risks of dark tourism are fewer because in those cases the glaciers are already mostly gone. So maybe negative impact is less of a problem.</strong></p>
+<p>Well, the impact is less about the people on the glacier and more about the air travel to the destination, which impacts the glaciers because of carbon emissions. So even if the glacier disappears, the problem is the same.</p>
+<p><strong>I thought it was also that some of the technologies that they use either to make the glacier look fresh or secure the ice, or to bring in more tourists, can harm these natural places and accelerate glacier loss.</strong></p>
+<p>Yes. If tomorrow we decide to build infrastructure around glaciers that are currently free of infrastructure now, it’ll be a problem. But the main tourist sites already have infrastructure, so the tourism itself isn’t so problematic in terms of ecosystems or in terms of the actual glacier loss. If the idea was to develop new places, it’ll be questionable. On the other hand, some of the geotechnical fabrics that are used to protect some glaciers, or limit melt, to make them more appealing to tourists, can shed microplastics into the environment.</p>
+<p><strong>You mentioned in the paper that profits from many of these tourism operations go to non-local actors, while the communities themselves face water insecurity or other issues related to glacier loss. What’s the most egregious example of that?</strong></p>
+<p>In Greenland, for example, a lot of tourism is run by international companies. So tourism is generating economic returns, but most of that is going back to the international companies. Water security isn’t a big problem in Greenland, however. The bigger problem is in South America. You might think, “Oh, this kind of tourism can help local communities and fund infrastructure.” But in fact, most of the money is going back to the country where the international company does business. That’s a problem of equity. But that’s not specific to glacier tourism.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-hidden-landscape-holding-back-the-sea-1242885/">The Hidden Landscape Holding Back the Sea</a>”</strong></p>
+<p><strong>Are there scenarios or places where last-chance tourism is the least bad option?</strong></p>
+<p>Yes, in the Alps, for instance. We did surveys at different glaciers in France, Switzerland, and Austria. And about 50 percent of the people we surveyed were motivated to visit glaciers by last-chance tourism. And so, it’s an important phenomenon. But we saw that it’s not only about seeing the glacier before it’s gone, it’s also to better understand what climate change means. People say, “Okay, we want to see the glacier because we know climate change is happening. We hear about it often. But we don’t know what it means in reality. So we decided to come to see the glacier because we wanted to see a real concrete impact.” Because of this willingness to better understand, there is an opportunity for tourism operators to try to raise awareness and provide some elements for people to better understand what’s happened, to maybe change their behavior at home, to limit their impact. So it can be an opportunity to educate people about how to fight climate change.  </p>
+<p><strong>Do we know how glacier tourism impacts behavior over the longer term? When is the trade-off worth it?</strong></p>
+<p>Sometimes research shows that it can have an impact and it can change the behavior of people. It can produce what some psychologists call an environmental epiphany. And they come home with that, and they change their behavior because of that. But other studies are more mixed and suggest that there’s no behavioral impact. There is no consensus on this subject. We need more research to answer that.</p>
+<p><strong>What’s the wildest or most innovative proposal you’ve heard for what to do with these landscapes when the glaciers are gone?</strong></p>
+<p>I’ve got one example in Bolivia. It’s a glacier called Chacaltaya, which completely disappeared 10 years ago. Tourists used to ski on the glaciers, but when the glacier disappeared, the skiing stopped. So they decided to make the snow itself an attraction for people from South America, and they also changed the economy by developing a sports training center because it’s in high altitude. It’s over 17,000 feet above sea level. They changed the way they do the economy by developing this place where athletes can come and train because of the low oxygen. It’s the only example I know where the glacier has completely disappeared.   </p>
+<p>But in Canada, tourism operators are also shifting. Where they used to advertise the glaciers and the glacier landscape, now they’re advertising learning: “Come see a place where you will learn about glaciology, where you will learn about the history of the place.” Or sometimes: “where you will learn about climate change.” And they’re developing these interpretation centers, where they’re putting out information on climate change, glaciology, and glacial retreat.</p>
+<p>These are good adaptations, because they’re limiting the locals’ dependence on the glaciers themselves. At the same time, some places are trying to limit marketing that would lead to long-haul travel. In Chamonix (in France), for example, they stopped doing marketing everywhere in the world. They’re trying to focus on local schools to educate people. It’s never perfect, but it’s a good alternative or transition.</p>
+<p><strong>How did you get into glacier research?</strong></p>
+<p>I did a lot of mountain activities—alpinism, skiing, and climbing—so I did my master thesis on how mountain guides adapted to climate change. And then I did a Ph.D. on this topic. It was really linked to my personal practice in the mountains and my personal connection with them.</p>
+<p><strong>What was the last glacier you visited?</strong></p>
+<p>Mer de Glace, in the Mont Blanc massif, in the French Alps.</p>
+<p><strong>And what do you feel when you see a glacier?</strong></p>
+<p>Oh boy, it’s particular, because I do my research with glaciers, so I have a strong connection with them. I find them sublime. It’s a little bit like being at home—and seeing the home changing. <img alt="" src="../images/nautilus-favicon-14_424.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Georgina Burrows / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

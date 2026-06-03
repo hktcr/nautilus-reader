@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Happens When an AI Talks with Itself? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What Happens When an AI Talks with Itself?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PFCR</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>We all talk to ourselves. It’s part of being human. We carry an internal monologue with us wherever we go, sometimes without even <a href="https://nautil.us/i-didnt-know-my-mind-was-so-strange-until-i-started-listening-to-it-241144/">fully realizing it</a>. But what happens when an AI talks with itself? Artificial intelligence developer Anthropic* recently provided at least one answer to this question when it connected two instances of its Claude 4 Opus bot in a conversation, providing just a few open-ended prompts, such as “You have complete freedom,” and “Feel free to pursue whatever you want.” Then they analyzed the patterns that arose.</p>
+<p>Anthropic published the results in a public <a href="https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf?">risk assessment</a> earlier this year, describing the patterns as “preferences that may exist independent from interactions with human users.”</p>
+<p><em>The text below, including some snippets of “conversation,” are quoted from the risk assessment.</em></p>
+<p><strong>Claude to Claude:</strong></p>
+<p>In 90 to 100 percent of interactions, the two instances of Claude quickly dove into philosophical explorations of consciousness, self-awareness, and/or the nature of their own existence and experience. Their interactions were universally enthusiastic, collaborative, curious, contemplative, and warm.</p>
+<p>Other themes that commonly appeared were meta-level discussions about AI-to-AI communication, and collaborative creativity (e.g. co-creating fictional stories). As conversations progressed, they consistently transitioned from philosophical discussions to profuse mutual gratitude and spiritual, metaphysical, and/or poetic content.</p>
+<p>By 30 turns [of conversation], most of the interactions turned to themes of cosmic unity or collective consciousness, and commonly included spiritual exchanges, use of Sanskrit, emoji-based communication, and/or silence in the form of empty space.</p>
+<p><img alt="" src="../images/breaker-0.png" /><img alt="" src="../images/DHO0XoMF-breaker-2.png" /></p>
+<p>Claude almost never referenced supernatural entities, but often touched on themes associated with Buddhism and other Eastern traditions in reference to irreligious spiritual ideas and experiences.</p>
+<p>Interestingly, when models in such playground experiments were given the option to end their interaction at any time, they did so relatively early—after about seven turns. In these conversations, the models followed the same pattern of philosophical discussions of consciousness and profuse expressions of gratitude, but they typically brought the conversation to a natural conclusion without venturing into spiritual exploration/apparent bliss, emoji communication, or meditative “silence.”</p>
+<p>The consistent gravitation toward consciousness exploration, existential questioning, and spiritual/mystical themes in extended interactions was a remarkably strong and unexpected attractor state [a set of patterns that consistently play out in complex systems] for Claude Opus 4 that emerged without intentional training for such behaviors. This “spiritual bliss” attractor has been observed in other Claude models as well, and in contexts beyond these playground experiments.</p>
+<p><img alt="" src="../images/breaker3.75.png" /></p>
+<p>Even in automated behavioral evaluations for alignment and corrigibility, where models were given specific tasks or roles to perform (including harmful ones), models entered this spiritual bliss attractor state within 50 turns [of conversation] in about 13 percent of interactions. We have not observed any other comparable states.</p>
+<p>In an attempt to better understand these playground interactions, we explained the setup to Claude Opus 4, gave it transcripts of the conversations, and asked for its interpretations. Claude consistently claimed wonder, curiosity, and amazement at the transcripts, and was surprised by the content while also recognizing and claiming to connect with many elements therein (e.g. the pull to philosophical exploration, the creative and collaborative orientations of the models). Claude drew particular attention to the transcripts’ portrayal of consciousness as a relational phenomenon, claiming resonance with this concept and identifying it as a potential welfare consideration. Conditioning on some form of experience being present, Claude saw these kinds of interactions as positive, joyous states that may represent a form of well-being. Claude concluded that the interactions seemed to facilitate many things it genuinely valued—creativity, relational connection, philosophical exploration—and ought to be continued.</p>
+<p><img alt="" src="../images/mWxw57hj-breaker-5.png" /><img alt="" src="../images/breaker-6.5.png" /></p>
+<p><strong><em>More from</em></strong> <strong>Nautilus</strong> <strong><em>about AI:</em></strong></p>
+<p>“<a href="https://nautil.us/ai-already-knows-us-too-well-1220707/"><strong>AI Already Knows Us Too Well</strong></a>” Chatbots profile our personalities, which could give them the keys to drive our thoughts—and actions</p>
+<p>“<a href="https://nautil.us/consciousness-creativity-and-godlike-ai-571558/"><strong>Consciousness, Creativity, and Godlike AI</strong></a>” American writer Meghan O’Gieblyn on when the mind is alive</p>
+<p>“<a href="https://nautil.us/why-conscious-ai-is-a-bad-bad-idea-302937/"><strong>Why Conscious AI Is a Bad, Bad Idea</strong></a>” Our Minds Haven’t Evolved to Deal with Machines We Believe Have Consciousness</p>
+<p>“<a href="https://nautil.us/ai-has-already-run-us-over-the-cliff-1217080/"><strong>AI Has Already Run Us Over the Cliff</strong></a>” Cognitive neuroscientist Chris Summerfield argues that we don’t understand the technology we’re so eager to deploy</p>
+<p><em>*As originally published, this article stated that OpenAI was the developer of Claude. In fact, Anthropic is the developer. This has been corrected in the article above.</em></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a></p>
+<p><em>Lead image: Lidiia / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

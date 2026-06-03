@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brain Might Not Function Like We Thought It Did | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Brain Might Not Function Like We Thought It Did</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-EGEL</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For over a century, scientists who study the brain have linked function to anatomy. This way of understanding the brain emerged in the early 1900s with German neuropsychiatrist Korbinian Brodmann, who stained thin slices of cortex taken from humans and other animals and found that the way the cells layered changed abruptly from one place to the next.</p>
+<p>Brodmann drew lines around these regions, mapping the human cerebral cortex into 52 distinct areas, based on their cellular structure. Later, scientists proposed that these so-called Brodmann areas correspond to specific functions, such as Broca’s area for speech production. Studies of brain injuries and electrical stimulation seemed to bear this out. Damaging the Broca’s area, for instance, interfered with speech, and stimulating specific tissues could lead to specific sensations, movements, or perceptual effects. Today, Brodmann divisions remain standard references for researchers and clinicians, especially in functional MRI studies.</p>
+<p>But a new <a href="https://www.nature.com/articles/s41593-025-02190-z">study</a> on mice from the Karolinska Institutet in Sweden, published in <em>Nature Neuroscience</em>, suggests that these maps don’t tell the whole story. When it comes to complex cognition, the brain may be organized not according to anatomy, but according to patterns of neural firing instead. In the prefrontal cortex of a mouse, the scientists found, function emerges not from places but from neuronal networks that are distributed across regions. They also discovered that how neurons fire when the brain is at rest is a good predictor for where it sits in the functional hierarchy—and what kind of cognitive work it does.</p>
+<p>“Our findings challenge the traditional way of defining brain regions and have major implications for understanding brain organization overall,” said Marie Carlén, an author of the study and professor at the department of neuroscience at the Karolinska Institutet, in a <a href="https://news.ki.se/new-brain-maps-challenge-traditional-descriptions-of-the-brain">statement</a>.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-surprising-relativism-of-the-brains-gps-237023/">The Surprising Relativism of the Brain’s GPS</a>”</strong></p>
+<p>Scientists had already determined that the functions of the prefrontal cortex—decision-making, planning, and emotional regulation—don’t correspond to neatly localized parts. They wanted to know if they could build a better map by looking at how individual neurons fire than by relying on anatomy alone. They also wondered if spontaneous activity in neurons could reveal any hidden truths about the way the brain works.</p>
+<p>To find out, the team of scientists recorded activity from more than 24,000 individual neurons in the brains of mice using high-density neuropixel probes, thin silicon shanks inserted into the brain tissue and studded with thousands of tiny recording sites. Half of the neurons they recorded lived in the prefrontal cortex of the mice and the other half in other cortical and subcortical regions. The researchers analyzed how these neurons behaved both when the animal was at rest and when they were exposed to simple sounds: how fast, regular, and consistent the firing patterns were, and whether spikes followed predictable patterns.</p>
+<p>Next, using a large independent dataset from the International Brain Laboratory, the researchers examined how neurons in similar regions encode sensory information, decision-making, and reward feedback. That dataset relied on giving mice a behavioral test involving a visual stimulus, wheel turns, a water prize, and white noise for errors. Using statistical analysis, the Karolinska Institutet scientists classified individual neurons based on whether they were tuned to sensory stimuli, decision-making, or reward. Finally, the team mapped the activity patterns they identified and compared them against traditional anatomical atlases and known connectivity-based models of the cortex.</p>
+<p>What they found is that the neurons in the prefrontal cortex of the mouse fire according to a unique motif. Unlike most other brain regions, such as the hippocampus or sensory cortex, the neurons here tend to fire slowly, regularly, and without erratic bursts. This activity is stable over time. When they looked at neural firing in other parts of the cortex, they found this slow and steady firing pattern seems to be a hallmark of high-level cognitive regions more generally.</p>
+<p>Surprisingly, neurons governing decision-making, considered a higher-order process, were governed more by fast, irregular bursts. “This suggests that cognitive processes rely on local collaboration between neurons whose activity patterns complement one another,” said Carlén. “Some neurons appear to specialize in integrating information streams, while others have high spontaneous activity that supports quick and flexible encoding of information, for instance, information needed to make a specific decision.”</p>
+<p>When the team remapped the prefrontal cortex according to the firing patterns they identified, they found that in some parts, the patterns did follow anatomical lines while in others, they did not, suggesting a network of overlapping functional zones. Sensory responses and decision-making also seemed to mostly ignore anatomy.</p>
+<p>The findings suggest function is emergent, not localized, and that higher-order cognitive activity required for planning and abstraction relies on slow and stable activity rather than speed and reactivity. The scientists propose that regular firing neurons may create a stable background that can serve as a kind of scaffold for other neurons that encode specific events and have more erratic firing patterns.</p>
+<p>What emerged was a different sort of map, one that defies strict borders in favor of rhythm and connection. <img alt="" src="../images/nautilus-favicon-14_524.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Master1305 / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Diver Who Witnessed His Own Death | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Diver Who Witnessed His Own Death</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-02
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-M182</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Chris Lemons, a saturation diver from England, is in the rare position of having witnessed his own death. All roughly 40 minutes of it were recorded on video, which he watched the next day aboard the <em>Bibby Topaz</em>, the 350-foot vessel he was diving from—rooting for himself to pull through.</p>
+<p>In the smudgy black-and-white footage, Lemons is seen lying on his side at the bottom of the North Sea atop something called a drilling template—a jungle gym of pipes that subsea oil drillers use to manage multiple wellheads—his diving suit and helmet making him resemble a toppled astronaut. For the first several moments, his limbs twitch unnaturally, his hands piteously reaching through the dark toward the remotely operated submersible that his ship sent down to find him.</p>
+<p>Then the twitching stops, the blackness of the surrounding sea framing his lonely demise. He is 300 feet below the surface of the North Sea and he can’t breathe. In a freak technical failure, the <em>Bibby Topaz</em> had begun to drift downstream away from him at the exact moment his air hose became entangled in the template. The hose runs to his diving bell, and his diving bell is connected by cables to the ship—and for one tense moment, Lemons himself is the only thing holding the errant 8,000-ton vessel in place.</p>
+<p>Then the hose snaps.</p>
+<p>“It was like a jack being pulled from a speaker,” Lemons told me when we spoke recently. “I lost all communication, which puts you in a very lonely place. Then the hose, which provides an infinite amount of gas—suddenly I had nothing to breathe at all.”</p>
+<blockquote>
+<p>Breathing a mixture too rich in oxygen gives you something akin to an acid trip with a side of convulsions.</p>
+</blockquote>
+<p>It would be a half an hour before the navigation glitch was solved and the ship was able to reposition the diving bell to rescue Lemons. When his unconscious body was eventually recovered and he was miraculously revived by his diving partners, Dave Yuasa and Duncan Allcock, Lemons had gone all that time without breathing.</p>
+<p>For most of us, observing our own passing, especially amid such a forlorn and desolate backdrop, might make for rather difficult viewing.</p>
+<p>Not for Lemons.</p>
+<p>“I think I’m sort of like everyone else who’s watched the video, thinking—does he make it?” he said.</p>
+<p>He made it. Others didn’t. Traumatized by the accident, which was streamed to monitors aboard the <em>Bibby</em> <em>Topaz’s</em> as the emergency unfolded, some of Lemon’s crewmates quit working with divers altogether, he said. But for him and his dive mates, the events of that 2012 accident, 115 miles off the coast of Aberdeen, Scotland, produced the opposite effect.</p>
+<p>“It has been a positive in our lives, in a strange way,” he said. “It gave us more confidence.”</p>
+<p>Three weeks later, Lemons and his dive partners were back at the bottom of the sea to finish the job cut short by the near tragedy.</p>
+<p><img alt="" src="../images/qUgggqrz-Digges_BREAKER-2.png" /></p>
+<p><strong>HATS OFF:</strong> Kirby Morgan dive helmets (known as "hats" in the profession) are the sat diver's most crucial piece of equipment, the lifeline delivering the proper mixture of gases as they work at great depths. This one belongs to Jerry Shepherd and is missing the removable helium reclaimer essential to using it on saturation dives. <em>Photo by Stephen Digges.</em></p>
+<p>If you’re not a saturation diver, it’s hard to imagine these terrifying events as a good day at the office—but it was. While at work, Lemons and his colleagues spend their days anywhere from 300 to 1,000 feet below the surface and remain at pressures up to 30 times that of sea level for as long as a month. To do so, they live in pressurized chambers aboard ships or oil rigs, from which they descend in diving bells to their job sites at the bottom of the sea—as dark, remote, and unhospitable a climate as can be found on Earth. In such a place, close scrapes like Lemons’ are almost routine.</p>
+<p>“When people hear the word ‘diving,’ they often think of guys in fins swanning about gracefully in clear blue water,” he said. “This job isn’t that. On nine out of 10 dives, visibility is near zero. Seeing what you’re doing is a luxury.”</p>
+<p>Perfected by the United States Naval Submarine Medical Research Laboratory in the late 1950s, saturation diving—called “sat” by those in the business—quickly became a boon to the oil industry and led to a massive proliferation of offshore oil production platforms. In the Gulf of Mexico alone, their numbers mushroomed from only a few hundred to nearly 3,000 by 1972, thanks largely to sat divers who could live at depth pressure to build the undersea infrastructure that offshore drilling required. The number has been climbing ever since.</p>
+<p>“Essentially, we’re the glorified plumbers for this system,” Lemons said with sardonic understatement.</p>
+<p>But plumbing at these depths isn’t just a matter of turning wrenches and <a href="https://nautil.us/your-datas-strange-undersea-voyage-1138554/">laying pipe</a>—it’s a fight with the limits of physics and biology. Saturation diving treads the razor’s edge of what a human body can endure.</p>
+<p>Every trip to the seafloor is a negotiation with gas laws and physiology that cut divers little slack. Without the sealed, pressurized chambers they live in aboard ships for weeks at a time, the special gas mixtures that they breathe, and the diving bells that ferry them from the chambers to the ocean floor, their bodies would seize, suffocate, or come apart from within. Those who do this work survive only because we have managed to forge a fragile scientific truce with the laws governing gases under intense pressure at depths humans were never meant to plumb.</p>
+<p>The human frailty that saturation diving eludes is the tendency of our bodies to absorb gases when we’re under high pressures and trying to breathe. Deep underwater, inhaling regular compressed air pushes inert gases—chiefly nitrogen—deep into blood and tissue. The air we breathe as we walk down the street is about 78 percent nitrogen and 21 percent oxygen (with argon and other trace gasses making up the rest). On a day-to-day basis, our bodies essentially ignore it. It’s inert.</p>
+<p>But once we dive to about 30 feet underwater, the pressure on us doubles from that at sea level, making the gases behave differently. On a typical scuba dive, when a diver breathes regular air, nitrogen slips into blood and tissue, building a load that can explode into bubbles on the way back up. Ascend back to the surface too quickly and your body essentially becomes a shaken can of beer. Nitrogen fizzes out of solution with your blood and tissues, blocking circulation, lodging in joints, even provoking stroke-like symptoms if they shut off oxygen to the brain. Divers call this decompression sickness “the bends.” Bad cases can, and sometimes do, result in death.</p>
+<blockquote>
+<p>The helium also makes the divers talk like a chorus of chipmunks for the duration of their saturation.</p>
+</blockquote>
+<p>Things only get worse the deeper you go. Nitrogen becomes a timebomb in your tissues and makes you drunk to boot—a state known as nitrogen narcosis. But breathing a mixture too rich in oxygen gives you something akin to an acid trip with a side of convulsions. It is only when divers are fully saturated with inert gas—in sat, that is—that they’re safe from the nasty side effects that breathing produces below about 300 feet, where the pressure is 10 times that experienced by a body at sea level.</p>
+<p>Before the advent of saturation diving, humans could work only about a half hour at no greater than about 120 feet below sea level before having to ascend. The longer divers stay down, the more nitrogen accumulates in their system, so even after this short stay at depth, they had to make numerous lengthy stops as they rose to let the gas slowly dissipate. That made getting any work done underwater a pain. Think of sending a carpenter to the 40th floor of a skyscraper to hammer one nail, then lowering him in an elevator that doesn’t descend until the next morning.</p>
+<p>Saturation functions by delaying the decompression process. Sat divers enter what’s called a saturation complex, which sits aboard a dive support vessel or oil rig. They are tightly sealed within it and brought to the pressure at the depth where they will work and remain there—unable to leave for <em>any</em> reason—until the job is done. Missing birthdays, weddings, anniversaries, and funerals is part of the work. It is here, topside, that they will live for weeks a time, descending in diving bells to the job site for their shifts. Their isolation ends only when they are depressurized—a days-long process that comes when their work is finished.</p>
+<p>The folks who do this kind of work are almost entirely men (there are four women known to have worked as sat divers) between about 25 and 40 years old. Any younger and they wouldn’t have accrued the experience needed to join the ranks. Much older and they might not withstand the rigors of the job as well.</p>
+<p>Anecdotally, there are only about 7,000 to 12,000 of them in the whole world, possibly fewer, notes Jerry Shepherd, head instructor at the South Louisiana Community College dive school.* Only one in 15 of his students ascends the professional ziggurat to saturation. Fewer still will stick with the job for an appreciable length of time—the first month-long dive often flushing out the fainter of heart. For those who do stay, said Lemons, it’s imperative that they be drawn to—rather than repelled by—the job’s idiosyncrasies and risks.</p>
+<p>For one, there’s really no fixed schedule once you graduate and land a spot on a dive contractor’s roster. Much of the job is waiting by the phone.</p>
+<p><img alt="" src="../images/yca6Ntmv-Digges_BREAKER.png" /></p>
+<p><strong>MIXOLOGIST:</strong> Jerry Shepherd, head instructor at the South Louisiana Community College dive school, shows off a diving manifold,  a system of valves that mixes the gases a sat diver would breathe during a dive. <em>Photo by Stephen Digges.</em></p>
+<p>In early June, when I had lunch in New Orleans with two Gulf of Mexico sat divers named Jeff and Dave, who preferred to withhold their last names for professional reasons, both men were looking forward to a few weeks off. By the time they ordered their second beer, though, their phones had rung with assignments for a saturation tour starting the next morning. That’s how quickly things can change. At the same time, a successful diver will work around 160 days a year, cumulatively, and all that downtime, said Shepherd, can lead some divers to act up while shoreside, giving the profession a rambunctious reputation. Bar fights, relationship problems, and run-ins with the law are frequent extracurriculars, according to many familiar with the profession. But all that stays onshore: The claustrophobic environment of the living chamber also makes the job more suitable for people who can be even-tempered and agreeable while they’re on the clock.</p>
+<p>“Assholes have a way of not lasting too long in sat,” Jeff told me.</p>
+<p>Those graduating from Shepherd’s class will have years of shallower dives ahead of them before they will even be considered for sat. They’ll first do regular compressed air scuba dives to about 120 feet, then graduate to breathing mixed gasses on deeper jobs with higher pay. From there, explain Lemons and Shepherd, with a bit of luck, your dive supervisor might single you out for a promotion to saturation. It pays to stick it out. Sat divers routinely bring home $180,000 to $200,000 a year.</p>
+<p>“If you can make it to sat, that’s good money for sitting in a steel chamber for half the year,” said Shepherd.</p>
+<p>A standard saturation chamber resembles a giant hamster tube made of metal cylinders. Depending on the size of the dive support vessel, it accommodates anywhere from six to 24 divers. Each complex has living quarters that are slightly less spacious than an airport hotel shuttle van, its walls lined with bunks abutted by a small sitting area and table. It’s almost exactly like being locked in a space capsule.</p>
+<p>Once in the complex, divers are pressurized—or “blown down”—over the course of several hours to the pressure they'll be working in once they descend to depth. At the same time, the air inside the saturation chamber phases over to a mixture of helium and oxygen, called heliox. Under pressure, the ordinary air we breathe at the surface becomes toxic. This removes nitrogen, which, under pressure, also affects neurotransmitter functions in the brain, essentially making it an anesthetic. Oxygen levels, too, must be managed—at pressure, too much of the gas turns poisonous, triggering spasms, hallucinations, and chest pains. Heliox therefore contains no nitrogen at all and only a tiny percentage of oxygen to keep the divers alive—at pressure, even a small dose is enough. The lighter helium, meanwhile, is very easy to breathe. Any heavier gas at saturation depth would make inhaling like trying to suck thick soup through a straw.</p>
+<p>The helium also makes the divers talk like a chorus of chipmunks for the duration of their saturation. The communications lines in most saturation units come equipped with special descramblers that aim to make the high registers of the diver’s helium voices more intelligible to the staff monitoring them from outside the complex. But their use is limited.</p>
+<blockquote>
+<p>“During decompression, you understand you’re not so much being paid to dive as you are to simply wait inside a can.”</p>
+</blockquote>
+<p>“All they really do is add bass to the high-pitched treble of the helium voices, turning Donald Duck into Oscar the Grouch,” Shepherd told me.</p>
+<p>Once fully pressurized to the depth where they’ll be working, it’s time for the downward commutes to start. A smaller crew of divers climb into the diving bell, an egg-shaped steel orb that detaches from the living quarters and is kept at the same pressure. The bell, which is about as spacious as a bathroom stall, is lowered on cables from the ship to the seafloor, its two-inch-thick steel walls protecting the divers from the pressure. Lemons calls it the “taxi to the job site,” though his description of its creaky, shimmying, and ever-darkening descent to the depths that can last up to an hour made me think of an elevator ride into the abyss. Crowded into the bell with the divers are their bulky Kirby Morgan dive helmets—which the divers call “hats.” Typically, divers work in groups of three for six-hour shifts, four teams rotating so work goes on around the clock.</p>
+<p>Coiled on hangers in the bell are the braids of their umbilical hoses. These are exactly what they sound like, delivering, as they do, the heliox, electricity, and fiber-optic lines for communication. Each hat is equipped with a microphone and a camera which keeps the divers in touch with their supervisors on the dive support vessel. Given the frigid depths at which the divers operate, another tube running through the umbilical carries warm water to channels in their neoprene drysuits.</p>
+<p>When the ride to the seafloor ends, divers exit the bell through the hatch. Since the pressure of the bell equals the pressure at the working depth, the seawater is kept at bay. Two of the divers then put on their helmets with the assistance of the third, referred to as the bellman, who remains in the bell to manage the umbilicals as they snake out behind the divers. Each diver has about 150 feet of slack to wander.</p>
+<p>It’s at this point, once you’re finally in the water, that the pressure of the job—both literal and metaphorical—can catch up with you, Dave, the Gulf diver, tells me.</p>
+<p>“A couple hundred feet above you is a ship with 160 people on it—cooks, dive support techs, navigators, swabbies—and they’re all there so you can tighten this one bolt at the bottom of the ocean,” he said. “You don’t want to fuck it up.”</p>
+<p>After their shifts end, the divers ascend in the bell to the pressurized living chamber aboard the ship. The bell is mated to the chamber to maintain equal pressure between the two. The divers then step through an airlock back into their heliox-filled metal cocoon, still sequestered from an outside world that’s only inches away.</p>
+<p><img alt="" src="../images/JQhRiEBY-Digges_BREAKER-3.png" /></p>
+<p><strong>HIGH PRESSURE PROFESSION:</strong> Author Charles Digges chats with Jerry Shepherd among decompression chambers used to teach students about working at tremendous pressures. The chambers can also be used treat divers suffering from decompression sickness. <em>Photo by Stephen Digges.</em></p>
+<p>When I visited Shepherd at his dive school in Morgan City, Louisiana, he showed me an array of decompression tables spelling out the wait times for various depths dived.</p>
+<p>In general, the standard is one day of waiting for every hundred feet of depth, plus an extra day, meaning a sat team that has been working 1,000 feet down—the maximum beyond which sat divers don’t go to avoid high-pressure nervous syndrome, characterized by tremors and neurological damage—must wait 11 days before they can emerge into sea level air. As decompression proceeds, the pressure is gradually reduced, with several stops along the way to avoid shock. The gas mixtures are also changed as the divers “ascend.” Helium is gradually washed out, oxygen levels are tuned to remain safe, and the divers are eased back toward surface air, Shepherd explained.</p>
+<p>These are the longest hours of the job. “During decompression, you understand that you’re not so much being paid to dive as you are to simply wait inside a can,” Lemons told me.</p>
+<p>Divers typically devote these long hours to books, movies, and catching up with home via whatever internet connection is available. While some dread the tedium, Paul Dinesson, a Norwegian saturation diver I interviewed, put it to good use producing notes for what would later become a three volume, 2,000-page <a href="https://the-norwegian.com/">autobiography</a>, as yet unpublished, of his life at the bottom of the North Sea—giving new meaning to writing under pressure.</p>
+<p>While the divers are at depth, their topside support vessel is held in place by a dynamic positioning system—a GPS-guided network of thrusters that acts as an electronic anchor parking the ship in one spot regardless of where the sea and wind want to pitch it. These systems have so many redundancies that their failure is almost unthinkable.</p>
+<p>Yet this was precisely the nightmare that unfolded on the night of Lemons’s fateful dive. As the dynamic positioning system of the <em>Bibby Topaz</em> glitched out, the ship drifted with the North Sea current, dragging the diving bell, Lemons, and his dive partners through the water column like marionettes before Lemons’ umbilical snagged on the drilling template they were inspecting that day.</p>
+<p>“I didn’t see any bright, beckoning lights when I was out,” Lemons told me. “When I came to in the bell, I was confused, though I understood from the expressions on Dave [Yuasa] and Duncan’s [Allcock’s] faces that something serious had happened. But it would be a while before I connected it to myself.”</p>
+<blockquote>
+<p>“It is amazing what you normalize.”</p>
+</blockquote>
+<p>A <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8956028/">paper</a> published on the factors that saved Lemons highlighted the thorough rescue training of the dive staff, the spot-on mixture of his diving gas, which allowed his tissues to hoard oxygen, and the fact that he did, indeed, lose consciousness, which lowered the demands of his system. But the alignment of all those elements is an awful lot to depend on if something goes wrong during a sat dive.</p>
+<p>The most dramatic accidents in saturation diving history tend to do with the pressure differentials between the living chambers and the sea level environment of the vessels where they sit. While Lemons’ experience spurred several industry-wide safety upgrades in backup breathing sources and more navigational redundancies, accidents do happen.</p>
+<p>The most dramatic of them tend to highlight the collision between our bodies—which are so finely tuned to living at around sea level—and the iron laws of physics governing the gases we breathe when they are subjected to 30 atmospheres of pressure.</p>
+<p>Just how powerful those collisions can be was viscerally illustrated in 1970, when a Gulf diver named Donald Boone had a very unfortunate <a href="https://journals.lww.com/nutritiontodayonline/citation/1970/00530/the_ordeal_of_donald_boone.1.aspx">experience</a> on the toilet in his living chamber. In these early days of saturation diving, the toilets operated like simple airlocks. An inner valve on the toilet would be opened to drop the waste, then be closed. An outside tender would then open an exterior valve to suck the contents into a holding tank at sea-level pressure. In Boone’s case, both valves were mistakenly opened at the same time while he was still seated on the toilet. As a result, his small and large intestines were sucked to the outside of his body as the highly pressurized air inside the chamber rushed outward.</p>
+<p>Boone survived, but it took some complex logistics. Two trauma surgeons were flown by helicopter to his dive vessel, then brought down to Boone’s pressure in a hyperbaric chamber. In a ghastly procedure, using only local anesthetic because the pressure inside the chamber made standard gaseous anesthetics impossible to use, they operated on Boone inside the sat complex, stabilizing him enough to endure the days-long decompression and another more comprehensive surgery on shore. Extra valves have since been added to sat chamber toilets to prevent this particular horror from repeating itself.</p>
+<p>A more lethal tragedy that haunts sat divers is a 1983 accident aboard a Norwegian North Sea drilling rig called the <em>Byford Dolphin</em>, where a routine transfer of divers from the diving bell to the living chambers went gruesomely awry. A clamp that secured the bell to the living chamber opened prematurely, instantly exposing the divers inside to explosive decompression. In the blink of an eye, the chamber went from depth pressure to sea level pressure like a shaken soda can. The pressure differential was so great that one diver was literally torn apart where he stood. Three others inside the chamber died immediately as nitrogen bubbles in their blood and tissue burst. A fifth man, a tender outside the chamber, was struck and killed by the bell as it was flung like a cannon ball away from the chamber.</p>
+<p>Less dramatic, though still terrifying stories are a part of every diver’s personal history. Jeff told me of having a several-ton load nearly dropped on him as it descended from his dive vessel. Shepherd spoke of his fear of <a href="https://nautil.us/manta-rays-at-play-1204569/">manta rays</a>, who lie camouflaged on the sea floor, and who, when spooked, dart to the surface. When this happens, a diver’s umbilical can get scooped up by the forked, fleshy appendages around the ray’s mouth, and drag the diver to unexpected and possibly fatal decompression. Norway’s Dinesson was nearly sucked under a piling to an oil platform as it was being repositioned. So long as they keep diving, their harrowing stories pile up.</p>
+<p>So <em>why</em> would anyone keep going in this line of work, I asked Lemons.</p>
+<p>“I think the bottom line is that it is amazing what you normalize,” he said.</p>
+<p>For the past few years, Lemons, now 45, has been working topside as a dive supervisor, but not for any reasons connected to his brush with death. In fact, he went on to dive in saturation for 10 more years. His experience was made into a Netflix/BBC documentary called <em>Last Breath</em>, itself subsequently developed into a film by the same name. In connection with that, Lemons is currently on a sabbatical from the diving world to do public speaking, but plans to return.</p>
+<p>His persistence in the industry, he suggested, might have something to do with his new relationship to his own mortality. As Lemons sat at the bottom of the North Sea after the bell and his dive partner had been dragged hopelessly away by the current towing the <em>Bibby</em> <em>Topaz</em>, panic was replaced by something wholly different.</p>
+<p>“I can still feel how the fear drained out of me,” he told me. “I’d done all I could, and rather calmly thought, well, this is it—if this is how I have to go when my time comes, it really wasn’t so bad.” <img alt="" src="../images/nautilus-favicon-14_922.png" /></p>
+<p><em>*As originally published, this article misspelled Jerry Shepherd's last name. It has been corrected in the story above.</em></p>
+<p><em>Lead image: SvedOliver / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science Behind the Perfect 3-Point Shot | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Science Behind the Perfect 3-Point Shot</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-03-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GHHD</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In Tuesday’s victory against the Washington Wizards, the Orlando Heat’s Bam Adebayo put up an astonishing 83 points, overtaking Kobe Bryant to claim the record for the second most points scored by a player in an NBA game (Wilt Chamberlain’s god-like 100 points in 1962 remains untouchable). In doing so, Adebayo came dangerously close to notching another, more dubious NBA record: most missed three-pointers. With 15 failed attempts, he was just one air ball away from tying it.</p>
+<p>Unless your name is “Steph Curry,” nailing a three-point shot is a tall order. But researchers from the University of Kansas’ Jayhawk Athletic Performance Laboratory are here to help. They recently <a href="http://dx.doi.org/10.3389/fspor.2026.1732293">published</a> a study breaking down the biomechanics of successful three-point shots—and they’ve got a record of their own in their sights.</p>
+<p>To investigate what separates a clutch three-point sniper from a bricklayer, they recruited 24 male basketball players—11 of whom were deemed proficient at threes, and 13 of whom were not—and let them take 10 shots from behind the three-point line. The researchers used markerless motion-capture technology to analyze the players’ shooting mechanics, which were recorded by nine cameras around the court.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-hot-hand-is-not-a-myth-643539">The “Hot Hand” Is Not a Myth</a>”</strong></p>
+<p>“What makes this study especially interesting is the use of the DARI markerless motion-capture system, which allows for noninvasive and time-efficient data collection,” study author Dimitrije Cabarkapa said in a <a href="https://news.ku.edu/news/article/to-attempt-world-record-researchers-will-use-their-finding-that-prep-phase-is-most-vital-to-accurate-three-point-shooting">statement</a>. Unlike a lot of traditional motion-capture technology, markerless motion capture doesn’t require donning skintight suits with ping-pong balls attached, creating a more natural experience.</p>
+<p>They found the key to a successful three was all in the setup. Analysis of the tape revealed successful three-point shooters had a greater bend in their hips, knees, and ankles, which allowed them to lower their center of mass prior to releasing the ball. “Having a wider stance is very important for stability,” Cabarkapa explained. “Without that, a shooter cannot maintain a stable base and is going to be off-balance.”</p>
+<p>The team hopes to apply the lessons learned from this research to help break the Guinness World Record for most consecutive three-point shots by partnering with <a href="https://www.instagram.com/thesportsphysicist/?hl=en">Cornell Jenkins</a>, a college basketball player turned physicist. Jenkins can routinely hit 30 to 40 three-pointers in a row—well short of the record—and hopes to improve with real-time analysis by the team.</p>
+<p>“This is where science meets practice,” Cabarkapa said. “We’re refining everything we do in order to better understand each factor that can optimize athlete performance. We’ll help Cornell monitor his progress and implement innovative technology to objectively assess his performance and advancement toward achieving this goal.”</p>
+<p>If Jenkins wants his name in the record books, he’ll have to top Fred Newman’s record of 209 consecutive three-pointers from the college three-point line. Of course, he could also try for more than 105 consecutive three-pointers from the NBA line. That record is held by, you guessed it, <a href="https://www.nba.com/warriors/videos/that-time-stephen-curry-hit-105-threes-in-a-row">Steph Curry</a>. <img alt="" src="../images/nautilus-favicon-14_315.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Jag_cz / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

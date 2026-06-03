@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Most Beautiful Science of the Year | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Most Beautiful Science of the Year</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-24
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-A2Q2</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>As Einstein saw it, this is where science begins: “The most beautiful thing we can experience is the mysterious. It is the source of all true art and science. He to whom this emotion is a stranger, who can no longer pause to wonder and stand rapt in awe, is as good as dead: His eyes are closed.”</p>
+<p>Einstein's view was an inspiration for “<a href="https://nautil.us/more-than-a-feeling-1242661/">More Than a Feeling</a>,” a <em>Nautilus</em> article this year by Sean B. Carroll, in which the evolutionary biologist portrays a wonderful world of scientists who found their callings in the emotion of awe. That spirit, too, drives our journalism and essays, and as 2025 winds down, we look back at some of the beautiful insights and writing that defined <em>Nautilus</em> this year.</p>
+<p><img alt="" src="../images/line-2-scaled.png" /></p>
+<p>On a sticky, late-spring night in parts of the eastern United States, you might witness one of the wonders of the animal kingdom: a constellation of hundreds of <a href="https://nautil.us/the-mathematical-mysteries-of-fireflies-1204513/">fireflies blinking in unison</a>.</p>
+<p><img alt="" src="../images/line-2-scaled_1.png" /><img alt="" src="../images/d7natbRm-3.png" /></p>
+<p><em>Illustration by Mathias Ball</em></p>
+<p>We needn’t get down to neurons and base pairs and biochemicals to be reminded of <a href="https://nautil.us/were-all-wild-things-1204099/">our animalness</a>. Sometimes it’s as simple as a 4-year-old <em>Homo sapiens</em> standing in quiet stillness, mouth agape, gazing up at the towering Barosaurus and Allosaurus in the foyer of the American Museum of Natural History, momentarily unaware of the buzz of other humanity around her.</p>
+<p><img alt="" src="../images/line-2-scaled_2.png" /></p>
+<p>Maybe the emergence of beings like us is not hindered by hard steps but is simply slow. Perhaps the universe is <a href="https://nautil.us/we-might-not-be-so-strange-1242875/">teeming with alien civilizations</a>—or will be before very much longer.</p>
+<p><img alt="" src="../images/line-2-scaled_3.png" /><img alt="" src="../images/JfKZ81wv-1.png" /></p>
+<p><em>Illustration by Cornelia Li</em></p>
+<p>In the beginning, I was chasing Peter Putnam the fantasy, a forgotten janitor who’d discovered the structure of the mind. But the deeper I read, I found myself thinking, <em>Wait, did</em> <a href="https://nautil.us/finding-peter-putnam-1218035/">a forgotten janitor</a> <em>seriously discover the structure of the mind?</em></p>
+<p><img alt="" src="../images/line-2-scaled_4.png" /></p>
+<p>Bullie was the most caring in the group. Whenever someone else was ill, she would sit with her and comfort her. Bram and Wezel had the strongest friendship. There was just the two of them after their friends had died, and they did everything together: eating, sleeping, pottering about like an old married couple. Bullie, Bram, and Wezel were three of the 25 <a href="https://nautil.us/living-with-lab-mice-1202657/">ex-laboratory mice</a> with whom I lived between 2020 and 2023.</p>
+<p><img alt="" src="../images/line-2-scaled_5.png" /></p>
+<p><a href="https://nautil.us/the-math-shows-jackson-pollock-painted-like-a-child-would-1249335/">Jackson Pollock’s paintings</a> look like beautiful accidents.</p>
+<p><img alt="" src="../images/line-2-scaled_6.png" /></p>
+<p>As I walked through the freezer room, I continued to think about <a href="https://nautil.us/my-visit-with-my-dead-fathers-brain-1207680/">my dad’s brain</a>, nestled in a shelf among other frozen brains, and my fear gave way to a strange mix of wonder and sadness. The once active neurons that fired electrical and chemical signals from axons to dendrites inside the crevices and folds of the left frontal lobe, home to the language center, were now quiet. The memories produced in the hippocampus were now frozen. These parts worked in concert to convert my dad’s experiences into the language of more than 4,000 essays and book reviews, two novels, and a memoir about his life as a New York Yankees fan.</p>
+<p><img alt="" src="../images/line-2-scaled_7.png" /><img alt="" src="../images/xTZQ9qc2-2.png" /></p>
+<p><em>Illustration by Jorge Colombo</em></p>
+<p>Built on the foundations of conservation and science, shaped by industry and politics, wolf reintroduction is <a href="https://nautil.us/howl-1191979/">a huge and messy paradox</a>, a noble intention to save the wolf soaked in the wolf’s own blood.</p>
+<p><img alt="" src="../images/line-2-scaled_8.png" /></p>
+<p>To stay alive in an Ice-Age environment, early humans would have needed cultural and physical traits foreign to their ancestors in Africa. Analysis of ancient DNA suggests these early humans adapted to their icy surroundings with physical traits passed on by their former mates: <a href="https://nautil.us/how-neanderthals-kept-our-ancestors-warm-1185278/">Neanderthals</a>.</p>
+<p><img alt="" src="../images/line-2-scaled_9.png" /></p>
+<p>It appears that moons actually might represent the most <a href="https://nautil.us/intelligent-life-may-be-hiding-in-the-moons-1194315/">robust habitats</a> in the galaxy.</p>
+<p><img alt="" src="../images/line-2-scaled_10.png" /><img alt="" src="../images/rRcExA2i-10.png" /></p>
+<p><em>Illustration by Maria Fedoseeva</em></p>
+<p>It’s impossible to know exactly <a href="https://nautil.us/when-did-i-start-getting-cancer-1195935/">when each of the five mutations happene</a>d. When, deep in my marrow, one thing after another went awry, and divided my life. Like all people who have been ill, my life is split into Before and After. The mutations must have happened in the Before, because that’s how leukemia works.</p>
+<p><img alt="" src="../images/line-2-scaled_11.png" /></p>
+<p>Asclepius, a Greek demigod and physician, was said to have learned the secret of bringing the dead back to life from <a href="https://nautil.us/snakes-break-all-the-rules-1206380/">a snake</a>. Christianity took pains to suppress the cult of Asclepius and demonize serpents, in scripture and art, which is one of the reasons humans learned to hate snakes.</p>
+<p><img alt="" src="../images/line-2-scaled_12.png" /></p>
+<p>One evening, a full moon hung over the rainforest. Amid the sounds of monkeys, grasshoppers, and the shamans’ chants to forest spirits, <a href="https://nautil.us/the-psychedelic-scientist-1254733/">Bruce Damer</a> saw <em>madre</em> ayahuasca. He asked her, “Would you like to do this? How about we join together and travel and try to figure out how we were all born?”</p>
+<p><img alt="" src="../images/line-2-scaled_13.png" /></p>
+<p>It was a hot day, and it smelled warm, resinous, homey, and alive. Even in that small patch of forest, each tree—piñons and junipers, bristlecone pines, and cypress—smelled distinctive, each plant had its own <a href="https://nautil.us/scent-makes-a-place-1175656/">olfactory fingerprint</a>, and together they created a complex and resonant symphony of a very particular smellscape.</p>
+<p><img alt="" src="../images/line-2-scaled_14.png" /></p>
+<p>Chris Lemons, <a href="https://nautil.us/the-divers-who-stretch-the-limits-of-human-biology-1240106/">a saturation diver</a> from England, is in the rare position of having witnessed his own death.</p>
+<p><img alt="" src="../images/line-2-scaled_15.png" /></p>
+<p>Philosophers are grappling with the idea that life and death may <a href="https://nautil.us/the-animals-that-exist-between-life-and-death-1202592/">not be the only states</a> of being in which organisms can exist.</p>
+<p><img alt="" src="../images/line-2-scaled_16.png" /></p>
+<p>Across dinner tables, disciplines, and research sites, stories converged on a clear and sobering reality: Antarctica’s ice knows no politics, yet it faithfully records the <a href="https://nautil.us/the-extraordinary-imperiled-science-at-the-end-of-the-earth-1198787/">consequences of our choices</a>.</p>
+<p><img alt="" src="../images/line-2-scaled_17.png" /></p>
+<p>Today, spiritualism and mainstream science having parted ways, physicists have proposed a new way to “see” into a new dimension—by looking deep into the hearts of <a href="https://nautil.us/neutron-stars-hint-at-another-dimension-1202180/">collapsed, dead stars</a> that have been behaving strangely.</p>
+<p><img alt="" src="../images/line-2-scaled_18.png" /><img alt="" src="../images/iH7XVs13-5.png" /></p>
+<p><em>Illustration by A. Kendra Greene</em></p>
+<p>A few more miles and the atmosphere turns golden, rays diffuse and refracted, a sepia glow. By the time we are moving past downtown L.A., it does not matter that the windows are up. A headache is starting. I feel the change of the air in my lungs. The diminishing. The tightening. The hurt. The light outside is stunning, though, gorgeous, the way an ice storm is a kind of guilty pleasure—<a href="https://nautil.us/with-regard-to-the-invisible-1231926/">so beautiful and so terrible</a>, so patently disaster or the precipice before.</p>
+<p><img alt="" src="../images/line-2-scaled_19.png" /></p>
+<p>The human body is a wonder of adaptations. Our skin’s blood vessels swell to expel excess warmth. Sweat glands release droplets of water that free heat as they evaporate. But what happens when the cells inside our bodies <a href="https://nautil.us/extreme-heat-will-change-you-1232228/">get too hot</a>?</p>
+<p><img alt="" src="../images/line-2-scaled_20.png" /></p>
+<p>Chris Warren, <a href="https://nautil.us/the-kingdom-of-the-echo-thief-1214737/">aka the Echo Thief</a>, sits in a chair in the center of his sound lab and sings. Each note hangs in the air, layering onto the next like a cake and building into a complex chord, creating a rich cathedral of sound.</p>
+<p><img alt="" src="../images/line-2-scaled_21.png" /></p>
+<p>Today, the anchoveta still swim, though in fewer numbers, and the seabirds still wheel above them. But their future, like ours, depends on whether we will <a href="https://nautil.us/the-problem-with-farmed-seafood-1243674/">grind them into meal</a> until none remain, or whether we will let them remain what they have always been: the living silver of the sea.</p>
+<p><img alt="" src="../images/line-2-scaled_22.png" />
+<img alt="" src="../images/Mwj6PNfH-6.png" /></p>
+<p><em>Illustration by Myriam Wares</em></p>
+<p>Perhaps <a href="https://nautil.us/how-animals-understand-death-1204412/">no other animal</a> is capable of being annoyed at a loved one’s irritating habit, then feeling sadness at the thought of how someday that habit will be remembered with affection and regret. What is more important, though: the differences between how humans and other animals understand death, or the similarities? To me it is the latter. The common essence of life’s preciousness and the finality of its loss.</p>
+<p><img alt="" src="../images/line-2-scaled_23.png" /></p>
+<p><a href="https://nautil.us/our-dark-unvaccinated-future-1236214/">Declining vaccination rates</a> might paradoxically be a consequence of vaccines’ incredibly successful and safe track records: Most people alive today have no first or even secondhand experience with many of the illnesses before vaccines were available.</p>
+<p><img alt="" src="../images/line-2-scaled_24.png" /></p>
+<p>According to myth, <a href="https://nautil.us/ghostly-swamp-lightning-explained-1239396/">ghostly blue lights</a> often called will-o’-the-wisp can trick travelers wandering through cemeteries or wading through wetlands, leading them off track and toward their doom.</p>
+<p><img alt="" src="../images/line-2-scaled_25.png" /><img alt="" src="../images/29RephB6-9.png" /></p>
+<p><em>Lightspring / Shutterstock</em></p>
+<p>As we enter the age of increasingly sophisticated human-chatbot interactions, <a href="https://nautil.us/ai-already-knows-us-too-well-1220707/">preserving the uniqueness</a> of our individual intellects may be the most important challenge humanity faces.</p>
+<p><img alt="" src="../images/line-2-scaled_26.png" /></p>
+<p>On the Kenyan reserve, I felt melancholic knowing that when Fatu and Najin died, <a href="https://nautil.us/the-last-of-their-kind-1204387/">northern white rhinos would be gone forever</a>. But thinking about the ordeal they’ve been through, the <em>Jurassic Park</em>-like efforts to resurrect their species, and the kinds of lives their offspring might lead, I was left to reflect on something else that Thom van Dooren, an environmental philosopher, said to me. “It bears considering whether it is better to just let the animals go extinct.”</p>
+<p><img alt="" src="../images/line-2-scaled_27.png" /></p>
+<p>​​​​​​​​​​​​​I feel you, <a href="https://nautil.us/the-universe-is-a-mirror-1247496/">universe</a>. <img alt="" src="../images/nautilus-favicon-14_624.png" /></p>
+<p><em>Lead collage by Tasnuva Elahi; with illustrations by Jorge Colombo, Mathias Ball, Cornelia Li, Deena So Oteh, Tara Anand, Myriam Wares, Ellen Weinstein; photos by James Wills</em>, <em>Jan Zwilling and an image by Lightspring / Shutterstock.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

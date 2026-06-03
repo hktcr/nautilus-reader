@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A New Way to Explore Venus by Balloon | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>A New Way to Explore Venus by Balloon</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-8140</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Venus is known as Earth’s twin. It’s about the same size as Earth, with similar gravity, and some 30 miles above the surface of the planet, the atmosphere is <a href="https://ntrs.nasa.gov/citations/20030022668">more Earthlike</a> than anywhere else in the solar system. Some have even proposed that floating human settlements could one day take up permanent residence there.</p>
+<p>But the planet has been something of a problem child for astronomy. A thick layer of clouds composed of corrosive sulfuric acid enshrouds it, limiting visibility and complicating entry. The temperature of the surface is hot enough to melt lead. The atmosphere is made of carbon dioxide and is so dense it could shatter glass. And the Venusian night lasts about 58 Earth days, making it impossible for space probes to rely on solar power.</p>
+<p>Now one scientist is busy hatching plans to send balloons to explore the planet: Michael Hecht, a researcher at the Massachusetts Institute of Technology and NASA’s Jet Propulsion Lab envisions a future in which an entire fleet of airborne explorers circles Venus indefinitely.</p>
+<p>The Soviet Union sent several landers to Venus in the 1970s and 1980s, but they quickly failed due to the extreme heat—the landers did not actually melt, but the electronics that kept them going soon stopped working. The Soviets had more luck with two helium balloons deployed from the same spacecraft 30 miles up in the Venusian atmosphere, where it is much colder and the atmospheric pressure is far lower: Each of the balloons survived for more than 40 hours while their instruments made measurements of the chemistry, temperature, and winds. Although <a href="https://sci.esa.int/web/trs/-/35987-venus-entry-probe">some balloon-based missions</a> to explore Venus have since been proposed in Europe, none have been taken up—in part because the attention of many space scientists has since turned to Mars.</p>
+<blockquote>
+<p>One scientistenvisions a future in which an entire fleet of airborne explorers circles the planet.</p>
+</blockquote>
+<p>Balloons are preferable to conventional space probes for exploration of Venus for several reasons. For one, they can rely on the energy of the planet's persistent and superfast westerly winds—which travel at speeds of more than 220 miles an hour, or roughly 60 times as fast as the planet's rotation—to propel them around its circumference, reducing time spent in darkness, without solar power, to about 50 hours at a shot.</p>
+<p>To create enough power to get them through the night, and supply an unlimited amount of lifting gas, Hecht proposes using a new renewable energy technology called solid oxide electrolysis. The atmosphere on Venus is almost entirely made up of carbon dioxide, and this technology can break CO2 down into its component parts—oxygen and carbon monoxide—which are more buoyant than CO2 and so would keep the balloon aloft. Reversing the process by recombining the gases could then generate electric power. (This same technology was recently successfully tested by the Perseverance Mars rover to make oxygen out of carbon dioxide.)</p>
+<p>“On Venus, the lifting gas is the primary reason,” to split carbon dioxide, says Hecht. That’s because all balloons leak, as their lifting gases escape through the balloon bag material. “But once you’ve separated carbon dioxide into those two constituents, you can put them back together and get energy out of them again.” Hecht is exploring his idea with a grant from NASA: The <a href="https://www.nasa.gov/directorates/stmd/niac/exploring-venus-with-electrolysis-eve/">project</a> is called Exploring Venus with Electrolysis, or EVE.</p>
+<p>Professor of earth, environmental, and planetary science Paul Byrne at Washington University in St. Louis, who has worked on other <a href="https://www-robotics.jpl.nasa.gov/what-we-do/research-tasks/venus-variable-altitude-aerobots/">Venusian balloon projects</a> for NASA, says Hecht’s proposal seems feasible but that many challenges remain, such as creating balloon materials that can withstand the corrosive Venusian clouds. Another obstacle for balloon exploration of Venus is finding a method of controlling their altitude, perhaps by changing their shape. The compressed gas bottles used to keep balloons aloft on Earth would be too heavy for balloon-based probes on Venus.</p>
+<p>“This is a first step,” says Byrne, toward a better understanding of Earth’s sister planet. <img alt="" src="../images/nautilus-favicon-14_1251.png" /></p>
+<p><em>Lead image: buradaki / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

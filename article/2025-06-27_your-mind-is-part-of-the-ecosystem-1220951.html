@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Mind is Part of the Ecosystem-Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Your Mind is Part of the Ecosystem-Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-27
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-LGYX</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>There is a really deep reason why, when you examine things from an unusual (to humans) point of view, they become strange in such a way that you need to include your own perspective in your description, as if you were like Neo in <em>The Matrix</em>, touching the mirror only to find that it is sticking to your finger and pulling away from the wall as you try to withdraw your hand.  </p>
+<p>It’s like what happens in a dream. When you dream of nasty creepy-crawlies falling on you from the ceiling, you also have a certain feeling or attitude (or whatever you want to call it) toward the insects, perhaps horror or disgust, perhaps mixed with a strange detachment. This is the same as how in a story there is what’s happening (the narrative) and how it’s being told (the narrator, whether it be singular, plural, human or not, and so on). These two aspects form a <em>manifold</em>. When we look at a “thing,” we are forgetting that “thing” is just part of a manifold. It’s not true that there’s “me” and then there’s a “thing” I reach out to with my perception, like reaching my hand out to a can of beans in the supermarket. But perhaps we have tried to design our world to look like a supermarket, full of things we can reach out and grab.</p>
+<p>The result of living as though you believe in subject–object dualism, which is our usual mode of thinking about the world (even if we are doing it unconsciously), is that it becomes hard to accept what is in fact more logical and easier on the mind in the end. When you analyze a nightmare, you discover that the insects and the feelings you are having about them are both aspects of your very own mind. Perhaps the insects are unacceptable thoughts of which you’re just becoming aware. What is so powerful about psychoanalysis and some spiritual traditions such as Buddhism is that they enable you to entertain the idea that thoughts and so on are not “yours” all the way down, which can be very liberating: What matters isn’t exactly <em>what</em> you think, it’s <em>how</em> you think. You know that facts are never just “over there” like cans of soup waiting to be picked up in some neutral way.  </p>
+<p>You know ideas code for attitudes, insofar as ideas always imply a <em>way of thinking</em> them, an attitude, and that this explains how propaganda works. Take a very simple example: The term <em>welfare</em> evokes contempt for its recipients in a way that the word <em>benefits</em> doesn’t. Since 2010 the British Conservative Party succeeded in getting almost everyone in the media to say “welfare” and not “benefits,” with the obvious repercussions of making cuts more acceptable. Reading a poem is a wonderful exercise in learning how not to be conned by propaganda, for this very reason. That’s because a poem makes it very uncertain exactly what sort of way you are supposed to hold the idea it presents. If I say “Come here!,” it’s fairly obvious what I mean, but if I say “It is an Ancient Mariner,” you might be a bit flummoxed. Reading a poem introduces some wiggle room between ideas and ways of having them. Propaganda closes this space down.</p>
+<blockquote>
+<p>Being mentally healthy might mean knowing that <em>what you are thinking</em> and <em>how you are thinking</em> are intertwined.</p>
+</blockquote>
+<p>Something fascinating occurs if you start to think how the biosphere, as a total system of interactions between lifeforms and their habitats (which are mostly just other lifeforms), is also like the inside of a dreaming head. Everything in that biosphere is a symptom of the biosphere. There is no “away” that isn’t merely relative to a certain position within it. I can’t suppress my thoughts without them popping up like nasty insects in my nightmare. I can’t get rid of nuclear waste just by hiding it in some mountain. If I widen my spatiotemporal scale enough to include the moment at which the mountain has collapsed, I didn’t really hide the waste anywhere once and for all. You can’t sweep things under the carpet in the world of ecological awareness.</p>
+<p>And this biosphere includes all the thoughts (and nightmares) we are having too. It includes wishes and hopes and ideas about biospheres. It’s not exactly physically located precisely on Earth. It’s <em>phenomenologically</em> located in our projects, tasks, things we’re up to. Say, for example, we decide to move to Mars to avoid global warming. We will have to create a biosphere suitable for us from scratch—in a way we will have exactly the same problem as we have on Earth, possibly much worse, because now we have to start from the beginning. Experientially, which is a sloppy and biased way of saying the philosophical word <em>phenomenologically</em>, we are still on Earth. Sloppy and biased, because it implies all kinds of things that need to be proved in turn, such as the idea that there is a certain kind of “objective world” and that “subjectivity” is different from it.  </p>
+<p>The phenomenology of something is the logic of how it appears, how it <em>arises</em> or <em>happens</em>. If we move to Mars, the move will appear in an Earthlike way, no matter what the coordinates on our space chart tell us. So it’s not correct to say that the biosphere is “in” a preexisting space. The biosphere is a network of relations between beings such as waves, coral, ideas about coral, and oil-spewing tankers, a network that is an entity in its very own right.  </p>
+<p>As the systems theorist Gregory Bateson implied <a href="https://press.uchicago.edu/ucp/books/book/chicago/S/bo3620295.html">when he wrote about “the ecology of mind,”</a> mental issues are somehow ecological in this sense. How your thoughts are related equals what is called “mind,” and mind is like the biosphere. Even though it’s made up of thoughts, mind is independent of those thoughts, it affects them causally. If you are scared, you will think scary things. It’s what some people call “downward causality.” Something like climate can affect something like weather. It’s not true that climate is just a graph of how weather events are related. There is something real there.  </p>
+<p>You can’t <em>reduce</em> the biosphere to its component parts, just as you can’t reduce your mind to its component thoughts. And you can’t reduce your thoughts to what the thought is about, or to the way you are thinking about that thought: You need both, because a thought is a manifold. And this leads to a very interesting insight: Maybe <em>everything is a manifold</em>. Or to use Bateson’s language, a “system.” The system is different from the things out of which it is made. Being mentally healthy might mean knowing that <em>what you are thinking</em> and <em>how you are thinking</em> are intertwined.</p>
+<p>It’s not exactly <em>what</em> you believe but <em>how</em> you believe that could be causing trouble. In other words, there are beliefs about belief. Maybe if we change <em>how</em> we think about things such as coral and white rhinos, we might be more ecologically healthy. And maybe mental health and ecological “health” are interlinked. I believe that humans are traumatized by having severed their connections with nonhuman beings, connections that exist deep inside their bodies (in our DNA, for instance; fingers aren’t exclusively human, nor are lungs or cell metabolism). We sever these connections in social and philosophical space but they still exist, like thoughts we think of as unacceptable and that pop up in nightmares.  </p>
+<p>Part of our growing ecological awareness is a feeling of disgust that we are literally covered in and penetrated by nonhuman beings, not just by accident but in an irreducible way, a way that is crucial to our very existence. If you didn’t have a bacterial microbiome in your digestive system, you couldn’t eat. Maybe this feeling of disgust will diminish if we become used to our immersion in the biosphere, just like our neurotic feelings diminish as we become friendlier with our thoughts—perhaps through psychotherapy or meditation. There have indeed arisen forms of ecological psychotherapy, and a branch of psychological studies some call ecopsychology. And many Buddhist meditation teachers also write about ecology, as a glance at some of the readily available magazines such as <em>Shambhala Sun</em> will show you. <img alt="" src="../images/nautilus-favicon-14_1099.png" /></p>
+<p><em>This <a href="https://thereader.mitpress.mit.edu/your-mind-is-part-of-the-ecosystem/">excerpt</a> from Timothy Morton’s <a href="https://mitpress.mit.edu/9780262551755/being-ecological/?">Being Ecological</a> is reprinted with permission from <a href="https://thereader.mitpress.mit.edu/">MIT Press Reader</a>.</em></p>
+<p><em>Lead image: View of the Earth as seen by the Apollo 17 crew traveling toward the moon. Credit: NASA.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

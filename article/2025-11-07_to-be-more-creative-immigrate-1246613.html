@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Be More Creative, Immigrate | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>To Be More Creative, Immigrate</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-07
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-A5J1</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Why do so many great ideas seem to come from people far from home?</p>
+<p>I’ve long been fascinated by how creativity crosses borders. Immigrants, research shows, are statistically more likely to generate exceptionally creative works. Indeed, there’s a long list of immigrant geniuses: W.H. Auden, Vladimir Nabokov, Nikola Tesla, Marie Curie, Sigmund Freud, Albert Einstein. The list could go on and on. Of course, anecdotes only take us so far. What does the data say?</p>
+<p>In 2016, Eric Weiner published some numbers in the <a href="http://www.wsj.com/articles/the-secret-of-immigrant-genius-1452875951"><em>Wall Street Journal</em></a>:</p>
+<p>An awful lot of brilliant minds blossomed in alien soil. That is especially true of the U.S., where foreign-born residents account for only 13 percent of the population but hold nearly a third of all patents and a quarter of all Nobel Prizes awarded to Americans.</p>
+<p>Those are some pretty convincing numbers—suggesting that immigrants <a href="https://nautil.us/will-trumps-immigration-policies-hurt-us-nobel-chances-1241780/">contribute disproportionately</a> to creative and innovative output.</p>
+<p>Creativity research offers an explanation: Psychologists have shown that bigger creative insights result from <em>distant associations</em>—connections between ideas drawn from widely different experiences or domains of knowledge. Associations between similar conceptual material also spark creative insights, but those tend to yield the ordinary, incremental kind that improve on what already exists. It’s the distant associations that lead to radical, breakthrough innovation. Weiner makes a similar argument based on recent research, citing studies showing that “schema violations” lead to greater “cognitive flexibility,” which in turn is linked to creativity.</p>
+<blockquote>
+<p>Immigrants can enhance the creativity of the Americans they live and work with.</p>
+</blockquote>
+<p>I probably won’t have trouble convincing you that immigration to the United States can be great for the immigrants. But do immigrants enhance the creativity of the American citizens who already live here? In October 2025, I <a href="https://keithsawyer.substack.com/p/adam-galinsky-on-how-to-be-a-creative">interviewed</a> creativity researcher and social psychologist Adam Galinsky, who teaches at Columbia Business School. For 20 years, Galinsky has been studying how cross-cultural connections contribute to creativity. In one study, he and Will Maddux, who studies organizational behavior, looked at whether traveling overseas <a href="https://www.apa.org/pubs/journals/releases/psp9651047.pdf">makes you more creative</a>. They asked people whether they’d traveled abroad or not, and then they gave them a creativity test. They found that travel abroad has no effect on creativity. But the people who had <em>lived</em> in another country scored higher on a creativity test. What’s more, the people who’d lived overseas <em>longer</em> scored higher.</p>
+<p>In another study, Galinsky and his colleagues examined the careers of fashion directors at the top fashion houses in Milan, Paris, London, and New York. They found a clear pattern: The more time these designers had spent living abroad, <a href="https://www.nytimes.com/2015/04/09/arts/international/measuring-the-bloom-of-creativity.html">the more original</a> their work tended to be.</p>
+<p>Galinsky then turned to personal relationships. Were you more creative if you dated someone from another country?</p>
+<p>A brief romance didn’t seem to matter. However, being in a <em>long-term romantic relationship</em> with someone from another culture did affect creativity. The same was true of friendship—close cross-cultural friendships predicted greater creativity, while superficial acquaintances did not. The lesson is that creativity comes from <em>deeper connections</em>, not superficial contact. When you really get to know someone, you start to see the world through their eyes—and it’s not always the way that you imagined.</p>
+<p>Deep cultural engagement benefits creativity everywhere, not only in the U.S. In another study, Galinsky looked at non-U.S. citizens who had lived in America on J-1 visas, a program that allows non-U.S. citizens to stay in the U.S. from six months up to five years before returning home. Galinsky wondered whether that experience abroad made them more entrepreneurial when they returned to their home countries. The answer was yes: The longer they had lived in the U.S., <a href="https://psycnet.apa.org/record/2017-14072-001">the more creative they were</a> when they went back home.</p>
+<blockquote>
+<p>Having relationships with people from other countries enhances your creativity.</p>
+</blockquote>
+<p>In August 2025, the Trump administration <a href="https://www.dhs.gov/news/2025/08/27/trump-administration-proposes-new-rule-end-foreign-student-visa-abuse">proposed a new rule</a> that would limit the time foreign students, professors, physicians, and other visa holders may remain in the U.S. without additional screening and vetting. That might sound like a bureaucratic adjustment, but research suggests it comes at a cost. Deep cultural engagement—the kind that fosters creativity—takes time. Immigrants can enhance the creativity of the Americans they live and work with, but only if they form close relationships. If they remain isolated among people from their own country, speaking their own language, the creative benefits never spread. The key is the depth of a relationship, not mere proximity.</p>
+<p>There’s another body of research suggesting that the universities that immigrants work for produce more scientific breakthroughs and spin off more businesses. It’s hard to design rock-solid causal studies, but leaders of the top universities certainly believe in the importance of having immigrants working there. It’s not because they’re woke; it’s because they want to generate the innovations that improve the U.S. economy.</p>
+<p>Creativity research strongly suggests that having relationships with people from other countries enhances your creativity. The lesson for everyone is: If you want to be more creative, seek out difference—and engage with it deeply. Get to know people from other cultures, and go beyond surface interactions. This is what drives the cognitive connections that lead to more surprising creative ideas. Meet people very different from you. Travel to a very different place and consider staying a while. Read magazines that you’ve never looked at before. Date someone from another culture. Fill your mind with variety.</p>
+<p>Living abroad may be the most direct route to greater creativity, but even if you can’t do that, you can learn from creativity research: Creativity flourishes when your mind is open to worlds beyond your own. <img alt="" src="../images/nautilus-favicon-14_828.png" /></p>
+<p><em>This</em> <a href="https://thereader.mitpress.mit.edu/are-immigrants-more-creative/"><em>excerpt</em></a> <em>is reprinted with permission from</em> <a href="https://thereader.mitpress.mit.edu/"><em>MIT Press Reader</em></a><em>. It is adapted from</em> <a href="https://mitpress.mit.edu/9780262551649/learning-to-see/">L</a><a href="https://mitpress.mit.edu/9780262551649/learning-to-see/">earning to See</a>.</p>
+<p><em>Lead image: Master1305 / Shutterstock.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

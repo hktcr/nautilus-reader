@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunting the Ghost of the Ocean | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Hunting the Ghost of the Ocean</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-CVIQ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>More than 60 miles off the coast of Baja, California, the crew of the <em>Pacific Storm</em> hauled an underwater microphone behind their boat while scanning the horizon with binoculars for signs of life.  </p>
+<p>For years, researchers had been searching for the source of a high-pitched click frequently detected in these waters. They had given it a name: BW43. BW for beaked whale, and 43 for the frequency of the tone, which peaks at 43 kilohertz. Modified for perception by human hearing, the noise sounds like a series of rapid clicks, like running a fingernail along the teeth of a plastic comb<strong>.</strong> In 2024, a team of scientists from the United States and Mexico embarked on a special research expedition to solve the mysterious source of the sound.</p>
+<p>On the tenth morning of their trip, a spotter on the boat saw a dark, spindle-like shape emerge from the depths at a distance. Two whales breached and bobbed at the surface of the water around the boat. The scientists scrambled to ready their cameras and acoustic recorders. Suddenly, one whale emerged within 65 feet of the stern, and Robert Pitman, a whale researcher at the University of Oregon, aimed a biopsy crossbow at the whale, nicking a valuable sample of skin and blubber, which bounced into the water. A hungry albatross stabbed at the dart containing the hunk of tissue, but the scientists managed to grab the device before the bird flew off with it.</p>
+<blockquote>
+<p>All these beaked whales have their own unique acoustic signals. They're like birds.</p>
+</blockquote>
+<p>“We were all ecstatic, this was what we had been working towards the whole trip and we finally got it,” says Elizabeth Henderson, a bioacoustician at Naval Information Warfare Center in California.</p>
+<p>The research team also scooped up a sample of water in the whales’ wake in hopes of gleaning flecks of DNA, and their hydrophones continued to record numerous clicks as the whales disappeared back into the ocean depths. Weeks later, DNA analysis from the biopsy revealed that the whales were gingko-toothed beaked whales. That June morning marked the first confirmed live sighting of the species at sea. And because the researchers managed to get a DNA sample and acoustic recording all in one go, they were finally able to confirm that this was indeed the animal making the BW43 call. Their findings were recently shared in a <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/mms.70052">new study</a> published in <em>Marine Mammal Science.</em></p>
+<p>According to the Society for Marine Mammology, 94 species of cetaceans roam the world’s rivers and oceans, and around a quarter of these are beaked whales. The marine mammals can reach the length of a bus and are meaty and tubular, with heads tapering to a pointy beak. Of the 24 beaked whale species, 16 and counting belong to a genus known as <em>Mesoplodon</em>, the most speciose of any whale genus. Yet to date, scientists know next to nothing about this diverse group of whales. “These are the least-known large animals left on this planet,” says Pitman. “We don't even know how many species there are.”</p>
+<p><img alt="A beaked whale surfaces, it's dark beak and eye just visible as it glides through glassy gray waters." src="../images/WIAqnX1U-Wang_BREAKER.png" /></p>
+<p><strong>AN ELUSIVE MESOPLODON:</strong> A beaked whale surfaces as it glides through glassy waters. Beaked whales are one of the largest families of cetaceans, but the least familiar to science. <em>Credit: Craig Hayslip</em></p>
+<p>Historically, beaked whales have been near impossible to study. They live far offshore, dive deep, and usually only surface for a few minutes before disappearing again. They are defenseless against killer whales, and as such, are skittish in nature and plunge into the ocean depths to hide. What scientists do know about different species of beaked whales largely comes from strandings—washed up specimens that taxonomists study to definitively tell one species from another.</p>
+<p>Spotting a mesoplodon in the wild is rare, and indentifying a free-swimming animal is nearly impossible. The most distinguishing feature of all of the known species of mesoplodon is a tusk-like snaggletooth that protrudes from each side of the jaw on males, mostly used for display and combat. In some cases, these teeth make it difficult for the creatures to open their mouths. Often, the best way for observers to recognize a mesoplodon is to catch an adult male baring its teeth.   </p>
+<p>“I never thought we'd know anything about beaked whales,” recounts Pitman, who has been studying marine mammals for nearly 50 years. Studies from the 1980s, he says, took a pretty pessimistic view of the possibility that scientists would be able to learn anything about these creatures.</p>
+<p>But with the aid of modern acoustic and genetic technologies, that is quickly changing. “It turns out that all these beaked whales have their own unique acoustic signals. They're like birds,” says Pitman. Once researchers can match an echolocation pulse to a specific species, they can passively monitor ocean sounds to listen for the different species of beaked whales rather than relying on serendipity and a sharp eye. High frequency hydrophones can be towed behind ships, he says, or anchored to the seafloor. Microphones can also be fixed to buoys and dropped off in areas of interest to be collected later.</p>
+<blockquote>
+<p>These are the least-known large animals left on this planet.</p>
+</blockquote>
+<p>All these methods are much cheaper than manning a specialized crew at sea, adds Sasha Hooker, a whale researcher at the University of St. Andrews in the United Kingdom who was not involved with the study. Some acoustic signals have yet to be linked to specific species and vice versa. “Matching those then makes the whole thing much more powerful.”</p>
+<p>The gingko-tooth beaked whale is only the latest in a slew of recent genetically confirmed live sightings paired with acoustic signals: In 2021 Pitman and his colleagues matched Hubbs’ beaked whales to a call known as BW37V off the Oregon coast, and in the same year, researchers spotted Sato’s beaked whales in Northern Japan. In 2023, researchers confirmed the first live sighting of Deraniyagala’s beaked whale in the South China Sea.</p>
+<p>Still, mysteries abound. Perrin’s beaked whales are probably the most elusive of the bunch. They have only been sighted in strandings, six of which have been recorded. Pitman is gunning to see these whales live in the wild and match them to an acoustic cue. Similarly, Hector’s and spade-tooth beaked whales have yet to be spotted live in the wild. Most mysterious of all—if it even exists—is the Cross Seamount beaked whale. Scientists first recorded a distinctive pulse near Hawaii 20 years ago, but no one has been able to match the sound with a known species, so they named it after the seamount where they first recorded the call.</p>
+<p>“At this point I think it’s very important to learn to tell these species apart because then we can go into the next mode, which is finding out where they are and how they’re doing,” says Pitman. Through passive monitoring, the scientists could determine where species live and how abundant they may be.</p>
+<p>These efforts have some urgency. Pitman and Hooker worry that beaked whales, already rare, could disappear before we learn anything about them. More and more images of beaked whales show scars from fishing lines, and military sonar can spook the whales, sometimes causing mass strandings. Anthropogenic assaults on the ocean—from overfishing, to climate change, to shipping traffic—are piling up. Who knows what effect they might have on these elusive whales.</p>
+<p>“It’s amazing that there’s something in the ocean we know nothing about,” says Pitman. “Technology is coming to the rescue. I just hope it's not too late.” <img alt="" src="../images/nautilus-favicon-14_936.png" /></p>
+<p>To read more about whales in the pages of <em>Nautilus</em>, check out these stories:  </p>
+<p><a href="https://nautil.us/whales-run-aground-by-the-sun-1211535/">Whales Run Aground by the Sun</a>: Is the fault of whale strandings partially in the stars?<br />
+<a href="https://nautil.us/who-speaks-for-the-whales-431148/">Who Speaks for the Whales?</a> Rights for Cetaceans are Not Enough. They also deserve representation. <br />
+<a href="https://nautil.us/the-great-whale-conveyor-belt-1197608/">The Great Whale Conveyor Belt</a>: The loss of whales has weakened the longest food chain on the planet  </p>
+<p><em>Lead image: Craig Hayslip</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

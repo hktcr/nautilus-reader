@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetic Ancestry Doesn’t Tell Your Whole Story | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Genetic Ancestry Doesn’t Tell Your Whole Story</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-30
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PYRK</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Genetic ancestry is a concept that has long captured people’s imaginations. It’s no surprise that it’s been turned into a booming industry by companies like 23andMe and Ancestry.com.</p>
+<p>Customers of genetic testing can now be delighted to learn that they’re “southern European,” “East Asian,” “British Irish,” “Greek and Balkan,” or “sub-Saharan African.” Others might be fascinated with claims of their “Viking” or “Yamnaya” roots and, upon discovering them, come to believe these revelations are central to their identities.</p>
+<p>However, the inconvenient truth is that these labels and identities are, for the most part, meaningless in historical, cultural, and even genetic terms. Having ancestry found in Viking genomes does not really make you “part Viking.” The reason for this is simple: Population genetics is not a perfect science.</p>
+<p>What we call “ancestry” is merely an approximation of genetic similarity to specific reference populations. These reference populations are artificial constructs used by scientists for modeling. They are often based on ancient genomes from different archaeological and chronological periods that are intended to represent particular populations (e.g., “Steppe nomads,” “Romans,” “Slavs,” or “Anglo-Saxons”). But these labels are neither universal nor objective; they’re selected arbitrarily and can, to some extent, determine the perceived outcome of the analysis.</p>
+<p>Perhaps the most significant issue with such categories is that they ignore the profound impact of human mobility over the last few hundred years, creating an impression of genetic fixation. These categories suggest that human populations stayed in place throughout world history, allowing each to develop highly distinct genetic compositions.</p>
+<blockquote>
+<p>Humans share about 99.9 percent of our genomes.</p>
+</blockquote>
+<p>However, ancient genomics indicates that migrations have, instead, been constant throughout human history. From the out-of-Africa migration 60,000 to 70,000 years ago to the Atlantic Slave Trade beginning in the 16th century, mobility—not isolation—has always been the norm. Because of this movement and mixing, geographic connection to present-day individuals in a particular country can be deceptive. Genetic similarity might, then, reflect shared ancestry from hundreds or thousands of years ago, in a region far removed from where someone lives today.</p>
+<p>At first blush, humans seem an incredibly diverse species. We vary in skin color, sex, sexuality, gender identity, hair and eye color, height, weight, limb length, face shape, and disease resistance, among other things.</p>
+<p>Yet, despite our visible differences, you’ll be surprised to learn that we are among the least diverse species in the world. Humans share about 99.9 percent of our genomes, meaning that two randomly chosen individuals differ in an exceedingly tiny fraction of the chemical building blocks of our genome. Because of this overwhelming similarity, defining what constitutes a population is not easy. The boundaries can be expanded or contracted, making the concept notoriously difficult to pin down objectively.</p>
+<p>In population genetics, a population is defined as a group of individuals that mate with one another and are, to some extent, distinct from other groups. These populations are sometimes characterized by their cultural or geographic traits (for instance, speaking a different language from neighboring groups, or being restricted to an island or to the boundaries of a nation).</p>
+<p>However, in the case of humans, there are no <em>truly</em> isolated populations. For practical reasons, some scientists have chosen to work solely with nationalities, while others have chosen to work exclusively with cultural attributes. But each approach has its own limitations. (Imagine trying to compare individuals from Iceland, which is relatively small and homogenous, with a geographically immense and diverse Russia.) Ultimately, the different definitions of populations depend on the questions posed and the genetic data under review.</p>
+<p>In the natural world, well-defined genetic populations <em>are</em> found. That’s because there are geographically restricted populations or species that are completely isolated from others. Examples include Madagascar lemurs and the extinct dodo from Mauritius. In these cases, known as “endemism,” the largest population of a species defines its range limit.</p>
+<p>Yet that is virtually impossible to find in modern humans; we are all genealogically connected to some extent as we trace our ancestry back in time. And while people have adapted to specific environmental conditions in the last tens of thousands of years—producing geographic patterns of variation in traits like skin pigmentation or pathogen-resistance genes—that patterning is merely an illusion.</p>
+<p>The very concept of race, for instance, arises from pigmentation genes, which are evident only because of how populations are distributed around the world. But these apparent patterns have been disproven by genomic studies. Indeed, whole-genome analyses indicate gradual variation across regions rather than fixed racial categories.</p>
+<blockquote>
+<p>People don’t share a single, uniform genetic background with others in their community.</p>
+</blockquote>
+<p>In genetics, scientists must analyze the genomes of millions, if not billions, of people, each carrying millions of variants. It’s an unfathomable amount of data. Which leads us to another central blind spot in genetic ancestry research: how we, as scientists, visualize the sheer scale and complexity of human genetic variation.</p>
+<p>Traditional representations, such as phylogenetic genetic trees, shed no light on this crucial aspect of human genetics. This explains why some population labels have been progressively abandoned: According to the archives of the <em>American Journal of Human Genetics</em>, the use of “Caucasian” in papers declined from 12 percent around the mid 20th century to less than 1 percent at the beginning of the 21st century. Alongside this decline, continental labels have increased—for instance, the use of “European” surged to 42 percent of papers between 2009 and 2018.</p>
+<p>Recently, instead of trees, geneticists have proposed representing genetic ancestry as overlapping circles. Starting with approximately 2.9 billion measurable nucleotide sites that can vary across the human genome, geneticists James Kitchens and Graham Coop, for example, analyzed a sample of 609 individuals from the Americas and found only 39 million observable variants. If they restricted the analysis to those genetic variants defined as “common,” the number of sites decreased to 10 million, an almost insignificant fraction of the potentially general number.</p>
+<p>The researchers repeated the approach across different populations, invariably finding remarkably few variable sites relative to the total genome length. For instance, 99 Utah residents with northern and western European ancestry exhibited 5,726,377 variants, whereas 96 African Caribbeans from Barbados exhibited 8,018,649 (the latter likely reflects the greater genetic diversity in Africa). More importantly, across populations, the degree of overlap in common variants is enormous, which means human groups have few exclusive genetic variants. In fact, variants that are common in a single geographic region are usually not exclusive to that region; they are present at similar frequencies in other populations worldwide.</p>
+<p>This is all to say that the complex interplay between ancestry and population differences undermines the idea of race as a real biological category. People don’t share a single, uniform genetic background with others in their community. Instead, populations—however we define them—have slightly different proportions of ancestry components.</p>
+<p>Instead of imagining abstract models of past populations, ancient genetics allows us to refer to specific sites and archaeological time periods from which a particular skeleton originated. Genetic ancestry is not a definitive marker of identity; it’s just one part of a much bigger puzzle, offering what I believe is a richer foundation for thinking about our collective identity and shared past. <img alt="" src="../images/nautilus-favicon-14_631.png" /></p>
+<p><em>This story is reprinted with permission from</em> <a href="https://thereader.mitpress.mit.edu/dna-and-its-discontents/"><em>MIT Press Reader</em></a><em>. It is adapted from</em> “<a href="https://mitpress.mit.edu/9780262553223/identity/"><em>Identity: What DNA Can Tell Us About Ourselves</em></a>”</p>
+<p><em>Lead image: Lightspring / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

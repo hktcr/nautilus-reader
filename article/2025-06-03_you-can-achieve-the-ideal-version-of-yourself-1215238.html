@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Can Achieve the Ideal Version of Yourself - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>You Can Achieve the Ideal Version of Yourself - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-WT6D</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I don’t really understand metaphysics, but I do like to hear very smart people talk about it, especially when it involves one of my favorite artists, pianist Glenn Gould, who shuffled off this mortal coil in 1982. So in April, I attended a talk called “The Perfectible Animal: Humanity as an Ideal” by French writer and philosophy professor Elie During.</p>
+<p>The talk, sponsored by the Nour Foundation, a philosophy nonprofit, took place at the Morgan Library and Museum in New York City, the restored home of industrial baron J.P. Morgan. I sat with other listeners in what had been Morgan’s personal library, an Italian Renaissance-style palazzo. We were encompassed by magnificent walls of books on dark walnut and bronze shelves. Paintings above the books and below the glass-stained ceiling encircled the room with images of Dante, Galileo, Michelangelo, and Botticelli, and symbols of philosophy, history, poetry, and science. It’s true, literacy was once important to American leaders.</p>
+<p>During, magnetic as a Jean-Luc Godard leading man, was interviewed by the personable and probing Steve Paulson, executive producer of the public radio show, <em>To the Best of Our Knowledge</em>, and a regular <em>Nautilus</em> contributor.</p>
+<blockquote>
+<p>Gould’s notion was that you could approach the essence of a musical work by transcending any material circumstances.</p>
+</blockquote>
+<p>“Metaphysics; so this is a spooky word,” During said. “It doesn’t mean necessarily anything occult or even religious. Metaphysics is about the basic structures that allow us to think about external reality.” It’s about imagining how much more interesting the world could be than the world taken for granted by “the naturalist default mode of most scientific minds.”</p>
+<p>That made sense, though I wasn’t too sure about the “basic structures.” Neither was Paulson, who asked about it.</p>
+<p>That came from Plato, During said. The king of Greek philosophers believed a soul constituted the “highest level of reality, the most real aspect of human experience.” And “this soul was not a material substance but a form of unity or simplicity at its core. And when you scratch the surface, and you aim for what constitutes the essence of being a human being, you reach this core level.”</p>
+<p>I could feel my hold on During’s remarks slipping.</p>
+<p><img alt="" src="../images/QNhBWHBh-Berger_BREAKER-2.png" /></p>
+<p><strong>THE METAPHYSICIAN:</strong> “I was an imaginative child,” Elie During (above) said. “I wrote comic books and wanted to be a filmmaker. The philosophical drive is also about imagining how more interesting the world can be.” <em>Photo courtesy of the</em> <a href="https://www.nourfoundation.com/the-perfectible-animal-humanity-as-an-ideal/#watch"><em>Nour Foundation</em></a><em>.</em></p>
+<p>Plato believed “there is something within us which has an affinity with what he called the ‘divine now,’” During said. The divine “was not a personal god but a higher level of reality.” Through disciplines like mathematics “the human mind is capable of relating to levels of reality that are more robust, more solid, than anything given to the senses.”</p>
+<p>When During started to talk about Gould, he was on the level of reality to which I could relate. While recording music, During explained, Gould did take after take of bars in a composition, piecing together the takes he liked best, always in search of the ideal form of the work.</p>
+<p>“Gould’s notion was that you could approach the essence of a musical work by transcending any material circumstances, such as what kind of instruments you’re going to play, a modern piano, say, or adhering to historical rendering of the work,” During said. “You could say this is a Platonic version of musical experience, which says there are ideal forms out there that are indifferent to material sensation.”</p>
+<blockquote>
+<p>“The purpose of art is … the gradual, lifelong construction of a state of wonder and serenity."</p>
+</blockquote>
+<p>That indeed is how Gould worked. He was always pursuing a universal idea that transcended the piano and the score. He was a trenchant essayist. He wrote that what he admired about Bach’s <em>Goldberg Variations</em> is that it is music, “like Baudelaire’s lovers, ‘that rests lightly on the wings of the unchecked wind.’ It has, then, unity through intuitive perception, unity born of craft and scrutiny ...”</p>
+<p>Gould was speaking During’s language. In fact, Gould read deeply in spiritual works; Jesuit priest and scholar Teilhard de Chardin was one of his favorite authors. “The purpose of art,” Gould once wrote, “is not the release of a momentary ejaculation of adrenaline, but is, rather, the gradual, lifelong construction of a state of wonder and serenity.”</p>
+<p>Gould was a great storyteller. During a series of concerts in 1958 in Tel Aviv, Israel, he told interviewer Jonathan Cott, he was mortified by an “absolutely rotten piano” he was given to play. He coasted through pieces he knew well, and the music didn’t suffer too much by playing “this monstrosity,” he said. But when the program shifted and he had to rehearse a different work, Beethoven’s <em>Piano Concerto No. 2</em>, Gould felt he “played like a pig because this piano had really gotten to me.”</p>
+<p><img alt="" src="../images/CtsnTio0-Berger_BREAKER.png" /></p>
+<p><strong>PLATO AT THE PIANO:</strong> Pianist Glenn Gould sounded Plato’s notes of metaphysics when he described Bach’s <em>Goldberg Variations</em> as music that has “unity through intuitive perception.” <em>Photo by Don Hunstein / Glenn Gould Foundation, Wikimedia Commons.</em></p>
+<p>The next day Gould drove his rental car to a sand dune by the Mediterranean Sea and sat alone in the car. He rehearsed the entire piece in his head by imagining he was playing it on an ideal piano. He wanted a tactile image of the whole work in his head. He never moved his fingers as he imagined the work because he didn’t want to stir memories of how he might have played it before.</p>
+<p>“I got to the auditorium in the evening, played the concert, and it was without question the first time I’d been in a really exalted mood throughout the entire stay there—I was absolutely free of commitment to that unwieldy beast,” Gould said.</p>
+<p>Compelled by his image of the work, Gould literally played the piano differently, with a softer touch than usual. “And what came out was really rather extraordinary,” he said. He received compliments backstage that stuck with him. “You were not quite one of us,” a woman, an acquaintance of Max Brod, the Kafka scholar, told him. “You were—you were—your being was <em>removed</em>.”</p>
+<p>I must say During’s discussion of Gould sparked new connections in my material brain. I do know what it means to work and rework material forms, such as language and music, in pursuit of an immaterial vision that feels right and real. Gould’s 1981 version of the <em>Goldberg Variations</em> can indeed make you feel like you have touched the core of infinite reality.</p>
+<p>Ultimately, During said, seeking the ideal is a journey into yourself. “We should view this business of shaping yourself, achieving an ideal or better version of yourself, as a way that gives you access to dimensions of yourself that are as solid and real as those ideals in music or mathematics,” he said. “This is what Plato had in mind when he said the soul has an inherent affinity with the ideal.”</p>
+<p>The affinity of the soul with the ideal was a bridge too far for me. But I remained moved by the notion that an ideal or better version of me was out there somewhere. Just as Gould imagined his ideal musical work, I could find new dimensions of thought and feeling. Maybe I understood metaphysics after all. <img alt="" src="../images/nautilus-favicon-14_1141.png" /></p>
+<p><em>Lead image: Suryadi suyamtina / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

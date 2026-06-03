@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Your Brain Decides What Matters | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Your Brain Decides What Matters</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7V4L</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://knowablemagazine.org/content/article/mind/2026/genetic-disease-reveals-role-of-brain-amygdala"><em>This article</em></a><em>originally appeared in</em> <a href="https://knowablemagazine.org/">Knowable Magazine</a>.</p>
+<p>The wind picks up dust from the unpaved road one afternoon in December as Jack van Honk turns into a ramshackle neighborhood in Lambert’s Bay, on the west coast of South Africa. A stocky woman in a red patterned sundress steps out of a small home painted palest sea green, her ochre-dirt yard crowded with potted plants, many medicinal. She smiles broadly, deep wrinkles creasing a face that is cherubic and yet careworn beyond her 47 years. “Doctor! I missed you,” she beams, her husky voice barely more than a hoarse whisper.</p>
+<p>Maria carries a rare genetic mutation that is almost unknown outside of southern Africa. Its effects have been to calcify a part of the brain called the basolateral amygdala, and to thicken and scar the vocal cords. A friend of Maria with the same condition lives several hours inland, and sometimes they meet when van Honk brings them to Cape Town for brain scans and other tests. “It helps to know I’m not alone,” Maria says.</p>
+<p>By every measure of daily life—holding down a job, keeping a household running, raising two teenage sons—Maria is competent and engaged. “You talk to her, and you don’t see anything wrong,” says van Honk, a social neuroscientist at the University of Cape Town. She and others he knows with her condition, Urbach-Wiethe disease, “are kind, sweet people by nature.” In an interview in her kitchen, Maria struggles to recollect even a fleeting moment of unhappiness—before mentioning that she kicked out her partner some years ago because of his drinking.</p>
+<p><img alt="" src="../images/Breaker_1.png" /></p>
+<p><strong>HOME SWEET HOME:</strong> Maria lives with a rare genetic disorder that damages part of the amygdala—a brain region increasingly linked not just to fear, but to how humans weigh the needs of others. <em>Credit: Richard Stone.</em></p>
+<p>Yet on tests and questionnaires designed to shed light on moral choices, Maria and others with Urbach-Wiethe fail in perplexing ways that challenge one of neuroscience’s most durable assumptions.</p>
+<p><strong>Fear factors</strong></p>
+<p>The amygdala, a brain region the size and shape of an almond, has long been described—almost mythologized—as the brain’s fear center. That view emerged from early rodent experiments showing its role in defensive reactions. “There were a lot of discoveries linking the amygdala to fear conditioning,” says Steve Chang, a neuroscientist at Yale University who studies social cognition and decision-making in monkeys. In such studies, mice and rats learn to associate a neutral cue—such as a tone—with a mild foot shock. Soon the sound alone makes them freeze in anticipation, a learned fear response that disappears after the amygdala is damaged.</p>
+<p>But in recent years, studies in animals and humans have painted a more complex picture. Rather than a simple switch for fear, the amygdala is now understood as a Grand Central Station in the brain: a network of specialized nuclei that help detect what we care about so that we can make decisions, says Elizabeth Phelps, a psychologist at Harvard University <a href="http://arjournals.annualreviews.org/eprint/zctGHZyKJKVq3fgYUICs/full/10.1146/annurev-neuro-071013-014119">who studies how emotions affect cognition</a>. The rare cases of Urbach-Wiethe disease in South Africa offer a unique window into that circuitry. Because the condition appears to damage the basolateral amygdala while sparing other regions of the structure, it has helped to clarify how different amygdala neural circuits interact with each other and with other brain regions—not only in fear-learning, but in social judgment and decision-making.</p>
+<p>Van Honk “is doing a really good job at linking his research to animal work to come up with a bigger theory,” says Phelps, who is not affiliated with the project. The emerging picture is intriguing, she says, though not yet entirely convincing to her: Van Honk and his colleagues now posit that the basolateral amygdala functions primarily as a kind of social compass, helping to weigh the needs and intentions of others and decide who matters to us.</p>
+<p>Earlier research had painted a simpler picture. Scientists in the 1990s unveiled the sensational case of a young woman with Urbach-Wiethe disease whose amygdala had almost entirely calcified, and she fit the prevailing fear-amygdala model. Unstintingly cheerful like Maria, S.M. (identified only by her initials) could not recognize fear in the facial expressions of others, neuroscientist Antonio Damasio and colleagues <a href="https://www.nature.com/articles/372669a0">reported in <em>Nature</em> in 1994</a>.</p>
+<p>As the scientists got to know S.M., she confided repeatedly how she hated <a href="https://knowablemagazine.org/content/article/living-world/2026/evolution-of-snakes">snakes</a> and <a href="https://knowablemagazine.org/content/article/living-world/2023/everyone-should-start-counting-spiders">spiders</a> and would try to avoid them. But when they took her one day to an exotic pet store, she gleefully held and stroked a snake for three minutes—remarking, “This is so cool!”—and had to be deterred from touching larger, more dangerous snakes. She was unflappable in a haunted house and unfazed by horror films. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3030206/">Damasio’s team concluded</a> that S.M. exhibited “a profound and pervasive impairment in the induction and experience of fear.”</p>
+<p>Like many in his field, van Honk, a young researcher at the time at Utrecht University in the Netherlands, was gripped by S.M.’s story. “She has to be the world’s most famous living neurological patient,” he says. Then in 2003, on van Honk’s first visit to South Africa, clinical psychologist Helena Thornton of the University of Cape Town bent his ear about her efforts to track down people with Urbach-Wiethe in South Africa. She realized that the country offered something neuroscientists almost never encounter: not just one famous patient, but an entire cluster of people living with a rare neurological disorder.</p>
+<p><img alt="" src="../images/Breaker_2.png" /></p>
+<p><strong>SEEKING THE ANSWERS:</strong> Social neuroscientist Jack van Honk has spent two decades studying people with Urbach-Wiethe disease in South Africa. <em>Credit: Richard Stone.</em></p>
+<p>Also known as lipoid proteinosis, Urbach-Wiethe disease was first described scientifically in 1929 by the Austrian medical researchers Erich Urbach and Camillo Wiethe. Medical sleuthing later traced back the disorder’s presence in South Africa to a brother and sister, Jacob and Else Cloete, who had immigrated from Cologne, Germany, in the mid-1600s. The pair had married into a colony of Dutch settlers. Around the turn of the 19th century, a Cloete descendant transferred a gene for the trait into the mixed-race population of Namaqualand, the arid highlands in the Northern Cape, near the border with Namibia.</p>
+<p>Urbach-Wiethe is recessive, which means that people must inherit copies of the defective gene from both parents to develop the condition. It <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1600-0625.2007.00608.x">has been associated with at least three dozen different mutations</a>, all of them in a gene that carries instructions for a protein called ECM1, which is integral to the skin’s connective tissue. Those with the mutation tend to have papery, inflamed skin and vocal cord lesions. They can have different patterns of calcification in brain regions, primarily in the amygdala, and in severe cases can suffer epilepsy, paranoia, or other psychiatric symptoms.</p>
+<p>Thornton and her colleagues found 34 individuals with Urbach-Wiethe, most of them scattered across the rocky deserts of Namaqualand. Numbers had dwindled since the days of the Dutch colony—“a small community that suffered from inbreeding,” van Honk says. Without close-kin marriages to sustain it, the condition was dying out. But with just 100-odd known cases globally, Namaqualand still had the most in the world.</p>
+<p>The implications were extraordinary: a rare chance to study how selective damage to the amygdala shapes behavior. In 2005, the University of Cape Town organized another research trip to Namaqualand. Van Honk climbed aboard, and later recruited Utrecht social neuroscientist David Terburg, then a student. “We went into this research with the basic idea that the amygdala is the fear center, and we’d find fearless people, like S.M.,” Terburg says. “But we got totally opposite results.” Although individuals with Urbach-Wiethe disease in the Northern Cape appeared calm and good-natured, behavioral testing <a href="https://psychiatryonline.org/doi/10.1176/jnp.2008.20.1.86?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">showed heightened fear responses and high rates of anxiety</a>.</p>
+<p>How could that be, the scientists wondered, if the brain region thought to govern fear had been compromised? At first, the revelations appeared to undercut the iconic case of S.M. and were coolly received by peers. “We spent five years to get those initial findings published,” Terburg says. One clue to the apparent contradiction was that individuals in Namaqualand had a unique Cloete mutation not seen on other continents. Another clue came in 2007, after a powerful 3 Tesla MRI machine came to Stellenbosch University near Cape Town. “We were the first to use it,” says van Honk. That’s when the team discovered that the damage was concentrated in the basolateral amygdala. “Nothing like that had been seen before,” van Honk says—in people, that is. Researchers had induced selective lesions to this and other parts of the amygdala in rats.</p>
+<p><img alt="" src="../images/Breaker_3.png" /></p>
+<p><strong>A PEEK INSIDE:</strong> MRI scan of a person with Urbach-Wiethe disease. Arrows indicate bilateral calcification in the basolateral amygdala, a brain region involved in fear-learning and social decision-making. <em>Credit: David Terburg.</em></p>
+<p>Rats are social creatures, and studies on these lesioned animals revealed that the basolateral amygdala helps them weigh outcomes and consequences; the central-medial amygdala, meanwhile, is more closely tied to fast, defensive reactions, such as freezing or fleeing from danger. It dawned on van Honk that the South Africans with Urbach-Wiethe disease were a kind of Rosetta Stone for seeing if what held for rats held for humans. Perhaps, he thought, different amygdala circuits might push human behavior in opposite directions, too.</p>
+<p><strong>Personal stakes</strong></p>
+<p>The <a href="https://knowablemagazine.org/content/article/mind/2022/mapping-brain-understand-mind">brain</a> had long fascinated van Honk, in part because of his own history. As a young adult, after his older brother died in a motorcycle accident, he struggled with mental health crises. The experience shaped how he related to the Urbach-Wiethe patients he later met—people whose raspy voices and visible skin changes often set them apart in their communities—and deepened his determination to unravel a living neurological mystery.</p>
+<p>In 2008, after studying Urbach-Wiethe from afar, van Honk landed a visiting professorship in the University of Cape Town’s department of psychiatry and mental health and moved from the Netherlands with his wife and their young children. He winnowed down the study population of people with Urbach-Wiethe, excluding individuals with afflictions such as alcoholism so that the team could be sure the effects they observed were truly due to the mutation. That reduced their pool of subjects to a handful of women, including Maria.</p>
+<p>Then, to dive deeper into their behavior and cognition, van Honk and his colleagues turned to tools borrowed from economics and moral philosophy: simple games and thought experiments designed to reveal how people weigh risk, reward, and responsibility. Classical economic theory assumes that humans shrewdly tally costs and benefits. Decades of behavioral research suggest otherwise: Decisions are often guided by gut feelings, impulses, and social instincts that defy narrow self-interest.</p>
+<p>In one widely used experiment known as the trust game, participants are given a sum of money and asked how much to invest with a stranger—with no guarantee of a return on that investment. Most people hedge their bets. The women with Urbach-Wiethe did not. Again and again, they invested generously with unfamiliar partners. With regard to their finances, their choices were reckless. To van Honk and his colleagues, the behavior suggested a diminished ability to flexibly weigh uncertainty, self-interest, and the intentions of others—the kind of calibration they believe an intact basolateral amygdala normally helps provide.</p>
+<p>A different pattern emerged in moral dilemmas. A classic thought experiment is the “trolley problem,” in which a runaway trolley could kill five people, but intervening would mean you actively killed just one. When asked what they would do in variations on this theme, the women with Urbach-Wiethe disease <a href="https://www.pnas.org/doi/full/10.1073/pnas.2119072119">consistently refused to endorse sacrificing a life</a>, even as the numbers of people to be killed—were they not to intervene—grew extreme. “It’s very nice to resist sacrificing a person, but if so many people were to die, it’s a bit weird,” van Honk says. “Something in the computation isn’t working.” The women understood the consequences but could not bring themselves to intervene. Some of them explained to the researchers that causing harm, even for the greater good, “hurts too much.”</p>
+<p>Intrigued, psychologist Tobias Kalenscher of the University of Dusseldorf in Germany took a sabbatical in 2023 to work with van Honk in South Africa. Kalenscher’s team <a href="https://www.sciencedirect.com/science/article/abs/pii/S1074742715002063?via%3Dihub">had earlier found striking behavioral changes</a> in rats with lesions in their basolateral amygdala. Normally, when a rat is presented with two options—getting a treat just for itself, or the exact same treat for itself and for another rat—it often prefers the mutual reward. The rats with brain lesions couldn’t care less about other rats, suggesting that the basolateral amygdala helps to assess the social value of a choice.</p>
+<p>Social behavior in rats is only a rough proxy for humans. “Generosity is a genuinely human topic that you need to study in humans,” Kalenscher says. He and van Honk asked the Urbach-Wiethe women in the Northern Cape to think of real people in their lives—those closest to them and those increasingly distant, all the way out to an anonymous stranger. For each person, the women were to decide how much money they were willing to share. A control group of women without the disease were asked the same questions. Generosity declined with distance in everyone, but among the Urbach-Wiethe women it dropped off far more steeply, <a href="https://www.pnas.org/doi/10.1073/pnas.2500692122">the team reported in 2025 in <em>PNAS</em></a>.</p>
+<p>The duo suspected that the women’s behavior reflected a difficulty in balancing self-interest with concern for others, rather than a fixed tendency toward generosity or selfishness. So, starting in November 2025, they conducted a variation of the experiment that removed the need to divide resources. They asked Maria and others to squeeze a handheld device called a dynamometer. Pressing harder would generate more money for people at various social distances. In such tests, people without amygdala lesions are consistent: “They press much harder for people they love or feel close to than for strangers,” Kalenscher says. The women with Urbach-Wiethe, by contrast, pressed just as hard for strangers as for loved ones—suggesting that they were not adjusting their behavior to social distance.</p>
+<p>Across responses to threat, moral judgment, and social decision-making, a striking pattern emerges. The women with Urbach-Wiethe are hampered in their ability to adjust their decisions as circumstances change. This suggests that the basolateral amygdala enables us to imagine others’ outcomes and weigh them against our own when making decisions. “This is what we do, and I think what the Urbach-Wiethe patients cannot do,” Kalenscher says.</p>
+<p>In other words, while earlier theories framed the amygdala mainly as a detector of danger—a switch that turns fear on or off—the new evidence points to the brain region’s broader role in calibration of behavior. Van Honk and his colleagues propose that the basolateral amygdala integrates emotional signals with possible consequences, allowing us to trade off our own gain against potential harm or benefit to others. The women with Urbach-Wiethe disease show what happens when that calibration system is disrupted: They are less able to reconcile competing considerations when making decisions. “It appears that they can’t trade off their own benefit versus the benefit of others,” Kalenscher says.</p>
+<p>One possible explanation for that breakdown lies in how the basolateral amygdala interacts with the ventromedial prefrontal cortex, a region involved in evaluating reward and guiding decisions. In a healthy brain, the two appear to work together, integrating self-interest with concern for others into a single signal that guides behavior. When the basolateral amygdala is damaged, that communication may break down, leaving decisions to be driven by simpler, intact circuits. The idea remains speculative, Kalenscher says, but it fits with what is known about how these regions interact.</p>
+<p><img alt="" src="../images/Breaker_4.png" /></p>
+<p><strong>MORAL GUIDE:</strong> Scientists suspect communication between the basolateral amygdala and the ventromedial prefrontal cortex helps people balance self-interest with concern for others when making social decisions.</p>
+<p>Translating the women’s behavior in experiments into everyday life is a challenge. But Kalenscher says he sees clues in Maria. On the visit with her in January, she was caring for two orphaned children, apparently unrelated to her. From his brief window on Maria’s day-to-day life, Kalenscher believes her computational deficit may translate into a kind of extreme altruism: a willingness to help others without the usual filtering of context. It makes her someone people can rely on, he says, but also someone who could potentially be taken advantage of. Echoing Maria’s heroism is an <a href="https://pubmed.ncbi.nlm.nih.gov/27936839/">observation about S.M. reported in 2018</a>: S.M. told researchers how she’d once given her only coat and scarf to a homeless man she’d met under a freeway ramp in the dead of winter.</p>
+<p><strong>An enduring riddle</strong></p>
+<p>Every visit to the Northern Cape, it seems, brings to light another hidden oddity of Urbach-Wiethe disease. Sitting at Maria’s kitchen table in Lambert’s Bay, van Honk chats with his research subject as if she is an old friend—and, indeed, they’ve known each other for more than 15 years. As the visit winds down, he asks her about her sense of smell. “Yes, it’s very good,” she says, without hesitation. She talks easily about cooking, about knowing when food has gone off. Nothing in her answer suggests impairment.</p>
+<p>Later, van Honk shows me unpublished results of a smell test he and colleagues recently ran with Maria and the others with Urbach-Wiethe disease. While their basic odor sensitivity is intact—they can detect smells just fine—the women struggle to identify what those smells are, a pattern that points to what the researchers call olfactory amnesia. “They understand the smell of fish, and coffee. But other smells they can’t really differentiate,” van Honk says. More striking, the women are unaware of the deficit, a phenomenon known as olfactory anosognosia.</p>
+<p>In rodents, the basolateral amygdala plays a key role not in detecting odors but in learning what they mean—linking a smell to memory or consequence. When that region is damaged, animals can still sense odors, but they fail to learn that a particular scent predicts danger or reward. The Urbach-Wiethe data suggest something similar, the scientists say. Smell, one of the most ancient sensory systems, appears to rely on the same circuitry that helps humans learn from experience and revise their internal models of the world.</p>
+<p>Despite the obstacles they face because of a steady, irrevocable loss of their basolateral amygdala, the women with Urbach-Wiethe in the Northern Cape cope and adapt, with resilience that impresses van Honk. And as they live out their lives, they gift science with a glimpse of how small changes in the brain can reshape how we fear, whom we trust, and how far our concern for others extends. <img alt="" src="../images/nautilus-favicon-14_38.png" /></p>
+<p><a href="https://knowablemagazine.org/content/article/mind/2026/genetic-disease-reveals-role-of-brain-amygdala"><em>This article</em></a><em>originally appeared in</em><a href="https://knowablemagazine.org/">Knowable Magazine</a><em>, a nonprofit publication dedicated to making scientific knowledge accessible to all.</em><a href="https://knowablemagazine.org/newsletter-signup"><em>Sign up for</em>Knowable Magazine’<em>s newsletter</em></a><em>.</em></p>
+<p><em>Lead image: The rocky deserts of Namaqualand in South Africa harbor the world’s largest-known cluster of people with Urbach-Wiethe disease, a rare genetic condition that selectively damages the amygdala. Credit: Knowable Magazine.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

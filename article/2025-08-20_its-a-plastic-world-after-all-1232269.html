@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It’s a Plastic World, After All - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>It’s a Plastic World, After All - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-20
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-65WL</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><em>Last week, cooperation took a fall. A United Nations treaty to reduce plastic production melted in the sun of opposition from countries who make most of the world's plastic, including the United States.</em></p>
+<p>In the middle of the last century, we learned to master the chemistry of carbon. It was a triumph born of war and industry, of oil wells and laboratories, and its most versatile offspring was plastic: a material as supple as imagination and as enduring as geological time. We made it to last forever—and it does. If only we could have foreseen the problem.</p>
+<p>At the entrance to <em>The Blue Paradox</em>, an exhibit at the Griffin Museum of Science and Industry in Chicago, you pass beneath a canopy of 1,278 fish, each sculpted from plastic waste by the artist Aurora Robson. The installation is called <em>Emergence</em>, and it is aptly named. We can emerge from <a href="https://nautil.us/can-humanity-stem-the-plastic-tide-1230748/">the plastic crisis</a>. But first we must submerge in it.</p>
+<p><img alt="" src="../images/BRDXynib-Steele_BREAKER.png" /></p>
+<p><strong>A BILLION BOTTLES OF PLASTIC ON THE WALL:</strong> A walk through the exhibit <em>The Blue</em><br />
+<em>Paradox</em> is a walk into a mirror held up to the modern world. <em>Photo courtesy of the Griffin Museum of Science and Industry</em>.</p>
+<p>You step into an immersive ocean—waves of light, whispering currents of sound, the rhythm of breath and tide. This is not decoration; it is a reorientation. The ocean is not “out there.” It is the Earth’s primary engine of life. It covers more than 70 percent of the planet’s surface, produces half the oxygen we breathe, and regulates the climate that makes our existence possible. To walk beneath its surface, even virtually, is to be reminded that we are not masters of nature, but citizens of it.</p>
+<p>Each year, 14 million metric tons of plastic enter the ocean. It is a number so large that it ceases to have meaning. The exhibit gives it form: photographs of rivers in Indonesia choked with shampoo bottles, statistics about microplastics found in whales and wombs, maps of the five great ocean gyres where garbage whirls in slow gyroscopic dances. It is one thing to know that plastic is durable. It is another to see it outlasting coral.</p>
+<p>To encounter <em>The Blue Paradox</em>—created by SC Johnson and Conservation International—is not to encounter merely an ecological problem, nor a scientific phenomenon. It is to walk into a mirror held up to the modern world.</p>
+<blockquote>
+<p>You are asked not to simply observe plastic, but to reckon with it.</p>
+</blockquote>
+<p>The exhibit's interactive displays allow you to trace the journey of a plastic bottle from factory to landfill, from coastline to open sea. They allow you to calculate your own plastic footprint. A ticker counts the tons of plastic produced since you entered the exhibit. A conveyor belt pours out plastic waste in a ceaseless flood. The experience is not overwhelming by accident. It is designed to provoke the disquiet of truth. It succeeds.</p>
+<p>But, as you wade through the virtual waste, the narrative turns to paradox—the exhibit's title. Plastics is a villain. It's in <a href="https://nautil.us/plastic-is-the-oceans-new-junk-food-236157/">our waterways</a>, clothes, <a href="https://nautil.us/you-eat-a-credits-card-worth-of-plastic-every-week-238481/">food</a>, and even blood. But it's also a marvel. It makes modern medicine possible. It stores vaccines and sterile instruments. It preserves food, reduces weight in cars, and shelters electronics.</p>
+<p>Plastic's problem is not in its invention, but in its abandonment. We made a material that endures longer than civilizations, and we built our culture to use it once and throw it away.</p>
+<p>The exhibit returns you to the possibility of hope. Here are the solutions—small, imperfect, but real. Alternatives to plastic. Reuse systems. Legislation. Education. A wall of names, digital and glowing, records the pledges made by guests: to reduce, to reuse, to speak out, to vote. It is a quiet room, and yet it hums with potential.</p>
+<p>For its part, SC Johnson has chosen to confront its history rather than obscure it. “Plastic is one of the most useful materials we’ve ever invented," says SC Johnson CEO Fisk Johnson. To solve the crisis, Johnson adds, “you have to get everyone in the plastic recycling loop collectively. And it all has to be done at scale.” This is not a call for perfection, but for cooperation.</p>
+<p>How will we overcome? Exhibits like <em>The Blue Paradox</em> can point the way. Corporations that produce plastic aren't the final obstacle. They can change.</p>
+<p>As you walk through the Blue Paradox exhibit, in shifting light and with the floor trembling beneath your feet, you are asked not to simply observe plastic, but to <a href="https://nautil.us/is-solving-the-plastic-problem-a-moral-issue-1231008/">reckon with it</a>. And that means to reckon with yourself, with the world you want. <img alt="" src="../images/nautilus-favicon-14_1004.png" /></p>
+<p><em>Lead photo courtesy of the Griffin Museum of Science and Industry</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

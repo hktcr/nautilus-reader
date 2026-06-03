@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Search for Where Consciousness Lives in the Brain | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Search for Where Consciousness Lives in the Brain</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-14
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GPEU</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 1998, neuroscientist Christof Koch bet philosopher David Chalmers that within 25 years, scientists would discover the neural correlates of consciousness. He was certain that we were on the cusp of solving the so-called hard problem: how the physical flesh of the brain gives way to the everyday streams of feelings, sensations, and thoughts that make up our waking experience.</p>
+<p>That bet didn’t go well for Koch: A couple of years ago, he paid up, delivering a case of fine wine to his opponent on a conference stage in New York City.</p>
+<p>But many scientists still <a href="https://nautil.us/finding-the-neural-correlates-to-consciousness-is-still-a-good-bet-352054/">believe</a> that the scientific keys to the kingdom of consciousness are within reach. Lately, some are focusing their attention on a new technology called transcranial focused ultrasound, in which acoustic waves are transmitted through the skull deep into the interior tissues. These waves can be used to stimulate specific target areas as small as a few millimeters in size and to monitor the changes that result.</p>
+<p>Now, two researchers from MIT have mapped out specific ways to use the technology to chip away at the hard problem. Because transcranial focused ultrasound offers a powerful and noninvasive way to alter brain activity, it will allow scientists to track cause-and-effect for the first time, they argue. In a new <a href="https://www.sciencedirect.com/science/article/abs/pii/S0149763425004865">paper</a>, published in <em>Neuroscience and Biobehavioral Reviews</em>, they plot out a series of experiments that will aim to answer how consciousness arises in the brain—and where.</p>
+<p>“Transcranial focused ultrasound will let you stimulate different parts of the brain in healthy subjects, in ways you just couldn’t before,” Daniel Freeman, an MIT researcher and co-author of the paper, explained in a <a href="https://news.mit.edu/2026/new-tool-could-tell-us-how-consciousness-works-0112">statement</a>. “This is a tool that’s not just useful for medicine or even basic science, but could also help address the hard problem of consciousness. It can probe where in the brain are the neural circuits that generate a sense of pain, a sense of vision, or even something as complex as human thought.”</p>
+<p><strong>Read more: “<a href="https://nautil.us/whats-so-hard-about-understanding-consciousness-238421/">What’s So Hard About Understanding Consciousness?</a></strong>”</p>
+<p>Most existing brain-monitoring technologies, such as MRI, EEG, or other forms of ultrasound, provide imaging of existing activity in the neural tissue but cannot alter it, so they can't measure cause and effect. Meanwhile, other forms of brain stimulation, such as transcranial magnetic or electrical stimulation, have been around for a long time, but they’re blunt instruments. They can only affect large swaths of cortex. Transcranial focused ultrasound can target specific areas deep in the brain that many theories of consciousness propose are crucial—and produce imaging with much higher resolution.</p>
+<p>Outside of brain stimulation, the only way for scientists to alter and monitor activity in specific tissues of the brain is through surgical interventions, which are both risky and invasive, presenting ethical challenges for studying healthy brains. “There are very few reliable ways of manipulating brain activity that are safe but also work,” said Matthias Michel, an MIT philosopher who studies consciousness and a co-author of the new paper.</p>
+<p>“It truly is the first time in history that one can modulate activity deep in the brain, centimeters from the scalp, examining subcortical structures with high spatial resolution,” Freeman added. “There’s a lot of interesting emotional circuits that are deep in the brain, but until now you couldn’t manipulate them outside of the operating room.”</p>
+<p>Freeman and his colleagues are especially interested in solving a fundamental disagreement about the origins of conscious experience: Does it require higher-order mental processes, such as reasoning or self-reflection, linking activity from different areas of the brain into a coherent whole? Or do specific patterns of localized activity—especially in subcortical structures at the back of the brain or in the back of the cortex—give rise to particular subjective experiences without a need for such interpretive overlays?</p>
+<p>The new technology could answer a series of smaller questions that would help solve that bigger picture conundrum. For example: What roles do the prefrontal cortex and subcortical structures play in conscious perception? Is consciousness local or spread across networks? If it’s spread across distant brain regions, how are different perceptions linked to produce unified experience?</p>
+<p>Some of the MIT researchers’ upcoming experiments will focus specifically on stimulating the visual cortex and higher-level areas in the frontal cortex. “It’s one thing to say if these neurons responded electrically,” argued Freeman. “It’s another thing to say if a person saw light.”</p>
+<p>Focused ultrasound won’t solve the hard problem overnight, but it may help us begin to see the light. <img alt="" src="../images/nautilus-favicon-14_548.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Mahesh Patil / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

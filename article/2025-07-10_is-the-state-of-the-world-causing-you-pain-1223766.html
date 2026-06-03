@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is the State of the World Causing You Pain? - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Is the State of the World Causing You Pain? - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-LOOF</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>These days, many people struggle to keep up with the state of the world without being overcome by a sense of despair that’s as profound as it is difficult to describe. Unless you happen to speak German.</p>
+<p>The German language, a popular saying goes, has a word for everything. There’s <em>Schadenfreude</em> and <em>Zeitgeist</em>, of course. But it’s perhaps time we get more acquainted with <em>Weltschmerz</em>, a word which literally translates to “world pain.”</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>Coined by the German writer Johann Paul Richter in his 1823 novel <em>Selina, Weltschmerz</em> has been used by scholars to signify a unique type of sorrow that is linked not to personal hardship but the hardship of others; not to one’s own misfortune, but the misfortune of the world at large. It pervades certain works of literature and philosophy, from Wolfgang von Goethe’s <em>The Sorrows of Young Werther</em> to Arthur Schopenhauer’s <em>World as Will and Representation</em> and was <a href="https://archive.org/details/typesofweltschme00brau/page/n13/mode/2up?q=weltschmerz+is">characterized</a> by one critic as “abnormal sensitiveness … to the moral and physical evils and misery of existence.”</p>
+<p>It may have been birthed more than two centuries ago, but <em>Weltschmerz</em> seems to be increasingly rearing its head in blog posts, YouTube videos, and self-help books that discuss how social media, global warming, political unrest, and other fixtures of 21st-century life are eating away at our collective mental health. This imposing word neatly encapsulates the mix of sadness, hopelessness, fear, distrust, and rage that many of us feel while doomscrolling our way through seemingly endless supplies of disturbing and disheartening headlines.</p>
+<blockquote>
+<p><em>Weltschmerz</em> literally translates to “world pain.”</p>
+</blockquote>
+<p>Whether <em>Weltschmerz</em> is indeed a particularly strong element of our current <em>Zeitgeist</em> or a feature of the individual human condition is difficult to say, largely because research on the specific psychological phenomenon remains all but unexplored by science.</p>
+<p>To study <em>Weltschmerz</em>, of course, you first have to properly define it. This is easier said than done. The German poet Heinrich Heine, who died in 1856, described it as rumination on the “transience of life on Earth,” framing it as an existential issue. Ralph Ellison, who referenced <em>Weltschmerz</em> in his 1952 novel <em>The Invisible Man</em>, appears to have connected it to generational trauma, in this case as a Black person in America. The Cambridge Dictionary defines <em>Weltschmerz</em> as a “feeling of sadness and lack of hope about the state of the world.” Merriam-Webster, as “depression or apathy caused by comparison of the actual state of the world with an ideal state.”</p>
+<p>These diverging, at times contradictory interpretations call the precise nature of <em>Weltschmerz</em> into question. Does it stem from—and take the shape of—pessimism or optimism? Nihilism or idealism? Apathy or care?</p>
+<p>The most obvious risk factor for flare ups of <em>Weltschmerz</em> is exposure to the suffering of others. Research has long shown that people who interact with traumatized individuals—including <a href="https://pubmed.ncbi.nlm.nih.gov/36875827/">emergency medical services personnel</a> and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9639100/">family members</a> of the terminally ill—are at risk of experiencing psychological distress themselves. More recent studies indicate that this distress, sometimes referred to as vicarious or secondary trauma, can develop even without direct contact, including through <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11022913/">social media imbibing</a> and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10517610/">news consumption</a>. This suggests <em>Weltschmerz</em> is more common today than it was in the past, when dispiriting news of world events were not delivered directly to our pockets 24/7.</p>
+<p>Another possible risk factor is the way people construct their sense of self. According to Marc Williams, a clinical psychologist and an honorary senior lecturer at Cardiff University in Wales, the emotional impact of events we experience has less to do with the event itself than the meaning and weight we attribute to it. “What feels impersonal to one person may feel deeply personal to another,” he says. In previous centuries, people’s inner circles were limited to their families and towns. Today, thanks to factors like nationalism, mass migration, and technology, our in-groups—and, by extension, sense of self—readily transcend borders, languages, and cultures. And as our identities expand, so does our concern for those with whom we identify. And it can even extend beyond the human, Williams says. “For climate anxiety, for example, research has found associations with higher levels of nature connectedness, or identification with the natural world.”</p>
+<p><img alt="" src="../images/Brinkhof_BREAKER.png" /></p>
+<p><strong>I'D WERTHER NOT:</strong> <em>Weltschmerz</em>has run as a trope through literature and philosophy for more than two centuries. This state of being has tormented protagonists from the unnamed hero of Ralph Ellison's <em>The Invisible Man</em>  to Wolfgang von Goethe's poor Werther, pictured here. <em>Credit: Laganrat / Wikimedia Commons.</em></p>
+<p>Identity, then, opens the door to another potential risk factor: affective empathy. Whereas cognitive empathy refers to the ability to understand someone else’s thought processes, affective empathy is the capacity to feel another’s emotions. Affective empathy helps us form and maintain relationships, but excessive or unregulated empathy can lead to what Williams describes as “emotional overload, the psychological burden of continually feeling others’ pain”—a burden which <a href="https://www.sciencedirect.com/science/article/abs/pii/S0006322325000216">increases</a> susceptibility to psychological distress, psychiatric disorders, and perhaps <em>Weltschmerz</em>.</p>
+<p>One final factor is cognitive dissonance, <a href="https://www.researchgate.net/publication/348018033_A_Review_of_Cognitive_Dissonance_Theory_and_Its_Relevance_to_Current_Social_Issues">defined</a> in one literature review as frustration that arises when “people are confronted with facts that contradict their beliefs, values, and ideas.” Though not always emphasized in equal measure, disjunction between personal expectations and perceived reality is a recurring theme in literary and philosophical <em>Weltschmerz</em> discourse. Miles Groth, an existential therapist, expert on continental European philosophy, and professor emeritus in psychology at Wagner College in New York City, suggeststhat the idea of <em>Weltschmerz</em> arose at a very specific time: when “religious feelings that suffering is inevitable disappeared from the West.”</p>
+<p>Indeed, where people from the devoutly Christian Europe of the Middle Ages are <a href="https://www.cambridge.org/core/journals/traditio/article/grief-grieving-and-loss-in-high-medieval-historical-thought/13B75AEE133C948401E31662578500EE">thought to have</a> accepted and found comfort in the fact that everything—including evil—was part of God’s divine plan, those born in later centuries tended to operate according to a different set of expectations. Where faith gave way to science, the evils of pain, suffering, and injustice came to be regarded as avoidable, unnecessary, and by extension intolerable.</p>
+<p>In this sense, <em>Weltschmerz</em> could be framed as an expression of the shattered assumptions theory. Formulated by social psychologist Ronnie Janoff-Bulman in her 1992 book <em>Shattered Assumptions: Towards a New Psychology of Trauma</em>, this theory proposes that certain experiences are traumatizing in large part because they dismantle our most basic assumptions about existence. Even getting this information third-hand, for example by doomscrolling, might spark a similar reaction. A 2024 study in Iran and the United States <a href="https://www.sciencedirect.com/science/article/pii/S245195882400071X#bib39">found</a> that social media exposure to “meaning-threatening” stimuli, such as famines and genocides, can cause existential anxiety as well as misanthropy: mistrust and hatred of humanity and even oneself. While existential anxiety matches Heine’s definition of <em>Weltschmerz</em> (preoccupation with the ostensible shortcomings of existence), misanthropy evokes <em>Weltschmerz</em> as expressed in the work of Schopenhauer, whose pessimistic attitude toward human civilization led him to prefer a life of asceticism and solitude.</p>
+<p>As for <em>Weltschmerz’s</em> clinical applications, it’s possible that the condition is merely a symptom of other, better defined and more extensively researched psychiatric conditions. After all, Heinrich Heine, Friedrich Hölderlin, and Nikolaus Lenau, German poets whose unwaveringly melancholic oeuvres form the bedrock for both literary and philosophical inquiries into <em>Weltschmerz</em>, all had complicated medical histories, having retrospectively received diagnoses for either severe <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1292781/">depression</a> or <a href="https://pubmed.ncbi.nlm.nih.gov/28176008/">schizophrenia</a>.</p>
+<p>Thomas Pyszczynski, a professor emeritus of psychology at the University of Colorado, Colorado Springs and one of the founding fathers of terror management theory (which posits fear of death as a key motivator of behavior and mental well-being), is collecting data on people experiencing “psychological distress” in response to Donald Trump’s political career. He suggests that his study subjects may not be feeling what constitutes <em>Weltschmerz</em> but rather a “subclinical form of PTSD” that “could reach clinical significance in some people.”</p>
+<p>Aaron Fisher, an associate professor of psychology at the University of California, Berkeley, cautions against classifying <em>Weltschmerz</em> as a distinct psychological phenomenon, arguing that, in both clinical and research settings, the focus should be on the way we respond to stimuli, not the stimuli themselves; on the output, not the input. So, he said, stressors “need not be classified as ‘world’ vs. ‘community’ vs. ‘self,’” and making too big of an effort to do so yields “diminishing returns.”</p>
+<blockquote>
+<p><em>Weltschmerz</em> is more common today than it was in the past.</p>
+</blockquote>
+<p>Williams, by contrast, <em>does</em> propose that <em>Weltschmerz</em> can be distinguished from other psychiatric conditions. While clinical levels of depression and anxiety can be debilitating, <em>Weltschmerz</em> need not result in functional impairment. “It can be a deeply felt experience without meeting the criteria for a mental health problem,” he says. Something like climate anxiety encompasses a broad range of emotions and relates not only to “inner suffering but also moral distress,” making it difficult to categorize as a psychological condition.</p>
+<p>The mental discomfort produced by <em>Weltschmerz</em> needn’t be paralyzing—and actually might in many cases serve as a source of motivation. Williams notes that a recent study he was involved in found that climate anxiety was associated with high levels of “intention to engage in pro-environmental behaviors.” The same can be said about anxiety regarding political events, with one 2023 study <a href="https://www.apa.org/news/press/releases/2023/01/politics-affecting-mental-health">finding</a> that people who reported “more politics-related negative emotions” also “reported greater motivation to act on political causes by doing things such as volunteering or donating money to political campaigns.”</p>
+<p>Whether activism can be used to treat <em>Weltschmerz</em> depends on the situation. In some cases, joining other people in working toward achieving a common goal can indeed provide a welcome feeling of purpose and community, improving our mental health. In others, lack of progress toward achieving such goals—especially lofty ones like ending global poverty or convincing governments and corporations to work together to mitigate global warming—can actually have the opposite effect: reducing our sense of agency and fueling the very despair we wish to keep at bay.</p>
+<p>On the flipside, <em>Weltschmerz</em> can also be treated by <a href="https://nautil.us/pico-iyers-wide-awake-silence-1177556/">retreating from the outside world</a>. This remedy was one used by Schopenhauer, who, convinced that the problems plaguing the world were both endemic and unsolvable, spent much of his adult life in self-imposed isolation from society. Today, Schopenhauer’s preferred treatment plan survives in the form of both physical and especially digital detoxes. But while research shows that taking a break from the doomscroll-inducing algorithms of social media platforms has noticeable <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11392003/">psychological benefits</a>, the strategy is ethically thorny. By deleting TikTok and turning off the evening news, we’re turning a blind eye to suffering in ways that those less fortunate than us cannot.</p>
+<p>In clinical practice, the most effective treatments for <em>Weltschmerz</em> balance engagement with disengagement, a middle ground between taking action where possible and recognizing what is and isn’t beyond our individual control. As Cynthia Shaw, a clinical therapist specializing in existential anxiety and founder of Authentically Living Psychological Services in New York City, explains:</p>
+<p>“One of the hardest parts is walking the line between validation and paralysis. You can’t reassure someone that everything will be fine, because they’re right, some things aren’t OK,” she says when I asked her about how people can best manage <em>Weltschmerz-</em>related distress without compromising on their moral values. “And yet, staying in a perpetual state of despair isn’t sustainable either. So, the goal in therapy isn’t to ‘fix’ the world, nor the person. It’s not about not caring. It’s about figuring out how to care differently.” <img alt="" src="../images/nautilus-favicon-14_1076.png" /></p>
+<p><em>Lead image: Valazarus-Studio / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

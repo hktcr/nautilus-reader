@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pico Iyer on Silence, Solitude, and His Book Aflame | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Pico Iyer on Silence, Solitude, and His Book Aflame</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-01-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-YUO6</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Pico Iyer’s <em>Aflame: Learning from Silence</em> opens with a scene that is becoming all too familiar: the loss of his home and all his worldly possessions to wildfire. He goes on to describe the death of his father, his mother’s rapidly failing health, and the cancer diagnosis of his daughter. With this abundant calamity you might expect the book to be about suffering, but instead it dwells on the sometimes simple, sometimes profound joys that can be found in silence, and how it can help us navigate life’s trials.</p>
+<p>For 40 years, Iyer has trotted the globe as a travel writer, and over the past 30 he has repeatedly returned to a Benedictine hermitage hidden in the forests of Big Sur where one can ponder the questions of existence in quiet. <a href="https://www.penguinrandomhouse.com/books/678663/aflame-by-pico-iyer/"><em>Aflame</em></a>was constructed from his notebooks spanning this period, and in it he explores the virtues of silence, relates the wisdom gleaned over his long friendships with luminaries such as Leonard Cohen and the Dali Lama, and delves into the deep insights that can be encountered via periodic solitude.</p>
+<p>Iyer says that his newest offering is a companion piece to his last book, <em>The Half Known Life</em>, which focuses on how we can find paradise in a world of conflict. He has previously written about the value of embracing a more tranquil pace in his bestselling <em>The Art of Stillness</em>. With <em>Aflame</em>, he continues his interrogation into the search for peace amidst a life of chaos.</p>
+<blockquote>
+<p>Optimism is only as useful as the realism it’s based on.</p>
+</blockquote>
+<p><strong><em>Aflame</em></strong> <strong>was collated from your notes spanning many years. Why did you decide to write the book now?</strong></p>
+<p>In part because I’ve never seen the world so divided as it is now, and a part of me feels that it’s words and beliefs that cut us in two, even as silence—which lies on the far side of them—can sometimes, though not always, bring us together. I’ve made more than 100 retreats in this single hermitage because the people I meet there are the most open-minded I’ve met and are most committed to finding the places and feelings we have in common, not the ones that tear us apart.</p>
+<p>But also because I’ve never seen my friends so despairing as they are now. And every time I travel into this wide-awake silence, I receive a powerful infusion of hope and confidence. <a href="https://nautil.us/these-are-their-brains-on-silence-235216/">Places of quiet</a> will always be valuable in a world of distraction and acceleration, but I decided to distill my 33 years of retreats into a small book now because I feel our world is crying out for medicine.</p>
+<p><strong>In our loud, money-motivated world, escaping all the noise to find silence is often something of an investment in terms of both time and money. So what value does silence offer in exchange?</strong></p>
+<p>I love that way of putting it, because going on retreat really does feel like the best investment I can make. Traveling into silence is a way of replenishing my inner savings account, my internal resources. Which in many ways are all I have to draw on when I step into an ICU.</p>
+<p>As I was writing this book, my mother had a stroke and was rushed into the intensive care unit for 35 days. As I was sitting by her bedside and she was teetering between life and death, I realized that my resume was no help at all. All the books I’d written were of little use. My bank account was of limited use. The only thing I could draw on to help her—and myself—was whatever I had gathered by sitting quietly, building up my inner reserves.</p>
+<p>Meister Eckhart, the wise German mystic, noted 600 years ago that if your inner work is strong, the outer can never be puny. If you’ve made that investment within, then your relationships, your career, your interactions with yourself can take care of themselves. But if you don’t—and I have sometimes been negligent in this regard—then you’re bankrupt and bereft. We all have to make a living, but it will only be as rich and strong as the life we’ve built beneath and around it.</p>
+<p><strong>What are some of the biggest challenges inherent to a life or even temporary period of silence, reflection, and hermitage?</strong></p>
+<p>There are certainly no guarantees when you go on retreat or step into silence. As the Trappist monk Thomas Merton wrote, if you enter into contemplation with hopes of getting something, you’re likely to be disappointed.</p>
+<p>Sometimes, when I sit in my lonely trailer on the hill, winter storms break out. The rain comes beating down on the roof, the wind shakes the flimsy foundations of the old wooden building, I can’t see a single light or sign of human habitation. I’m truly in the wilderness, with nowhere to run or hide. And what can be so merciless and unsettling for me on a three-day stay is a lifelong vocation for a monk or nun. For all their hope and confidence, they live very often alone in their cells, surrounded by fears and doubts and frustrations.</p>
+<p>Catholic priest Thomas Keating points out that contemplation can’t get rid of suffering; it simply allows you to see it on a larger canvas, to put it in perspective. To remember that nothing lasts forever and that reality, sad to say, is seldom without setbacks and sorrows.</p>
+<p>For me the big challenge of going on retreat is that it can be hard to come back to the loud and disorderly world and it asks me how I am going to change my life. Given that I’m not a monk, how can I try to keep some of the graces and blessings of that life alive in the midst of my crowded life and an often divisive world?</p>
+<blockquote>
+<p>We can’t live without fire, and the question becomes how to live with it.</p>
+</blockquote>
+<p><strong>You discuss in the book how with so many humans now living where we’re not supposed to, wildfires are increasingly a fact of life. The monks choose to keep the Hermitage where they know it is at risk of fire. How are we to navigate the tension between existing in the places we love and the growing wildfire and climate danger to those places?</strong></p>
+<p>Monks in my experience are realists; they’re not living in the never-never and they don’t expect life to be easy. As you say, their lives call for them to <a href="https://nautil.us/a-hermits-reality-787160/">live in the wilderness</a>, often in beautiful remote locations akin to the desert where the first Christian priests lived. But they know that puts them out of the reach of medical help and convenience and much else.</p>
+<p>I begin my book by describing how a wildfire, many years ago, wiped out my house and every last thing in it. I was lucky to survive, since I was caught inside that fire for three hours, out of the reach of firetrucks and helicopters, and saved only by a good Samaritan who found himself stuck in exactly the same place. I lost everything I owned in the world, including the handwritten notes for my next three books and eight years of writing.</p>
+<p>Because of the nature of insurance policies, we had to rebuild our home in the same location, in the hills of California, and we’ve had to flee approaching fires 10 or 12 times in the rebuilt house, just as my monk-friends often do. Yet I can’t complain about any of this because, as you say, I know the danger of living in these hills, where humans were never supposed to live, and because fire is an important part of the natural cycle. Much of the beautiful landscape around me can’t survive without regular fires. So we can’t live without fire, and the question becomes how to live with it. And how to keep the fires of conviction and hope alive within ourselves.</p>
+<p>This is a book about climate change, since those whose lives aren’t being upended by fire are at the mercy of hurricanes and tsunamis and floods and typhoons. The climate crisis all of humanity is facing is reminding us that humans do not sit at the center of the world, and it is stripping us of all our certainties. Maybe that’s one reason why I gravitate more and more to a place where I can see and feel how tiny we and our hopes and plans are, and where I am taught to learn how to live with uncertainty, and with flames literal and metaphorical all around me.</p>
+<p><strong>You strike me as an optimist. Would you agree with that?</strong></p>
+<p>I am an optimist, though my sense is that optimism is only as useful as the realism it’s based on. I like the fact that two of the great hope-givers I know—the Dalai Lama and his great late friend Archbishop Desmond Tutu—both stress that they’re not idealists or romantics or even optimists; they’ve lived close enough to suffering and difficulty not to expect life always to be sunny or amenable to their plans. But they do believe that our end is not despair and that the arc of the moral universe, as Dr. Martin Luther King, Jr. put it, bends toward justice.</p>
+<p>We’ve all suffered traumas and horrors that to some extent never go away. But that doesn’t mean that hope is impossible; it might even mean that it’s necessary. A life without hope is no life at all. There are so many causes for despair right now, from warfare to the climate crisis to our mounting divisions to our recent plague. But the world has improved in so many ways in my lifetime, and often in ways that we quickly take for granted.</p>
+<p>The media, in which I have been involved for 40 years, always concentrates on drama, which often involves violence and suffering. But today's technology allows us to live longer and more healthily than ever before. In the U.S., there are much greater rights than when I was in high school for many who have long been oppressed, and the kids that I meet are much more instinctively global than when I was in college. It’s up to us whether we concentrate on what cuts us up or what opens us up. <img alt="" src="../images/nautilus-favicon-14_1285.png" /></p>
+<p><em>Lead image: Elena Ray / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

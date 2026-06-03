@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worm-Inspired Treatments Inch Toward the Clinic - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Worm-Inspired Treatments Inch Toward the Clinic - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-B5V0</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://knowablemagazine.org/content/article/health-disease/2025/worm-inspired-treatments-inch-toward-clinic"><em>This article</em></a> <em>originally appeared in</em> <a href="https://knowablemagazine.org/">Knowable Magazine</a>.</p>
+<p>The experiment was a striking attempt to investigate weight control. For six weeks, a group of mice gorged on lard-enriched mouse chow, then scientists infected the mice with worms. The worms wriggled beneath the animals’ skin, migrated to blood vessels that surround the intestines, and started laying eggs.</p>
+<p>Bruno Guigas, a molecular biologist at the Leiden University Center for Infectious Diseases in the Netherlands, led this study some years back and the results, he says, were “quite spectacular.” The mice lost fat and gained less weight overall than mice not exposed to worms. Within a month or so, he recalls, the scientists barely needed their scale to see that the worm-infested mice were leaner than their worm-free counterparts. Infection with worms, it seems, <a href="https://faseb.onlinelibrary.wiley.com/doi/abs/10.1096/fj.14-266239">reversed obesity</a>, the researchers reported in 2015.</p>
+<p>While it’s true that worms gobble up food their hosts might otherwise digest, that doesn’t seem to be the only mechanism at work here. There’s also some intricate biology within the emerging scientific field of immunometabolism.</p>
+<blockquote>
+<p>After two years, those who received 20 worms had lost an average of 11 pounds.</p>
+</blockquote>
+<p>Over the past couple of decades, researchers have recognized that the immune system doesn’t just fight infection. It’s also intertwined with organs like the liver, the pancreas, and fat tissue, and implicated in the progression of <a href="https://knowablemagazine.org/content/article/health-disease/2024/whats-next-in-the-ozempic-era">obesity</a> and type 2 diabetes. These and other metabolic disorders generate a troublesome immune response—inflammation—that worsens metabolism still further. Metabolic disease, in other words, is inflammatory disease.</p>
+<p>Scientists have also observed a metabolic influence of worms in people who became naturally infected with the parasites or were purposely seeded with worms in clinical trials. While the physiology isn’t fully understood, <a href="https://www.annualreviews.org/content/journals/10.1146/annurev-nutr-061121-100742">the worms seem to dampen inflammation</a>, as discussed in the 2024 <em>Annual Review of Nutrition</em>.</p>
+<p>“We’re never going to cure or treat metabolic disease with worm infections,” says Guigas. They cause unpleasant side effects like nausea, and it would be impractical to dose millions of people with parasites. But worms can be valuable tools for scientists to understand the feedback between inflammation and metabolism. The findings could inspire more traditional, less ick-inducing treatments.</p>
+<p>The worms we’re talking about <a href="https://www.who.int/news-room/fact-sheets/detail/soil-transmitted-helminth-infections">are helminths</a> such as <a href="https://www.ncbi.nlm.nih.gov/books/NBK8282/">flukes and roundworms</a>.While they’ve largely been eliminated from developed nations, an estimated 1.5 billion people worldwide carry them. They can be dangerous in high numbers, and cause symptoms such as diarrhea and malnutrition in those at high risk, including children and immunocompromised individuals, and during pregnancy.</p>
+<p>But for most people, infection with a few worms is pretty benign. “Throughout human evolution, I think, there’s been this nice sort of truce,” says Paul Giacomin, an immunologist at James Cook University in Cairns, Australia. As part of that detente, he says, helminths evolved molecules that tell the human immune system, “I’m not here, don’t worry about me.” In turn, people might have evolved to depend a bit on worms to temper inflammation.</p>
+<p><img alt="" src="../images/worm-breaker.png" /></p>
+<p><strong>THE WORMS’ GOOD TURNS:</strong> Blood flukes like <em>Schistosoma mansoni</em> are another type of worm being investigated for their metabolism-regulating properties. <em>Image by Waisberg / Wikipedia.</em></p>
+<p>Today, metabolic disease is a massive global problem, with obesity affecting an estimated <a href="https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight">890 million people</a>. Some 580 million* have <a href="https://diabetesatlas.org/resources/idf-diabetes-atlas-2025/">type 2 diabetes</a>, which arises when the hormone insulin, which controls blood sugar levels, is in short supply or the body’s cells <a href="https://www.mayoclinic.org/diseases-conditions/type-2-diabetes/symptoms-causes/syc-20351193">become insensitive</a> to it.</p>
+<p>Links between metabolic disease and worm infection emerged from research on human populations. Studies in Australia, Turkey, Brazil, China, India, and Indonesia showed that people with metabolic conditions such as diabetes were <a href="https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0000707">less likely to have helminth infections</a>, and <a href="https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0008464">vice versa</a>. “This observation is quite strong,” says Ari Molofsky, an immunologist at the University of California, San Francisco.</p>
+<p>Going a step further, scientists observed what happened when they <a href="https://www.sciencedirect.com/science/article/pii/S0168822717302152">provided deworming treatments.</a> “The overwhelming majority of the studies showed that deworming worsens your metabolic health,” says Giacomin.</p>
+<p>Scientists looked to lab mice for additional clues. Molofsky and colleagues, in 2011, reported that when they infected mice on high-fat food with the gut worm <em>Nippostrongylus brasiliensis</em>, the infection <a href="https://www.science.org/doi/full/10.1126/science.1201475">improved blood sugar control</a>. Similarly, in Guigas’ study, published in 2015, the worms—blood flukes called <em>Schistosoma mansoni—</em>improved not just weight, but also blood sugar processing. And the worms needn’t be alive: Even molecules collected from crushed worm eggs <a href="https://faseb.onlinelibrary.wiley.com/doi/abs/10.1096/fj.14-266239">improved metabolism</a>.</p>
+<blockquote>
+<p>“The parasitic worms are real masters at controlling inflammation.”</p>
+</blockquote>
+<p>The going hypothesis is that <a href="https://knowablemagazine.org/content/article/health-disease/2021/what-does-mean-have-prediabetes">metabolic problems</a> kick off a vicious immunometabolic cycle. First, Guigas says, damaged cells in metabolic organs cry for help, releasing molecular signals that call in immune cells. When the immune cells arrive, they morph into forms that promote a type of inflammation called Th1. Th1 responses are good at combating viruses, but they’re the wrong choice here. Th1 can aggravate metabolic problems by impairing insulin manufacture, altering insulin signaling, and amplifying insulin resistance.</p>
+<p>Thus, instead of helping, the immune cells cause further stress in the metabolic tissues. So the tissues call in more immune cells—and the cycle repeats.</p>
+<p>Worms seem to break the cycle. In great part, that’s probably because their “I’m not here” message causes a different kind of immune response, Th2, that dampens the Th1 reaction and re-normalizes the system. Other mechanisms might also be at work: Worms might reduce appetite; it’s known they can alter <a href="https://knowablemagazine.org/content/article/living-world/2017/getting-know-gut-microbiome">gut microbes</a>; and Guigas suspects they can also <a href="https://faseb.onlinelibrary.wiley.com/doi/full/10.1096/fj.202001973R">manipulate creatures’ metabolisms</a> via non-immune pathways.</p>
+<p>“The parasitic worms are real masters at controlling inflammation,” says Giacomin, who coauthored an article on <a href="http://arjournals.annualreviews.org/eprint/MMXGKRXAJ8TNWKQV827W/full/10.1146/annurev-immunol-093019-122827">helminths and immunity</a> in the 2021 <em>Annual Review of Immunology</em>. Thus, scientists interested in controlling immunometabolic disease might take cues from these wriggly little metabolic masterminds. In fact, researchers have already tested helminths to control inflammation <a href="https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2020.01821/full">in autoimmune conditions</a> such as inflammatory bowel disease.</p>
+<p>The accumulating evidence linking worms to metabolic benefits in animals and people inspired Giacomin and colleagues to conduct a trial of their own. Commencing in 2018, they decided to try the hookworm <em>Necator americanus</em> in 27 obese people who had insulin resistance, putting them at risk for type 2 diabetes. The researchers applied worm larvae in patches on the subjects’ arms; after passing through the skin, the worms would travel through the blood stream, to the lungs, and then to the small intestine. An additional 13 participants were assigned to placebo patches with Tabasco sauce to mimic the itch of entering worms.</p>
+<p><em>N. americanus</em> is a <a href="https://www.cdc.gov/dpdx/hookworm/index.html">common cause of hookworm infections</a> across much of the world. While most cases are asymptomatic, the time when the worms are attaching to the intestinal wall can cause symptoms like nausea and low iron levels, especially if there are a lot of worms. So the main goal was to determine if the treatment was safe, trying doses of 20 or 40 worms. Many subjects suffered short-term unpleasantness such as bloating or diarrhea as they adjusted to their new intestinal tagalongs, but overall, most <a href="https://www.nature.com/articles/s41467-023-40263-4">did fine</a>.</p>
+<p>After 12 months, the people who got hookworms had lower insulin resistance and reduced fasting blood sugar levels. After two years, those who received 20 worms had lost an average of 11 pounds—though not all individuals lost weight, and some gained.</p>
+<p>“It was quite convincing that the worms were having some sort of beneficial effect,” says Giacomin. The subjects were convinced too: When the study was over, the researchers offered deworming, but most participants elected to keep their worms.</p>
+<p>Giacomin and Guigas hope to identify worm components or invent worm-inspired molecules to produce similar effects without whole parasites. Giacomin cofounded a company, Macrobiome Therapeutics in Cairns, to develop hookworm molecules into treatments. Such medications might be based on the wriggly parasites, but they’d be an easier pill to swallow. <img alt="" src="../images/nautilus-favicon-14_1133.png" /></p>
+<p><em>Lead art: Liz Greene; with images by Ana-Marija Mrkic and Rin Green / Shutterstock</em></p>
+<p><em>*Correction: As originally published, this article erroneously stated that obesity affects an estimated 890 million people and that another 580 million have type 2 diabetes. In fact, the populations with obesity and the populations with type 2 diabetes are overlapping—so the word “another” has been removed.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

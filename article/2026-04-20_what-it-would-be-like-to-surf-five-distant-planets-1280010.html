@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What It Would Be Like to Surf Five Distant Planets | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What It Would Be Like to Surf Five Distant Planets</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-20
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-YDNW</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The waves on Earth are pretty crowded these days. Surfing has gotten so popular that shredding the gnar has almost become a contact sport in many parts of the world. It takes a lot of work to find a quiet break where you can carve up a swell with just a handful of your favorite surf homies and a pod of dolphins.  </p>
+<p>Perhaps it’s time to look to the stars for your next surf destination?</p>
+<p>The number of planets known to host liquid lakes and oceans, past or present, is growing, and where liquid flows, waves follow. But what kinds of waves you’ll find on these distant planets varies dramatically, ranging from lazy ankle biters in a sea of lava to 16-foot heavies in a liquid methane lake, according to a new <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2025JE009490">model</a> developed by scientists from MIT and the Woods Hole Oceanographic Institute, which they’ve aptly named “PlanetWaves.” It’s the first time waves have been simulated for such extreme planetary environments.  </p>
+<p>On Earth, waves form as wind drags across bodies of water, pushing unevenly on their surfaces. As the waves lengthen, and the distance between crests grows, the waves are increasingly driven by the force of gravity rather than by surface tension. Once gravity takes over, the waves can grow with the wind. On faraway planets, the size of the waves would depend not only on the strength of gravity and the speed and direction of the wind, but the density of the atmosphere, the viscosity of the liquid in the oceans and lakes, as well as the depth of the bed. All these factors were fed into the PlanetWaves model.</p>
+<p>Note that to actually surf these waves, they would need to break in shallow coastal waters in a clean, sustained way, something the PlanetWaves model does not directly address.* But with science as our tour guide, and creative license as our faithful companion, let’s take a fictional surfing safari through the cosmos.</p>
+<p><strong>Read more: “<a href="https://nautil.us/space-travel-for-everyone-the-intergalactic-travel-bureau-234464">Space Travel for Everyone: The Intergalactic Travel Bureau</a>”</strong></p>
+<p><strong>1. Titan: Ontario Lacus</strong></p>
+<p><img alt="" src="../images/titan_c88c27.png" /></p>
+<p>Titan. <em>Credit: NASA</em>.</p>
+<p>Surfing on Titan would likely be a surreal, slow-motion, and tenebrous experience. Saturn’s largest moon is home to several low-density liquid methane lakes. Ontario Lacus is the largest of these, on Titan’s southern hemisphere. With a light breeze of 1.5 miles per hour, ripples would just begin to form on the surface, the PlanetWaves model suggests. But the waves would rear up to 16.4 feet in 11 mile per hour winds, making for a pretty radical, if blustery, session.  </p>
+<p>On Earth, over 10 feet is generally expert-level, but given that Titan has only 14 percent of Earth’s gravity and a thick nitrogen-rich atmosphere, the waves would roll in like molasses, taking much longer to break. That would theoretically give even non-experts plenty of time to tune in to the rhythm and perfect pop-ups and cutbacks without getting crushed by the weight of a collapsing wall of liquid. You probably wouldn’t have to worry about getting squished by Titan’s atmosphere, either. It’s dense like that of Venus, but only 1.5 times that of Earth near sea level, so it would be noticeably thicker but likely not dangerous. And you could probably ditch the sunscreen: Titan only gets about 1 percent as much sunlight as Earth. Surfing there would be like surfing in bright moonlight on Earth. Unfortunately, you might also turn to ice as brittle as granite. Average surface temperatures on Titan sit at around -294 degrees Fahrenheit.</p>
+<p><strong>2. Mars: Jezero Crater Lake</strong></p>
+<p><img alt="" src="../images/mars_600b63.png" /></p>
+<p>Mars. <em>Credit: NASA/JPL/MSSS</em>.</p>
+<p>To surf on Mars, you would not only need to travel up to 249 million miles into space, you’d also have to time travel to the distant past. Current atmospheric pressure and surface temperatures are too low to allow liquid water to flow consistently on Mars. It would either freeze or evaporate. But long ago the planet was likely covered in crater lakes, like Jezero Crater Lake. Around 3 billion years ago, turbid water would have coursed through this lake and river delta on the edge of Isidis Planitia, and in places the lake floor might have reached a depth of 32 feet.  </p>
+<p>Let’s say an easterly 23 mile per hour wind whipped up and blew for 10 hours straight. Under these stormy conditions, the waves would bump along at a gentle 1.6 feet near the east coast, but they’d be firing on the west coast of the lake, reaching heights of around 5 feet, according to the PlanetWaves model. In other words, longboarders might find something to ride on the east coast, but shortboarders would want to head to the west.</p>
+<p>Like on Titan, the Mars of 3 billion years ago featured low gravity, which would surely make aerial moves a snap. You could potentially achieve higher heights and more acrobatics. And like on Titan, the waves would roll slowly, marching along like a clan of elephants, giving you plenty of time to carve up and down the face.</p>
+<p><strong>Read more: “<a href="https://nautil.us/visit-the-7-most-extreme-planets-in-the-universe-1231947">Visit the 7 Most Extreme Planets in the Universe</a>”</strong></p>
+<p><strong>3. Kepler 1649-b</strong></p>
+<p><img alt="" src="../images/kepler_7b56cc.png" /></p>
+<p>Kepler 1649-b. <em>Credit: NASA.</em></p>
+<p>To surf on Kepler 1649-b, you’ll need to travel 219 light-years into the cosmos, and then make your way to a hypothetical ocean made of sulfuric acid. Aside from the fact that sulfuric acid can give you third-degree burns and permanently scar your skin, it also has much higher surface tension and liquid density than water, which would make it more resistant to wave formation. Winds would need to reach 12 miles per hour before any ruffles could form on the surface. But above this threshold, waves could grow to heights comparable to those on Earth for a given wind speed, according to the PlanetWaves model. That’s because in many respects, Kepler 1649-b is like Earth: The gravity is similar, as is the atmospheric pressure. (The planet is also Earth-sized.)  </p>
+<p>But be prepared to bake. Beyond the obvious drawbacks of surfing in acid, there’s another downside to this surf destination: Kepler 1649-b is thought to have a runaway greenhouse atmosphere. And so, it gets scorchingly hot—roughly 500 degrees Fahrenheit.</p>
+<p><strong>4.LHS 1140-b</strong></p>
+<p><img alt="" src="../images/lhs_16cb9a.png" /></p>
+<p>LHS 1140 b. <em>Credit: NASA.</em></p>
+<p>What a relief: Water! Just a short 49 light-years from Earth, LHS 1140-b may be <a href="https://science.nasa.gov/exoplanet-catalog/lhs-1140-b/">covered</a> in a massive ocean. Because this ocean is thought to be composed of water, with surface tension similar to that of the oceans on Earth, the waves can get started with just a light nudge from the wind: around 6 miles per hour. Gravity is much higher, however—about 2.4 to 3.4 times that of Earth—which means waves have a tougher time reaching massive heights before collapsing under their own weight.</p>
+<p>But who knows, you might even meet an extraterrestrial surfer here. Because of its thick nitrogen-rich atmosphere, it’s considered one of the best targets in the search for extraterrestrial life. It’s also considered tidally locked, meaning one side always faces its star, while the other side is permanently dark and frozen. Surfing and snowboarding in one trip?</p>
+<p><strong>5. 55 Cancri-e</strong></p>
+<p><img alt="" src="../images/cancrie_0d4afa.png" /></p>
+<p>55 Cancri e. <em>Credit: NASA.</em></p>
+<p>The final stop on this surfing tour is only for the extreme athlete with extremely humble ambitions. You would have to be able to withstand hurricane-force winds and yet satisfy yourself with puddle jumpers. Wavelets only form on this lava world’s ocean of dense liquid rock at wind speeds of above 83 miles per hour. Beyond that, wave size is minimized by the planet’s hefty gravity, which is more than twice that of Earth. It’s a tidally locked hellscape, with dayside temperatures of more than 4,000 degrees Fahrenheit. So don’t forget your sun hat.</p>
+<p>Or maybe it’s best to just brave the crowds at the surf breaks on Earth? <img alt="" src="../images/nautilus-favicon-14_173.png" /></p>
+<p>*<strong>As waves grow, they become steeper up to a geometric limit, at which point they crest and tumble forward. But waves that break in open water on Earth typically form whitecaps that are too chaotic to surf. When waves enter shallow water, they steepen rapidly, and under the right conditions of wind, swell direction and seafloor shape, can produce a clean surfable face.</strong></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Trioyoayo / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

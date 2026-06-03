@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunting For the Grandma of All Eukaryotes | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Hunting For the Grandma of All Eukaryotes</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-11
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-E1R9</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 2008, I found myself sitting at the bottom of the ocean, in the Sea of Cortez in Mexico, more than a mile deep, in the <em>Alvin</em> submersible. The very vehicle that was used to discover the first hydrothermal vent, the <em>Alvin</em> is the only human-occupied deep submergence vehicle in the United States scientific fleet—it was also used to discover the wreck of the <em>Titanic</em>—and it handles extreme pressure with grace. At the time of my dive, <em>Alvin</em> could’ve plunged to twice the depth of our mission without a problem. Due to recent upgrades, it can now go even a mile deeper than that.</p>
+<p>After working our way through loads of checklists and shutting the hatch, we were yanked off the ship’s deck by the A-frame and then nestled into the water. I sat cross-legged, but blissfully upright, in a sphere with two-inch-thick titanium walls, mere inches from the pilot, Sean Kelley, and my advisor, Andreas Teske, each with our own porthole.</p>
+<p>The bioluminescent lights were stunning as we dropped like a stone through a mile of seawater. When we released ballast and the seafloor came into view, I felt like I had gone to another world. Water shimmered all around us as the heat from the hydrothermal vents rose from the seafloor. I pressed my face close to the acrylic porthole but tried not to touch it. The pilot in charge of keeping the portholes pristine, Dave Walter, had warned me not to bring it back to the surface smudged. On the other side of the porthole was a seething mass of gigantic worms. Each worm was roughly as tall as me with a white body the diameter of a garden hose and a bright red head like a feather duster. The worms radiated from every hard surface in chunky bouquets. I knew that I was one of only a few hundred people who have ever seen worms like these up close, so I inched my greasy nose closer to Dave’s precious acrylic window.</p>
+<blockquote>
+<p>These cells were only about as wide as a wavelength of blue light.</p>
+</blockquote>
+<p>My job was to make sure we completed our scientific objectives, documenting our work with written notes and video from <em>Alvin</em>’s external cameras. In my spare moments, I filmed the fantastic worms as they sipped chemicals from the scalding fluids. But these animals don’t use the chemicals directly. They funnel them to bacteria that live inside their bodies and these bacteria turn the chemicals into food for the worm. We humans often take probiotic supplements to keep our gut microbes healthy. These giant worms, known as Riftia, take this notion to the extreme. Over the course of evolution, they cast aside their mouths, stomachs, and butts so they could depend on the microbes for everything. Now they just have a special organ called a trophosome packed with sulfur-oxidizing-microbes.</p>
+<p>I was not, however, at the bottom of the sea to study the worms, as cool as they were. No, I was hoping to catch something much older—something stretching back to the origin of multicellular life itself. When I completed the dive and returned to the lab in Chapel Hill, North Carolina, with the hydrothermal vent samples in hand, I was stunned by what I eventually found in them. I pulled out DNA, sequenced it, and immediately encountered a dilemma. As I hammered away on my computer, trying to identify these sequences based on their similarity to known DNA sequences, one set of sequences refused to fit nicely into any category.</p>
+<p>Try as I might, I could not make a phylogenetic tree that placed these DNA sequences reliably into one of the archaea, bacteria, or eukaryotes. At the time I was doing this work, all known life on Earth fell into one of these three groups, so my first thought was that I was a terrible scientist, and I was screwing up the algorithm somehow. Instead, it turned out that I had stumbled onto an organism much stranger than I had expected.</p>
+<p>I started combing the scientific literature to see if other people had found these strange DNA sequences, too. They had been found in other deep-sea hydrothermal vents and other subsurface locations, but because this microbial group was uncultured, it did not have a proper name. Costantino Vetriani at Rutgers University named it Marine Benthic Group B (MGB-B). Fumio Inagaki at JAMSTEC named it the Deep-Sea Archaeal Group. Ken Takai at JAMSTEC named it the Marine Hydrothermal Vent Group. Katrin Knittel at the Max Planck Institute for Marine Microbiology in Germany decided to try and take its picture.</p>
+<p><img alt="" src="../images/Llyod_BREAKER-1.png" /></p>
+<p><strong>FIREPOWER:</strong> Scientistsnamed this recently discovered organism <em>Prometheoarchaeum syntrophicum</em>, after Prometheus, the Greek god who forged humans out of mud and gave them fire. It’s a fitting name if the mysterious creature is indeed the progenitor of all eukaryotic life and gave us mitochondria, which provide fuel to all living cells. <em>Credit: Chhandama / Wikimedia Commons.</em></p>
+<p>Taking a microbe’s picture is harder than it sounds. Sure, if you have a nicely growing culture, you can smear it across a glass slide, stain it, stick it under a microscope, and snap a picture. But if you’re trying to discover a new mysterious group of microbes at the bottom of the ocean that refuse to grow in a petri dish, the task is more difficult. When you smear fresh mud across a microscope slide, the cell stain does not distinguish one type of microbe from another—a significant problem since there are <em>billions</em> of different types of microbes in each gram of sediment.</p>
+<p>To overcome this obstacle, Katrin went to a computer and lined up the 16S rRNA gene sequences from this strange MBG-B/DSAG/MHVG against those of all other bacteria and archaea known at the time and picked out an 18-nucleotide section that only matched this one group. She then attached a fluorescent probe to these little 18-nucleotide stretches of DNA and then swished it around in the seafloor muck. Somehow these bits of DNA probes found their targets: They glommed on to the MBG-B/DSAG/MHVG cells and made them glow, giving Katrin and her colleagues the first glimpses of these mysterious beings.</p>
+<p>As the scientists peered into the microscope, the first thing they noticed was that these cells were extremely small; they were only about as wide as the wavelength of blue light (550 nanometers). But the most important thing about them, the thing that may be extremely consequential for our own existence, is that they formed globby aggregates with other cells. In any other type of microbe, the tendency to form aggregates is not earth-shattering. But these were not normal microbes. These were not-bacteria, not-quite-archaea, and not-quite-eukaryotes. They were on the edge of the known tree of life. To understand why this is so important—why the clumping together of these specific cells made pulses race—you need to know a bit about the very deep history of our branch on the tree of life, the eukaryotes.</p>
+<p>One of the defining features of eukaryotes is that we have microscopic organelles inside our cells called mitochondria. These mitochondria take electron-rich food molecules (harvested by our guts and passed along through our blood) and react them with oxygen (brought by our blood from our lungs) to generate ATP, the primary source of energy for all living cells. But our mitochondria are not really “us”—they are ancient bacteria that for mysterious reasons ended up inside an early eukaryotic cell. Then they stayed so long they became permanent residents. We couldn’t do anything we like to do without our little mitochondrial interlopers. Listen to music, form a thought, read a book, or produce body heat—they help us do it all. And the same is true for every animal on the planet.</p>
+<blockquote>
+<p>It’s hard to identify our “great-grandma” by just one gene and a handful of pictures.</p>
+</blockquote>
+<p>How did this association start between early eukaryotes and the bacteria that later became mitochondria? Fortunately, we have tons of data about the ancient Alpha-proteobacteria that turned into mitochondria. <em>Un</em>fortunately, we know almost nothing about the ancient cell that was their original host.</p>
+<p>As I sat in my windowless room as a graduate student just back from the Sea of Cortez, trying unsuccessfully to force computer algorithms to tell me what the heck these microbes were, I may have been looking at some of the first-known direct descendants of that host that eventually evolved into humans. This is why people were so gob-smacked by these boringly named MBG-B/DSAG/MHVG microbes. What if they retained some of the properties of that first step toward eukaryotic life on Earth?</p>
+<p>This is also why it was so enticing when Katrin Knittel showed us that these microbes form little clusters with other cells. Maybe these microbes’ penchant for huddling together led to some of them forming a relationship with Alphaproteo-bacteria and starting along the pathway to becoming what we are today. But it’s hard to identify our “great-grandma” by just one gene and a handful of pictures. Unfortunately, that’s literally all we had to go on for almost two decades.</p>
+<p>Then, in 2015, Anja Spang and Thijs Ettema at Uppsala University in Sweden made the first whole genomes of these mysterious organisms. To the gratitude of scientists like myself, they gave them a name that was not an acronym: Lokiarchaeota, after the hydrothermal vent called Loki’s Castle (a nod to the Norse god Loki) where they were found. When these researchers lined Lokiarchaeota’s genome up against those of other organisms, they found that they were surprisingly close to our lineage, the eukaryotes. The fact that they are so closely related to us suggests that they may truly be direct descendants of our ancient progenitor cells.</p>
+<p>These researchers also found some things in the genome that had never been seen in a prokaryote before. One of the key features that separates eukaryotes (humans, plants, fungi, and so on) and prokaryotes (bacteria and archaea) is that we eukaryotes can move things around on little conveyor belts inside our cells with special proteins. Lokiarchaeota have genes that encode those proteins, which is another clue that they belong on our team. The researchers also found genes suggesting they might have passed hydrogen back and forth with an endosymbiont (maybe a proto-mitochondria), as well as external structures that would help them hang on to their Alphaproteobacterial friend.</p>
+<p>To learn more about these promising creatures and their internal structures, scientists needed better images of them. But the only way to do this would be to grow Lokiarchaeota in a culture. Despite all the cultures people had made from hydrothermal vents, Lokiarchaeota had never been among them.</p>
+<p>The effort to culture Lokiarchaeota started way back in 2006. Hiroyuki Imachi and his colleagues at the JAMSTEC decided to try a new approach to growing them. They built a special closet-sized chamber threaded with little pieces of sterilized kitchen sponges hanging along a nylon string. They soaked these sponges in fluids from a deep-sea hydrothermal vent off the coast of Japan. Then they dripped growth media slowly onto the top sponge. Once the first sponge was saturated, the liquid dripped excruciatingly slowly down to the next sponge and so on. Then they waited, patiently. Fourteen years later, in 2020, Hiroyuki and his coauthors reported the first culture of Lokiarchaeota,which they were able to photograph in high resolution.</p>
+<p>The results delivered the kind of storybook ending that scientists dream about: It turns out that there are large appendages protruding out of each little Lokiarchaeota cell. If you use your imagination, you can just imagine these cells using their armlike thingies to tangle up an Alphaproteobacterial cell, engulf it—and eventually evolve into a human or a giraffe.</p>
+<p>The team named the new organism <em>Prometheoarchaeum syntrophicum</em>, after Prometheus, the Greek god who forged humans out of mud and gave them fire—a fitting name if we guessed right about it being the progenitor of all eukaryotic life and giving us mitochondria, the firepower of life on Earth. <img alt="" src="../images/nautilus-favicon-14_1128.png" /></p>
+<p><em>This article is an excerpt from</em> <a href="https://press.princeton.edu/books/hardcover/9780691236117/intraterrestrials?cq_src=google_ads&amp;cq_cmp=22606612242&amp;cq_con=&amp;cq_term=&amp;cq_med=pla_with_promotion&amp;cq_plac=&amp;cq_net=x&amp;cq_pos=&amp;cq_plt=gp&amp;utm_term=&amp;utm_campaign=Wisdom+Series+Sales-Performance+Max-19&amp;utm_source=adwords&amp;utm_medium=ppc&amp;hsa_acc=3913368323&amp;hsa_cam=22606612242&amp;hsa_grp=&amp;hsa_ad=&amp;hsa_src=x&amp;hsa_tgt=&amp;hsa_kw=&amp;hsa_mt=&amp;hsa_net=adwords&amp;hsa_ver=3&amp;gad_source=1&amp;gad_campaignid=22606612689&amp;gbraid=0AAAAAD3QSb0qDtfV7RWDx5K2TB4IPKP7K&amp;gclid=Cj0KCQjwjJrCBhCXARIsAI5x66XlRKr0XmF_aP6T2QnmosONsqKLpk-kwcgbzYhOc_2vdJO_NtVnwfAaAm1MEALw_wcB">Intraterrestrials: Discovering the Strangest Life on Earth</a><em>, copyright 2025, published by Princeton University Press and reprinted here by permission.</em></p>
+<p><em>Lead image: Gallwis / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

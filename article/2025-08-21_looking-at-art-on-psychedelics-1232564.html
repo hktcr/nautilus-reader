@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looking at Art on Psychedelics | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Looking at Art on Psychedelics</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GLX1</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>How do psychedelics change what we see? Many scientists have tried to <a href="https://nautil.us/out-of-your-head-791745/">answer this question</a> by pairing large-scale brain scans with self-reports from tripping study participants. But few people have looked into the mediators of this realm: the eyes.</p>
+<p>So a team of <a href="https://nautil.us/why-scientists-need-to-get-high-305830/">researchers set out to discover</a>: Where does the gaze go on psychedelics?</p>
+<p>To do that, they went to people’s homes with eye-tracking equipment and pills of dried psychedelic mushrooms (from <em>Psilocybe cubensis</em>). Then they showed people 30 different paintings while they tripped—and watched what happened.</p>
+<p>The study participants, of course, had volunteered for the study and been evaluated first. (They’d all taken mushroom psilocybin at least twice before—and got two different study visits: one on a very low-dose, as an “active” control, and another on a high-dose as the experimental condition.)</p>
+<blockquote>
+<p>“What a labyrinth of endlessly significant complexity!”</p>
+</blockquote>
+<p>The artwork for the study was not your usual psychedelic aesthetic fare. (Not a fractal in sight!) One painting, <a href="https://www.nationalgallery.org.uk/paintings/jean-simeon-chardin-the-young-schoolmistress"><em>The Young Schoolmistress</em></a>, by Jean-Siméon Chardin, was painted in the 1730s, and shows in muted rococo style, a quiet, classical moment of instruction. Another, <a href="https://www.guggenheim.org/artwork/300"><em>Abstract Speed + Sound</em></a> by Giocomo Balla from the first half of the 1910s is a Futurist painting that translates the experience of seeing and hearing a new car, through oil paint, into geometric shapes. The rest of the 30 works ranged in date from the 1400s to the mid 20th century.</p>
+<p>What happened when the scientists analyzed the data from the eye-tracking experiments was not what they expected. One of the leading theories about these sorts of psychedelics—known as serotonergic psychedelics, which impact serotonin receptors that can alter perception—is that they work, in part, by relaxing expectations, allowing people to break free from standard ways of looking at things. The scientists presumed this would result in more chaotic, wild visual roving around the artworks.</p>
+<p>The “active control” low-dose psilocybin showed people looked around paintings about as expected, for example, focusing on the faces of the two individuals in <em>The Young Schoolmistress</em> painting as well as the relation of the two figures.</p>
+<p>But on the high-dose of psilocybin, people’s eyes tended to wander around less rather than more—instead locking in even more to focal details, such as the faces in that painting. This was equally the case in a more visually scattered painting, like <em>Abstract Speed + Sound</em>: People’s visual focus really zeroed in on the most central part of the painting, rather than dancing around it more widely (as they did on the low-dose control).</p>
+<p><img alt="" src="../images/p3g3R6Mo-Courage_BREAKER.png" /></p>
+<p><strong>THE EYES HAVE IT</strong>: Using eye-tracking technology, scientists studied how people looked at paintings while on high doses of psilocybin (left column) versus a very low, active-control dose (right column). Averaging the data and displaying it with heat maps over the paintings (top: <em>The Young Schoolmistress</em>; bottom: <em>Abstract Speed + Sound</em>) reveals that people on the psychedelic tend to focus much more intensely on smaller areas. <em>Image from Muller, S.,</em> et al. <em>(2025).</em></p>
+<p>The results might have been a surprise based on scientific literature. But they might not be a surprise based on experience. <a href="https://nautil.us/my-3-greatest-revelations-9-511700/">People on psychedelics</a> often report fixation on visual details of the smallest sort, usually passed over by the day-to-day perceiving mind. Or as the writer and philosopher Aldous Huxley described in his 1954 <em>The Doors of Perception</em>: “I looked down by chance, and went on passionately staring by choice, at my own crossed legs. Those folds in the trousers—what a labyrinth of endlessly significant complexity! And the texture of the grey flannel—how rich, how deeply, mysteriously sumptuous!” (Credit to the study authors for pulling this quote.)</p>
+<p>Although psychedelics seemed to increase participants’ focus on parts of the paintings as well as self-reported feelings of flow, the drugs did not seem to make people <em>like</em> the paintings any more than they did at the very low-dose baseline.</p>
+<p>Curious to know more? The study authors lay it all out in <a href="https://www.nature.com/articles/s41598-025-10206-8">their paper</a>, which was published this summer in <em>Scientific Reports</em>, as well as in the <a href="https://static-content.springer.com/esm/art%3A10.1038%2Fs41598-025-10206-8/MediaObjects/41598_2025_10206_MOESM1_ESM.pdf">supplementary material</a>. But if you want a quick rundown of how the experiment went down, here it is:</p>
+<p>The research team met each person at a home of the participant’s choosing on two different days, a month apart. With them each time the researchers brought their eye-tracking gear, a monitor to display the artworks, and a capsule of either 0.5 grams of dried psychedelic mushrooms (acting as a sort of baseline control) or 3 grams. Neither the participants nor the research team knew at the time which dose a participant had received.</p>
+<p>About an hour after taking the pill, participants were shown the famous—but not too famous—works of art on the monitor in a random order, for 30 seconds each. The eye-tracking equipment captured where people’s eyes moved and where they rested. Compiling the data and averaging it, the researchers could create a heat map to see how people’s visual engagement changed with the higher dose. They were also asked to describe the intensity of their perceptions—things like: “Edges seem warped,” “I see geometric patterns,” “My sense of time and space is distorted.”</p>
+<p>As a caveat, it was a small study—just 15 people completed all steps of the study, most of whom were male and in their early-to-mid 30s. The researchers acknowledge that this study was “exploratory”—hence the casual testing environments and small group. But it’s an early step in learning how psychedelics shift what we see—and how we look. <img alt="" src="../images/nautilus-favicon-14_1000.png" /></p>
+<p><em>Lead image: Nina_Susik / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Problem with Psychedelic Research | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Problem with Psychedelic Research</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-24
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-UIIZ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>President Trump recently signed an <a href="https://www.whitehouse.gov/presidential-actions/2026/04/accelerating-medical-treatments-for-serious-mental-illness/">executive order</a> to accelerate approval of psychedelic drugs for mental-health conditions, particularly for veterans suffering from PTSD and depression. These potent drugs, which cause hallucinations, are the first new drugs to show real promise for treating mental-health conditions in decades.  </p>
+<p>For the past 30 years, the standard <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8610877/">treatment</a> for depression, for instance, has been a class of drugs called SSRIs—Zoloft, Prozac, and Lexapro—which generally boost levels of the neurotransmitter serotonin in the brain. They help a lot of people, but they don’t work for everyone. They come with a long list of side effects, and depression remains one of the leading causes of disability in the world today.</p>
+<p>So why aren’t psychedelics approved for everyone?</p>
+<p>One of the thorniest obstacles is pretty simple: It’s hard to run a proper clinical trial with these mind-bending drugs. The standard in clinical trials research is the double-blind placebo-controlled trial. Neither the patient nor the researcher knows who got the real medicine. The problem is that between 90 and 95 percent of people can guess whether they’ve gotten a psychedelic in a blinded trial, versus 63 percent with traditional antidepressants.  </p>
+<p>To untangle this knot, a team of scientists recently devised a workaround. Instead of comparing psychedelics against a placebo, they compared them against so-called open label antidepressants, a trial where everyone knows who’s getting what. Across a review of 24 studies, they found that psychedelics were no more effective than open-label antidepressants. They published their <a href="https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2846479">results</a> in <em>JAMA Psychiatry</em>.  </p>
+<p>I spoke with co-author Balázs Sizgeti, a psychedelics researcher at University of California, San Francisco, about what he thinks of Trump’s executive order, whether he still sees value in psychedelic therapy, and how he got into this research.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-psychedelic-scientist-1254733">The Psychedelic Scientist</a>”</strong></p>
+<p><strong>What inspired you to do this review?</strong></p>
+<p>One of the central methodological problems of psychedelic research is this so-called blinding problem—that patients can realize who got the placebo and who got the active drug. This isn’t some small niche problem in the field. It’s something that everybody is talking about.  </p>
+<p>I started to think about doing this study when the famous escitalopram versus psilocybin <a href="https://pubmed.ncbi.nlm.nih.gov/33852780/">study</a> came out a few years ago, a randomized controlled trial from Imperial College of London. They didn’t collect blinding quality data. We were having some chats with colleagues about it. That’s when it hit me that there is one way of doing this comparison: If psychedelic studies are practically always open label—which is the technical term for when patients know what they’re getting—then the fair comparison is with open label antidepressants.</p>
+<p>It’s very simple, but sometimes these simple ideas are the best ones.</p>
+<p><strong>Are psychedelic-assisted therapy and open-label antidepressant treatment an apples-to-apples comparison?</strong></p>
+<p>The ideal study design would be to randomize patients to either type of therapy, but that would require equal blinding, which is impossible at this point. I’m not aware of any systematic differences between the study populations, but bear in mind that often these individual details aren’t documented in detail in these papers. The study populations aren’t completely homogeneous, but that heterogeneity gives the results a bit more of that real-life credibility.  </p>
+<p><strong>Do you think it will be possible to actually blind psychedelic trials at some point?</strong></p>
+<p>I’m doubtful, but I’m not ruling it out. The next generation of psychedelic trials are going to use much more aggressive active placebos. Today, the trials often rely on niacin, or vitamin B12, because this causes noticeable sensations such as skin flush and tingling, but the intensity of the drug experience isn’t comparable to that of psychedelics. Maybe you could use high doses of THC and put some other drugs into that mixture to alter states of consciousness. Maybe that would be sufficiently close to a psychedelic state that it would work as a placebo. We’re going to know a lot more about how well these approaches succeed in a few years. But my hunch is that it’s not going to work because psychedelics have a unique and characteristic effect: the visual distortion. Both with the eyes closed and with the eyes open, you get a geometric pattern formation. I’m not aware of any other drug that can mimic that effect.  </p>
+<p><strong>Do any of the non-classical psychedelics, which also have mind-altering effects, have reliable active placebos?</strong></p>
+<p>With ketamine there’s another drug called midazolam, which is an anesthetic that you can use as an active placebo. In studies that use it as the placebo, the blinding is significantly better than with an inactive placebo.</p>
+<p><strong>You used standard depression scales to determine how well each therapy worked, but do these scales capture other dimensions of psychological well-being thought to improve with psychedelic therapy, like sense of meaning, relationships, and quality of life?</strong></p>
+<p>No, these studies only measured symptoms of depression. Some therapies can have other impacts beyond symptom reductions, in terms of functional improvements. You can be equally depressed but have a better life. And there’s some evidence that psychedelics may be better in those domains. But there’s no validated standard measure of these functional outcomes. We would have been interested in looking at those outcomes, but the data just isn’t there.</p>
+<p><strong>Read more: “<a href="https://nautil.us/what-is-your-brain-doing-on-psychedelics-1242605">What Is Your Brain Doing on Psychedelics?</a>”</strong></p>
+<p><strong>So do your findings suggest we may have been measuring the effectiveness of psychedelic-assisted therapy wrong?</strong></p>
+<p>What scientists aim to measure in clinical trials, and what regulators care about, is the gap between the effects of a particular therapy and the placebo, an inactive treatment that works through expectation. This gap is significantly larger with psychedelics than with antidepressants. One hypothesis is that this is because the participants who get the placebo in psychedelic trials know they haven’t gotten the drug. They don’t get any of the boost that traditionally comes from the placebo effect. In fact, there’s one psychedelic study where patients in the placebo arm got worse. That never happens in medicine. So they may experience a “nocebo” effect, where they’re disappointed, and their negative expectations shape a negative response.  </p>
+<p>Enrolling in these clinical trials is a lot of effort. You need to come to the study site several times and fill out all kinds of forms. And in the psychedelic trials we have this whole preparatory psychotherapy session where we’re telling you that you’re going to have this life-changing mystical experience. We really talk it up. And then finally the day comes. Your spouse or a friend or whoever drives you to the clinic. You take the pill, and it’s a dud. Patients are disappointed, and they often express that to the therapist.  </p>
+<p>It’s clear that there’s a missing placebo response in psychedelic studies, so we want to know why that does happen. It’s not entirely clear, but this hypothesis, that it’s impossible to fake the effects of psychedelics, is something that I’d say the field converges on.</p>
+<p><strong>Does any of this diminish the value of psychedelic therapy for depression?</strong></p>
+<p>No, I wouldn’t say that. We showed that psychedelics aren’t better than open-label traditional antidepressants. That doesn’t mean that they’re not effective. It just means that they’re no more effective than traditional antidepressants when it comes to symptom reduction. Let’s not throw out the baby with the bath water, as they say.  </p>
+<p>I do believe that at the end of the day, psychedelic therapy is an effective treatment. But if you follow the narrative around psychedelic therapy, there was a lot of talk about how it’s this breakthrough medication, and I don’t believe that to be the case. The reason people had that impression is because of this much larger gap between the placebo arm and the real thing. The reality is that patients in the control arm of psychedelic studies are just getting much less well than those in the antidepressant control arm.</p>
+<p><strong>Are there more risks associated with psychedelic-assisted therapy than with antidepressant therapy? I know they’re often not recommended for people with a history of psychosis or a family history of schizophrenia, for instance.</strong></p>
+<p>Right now, in most trials, we’re screening those patients out, so there’s an unclear risk profile when it comes to these cases. But my subjective reading of the data based on the clinical trials is that psychedelics have a more favorable side-effect profile compared to traditional antidepressants. But—and this is a big but—bear in mind that with traditional antidepressants, we have given them to hundreds of thousands of people in clinical trials and primary-care contexts. Millions of people are taking them. With psychedelics, both of those numbers are much smaller.</p>
+<p>The issue is that typically, how a new medication works in real life is different from how it works in clinical trials. For example, with SSRIs, most of the trials run eight to 12 weeks. But in reality, many people take antidepressants for years and years, so a lot of side effects that didn’t show up in clinical trial data do occur in real-life settings.  </p>
+<p>I wouldn’t be surprised if something similar happened with psychedelics. We’re testing them in these highly controlled clinical trials with many safeguards. But once they’re approved, companies are going to have a profit motivation to roll back some of those safeguards to bring down the cost. There’s going to be some excessive prescription probably. And then we will probably learn some new side effects and some new negative outcomes. I don’t know that for sure, but I suspect it will happen. And again, this isn’t unique to psychedelics. It’s just what a drug looks like in clinical trials and how it looks in real life. There’s always a disconnect.</p>
+<p><strong>Read more: “<a href="https://nautil.us/why-scientists-need-to-get-high-305830">Why Scientists Need to Get High</a>”</strong></p>
+<p><strong>What do you think of the executive order from the Trump administration to accelerate and facilitate access to psychedelics like ibogaine for PTSD?</strong></p>
+<p>Overall, I’m positive about it. Even though I’m known as somebody who is critical of psychedelics in the research field overall, I would approve them. The reason is that there’s been basically zero innovation in the depression treatment space in the past 30 to 40 years. Since SSRIs came to the market, we’ve just been twisting those molecules around. Psychedelics are really the only big new players. There are some brain-stimulation techniques, but they’re less scalable. Even if psychedelics aren’t better than traditional antidepressants, they’re another tool in the toolkit of medicine that we can use to help patients. Some patients aren’t going to respond to SSRIs, but will respond to psychedelics.  </p>
+<p>Of course, we need to be careful about how we use them. When I say I’m in favor of approving psychedelics, I don’t mean it in a wild, wild west style. They should be rolled out continuously with careful monitoring of the outcomes and the side effects. But right now, there’s enough data from academic research that I welcome the accelerated approval process.</p>
+<p><strong>What do you think we have to be most wary about with psychedelic research and prescriptions?</strong></p>
+<p>We’re screening out a lot of difficult patients in this trial. People with personality disorders and family history of schizophrenia. I’m not saying that psychedelics could trigger schizophrenia in somebody whose grandmother was a schizophrenic, but we don’t know that yet. We don’t have any data. This is the disconnect between the clinical research and the real-life application of these medications.</p>
+<p><strong>What do you most want to study next?</strong></p>
+<p>I’d like to do a study where we recruit patients with depression, and then we randomize them to either receive ketamine, an SSRI, or psychedelic therapy. For patients who didn’t respond to the option that they’re first randomized into, they get randomized into one of the other two treatment options in a sequential way. I want to find out what is the right order in which to try these treatments.  </p>
+<p>Right now, it looks like psychedelics are going to be approved for treatment-resistant depression. But that means that patients will likely have to go through two trials of SSRIs before getting to psychedelic therapy, because the definition of treatment-resistant depression is that you tried and didn’t respond to two traditional antidepressants. To me that’s just strange. We should also try psychedelics as a first-line treatment option. There’s a lot of debate about treatment-resistant depression in the field. Is it a completely different disorder from regular depression?</p>
+<p><strong>How did you get into studying psychedelics?</strong></p>
+<p>It’s the usual story: I started to go to raves and got really interested in them. I was already like a postdoc researcher in New York at Mount Sinai Hospital, studying metabolic engineering. And then I realized that psychedelics are much more interesting. <img alt="" src="../images/nautilus-favicon-14_153.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: andrei310 / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

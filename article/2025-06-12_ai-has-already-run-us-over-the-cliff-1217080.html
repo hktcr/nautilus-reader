@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Has Already Run Us Over the Cliff - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>AI Has Already Run Us Over the Cliff - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-47I0</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Early in his new book <em>These Strange New Minds</em>, Oxford cognitive neuroscience professor and U.K. Google DeepMind AI researcher Chris Summerfield describes a classic cartoon scene in which Wile E. Coyote has just been led over a cliff by Road Runner, his legs churning for solid ground as he briefly hovers above the canyon below, moments from a catastrophic plunge. “I am writing this book because we have just gone over that cliff,” asserts Summerfield. “The safe ground we have left behind is a world where humans alone generate knowledge.”</p>
+<p>Knowledge is, after all, power. It is what has enabled humans to build gleaming civilizations on Earth, to explore the reaches of our starry solar system, to dream up mind-bending artworks, and to grasp the material, cultural, and political dimensions of our everyday realities. As AIs become increasingly savvy at producing and acting on knowledge, what will they or those who control them do with it? In whose interest will they act, especially if AIs begin cooperating with one another?</p>
+<p>Summerfield is, at least in the immediate future, less worried about the technology itself than about humans’ capacity to understand how it works and to interact with it intelligently. And this is, in part, the purpose of <em>These Strange New Minds</em>: to help readers understand precisely how LLMs work, how they use language, and why the results look so much like human thought and speech. Over the course of the book, he takes us on a tour of the history of AI’s development—from its early philosophical underpinnings to its pop culture inspirations and impacts and explores our shifting ethics as it relates to these new minds.</p>
+<p>Ultimately, Summerfield argues that LLMs are not sentient—at least not in any way humans can understand—that they’re unlikely to take over and destroy the world, but that they may well exacerbate existing problems. After all, AI’s limitations are not that dissimilar from those of the human brain, he says. We spoke with Summerfield about the limitations and risks of a technological revolution that is approaching so rapidly we’ve barely had time to consider it.</p>
+<p><img alt="" src="../images/kSadyOcY-Hilden_BREAKER.png" /></p>
+<p><strong>CLIFFHANGER:</strong>In his new book <em>These Strange New Minds: How AI Learned to Talk and What it Means,</em>cognitive neuroscientistChris Summerfield argues that, like a cartoon Wile E. Coyote, we have all just gone over a cliff in our relationship with AI. “The safe ground we have left behind is a world where humans alone generate knowledge.” <em>Photo by Catalina Renjifo.</em></p>
+<p><strong>You use Wile E Coyote as a metaphor for the “cliff” we’ve run over in regard to AI. How did we get here?</strong></p>
+<p>The technology hasn’t yet outrun our ability to control it, but this is the direction of travel. The metaphor refers to the unknowns associated with a new world in which AI systems can generate new knowledge—the first time an agent other than a human has been able to do this.</p>
+<p><strong>What is the significance of the language in large language models?</strong></p>
+<p>For humans, language is our superpower. Language is the critical cognitive advance that unlocked our ability to cooperate and collaborate and build an advanced civilization. Language allows us to share knowledge with each other, and to create new knowledge by combining ideas: Think of a horse with a horn—oh! A unicorn. So, the fact that AI has learned to talk is a really, really big deal.</p>
+<p><strong>To what extent does AI’s mastery of language give it some of the same super-powers as humans—such as the ability to cooperate and to share and create new knowledge?</strong></p>
+<p>Cooperation requires more than just language—it requires the ability to infer the beliefs and preferences of others, and to adapt to the social world. We haven’t yet extensively tested situations where LLMs interact with each other, to understand what the consequences may be. Their ability to reason, however, gives AI systems the opportunity to create new ideas, by putting existing pieces of knowledge together in novel ways.</p>
+<p><strong>Do LLMs “understand” language or are they just good at acting like it?</strong></p>
+<p>The problem is we don’t have widely agreed definitions for what it means to “understand” something in the first place. Do you “understand” how a combustion engine works? Do you “understand” why World War II happened? We don’t have strong criteria for making hard and fast judgments like this. What we can say, however, is that LLMs’ formal competence in language, including in generating entirely novel utterances, is as good as or better than a human, at least for English and other well-resourced languages.</p>
+<blockquote>
+<p>The technology hasn’t yet outrun our ability to control it, but this is the direction of travel.</p>
+</blockquote>
+<p><strong>In the book you explore assertions that AI has become or will become conscious. How could AI consciousness impact society?</strong></p>
+<p>I honestly don’t think it would affect society at all, because we would never know whether it is conscious or not. When it comes to any agent other than ourselves, consciousness is very much in the eye of the beholder—I can’t experience your subjectivity, but if you display certain behaviors, I will treat you <em>as if</em> you are conscious. We do this with our pets all the time. I expect that as AI becomes more humanlike, people will come to believe that it is conscious, but we won’t ever know for sure whether that is right or not.</p>
+<p><strong>Will AI be a tool, or a new form of person?</strong></p>
+<p>I think it’s more useful to think about AI as a tool, and in particular as a sort of digital service that we can use to make decisions on our behalf. People need to remember that when talking to AI they are not interacting with a person—they are using a service that is provided by a technology company. But if it behaves in humanlike ways, it will definitely be tempting to treat AI like a human. However, I am not convinced that what we need is more humans—we have 8 billion of them already. We need better tools for organizing society, so that we can live together more peacefully, prosperously, and equitably—variables that are in short supply right now.</p>
+<p><strong>Can LLMs “think?”</strong></p>
+<p>LLMs carry out reasoning steps in natural language that resemble those that you and I might make when solving a problem. They can even say these steps to themselves out loud whilst they are reasoning, and—just like for you and me—this improves their chances of finding a good solution. But we haven’t really clearly defined what it means for a human to “think” so there will always be room for some people to claim that what AI systems are doing does not count as “thinking.”</p>
+<p><strong>In the book you push back against the idea that the use of the word “computation” as a metaphor for human thinking is somehow socially oppressive. Why?</strong></p>
+<p>Some people have argued that if we use the metaphor that the brain computes information, we are somehow lowering people to the level of computers, and that this is intrinsically harmful. I agree that it’s important for us to maintain a notion of human “difference”—we have our own concerns, and they should be treasured—but I think the general idea that it’s oppressive to use computation as a metaphor for the brain is a bit silly. It’s just a useful way of thinking about thinking.</p>
+<blockquote>
+<p>People need to remember that when talking to AI they are not interacting with a person.</p>
+</blockquote>
+<p><strong>You discuss the risks posed by AI “autopropaganda.” How would this differ from the digital misinformation we’re facing today?</strong></p>
+<p>Algorithms embedded in content recommendation systems, such as social media platforms, already ensure that we view “autopropaganda”—propaganda for the views we already hold, i.e. that confirms our existing beliefs. If AI became highly personalized, there is a risk that it could behave similarly, only telling you what you want to hear. The difference would be that AI systems can actively engage with you in persuasive dialogue, so the effect risks being much stronger.</p>
+<p><strong>Many people envision a near future where AI solves the looming issues of the day, but as you discuss in the book, this expectation may be misplaced. Why?</strong></p>
+<p>AI is very good at retrieving knowledge and reasoning about formal problems, but many of the issues that we face today require a different sort of skill—the ability to bring people together to cooperate. We have yet to see much evidence that AI is good at this—although there have been some early attempts, including one that I <a href="http://habermas.ai/">led</a> at Deepmind. [A study on whether AI can function as a political mediator.] The ability to solve formal problems, like playing Go at Grandmaster level or solving logic puzzles, does not necessarily equip you for the real world, where things tend to be quite messy. Outcomes are uncertain—stochastic rather than deterministic—and challenges can arise without warning.</p>
+<p><strong>You close the book by exploring some of the potential AI doomsday scenarios. What worries you the most?</strong></p>
+<p>The arrival of AI is likely to exacerbate systemic problems that already exist, such as disruption to the labor market from growing automation, the concentration of capital in the hands of large multinational companies, the spread of mis/disinformation in the information ecosystem, the use of cyber technologies for criminal or destabilizing attacks on critical infrastructure, and the environmental costs of intensive demand for energy, water, and rare earth minerals.</p>
+<p>I am worried about what will happen when AI systems begin to interact with each other. As humans, we are not all that smart on our own. You might think you are smarter than a chimp, but if I stranded you both on a desert island, my money is on the chimp surviving longer. We are good at cooperating, and our intelligence is enabled by our social world. When agents start to interact, they will naturally find modes of acting and communicating that may be misaligned with human values. This is what worries me most! <img alt="" src="../images/nautilus-favicon-14_1125.png" /></p>
+<p><em>Lead image: cybermagician / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

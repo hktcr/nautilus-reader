@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Weird Cooling Effect of Wildfires - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Weird Cooling Effect of Wildfires - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RZSF</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Hardly two months into Canada’s historic wildfire season, the country is already well on its way to one of the most devastating fire seasons on record. The racing flames have <a href="https://www.cbc.ca/news/canada/manitoba/lac-du-bonnet-wildfire-couple-names-1.7536238">claimed two lives</a> and displaced more than 20,000 people in Manitoba alone, with most of the evacuees <a href="https://ictnews.org/news/first-nations-are-in-the-line-of-fire-in-canada/">belonging to the province’s First Nations</a>. Over <a href="https://www.washingtonpost.com/weather/2025/06/10/canada-wildfires-land-burned-maps-smoke/">7.8 million acres</a> have burned, exceeding the average area burned in a year, and forecasters predict the season will extend for at least another <a href="https://theconversation.com/wildfire-season-is-changing-in-canada-posing-even-greater-risks-to-the-nations-communities-and-ecosystems-248323">three months</a>, maybe more. It’s a clear demonstration of how <a href="https://www.climatecentral.org/climate-shift-index-alert/canada-may-2025">climate change has heightened the potential</a> for tremendous blazes to tear through forests and prairies.</p>
+<p>Yet, most dominant climate models have failed to incorporate the rising rates of fire activity recorded in the Earth’s boreal forests. Instead, these models tend to assume that fire activity, and related emissions, would stay steady with levels logged in the late-2010s. In <a href="https://www.pnas.org/doi/10.1073/pnas.2424614122">a paper published</a> in the <em>Proceedings of the National Academy of Sciences</em> in early June, a trio of researchers studied what would happen to climate projections if they ran new models that more accurately represented the severity of fire season in boreal forests over recent years and into the future.</p>
+<p>What they found seems counterintuitive: According to the new models, the smoke from all the wildfires could actually dampen global warming by an estimated 12 percent. Dargan Frierson, atmospheric scientist and a co-author of the recent paper, says he was “expecting the opposite to happen.”</p>
+<blockquote>
+<p>Warming is more than offset by the net cooling effect that the smoke and other aerosols create.</p>
+</blockquote>
+<p>To calculate the impact of increased fire activity on climate change, Frierson and his colleagues leveraged the <a href="https://www.globalfiredata.org/index.html">Global Fire Emissions Database</a>, which catalogs levels of smoke, soot, and CO2 emitted by fires in a given year. They then analyzed the relationship between fire activity, fire-related emissions, and global temperatures between 1997 to 2023 and plugged these variables into existing climate change models.</p>
+<p>“Forest fires have an effect on climate in a lot of ways,” says Frierson. These fires release smoke, carbon dioxide, methane, and all sorts of other pollutants—including sometimes toxic substances. Much of this mixture of emissions has a warming effect on the planet, whether by adding more greenhouse gases to the atmosphere or by darkening the surface of snow and ice, causing it to capture more heat and melt faster.</p>
+<p>But the models Frierson and his colleagues ran found that this warming is more than offset by the net cooling effect that the smoke and other aerosols create when they brighten clouds and prevent some of the sun’s heat from ever reaching the surface. This even manages to keep some of the sea ice in the Arctic from melting; as a result, the ice lasts longer and stays thicker deeper into the summer and fall than it otherwise would, which leads to even more cooling in the winter compared to what most other climate models suggest.</p>
+<p>Still, while Frierson and his team are able to state with some confidence that increased fire activity alone could reduce warming by 12 percent globally and 38 percent in the Arctic, Hamish Gordon, atmospheric scientist at Carnegie-Mellon University, says “the precise numbers are wildly uncertain.” Gordon doesn’t point that out to suggest there’s anything wrong with the paper itself. “I like the study,” he says, but the authors have to make a lot of assumptions and there are a lot of uncertainties inherent to climate modeling, especially when you’re dealing with aerosols like wildfire smoke, which remain <a href="https://grist.org/science/earthcare-to-solve-cloud-climate-mystery/">one of the most challenging things</a> for climate scientists to depict accurately in their models. Aerosols, tiny particles suspended in the atmosphere, behave in complex ways: some scatter light, others absorb heat, a few do both; all while they <a href="https://grist.org/science/how-cleaning-up-shipping-cut-pollution-and-warmed-the-planet/">brighten clouds</a> by multiplying water droplets, sometimes even <a href="https://nautil.us/when-pollution-brings-snow-1131658/">causing spontaneous snowfall</a>.</p>
+<p>Frierson himself even says, “the numbers shouldn’t be taken too seriously at this point.” The paper didn’t aim to determine the precise, definitive effect of increasing wildfires on the global climate. Instead, the researchers wanted to highlight the importance of accurately accounting for these emissions in future climate models, especially as the Intergovernmental Panel on Climate Change prepares <a href="https://www.ipcc.ch/2024/08/02/ipcc-approves-outlines-of-the-first-two-reports-in-the-seventh-assessment-cycle/">the reports in its seventh assessment cycle</a>.</p>
+<p>But even if future analyses reinforce the findings of Frierson and his collaborators and they conclude that an abundance of smoke can have a pronounced cooling effect on the planet and the arctic, that doesn’t mean these fires are somehow benign or benevolent. As a fire ecologist at University of Nevada Reno, Erin Hanan points out: “Changes in fire regime in boreal regions is an ecological and environmental and human health disaster.” <img alt="" src="../images/nautilus-favicon-14_1104.png" /></p>
+<p><em>Lead image: thmphotographs / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

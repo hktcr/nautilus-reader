@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Artist Who Showed How Plants and Insects Relate | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Artist Who Showed How Plants and Insects Relate</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-YDTS</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>From roughly the 15th through the 19th centuries, most European botanical collectors and artists experienced the Americas through seeds and specimens painstakingly brought back from scientific voyages. But <a href="https://nautil.us/the-seeds-that-sowed-a-revolution-234777/">some traveled</a> to encounter plants in their natural habitats. One such artist was Maria Sibylla Merian. Merian was born in Frankfurt, where her stepfather, the still-life artist Jacob Marrel, taught her to paint flowers in watercolor. Alongside this artistic education, Merian developed an enduring interest in <a href="https://nautil.us/why-i-traveled-the-world-hunting-for-mutant-bugs-234968/">entomology</a>. Between 1679 and 1683, she published two volumes on the insect life cycle, the product of years of careful study.</p>
+<p><img alt="" src="../images/wbSRHnQ2-Glick_BREAKER.png" /></p>
+<p><em>Pepper plant with Carolina sphinx moth</em></p>
+<p>By 1665, Merian was living in Amsterdam. Seventeenth-century Holland was a major colonial power, and Amsterdam its wealthy, trading heart. Ships arrived in the city daily, carrying plants and animals from the Americas, Asia, and Africa—cargo that fueled the research of scholars keen to collect and categorize new specimens.</p>
+<p>Merian visited their collections of natural curiosities, and “saw with wonderment the beautiful creatures brought back from the East and West Indies,” she later wrote in her beautifully illustrated book, <em>Metamorphosis Insectorum Surinamensium</em> (<em>The Transformations of the Insects of Suriname</em>).  </p>
+<p>But preserved specimens could not advance Merian’s understanding of insects: She needed to see them in their natural habitat. In 1699, she set sail to Dutch-controlled Suriname, on the northeast coast of South America. In Suriname, Merian studied insects and plants in the garden of her house in Paramaribo, in the sugar plantations of Dutch enslavers, and in rainforests “densely overgrown with thistles and thorn bushes.” Although her primary interest in plants was as food sources for insects, she noted their medicinal and culinary uses and potential as building materials. Other Dutch colonists did not share this approach—they were unable to tell Merian the “name or properties” of a plant growing in her garden and mocked her for “looking for other things than sugar in the country.”</p>
+<p><img alt="" src="../images/Glick_BREAKER-2.png" /></p>
+<p><em>Ripe pineapple with longwing</em></p>
+<p>Instead, Merian relied on the help and knowledge of the Indigenous population of Suriname. Studying the specimens they supplied to her, she described how they used plants as medicine, food, and insect repellents. She also documented the botanical knowledge of enslaved African laborers and the terrible conditions they endured.</p>
+<p><img alt="" src="../images/Glick_BREAKER-3.png" /></p>
+<p><em>Branch of pomelo with green-banded urania moth</em></p>
+<p>But Merian also benefitted from enslaved labor: When embarking on an expedition into the rainforest, she sent her “slaves ahead with axe in hand,” she wrote, to hack a path through the dense undergrowth. After contracting a weakening illness—possibly malaria—Merian returned to Holland in 1701, laden with specimens, field notes and sketches. She worked her research into her book <em>Metamorphosis</em>, which was published in 1705 in Amsterdam. Merian’s hand-colored illustrations showed insects interacting with the plants that sustained them—an innovative approach as flora and fauna were typically illustrated separately.</p>
+<p><img alt="" src="../images/Glick_BREAKER-4.png" /></p>
+<p><em>Pineapple flower with cockroaches</em></p>
+<p>It is easy to imagine the excitement felt by an 18th-century reader leafing through the <em>Metamorphosis</em>. Merian’s delight with the plants she encountered is tangible in her work: in the whirling tendrils of a passionflower, the impossibly bright colors of the banana branch, the waxy shine of the watermelon’s skin and description of how its flesh “melted in the mouth like sugar.”</p>
+<p>Alongside these published illustrations, Merian produced at least two deluxe versions. The set now in the Royal Collection may have been presented to George III, then Prince of Wales, in 1755. Merian’s pioneering depiction of the interconnected relationship between plants and insects had a lasting impact on how others illustrated the natural world. <img alt="" src="../images/nautilus-favicon-14_986.png" /></p>
+<p><em>Extract from</em> Botanicals from the Royal Collection<em>, authored by Alice Alder, assistant curator of prints and drawings at Royal Collection Trust. Available from</em> <a href="http://royalcollectionshop.co.uk"><em>royalcollectionshop.co.uk</em></a> <em>and Royal Collection Trust shops, and all good bookshops.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

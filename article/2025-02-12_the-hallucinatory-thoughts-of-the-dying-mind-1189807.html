@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Language of Delirium | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Language of Delirium</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-RIBG</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>William Brahms spent years researching final utterances of the dying for his anthology of last words, <em>Last Words of Notable People</em>, which was published in 2010. But when he was at the bedside of his dying mother, he realized he had never discussed with his mother what their last words would be. The reality was that she did not say anything witty, profound, grateful, or spiritual.</p>
+<p>“In her case, due to debilitating illness, it was not a clear punctuated statement,” Brahms told me in an email, with evident surprise. “It was more of a slow and fading dialogue.”</p>
+<p>This dissonance between the idealized notion of dying speech, based on people’s expectations and cultural ideals, and the reality of final moments can complicate our understanding of death. And when delirium enters the equation, the gap between expectation and reality widens even further.</p>
+<p>What should we make of people who can speak and yet make no sense?</p>
+<p>“I don’t want to call it a nearly universal feature of the end-of-life experience,” David Wright, a Canadian medical ethnographer, told me, “but as you die, unless you die very suddenly in an instant, your various bodily systems start to work differently until they stop working at all. And that includes the way that you think, and that includes the way that you communicate.”</p>
+<blockquote>
+<p>Despite its prevalence, doctors don’t reliably recognize delirium.</p>
+</blockquote>
+<p>Ancient medical writers distinguished between two types of delirium: <em>phrenitis</em>, the restless variety, and <em>lethargus</em>, an inert, dull state. Modern researchers keep this distinction, describing delirium as either quiet, listless, apathetic, and “pseudo wakeful,” or as a restlessness in which patients are “muttering” and “talkative.”</p>
+<p>Delirium was one of the first medical conditions ever described by Greek and Roman writers almost 2,000 years ago. The Greek philosopher Celsus introduced the word <em>delirium</em> in the second century B.C.; the word came from the Latin <em>delirare</em>, which means to go out of the furrow (<em>lira</em> is Latin for “furrow”). The delirious plow leaves the furrow of sense. A modern person might think that leaving the planned track is a desirable thing, until they familiarize themselves with a single-bladed plow and realize the inconvenience of an errant ox-pulled plow skittering across the field’s surface.</p>
+<p>Despite this pedigree, the exact biological mechanisms behind delirium aren’t well understood, but it appears to stem from neuronal dysfunction, probably due to neurotransmitter fluctuations. Neurons in the brain aren’t dying (which is why sometimes people can recover from delirium) but disconnecting from each other. Basically, delirium is the result of a neurochemical commotion. Now clinicians look for three types of delirium: a restless, hyperactive form, a listless form, and a mix of the two.</p>
+<p>Delirium is very common among the dying, particularly in the later stages, where that lethargic type shows up often. As a diagnosis, it covers a complex of symptoms and isn’t a single thing. Despite its prevalence, doctors don’t reliably recognize delirium. It’s often mistaken for dementia, depression, <a href="https://pubmed.ncbi.nlm.nih.gov/25976839/">or psychosis</a>. In a study of 100 consecutive cases of delirium in a palliative care unit, researchers found that 33 percent of patients were classified with the hypoactive, lethargic form. They had the same impairment in cognitive functioning as patients with other variants, showing similar deficits in orientation, memory, and comprehension <a href="https://pubmed.ncbi.nlm.nih.gov/21677247/">on cognitive test scores</a>. This variegated presentation makes it hard to tell when someone is delirious. Though clinicians want to take it seriously, they don’t have a uniform method for recognizing delirium or dealing with it therapeutically.</p>
+<p>On the other hand, delirium is not just biological and emotional, but social. It has what David Wright, a Canadian medical ethnographer, called a relational dimension, in the sense that any individual’s delirium impacts other people’s perceptions of the relationship. Some find it traumatizing and distressing, others less so. In either case, what seems to help is when delirium is described as a normal part of dying, in the same way that baby babbling is described as a normal feature of language acquisition.</p>
+<blockquote>
+<p>Delirium is often mistaken for dementia, depression, or psychosis.</p>
+</blockquote>
+<p>Some medical staff try to normalize the delirium as part of the natural process of dying, and they encourage family members to enter the hallucinatory world—<a href="https://journals.sagepub.com/doi/10.1177/0269216307081129?icid=int.sj-full-text.similar-articles.4">or at least not to fight it</a>. Many hospices recommend the latter as well: “Do not contradict, explain away, belittle or argue about what the person claims to have seen or heard,” reads a short text that a hospice provides about the dying process. “Just because you cannot see or hear it does not mean it is not real to your loved one. Affirm his or her experience. They are normal and common.”</p>
+<p>To take advantage of the interaction window that remains, you open another window, the one that the dying person wants to operate with. You might respond, “So you say you’re going on a trip. Who do you think will be waiting for you?” Or, “Tell me some nice things you remember about your mother.” Family members might be told that the patient has already undergone a sort of social death; though their body is present, the previous person they were is now gone, so a new relationship is required. So while your father’s brain is the author of some insult, and his body its animator, your father as you knew him isn’t the principal of that offensive utterance.</p>
+<p>Of course, another option is to interpret delirium as a new kind of sense making, as Maggie Callanan and Patricia Kelley’s 1992 book <em>Final Gifts</em> does. Their book proposed that dying people begin using a symbolic language particular to the end of life that must be carefully listened to, written down, and interpreted. “Healthcare professionals and families may assume that what they’re hearing and seeing is confusion . . . unfortunately, dying people are often labeled ‘confused’ without adequate assessment,” Callanan and Kelley wrote. To those authors, the only reality is the special symbolic language of the dying, and the brain-based understandings of delirium diminish those messages or their meanings. (They don’t have a monopoly on this, by the way. Nearly 40 percent of Indian family members said that delirium was the cause of supernatural beliefs, emotional stress, or a failure of religious observance—and <a href="https://www.ajol.info/index.php/ajpsy/article/view/77352">did not have biomedical origins.</a>)</p>
+<p>My speculation is that the interpretive control promoted in <em>Final Gifts</em> reflects a cultural adaptation to dilemmas posed by delirium to a <em>laissez parler</em> approach to language at the end of life. That is, if no one gets a clear model about the language they should produce at the end, except for the vague sense that it should be pithy, poignant, and uniquely reflective of who they were, then it risks ending up delirious and nonsensical (if it exists at all). And if loved ones are directed to attend to all of the utterances, how should the nonsensical ones be interpreted? As if they contain some meaning.</p>
+<p>Meanwhile, other religious practices keep dying people occupied, authoring for them what to utter, chant, or pray. Sharing linguistic agency in this way looks like a wise cultural adjustment to the prevalence of delirium. In those traditions, only the prescribed words matter—everything else becomes noise, harmless and inconsequential. <em><img alt="" src="../images/nautilus-favicon-14_1266.png" /></em>  </p>
+<p><em>This article was adapted with permission from</em> <a href="https://thereader.mitpress.mit.edu/the-hallucinatory-thoughts-of-the-dying-mind/"><em>MIT Press Reader.</em></a></p>
+<p><em>Lead image: Valery Brozhinsky / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

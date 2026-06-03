@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>March of the Mangroves - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>March of the Mangroves - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-VHWS</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>It’s July, a sweaty month in Florida’s most aggressive season, and Rick O’Connor steps into the cold clear water at the kayak and paddleboard launch at Big Lagoon State Park near the coastal city of Pensacola. He steadies his board. Nearby, O’Connor’s 9-year-old grandson waits to push his board into the water. Nearby, grasses stand as tall as the blue heron that wades through them. Birders stand on the boardwalk, pointing out toward the flocks of pelicans that fly by in Vees.</p>
+<p>O’Connor glances down to find his footing, and there it is: a red mangrove. One leaf pokes out of the sprout like a bright green flag announcing new territory, surrounded by towering rushes that are a few feet high.</p>
+<p>“It was just the propagule with one leaf sticking out of it,” O’Connor said, recalling the moment months later. “How I spotted it, I have no idea.” O’Connor is a county marine extension agent for the University of Florida’s Institute of Food and Agricultural Services in Florida’s northwestern county who has made a career out of studying terrapin turtles and educating the public on local wildlife and flora.</p>
+<blockquote>
+<p>Florida’s $13 billion fishing industries can trace their roots, quite literally, to the mangroves.</p>
+</blockquote>
+<p>Red mangroves—so called because of the color of their tentacled, sprawling roots, which grow above ground and make them look a bit like giant bushes crawling on stilts—are indigenous to southern latitudes. This was not the first time O’Connor had encountered a red mangrove plant this far north and west, but it was the first in a few years. If the red mangrove sprout O’Connor found continues to thrive, especially through the winter, its success paints a picture of change: mangroves marching farther from the equator as the planet warms. It’s not a clearcut story, though, said O’Connor. “There’s different ways of looking at it. Some people see it as good. Some people see it as bad. For a lot of the scientists, it’s a proxy for climate change.”</p>
+<p>For the winter, the little red pioneer would test its resilience.</p>
+<p>Mangroves” is a word to describe about 80 different species of mangrove trees, often grouped because of their ecological function rather than <a href="https://programs.ifas.ufl.edu/florida-4-h-forest-ecology/forest-ecology-contest/contest-stations/forest-ecosystems/mangrove-forests/white-mangrove/#:~:text=Depending%20on%20habitat%20conditions%2C%20the,the%20roots%20during%20flooded%20conditions.">direct relation to one another</a>. In Florida, it means three kinds: black, red, and white, which all grow around south Florida coasts, the Caribbean, and Central America. Black mangroves—which, along with the whites, secrete filtered salt from their leaves—are more cold-tolerant; these are the ones most successfully wandering northward and along the eastern United States coast. Black mangroves have already established a grove, via spreading of their seed pods, outside Port St. Joe in Florida’s panhandle—some 350 miles northwest of Orlando.</p>
+<p>Mangroves provide substantial <a href="https://www.nature.com/articles/s41598-020-61136-6">protection for coastal communities</a>, by <a href="https://slosh.nws.noaa.gov/docs/data/ihrc/Role_of_mangroves_in_attenuating_storm_surges.pdf">slowing storm surge</a>, stabilizing against coastal erosion, and acting as guardians for wildlife. They establish nurseries for innumerable fish—such as baby Goliath groupers, snook, gray snappers, schoolmasters—and homes for crabs, migratory birds, snakes, alligators, and many other creatures. Florida’s <a href="https://myfwc.com/conservation/value/saltwater-fishing/">$13 billion fishing industries</a> can trace their roots, quite literally, to the mangroves.</p>
+<p>The Smithsonian Institution and its departments, such as the Smithsonian Environmental Research Center, track the progression of black, red, and white mangroves up the eastern U.S. The U.S. Fish and Wildlife Service calls them peripatetic plants, which have now reached as far north as Georgia’s eastern coasts.</p>
+<p>In their wake, mangroves leave a changed ecosystem. Although they serve as foundations for a certain kind of ecosystem, they also replace native <a href="https://oceanservice.noaa.gov/facts/saltmarsh.html#:~:text=Salt%20marshes%20also%20protect%20shorelines,and%20by%20metabolizing%20excess%20nutrients.">salt marshes</a>, which are coastal wetlands that also protect the shore and act as nurseries for wildlife. They have other drawbacks from some humans’ perspectives: Areas with mangroves emit swampy, sulfuric odors that come from the breakdown of organic matter below them. Mangroves also block views, a regular complaint of people who expect Florida’s shore to be flat all the way to the ocean’s horizon.</p>
+<p><img alt="" src="../images/viv6gsk1-Davidson-Hiers_BREAKER.png" /></p>
+<p><strong>WHERE THE RED MANGROVE GROWS:</strong>The range of mangrove forests is changing—many scientists see this as a proxy for climate shifts. This red mangrove sprout, spotted by local marine expert Rick O’Connor, is making a new home for its species farther north in Florida than it would usually be found. <em>Photo by CD Davidson-Hiers.</em></p>
+<p>“If you look at this whole cycle, at the importance of salt marshes and why they’re so positive, then flip the page over and see the mangroves, they’re basically the same,” O’Connor said. “The only difference is the plant.”</p>
+<p>“This is a really interesting topic that [we’re] trying to understand, especially concerning the future of Florida coastlines, especially how rapid those mangroves can move,” said Yiyang “Calvin” Kang, a Ph.D. student in the University of Florida's School of Natural Resources and Environment where he focuses his research on mangrove ecology. “It could be a totally different coastal landscape in the future, if we’re not working to get climate change under control.” That future could arrive as soon as 2040, he said, interpreting some models that track mangrove progression.</p>
+<p>Kang’s interest in the gregarious trees began in his undergraduate studies in subtropical Xiamen, China, to which he had come from his hometown, Beijing. (The climate difference between the two cities is comparable to the difference between New York City and Gainesville, Florida, he said.) At the University of Florida, he focuses on how temperature affects the trees. His research, and understanding the mangrove’s resilience, could help inform decisions about using them to reinforce “living shorelines”—natural, stabilized coastlines—that help protect infrastructure during hurricanes and flooding. One study, published in 2012 by The Nature Conservancy and Wetlands International, demonstrated that mangrove groves could reduce the <a href="https://www.conservationgateway.org/ConservationPractices/Marine/crr/library/Documents/wind-and-swell-wave-reduction-by-mangroves.pdf">size and impact of waves</a> by between 13 and 66 percent, depending on the density of the grove. Another study, published in <em>Nature</em> in 2020, found that mangroves could help to <a href="https://www.nature.com/articles/s41598-020-61136-6">reduce U.S. property damages</a> by more than $65 billion, protecting more than 15 million people every year.</p>
+<p>“This species is quite amazing,” Kang said. “How they’re able to live in the coastlines, and they’re one of the most efficient species to sequester carbon.” The National Oceanic and Atmospheric Administration, or NOAA, says that mangroves wildly outperform mature tropical forests when it comes to carbon capture, at a rate of nearly 10 times greater. This might be because mangroves store carbon in the soils they help stabilize rather than in their above-ground tissues, thus creating a deeper carbon “sink” for more long term storage.</p>
+<p>Mangrove expansion varies continent to continent, and latitude to latitude. In Australia and in <a href="https://www.sciencedirect.com/science/article/pii/S0048969722027759">Brazil</a>, sea level rise—and other human impacts—are driving mangroves farther inland. Researchers have used satellite imagery to map changes in mangrove ranges to find potentially harmful saltwater intrusion along the northern coast of Brazil. While in <a href="https://www.sciencedirect.com/science/article/pii/S0272771419311953">South Africa</a>, agricultural practices, such as cattle grazing, and extreme flooding threaten a mass mangrove die-back.</p>
+<p>On the Galápagos Islands, mangrove roots knuckle into volcanic stone and begin to grow. Nicolas Moity loves the trees, their initiative and their tenacity. He’s a senior marine ecologist at the Charles Darwin Foundation in the Galápagos.</p>
+<p>Mangroves are a colonizing plant, a plant pioneer. A mangrove propagule—a seedling that falls into the water when ripe—can float for weeks or months on ocean currents before happening upon a beach, a shore, or rocky outcropping where, waterlogged, it will sink to the bottom and find some purchase to start growing. Give the propagules five or so years and <a href="https://www.floridamuseum.ufl.edu/southflorida/habitats/mangroves/mangrove-life/#:~:text=Snails%2C%20barnacles%2C%20bryozoans%2C%20tunicates,proximity%20to%20mangrove%20root%20systems">they can mature</a> into marine wildlife nurseries, stopover points for migrating birds, form islands of their own, cultivate their own soils beneath them, and develop into thriving leafy metropolises.</p>
+<p>The Galápagos Islands are home to four species of mangroves—red, black, white, and button—which have particular adaptations to life within the volcanic islands. Moity puzzles through what makes them so successful, and how climate change will continue to affect them in their native ranges. He’s looking into historical ecological data stored in mangroves’ soils to search for clues from the past about what their future might hold.</p>
+<blockquote>
+<p>Mangroves wildly outperform mature tropical forests when it comes to carbon capture.</p>
+</blockquote>
+<p>As far as how a warming planet will impact the Galápagos’ mangroves, scientists predict that the wet and dry seasons, influenced by <a href="https://oceanservice.noaa.gov/facts/ninonina.html">El Niño</a>’s warm phase and La Niña’s cold phase, will become more frequent and severe. Mangroves <a href="https://www.sciencedaily.com/releases/2024/11/241112123310.htm">can drown</a> in rising seas. They can also dehydrate. Whereas in Florida scientists are documenting a northward expansion of mangroves, in the Galápagos, a change in ocean current systems could prevent the normal distribution of mangrove propagules, ultimately impacting the spread of their native ranges.</p>
+<p>Moity said that some of the coastal island trees may rely on an upwelling Cromwell Current in the Pacific that brings with it the nutrients—phosphorous, nitrogen, potassium—the trees use. In a warming climate and with warming oceans, scientists hypothesize, currents will change, threatening the delivery of these key nutrients. A dip in ocean currents might also mean less transportation avenues for mangrove propagules to travel to settle in new areas.</p>
+<p>Changing rainfall patterns also impact the island groves. Mangroves rely on underground water supplies collected from runoff from the highlands since the islands have no permanent rivers, which would normally provide mangroves their nutrients, Moity added.</p>
+<p>If their environment changes, the mangroves will too, affecting all the creatures that rely on their health, including sharks, fish, sea turtles, birds, crabs, lobsters, and more.</p>
+<p>In October, when Iwent to find the baby red mangrove tree near Pensacola, it was already taller than O’Connor described it from his summer encounter. No longer a shoot waving a single leaf, the mangrove sprout now had five bright green leaves forming a crown.</p>
+<p>“Wow! Growing leaves!” O’Connor responded when I texted him a photo.</p>
+<p>NOAA predicted a warm winter for Florida. The little red mangrove has a decent shot at survival. O’Connor works with a small team of volunteers who will keep an eye on it, though they won’t intervene if it starts to struggle in its small alcove within the rushes just out of the way of the kayak launch.</p>
+<p>Science is careful not to declare this one mangrove proof that the climate has warmed enough for red mangroves to make a home at this latitude.</p>
+<p>“Mangroves,” Moity said, “show you very well how everything is connected.” <img alt="" src="../images/nautilus-favicon-14_1238.png" /></p>
+<p><em>Lead photo by the author</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

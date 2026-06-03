@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Were You Born to Love Music? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Were You Born to Love Music?</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-03-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-GEV8</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Acclaimed Russian novelist Vladimir Nabokov believed that aesthetic pleasure was a full-bodied experience. Nabokov, who was celebrated for his rich, evocative prose, got what he called a “telltale tingle” when he encountered masterful works of literature or art. He claimed these shivers up the spine were a sign of artistic sensitivity, even genius. But whatever pleasure Nabokov took in <a href="https://nautil.us/speak-butterfly-234692">literary elegance</a> didn’t carry over to music. Even though his son, Dmitri, was an opera singer, the elder Nabokov described himself as having “no ear” for music and reportedly found concerts boring and irritating.</p>
+<p>Nabokov’s finicky tingle hints at a long-standing mystery: Why does a particular splash of paint on a canvas or musical phrase wreck one person while leaving another cold? Cognitive scientist <a href="https://cognition.maxplanckschools.org/en/doctoral-candidates/giacomo-bignardi">Giacomo Bignardi</a> has been working to untangle this scientific knot for years. Now new <a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1012002">research</a> from Bignardi and a team at the Max Planck Institute for Psycholinguistics suggests that at least part of the answer lies in our genetic inheritance.  </p>
+<p>Bignardi and his colleagues gathered data on more than 15,500 people in the Netherlands, including data on common genetic variants as well as their responses to questions about whether they tend to get chills in response to music, poetry, or art. When they crunched this trove of data, they found that about one-third of the variation is linked to family-related factors, while a smaller fraction of that is related to common genetic variants. Some of these genetic variants were shared across all art forms and were linked to personality traits such as openness to experience, while other variants were specific to different art forms. The results suggest that what we may experience as personal, even ineffable responses to art could be partly passed down to us from prior generations like our eye color or temperament.</p>
+<p>I spoke with Bignardi, now at the Max Planck Institute for Empirical Aesthetics, about how the shivers we feel when viewing art might be different from the kind we feel when encountering a beautiful scene in nature, what we know about what is happening in the body when someone gets aesthetic chills, and the evolution of pleasure in art.</p>
+<p><strong>Do you personally experience aesthetic chills?</strong></p>
+<p>I do not experience chills from music. I’m one of many people who do not. But I do experience chills, or I’d say “waves of excitement,” from visual art. Sometimes it happens, sometimes it doesn’t. I asked one of my colleagues, the second author of the paper, Danielle Admiraal, what particular piece of music or work of art gave her chills. She usually gets chills from [René] Magritte paintings. And one in particular: <em>La Magie Noire</em>. I didn’t know this painting. And for Simon Fisher, the last author, it’s Radiohead, especially the final section of the song <a href="https://www.youtube.com/watch?v=7AQSLozK7aA">“There There.”</a></p>
+<p><strong>What drew you and your co-authors to want to study this subject?</strong></p>
+<p>Our interest was driven by a few recent discoveries. One <a href="https://www.pnas.org/doi/10.1073/pnas.191355898">study</a> published in the beginning of the millennia used chills as a window into the neurobiology of music-related experiences. Another was the identification around 2014 of a condition known as <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(14)00133-X?ncid=txtlnkusaolp00000618">musical anhedonia</a>: the inability to feel pleasure from music despite being able to feel pleasure from virtually every other stimuli and despite having the rest of one’s perceptual abilities intact. These individuals reported fewer chills or no chills when listening to music. We wanted to know: Can we explain this kind of variability in aesthetic pleasure with genetics? And if so, can we build a research agenda based on the associations that we find?</p>
+<p><strong>How are aesthetic chills different from what you might feel when viewing a stunning landscape in nature or having a religious experience?</strong></p>
+<p>The honest answer is that I’m not completely sure. The literature defines chills as these pleasurable emotional reactions to a vast array of stimuli. There are people that report chills from music, other people that report chills from art, but there are also people who have these chills when they have powerful experiences in nature, or when they listen to powerful speeches. So there are people who have a broad-based predisposition to having chills. But there are also different types of chills. For example, people who experience more chills from music also tend to experience more chills from art and poetry. But some have more chills from one category of experiences than another.</p>
+<p><strong>Do we understand why we get chills when something moves us aesthetically? Do we know what’s happening in the body?</strong></p>
+<p>It’s a hard question to answer. There are different <a href="https://doi.org/10.1037/bul0000341.">theories</a> that try to explain why people should have this type of reaction when listening to music. Some of these theories were developed for music specifically. Others are a bit more general.  </p>
+<p>One theory is “contrastive valence,” and it emerges from the music-specific framework. It’s a theory that proposes that chills can be caused by a violation of musical expectations, producing a rapid unconscious response. The idea is that unexpected outcomes cause this reaction in the autonomic sympathetic nervous system, which governs our fight-or-flight responses. The theory is that, like different animals, humans develop goosebumps, which makes the hair stand on end, both as a thermal regulatory mechanism, but also a signaling mechanism, when they’re frightened, to appear bigger to attackers.</p>
+<p><strong>Read more: “<a href="https://nautil.us/weve-got-the-beat-in-our-genes-1211821">We’ve Got the Beat—in Our Genes</a>”</strong></p>
+<p>When we’re listening to music, we build expectations about what will unfold over time. But sometimes, the structure of the music itself changes suddenly. A voice comes in, or there’s a sudden drop or rise in volume, or our temporal expectations are violated. We have this unconscious physiological reaction. When we realize that we’re in a safe context, we reappraise this reaction as aesthetic appreciation. This theory can’t necessarily be applied to all chills. Sometimes chills aren’t accompanied by goosebumps, the hair standing on end, but instead they show up as a tingling sensation, a shiver down the spine. It can happen on the face, on the legs, on the arms.</p>
+<p>A wide body of evidence suggests that just before people experience chills in response to aesthetic or emotional stimuli, there’s an electrical charge in the skin, known as skin conductance or electrodermal activity. This too arises from the autonomic sympathetic nervous system. There’s also some work showing changes in heart rate and a drop in body temperature.</p>
+<p><strong>What do your findings tell us about the different roles nature versus nurture play in aesthetic experience?</strong></p>
+<p>I personally think the nature versus nurture dichotomy is a misleading framework to begin with, as traits that differ between individuals are expected to be, most of the time, a complex interplay of both. But things can get messy when you’re looking at genetic relatedness. People who are genetically related might come from the same family. They might share a specific environment more than people who aren’t genetically related. That’s why we took a two-step approach. We wanted to account for this family relatedness. But the truth is, we don’t really care about these absolute numbers—30 percent of the variability is family-related and 7 percent influenced by genetics—but rather about how they compare to one another, because the measure that we use is, in itself, noisy. Basically, we learned that there is transmission from one generation to the next, that isn’t just genetic, but it’s also partially due to cultural transmission. And this makes individuals that live within a family more likely to experience this type of phenomena.</p>
+<p><strong>As you mentioned earlier, you found some of the genetic effects seem to be shared across different art forms, whereas others were different. What do you make of those differences?</strong></p>
+<p>On the similarity side, this is suggestive of the idea that perhaps some variants increase the likelihood of experiencing chills across artistic domains. That means we might use genetic association in the future to investigate sensitivity to the arts in general. We could do some cool studies.</p>
+<p><strong>What would those cool studies be?</strong></p>
+<p>If we had a much bigger sample size, we could begin to ask things such as whether specific genetic variants contribute to specific developmental pathways in the brain. We could ask questions about the evolution of aesthetic chills. Like are they in parts of the genome that are associated with our Neanderthal ancestors?</p>
+<p><strong>How do you measure whether someone is prone to chills or not? What if they just haven’t seen the right work of art or heard the right piece of music yet?</strong></p>
+<p>How did we measure it? We used the simplest metric available: self-report. We chose questions from an established personality measurement tool and the musical anhedonia tool. People were asked to rate the following statements. “Sometimes when looking at art or reading poetry, I feel a chill or wave of excitement,” and “Sometimes when listening to music I feel chills.”It’s possible that those questions won’t capture the experience of a person who just hasn’t yet been exposed to the kind of art or music that would make them feel chills. But if you look at the literature on chills, you find that people who experience chills from music tend to experience them relatively frequently with different types of music stimuli, even if there is some variation. We are less certain about relative frequency when it comes to aesthetic chills from art.</p>
+<p><strong>Your sample was drawn entirely from the Netherlands. Does that limit what you learned to this particular cultural group?</strong></p>
+<p>Absolutely. The association that someone finds between genetic variation and any particular trait are population-specific, at least in part due to differences in culture. But previous <a href="https://psycnet.apa.org/record/2018-35082-001">work</a> has estimated peoples’ experiences of aesthetic chills using twins. This work was done in different cultures: Japan, Germany, and Canada. And they found a compatible estimate, albeit a bit higher: Around 40 percent was attributable to family-related genetic effects.</p>
+<p><strong>Aesthetic pleasure seems like something that’s so universally human. Does your research complicate that idea or reinforce it?</strong></p>
+<p>It’s a tricky question because it carries so much cultural baggage. It comes from a specific anthropomorphic view that suggests humans have aesthetic senses that animals might not have. But if you go back in time and you look at Darwin talking about sexual selection, he was talking about how animals have aesthetic taste, too, right? So I don’t think our research says anything about that in particular. I’d love to move the needle toward expanding our understanding of aesthetics beyond humankind.</p>
+<p><strong>If the capacity for aesthetic response is partly heritable, could that change anything about our understanding of the evolution of human art that goes back tens of thousands of years?</strong></p>
+<p>I don’t think what we found will drastically change our conception. But it gives us a way to ask new questions about the evolution of the arts. So people differ in their sensitivity, and there’s an association between genetic variants and sensitivity. The question now is how can we better understand this genetic association in the first place and what it does in our bodies. And maybe we could trace back the evolution of some of these variants across time.</p>
+<p><strong>Do you worry that someone might misuse the findings or the data to suggest that certain cultural or racial groups are more sensitive to art than others? And what would you say to someone who tried to do that?</strong></p>
+<p>I’d say that these heritability studies aren’t informative of group differences. This is very important. The second thing I’d say is that just showing that something is heritable doesn’t imply any type of determinism. It can change between different cultures and it can even change within culture over time and over one’s lifespan, because it’s a measure that includes environmental effects. So if you change the environmental effect, you’ll change the relative contribution of genetic effects, too. People shouldn’t and cannot use these results to make any such claims, but you’re very much right that all genetic research is prone to be misinterpreted. So we need to be very aware of these problems.</p>
+<p><strong>Did anything in the results surprise you?</strong></p>
+<p>We showed in the past that with twin <a href="https://www.nature.com/articles/s41598-022-07161-z">studies</a> that we could find some heritability. We confirmed that by doing this study. We showed the gap between family-based and genetic-based estimates of heritability, which was kind of expected. Maybe something that is nice that I hadn’t predicted at the beginning is that the genetic correlations between these two traits—musical chills and other artistic chills—was moderate, but wasn’t perfect.  </p>
+<p>At the beginning of the paper, I cite Nabokov. I believe Nabokov himself wasn’t very fond of music. He has reportedly said that for him, music wasn’t such a powerful emotional stimulus. So there’s something interesting in the sharedness of these associations, but there’s also something interesting in the difference between them. It’s a good reminder that people are different. We experience different things, but we sometimes take these things for granted.</p>
+<p>When someone else is telling you that they experience the world completely differently, you’re kind of in shock for a moment. Like, “Oh, you experience chills when you see abstract patches of colors on a canvas?!” So yes, we’re different. And that’s beautiful. <img alt="" src="../images/nautilus-favicon-14_328.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Igor Nikushin / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

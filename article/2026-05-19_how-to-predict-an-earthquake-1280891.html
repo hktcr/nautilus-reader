@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Predict an Earthquake | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How to Predict an Earthquake</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-19
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-03X1</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://nautil.us/products"><img alt="" src="../images/upcoming-issue-banner_e15e12.png" /></a></p>
+<p>We know from dense worldwide seismometer networks that the plate tectonic engine, the primary driver of earthquakes, has not meaningfully changed over our lifetime. But for geologic processes, which operate on the scale of thousands or millions of years, that’s no time at all. To understand the deeper past, geologists must dig into a deeper and often murkier archive.</p>
+<p>Katherine Scharer, a USGS geologist, has spent her entire career in the trenches, literally. She and colleagues, other paleoseismologists, contract earthmovers to dig reinforced ditches across California’s most dangerous “headliner faults.” I know this because she was my undergraduate advisor, and in 2006, I spent a summer working in one of those trenches along the San Andreas fault in the dusty foothills of the San Gabriel Mountains.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-ancient-architecture-that-defies-earthquakes-301285">The Ancient Architecture that Defies Earthquakes</a>”</strong></p>
+<p>That summer, we labored under the hot Southern California sun, navigating aluminum hydraulic shoring meant to keep the trench from collapsing as we stood inside the earth with a quiet sense of mortality, directly atop a live plate boundary. We worked on the property of a retired man who enjoyed our company and showed vague interest in our goals. If memory serves, he even invited us inside, reminding us that “it’s 5 o’clock somewhere.” We probably discussed the scientific holy grail driving the work: establishing how often earthquakes strike, and getting a rough sense of when the next might come.</p>
+<p>Along smoothed dirt walls, geologists scan for offset—layers that suddenly jump in a stair-step up or down, evidence that a fault moved during an earthquake. To establish when that happened, they often rely on radiocarbon dating, using bits of wood or plant material plucked from the walls. By dating the offset layers and undisturbed layers above, geologists can bracket the age of past ruptures.</p>
+<p><img alt="" src="../images/Howell_BREAKER-3.png" /></p>
+<p><strong>IN THE TRENCHES:</strong> USGS geologist Katherine Scharer works to reveal rock and soil layers offset by ancient earthquakes. <em>Credit: Devin McPhillips / USGS.</em></p>
+<p>A single trench may reveal numerous earthquakes, some of which are known from historical records and many that predate written records. From these clues geologists estimate the timing, magnitude, and location of past earthquakes along active faults. This process is repeated in trenches across California, mapping ancient ruptures that scored the earth for miles.</p>
+<p>While not entirely diagnostic, paleoseismologists like Scharer have demonstrated that California’s transform fault network, driven by the Pacific tectonic plate as it grinds relentlessly northward against the North American plate, exhibits a certain earthquake cadence. Geologists now know that this fault network, which includes the San Andreas, is practically guaranteed to host a large future earthquake. But scientists like Scharer know the risks vary substantially depending on where one works, resides, or travels across California’s fractured and faulted landscape.</p>
+<p>Geologists have established a refined story for the last 1,000 years, but the historical record is even clearer. Between 1800 and 1906, California experienced eight significant, ground-rupturing earthquakes on the San Andreas, San Jacinto, and Hayward faults. Yet over the last 120 years, “there’s zero,” she says. “We went from having basically one every 10 to 20 years to zero over the last 120 years.” A hiatus of this length isn’t unheard of in the geologic record, but it’s stretching the upper limit.</p>
+<p>That’s why the <a href="https://pubs.usgs.gov/fs/2015/3009/pdf/fs2015-3009.pdf">USGS says</a> “the likelihood for a magnitude 6.7 or larger earthquake somewhere in the entire region remains near certainty” over the next 30 years. In their “readiness” model, the southern San Andreas, with its visible scar slicing roughly 40 miles from downtown Los Angeles and directly through glitzy Palm Springs, is widely considered prone to rupture. As such, Los Angeles faces a 60 percent chance of a 6.7-magnitude or larger earthquake in the next 30 years.</p>
+<p>Paleoseismology, therefore, isn’t just an attempt at cataloging. It’s a science that helps us understand the stark tension between two vastly different timescales, human and geologic, that from time to time unpredictably converge. <img alt="" src="../images/nautilus-favicon-14_63.png" /></p>
+<p><em>Want to learn more? Read “<a href="https://nautil.us/the-earthquake-illusion-1280874/">The Earthquake Illusion</a>”</em></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: ONYXprj / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

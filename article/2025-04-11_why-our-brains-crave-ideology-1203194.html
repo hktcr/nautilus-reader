@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Our Brains Crave Ideology - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why Our Brains Crave Ideology - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-04-11
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-9REQ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>As the lights in the lecture hall slowly brighten, political neuroscientist Leor Zmigrod braces herself for the onslaught of questions from an audience brimming with rising hands—and one clenched fist. “Is it a question? An exclamation? A symbol of solidarity or defiance?” Zmigrod writes at the end of her new book, <em>The Ideological Brain: The Radical Science of Flexible Thinking.</em> “Before I can point the roving microphone in its direction, the owner of the fist begins to speak.”</p>
+<p>“I wrote about the ideological phantoms in the human brain long before these strange neuroimaging technologies were invented,” the audience member says. “It is no surprise, of course, but I’m glad to discover these phantoms are real.”</p>
+<p>The exchange is actually an imagined one—the speaker, Karl Marx. In the book’s epilogue, Zmigrod defends her research against the skeptical remarks of historical luminaries such as Charles Darwin and Hannah Arendt. In her fictitious response to Marx, she clarifies why it’s valuable to understand the impact ideologies have on the human brain and body—and underscores to the grumpy German philosopher that her work complements his insights rather than supplants them.</p>
+<p>To Marx’s question, “What does your ‘new method’ genuinely show?” Zmigrod answers: “That we can bypass self-reports of ideological oppression and that, instead of relying solely on the tools of history, economics, demographics, and ethnography, we can study unconscious processes that are inconspicuous to the observer’s naked eye or the believer’s storytelling tongue.”</p>
+<p><img alt="" src="../images/Leor_Zmigrod__books_use_-min.jpg" /></p>
+<p><strong>THE IDEOLOGIST:</strong> Leor Zmigrod points out that “<em>idéologie</em>”—a term coined by the 18th-century French enlightenment philosopher Antoine Destutt de Tracy—was meant to be an empirical science of ideas, an “ology” like any other. “Very quickly,” she says, “the word ‘ideology’ turned away from a scientific pursuit into a label for the useless dreamer.”</p>
+<p>I was eager to hear Zmigrod explain this in richer detail. In our recent conversation over a video call—Zmigrod spoke to me from her home in England—she described her research with verve. In 2016, she was among the first wave of scientists to start investigating the neurobiological origins of ideological thinking, which was the subject of her Ph.D. thesis at Cambridge University.</p>
+<p>“It felt like those methods weren’t being used in the best way to understand our politics, and what makes people gravitate toward ideologies in the first place,” she says. “And then there were all these very politically charged elections in 2016: both in Europe with Brexit, and in the United States, with Donald Trump. It led to a really exciting and interesting path.”</p>
+<p>We started with the basics: What makes the human brain so prone to ideology.</p>
+<p><strong>What makes ideology, as you write, the “brain’s delicious answer to the problem of prediction and communication?”</strong></p>
+<p>Our brains are these amazingly predictive organs trying to constantly explain the world, because that’s our way to survive. We have to have a reliable model of reality so that we can know what to expect—for example, when there’s going to be a confrontation with someone we’re in a relationship with. Ideologies give us the answers for all those predictions. We don’t have to do that job ourselves, because ideologies say, “Here’s how the world works, how social relationships work. Here are rules of conduct and thought.” We can rely on a compelling story and logical system that many other people are buying into, even if it’s wrong. Ideologies are incredibly seductive because they give us a community of people who we can belong to, and share information with. But that doesn’t mean they’re good for us. Because although that’s all very alluring, research suggests that ideologies can also be very injurious to our capacity for elastic, free, and authentic thought.</p>
+<blockquote>
+<p>Maybe being immersed in a world that’s focused on negative feelings can actually change the brain.</p>
+</blockquote>
+<p><strong>Are we all ideological thinkers to some extent?</strong></p>
+<p>Yes, we can think about this as a spectrum. Some people are highly ideological and dogmatic in the way they view the world, view others, and view themselves. They have this very rigid adherence to a doctrine, this embrace of a totalizing explanation of the world. And importantly, part of that is being very resistant to credible evidence. They might still process it, might still remember it, but they will reject it. This also involves having a very fixed identity and adhering to strict identity categories for who belongs and who doesn’t. That results in a strong favoritism toward other people who believe the same thing. A very ideological person will exclusively affiliate with people who believe in the ideology and the cause, and reject anyone who doesn’t. And that rejection can take the form of hostility, prejudice, discrimination, and in the most extreme form, a willingness to endorse violence against that outgroup, or against innocent people who reflect or represent that group. And across that spectrum we go all the way to someone being very non-ideological, very flexible and open to plurality, to evidence, to debate.</p>
+<p><strong>How do you study ideology in the brain?</strong></p>
+<p>My approach has been to look at every ideology and any ideology—the left and the right, nationalism and religion, and every other kind of ideology. But there are some psychological and neurobiological processes that are related to just how extremely people adopt ideologies, regardless of their missions. There are also some things that are dependent on the specific ideology itself. There is a whole body of research showing psychological and even neurobiological differences between conservatives and liberals in the U.S., for example. So in that sense, we see that different ideologies might either lead to or attract different kinds of minds.</p>
+<p><strong>What are some of those neurobiological differences you’ve seen between American conservatives and liberals?</strong></p>
+<p>One of the experiments that’s been replicated a few times shows that people who hold right-wing beliefs tend to have a <a href="https://www.cell.com/iscience/fulltext/S2589-0042(24)01757-7">larger amygdala</a>, an area of the brain that controls our emotional processing of threat, disgust, fear—these kinds of negative emotions. That area is enlarged in people who hold more traditional views, who tend to believe that social dominance hierarchies are natural and good, that economic inequalities are fine. Why would a conservative have a brain that’s structured in that way? Is it that, if they already had a larger amygdala, that made them more attracted to ideologies that dealt with fear and threat and disgust, which many conservative ideologies try to grapple with and counter? Or maybe being immersed in a world that’s very focused on those negative feelings can actually change the brain.</p>
+<p><strong>That makes me think of a line in your book—you write that the “ideologue believing in hierarchies is viscerally numb.”</strong></p>
+<p>That’s right. I was discussing a 2020 <a href="https://www.nature.com/articles/s41467-019-14193-z">study</a>, where researchers looked at people’s unconscious reactions to injustice—in particular their responses to people who are suffering from unequal social and economic structures. The researchers presented participants with videos of people who have experienced homelessness talking about that adversity. They also gave them a control video where they’re just watching coffee beans being processed. And what they found is that ideology really conditions the response. For people who believe that economic and social hierarchies are wrong and that we shouldn’t justify but instead correct them, you see that, when they’re watching the videos of homeless people discussing their plight, their bodies react strongly. Their heart rate accelerates when we measure their skin conductance response, another measure of physiological arousal, especially relative to watching coffee beans.</p>
+<p>But in a really chilling way, when participants who believe that inequalities are fine, natural, good, inevitable, watched the video of the homeless people discussing their plight, their bodies didn’t react. There were no physiological differences when they watch the homelessness video versus when they watch the coffee beans, which really shows you how deeply into our physiological reactions ideologies go, how we become numb to injustice and difficulty. Believing in these ideologies passionately stops you from engaging with others on a human level.</p>
+<blockquote>
+<p>The mind of an ideological person is so much more sophisticated than thoughtlessness.</p>
+</blockquote>
+<p><strong>The philosopher Hannah Arendt touched on that point, you note in your book, saying it’s one of “her most astute intuitions”—that ideologies aim at the “transformation of human nature itself.”</strong></p>
+<p>Arendt was hugely prophetic, and the times we're living in now show how astute her thinking was. She had the sense that ideologies don't just try to change the social world—they try to change our nature. But she didn't have neuroscience or psychology at the time, so she couldn't know how deeply into our psychology and biology we see ideologies trickle. What she came up with was the idea that a person who is brainwashed, who becomes part of an ideological system, is in many ways mindless or thoughtless. She talked about this when she analyzed the trial of Adolf Eichmann, this high-ranking Nazi official who helped architect the Holocaust. She talked about this very famously, the banality of evil, and said he had this remarkable inability to think—it was sheer thoughtlessness that guided him.</p>
+<p><strong>Was Arendt wrong about that?</strong></p>
+<p>I think that’s just completely not true, that to characterize it as thoughtlessness or mindlessness is a wrong and almost dangerous way to look at it. Because the mind of an ideological person is so much more sophisticated than that—and dangerous because of that. We really need to look at how rational and emotional processes get twisted and distorted by ideologies to understand what an ideological thinker is like. All the research strongly suggests that “mindlessness” is a very lazy way to describe it, and very misleading, because it means the person’s not responsible. They're under siege, under the influence of someone else. To be swept up into that influence is a very complex cognitive process that some brains gravitate to more easily than others. So I strongly counter that idea. Maybe the new explanations or metaphors are not as sexy as thoughtlessness and mindlessness, but they’re more true. And I think they help guide us in a better direction for understanding who is ideological, and what that does to them.</p>
+<p><strong>What metaphor do you use to understand ideological thinking?</strong></p>
+<p>Well, metaphors are both beautiful and can be problematic, because they reduce a very complex story into an image. So, I’m cautious, but I found it useful to think about how people spiral into extremism. We’re all differently susceptible, and when we’re triggered, a person who is very resistant to ideological narratives, who actually is very rooted in thinking carefully, critically, flexibly about evidence and about the world—they will need a very strong push and very constant pressure to spiral into an extreme embrace of an ideology. But a person who’s already at risk, who maybe thinks more rigidly about the world, who’s maybe more impulsive in their everyday emotional habits, who has certain neurobiological sensitivities—when that person is pushed or triggered a little, they will spiral in much faster.</p>
+<p><strong>Which factors make people resilient to thinking ideologically?</strong></p>
+<p>The people who are the most creative, flexible, and most able to balance evidence are the people who are most resistant to ideological solutions, ideological narratives, and ideological identities. Creativity and cognitive flexibility are really powerful resilience factors against thinking in ideologically closed and authoritarian ways.</p>
+<p><strong>What about intelligence?</strong></p>
+<p>We do measure intelligence, and importantly, even after controlling for intelligence, all these patterns remain. So intelligence is not the driving factor. It’s very uniquely flexibility that is predicting people’s resistance to ideologies and predicting their intellectual humility. People who choose to leave a religious ideology tend to be the most cognitively flexible people, and people who grew up secular and later chose to enter a religious ideology tend to be the most cognitively rigid. There’s still a lot of questions about that process of conversion and deconversion, but those are just initial clues.</p>
+<p><strong>How do the most cognitively flexible people tend to identify on the political spectrum?</strong></p>
+<p>The most cognitively flexible people tend to be more independent, more moderate leaning. And if we imagine a spectrum from the very extreme left to the very extreme right, we see that the most cognitively flexible people are generally in the center-left and are the least likely to latch onto pre-established group identities.</p>
+<p><strong>Is flexibility a stable psychological trait?</strong></p>
+<p>If there is a continuum of flexibility, and we’re all on that spectrum, we all shift along that spectrum very clearly in times of stress. When our bodies are stressed—whether that's because we're supposed to give a presentation in front of a big audience, or physically stressed, which we can induce in the lab by asking people to put their hand in a bucket of ice water—what we see is that people’s psychological flexibility diminishes significantly. Our thoughts narrow. We rigidify. We conserve our resources rather than go and explore the world. Flexibility is something that can increase and decrease momentarily and over our lifespan, which is why it's this continuous hard work to keep it up. I call it a Sisyphean task.</p>
+<blockquote>
+<p>The first step to becoming more open-minded might be to interrogate your habits and your routines.</p>
+</blockquote>
+<p><strong>Have you studied the basis of cognitive flexibility in the brain?</strong></p>
+<p>In a large study that I ran with thousands of participants, we wanted to look at the genetics of rigidity, and what we homed in on was a neurotransmitter that we all know and love—dopamine. We know that dopamine governs our senses of reward, of pleasure, but it does that because it governs our learning. And there’s been a lot of research suggesting that our capacity to adapt is rooted in the functioning of dopamine. So we looked at whether people with genetic variations that affected how dopamine is distributed in their brain, whether those genes could predict people’s cognitive rigidity or flexibility. We found that they did. When people have less baseline dopamine in their prefrontal cortex, and a greater concentration of dopamine in their striatum, the midbrain area that governs learning and reward, that's a particular genetic profile that puts people at risk for rigid thinking. We found that people with other combinations of these genes typically tended to be much more flexible.</p>
+<p><strong>Does that mean how flexibly we think is genetically determined?</strong></p>
+<p>Those genetic contributions are significant and real, but they’re not deterministic. It doesn't mean that if you have a particular combination of genes, you're doomed to be a dogmatic person for the rest of your life. But there is an elevated risk factor that affects how people deal with information, how flexible or not they tend to be in the world.</p>
+<p><strong>I was amazed to read that you can even tap into people’s ideology by having them make split-second decisions.</strong></p>
+<p>It’s interesting, right? When we ask participants to make very simple perceptual judgments about whether there’s a red square on the left of the screen, or a green circle on the right side of the screen—often in 400 milliseconds or so—this allows us to understand how their brains are processing information, how they’re responding to evidence, how quickly or cautiously they evaluate stimuli. You would never think that if I gave you a game where you respond to things really quickly, as fast as you can press a button, that that would give me any indication about your politics or ideologies at all—but it does. We found that people who tend to be more cautious, where you have to balance speed and accuracy in the game, tend to also be cautious politically. They tend to adopt conservative ideologies that champion the status quo, keeping traditions in place.</p>
+<p>We also find that people who are the most dogmatic in their ideological decisions—they tend to resist evidence, resist debate, resist changing their opinion—also really struggle to integrate sensory evidence in that span of a millisecond. They will struggle and take so much longer to do what we call the evidence-integration process that happens in the brain on the order of 100 milliseconds or so. People who are more dogmatic—who struggle with integrating evidence in a nuanced, flexible way—also have these rigid evidence-integration systems when they’re processing visual information as well.</p>
+<p><strong>Why is that significant?</strong></p>
+<p>This still amazes me, even though this has been replicated over so many different tasks. Basically, it shows a mirroring between how our brains are integrating or making decisions on the level of a second, and the cognitive style with which they approach much bigger, more time-intensive questions, such as ones about their ideological convictions. It shows a resonance between very different levels of our consciousness, between how our brains are processing visual information, auditory information—on like a 100-millisecond basis—and how they’re forming ideological decisions over months and years. It’s cool that potentially there are these patterns in how our consciousness relates to the world, and that exist across many different timescales and many different kinds of problems.</p>
+<p><strong>What’s the best way to become a more open-minded person and ensure you don’t become an ideologue?</strong></p>
+<p>Just wanting to be that kind of human being is already an important step forward. A lot of people think it’s actually very good to be ideological—it’s a synonym for being a principled, moral person. We live in a society that really glorifies habits and the amazing moral virtues of routines. This research challenges that, because a very routine-, habit-oriented way of thinking about the world is a very rigid, conformist way of thinking about the world. So probably the first step to becoming more open-minded might be to interrogate your habits and your routines, and to think about the effect that’s having on how you exist as a human being.</p>
+<p>Our flexibility isn’t something that’s just constrained to one domain. If you can think flexibly about the world, about how you solve problems, about how you imagine alternatives, about how you adapt to change—whether that’s in an artistic, a social, or a relationship domain—all of those flexibilities translate into flexibility in the political and ideological domain. Finding your ways to practice that flexibility, that inventiveness, that thinking otherwise, is a really powerful way to resist all those pressures to think in a more narrow way. I think it’s a very fulfilling struggle, because you find a more authentic, free way of living and thinking and relating to people in the world around you.</p>
+<p><em>Lead image: Jorm Sangsorn / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

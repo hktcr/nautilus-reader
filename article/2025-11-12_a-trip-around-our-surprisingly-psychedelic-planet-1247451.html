@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Trip Around Our Surprisingly Psychedelic Planet | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>A Trip Around Our Surprisingly Psychedelic Planet</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-12
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-Y49Q</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Evolution seems to have a thing for mind-bending molecules here on planet Earth. Psychedelics are more widespread in nature than you might think. These remarkable compounds, which can profoundly alter consciousness, arose repeatedly across evolutionary time, stretching back at least 65 million years. To date, some 80 species of <a href="https://www.mdpi.com/2227-9059/11/2/461?">fungi</a>, at least 20 <a href="https://pubs.acs.org/doi/10.1021/acsomega.0c03196?">plants</a>, and a species of toad have been documented to produce psychoactive molecules. And scientists continue to identify <a href="https://www.tandfonline.com/doi/full/10.1080/00275514.2024.2363137">new</a> ones. The array of different chemical formulations are as diverse as the <a href="https://theconversation.com/a-psychedelic-tour-of-earths-ecosystems-from-the-desert-to-siberia-268719">ecosystems</a> in which they’re found.</p>
+<p>Many of these hallucinogenic compounds have been used for <a href="https://www.researchgate.net/profile/Petia-Pechalova/publication/288220713_Dentigerous_cysts_A_clinical_study_of_146_cases/links/57d0447408ae601b39a05988/Dentigerous-cysts-A-clinical-study-of-146-cases.pdf?_sg%5B0%5D=started_experiment_milestone&amp;origin=journalDetail&amp;_rtd=e30%3D#page=122">religious</a> or cultural purposes for thousands of years. These include iboga, peyote, ayahuasca, and psilocybin mushrooms, as well as cannabis, ethanol, and opium. Scholars speculate that hallucinogenic mushrooms and cacti in particular—which produce psilocybin and mescaline, respectively—may have played foundational roles in some of the major religions of India, the Americas, the Middle East, and Europe.</p>
+<p>No one knows for sure why so many living things developed the ability to produce these mind-bending molecules, but at least one function seems clear: For some organisms, the point is predator and pest deterrence. The Sonoran desert toad, for example, which haunts the deserts, meadows, forests, and canyons of northern Mexico and the southwestern United States, secretes a milky white toxin containing the potent psychoactive substance 5-MeO-DMT, which is known to produce vivid visual hallucinations and other alterations to sensory perception in humans. But that toxin can also paralyze—and even kill—domesticated dogs and cats who try to eat them, and it successfully deters many of the toads’ wilder predators.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/out-of-your-head-791745/"><strong>Out of Your Head</strong></a>”</p>
+<p>On the flip side, some psychedelic substances may serve to attract creatures who, after consuming them, can help propagate that plant, by spreading seeds, spores, or roots around. According to legend, forest-dwelling pygmy people in Central Africa—<a href="https://karolinum.cz/data/clanek/10749/Theol_12_1_0143.pdf">mainly</a> the Mbenge ethnic group in Gabon (Aka, Gyele, Bongo, Baka, and Kola groups)—only started experimenting with a psychedelic called ibogaine, a chemical produced by a shrub known as <em>Tabernanthe iboga</em>, after they witnessed forest animals such as wild boar and porcupine digging up and feasting on the roots of the plant, and then behaving as if they were drunk.</p>
+<p>Whether for defense or attraction, the variety of living things that produce psychoactive effects, and the range of habitats they occupy on Earth, is quite a <a href="https://theconversation.com/a-psychedelic-tour-of-earths-ecosystems-from-the-desert-to-siberia-268719">trip</a>. What follows is a quick tour of the ecosystems where psychedelics can be found, and some of the mind-blowing plants and animals that reside there.</p>
+<h3><strong>Desert</strong></h3>
+<p><strong>San Pedro cactus:</strong> Native to the deserts of the high Andes, this lanky, fast-growing cactus (<em>Echinopsis pachinoi</em>) produces mescaline, a psychedelic alkaloid that when consumed is known to produce euphoria, connection, stimulation, visual alterations, nausea, confusion, and anxiety. Some of the oldest archeological evidence of mescaline consumption to date comes from San Pedro <a href="https://journals.sagepub.com/doi/pdf/10.1177/00914509251318751">samples</a> found in a Peruvian cave dated to 8,600 B.C.</p>
+<p><strong>Peyote cactus:</strong> This small spineless globular cactus (<em>lophophora williamsii</em>), cousin to San Pedro, also contains mescaline and is native to the deserts of Mexico and Texas. Peyote samples found in a cave in Texas suggest it was first consumed by humans around 3,200 B.C. Some cacti other than San Pedro and peyote also contain mescaline, but these two are the only ones that contain the compound in high enough concentrations to produce mind-bending effects when consumed without complex refinement techniques. Aldous Huxley’s book <em>The Doors of Perception</em> recounts his experiences usingmescaline.</p>
+<p><strong>The Sonoran Desert Toad:</strong> Native to its namesake, the Sonoran desert, which stretches across the southwestern U.S. and northern Mexico, this toad produces one of the most powerful psychedelics known to science, 5-MeO-DMT. It is similar in composition to the more common DMT, dimethyltryptamine, the hallucinogenic molecule that makes ayahuasca such a powerful drug. The Sonoran Desert toad (<em>Incilius alvarius</em>) is the only vertebrate known to produce the compound, which can be collected from exterior glands on the frog’s skin. Researchers believe this unique trait may reflect a genetic <a href="https://akjournals.com/view/journals/2054/7/S1/article-p68.xml?ref=sciof.fi#B28">mutation</a> in coding for a closely-related molecule found in most other toads, or the result of symbiosis with a microbe.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/what-is-your-brain-doing-on-psychedelics-1242605/"><strong>What is Your Brain Doing on Psychedelics?</strong></a><strong>”</strong></p>
+<p>Archaeological toad remains and symbols across the Americas have not yet clearly demonstrated that its use by Maya and Olmec cultures—who were known to <a href="https://the-eye-of-mother-nature.com/where-did-bufo-come-from-the-ancient-origins-of-toad-medicine/">create</a> toad effigies, sculpture, and imagery—was psychedelic in origin. (Some Olmec effigies of the toad include exaggerated versions of the very glands on the toad’s warty skin that produce the psychedelic compounds.) The species faces growing ecological pressures from psychedelic experience seekers.</p>
+<h3><strong>The Siberian Tundra</strong></h3>
+<p><strong>Fly Agaric:</strong> This small red-capped and white spotted mushroom (<em>Amanita muscaria</em>) thrives in the boreal and temperate forests of the north, including the United Kingdom and Siberia. It produces <a href="https://journals.sagepub.com/doi/abs/10.4997/jrcpe.2018.119">four</a> hallucinogenic compounds: muscimol, muscarine, muscazone, and ibotenic acid, whose effects are different from those of psilocybin. Ethnographic accounts suggest that Siberian <a href="https://pulsarmag.com/assets/img/jrcpe_48_1_lee.pdf">shamans</a> used the plants for their psychoactive properties, which have also been associated with the creation of the legend of Santa Claus.</p>
+<h3><strong>Grasslands</strong></h3>
+<p><strong>Ergot:</strong> This tiny parasitic fungus (<em>Claviceps purpurea</em>) infects grasses and cereals, mostly rye, and produces ergot alkaloids, which are chemically related to LSD. In large enough doses ergot can be <a href="https://www.researchgate.net/profile/Petia-Pechalova/publication/288220713_Dentigerous_cysts_A_clinical_study_of_146_cases/links/57d0447408ae601b39a05988/Dentigerous-cysts-A-clinical-study-of-146-cases.pdf?_sg%5B0%5D=started_experiment_milestone&amp;origin=journalDetail&amp;_rtd=e30%3D#page=122">toxic</a> to humans, a condition known as ergotism or St. Anthony’s fire, which can result in burning pain, gangrene, convulsions, and psychosis. Ergot is <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC92477/?">distributed</a> across temperate regions around the world, but has even been found in the Arctic. Infected rye grains grow a large purple mass of fungal tissue, shaped into a form that resembles a horn, hence the name of the fungus, which is derived from the French word <em>argot</em>, meaning “spur.” In the middle ages, outbreaks of ergot poisoning are thought to have caused mass hysteria, manic dancing, and hallucinatory visions across Europe. Swiss chemist Albert Hofmann used ergot molecules to synthesize LSD in 1938.</p>
+<h3><strong>Forest and Landscaping</strong></h3>
+<p><strong>Magic mushrooms:</strong> An estimated 200 species of fungi generate psilocybin and psilocin, <a href="https://www.cell.com/heliyon/pdf/S2405-8440(23)03545-4.pdf">mainly</a> in the <em>Psilocybe</em> genus. These fungi are known as “magic mushrooms” and can be found in humid, cool subtropical forests and river valleys, ideally where there is a lot of decaying matter, all across the world. But known species records are highest for the U.S., Mexico, and Central America, as well as Europe. Psilocybin is similar in structure to melatonin, serotonin, and other neuroregulators. These mushrooms degrade leaves, woods, and dung. Many wood-decomposing psilocybes are found not in the depths of a wild forest but in <a href="https://books.google.com/books?hl=en&amp;lr=&amp;id=DISeEAAAQBAJ&amp;oi=fnd&amp;pg=PR9&amp;dq=Psilocybe+habitat&amp;ots=oVM1RaJEtg&amp;sig=TQihJv9GuyZnWibQL5JpRUamh1I#v=onepage&amp;q=Psilocybe%20habitat&amp;f=false">disturbed</a> edges of densely populated areas, such as in the underbrush of landscaping around office buildings, college campuses, utility substations, hospitals, suburban homes, and parks. They thrive especially in mulch and wood chips. The liberty cap is a tiny unassuming and common mushroom (<em>Psilocybe semilanceata)</em> that produces some of the most potent doses of psilocybin and psilocin of any fungus. And that’s saying something.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/the-long-history-of-psychedelic-theft-430330/"><strong>The Long History of Psychedelic Theft</strong></a><strong>”</strong></p>
+<h3><strong>Rainforest</strong></h3>
+<p><strong>Iboga tree:</strong>  Native to the rainforests of Central Africa, this small perennial rainforest plant (<em>Tabernanthe iboga</em>) thrives in the undergrowth of rainforests and contains a psychedelic alkaloid compound in its yellowish roots and bark. The alkaloid, known as <a href="https://d1wqtxts1xzle7.cloudfront.net/115964547/91.Chiara-libre.pdf?1718306716=&amp;response-content-disposition=inline%3B+filename%3DTabernanthe_iboga_a_Comprehensive_Review.pdf&amp;Expires=1762925658&amp;Signature=SFvJsvd~84e961JvNoZA5Yq3OwbcjAum~oanAhDC~C8yXCLvBVJ~seyM8U0qmfQcJsxoFs-sMSKqA-mmja1XMTvXZZzQPDQeB94XP2HA9u3HZE7hgYI4k-BTLG1xCYozHESUEq7cyq-aquULS5g0nMi3Z-jM9PKvRprvWbZ~W1tYlxYiTpy7lAJKyYpae-qBa~st79xGhbvBwwJpbBMI988UxoxvdxWfmOjR3Rue0VsX3ZzWG3~-x1hBdBzLKiEFEvskrwNaSFaMEQXO44IcCfLSzGetp1FS~mV5RF0XVqhsqt-zXbk6bi5YzoFsuqBxrUY8w1HuMKzW2RPSRytQfg__&amp;Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA">ibogaine</a>, is released when the bark is chewed and is central to how religion is practiced by the Bwiti people indigenous to West Central Africa, particularly their coming of age rituals. Ibogaine is similar to tryptamine, and to harmaline, another natural alkaloid and psychedelic agent, and is a strong, long-lasting psychedelic. More recently, in the U.S., it has been used to treat opioid addiction, but in high doses it can be toxic to humans.</p>
+<p><strong>Chacruna:</strong> Known to science as <a href="https://doi.org/10.1080/02791072.2005.10399795"><em>Psychotria viridis</em></a>, this small understory tree is found primarily in the western Amazon. These plants belong to the coffee family, and are dried and brewed into a drink called ayahuasca, which translates as vine of the soul, which generally consists of two ingredients. The other is <em>Baniesteriopsis caapi</em>, a woody braided vine also native to the Amazon rainforest that contains harmala alkaloids, such as harmine and harmaline, which allow DMT to reach the central nervous system. Chacruna produces the DMT itself, the hallucinogenic molecule that makes ayahuasca such a powerful drug. Today, many tourists travel to South America to take part in ayahuasca <a href="https://health.clevelandclinic.org/ayahuasca">ceremonies</a> led by shamans.</p>
+<h3><strong>Tropical savannah</strong></h3>
+<p><strong>Yopo:</strong> This tree (<em>Anadenathera peregrina</em>) is native to the tropical savannas and semi-deciduous forests of South America as well as some Caribbean islands. The woody plant, which is in the legume family, and is closely related to chickpeas, can grow more than 80 feet tall. Its seeds can be dried and ground into a snuff containing DMT as well as 5-MeO-DMT, though its main psychoactive compound is bufotenine. Some Indigenous groups, such as the Piaroa of Venezuela’s Orinoco Valley, still use it in shamanistic rituals. Archaeological evidence suggests its use goes back thousands of years.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/what-hallucinogens-will-make-you-see-308247/"><strong>What Hallucinogens Will Make You See</strong></a><strong>”</strong></p>
+<p>Across continents and kingdoms, it seems, evolution keeps rediscovering the chemistry of transcendence. <img alt="" src="../images/nautilus-favicon-14_803.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em>.</p>
+<p><em>Lead image: TorriPhoto / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Cosmic Movie | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Creating a Cosmic Movie</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-09-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-3Y4P</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="" src="../images/schmidt-banner-1_6.png" /></p>
+<p>On June 23, 2025, the world saw the universe with a new pair of eyes.</p>
+<p>That was the release date for <a href="https://rubinobservatory.org/">the first images</a> from the <a href="https://nautil.us/the-woman-behind-the-worlds-biggest-camera-1219688/">Vera C. Rubin</a> Observatory. These pictures showed a kaleidoscope of dazzling galaxies, swarms of previously undetected asteroids, and variable stars flashing. The pictures are breathtaking and were compiled after a mere 10 hours of observing. And it’s only the beginning.</p>
+<p>The Rubin Observatory, nestled high in the mountains of Chile, will not spend its time imaging individual stars, galaxies, or planets, nor does it have a single type of target. Rather, over the course of the next 10 years, Rubin will scan the entire southern sky again and again, creating a time-lapse <a href="https://nautil.us/a-movie-camera-for-the-cosmos-854489/">movie of the cosmos</a>. In addition, certain patches of the sky, called “<a href="https://survey-strategy.lsst.io/baseline/ddf.html">Deep Drilling Fields</a>,” will be imaged some 23,000 times, giving an even more precise time-varying picture of the sky. It’s the largest movie on the biggest screen, and astronomers can’t wait.</p>
+<p>Called the Legacy Survey of Space and Time (LSST), it’s an ambitious project that will enable a plethora of astronomy to be done in various disciplines. Astronomers will be able to detect things that would be impossible to see in a single observation, such as asteroids traveling through the inky blackness of space, supernovae exploding, stars dimming or brightening, or exoplanets orbiting their stars.</p>
+<blockquote>
+<p>“Rubin is expected to detect about a million new supernovae per year.”</p>
+</blockquote>
+<p>This cosmic movie will contain a historic amount of data. Rubin will take <a href="https://www6.slac.stanford.edu/research/slac-science-explained/lsst-camera">three images a minute with a 3,200 megapixel camera</a>. This means that every night, Rubin will produce 20 terabytes of data. That’s more than 60 petabytes by the end of the survey.</p>
+<p>It’s a lot of data, the likes of which astronomers haven’t dealt with before.</p>
+<p>“The amount of data is truly mind-boggling. It’s the largest camera ever built for astronomy, and its output of data is a lot to reckon with,” says Colin Orion Chandler, a planetary scientist at Northern Arizona University.</p>
+<p>“Astronomers have always been so photon starved,” says Arpita Roy. “We’re about to move into this inverse era, I think that’s going to be incredible.” Roy leads astrophysics and space at Schmidt Sciences. Existing strategies for data management will be woefully inadequate to deal with the massive amount of data coming out of Rubin. So to help prepare scientists to deal with this amount of data, Schmidt Sciences is providing support for a team of astronomers, data scientists, and software engineers working on a project called <a href="https://dirac.astro.washington.edu/lincc/">LINCC Frameworks</a>. LINCC stands for the LSST Interdisciplinary Network for Collaboration and Computing. A collaboration between the University of Washington, Carnegie Mellon University, and the LSST Discovery Alliance—and supported by Schmidt Sciences—LINCC is a massive initiative to compile ways to handle this raw data from Rubin, processing it quickly and efficiently so that it can be used by astronomers. Various software tools provided by LINCC will help astronomers parse the data, whether they are looking for comets, modeling light curves of supernovae, or mapping dark matter.</p>
+<p><strong>Cosmic Wanderers</strong></p>
+<p>Remnants from our solar system’s formation, <a href="https://ssd.jpl.nasa.gov/">more than 1 million known asteroids</a> lurk in our solar system. They are numerous, yet tiny, having cumulatively <a href="https://science.nasa.gov/solar-system/asteroids/">less mass than the Earth’s moon</a>. Because of this, asteroids have always <a href="https://nautil.us/here-to-save-the-day-521210/">been difficult to spot</a>. However, astronomers have a trick up their sleeves. Time-lapse observations, such as the ones Rubin will provide, create a movie of our solar system, allowing asteroids to quickly stand out as they move swiftly in front of a background of the more stationary stars. This method will also allow scientists to find <a href="https://nautil.us/comets-are-more-dangerous-than-we-thought-238147/">previously unknown comets</a>—icy snowballs that come from the outer reaches of our solar system.</p>
+<p>Rubin’s method of searching the sky is already proving incredibly fruitful for finding these cosmic wanderers. Even after the <a href="https://rubinobservatory.org/news/first-imagery-rubin">initial 10 hours of observations</a>, it was clear that LSST would find asteroids. A <em>lot</em> of asteroids.</p>
+<p>“One of the things that was most stunning ... that took me by surprise, was the number of asteroids they got just in a few pointings,” says Roy. In the first 10 hours of observations, Rubin found more than 2,000 new asteroids—several of which were beyond Neptune and seven of which were considered “Near-Earth Asteroids” that <a href="https://nautil.us/the-origin-of-the-asteroid-that-killed-the-dinosaurs-889220/">spend some time</a> in the Earth’s neighborhood.</p>
+<p><img alt="" src="../images/geTn6YYI-Fernandez_BREAKER.png" /></p>
+<p><strong>MOVING PICTURES:</strong>This image, from the Vera C. Rubin Observatory, reveals numerous asteroids flying through space (indicated by the colored lines), as well as two distant galaxies from the Virgo Cluster. <em>Credit: NSF–DOE Vera C. Rubin Observatory.</em></p>
+<p>In order to find these small cosmic wanderers, Chandler is developing a LINCC Framework approach called the Kernel-Based Moving Object Detection (KBMOD). KBMOD will help scientists quickly parse Rubin’s massive amount of data to find small moving objects such as asteroids and comets.</p>
+<p>Chandler points out that, while finding these objects is interesting, there’s valuable science to learn as well. These observations may give us hints about <a href="https://nautil.us/the-madness-of-the-planets-234684/">how our solar system formed</a>. “I’m very excited by the prospect of finding more comets to improve our understanding of where ices are found in the solar system, and even where Earth’s water came from,” he says.</p>
+<p>Interstellar objects, ones that originate outside of our solar system, <a href="https://phys.org/news/2025-07-apparently-vera-rubin-captured-images.html">have also already been detected</a>. These objects can give us hints about the formation conditions of planetary systems outside of our own.</p>
+<p><strong>Exploding Stars</strong></p>
+<p>As Rubin images the sky night after night, it is excellently poised to detect transient phenomena—cosmic events that are here one moment and then gone the next. A prime example is supernovae—exploding stars that are gone in the blink of an eye in cosmic time. To detect these events, it’s important that LINCC Frameworks not only work well, but work quickly.</p>
+<p>Certain types of supernovae can peak and fade over the course of a hundred days, others a mere month. This might sound like a long time, but astronomers don’t have this entire time to observe the supernova. First, the supernova needs to be found, and follow-up observations (sometimes at different wavelengths) need to be made. These are all easiest when the supernova is at its peak brightness and before it fades from view.</p>
+<p>Rubin will scan the sky every three to four days. This is enough to image a plethora of exploding supernovae. But actually finding them in the data is another story. “A big question that we’ve been battling with is, how do you sort through this much data?” says <a href="https://kdesoto-astro.github.io/">Kaylee de Soto</a>, a LSST-Data Science Fellow at the Center for Astrophysics at Harvard University. “For context, Rubin is expected to detect about a million new supernovae per year, which is far more than anything we’ve dealt with.”</p>
+<p><img alt="" src="../images/Fernandez_BREAKER-2.png" /></p>
+<p><strong>A BUSY UNIVERSE:</strong>Detailed images from Rubin are revealing the distant dynamism of the heavens. This slice of the Virgo Cluster’s many galaxies shows two large spiral galaxies as well as three others that are in the process of merging.  <em>Credit: NSF–DOE Vera C. Rubin Observatory.</em></p>
+<p>“I just find that really exciting. I like the idea that we’re looking at something that inevitably disappears,” says de Soto. “We have a month to learn everything we can about it. And then next month, there will be a whole new set of objects to look at.”</p>
+<p>Here, machine learning algorithms will come into play, which can automatically filter the data, looking for new bright points of light that <a href="https://nautil.us/the-echoes-of-light-476594/?_sp=bfae8573-d45b-4230-bea7-c959fac56d5d.1755744161757">herald a supernova</a>. When one is found in the data, an alert will go out in real time. De Soto works to help automate the categorization of these supernovae. She designed Superphot+, a LINCC framework that quickly analyzes the photometry, or brightness, of a supernova. These alerts contain not only a notice that the supernova has occurred, but also labels and categories that help identify prime targets for further research, explains Ashley Villar, an astrophysicist at Harvard University.</p>
+<p><strong>Grappling with Dark Energy</strong></p>
+<p>Rubin’s data about exploding stars might give astronomers another insight—one into the mysterious force known as dark energy.</p>
+<p>Naively, looking out at the cosmos, we expect distant galaxies to be slowing in their expansion—pulled together by the mutual force of gravity. Surprisingly, however, distant galaxies are actually moving faster and faster away from one another—indicating that some unknown force counteracting gravity is pushing galaxies farther apart. The repulsive force of dark energy also slows down the development of cosmic structure. The nature of dark energy is one of astronomy’s biggest mysteries.</p>
+<blockquote>
+<p><em>“How do you sort through this much data?”</em></p>
+</blockquote>
+<p>A special type of supernova—dubbed supernova type 1a—may help provide clues to dark energy. Because supernovae type 1a have a uniform intrinsic brightness, comparing how bright they appear gives us an excellent estimate of the distance of their host galaxies. As Rubin catalogs more and more supernovae type 1a, we will have a better understanding of how dark energy is affecting the cosmos.</p>
+<p>“Those are the two things that we try to measure: the accelerated expansion and the impact of that on cosmic structure,” explains Rachel Mandelbaum, a co-PI for LINCC Framework based out of Carnegie Mellon University. By imaging each area in the sky so frequently, more supernovae can be found and followed up on to try to decipher the strange force of dark energy.</p>
+<p><strong>Narrowing in on the Unexpected</strong></p>
+<p>Having automatic frameworks in place to process and sift through the enormous amounts of data certainly helps certain fields of astronomy where astronomers know what they are looking for. But science really moves forward when we find something completely unexpected. If these data-analysis frameworks are based on known types of objects, such as comets or supernovae, it begs the question—how will astronomers discover something truly new and anomalous?</p>
+<p><img alt="" src="../images/Fernandez_BREAKER-3.png" /></p>
+<p><strong>TIME-LAPSE:</strong>Because it gathers so many images, the Rubin Observatory can bring to light previously unnoticed detail. This combination image compiles more than 670 images taken over the course of about seven hours. It reveals new subtleties of the Trifid and Lagoon nebulae and their gas clouds, thousands of light-years from us.  <em>Credit: NSF–DOE Vera C. Rubin Observatory.</em></p>
+<p>“Throughout the history of astronomy, discoveries have often been made by someone looking into the data, noticing something weird, and investigating what they saw,” says Konstantin Malanchev, a LINCC project scientist based out of Carnegie Mellon University. “The problem is that with the current volume of data, human-driven discoveries are becoming really difficult.”</p>
+<p>Malanchev is a co-convener of the LSST Informatics and Statistics Science Collaboration Anomaly Detection Interest Group. He explains that the amount of data can be a benefit here, as long as one is creative about using it. By filtering out known objects and using techniques such as machine learning, anomalous events or objects can be detected. “My hope is that a combination of machine learning, human expertise, and a bit of luck will lead to new discoveries,” he says.</p>
+<p>And new science is bound to happen. Andrew Connolly, a co-PI of LINCC Frameworks at the University of Washington, explains. “When you open up a new window on the universe, [in this case] the window of time, you have an opportunity to discover many new phenomena and types of stars and galaxies—new astronomical sources or events that might test our understanding of how the universe formed and evolved.”</p>
+<p>“The challenges are the sheer data volume,” says Anais Möller, a physicist at Swinburne University, who isn’t involved in the LINCC work. “Meeting this challenge means embracing big data technologies like distributed computing [and] machine learning, because at this frontier, frontline discoveries are inseparable from frontline technology.”</p>
+<p>The amount of insight promised by the Rubin Observatory will be a treasure trove for scientists for decades to come—but only in as much as the massive amounts of data can be processed and put to good use. <img alt="" src="../images/nautilus-favicon-14_954.png" /></p>
+<p><em>Lead image: NSF–DOE Vera C. Rubin Observatory</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

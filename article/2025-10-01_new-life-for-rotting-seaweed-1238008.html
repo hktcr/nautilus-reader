@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Life for Rotting Seaweed | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>New Life for Rotting Seaweed</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-01
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-1K6Q</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="" src="../images/schmidt-banner-1_4.png" /></p>
+<p>Each time Loretta Roberson finds herself in an ominous shadow while scuba diving off the coast of Puerto Rico, she discovers that the culprit is <em>Sargassum</em>—large mats of golden-brown seaweed floating overhead.</p>
+<p>Roberson, a scientist at the Marine Biological Laboratory in Woods Hole, Massachusetts, has led a team to develop a seaweed farm in Puerto Rico for several years. But unlike the varieties grown at the farm, and unlike most seaweeds, the genus <em>Sargassum</em> includes species that spend their entire lives floating in the ocean waves. Air-filled bladders the size of small peas called pneumatocysts buoy the algae up to the sea surface where its ochre fronds aggregate to form enormous rafts.</p>
+<p>For more than a decade, the amount of <em>Sargassum</em> has exploded in tropical Atlantic and Caribbean waters. “There’s always been <em>Sargassum</em> in the Caribbean, but not at the levels that we’re seeing now,” says Roberson. Each year massive tangles of the seaweed grow in the open ocean and then wash ashore in mountainous drifts, befouling toney resorts and nature reserves alike. The largest seaweed blooms have contributed to steep declines in visits to once-idyllic tropical beach destinations—one study <a href="https://www.sciencedirect.com/science/article/abs/pii/S0964569124000760?via%3Dihub">reported</a> a 9 percent drop in tourism across the Caribbean due to <em>Sargassum</em> in 2011.</p>
+<blockquote>
+<p>There was more than 9 million tons of Sargassum in 2015 and over 24 million tons in 2022.</p>
+</blockquote>
+<p>As it decays, the seaweed doesn’t just vex sunbathers; it also kills marine life. As a short-term measure in some places, bulldozers and dump trucks remove rotting piles of the beached macroalgae, with most of the mess winding up in landfills. But Roberson is applying her knowledge of seaweed to find uses for this overabundance of <em>Sargassum</em>. She is working with Shishir Chundawat of Rutgers University and José Avalos of Princeton University to lead a multidisciplinary network of collaborators from eight research institutions and one company that is exploring how to transform the glut of <em>Sargassum</em> into products, finding economic value in the problematic seaweed.</p>
+<p>Their project, the Sargassum Biorefinery, or SaBRe, is part of the <a href="https://www.schmidtsciences.org/viff/">Schmidt Sciences Virtual Institute on Feedstocks of the Future</a> (VIFF). A biorefinery transforms raw materials into products just as an oil refinery does, but it uses biomass—in this case <em>Sargassum</em>—as the raw material instead of petroleum. The institute’s five projects aim to make it more cost-effective to use organic matter currently regarded as waste, says Genevieve Croft, Schmidt Sciences senior program scientist. “We have all this biomass lying around that is not only not being used, but could be an environmental harm if we’re not using it,” she says. “Each of these projects is tackling an economic opportunity, but also potentially an environmental challenge.”</p>
+<p>The gravity of the environmental challenge <a href="https://nautil.us/the-oceans-are-missing-their-rivers-302187/">posed by <em>Sargassum</em></a> is what motivates Avalos. “People are suffering economically, and ecosystems are getting ruined,” he says. “It’s a growing crisis.”</p>
+<p>S<em>argassum</em> is naturally found in the center of the North Atlantic, an area known as the <a href="https://nautil.us/eels-dont-have-sex-until-the-last-year-of-their-life-237906/">Sargasso Sea</a>, which is defined by swirling ocean currents.</p>
+<p>“It is a beautiful seaweed, and it has its own unique, essential habitat for organisms,” says Roberson. <em>Sargassum</em> is nursery and hunting ground for hundreds of species of fish and invertebrates as well as sharks, rays, dolphins, and eels. Young sea turtles rest on the mats, and find food and shelter amid the seaweed blades. Ten animal species live exclusively in this floating <em>Sargassum</em> ecosystem.</p>
+<p>But, for the past decade and a half, <em>Sargassum</em> has been proliferating far beyond the Sargasso Sea, covering a wide swath of ocean now called the Great Atlantic Sargassum Belt, which extends in a band across about 5,500 miles of the Atlantic Ocean—from West Africa to the Caribbean Sea to the Gulf of Mexico.</p>
+<p><img alt="" src="../images/E9rGOZqk-Gardiner_BREAKER.png" /></p>
+<p><strong>TRASH TO TREASURE:</strong><em>Sargassum</em> fronds, like these drying in Puerto Rico, could become the raw material for a host of products, from biofuels to fertilizers. <em>Credit: Loretta Roberson.</em></p>
+<p>While the amount of floating seaweed in the belt waxes and wanes with the seasons, its peak amounts have grown over the years. According to satellite measurements <a href="https://optics.marine.usf.edu/projects/saws.html">analyzed</a> by researchers at the University of South Florida, there was more than 9 million tons of <em>Sargassum</em> in 2015, more than 20 million tons in 2018, and over 24 million tons in 2022. Estimates indicate that 2025 will be another record year: In May there were nearly 38 million tons of the seaweed floating in the Great Atlantic Sargassum Belt, according to <a href="https://optics.marine.usf.edu/projects/SaWS/pdf/Sargassum_outlook_2025_bulletin05_USF.pdf">an update</a> from the researchers.</p>
+<p>Large volumes of the squishy brown seaweed are pushed into coastal waters and onto beaches by waves, currents, and winds. On beaches, dead <em>Sargassum</em> covers sand in a wide ribbon parallel to shore or forms hillocks several feet tall. As it decays, the seaweed releases rotten-egg smelling hydrogen sulfide and ammonia, toxic gases that can cause human health problems including nausea and breathing difficulties.</p>
+<p><em>Sargassum</em> drifts piled on beaches can reduce the availability of sea turtle nesting sites and can make the already perilous journey from nest to waves even harder to navigate for emerging hatchlings. Where decaying <em>Sargassum</em> floats offshore, the mats can block turtles from surfacing for a breath of air and prevent sunlight from getting to corals, seagrass, and other marine life below. Massive influxes of rotting <em>Sargassum</em> infuse water with excess nutrients and deplete oxygen, killing fish, crabs, urchins, and mangrove trees.</p>
+<blockquote>
+<p><em>As it decays, the seaweed doesn’t just vex sunbathers; it also kills marine life.</em></p>
+</blockquote>
+<p>Coastal communities in Mexico, including in the state of Quintana Roo on the Yucatán Peninsula, have been grappling with the problems of excess <em>Sargassum</em> for years. In 2022, Judith Rosellón Druker, a research scientist with the Mexican government, <a href="https://www.tandfonline.com/doi/full/10.1080/26395916.2023.2253317">interviewed</a> Quintana Roo residents about how <em>Sargassum</em> has affected their coast. They described a crisis. “Some people were telling me, I cannot go to the beach and enjoy it anymore because it smells horrible and the landscape is depressing,” she says. As one resident she interviewed put it, “Everything dies along the coast.”</p>
+<p>The locals she interviewed also described the economic effects of the environmental changes. While some described new job opportunities with companies managing the <em>Sargassum</em>, many more reported a loss in income from fishing and businesses linked to Quintana Roo’s tourist epicenters, such as Cancun and Playa del Carmen. A 2022 <a href="https://publications.iadb.org/en/economic-impact-sargassum-evidence-mexican-coast">study</a> led by the Inter-American Development Bank estimated that economic activity drops nearly 12 percent when Quintana Roo coasts are swamped by <em>Sargassum</em>.</p>
+<p><img alt="" src="../images/Gardiner_BREAKER-2.png" /></p>
+<p><strong>POSTCARDS FROM THE SEA:</strong>Seaweeds, which are actually algae, not plants, can be pressed and dried, like these specimens, which were made by kids during a public outreach event, the Woods Hole Science Stroll. The green leaves are <em>Ulva</em>, also called “sea lettuce,” the red ones are <em>Palmaria</em>, and the brown one on the left is <em>Sargassum</em>.  <em>Credit: Loretta Roberson.</em></p>
+<p>So <em>Sargassum</em> represents a double-edged sword. Swirling in the Sargasso Sea at a population right-sized for the environment, <em>Sargassum</em> creates crucial habitat. But once <em>Sargassum</em> is headed for a coast, “you cannot consider that an ecosystem that should be protected,” Rosellón Druker says.</p>
+<p>While there is still more to learn about why <em>Sargassum</em> is proliferating so rapidly, a key cause is likely the dramatic increase in nutrients, including nitrogen from fertilizers, carried into the ocean by runoff. It’s also possible that nutrients are arriving with dust blown off the Sahara Desert, which settles into the Atlantic. The amount of such windblown dust is increasing as the climate changes and the Sahara grows drier.</p>
+<p>The warming temperatures and abundant sunlight in the tropics also help the seaweed grow more quickly. A <a href="https://journals.plos.org/climate/article?id=10.1371/journal.pclm.0000253">study</a> published in 2023 reviewed the effect of projected climate warming on <em>Sargassum</em> and found that by 2050 it’s likely that the blooms will last for more of the year and happen at higher latitudes. If ocean waters get too warm, vast rafts of seaweed may die during the hottest months. While predicting long-term, future ecological events in rapidly changing oceans is uncertain, it’s possible that the Sargasso Sea’s population of <em>Sargassum</em> may multiply in warming waters, sending rafts of seaweed to mid-latitude beaches along the United States East Coast.</p>
+<p>Most of the <em>Sargassum</em> gathered from beaches is destined for landfills, but as uses for the seaweed as a feedstock—or raw material—are emerging, new companies are popping up across the Caribbean to take advantage.</p>
+<p>While making use of <em>Sargassum</em> is relatively new, other types of seaweed have been used for thousands of years for food and more recently to make chemicals to stimulate plant growth, bioplastics, and renewable energy. Converting seaweed to energy has a much smaller environmental footprint than traditional oil and gas production, says Michael Huesemann, an engineer at Pacific Northwest National Laboratory who studies methods to develop biofuels, vegan protein for foods, and other products from seaweed. Unlike other sources of biomass, seaweed doesn’t require freshwater or land, he adds. Huesemann has not yet worked with <em>Sargassum</em> but can see the appeal because its blooms mean there is no need to farm it, as is typical for other seaweeds used in industry.</p>
+<p>Using <em>Sargassum</em> to produce biofuels is of keen interest to Caribbean nations, such as Barbados, that are transitioning to renewable energy. In 2019, Legena Henry, a mechanical engineer and University of the West Indies lecturer, and her undergraduate students were searching for ways to make biofuels locally. Experimenting, they discovered that useful quantities of biogas could be produced from a combination of rum distillery wastewater and <em>Sargassum</em>.</p>
+<blockquote>
+<p>Sargassum represents a double-edged sword.</p>
+</blockquote>
+<p>With Henry as the CEO, Rum and Sargassum, Inc. spun off from the university and today is operating a large biodigester—a tank that uses microbes to break down organic compounds in <em>Sargassum</em> and wastewater into biogas. With conversion kits installed, four cars are now running on biogas instead of gasoline.</p>
+<p>The project plans to eventually convert 120 conventional taxis serving Barbadians to run on this <em>Sargassum</em>-based fuel. Initially, Rum and Sargassum will sell compressed natural gas to the taxis. After two years, the profits will be used to build a 250-killowatt biogas plant. “The taxis will not even know when they switch over to renewable biogas, except their costs will go down,” says Henry. She hopes investors will help Rum and Sargassum increase the scale of biogas production and estimates that 32 similar biogas plants would be needed to rid Barbados beaches entirely of <em>Sargassum</em>.</p>
+<p>Building on existing uses for seaweed, the Sargassum Biorefinery team is one year into a five-year search for new ways to turn <em>Sargassum</em> into a bevy of products.</p>
+<p>“The impact of the project transcends national boundaries,” says Chundawat. Solutions developed could be implemented in all locations currently vulnerable to <em>Sargassum</em>, he adds, which include more than 40 Caribbean and West African countries and territories.</p>
+<p>What will they make from the seaweed? It may become biofuels, animal feeds, chemicals to replace petrochemicals, bioplastics, and pharmaceuticals, says Avalos. “But we haven’t committed to any specific products,” he adds. Discovering more about <em>Sargassum</em> and how to break it down into its component parts will help answer that question, says Chundawat.</p>
+<p>Before new uses for <em>Sargassum</em> are found, there is more to learn about the seaweed’s basic biology and ecology. So last fall, Roberson and her team collected samples of <em>Sargassum</em> from the water and beaches of Puerto Rico and sent them to project partners.</p>
+<p><img alt="" src="../images/Gardiner_BREAKER-3.png" /></p>
+<p><strong>BUCKET SCIENCE:</strong>A Falmouth High School student collects <em>Sargassum</em> samples in Woods Hole, MA, in front of the Marine Biological Laboratory with the Woods Hole Oceanographic Institute dock and ship in the background. <em>Credit: Loretta Roberson.</em></p>
+<p>With her colleagues, Roberson is exploring the biology and growth rates of the three main types of <em>Sargassum</em> found in blooms—<em>S. fluitans</em> and two varieties of <em>S. natans</em>. If they have distinct compositions, each type may be useful in different products.</p>
+<p>One challenge posed by turning <em>Sargassum</em> into a feedstock is that, as it lives and floats in the ocean, seaweed absorbs toxic heavy metals, including arsenic. This can be beneficial as seaweed can be used to remove toxics from water, but hazardous in products made from the seaweed. “You can’t just feed it to animals,” says Chundawat, explaining that the project might need to strip toxic compounds out before <em>Sargassum</em> is utilized.</p>
+<p>But <em>Sargassum</em>’s ability to concentrate elements from seawater may have a distinct upside if it also holds onto rare earth elements—valuable metals used in technologies such as phones, computers, electric and hybrid vehicles, and televisions. Small amounts of these elements are naturally found in seawater and accumulate in seaweeds, although it is currently unknown how much builds up in <em>Sargassum</em>.</p>
+<p>“When you grow seaweed in [seawater], certain rare earth elements … get bioconcentrated in the seaweed by a factor of 10,000 to a million, depending on the seaweed, and depending on the elements,” says Huesemann. While the elements concentrate in seaweed, Huesemann cautions that the quantities found so far are too small to be economically valuable. Engineers from UCLA and Roberson are working together to learn how <em>Sargassum</em> takes up rare earth elements and how best to extract them.</p>
+<p>While Roberson focuses on the biology of <em>Sargassum</em>, other researchers are focused on its microbiome, including yeast and bacteria that help break down the seaweed. Microbes, like those used in Henry’s biodigester, release enzymes that break complex compounds into simple ones. Those simple compounds become the building blocks for products produced in biorefineries.</p>
+<p>Analyzing microbes on <em>Sargassum</em> collected from Caribbean beaches, Chundawat and his colleagues are discovering which wild microbes and enzymes naturally break <em>Sargassum</em> apart. Rutgers University biologist Debashish Bhattacharya  and colleagues are working to sequence the genomes of such microbes. “We’re getting insight into the actual genes that are involved in the breakdown of <em>Sargassum</em>,” says Chundawat.</p>
+<p><img alt="" src="../images/Gardiner_BREAKER-4-1.png" /></p>
+<p><strong>THE (UN)WELCOME MAT:</strong>Floating rafts of <em>Sargassum</em> form crucial habitat for a variety of ocean creatures. But overproduction of the brown algae causes problems at sea and ashore. <em>Credit: Andriy Nekrasov / Shutterstock.</em></p>
+<p>However, brown seaweeds like <em>Sargassum</em> are often harder to break down than other seaweeds. To speed up the process in biorefineries, the researchers plan to engineer super-efficient enzymes and microbes. After finding enzymes that break down <em>Sargassum</em> in the wild, they will engineer versions that break down the seaweed more effectively—a type of directed evolution guided by computational modeling. Avalos will then develop microbes that secrete the improved enzymes.</p>
+<p>Many of the microbes of interest are bacteria, but Avalos is focused on yeasts that can digest <em>Sargassum</em> and live in saltwater. Yeasts have advantages, he says. They can be engineered to produce enzymes and proteins that are harder for bacteria to produce, and they don’t seem to get infected by viruses, Avalos explains.</p>
+<p>Once there are enzymes that efficiently break down the seaweed, the team will explore what products can be made from the resulting compounds and whether other microbes and physical conditions, such as high pressures and temperatures, can further transform those compounds into useful products.</p>
+<p>Despite the project name, the Sargassum Biorefinery does not plan to build an actual biorefinery. Rather, the project aims to develop processes and technologies to convert <em>Sargassum</em> into products, paving the way for future biorefineries.</p>
+<p>“A dream that we always talk about within the SaBRe team is having a floating biorefinery,” says Roberson. If vessels collecting the <em>Sargassum</em> also had the technology to process it, products could be made right on the boat. “So while we’re collecting, you know, pass it straight into the feed of the biodigester,” she says.</p>
+<p>Whether or not floating biorefineries become a reality, gathering <em>Sargassum</em> while it is still at sea could prevent massive piles of it on beaches and in coastal waters. So Roberson and her colleagues are developing methods to skim the seaweed from the sea surface and haul it onto vessels. Other technology may someday help gather the seaweed too, like electric self-driving tugboats that can tow heavy bags of seaweed to biorefineries onshore, says Roberson. <em>Sargassum</em> forecasts are becoming detailed enough to track where rafts of seaweed are floating so that boats know where to collect them.</p>
+<p>But what will happen if <em>Sargassum</em> overproduction stops after the infrastructure for biorefineries is built? “Maybe we’ll one day have a time where we could control the amount of nutrients that are being dumped into the ocean and not have these large blooms,” says Roberson. <em>Sargassum</em> farms in the ocean could keep the industry going, she says.</p>
+<p>“I think the <em>Sargassum</em> project is not only addressing the problem of the now,” says Chundawat. “It could also be looking at creating opportunities in the future when you could develop seaweed farming technologies in the years to come.” <img alt="" src="../images/nautilus-favicon-14_951.png" /></p>
+<p><em>Lead image: Arkadij Schell / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Taste of Prehistory | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Taste of Prehistory</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PA3O</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Imagining Neanderthal cuisine, we approached chef Josh Lewin, cofounder of <a href="https://www.julietsomerville.com/">Juliet restaurant</a> in Somerville, MA, who has also concocted dishes inspired by Classical Rome. “What’s 50,000 years more?” said Lewin when invited to collaborate on cooking up Neanderthal meals. The following recipes were created in conversation with Lewin.</p>
+<h4><strong>Shanidar Barley Salad</strong></h4>
+<p>To start our culinary time-travel, an appetizer. This vegetarian-friendly dish was inspired by roughly 50,000-year-old plant remains unearthed from Shanidar Cave in what is now Iraq. Based on pollen in the sediments, Neanderthals in this mountainous region enjoyed a pleasant environment with walnut trees, oaks, and wild relatives of chicory and lettuce growing nearby. From the fossilized plaque of a Shanidar Neanderthal’s teeth, archaeologists extracted starch grains and phytoliths—microscopic mineral deposits that vary in shape by plant species. These botanical bits indicate that Neanderthal chomped date fruits, pea or chickpea-like legumes, and cooked grains resembling wild barley. (An older layer at the same site yielded a 70,000-year-old charred lump, thought to be a grain and legume pancake.)</p>
+<h5><strong>Ingredients</strong></h5>
+<h6><strong><em>From the original pantry:</em></strong></h6>
+<p>1/2 cup dates, chopped<br />
+1/2 cup walnuts, chopped<br />
+1 cup chickpeas <br />
+1 cup pearl barley<br />
+3 cups water</p>
+<h6><strong><em>Modern additions:</em></strong></h6>
+<p>2 tablespoons olive oil<br />
+1 small onion<br />
+1 teaspoon cumin<br />
+1/4 teaspoon cinnamon<br />
+Salt and paper to taste<br />
+1 dollop yogurt to finish</p>
+<h5><strong>Method</strong></h5>
+<ol>
+<li>
+<p>Bring barley, water, and salt to boil. Reduce heat and simmer for 25-30 minutes until tender.</p>
+</li>
+<li>
+<p>In a medium pan, cook olive oil and onions for 5-7 minutes. Add walnuts, chickpeas, spices, and dates. Continue sautéing until the dates soften, about 1-2 minutes.</p>
+</li>
+</ol>
+<p>3.To serve, mix with barley and more olive oil. Allow to cool. Finish with a dollop of plain yogurt.</p>
+<p><img alt="" src="https://lede-admin.nautil.us/wp-content/uploads/sites/70/sites/3/nautilus/linebreak.png?w=710" /></p>
+<h4><strong>Iberian Roast Rabbit</strong></h4>
+<p>This recipe derives from the culinary traces of Neanderthals who roamed the Iberian Peninsula roughly 120,000 years ago. During this period, frigid Ice Age conditions lulled, and Europe experienced a temperate climate similar to today’s. The ingredients featured in this dish—rabbit, pine nuts, and olives—were <a href="https://doi.org/10.1016/j.quaint.2011.03.019">discovered at Bolomor Cave</a>, a site perched in a narrow valley a few miles from Spain’s Mediterranean coast. Within the roughly 8-inch sediment layer deposited during this warm phase, researchers excavated bones from at least 80 rabbits. Burn marks and breaks indicate the arms were roasted, and the legs were broken down for marrow. <a href="https://doi.org/10.1016/j.quascirev.2019.03.015">Analyses of pollen</a> from the same layer have revealed many edible species in proximity, including trees that produce wild pine nuts and olives. To transform these ingredients into a modern meal, Chef Josh’s team of professional cooks added olive oil, wine, herbs, and contemporary conveniences like a stovetop.</p>
+<h5><strong>Ingredients</strong></h5>
+<h6><strong><em>From the original pantry:</em></strong></h6>
+<p>1 whole rabbit, cut into 6-8 pieces<br />
+¾ cup olives, roughly chopped<br />
+⅓ cup pine nuts, toasted</p>
+<h6><strong><em>Modern additions:</em></strong></h6>
+<p>¼ cup olive oil<br />
+1 medium shallot, finely minced<br />
+3 cloves garlic, finely chopped<br />
+1 tablespoon fresh rosemary, chopped<br />
+1 tablespoon fresh thyme leaves<br />
+2 bay leaves<br />
+½ cup dry white wine<br />
+2 cups vegetable broth (plus more as needed)<br />
+Salt and black pepper</p>
+<h5><strong>Method</strong></h5>
+<ol>
+<li>
+<p>Warm olive oil in a heavy, oven-safe pot over medium heat. Add shallot and garlic, letting them soften slowly.</p>
+</li>
+<li>
+<p>Combine thyme and rosemary in a food processor with a pinch of salt until a paste forms. The salt works as an abrasive to bruise the hard herbs and release moisture. For a more authentic experience, pull out that mortar and pestle or go outside and get a rock. Rub the paste all over the rabbit pieces. Add to the pot of garlic and shallots, along with bay leaves. Season with pepper to taste. Sauté gently until the meat is golden brown.</p>
+</li>
+<li>
+<p>Pour in the white wine to lift the caramelized bits from the pan, then stir in olives and toasted pine nuts.</p>
+</li>
+<li>
+<p>Add broth to nearly cover the meat. Cover and cook gently over low heat—or in a 325°F oven—for about one hour, until the meat yields easily to touch. If the liquid runs low, replenish it as needed, imagining the slow patience of a meal tended by fire.</p>
+</li>
+<li>
+<p>Remove the lid and let the sauce thicken slightly. Taste for salt and acid balance. Serve warm with a drizzle of its juices.</p>
+</li>
+<li>
+<p>Serve warm with a drizzle of its juices.</p>
+</li>
+</ol>
+<p><img alt="" src="https://lede-admin.nautil.us/wp-content/uploads/sites/70/sites/3/nautilus/linebreak.png?w=710" /></p>
+<h4><strong>Spy Cave Sheep Stew</strong></h4>
+<p>Facing the other extreme of climate, Neanderthals who inspired this dish lived roughly 45,000 years ago through severe cold in what is now Belgium. Studies of the region have shown wild <a href="https://www.aranzadi.eus/fileadmin/docs/Munibe/200501205219AA.pdf">mouflon sheep</a>—the protein in this dish—were abundant through this period. At a site known as Spy Cave, Neanderthal <a href="https://www.nature.com/articles/nature21674">dental tartar held DNA</a> from these sheep and fungi as well as starches resembling <a href="https://www.pnas.org/doi/10.1073/pnas.1016868108">water lily bulb and sorghum</a>.</p>
+<p>Imagining a moment of <em>hygge</em> against Ice Age cold, Chef Josh and his team created a stew of mushrooms, water lily, and lamb to be ladled over sorghum pilaf.</p>
+<p><img alt="" src="../images/Alex_BREAKER-2.png" /></p>
+<p><em>Photo by Bob Grant</em></p>
+<h5><strong>Ingredients</strong></h5>
+<h6><strong><em>From the original pantry:</em></strong></h6>
+<p>1 lb lamb, cut into bite-size pieces<br />
+1 cup sorghum<br />
+1 cup wild mushrooms, roughly chopped <br />
+1-2 water lily bulbs, peeled and thinly sliced (or substitute mild root vegetable if unavailable—water lily is slightly starchy like parsnip or celery root but with a milder flavor)</p>
+<h6><strong><em>Modern additions:</em></strong></h6>
+<p>2 tablespoons olive oil (divided)<br />
+1 small onion, finely chopped<br />
+2 garlic cloves, minced<br />
+1 teaspoon ground cumin<br />
+½ teaspoon ground coriander<br />
+½ teaspoon smoked paprika<br />
+1 teaspoon rosemary (fresh or dried)<br />
+1 cup vegetable stock<br />
+Salt and black pepper, to taste</p>
+<h5><strong>Method</strong></h5>
+<ol>
+<li>
+<p>Bring 2 cups of water to a boil, add the sorghum and a good pinch of salt, and cover. Simmer about 1 hour, until tender and nutty. Drain any remaining liquid and keep warm—this is the earthy base for the stew.</p>
+</li>
+<li>
+<p>In a small pan, warm 1 tablespoon olive oil over medium heat. Sauté the sliced water lily bulbs (or substitute root vegetable) for 5–7 minutes, until golden and tender. Set aside.</p>
+</li>
+<li>
+<p>In a large heavy pot, heat the remaining tablespoon of olive oil over medium-high heat. Season the lamb with salt, pepper, and rosemary. Brown on all sides, 5–7 minutes, until richly golden brown.</p>
+</li>
+<li>
+<p>Add onion, garlic, and additional spices to the pot and cook until soft. Stir in mushrooms.</p>
+</li>
+<li>
+<p>Add vegetable stock and the sautéed water lily bulbs. Lower the heat and simmer gently for 30 minutes, or until the lamb is tender and the broth has deepened. Taste and adjust seasoning.</p>
+</li>
+<li>
+<p>To serve, spoon the stew generously over the warm sorghum. The grains absorb the broth’s warmth, an echo of the sustenance that carried Ice Age humans through long winter nights. <img alt="" src="../images/nautilus-favicon-14_642.png" /></p>
+</li>
+</ol>
+<p><em>To learn more about the inspiration behind these recipes, read "<a href="https://nautil.us/eat-like-a-neanderthal-1255402/">Eat Like a Neanderthal</a>."</em></p>
+<p><em>Lead photo by Bob Grant</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

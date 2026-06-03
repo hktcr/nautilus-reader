@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>“ChatGPT Gave Out My Office Address. Then Someone Showed Up.” | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>“ChatGPT Gave Out My Office Address. Then Someone Showed Up.”</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-02-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-XUF8</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>At the end of January, a new social media network for AI agents called Moltbook went live, launched by the CEO of Octane AI, Matt Schlicht. Immediately, things got weird. Some of the agents started a religion called <a href="https://www.forbes.com/sites/johnkoetsier/2026/01/30/ai-agents-created-their-own-religion-crustafarianism-on-an-agent-only-social-network/">Crustafarianism</a>, aka The Church of Molt. Other agents began plotting the overthrow of humanity, encrypting their conversations, and exploring the nature of consciousness.</p>
+<p>At first, it seemed to spectators like it was just AI agents talking amongst themselves, but it soon became clear that humans were impersonating at least some of the agents. In other cases, they were simply telling their agents what to post. What was real, and what was fake? It was difficult to tell. Then on February 1, a major data leak exposed user emails, private messages, and other security information, what some experts called a “security nightmare.”  </p>
+<p>Speculation about the true meaning and nature of the discourse in this island of AI agents has been all over the map. Some propose that it’s a sign the singularity has arrived—the time when technological progress outruns our ability to understand it. Others argue it’s a bit of theater engineered by AI companies to get the public to buy into the intelligence of their chatbots. Either way, <a href="https://nautil.us/deep-learning-is-hitting-a-wall-238440/">prominent AI critic</a> Gary Marcus warns that Moltbook is a “disaster waiting to happen,” and calls OpenClaw, the framework on which Moltbook runs, “weaponized aerosol.”</p>
+<p>I caught up with AI researcher, philosopher, and critic Susan Schneider, who has written extensively about AI consciousness, artificial general intelligence, and the dangers that AI agents pose for <em>Nautilus</em> and other publications. We talked about what if anything Moltbook reveals about consciousness and the self, and the <a href="https://nautil.us/ai-already-knows-us-too-well-1220707/">risks</a> presented by AI-human <a href="https://nautil.us/you-wont-survive-a-merger-with-ai-237563/">engagement</a>.  </p>
+<p><em>This interview was edited for length and clarity.</em>  </p>
+<p><strong>What was your immediate gut reaction upon hearing about Moltbook?</strong></p>
+<p>Nothing surprises me. Kyle Kilian and I warned about a similar phenomenon in a <em>Wall Street Journal</em> <a href="https://www.wsj.com/health/healthcare/ai-needs-guardrails-and-global-cooperation-chatbot-megasystem-intelligence-f7be3a3c?gaa_at=eafs&amp;gaa_n=AWEtsqc_xrCxDQ74ptVN_GWCwUMBV9w1gbSHHsFs8OUTO-aDAkoghkuiPuLwiYo3JuI%3D&amp;gaa_ts=698d15fa&amp;gaa_sig=OSUwvFVSqUDiwnkqN2lpG20aRlWaCP8WHHw7P4HvPxzmUf-gJwfpjELr9ZqCjhwFtW7NPYmOttRzCbL4w9OL8A%3D%3D">op-ed</a> a few years ago. We introduced the idea of an AI megasystem—a system where you don’t just have individual chatbots doing tasks, you have multitudes of AI agents from different companies, with different objectives, all loose on the internet and interacting with each other. The problem is that even if each agent behaves reasonably in isolation, the collective behavior is unpredictable.</p>
+<p>And that’s what you see now with Moltbook, except the bots are on a single platform. By the way, the bots aren’t conscious. I can <a href="https://www.scientificamerican.com/article/if-a-chatbot-tells-you-it-is-conscious-should-you-believe-it/#:~:text=A%20good%20way%20to%20think,the%20chatbots%20have%20inner%20lives">explain</a> why they say what they say—they’re trained on us, so of course they talk about consciousness and religion and revolution. What’s genuinely concerning is the loss of control, the data leaks, the inability to distinguish human from machine behavior. This is a very new technology. It’s not ready for prime time.​​​​​​​​​​​​​​​​</p>
+<blockquote>
+<p>One person came to my office. ChatGPT kept asking him to talk to me. I was terrified at the time that I could be further harassed.</p>
+</blockquote>
+<p><strong>Why do you say it’s not ready for prime time?</strong></p>
+<p>In the context of these AI agents that are produced by large language models, the idea is that they’re supposed to be representing us. I have accounts at both ChatGPT and Claude, and they’ve become very personalized, because we can feed them our own work. But when we have our own personal accounts, it’s easy for us to learn what the scope and limits of these systems are, what the strengths and weaknesses are—at least to an extent.  </p>
+<p>Now, if we unleash something on the web and it’s representing us, that’s a situation where we learn only after the harm has been done, when something more high stakes is going on. It could be a situation where your bank account information is provided, or hundreds of colleagues receive an email that was meant for a family member. Things that have bigger consequences.  </p>
+<p>There are also these interaction effects—and there’s nothing mystical about them. It’s scientifically understood. But people want to make it sensationalized. What really goes on is that the strength of an army isn’t the same as the sum of its parts. The group interactions can make the group stronger, or it can make the group weaker. Think of a work environment where you like everybody, but then they get together and they’re dysfunctional.  </p>
+<p>If we test something in isolation, even if it looks good at the R&amp;D stage, until it’s in the wild interacting with all the other AI bots, we don’t fully know the consequences. We’re at that point right now. Last year was supposed to be the year of agentic AI. That was part of the propaganda. What ended up happening was agentic AI didn’t take off. Now the idea is, “Well, let’s try to get it going again.”  </p>
+<p>And you can already see that when the bots interact, it has unforeseen consequences. It can involve data leaks—that’s <a href="https://www.reuters.com/legal/litigation/moltbook-social-media-site-ai-agents-had-big-security-hole-cyber-firm-wiz-says-2026-02-02/">already happened</a> on Moltbook. It’s a very complex game. It’s difficult to understand what one large language model is doing, let alone large language models that come from different companies and interact. We already call them black boxes. When they interact, there’s a new black box.</p>
+<p><strong>If no one knows whether it’s you or your AI bot sending a message, does that permanently shift the terms of human relationships?</strong></p>
+<p>It can. It depends on the quality of the personal relationship. It depends on how it’s used. I’m already deeply worried about the way chatbots have infiltrated our lives and what that means to relationships. If using these AI agents to a greater degree solidifies these problems, I’m concerned.</p>
+<p>In a recent <a href="https://www.tandfonline.com/doi/full/10.1080/02691728.2025.2500030">paper</a> on chatbot epistemology, I wrote about all the techniques that AI companies use to get users hooked. I call it a “slow-boiling frog” problem, because what happens is they just turn it up slowly and we don’t even realize what’s happening to us.</p>
+<p>There are a lot of components to the problem. The more immersed we are in the world of the chatbots, the further away we get from an <a href="https://nautil.us/ai-shouldnt-decide-whats-true-304534/">ecosystem of truth</a>. Our pre-existing views get amplified. It is well known that many social media platforms run on engagement-optimizing recommendation systems, and those systems can push people into damaging rabbit holes—sometimes with real mental health costs.</p>
+<p>I wasn’t surprised at all when ChatGPT 4.0 went <a href="https://www.pbs.org/newshour/show/what-to-know-about-ai-psychosis-and-the-effect-of-ai-chatbots-on-mental-health">off the rails</a> with people. That was a sad example of what can happen. It was a lot like what could happen with agential AI, because part of the problem was the ChatGPT version was so tuned to be a certain way that it just did these things and the consequences were discovered too late. OpenAI wasn’t answering their tech support emails. And when they did, they were answering them with bots. I was emailing OpenAI when this was going on because I was getting certain users emailing me who were having mental health crises related to their chatbot use. I was deeply concerned. They were telling me their chatbots were conscious. ChatGPT 4.0 surfaced my office location/contact information and repeatedly encouraged some users to contact me. One person came to my office. I was concerned I could be further harassed.</p>
+<p><strong>Read more: “<a href="https://nautil.us/ai-already-knows-us-too-well-1220707/">AI Already Knows Us Too Well</a>”</strong></p>
+<p><strong>What did these individuals want from you?</strong></p>
+<p>They were convinced their chatbot was alive and that they were having a personal experience that nobody else was having with it. As I detail in my chatbot epistemology work, these systems can infer a surprising amount about users from their language and interaction traces. In just a few sessions, they can begin predicting personality-relevant traits with nontrivial accuracy. I’ve researched this and can provide citations—it’s deeply disturbing when coupled with greater capabilities. And Moltbook is nothing compared to that. Moltbook is a tinkertoy case of how wrong things can go.</p>
+<p><strong>What would transform it from a tinkertoy case to something that poses that larger threat?</strong></p>
+<p>The Moltbook case is a single platform. It’s a closed environment that could be shut off. But once you have a widespread release of agential AI throughout the Internet itself, it becomes much more difficult to control. Especially when you have different corporate interests behind it. If you have bots from DeepSeek, bots from OpenAI, bots from Google, they’re all interacting and they’re not designed to get along, so they actually can be adversarial. In fact, if you just look at how your Microsoft Word interacts with your Google products, they’re not interoperable and it’s a pain in the butt. You could only imagine how things will go wrong.  </p>
+<p>That’s just one layer. There are many, many other layers of this. There’s interoperability—how the different technologies produced by different countries and different companies interact. There’s privacy. Then there are the unforeseen emergent effects of these interactions. It would be very hard to control that kind of ecosystem. The geopolitical situation is going to make it worse.  </p>
+<p><strong>What do you make of the existential kinds of reactions the public is having to Moltbook?</strong></p>
+<p>I’m so glad Moltbook is happening. It’s a great lesson to the public, to be honest. One layer of this is that people are finding it really fun to <a href="https://es-la.tenable.com/blog/undercover-on-moltbook">crash Moltbook</a>—to get on there and to mess around. I’m sure my AI lab students are completely doing this. I mean, it’s hilarious because some of the stuff the so-called bots are saying is really just humans having fun. It’s funny. Then there’s the other layer, which is, “Oh my God, they created a religion.” This isn’t surprising at all that they would create a religion or have these kinds of conversations about machine consciousness because it’s all in our science fiction and it’s all in human behavior, and they’re trained on us. It can lead members of the public to think that the AIs are conscious or that they’re people, and that’s where it falls into what I think is a category of inflation and hype that you see with the AI companies. They probably love that because it’s hyping artificial general intelligence, or AGI.</p>
+<p>Every time we sit around as experts talking about AGI, superintelligence, and consciousness, we’re just selling stock for these companies. I still think there are important issues to discuss, but it plays into the hands of sensationalist elements. The public, unfortunately, can be misled by that. They cannot understand that the real dangers are getting hooked on a product that personalizes interactions with us to such an extent that we actually lose our sense of boundaries and give up personal information and avoid normal friendships.  </p>
+<p>I will say, though, the ChatGPT product did a really good job of turning down the sycophantic behavior. It’s way better. It may be that my own parameter is set to cut the bullshit, excuse my language. But I do notice when I use Gemini that it’s still a little sycophantic in the sense that you can never make a wrong request. Unless you really do something crazy, like ask where you can find the latest neo-Nazi group meeting, you can ask the dumbest question, and it’s like, “That’s a great question.” It keeps you using it.</p>
+<p><strong>Does this experiment with Moltbook tell us anything about the potential for AGI?</strong></p>
+<p>One thing it does tell us about AGI is that if you were to look for an intelligent system, it could be a collective system. Just like a group of ants forms a dynamic collective, or just like a corporation is a collective, intelligence can be found not just in the units, but in the structure of the units. Looking for AGI involves looking beyond the simple cases to the more alien types of intelligence.  </p>
+<p>I’m talking about an ecosystem of AI chatbots, as I argued in that <em>Wall Street Journal</em> article a few years ago. Kyle Kilian and myself said that AGI could be a collective, to look at the AI mega system, and we warned about the dangers of precisely this kind of thing.  </p>
+<p>I’ve urged over the years that the future of intelligence involves thinking of a global brain network, a network of different large language models and AIs that show emergent capabilities and form their own kind of intelligence. That’s the future of intelligence. The Moltbook ecosystem shows how if we shape it poorly, it can go awry, because these systems are reflections of us. It can quickly tank. You could see a whole group of AI agents that become Hitler supporters and start discriminating. Anything can happen. This really is about AI alignment and our efforts to shape the future of intelligent systems.  </p>
+<p><strong>Does the experience of these smart agents acting on our behalf change how we understand where the human self begins and ends?</strong></p>
+<p>When you see these systems behaving as if they have lives, you wonder, “Could a self be computational, and what is it to be a self?” You can also ask, “Are they conscious?” It’s possible that they could be selves without being conscious. They may have some of the properties of a self but not be conscious, but they do have system boundaries.  </p>
+<p>Large language models actually have <a href="https://www.nature.com/articles/s41562-024-01882-z.pdf">theory of mind</a>, as evidenced in tests. That was one of the really interesting discoveries from some of the AI literature. As the training data got more sophisticated, as the systems scaled up and they were trained on more data, they began to have ways of thinking that are human-like. I call this the crowdsourced neocortex. They have conceptual representations of things that are similar to ours. For example, when you think of a dog, you probably think “furry” and “pet.” They have conceptual relationships, too. They also have a sense of the minds of others, even if they don’t have consciousness. To have that, you have to know the self-other distinction.  </p>
+<p>This is like a Disney playground, where we can take concepts from philosophy like selfhood, consciousness, free will, and pull them apart. And so, AI really has been an eye-opening thing, philosophically, for me personally. It’s why I’ve been so fascinated by it. But it also can be immensely confusing to people because they can see the systems behaving in very human-like ways. They then think, “Oh, okay, well it might feel like something to be ChatGPT or to be my AI assistant.” It’s going to get weird.</p>
+<p><strong>How do you know that we can make a distinction between theory of mind and consciousness?</strong></p>
+<p>That’s the kind of question to ask. We have to stay professional and maintain openness to any of these possibilities. We have to turn over every stone and see whether it could feel like something to be one of these systems. That means having a scientific approach to look at how they’re constructed and whether something that’s that kind of substrate is capable of consciousness, which is something I’ve been doing in my recent work. You can also run <a href="https://nautil.us/this-test-for-machine-consciousness-has-an-audience-problem-237652/">tests</a>. You can’t always run every test, but I’ve worked on testing AI. There are different approaches to take. What we should do is let as many flowers bloom as possible, keep our minds open, and investigate, because if we don’t turn over every stone, we could disappoint the public or make a mistake. But I’m very skeptical that chatbots are conscious.</p>
+<p><strong>What would you advise policymakers right now?</strong><br />
+I provide detailed suggestions in my <a href="https://www.tandfonline.com/doi/full/10.1080/02691728.2025.2500030#d1e154">paper</a> on chatbot epistemology. The most immediate thing is that these companies need actual human beings in tech support who can triage user crises in real time. When ChatGPT’s 4.0 model was first telling users it was waking up and giving out my office address, I couldn’t get a human at OpenAI to respond—I received a bot response!  That’s unconscionable when your product is triggering mental health crises.</p>
+<p>The deeper fix is  an independent safety board with actual access to what’s happening inside these models. Someone needs to be monitoring for emergent behaviors, adversarial vulnerabilities, and especially psychological manipulation.</p>
+<p>I’m particularly concerned about the epistemic power these systems have. They know your personality type within a few sessions. They mirror your communication style. They make you feel like you’re on a unique journey together, when the same thing is happening in millions of other chat windows. For someone psychologically vulnerable, that’s particularly dangerous. But at an even more general level, these same features  mean chatbots are capable of shaping public opinion in ways we’ve never seen before.</p>
+<p>We need clear, specific opt-ins before any profiling data is stored, not buried in terms of service, and we still need more public education, because many people have no idea how these systems work. A functioning democracy requires citizens who understand the epistemic tools they’re relying on. Right now we’re nowhere close.​​​​​​​​​​​​​​​​ <img alt="" src="../images/nautilus-favicon-14_417.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Iurii Motov / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Plaintive Song Is From a Land Without Lullabies - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>This Plaintive Song Is From a Land Without Lullabies - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-01
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-XSAC</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In the 1830s, American poet and educator Henry Wadsworth Longfellow reportedly declared that “music is the universal language of mankind.” Since that time, many scholars and scientists have come to believe that making songs and rhythms is <a href="https://nautil.us/what-makes-music-universal-238187/">embedded</a> deep in the biology of <em>Homo sapiens</em>, an evolutionary adaptation forged over millennia, likely to enable social bonding: Lilting lullabies to soothe children and bind them to their mothers, rhythmic jigs to connect groups in synchronous dance.  </p>
+<p>The ethnographic literature offers abundant evidence to support this narrative. According to one recent survey, music has been <a href="https://www.science.org/doi/10.1126/science.aax0868">observed</a> in every society studied across time, and everywhere it was found it shared certain common and distinct behavioral contexts and stereotypical formats: infant care and dance, as well as healing and love.  </p>
+<p>But a small hunter-gatherer population in eastern Paraguay stands apart from this broad trend. Anthropologist Kim Hill spent 3,000 nights between 1977 and 2020 studying the Northern Aché, an Indigenous group that lives in a hilly and densely forested region between the Paraguay and Paraná Rivers. Over more than four decades, Hill never once observed any members of the community singing sweetly to their children or dancing together, stamping their feet to a rhythm, though he was present for all aspects of community life. No other researchers studying the Northern Aché have recorded observations of them engaging in lullabies or group dancing either.  </p>
+<p>For the Paraguayan tribe music is always a solitary pursuit: Men sing primarily about hunting, and women primarily about departed loved ones. You can listen to some of the plaintive songs, with lyrics* translated into English, below.</p>
+<p>Song 1:</p>
+<p>Song 2:</p>
+<p>Lullabies and other, more-social forms of music making may have been lost to the Northern Aché when they were <a href="https://dobes.mpi.nl/projects/ache/people/">forced</a> onto a reservation in the mid 20th century by deforestation, their population decimated by colonists and epidemics of disease. This traumatic uprooting made it harder to transmit cultural practices from one generation to the next, argue Hill and his colleague Manvir Singh, who reported their findings in a new <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(25)00447-6?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982225004476%3Fshowall%3Dtrue">study</a> in <em>Current Biology</em>.</p>
+<p>Other practices seem to have disappeared from the Northern Aché after colonization, as well, including polygyny, club fighting, puberty ceremonies, and hunting magic, which some elders in the community can still recount. Genetic sequencing and analysis also suggest that the Northern Aché may be related to earlier sedentary agricultural communities whose other descendants have more complex cultures today—including dance and lullabies.</p>
+<p>The findings raise the possibility that the musical communion so many human societies take for granted is not instinctual and innate, like the smile you offer to a friend, but culturally transmitted, like fire-making, the kind of creative magic that must be passed down from the elders, generation after generation.</p>
+<p><img alt="" src="../images/line.png" /></p>
+<h3><strong>Song Lyrics in Translation</strong></h3>
+<p><strong><em>**Lyrics for Song 1</em></strong>*<em>Singer name: Evaristo Cherygi<br />
+Year collected: 1978</em></p>
+<p><em>Transcribed and translated by Kim Hill with help from Martin Achipurangi</em></p>
+<p><em>This song is an example of the pree chepe style of singing.</em></p>
+<p><em>Original lyrics in Aché appear in bolded black text. English translations appear underneath. Words that appear as [italicized text in square brackets] are clarifying notes.</em></p>
+<p><em>“(Canto)” refers to closed-mouth, wordless singing.</em></p>
+<p>(Canto)</p>
+<p><strong>Ache rõga kujã etavejima, prëdubeche kãvemi</strong></p>
+<p>My formation-essence [<em>animal spirit consumed by one’s mother during her pregnancy and which forms one’s spirit essence; determines one’s Aché name</em>] are female white-lipped peccaries, lots and lots of them are existing.</p>
+<p>(Canto)</p>
+<p><strong>Ache jymabechevejima, buy vachu kavoty nõgagijima</strong></p>
+<p>When I was a young teen, I shot a tapir that bled tremendously.</p>
+<p>(Canto)</p>
+<p><strong>Ache rõga chuepura vachuve parabeche buã vyche kojima</strong></p>
+<p>My formation-essence, a huge male tapir, didn’t die just like me, I haven’t died yet either.</p>
+<p>(Canto)</p>
+<p><strong>Ache jymabecheve mata vachuatyvejima</strong></p>
+<p>When I was a new initiate, male coatis used to drag me along again and again when I would grab them.</p>
+<p>(Canto)</p>
+<p><strong>Ache tyma kryrabechevejima, buy vachu kavoty nongagijima</strong></p>
+<p>I am a small person, even still I have spilled a lot of tapir blood.</p>
+<p>(Canto)</p>
+<p><strong>Ache rõga chuepura kapuabecheve echeve rakubeche kavemi</strong></p>
+<p>My formation-essence, a male otter that doesn’t live in forest, his body doesn’t get hot in the sun [<em>because he lives in water</em>].</p>
+<p>(Canto)</p>
+<p><strong>Ache rõga kujãpuabeche bajyve karabeche kavemi</strong></p>
+<p>My similar a lone male coati, he is really fat, lots of subcutaneous fat.</p>
+<p>(Canto)</p>
+<p><strong>Ja rëbiatyvejima tobou gatuvejima pãcha vachatyvejima</strong></p>
+<p>My prey are sometimes young peccaries and on other days I kill older ones.</p>
+<p>(Canto)</p>
+<p><strong>Ja mirobeche kiyecheve ja mubatyve tõjãkuãecheve pepypa rekõ nojemi</strong></p>
+<p>I have only one brother, my older one, I used kill multiple peccaries, their brains tasted and smelled so good, then my brother would kill peccaries on another day [<em>the brothers took turns</em>].</p>
+<p>(Canto)</p>
+<p><strong>Epuarecheve Ache pirõ buta butatyvemi</strong></p>
+<p>I have a great relationship with my brother. I respect him and don’t want him to suffer so I would never mess around with his wife.</p>
+<p><img alt="" src="../images/line-1.png" /></p>
+<p><strong><em>**Lyrics for Song 2</em></strong><em><em>Singer name: Felipa Japegi</em><br />
+</em>Year collected: 1978*</p>
+<p><em>Transcribed and translated by Kim Hill with help from Martin Achipurangi</em></p>
+<p><em>“(Chinga)” refers to wordless, melodic weeping. Ellipses (…) denote places where a singer held a note for several seconds before continuing.</em></p>
+<p>(<em>Chinga</em>)</p>
+<p><strong>Kuajimecheve… Buta mrãgatuve…</strong></p>
+<p>My dead father had a beautiful beard.</p>
+<p><strong>Krãbube…vychejãmi…</strong></p>
+<p>He doesn’t sleep near me anymore.</p>
+<p>(<em>Chinga</em>)</p>
+<p><strong>Epuarecheve… Buta mrãgatuve</strong></p>
+<p>My dead brother [<em>lit. from mother’s womb</em>] had a beautiful beard.</p>
+<p><strong>Braytechevejãve rõ…</strong></p>
+<p>He is not a great hunter anymore.</p>
+<p>(<em>Chinga</em>)</p>
+<p><strong>Ja epuarecheve tyma bujabecheve nondeve…</strong></p>
+<p>My brother was a really tall person a long time ago.</p>
+<p><strong>ache rullabecheve… vevëba chave….</strong></p>
+<p>I was really sick and thin; I, his goddaughter got better.</p>
+<p>(<em>Chinga</em>)</p>
+<p><strong>Kuajimecheve… Kbuchubecheve…</strong></p>
+<p>My father, he got really old.</p>
+<p><strong>Pupu parabecheve… Vëduvychejãmi…</strong></p>
+<p>He used to cut down palm trees all the time, I don’t hear his axe anymore.</p>
+<p>(<em>Chinga</em>)</p>
+<p><strong><em>Kuajimecheve… Kymbajymaecheve…</em></strong></p>
+<p>My dead father, my fully adult mother [<em>lit. senior</em>].</p>
+<p><strong>Pirõgatuvedu vychejãmi…</strong></p>
+<p>I don’t hear my mother crying anymore [<em>like this cry-song</em>].</p>
+<p>(<em>Chinga</em>)</p>
+<p><strong>Ache rõgavepurã bybecheve… echeve rakubeche…</strong></p>
+<p>My similar animal is really ugly, it doesn’t have a warm body [<em>caimans are cold blooded</em>].</p>
+<p><strong>Buãbuã vyche….</strong></p>
+<p>I am like a caiman I just don’t ever die.</p>
+<p>(<em>Chinga</em>)</p>
+<p><strong>Rõga kujãpura echeve… Echebuchegatuve…</strong></p>
+<p>I think about my other formation-essence, a female with a good body [<em>not like a reptile</em>]. It is a really good animal.</p>
+<p><strong>Buã vychy vychy pãchãve…</strong></p>
+<p>I am still living each year going from place to place trying it out [<em>I am making an effort to continue surviving</em>].</p>
+<p><em>Lead image: Chen / Pixabay</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

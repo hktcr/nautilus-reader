@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Can Feel Your Human Fingers - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>I Can Feel Your Human Fingers - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-14
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-LXC7</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><em>Hundreds and hundreds were the truths and they were all beautiful.</em></p>
+<p><em>—Sherwood Anderson</em></p>
+<p>Joanna was the perfect height to be a princess, but she was employed as a chipmunk. She was glad when she got to work early, had her pick of heads. You might think the selection would be a question of mood or disposition, whether you wanted to be the prankster or play it straight that day, but really it was a very simple matter of how much weight you wished to carry, how awkwardly it would sit on your neck.</p>
+<p>There are people who get their dream jobs, and Joanna’s had been to work magic in that kingdom. It was not a dream, or a reality, I would have guessed had Joanna not told me, later, far away in a book bindery, as we sewed signatures taut. But then I suppose half the job was a kind of disappearing, avoiding suspicion or detection, even if the other half turned on being unmistakable.</p>
+<p>Everyone in her division was sorted and distinguished by the sole characteristic of height. It’s worth noting that the taxonomy of masked characters has nothing to do with good or evil, male or female, leading or supporting, old or young, human or otherwise. It is refreshingly free of dichotomy. One lives by the great constant of which costume will fit. There is no personality inventory or aptitude test. There is only the gradient of stature, steps that sort into whole classes of what you might be.</p>
+<p><img alt="" src="../images/g4WpEqLV-Greene_BREAKER.png" /></p>
+<p>What you stepped into then was a new way of being. What you stepped into had whole cooling systems and strategic fans, protocols for feeling faint. What you stepped into included the day Joanna met a family and got waved into a Kodak moment. She bent her chipmunk knees and crouched down to better frame the picture, chipmunk paw in the hand of a very little girl.</p>
+<p>This was an adorable child, hair in pigtails, who knew how to smile for the camera and at the same time speak through bared teeth. The kid, clearly adored, clearly the center of not just this tableau, spoke in the hiss of a whisper that would not reach the camera.</p>
+<p><em>I can feel your human fingers.</em></p>
+<p>As if blackmail might come next.</p>
+<p>The chipmunk said nothing—Joanna said nothing—but perhaps in this moment froze, and not just for the sake of the shutter.</p>
+<p>There is such power in knowing things. It is so compelling to tell. It is not enough to have a piece of information, we must set the air vibrating with it. The old bestiaries knew as much when they claimed: Lion cubs are born dead. They stay dead for three days, the bestiaries said, until their mother licks them and their father breathes life into them. The scribes meant the lion but also the divine father. They meant to say something about spirit and this mortal coil. They meant allegory over natural history, every time. But didn’t they mean, too, that this is how it always is: the material fact of the world dead to us, every new thing dead to us until we have ways to make it mean something? To, as we say, “bring it to life”? And don’t we, over and over, do that with our mouths, with the movement of our tongues and the shape of our breath?</p>
+<p>Maybe it was just the distortion of speech through gritted teeth, but it struck the chipmunk as so purposeful, so malign, so totally creepy. It was a good story, later, in the book bindery—I know that we laughed—but it haunts me still.</p>
+<blockquote>
+<p>This was the sting, the delicious sting, of discovering a lie.</p>
+</blockquote>
+<p>There’s part of me that likes to think somewhere there’s a whole album of such encounters, maybe not just in this little girl’s family but in others, too, probably all stacked away, all but forgotten, but somewhere a document of fantasy after fantasy brought close and put on notice. Because wouldn’t we just? Revel in our cleverness. Tell being after being we were on to them. Be sure, at all costs, to be nobody’s fool.</p>
+<p>I can feel your human fingers. Obviously, the child was not wrong, but this honesty was not refreshing. It was not the relief of disclosure or unburdening, a statement of fact spoken through a little screen, to a confessor confined in the vessel of a tiny sacred space.</p>
+<p><img alt="" src="../images/6e0Rwz9G-Greene_BREAKER-3.png" /></p>
+<p>Nor was it eureka, the joy of figuring something out. Neither was it the thrill of sharing a secret or the delight of being in on the gag. It was not the privilege of witness or the humility of discovery or any species of awe in knowing—for sure—anything at all. No, I think, just the opposite. It was not inclusion but rejection, not an expansion of the world but a contraction making it smaller. This was the sting, the delicious sting, of discovering a lie.</p>
+<p>The chipmunk could not speak back, of course. Because chipmunks do not speak and it was not allowed, and anyway, what could you say? What was there to say in the face of a full-on power move, six words long, in which the chipmunk was outed, the jig was up, and magic itself was a lie? What do you say in such a moment, to such a child?</p>
+<p>I mean, she was on to something. This was a chipmunk made up, then made by and made of human fingers. It was human fingers all the way down. And to the extent she was speaking truth to power, I say power to her! What do we suffer because we won’t tell it how it is? I am rooting for every bit of autonomy and self-possession and standing up to authority inherent in this act. I am all for discovery. I believe in observation, that what we attend to will change the world. I think all those parts bode well.</p>
+<blockquote>
+<p>The world does not cleave neatly into abstract and concrete.</p>
+</blockquote>
+<p>But this child was not in the grip of epiphany, she was sending a message. She was a reckoning. Backdropped by an actual soft underbelly, she went straight to a vulnerable spot, and I cannot say if she did or did not know exactly what she was doing. There are so many kinds of innocence. But here I cannot help but see both: the righteousness and the cunning.</p>
+<p>I don’t remember who all read me fairy tales growing up, but it was my father specifically who liked to bring up <em>The Book of the Grotesque</em>. Sherwood Anderson writes about it in a story of the same name: a book that was never published, penned by an old writer animated by his work and saved from the fate it describes because “something inside him was altogether young.” The book suggests that in the beginning of the world “there were a great many thoughts but no such thing as a truth,” goes on to assert we composite thoughts together to make the truths ourselves. To believe solely in any one truth, the book says, makes of it a falsehood and its believer a grotesque.</p>
+<p>Maybe it’s because I’ve heard it since I was young, part of the life my father breathed into me, but it still strikes me as correct. The folly of a truth too closely held. Indeed, the cruelty of a partial truth plays out again and again, there to be seen, an insult, a shard of it stuck under the skin. Which is maybe why sometimes when I think about the child and the chipmunk, I am struck that it is so very, bone-deep sad. It seems like a cycle that could be hard to break. We are terrified we can’t afford to be taken advantage of. We like to be generous, but we fear our credulity. What a tragedy: We so hate to be taken in that we will pass up the chance to be taken with.</p>
+<p><img alt="" src="../images/Nc6X7TTW-Greene_BREAKER-4.png" /></p>
+<p>This child, so determined not to be duped, so set on getting her facts straight, so sure of what she could see and what she could feel, may have missed something intractable: It’s not so singular. It’s not even binary. We mix up the tangible and the intangible all the time. The world does not cleave neatly into abstract and concrete. We make meaning from metaphor, and we ask so much to be a vessel. If we are a tool-using creature, this is perhaps our favorite: the way we can make the physical hold the ineffable. My god. And sometimes back again. All tangled and entwined. We do it with language and story and tradition and ritual. Gloriously and incorrigibly, we do it all the time.</p>
+<p>And maybe this is the least of it, but consider: There is nothing wrong with human fingers. What a ridiculous thing to have to say. Indeed, how astounding: They can be found even in chipmunk hands. Just as they can be found in a bindery, among punching cradles and the nipping press, rough-cutting parent sheets with dull knives, drawing linen thread through beeswax, deftly sewing with blunt needles, until a story has a shape, until a vision is married with language, until a thing has a story even before it has words.</p>
+<p>The chipmunk holding the child’s hand wasn’t meant to defraud. No one was getting away with anything by working, within manifold limitations, to embody an ideal. To animate or articulate is so often to approximate, but if the gap between intention and substantiation is some kind of scandal it is also a marvel, a drop-dead absolute miracle, if any such thing exists.</p>
+<p>I mean, what if we cooed it? I can feel your human fingers. We exclaim all the time at infants, at their little baby digits, fingers and toes at a scale we treat as unbelievable though we were once that size ourselves. How precious these miniatures, how tenacious the strength of their grip! The word we use is perfect, breathe it out at these creatures just come into being.</p>
+<p>Yes, imagine if it had been a statement of tenderness. Oh, what love one might have for the bones that structure, the irreducible facts on which we hang all that imagination might conjure. I can feel your human fingers. I know you are there. I know this had to be made, fabricated, not like mendacity but like craft. Oh, how easily the tone can turn it. Change the lilt and right there, a statement of grace: “I see you, right to the core.” Why wouldn’t it be a relief to hear, in no uncertain terms, “I know exactly what you are”? <img alt="" src="../images/nautilus-favicon-14_1244.png" /></p>
+<p><em>Excerpted from</em> <a href="https://tinhouse.com/book/114349/">No Less Strange or Wonderful: Essays in Curiosity</a><em>, by A. Kendra Greene (Tin House).</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

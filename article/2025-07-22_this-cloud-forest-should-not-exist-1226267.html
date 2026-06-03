@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How a Forest Was Victorious | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How a Forest Was Victorious</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-6AJX</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A ​cloud-​forest is a ​river​­maker.</p>
+<p>Cloud-​forests form at higher altitudes than rainforests: typically between 3,000 and 8,000 feet above sea level, in steep landscapes of peak, ridge, and valley. The elevation means that ​cloud-​forests are cooler than rainforests, and the drama of their topography means that their rivers are fast, shallow, clear, and ​rock­bedded, compared to the muddier, <a href="https://nautil.us/the-amazon-river-in-the-sky-312496/">slower rivers of rainforests</a>.</p>
+<p>Altitude and coolness ​co-create the cloud. Humid air is pushed upward by the land, bringing the water it bears to a condensation point, and forming the mist which cloaks such forests ​year-​round. The mist also reduces direct sunlight, reducing transpiration from the trees and retaining more water within the forest system.</p>
+<p>Because this drifting mist infiltrates the full volume of the ​forest—​wandering from ground to canopy, between trunks, into every ​niche—​the available surface area for condensation is maximized. And because ​cloud-​forests are characterized by an astonishing density of air plants, or epiphytes (that is, plants which grow on other plants), this surface area is immense. Liverworts, mosses, ferns, <a href="https://nautil.us/why-is-everything-an-orchid-424338/">orchids</a>, lichens, and bromeliads throng the trees of a ​cloud​­forest; hundreds, sometimes thousands of plants can flourish upon a single big tree, in a proliferating density of floral life greater even than that of a rainforest.</p>
+<blockquote>
+<p>Thus the marrow of the mountain is cracked open, slurped out, and sold.</p>
+</blockquote>
+<p>Much as a bearded person walking through mist will find water droplets condensing upon the hairs of their beard as well as their skin, so the epiphytes of a ​cloud-forest act as collectors for the moisture suspended in the mist, which in time rolls and drips as water to the forest floor. This gentle, constant ​run-​off is known by forest biologists as fog-​drop, and it is what allows ​cloud-​forests to maintain the flow of their streams and rivers even in dry periods. This is why an alternative name for a cloud-​forest is a water-​forest. This is why river and ​cloud-forest cannot be ​separated—for each authors the other.</p>
+<p>The interior of a ​cloud-​forest is a steaming, glowing furnace of green. To be inside a ​cloud-​forest is what I imagine walking through damp moss might be like if you had been miniaturized. There, life thrives upon life upon life upon life in a seemingly endless <em>mise en abyme</em> that bewilders the imagination and opens a ​scale-​slide of wonder into which the mind might plummet.</p>
+<p>Cloud-​forests are among the most biodiverse habitats in the world. Although they account for less than half of 1 percent of the Earth’s land surface, they are home to around 15 percent of known species. A ​cloud-​forest can contain around 400 species of tree in a single hectare; almost half as many as the number of native tree species found across the entirety of the contiguous United States. Among ​cloud-​forests, the most biodiverse are generally agreed to be those of the Tropical Andes. There, a unique abundance and variety of life is created by the proximity of the Pacific and the Andes, which rise from sea level up to more than 20,000 vertical feet in only a few hundred lateral miles.</p>
+<p>But millions of hectares of Andean ​cloud-​forests have been lost over recent decades to logging, farming, building, and mining. Over 2 percent of ​cloud-forest was destroyed globally between 2001 and 2018; in the Andean ​cloud-​forests this rate reached 8 percent. Existing legal protections have slowed but not stopped the ​loss—​and much of that loss has happened in Ecuador.</p>
+<p><img alt="" src="../images/Macfarlane_BREAKER.png" /></p>
+<p><strong>LIVING DEAD:</strong> Here in Los Cedros, a rugged area in the Andes made up primarily of cloud forest, spectacular Dracula orchids thrive. Their swooping petals resemble the Gothic capes of vampires, and they emit a smell like that of rotting meat to attract pollinators. <em>Credit: Eric Hunt / Wikimedia Commons.</em></p>
+<p>Metal mining is the most catastrophic and terminal of ​cloud-​forest interventions. For the gold and copper mining which now predominates in the northern Andes, the method of ​large-scale extraction is usually ​open-​pit, which requires the digging of a series of vast stepped “benches” to give heavy machinery access to the ore. The establishment of a pit first requires deforestation of the extractive zone, then the construction of a network of access roads for the heavy machinery. Dynamite blasts the bedrock, before large power shovels collect the shattered ore. Trucks transport the ore to the crushers, where it is ground to a fine consistency and mixed with water to make a slurry. The refining process then removes unwanted materials, separates out valuable ​by-​products—​and purifies the ore slurry to the desired concentrate.</p>
+<p>In the case of gold mining, ore is typically piled into huge heaps for extraction by a technique known as cyanidation or “heap leaching.” The ore is sprayed with a dilute solution of highly toxic sodium cyanide, which filters down through the ore and forms a gas that smells of bitter almonds. Where it encounters gold, it dissolves it and carries it out. Because gold is widely disseminated in ​low-​grade ore, large volumes of sodium cyanide and other solvents are necessary to leach it. Once deployed, these solvents theoretically require storage or safe disposal; the standard technique is to construct an impoundment dam, which retains the ​by-​products in ponds or lakes. In practice, many smaller gold mines just let the solvents flow directly into nearby streams and rivers.</p>
+<p>Thus the marrow of the mountain is cracked open, slurped out and sold; thus the ​cloud-​forest and its rivers are poisoned and killed.</p>
+<p>Among the most intact and miraculous ​cloud-​forest regions of South America is the Cordillera de Toisán, a branch of the ​northwestern Andes which runs through the area of Intag, in the Cotacachi canton of Ecuador’s Imbabura Province. In the western extension of the Toisán lies a small massif called the Cordillera de la Plata. And at the southern end of that ​massif—where ​earth-​forces have rippled the terrain into ​steep-​­sided valleys and narrow ridges, and the ground rises to a pyramidal central peak of around 9,000 feet—is Los Cedros, a rugged and remote area of mostly primary ​cloud-​forest, accessible only by foot, mule, or helicopter.</p>
+<p>The topographical map of Los Cedros is a beautiful document. It shows the green of forest veined with the blue of rivers and streams. It shows an intricate, lobed landscape, contoured into many small watersheds, each of which collects water from rain and ​­fog-​­drop to create countless creeks and streams, who become the headwaters of the four main rivers flowing southwards out of the forest: the Río Manduriacu, the Río Magdalena Chico, the Río ​­Verde—and the Río Los Cedros. It is the Río Los Cedros whose route I want to trace back toward its source in the upper gorges of the ​­cloud-​­forest.</p>
+<p>Los Cedros is a living <em>Wunderkammer</em>. It is the home of fabulous beasts, birds, plants, and fungi who could have flown, crawled, and grown straight out of Hieronymus Bosch’s imagination: the spiny pocket mouse, the strangler fig, the ​white-​headed capuchin, the devil’s fingers fungus, the spectacled bear, the dwarf squirrel, the river otter, the jaguarundi, the ​­golden-​­headed quetzal, the ​­black-​and­-chestnut eagle . . .</p>
+<p>Here lives a frog who can modify the texture of her skin at will, toggling from smooth to grainy in just a few minutes. Here live Dracula orchids, whose purple, swooping petals resemble the Gothic cape of a vampire, and who mimic the smell of rotting meat in order to attract pollinating flies. Here live at least a dozen species of hummingbird, ­thimblefuls of molten metal who whir from flower to flower. Even their human names seem to have tumbled straight out of myth: the Andean emerald, the ​­long-​tailed sylph, the tourmaline sunangel.</p>
+<p>Where the streams and rivers flow fast over rapids in Los Cedros, they are green-watered, and where they gather in pools they are blue as a glacier’s heart. Pumas and spotted cats drink from them. ​White-​throated dippers fish them.</p>
+<p><img alt="" src="../images/Macfarlane_BREAKER-2.png" /></p>
+<p><strong>BEAST OF WONDER:</strong> The enigmatic jaguarundi, a slender medium-sized wild cat native to the Americas, is one of the many fantastic animals that make a home in the Los Cedros forest. Also known as the "otter-cat," these solitary felines travel alone or in pairs and have distinct calls. <em>Photo by Diego Grandi / Shutterstock.</em></p>
+<p>It is not known exactly how old the area of ​­cloud-​­forest now called Los Cedros is, and how many millennia of continuous flourishing it has performed. But according to the Dry Refugia hypothesis—​one of the two dominant paradigms for understanding the Pleistocene pasts of rainforests and cloud-​­forests in the ​­neotropics—it is plausible that montane forest has existed continuously here throughout the glacial fluctuations of the Pleistocene; that is to say, for around 1.5 million years.</p>
+<p>This is a forest who has ​self-​regulated for an exceptionally long time.</p>
+<p>And yet, this ​cloud-​forest should not exist.</p>
+<p>The slender path leading into its mist should be a 30-​foot-​wide access road, bulldozed up the ridgeline.</p>
+<p>The trees that dwell here, with their shaggy overcoats of epiphytes, should be stumped or burned off.</p>
+<p>The smell of bitter almonds should drift through Los Cedros.</p>
+<p>In 2017 a small Australian environmental ​non-​profit called the Rainforest Information Centre discovered that a mining concession had been granted by the Ecuadorian government for the Los Cedros ​cloud-​forest.</p>
+<p>Where the cadastral map of the valley had once shown only the unbroken green of forest, there was now a large, diagonally hatched grid stamped in scarlet over the lower third of the forest, signifying the concession. The grid covered an area that included the headwaters of three of Los Cedros’s rivers.</p>
+<p>Worse was to come. It turned out that the permit for the concession had already been sold to a Canadian prospect generator firm called Cornerstone Capital Resources. Prospect generator firms typically explore for ore-rich locations, then seek to acquire the social license—that is, government and community consent to mine—for sites they believe to have significant mineral potential. They then sell such knowledge and licenses on to larger mining companies for fat profits, while also retaining a minority stake in the venture.</p>
+<p>Los Cedros, one of the most biodiverse and​ bio​­abundant places on Earth, was suddenly laid open for business. Cornerstone was to seek copper and gold in the ​cloud-forest, working in alliance with Ecuador’s state mining company, ENAMI.</p>
+<blockquote>
+<p>Los Cedros is the home of fabulous beasts who could have flown straight out of Hieronymus Bosch’s imagination.</p>
+</blockquote>
+<p>In 2017, Cornerstone and ENAMI came with drills, maps, and helicopters to begin their surveying of Los Cedros. They would in due course bring the chainsaws, the feller bunchers, the log loaders, and the ​de-​limbers, to strip the forest of its trees and clear the ground for roads, camps, and the open pit. After that they would bring the blasting teams, the excavators, the leachers, and the river dammers. They came to kill the forest and its ​waters—​and it seemed as if nothing could stop them.</p>
+<p>But then on Nov. 10, 2021, something remarkable happened. Something which could only have taken place in Ecuador.</p>
+<p>That day a judgment was passed in the Constitutional Court in Quito. It ruled that mining would violate the rights of Los Cedros: both the rights of its creatures and plants to exist, and the rights of the forest and its rivers as a system to “maintain its cycles, structure, functions, and evolutionary process.” That ruling deployed the political might of Rights of Nature articles enshrined in Ecuador’s constitution over a decade earlier, in 2008.It was the first time such rights had taken precedent over economic interests in a court.</p>
+<p>During the hearing, local people from the villages bordering Los Cedros had testified about the impact mining would have. It was often the rivers who were the focus of their testimonies. “We have taken the pure water, the clean water, that comes from Los Cedros Forest,” said one witness, “we are defending nature, the right to life, which is water.”</p>
+<p>“I grew up here more than 50 years ago,” said another; “when I was a child here, there was water at every step; today there are only rivers in the larger ravines, and if that which originates in the Los Cedros reserve is not defended now, what is going to happen tomorrow?”</p>
+<p>The judgment wrapped a protective forcefield around Los ​­Cedros—​one so powerful that the mining companies were compelled to evacuate the area within weeks.</p>
+<p>The chief judge who ruled on the case? That was wise, watchful Agustín Grijalva Jiménez. And his supporting judge was the extravagant and ​­long-​­limbed Ramiro Ávila Santamaría.</p>
+<p>“The forest helped us,” Agustín recalled to me later, in an openly animist account of how he and his colleagues had formed their judgment; “the strong voice of life” proved a greater influence “than even the legalistic framework.” He and his fellow judges felt “the call of life” from Los Cedros; it “swayed the bench.”</p>
+<p>Agustín’s deeply philosophical ​124-​page ruling found that the Rights of Nature, together with the human right to a healthy environment and to <a href="https://nautil.us/this-ocean-wave-has-rights-1170303/">clean water</a>, would be violated were mining to be permitted in Los Cedros. The mining companies were ordered immediately to cease all activities and to make good any damage, and the government was required to guarantee the rights to which Los Cedros was constitutionally entitled.</p>
+<p>“A river [or] a forest,” wrote Agustín, are “life systems whose existence and biological processes merit the greatest possible legal protection that a constitution can grant: the recognition of rights inherent to a subject.”</p>
+<p>News of this thunderclap judgment echoed around the world. “This ruling is as important to nature as Thomas Paine’s <em>Rights of Man</em> were to our own species,” said Mika Peck, a field biologist who has worked in Ecuador since the 1990s. The ​­British-​­Peruvian barrister Mónica Feria-​­Tinta described the Los Cedros ruling as comparable to “the ​­turning-​­point in the history of human rights of 1948.” In recognizing that nature could bear “legal status and substantive rights,” she said, it marked “the law of the future.” <img alt="" src="../images/nautilus-favicon-14_1059.png" /></p>
+<p><em>Excerpted from</em> <a href="https://www.penguin.co.uk/books/455147/is-a-river-alive-by-macfarlane-robert/9780241624814">Is a River Alive?</a>. <em>Copyright (c) 2025 by Robert Macfarlane. Used with permission of the publisher, W. W. Norton &amp; Company, Inc. All rights reserved.</em></p>
+<p><em>Lead photo: Kath Watson / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

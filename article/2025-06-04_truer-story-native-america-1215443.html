@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Truer Story of Native America - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>A Truer Story of Native America - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-06-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-EVAS</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A brilliant supernova visible across North America and much of the rest of the world in the 11th century is said to have inspired an explosion of civilization building among Indigenous cultures across the Mississippi Valley and the American Southeast. One of the grandest cities was named Cahokia, which sprung up near what is now St. Louis. Cahokia had a plaza the size of 30 football fields and earthen pyramids up to 100 feet tall and it quickly swelled to become the largest pre-Columbian settlement north of Mexico: The city’s peak population of more than 10,000 rivaled London’s at the time. But it was just one of many Native American metropolises. The Huhugam people’s sprawling civilization in the Southwest, for example, contained more than 1,000 miles of canals.</p>
+<p>These cities were abandoned by the late 14th century amid climate change and political instability, an exodus that many European settlers perceived as signs of the civilizations’ decline, according to written accounts. But in reality, many of the Indigenous peoples’ left their cities in a purposeful way, to create more egalitarian and sustainable societies, according to recent scholarship from historian and author Kathleen DuVal. And these Native societies continued to make up the majority of the North American population through the mid 1700s and to control most of the land and resources on the continent for a century after that, says DuVal. Her findings contradict myths perpetuated by white settlers and historians for centuries—namely, that Native influence had greatly declined by the 19th century, and that Native populations lacked advanced civilizations.</p>
+<p>DuVal outlines these arguments in her 2024 book, <em>Native Nations: A Millennium in North America</em>, which recently won <a href="https://www.pulitzer.org/winners/22696">a Pulitzer prize</a>. A professor at the University of North Carolina at Chapel Hill, DuVal specializes in early American history and her work aims to amplify the voices that are often overlooked in historical accounts, including enslaved and Indigenous people, and to connect their narratives with the present. When preparing <em>Native Nations</em>, DuVal took care to work closely with Native American historians and scholars to ensure fidelity to their own accounts of their history. Many other historians of North America’s colonial period have relied primarily on texts and sources from white colonial settlers, though this emphasis is shifting.</p>
+<p><em>Nautilus</em> spoke with DuVal about how her work rewrites the history of North America, her efforts to foreground Native scholarship and what lessons the story of Indigenous retreat from cosmopolitan cities has for today.</p>
+<p><img alt="" src="../images/GmHdwCzf-Glick_BREAKER.png" /></p>
+<p><strong>SHIFTING FOCUS:</strong> Pulitzer-winning historian Kathleen DuVal aims to dispel myths of early America with her book, <em>Native Nations. Photo by Laura Wessell.</em></p>
+<p><strong>Your book is described as reshaping the history of the North American continent. How does it do that?</strong></p>
+<p>This book takes a long view. It’s 1,000 years of history, and that puts the United States in context—the U.S. has been here for just about 250 years. Native nations have been here for millennia, and they’re still here today within the United States, Canada, and Mexico. That longer timespan helps us both to realize that the United States and the things the country has done were not inevitable, and that they are only a small part of Native American history.</p>
+<p><strong>You note that most of North America remained under Native control into the 19th century. Why has this history gotten lost in modern retellings?</strong></p>
+<p>There was an intentional forgetting in the late 19th century and early 20th century, when white Americans told themselves that this continent really didn’t belong to Native Americans, that there weren’t that many of them and they weren’t that organized. I think that was part of coming to grips with the fact that the United States did some really terrible things—forced people off of their land and fought some brutal wars against Native Americans. It was easier to believe that Native Americans had never really been important for white Americans to ease their consciences.</p>
+<p><strong>What might what is now the United States look like if, as you wrote, “British colonists could have lived side-by-side with Native nations, continuing to ally and trade in mutually beneficial ways?”</strong></p>
+<p>It would have looked more like what people imagined before the 19th century. It wouldn’t just be one country—it would be multiple countries. There would be Native nations with their own territory and sovereignty, completely separate from but maybe allied with other Native nations. Maybe some countries that were multiple Native nations coming together, but it wouldn’t be all one country.</p>
+<blockquote>
+<p>There was an intentional forgetting in the late 19th century and early 20th century.</p>
+</blockquote>
+<p><strong>This book traces the embrace and then rejection of urban life by Native American groups and their transition to less centralized communities. Can we take lessons from these decisions today, particularly given your observations of these Native societies’ climate-driven struggles with agriculture and the hoarding of wealth by Native elites?</strong></p>
+<p>It tells us there’s a different way to organize societies. These societies were more democratic and egalitarian than Western European societies at the time, or than the United States that was created. There are different kinds of ways to live on the land and in a community. These nations were smaller-scale than the United States, but I think at least locally, on a county and state level, there are ways we can now imagine having values that mirror that focus on reciprocity.</p>
+<p><strong>You have long worked to highlight marginalized voices in early America and offer a perspective outside of the colonial outlook. Is it challenging to find primary sources?</strong></p>
+<p>It is less difficult than I thought it would be to find many different kinds of voices from the past. Looking at the 17th and 18th centuries, almost everybody who was writing things down were white men. But those white men also recorded what Indigenous people said to them. It’s clear from those records that the white writers knew that these Indigenous people mattered and had power, even when the writers didn’t like the things they were trying to do. For example, in the 17th and 18th centuries, French and Spanish officials who were sent out to Quapaw country, in what’s now Arkansas, wrote back reports to their superiors in Paris and Spain. They wrote down long speeches that Quapaw chiefs gave to them and described what was going on with the Quapaws and the people they were fighting against. These records aren’t perfect: They don’t come directly from Quapaws, but tell us a huge amount about what they were doing and what mattered to them at the time.</p>
+<p><strong>Y</strong>ou made a special effort to foreground Native perspectives and scholarships in this book. What do these perspectives bring to the work that you could not provide yourself as a non-Native researcher?****</p>
+<p>There are almost 600 federally recognized tribes in the United States, and many more state-recognized tribes. I couldn’t possibly be an expert in the histories of all of them—much less what’s happening in the present day. One of the things this book tries to do is to connect the present with the past, so it’s been important to talk to scholars within tribes today who are doing things like working on language and reviving various parts of material culture, who have kept their own histories. For example, the linguistic work the Quapaw are doing within the tribe really has informed how I understand some of the Quapaw words and names that I’ve come across in old documents. That has enriched my understanding, and then I can tell readers about how the Quapaw people have seen the world through time.</p>
+<p><strong>You describe the history of Native North America as “a combination of victimhood and survival.” Would you say that this is a nuance that is often overlooked in the historical research on Native Americans and if so why?</strong></p>
+<p>The old story was basically that Native Americans either weren’t that important or were savage and obstacles to American progress. Then in the 1960s, there was a new story that corrected that, but it over-emphasized Native American victimhood. Now, that isn’t to say that Native Americans haven’t been victims to lots of terrible things, but that’s not the only story. In both versions, Native Americans don’t have much agency or individuality. What I hope this book does is show Native American history in a much fuller sense—even though, yes, terrible things have happened to Native Americans, they also have done all kinds of important things. They have a long, complicated history, not all of which has to do with other kinds of people. <img alt="" src="../images/nautilus-favicon-14_1140.png" /></p>
+<p><em>Lead illustration: Painting of Cahokia</em> <em>by William Iseminger, courtesy of Cahokia Mounds State Historic Site</em>.</p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

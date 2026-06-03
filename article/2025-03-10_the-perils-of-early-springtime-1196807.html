@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Perils of Early Springtime - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Perils of Early Springtime - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-03-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-D3AT</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Winter and spring 2023 were very warm in much of the eastern United States, causing springtime biological activity to start much earlier than it had in decades. The blooming of the iconic cherry trees of the mid-Atlantic region started on March 1, weeks ahead of schedule. <em>Saturday Night Live</em> gave the phenomenon a nod, with an <a href="https://youtube.com/watch?v=UZhjIyGmrRQ">opening skit</a> featuring early sightings of stereotypical characters who populate Central Park when the weather is nice. By mid-April that year, New York City had <a href="https://www.nbcnewyork.com/weather/final-day-of-summer-like-heat-as-temps-may-top-90-again-nj-wildfires-continue-to-burn/4239949/">already reached 90 degrees Fahrenheit</a>.</p>
+<p>Around the globe, changing climate conditions are altering the timing of seasonal activity. Most of these shifts are occurring in spring, and the implications for the planet reach well beyond the late night comedy circuit.</p>
+<p>The biggest shifts in springtime activity are occurring in Asia, followed by Europe, though our ability to state this with confidence is hampered by limited information from the Southern Hemisphere. On each of these continents, the budding of new leaves in common overstory trees <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/gcb.14619">has shifted</a> to between nine and 15 days earlier since the early 1980s. Changes in the timing of leaf budding are less dramatic in the U.S.; since the early 1980s, spring leaf budding has advanced by about a week.</p>
+<blockquote>
+<p>Between 2013 and 2017, saffron production in Kashmir declined by 90 percent.</p>
+</blockquote>
+<p>But over longer time periods, some of the effects are more dramatic. In New York, for example, tulip trees now flower 27 days earlier than in the 1800s, and common milkweed, a plant that is critically important to endangered monarch butterflies, flowers 13 days earlier. In Concord, Massachusetts, yellow wood sorrel flowers <a href="https://esajournals.onlinelibrary.wiley.com/doi/10.1890/07-0068.1">32 days earlier</a> than 150 years ago.</p>
+<p>Autumn events are also drifting later in the year than in decades past, though patterns are not as clear or strong as those emerging for spring. Autumn phenophases—life cycle stages such as leaf color change and leaf drop—appear to be shaped not only by temperatures, beginning when temperatures start to cool in the late summer, but also by day length and available moisture.  </p>
+<p>Not all plants are shifting their springtime activity earlier in the year. Some are exhibiting the opposite response. For example, in North Dakota, nannyberry, smooth sumac, and black walnut now flower <a href="https://pubmed.ncbi.nlm.nih.gov/21613073/">approximately 10 days later</a> than in the first half of the 1900s. And many other species seem not to care much about changing conditions and persist in undergoing springtime activity at the same time that they have in decades past. This is especially true in the Southern Hemisphere. Approximately 70 percent of the species evaluated in a comprehensive study in Australia and New Zealand <a href="https://researchers.mq.edu.au/en/publications/australia-and-new-zealand-2">showed no evidence of changes</a> in seasonality.</p>
+<p>Certain types of plants are more affected than others. In general, those active the earliest in the spring show the greatest changes in the timing of their activity. In addition, annual plants, which complete their entire life cycle within a single year, are shifting seasonal activity more dramatically than perennials. Plants at higher elevations and latitudes tend to show greater seasonal changes, too.</p>
+<p>And wind-pollinated plants, which produce pollen grains lightweight enough to be carried on air currents, are more affected than those pollinated by insects. These wind-pollinated plants are the ones responsible for causing seasonal allergies, as the pollen grains are small enough that we breathe them into our lungs. The trend toward earlier flowering in wind-pollinated plants is not good news for those of us suffering from seasonal allergies; it means an earlier start to the sniffles and congestion the season brings.</p>
+<blockquote>
+<p>Yellow wood sorrel now flowers 32 days earlier than 150 years ago.</p>
+</blockquote>
+<p>Even more significant are the impacts to agriculture. In India, the flowering period for saffron has shortened substantially in recent years. Saffron “threads,” highly valued for the flavor and rich color they bring to dishes and drinks, are actually the female reproductive parts of the saffron crocus flower. In parts of India, saffron flowers now open when temperatures are too warm for their development. This leads to a high rate of flower death, and with no flowers, there is no saffron. Between 2013 and 2017, saffron production in Kashmir <a href="https://india.mongabay.com/2023/01/warmer-winters-in-the-kashmir-valley-are-leading-to-early-flowering-of-the-gul-toor/">declined by 90 percent</a>. Consequently, many saffron farmers are shifting their plantings to higher elevations with cooler temperatures.</p>
+<p>The northeastern U.S. is a major fruit production region, as are southern states. As temperatures in these regions have warmed, leaf and flower bud development as well as the last spring frost have shifted earlier in the season. In many locations, however, the date of the last frost has not shifted earlier to the same degree as plant activity. Consequently, tender plant tissues are at greater risk of exposure to damaging frosts. Many of the plants that produce fruits we enjoy, including blueberries, apples, and cherries, open their flower buds early in the season, sometimes even before they break leaf buds. Once flower buds begin to open, they become sensitive to cold temperatures.</p>
+<p>As with saffron, if flower buds are killed by frost, there are no fruits. So advancing springtime is expected to worsen the risk of frost damage in the coming decades. The start of springtime biological activity in the U.S. is <a href="https://iopscience.iop.org/article/10.1088/1748-9326/10/10/104008">projected to advance</a> by up to three weeks by the end of the century. One set of predictions indicates that we can expect to experience early warm springs followed by damaging freeze events in nearly one out of every three years by the mid-21st century. The same is predicted for Europe and Asia, with up to a third of Europe and Asia’s forests predicted to be threatened by frost damage in future decades.</p>
+<p>In mid-December 2023, my friend and colleague Jorge Santiago-Blay sent me photos of cherry trees on the Penn State York campus in Pennsylvania, bearing many open blooms. While he expressed pleasure over the lovely sight, the phenomenon sparked confusion and disorientation because typically, eastern Pennsylvania is wracked with frigid temperatures and snow by this time of the year—hardly favorable conditions for delicate cherry blossoms.</p>
+<p>As the regularity of the seasons gives way, we can expect more of these oddball events, and the consequences they bring to our health and our food systems. <img alt="" src="../images/nautilus-favicon-14_1249.png" /></p>
+<p><em>Adapted with permission from an</em> <a href="https://thereader.mitpress.mit.edu/how-plants-are-responding-to-a-warming-world-and-what-it-means-for-us/"><em>excerpt</em></a> <em>in MIT Press Reader.</em></p>
+<p><em>Lead image: yuyan9686 / Pixabay</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

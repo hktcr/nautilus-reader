@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Heat Could Change the Nature of Work | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Heat Could Change the Nature of Work</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-53WU</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>When a work room is hot and sticky, it can be challenging to focus—and people can get grumpy quickly. While many studies have looked at the impact of heat on individuals’ ability to work, few have studied the impact that higher temperatures have on teams.</p>
+<p>Now, a new paper finds that teamwork breaks down even with modest increases in temperature, due to increased irritability and communication breakdowns. The effects were particularly strong in mixed-gender teams and teams with different academic experience.</p>
+<p>Teevrat Garg, an economics researcher at the University of California San Diego’s School of Global Policy and Strategy, and his colleagues studied undergraduate computer science students in Dhaka, Bangladesh. They were assigned to work, either individually or in pairs, on programming tasks, inside rooms with temperatures of 75 degrees Fahrenheit or 84 degrees Fahrenheit—temperatures commonly found indoors in office settings, Garg says. Compared to the outside, the temperatures were still modest—the summer heat outside in Bangladesh can soar well over 105 degrees Fahrenheit.</p>
+<p>“It’s not that heat is making me worse at my job, but in tasks that require teamwork, we’re seeing this breakdown happening because the heat is driving up irritability and other forms of breakdowns in interpersonal communication,” says Teevrat Garg, an economics researcher at the University of California San Diego’s School of Global Policy and Strategy.</p>
+<blockquote>
+<p>“I think it’s going to change the nature of work.”</p>
+</blockquote>
+<p>Even when the increases in heat were modest, the researchers saw effects. The students were tasked with adding features to software code. In the teams, one was the “driver” typing code, and the other was the “navigator” who monitored the process. In the cool rooms, the teams were more productive than individuals.</p>
+<p>For workers toiling alone, the outcomes didn’t change in the hotter rooms—in fact, they were slightly more successful in the warmer room. That makes sense, the researchers say, because prior research on the impacts of heat shows the negative effects don’t kick in until the temperatures are higher than 84 degrees.</p>
+<p>But for teams in the hotter rooms, things started to break down. They were around half as likely to complete the code task, compared with teams in the cooler rooms. They were also more likely to request a new partner. For teams that were mixed male and female, or had students from different academic years, cranking up the heat changed group dynamics the most. The research was <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5234644">published</a> in the journal <em>The Review of Economics and Statistics.</em></p>
+<p>The research has implications for countries—like India and Bangladesh—where the number of people engaged in so-called knowledge work is increasing alongside rising temperatures, Garg says. Technological interventions like air conditioning and air purifiers can make the physical environment better, but managers may also have to change the way they incentivize people to collaborate. It might mean assigning individual tasks when the temperatures are high, and reserving collaboration for when it’s cooler, he says. “I think it’s going to change the nature of work.”</p>
+<p>“This work is at the forefront of scientific research on the impacts of extreme heat,” says Alan Barreca, an associate professor at the University of California, Los Angeles’ Institute of the Environment &amp; Sustainability who studies economics, climate change, and human health and was not involved in the study. He gives two reasons: First, the experimental design means the results can be interpreted as a cause-effect relationship. And secondly, the researchers look carefully at individual versus team performance, with an eye on how heat compromises collaboration. Generally, past research has focused on individual performance like test scores, because individual outcomes are easier to observe than collaborations.</p>
+<p>The full picture of heat’s impacts on cognition is just beginning to emerge, through new work happening across researchers, says Barreca. “Heat might impact collaboration since heat impacts hormonal balances or might cause physical discomfort in ways that might make it hard to work closely together,” he says, adding that the research suggests that heat increases violence, which might be an indication of how heat affects interpersonal dynamics.</p>
+<p>Additionally, access to air conditioning may not just be healthy—it might be critical to maintaining a healthy economy, Barreca says.</p>
+<p>Garg adds that it’s important to study heat and teamwork in different places to understand how generalizable the findings are. “It’s interesting to see, not just that the physical environment affects the way people work, but also the pathways through which that happens.” <img alt="" src="../images/nautilus-favicon-14_1069.png" /></p>
+<p><em>Lead image: WindAwake / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

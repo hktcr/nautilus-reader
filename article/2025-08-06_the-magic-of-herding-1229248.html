@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Magic of Herding - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Magic of Herding - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-08-06
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-SJGH</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>When Doyle Ivie, a 77-year-old farmer and sheepdog trainer in northern Georgia, received an email from Saad Bhamla and Tuhin Chakrabortty, two biophysicists from the Georgia Institute of Technology, he was intrigued. The researchers wanted to know if he would let them record the to-and-fro-ing of his sheepdogs.</p>
+<p>The farmer couldn’t fathom what the scientists might learn about the abstractions of physics by studying his muddy canines, but he agreed. Not long afterward Bhamla and Chakrabortty, who study collective behavior, pulled up to Ivie’s farm to watch the dogs in action. That day, the farm was hosting a sheepdog trial, a centuries-old competition in which sheepdogs show off their herding skills by steering small flocks of sheep across a field, as well as splitting the group, known as “shedding,” among other tasks.</p>
+<p>Physicists have studied sheepdog herding for decades, but they have mostly modeled how the dogs gather up large herds, Bhamla says. In these large herds, sheep display what’s known as selfish flocking behavior, gravitating toward the center and putting others between themselves and danger. But in smaller groups, as in sheepdog trials, their decisions become more erratic, as they waver between following the flock or heading off on their own.</p>
+<p>How the sheepdogs manage to get the sheep to go where they want under these chaotic conditions suggests a solution to a tough problem in physics—controlling noisy, unpredictable collectives, which is relevant not just to sheep, but also to drone and robotic swarms and pedestrian movements, among other things. Such emergent collectives are driven by both group-level patterns and by interactions between individual members of the group.</p>
+<blockquote>
+<p>Instead of suppressing randomness, they found, the sheepdogs seemed to embrace it.</p>
+</blockquote>
+<p>“Dogs do amazing things, so naturally we were interested,” says Bhamla.</p>
+<p>After their visit to the farm, Bhamla and Chakrabortty gathered a series of recordings of sheepdog trials from YouTube videos. As they looked for patterns in the recordings and talked with sheepdog handlers, they noticed that both herding and shedding boiled down to a two-step process. In the first step, the dog nudges the sheep gently from a distance without inducing panic, waiting for them to face in the desired direction. In the second step, the dog approaches, increasing the threat to get the sheep to move; instinctively, they flee from the perceived predator in the direction they are facing.</p>
+<p>The next challenge for the physicists was translating what they had learned into a mathematical model. Their model included five sheep who changed orientation either in response to a social influence (copying their neighbor), or in response to outside force, such as a dog or a handler. Which influence they chose to respond to was determined at random, though individual sheep were programmed to be more or less responsive to dogs and handlers. The dogs in the model also followed the same two-step process as in real life, first nudging and then moving.</p>
+<p>The scientists found that although random behavior is typically considered an obstacle to controlling a small collective, the indecisiveness of the sheep was actually a benefit to the dogs in the “splitting” task.  The dogs could simply wait until the sheep were facing in the direction they wanted before closing in, limiting the effort required. Instead of suppressing randomness, they found, the sheepdogs seemed to embrace it.</p>
+<p>Based on these findings, the scientists built an algorithm that could be used to predict behavior in other small indecisive behavior-switching collectives. The results, which have not yet been peer-reviewed, were published in June on the preprint server <a href="https://arxiv.org/pdf/2406.06912"><em>arXiv</em>.</a></p>
+<p>Ted Pavlic, a computational biologist and professor at Arizona State University said the findings could apply to any situation where someone needs to guide a group of individuals with whom they can’t directly communicate. “When I’m developing a strategy for a group of individuals that I want to steer, I would assume consistent behavior from all of them,” says Pavlic. “This shows that maybe that’s not the best strategy.”</p>
+<p>But Pavlic notes limitations in the model, particularly in how it represents real sheep. For example, the model sheep don’t avoid collisions and can pass through one another. They also don’t remember where they’ve been. “It would be interesting to see what they find if they add these things to the model,” he says.</p>
+<p>Raissa D’Souza, a professor of computer science and engineering at the University of California, Davis, praised the scientists’ clever use of real world data and agreed that the findings could be useful in the context of robot swarms, particularly for search and rescue. But she pointed out that the results only apply to a very specific type of physics problem—small noisy systems that feature random switching between two states—and don’t generalize over all examples of small, noisy collectives.</p>
+<p>Bhamla and Chakrabortty agree that there’s much to learn. In the future, they hope to explore further how individual sheep behavior influences the outcomes. “Animals are so complicated. We’re still just scratching the surface,” Bhamla says. “What I find amazing is that we’ve taken such a seemingly simple competition and made a whole story about it,” Bhamla says. “How beautiful is that?” <img alt="" src="../images/nautilus-favicon-14_1035.png" /></p>
+<p><em>Lead photo: Alexandra Morrison Photo / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

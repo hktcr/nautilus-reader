@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is It Cake? How Our Brain Deciphers Materials - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Is It Cake? How Our Brain Deciphers Materials - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-07-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-DA8J</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>One of the greatest questions of the modern age is: Is it cake? As in: Is it an <a href="https://youtube.com/watch?v=OJhiQoNgKfc&amp;t=15s">espresso machine</a>, or cake? <a href="https://mailtrack.io/l/104fb94d6f4f2ac3d17c609ec543192ef2fc58d0?url=https%3A%2F%2Fyoutu.be%2FOJhiQoNgKfc%3Fsi%3DBktoUHSCijlG1CCh%26t%3D63&amp;u=2055394&amp;signature=4ba03dbb919eca3d">Paint can</a>, or cake? <a href="https://mailtrack.io/l/dcf3444cb3eb03a31e9302c0d32c98be13de0d41?url=https%3A%2F%2Fyoutu.be%2FOJhiQoNgKfc%3Fsi%3DNJwssTb0un8jldS5%26t%3D334&amp;u=2055394&amp;signature=5abf9b4515c3622c">Air fryer</a>, or …? Millions of viewers have watched rapt as TikTok  bakers slice or bite into inedible-looking objects with fluffy, frosting-filled innards … or have tuned into <em>Is It Cake?</em>, the aptly named Netflix show. Why? As a form of entertainment, this kind of visual trick is hardly new. For centuries, artists have delighted in fooling us into thinking one material is another. From Michelangelo’s marble <em>David,</em> with his sinewy, soft-looking flesh, to Giovanni Strazza’s <em>Veiled Virgin</em>, draped in a marble veil that appears gossamer thin. What makes these illusions so mesmerizing? Maybe it’s because these classic works of art and these modern social media ruses test our ability to use an underappreciated skill that’s been essential to our species’ survival: identifying what stuff is made of.</p>
+<p>Over the past century, neuroscience has made great strides in understanding how the brain visually identifies objects—like mugs, trees, and faces. But the question of how we recognize what those objects are made of (smooth porcelain, rough bark, soft flesh) has been overlooked until relatively recently. “Our world contains both things and stuff, but things tend to get the attention,” wrote Edward H. Adelson, an MIT neuroscientist whose provocative 2001 <a href="https://citeseerx.ist.psu.edu/document?repid=rep1&amp;type=pdf&amp;doi=8717f5578d25c5f4e150c52e953384b753d0d790">paper</a>, “On Seeing Stuff: The Perception of Materials by Humans and Machines,” spurred a flurry of material perception research.1</p>
+<h4><strong><em>Nautilus</em> premium members can listen to this story, ad-free.</strong></h4>
+<h4><strong><em>Nautilus</em> members can listen to this story.</strong></h4>
+<p>“Yet materials are just as important as objects are,” he wrote. “Our world involves steel and glass, paper and plastic, food and drink, leather and lace, ice and snow, not to mention blood sweat and tears.”</p>
+<p>It’s strange that the field of material perception is so new, considering how essential the ability to decipher what things are made of is. “When we look around our world, everything is made of materials,” says Alexandra Schmid, a postdoc at the National Institutes of Health’s National Institute of Mental Health. “And we need that information to know how to interact with that world.” Recognizing what an object is made of tells us—as it told our ancestors—how we can interact with it: Can we squeeze it? Eat it? Touch it without getting burned or scratched? Pick it up? (And if so, using how much force?) Material perception helps us spot the glimmer of potentially potable water, and sort firm, fresh-looking fruit from wrinkled, rotten ones. Humans, like chimpanzees, use material properties like hardness to determine if a rock is a suitable weapon or tool. And brains that are optimally tuned to making these sorts of decisions efficiently and accurately are essential to survival and reproductive success, especially as our evolutionary predecessors navigated the travails of early human history.</p>
+<blockquote>
+<p>Even when we’re not seeing a material, our minds can fill in the blank of what it should look like.</p>
+</blockquote>
+<p>Since Adelson’s provocative paper two decades ago, the study of material perception has exploded. Recent studies have investigated how we categorize specific materials, such as wood or metal, as well as isolated material properties, including hardness, color, or elasticity. Dozens of papers exclusively tackle our perception of “gloss.” Yet despite the neuroscientific progress studying how our brains make sense of this narrow band of materials and properties, until recently, researchers didn’t have the foggiest sense of the span or range of materials humans perceive.</p>
+<p>Now, a <a href="https://www.pnas.org/doi/10.1073/pnas.2417202122">paper</a> recently published in the <em>Proceedings of the National Academy of Sciences</em> proposes a sweeping, generalized approach to understanding material perception.2 Most prior research has focused on testing specific material qualities that scientists predetermined to be important to perception—such as shininess, hardness, or color. Schmidt and her coauthors of the <em>PNAS</em> paper took a different approach: letting patterns emerge naturally from behavioral data. Using methods borrowed from machine learning, they were able to uncover 36 fundamental dimensions that our brains consider to understand materials.</p>
+<p><img alt="" src="../images/Rw7q4Pw8-Markowitz_BREAKER.png" /></p>
+<p><strong>NOT CAKE</strong>: Sculptors have delighted for centuries in making art that fools our brains into thinking marble is anything but. <em>Credit: Shhewitt / Wikimedia Commons.</em></p>
+<p>“We wanted to take a bottom-up approach,” says Martin Hebart, a researcher at Justus Liebig University Giessen who coauthored the paper. “To get a bigger picture and figure out what things we should actually be caring about and studying.”</p>
+<p>The team began by collecting a dataset of 600 images of 200 different materials—for example, brick, velvet, sandpaper, plastic. Next, they presented thousands of participants with sets of three images and asked them to rate which of two images was most similar to the third (reference) image. After collecting nearly 2 million ratings, they used a technique borrowed from machine learning to derive 36 “core dimensions of material perception.” These are essentially the cognitive axes humans use to sort materials. For example, we use the “mineral” dimension to sort images by how rough, rocky, hard, or otherwise mineral-y they appear. Other dimensions rate objects by how fabric-y or how metallic they look. Some dimensions matched categories that previous experimenters had investigated, such as texture and color. Others—such as “crystalline,” “small,” and “spongy”—were novel. In theory, these 36 dimensions can now help researchers understand what the human brain is keying off of when it decides that a rock looks more similar to a mirror than to, say, a fluffy blanket.</p>
+<p>“Their paper is really taking us a lot further toward understanding how we actually recognize things,” says Robert Kentridge, a professor at Durham University who was not involved with the study. “It really gets you thinking about the different ways of working out how vision works, how we end up with higher-order representations.”</p>
+<p>Scientists are only beginning to understand how the human brain identifies materials. It’s a seemingly simple task, undergirded by complex computations that happens in the blink of an eye. Consider a soap bubble—its shiny surface mirrors whatever environment it’s in. Visually, it can look entirely different from one setting to another. Yet our brains have no difficulty identifying it as the same glossy, filmy object each time. Despite the dramatic change in appearance, we perceive consistency. How?</p>
+<blockquote>
+<p>Recognizing what an object is made of tells us how we can interact with it: Can we squeeze it? Eat it?</p>
+</blockquote>
+<p>At first, researchers hypothesized that the brain might have dedicated regions for detecting specific material qualities, such as glossiness. They proposed that neural circuits might be solving an “inverse optics problem”—inferring the physical properties of a surface by analyzing the patterns of light hitting the retina. However, that approach turned out to be computationally intractable. Now, the field has come to view material perception as a gestalt process—one that taps a diverse range of neural circuitry. Rather than relying on a single, specialized “material recognizing” region, our brains draw on a network of systems that integrate low-level visual features with higher-order knowledge—such as context, memory, touch, and real-world experience—to determine what something is made of. “We’re seeing a distributed network, definitely,” Schmidt tells me. “There is no ‘stuff’ area. It’s all over the place.”</p>
+<p>In a 2021 <em>NeuroImage</em> <a href="https://pubmed.ncbi.nlm.nih.gov/33385563/">paper</a>, Schmid and collaborators wanted to see what would happen in the brain when we detected material motion—such as cloth flapping or jelly wobbling—but without any visual surface texture.3 To test this, they created what she calls “dynamic dot materials,” animations of black dots on gray backgrounds that simulated material motion. When study participants viewed just these moving dots, they were able to guess what material they represented, such as jelly or liquid. What’s more, scans of their brains showed activation across visual pathways, somatosensory areas, and even motor regions. “It was surprising, because we saw activations in regions that were not historically thought to process motion … including areas that were thought to process texture of objects and patterns,” Schmid says.</p>
+<p>All of this implies that even when we’re not seeing a material, our minds can, to some extent, fill in the blank of what it should look like and how it should behave. The brain “identifies the object as a cloth flapping in the wind, infers the object’s weight under gravity, and anticipates how it would feel to reach out and touch the material,” the authors of the study write. The brain doesn't just see materials; it experiences them across multiple sensory dimensions.</p>
+<p>All of these recent investigations are revealing how deeply we seem to be wired—and in complex, surprising ways—to recognize what stuff is made of. Which maybe explains why we’re so fascinated by <a href="https://nautil.us/how-to-drive-a-car-through-a-wall-352926/">illusions that challenge</a> this ability. A glitch in our material perception systems could ruin our ability to interact appropriately and productively with the world. Hence the enduring question: Is it cake? <img alt="" src="../images/nautilus-favicon-14_1089.png" /></p>
+<p><strong>References</strong></p>
+<ol>
+<li>
+<p>Adelson, E.H. On seeing stuff: The perception of materials by humans and machines. <em>Proceedings of SPIE—The International Society for Optical Engineering</em> 4299 (2001).</p>
+</li>
+<li>
+<p>Schmidt, F., Hebart, M.N., Schmid, A.C., &amp; Fleming, R.W. Core dimensions of human material perception. <em>Proceedings of the National Academy of Sciences</em> e2417202122 (2025).</p>
+</li>
+<li>
+<p>Schmid, A.C., Boyaci, H., &amp; Doerschner, K. Dynamic dot displays reveal material motion network in the human brain. <em>NeuroImage</em> 117688 (2021).</p>
+</li>
+</ol>
+<p><em>Lead image: <a href="https://www.shutterstock.com/g/cicilia+na">ciciliana</a> / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

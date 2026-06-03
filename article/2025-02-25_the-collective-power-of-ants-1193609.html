@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ants Beat Humans at Problem Solving in Groups | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Ants Beat Humans at Problem Solving in Groups</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-25
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-B6RJ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Throughout the ages, the industry and cooperative spirit of the humble ant have been praised as virtuous, even holy. “Go to the ant, thou sluggard,” King Solomon exhorts his egotistical, layabout son in Proverbs 6. “Consider her ways, and be wise.”</p>
+<p>Thousands of years later, we humans are still trying to keep up. So says a new <a href="https://www.pnas.org/doi/10.1073/pnas.2414274121">study</a> from scientists at the Weizmann Institute of Science in Israel.</p>
+<p>The researchers pitted the collective problem-solving skills of humans against a cadre of <em>Paratrechina longicornis—</em>better known as longhorn crazy ants, the 3-millimeter-long bane of sewage pumps, AC units, breaker boxes, and picnics. To do so, they set both species loose to solve a puzzling problem involving shoving an awkward shape through a simple maze. It would require cooperation, stamina, trial-and-error—and perhaps even a bit of sacrificing one’s ego to the greater cause.</p>
+<p>Like King Solomon might have predicted, the sluggards lost.</p>
+<p>As it turns out, ants are pretty smart when you get them together. When they join forces, as they did in the experiment, they are able to more efficiently navigate an odd-shaped load through the maze than a group of humans trying to do the same thing. Of course, we people have much bigger brains and are more cognitively developed than ants, Ofer Feinerman, a complexity science researcher and coauthor of the new paper,  assured me when we chatted. But that, as it turns out, is part of the problem.</p>
+<p>“Unlike the ants, each person that enters the puzzle understands it and has different ideas on the sequence of moves required to move through it,” Feinerman told me. “It is these differences that make it difficult for the group of people to achieve consensus—and indeed they often settle for bad solutions.”</p>
+<blockquote>
+<p>Human subjects worked better alone than in groups. For the ants, it was the opposite.</p>
+</blockquote>
+<p>To stage this interspecies competition, the researchers put the subjects through something called the “piano movers puzzle,” a robotics problem that examines possible ways of moving an oddly shaped object—like a piano—from point A to point B through a complex environment. Instead of a piano, the ants and the humans were given a large T-shaped object that they had to maneuver across a rectangular space that was divided into three chambers connected by two narrow openings—a scenario that would require some crafty manipulation to slide the object through.</p>
+<p>The researchers created two separate sets of mazes—one that was ant-scale, and one that was people-scale. Feinerman and his colleagues then set the ants to their navigation task in three combinations: a single ant, ants in a small group of about seven, and then in a large group of about 80. The humans, too, were sent to their maze in parallel combinations of one individual, a small group of six to nine people, and a large group of 26.</p>
+<p>Among the human subjects, Feinerman told me, a spirit of competition was enough to compel them to tote their load. For the ants, however, the researchers left the T-shaped parcel in a bag of cat food overnight to spur them to action.</p>
+<p>To make the comparison between the species as accurate as possible, a number of the run-throughs of the experiment limited the communication abilities of some of the human participants: They were instructed to refrain from conversation or gesticulation, and made to wear surgical masks and sunglasses to block them from hinting at directions with their expressions.</p>
+<p>This might at first seem to give ants an unfair advantage, given that they can rely on a well-known intercom system running on pheromones—the chemical signals they lay down to guide each other to sources of food or to sound alarm. But Feinerman explained that pheromones don’t convey information about how wide doorways are or whether the load the ants are carrying has to be turned around to fit through them.</p>
+<p>About all the pheromones would tell the ants, he said, is: “‘the door is north of here’ or ‘the nest is north of here.’ This is information that the individual ants knew anyway and therefore the fact that they receive it again is not too useful.”</p>
+<p>To mimic the ants’ capabilities of attaching to the load, the humans were given handles, connected to force meters, to pull on. The researchers repeated the experiment numerous times for each combination. They then analyzed the videos and crunched the data with computers and various physics models. These <a href="https://www.pnas.org/doi/10.1073/pnas.2414274121#supplementary-materials">videos</a> give us a panoramic view of the cogitations involved.</p>
+<p>VIDEO</p>
+<p><em>Credit: Weizmann Institute of Science / YouTube</em></p>
+<p>The big finding was the human subjects worked better alone than in groups. For the ants, it was the opposite. Groups of ants cooperated in a “calculated and strategic manner,” the researchers wrote in their paper, “exhibiting collective memory that helped them persist in a particular direction of motion to avoid repeating mistakes.”</p>
+<p>To the humans’ credit, Feinerman did tell me that a single person has an easier time solving the puzzle than does a big group of ants. But for people, that’s where the improvement ends. It’s as if too many individual opinions on how the puzzle should be solved simply collide and make mush of cooperation as more and more people are added to the experiment. That’s not a problem for ants—who have no idea what the puzzle even is. They know only one command: Carry the food home to the nest.</p>
+<p>“Because they are simple, the individual ants do not try to grasp the geometry of the maze,” said Feinerman. “All they understand is that they have to carry a large load together. Thus, all ants are on the same page and all of them cooperate on carrying a load together.” Ants as individual units focus exclusively on protecting their queen—the one organism within their community that can actually reproduce.</p>
+<p>We humans have more varied and individualized concerns. And these concerns, as Feinerman’s experiment suggests, can become baggage when we’re trying to solve collective problems, said neuroscientist Robert Sapolsky, who was not involved with the study.</p>
+<p>“Each person egoistically thinks they have the most relevant information—and the wisest assessment of it—to accomplishing the overall goal,” he wrote in an email. “So, a cognitive tendency to decide the little sliver of reality you have access to can be extrapolated to what the entire phenomenon is, and then the human-y ego to assume that your constructed reality is better than everyone else’s.”</p>
+<p>In other words, we’re back to banging the load back and forth, trying to enforce our own solution. It’s a lesson King Solomon’s son would have done well to abide. <img alt="" src="../images/nautilus-favicon-14_1258.png" /></p>
+<p><em>Lead image: igzumi / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

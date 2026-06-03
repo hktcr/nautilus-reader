@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Sex and the City - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Plant Sex and the City - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-05-14
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PORQ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Steps from a public bathroom, across a narrow street from a home goods store in Tokyo, Japan, a tangle of delicate reddish stems fringed with rubbery emerald leaves pokes from a crack in the pavement. Smaller than a discarded Big Mac box, the plant sprawls close to the ground, appearing entirely unremarkable. Put more plainly: Common purslane looks like a weed.</p>
+<p>Purslane is so inconspicuous that when Tomohiro Fujita, a biologist at Japan’s National Institute for Environmental Studies in Ibaraki, started studying it in August 2021, he had trouble picking it out in the bustling cityscape. “There were several times when I walked around Tokyo for an entire day without finding a single individual,” he wrote by email. But once he learned to recognize the plant, he found it in all kinds of places. Growing in a lush, tree-ringed quad outside a cafeteria at Rikkyo University, for instance. Or eking out a modest living near a city bus lot not far from Sugamo Station.</p>
+<p>Common purslane, known to scientists as <em>Portulaca oleracea</em>, is not just big in Japan. By some counts, it’s the eighth most widely distributed plant in the world. As happy growing in gardens as along roads or parking lots, it has been documented everywhere from Mexico City to Tanzania’s Serengeti National Park to Midway Atoll in the North Pacific Ocean.</p>
+<p>No one seems to agree on where purslane got its start—scientists have speculated that it came from India, North Africa, or Australia—but it’s moved around the world for millennia. It came to the Americas well before Columbus; Indigenous people in present-day Ontario were harvesting the plant as early as 1350. In some places, the plant probably hitched a ride with migrating animals or oblivious humans; in others, it traveled first class, brought along for its many medicinal and culinary uses.</p>
+<p>Fujita and his colleagues’ <a href="https://academic.oup.com/aob/article/135/1-2/269/7721967">recent study</a> helps explain how common purslane continues to find purchase in our increasingly anthropogenic world. Fujita collected seeds from purslane plants at 10 urban sites in Tokyo—including the one near the public bathroom—and from rice paddies and fields at 10 sites outside the city. After growing those seeds into mature plants in a greenhouse, he observed something surprising: The purslane grown from urban seeds was much less likely to open its flowers and bloom than the rural plants. Or, as Fujita and his co-authors poetically phrased it, “the flower does not open in the city.”</p>
+<blockquote>
+<p>Common purslane is the eighth most widely distributed plant in the world</p>
+</blockquote>
+<p>Although plants have multiple ways to do the deed, flowers are the decorative boudoirs where fertilization happens. Some common purslane individuals cross-pollinate by swapping pollen with each other. On hot, sunny days, these plants explode with small yellow flowers that open just long enough to let insects carry pollen between plants. Other purslane plants, however, self-pollinate by fertilizing within their own tightly curled buds, which never unfurl to become flowers.</p>
+<p>Flowering is so ephemeral that Fujita didn’t spot purslane with open flowers at any of the collection sites either in Tokyo or outside the city. But his team observed the plants’ offspring as they flowered in the greenhouse. While environmental conditions trigger or suppress flowering in most species, a purslane plant’s specific genes dictate whether it opens its flowers for pollination or takes care of business itself. And Fujita found that the vast majority of urban plant offspring—95 percent—never flowered, compared with roughly 76 percent of individuals from rural areas.</p>
+<p>The fact that so many more plants in Tokyo carry the genes for closed flowers shows that the urban population is evolving to almost exclusively self-pollinate, Fujita says. Closed buds take less energy to grow, mature earlier than open flowers, and produce bigger seeds, which often develop into seedlings with larger root systems for reaching scant moisture. In dryer, hotter urban environments that tend to have fewer pollinators, these benefits may help purslane survive.</p>
+<p>With some 70 percent of the Earth’s terrestrial surface now altered by human development, the study offers a peek into one way that plants are adapting to urbanization. In a <a href="https://www.sciencedirect.com/science/article/pii/S2351989422002451?via%3Dihub">2022 review</a>, Fernanda Bered, a geneticist at Federal University of Rio Grande do Sul in Porto Alegre, Brazil, found that, globally, urban plant communities are less diverse than those in surrounding areas and tend to feature more introduced and hardy species. Bered and her coauthors also identified other ways plants respond to urbanization. City plants often grow faster, flower earlier and longer, and make smaller seeds than their rural counterparts. Some plants respond to industrialized environments by growing more slowly in soils laden with heavy metals. And plants exposed to polluted air produce less chlorophyll A, a key pigment for absorbing light, meaning they make less energy and oxygen.</p>
+<p>Purslane isn’t the only urban plant turning to solo reproduction. In industrial sites near the port of Antwerp, Belgium, where pollinating hoverflies are rare, common centaury (<em>Centaurium erythraea</em>) produce smaller flowers that <a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.1365-2435.2011.01923.x">are more likely to self-pollinate</a>. In Osaka, Japan, Asiatic dayflowers (<em>Commelina communis</em>) in more urban areas grow <a href="https://www.journals.uchicago.edu/doi/10.1086/676855">reproductive parts</a> that are physically closer together, making self-pollination easier. Bered points out that such strategies give plants a leg up in places where fragmented habitat has made nearby cross-pollinating plants scarce, or where there’s a shortage of pollinators.</p>
+<p>“It’s difficult for pollinators like birds, bats, and insects to live in the cities,” Bered says. “Plants that depend on pollinators to reproduce have to evolve in a very short time to survive.”</p>
+<p>But “selfing,” as it’s called, can have drawbacks, too. Populations that self-pollinate for generations will likely have less genetic diversity than plants that cross-pollinate, Fujita explains. And lower genetic diversity could make it harder for future generations of urban purslane to weather stressors, particularly as cities become warmer.</p>
+<p>For now, though, common purslane is doing just fine: The succulent thrives in full sun and warm temperatures, and its waxy leaves retain precious moisture in paved-over spots like near that Tokyo bathroom. In cities around the world, the plant is winding its way along the cracks between sidewalk pavers, reaching for water and soaking up sun. <img alt="" src="../images/nautilus-favicon-14_1176.png" /></p>
+<p><em>This</em> <a href="https://www.biographic.com/plant-sex-in-the-city/"><em>story</em></a> <em>originally appeared in</em> bioGraphic<em>, an independent magazine about nature and regeneration powered by the California Academy of Sciences.</em></p>
+<p><em>Lead photo by Bob Gibbons / Alamy Stock Photo</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

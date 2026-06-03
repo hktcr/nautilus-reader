@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cephalopods Are Coming | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Cephalopods Are Coming</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-29
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-Z822</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://nautil.us/products"><img alt="" src="../images/upcoming-issue-banner_3a5fb2.png" /></a></p>
+<p>The quaint seaside village of Lyme Regis is precariously perched between rugged black cliffs in southwestern England. It sits astride one of the most famous fossil sites in the world. On an autumn day several years ago, I left behind the crowded streets of souvenir shops selling fossils and T-shirts. I walked along the cliffs and over the ribbed rocks underlying the beach, stepping across one of the most devastating mass extinctions of the geological record.</p>
+<p>The fossils beneath the village represent the end of the Triassic geological period. Around 200 million years ago, great gouts of deep Earth material welled out of volcanoes. As it flowed across land and sea bottom, it decanted enormous volumes of carbon dioxide. Mixed with the late Triassic atmosphere, it caused global temperatures to skyrocket.</p>
+<p>But it was not heat alone that stressed the world into one of the greatest mass extinctions in Earth history. The warming planet reduced the temperature differential between polar and equatorial regions. A consequence was a slowing of the important ocean currents called Thermohaline Circulation Currents. These are the drivers of oxygenating the oceans. When they slow and then halt, mass extinction follows. The living Triassic world, home to early dinosaurs, invertebrates, strange plants, and so much else, became a death world—on land, in the sea, in the skies.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/pirates-killer-whales-and-cheap-jewelry-a-life-in-science-235203"><strong>Pirates, Killer Whales, and Cheap Jewelry: A Life in Science</strong></a><strong>”</strong></p>
+<p>As I walked along the rocky beaches northwest of the town itself, I traversed from the youngest strata of the Triassic period to the oldest of the Jurassic period. The strata changed from being largely devoid of fossils to becoming packed with them. These fossils were almost exclusively cephalopod fossils, including the remains of nautiluses, squids, and belemnites, squid-like animals with an internal skeleton. This is where the area’s fabled 19th-century paleontologist, Mary Anning, made some of the most important finds of her life. They included the complete, if flattened skeletons of early Jurassic period ichthyosaurs, or “fish lizards,” among many other treasures that she extracted from these strata with the primitive, brute force equipment available in her time.</p>
+<p>But far more commonly than the marine reptiles, which now adorn so many museum walls, are the fossils that were used as the title of the 2020, nearly totally imaginary movie <em>Ammonite</em>. The movie was focused on the supposed romantic affair between Anning and geologist Charlotte Murchison, as they grubbed fossils out of the Jurassic coastline. One of the few aspects that rang true was the abundance of the ammonites discovered by Anning and Murchison.</p>
+<p>Ammonites are gorgeous white spirals that look like the externally shelled nautiluses, except with far more styles. Where the nautilus fossils had smooth exterior shells looking very much like those of the modern day, the ammonites were more rococo. They had ribs, spines, indented lines along the shell in all manner of designs. Most importantly, the ammonites had respiration systems capable of surviving extremely low oxygen levels just as the nautilus does today.</p>
+<p><img alt="" src="../images/PQ1_7ade4f.png" /></p>
+<p>Like the dinosaurs in the earliest Jurassic period, ammonites evolved the ability to live in a superheated world. Some lived just above the sea bottom, some in mid-water, some at the surface. Some simply floated and might have spun like pinwheels in waves; others were flat, compressed, and surely awesome and rapid swimmers. Their only competition in the earliest Jurassic probably came from their own kind. Gone were their 200-year-long nemeses: bony and cartilaginous fish, suffocated by the ocean’s lack of oxygen.</p>
+<p>More than 40 species of ammonites existed in the early Jurassic of Europe. Add in the squids and nautiluses, and there were probably at least 100 species of cephalopods living in the shallow warm waters in the 2 to 5 million years after the Triassic mass extinction. It was a marine biology unlike anything humans have ever witnessed.</p>
+<p>Today, the Lyme Regis fossils tell us a clear story: The survivors of the Triassic mass extinction were the seedstock of a great cephalopod flourishing.</p>
+<p>As a paleontologist who has studied cephalopods and mass extinctions for more than five decades now, I see signs of that story today, similar in ways both familiar and horrifying. It is as if our world is like the one at the end of the Triassic. Signs point toward a mass extinction, the sixth in the geological time of animals, that is either completed or heading toward finality in our ocean communities.</p>
+<p>Once again, we are in a warming world; once again, ocean currents that supply oxygen are slowing; once again, a significant proportion of marine predators, such as the predatory bony and cartilaginous fish, are disappearing. And once again, the cephalopods are flourishing, blooming like weeds, as they fill the ecological niches of the ocean animals around them being wiped out</p>
+<p>I began to study the living nautilus, morphologically as close to an ammonite as we will ever get, as a graduate student in 1975. The living nautilus is the great survivor. As good as the ammonites were at surviving a mass extinction caused by low oxygen oceans, they ran out of luck due to the great asteroid collision of 66 million years ago. Yet the catastrophe spared one of the common fossils found at Lyme Regis—an enormous nautiloid species that looks remarkably like those still living today in the tropical Pacific Ocean and parts of the Indian Ocean.</p>
+<p>At age 25, I took my first diving trip to the waters of the tropical Pacific, including New Caledonia, a giant island that parallels the Great Barrier Reef of Australia, and Papua New Guinea, which has the highest diversity of nautiluses.</p>
+<p><img alt="" src="../images/Ward_breaker.png" /></p>
+<p><strong>JURASSIC BEACH:</strong> A walk along the rocky shore at Lyme Regis, England, with its visible cephalopod fossils, is a step back into deep time. <em>Credit: MarkGodden / Adobe Stock.</em></p>
+<p>I arrived in Noumea, New Caledonia, with the fervor of the young and the skills of a professional salvage diver and dive instructor, both of which I had been earlier in college. It’s one of few places on Earth where nautiluses rise to a depth shallow enough for human divers with scuba gear to see them—but only at night. My French diving partner, Pierre Laboute, and I would sit on the edge of the barrier reef in the dark, from perches about 60 feet deep, and with our dive lights probe the deep beneath us. Several times each dive, our lights would pick up a nautilus, swimming up the vertical wall from its 1,000-foot deep, daytime resting place.</p>
+<p>I have returned to the South Pacific many times to observe the living nautilus and its underwater environment. This includes the waters and coral reefs surrounding Australia, the Philippines, Palau, Vanuatu, New Caledonia, Samoa, and Fiji. My colleague Bruce Saunders and I discovered a second nautiloid genus, <em>Allonautilus</em>, which we formally named in 1997, and is known today as <em>Allonautilus</em> Ward &amp; Saunders.</p>
+<p>In December 2025, 50 years after my first trip, I was back again. I was not quite as spry as I was a half century ago, but still able to gear up with old, but well-maintained dive equipment and underwater cameras, and enter the world of these living fossils, having become, at least academically, a living fossil myself. What we observed was a remarkable replay of the early Jurassic—the cephalopods taking over niches once dominated by fish.</p>
+<p>We saw cephalopods taking over at all sites save those still being actively fished for nautiluses. Even that, though, is not a clear-cut story.</p>
+<p><img alt="" src="../images/PQ2_a2a77d.png" /></p>
+<p>For a century, nautiluses have been hunted for their meat and beautiful spiral shell. In fact, since 2010, my trips to the South Pacific had been funded to research the threats of extinction to nautiluses. And today in places where nautiluses are still hunted, such as the Philippines and Indonesia, they do face extinction. This, despite the 2017 passage of international controls on their heretofore unregulated slaughter, and new rules against trading their shells—rules informed by census counts based on my groups’ deep water camera work.</p>
+<p>Of the many sites we visited over the years, the Philippines were the saddest. As far back as my first trip there, in 1987, local fishermen told me that the nautilus had been totally fished out of the area’s Tanon Strait. In the 2010s, as we began to document the Philippine populations at other regions than Tanon, our deep-water cameras, which filmed at 1,000-foot depths, showed only the occasional nautilus. Thousands had been caught and sent to Europe and America, with the fishermen receiving $1 a shell. We discovered that as many as 500,000 nautilus shells (or parts of their shells) had been imported into the United States alone in the first decade of the 21st century.</p>
+<p>The nautilus alone among cephalopods lives a relatively long life. It takes them up to 15 or 20 years to reach full size. So, the killing of that many nautiluses in such a short time would seemingly have a catastrophic effect on the living species. But that hasn’t been the case.</p>
+<p>At island nations other than the Philippines, such as Fiji, Palau, and Papua New Guinea, as well as off the Great Barrier Reef of Australia, we found that the laws that banned or regulated the nautilus trade worked. Genetic analyses, using samples provided from our trips, discovered three new species. And this is probably only the tip of the nautilus diversity iceberg. We have discovered that every island group separated by deep water seems to have its own endemic nautilus species.</p>
+<p>And yet, while the nautilus has been spared in countries with legal protections, the fish consumed by humans are not.</p>
+<p>Where are the sharks?”</p>
+<p>Last December, as I was following a pair of bobbing nautiluses with my underwater camera, this was my persistent thought.</p>
+<p>During my work in these same waters in the 1980s and ’90s, diving was hazardous. I was literally chased out of the water on numerous occasions by aggressive grey reef sharks, even the small ones. Now I saw no sharks at all. My colleagues and I also found that few to no fish, such as Conger eels and snapper, were caught in our nautilus traps, something that invariably occurred in the 1980s. Our underwater video cameras, over the course of 300 hours gathered in the past five years, showed fewer fish than we had ever seen before. But showed many, many more octopus, squid, and nautiluses. And we weren’t the only ones seeing it.</p>
+<p><img alt="" src="../images/Ward_breaker-2.png" /></p>
+<p><strong>ORIGINAL SURVIVOR:</strong> Ammonites, fossilized here, thrived during a mass extinction because they got by on extremely low levels of oxygen. <em>Credit: mejn / Adobe Stock.</em></p>
+<p>In 2016, a team of fisheries biologists from the University of Adelaide, in Australia, <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(16)30319-0">publis hed a paper</a> that looked at the global catch of cephalopods from the world’s oceans from the early 1950s onward.1 The scientists were astonished at their results. They found that the catch of cephalopods was showing just the opposite of the known catch of human-food fish.</p>
+<p>While the global yield of caught fish tonnage was steadily dropping, the catch of cephalopods was going up. And it was among virtually every kind of cephalopod, from the fast-moving squids to the bottom-dwelling cuttlefish to the eight-armed octopus. Across 35 species of cephalopods that have records kept concerning their global catch, all showed significant increases in the tonnage being caught and sold. <a href="https://www.nature.com/articles/s41598-021-03777-9">Another</a> study estimated that the yearly tonnage of cephalopods caught increased by more than 400 percent from the 1960s to 2014.2</p>
+<p>The authors of the 2016 study proposed that human-caused warming of the oceans allowed cephalopods to grow faster than fish they might compete with. But they also stated the vast increase of cephalopods relative to fish populations was related to “the global depletion of fish stocks, together with the potential release of cephalopods from predation and competition pressure.”</p>
+<p>Indeed, cephalopods and fish have been both competitors and predators on each other for 450 million years. Remove one, and the other is affected. Generally, it’s the fish that triumph. The bite scars we found on many nautilus shells that we observed in the 1980s tells us that early in nautiluses’ lives, predation by sharks and other fish were the most significant cause of mortality. Plus, sharks and bony fish compete for food with the nautiluses, which are not predators. They are scavengers. Dead fish or other carrion are their prized food, but they swim slowly once the scent is detected, and in a big-fish-and-shark-filled world, by the time they get to that dead tuna or snapper, it has already been eaten by the fast-swimming fish.</p>
+<p><img alt="" src="../images/Ward_breaker-3.png" /></p>
+<p><strong>DEEP DIVE:</strong>Author Peter Ward releases a nautilus with a transmitter to track its movements and behaviors near the Great Barrier Reef in the Coral Sea. <em>Photo courtesy of Peter Ward.</em></p>
+<p>Now, the tables are turned. That alone is an augury.</p>
+<p>In the ocean’s Mesophotic Zone, the depth with little light, from around 320 feet to 1,600 feet, we saw cephalopods thriving. Paleontologists call this the “Recovery Zone.” After a mass extinction, it’s where the survivors mostly dwell and compete for oxygen and food. It is the cradle of future marine life. It’s where the cephalopods have an evolutionary advantage.</p>
+<p>As a group, they are one of the fastest known “evolvers.” They have short lifespans, about six months to two years, and natural selection works quickly to reward survival to new genes that increase population numbers. They reach sexual maturity at full size after only one to two years since hatching. They also have short reproductive cycles, which produces many more generations over the same period than fish can accomplish. This is how they win the evolution race: outgrow, out-reproduce, and out-evolve.</p>
+<p>Nothing stokes the evolutionary fires of new species formation like the slaughter of the incumbents. The bigger the body count, the faster the refilling of community positions in many environments. And that’s what we now see in the recovery zone.</p>
+<p>The removal of so many large fish has enabled cephalopod populations to thrive. Sharks, in fact, are among the most significant victims of overfishing. A <a href="https://www.cell.com/current-biology/fulltext/S0960-9822(21)01198-2">2021 article</a> in the journal <em>Current Biology</em> stated that “overfishing” of sharks is driving one third of all species to imminent extinction.3 Add in a warming ocean (which favors cephalopods) with diminishing oxygen (which favors cephalopods), and you see why the cephalopods are flourishing.</p>
+<p><strong>Read more:</strong> <strong>“</strong><a href="https://nautil.us/twilight-of-the-nautilus-238273"><strong>Twilight of the Nautilus</strong></a><strong>”</strong></p>
+<p>It’s not just us scientists who are witnessing the sea change. In 2025, fishermen along England’s southern coast, not far from the fossil beds of Lyme Regis, pulled up their nets and traps not with the Dover sole, crabs, or lobsters they were expecting. Instead, they were filled with cephalopods, notably octopus and squid. Steve Simpson, a professor of marine biology at the University of Bristol, told <em><a href="https://www.nytimes.com/2025/09/29/world/europe/octopus-invasion-england-uk.html?searchResultPosition=1">The New York Times</a></em> that “climate change is a likely driver” of the population boom. “We are right on the northern limit of the octopus species range, but our waters are getting warmer, so our little island of Great Britain is becoming increasingly favorable for octopuses’ populations.”</p>
+<p>This is undoubtedly correct. But a more thorough hypothesis is that the removal of so many fish stocks allowed the octopus populations to thrive and increase in size. The global fisheries industry is akin to the global petroleum industry. It produces a product of importance to humanity. But leaves humans to contend with its deep environmental gouge in Earth.</p>
+<p>As scientists, we can’tsay for certain the current rise of cephalopods represents the early phase of a new mass extinction in our oceans. But there are certainly signs for Cassandra to see.</p>
+<p>For one, this is what a mass extinction does. There is no sudden death, not even after the Chicxulub asteroid hit the Yucatan peninsula 66 million years ago. Extinction still took a few decades. The extinction ending the Triassic period took a minimum of 1 million years to consummate its slaughter, based on our knowledge of rock dating, from the first evidence of darkening strata in the Late Triassic, to the appearance of those thin, dark rocks of the Lyme Regis shore and seaside cliffs.</p>
+<p>As time intervals go, this cephalopod survey, measured in decades, is so short compared to the vastness of geological time as to be so ephemeral. But the great extinctions of the past did not include the asteroid of humanity. They did not include very determined humans in vast armadas of fishing boats, factory ships quickly processing the catch, or innumerable stores in Asia where hundreds of shark fins hang in the windows for sale.</p>
+<p>If we continue to fill the atmosphere with carbon dioxide in volumes that match the volcanoes and lavas that tended the Triassic, creating a reduction in high latitude polar regions without similar temperature increase in the tropics (what is happening now), and if we cause the critical ocean currents to slow or cease by 2050, and <a href="https://interactive.carbonbrief.org/amoc-explainer/index.html">studies predict</a> we are, then in all probability we are headed toward the sixth mass extinction.4 The cephalopods are coming.</p>
+<p>Calamari, anyone? <img alt="" src="../images/nautilus-favicon-14_32.png" /></p>
+<p><strong>References</strong></p>
+<ol>
+<li>
+<p>Doubleday, Z.A., <em>et al.</em> Global proliferation of cephalopods. <em>Current Biology</em> <strong>26</strong>, PR406-R407 (2016).</p>
+</li>
+<li>
+<p>Ospina-Alvarez, A., <em>et al.</em> A network analysis of global cephalopod trade. <em>Scientific Reports</em> <strong>12</strong>, 322 (2022).</p>
+</li>
+<li>
+<p>Dulvy, N.K., <em>et al.</em> Overfishing drives over one-third of all sharks and rays toward a global extinction crisis. <em>Current Biology</em> <strong>31</strong>, P4773-4787 (2021).</p>
+</li>
+<li>
+<p>Keating, C. Is global warming tipping key Atlantic ocean currents towards “collapse”? <em>Carbon Brief</em> (2026).</p>
+</li>
+</ol>
+<p><em>Lead image: Strolch fec. Unknown Leipzig ; Berlin ; Wien : F.A. Brockhaus</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

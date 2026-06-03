@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nautilus Reading List of Science Biographies | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Nautilus Reading List of Science Biographies</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-I1KJ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Is time travel possible? You can have heady fun <a href="https://nautil.us/a-nonlinear-history-of-time-travel-236118">delving into the debate</a> that echoes from the writings of Kurt Godel, Stephen Hawking, and Albert Einstein. The answer, by the way, is yes, no, maybe. But there is one form of time travel that always feels real and thrilling—a totally engaging biography. You live inside the life and times of a person who saw the world as nobody else did. You walk the streets where they lived and feel the people and cultures, loves and trials, that made and unmade them. This list of beautifully composed biographies is our invitation to travel back in time and be dazzled by scientists who stretched the boundaries of their fields and thought and humanity themselves. Welcome. It’s a four-century tour.</p>
+<p><strong><em><a href="https://www.penguinrandomhouse.com/books/170020/galileos-daughter-by-dava-sobel/">Galileo’s Daughter: A Historical Memoir of Science, Faith, and Love</a></em> by Dava Sobel</strong></p>
+<p><img alt="" src="../images/galileosdaughter-breaker.png" /></p>
+<p><em>Penguin Random House</em></p>
+<p>You don’t really know Galileo until you meet him through the eyes of his oldest daughter, Maria Celeste, the name she adopted for herself in the convent where she was consigned for her short life, in honor of her father’s illumination of the stars. Sobel portrays the 16th-century astronomer, inventor, and <a href="https://nautil.us/galileo-the-science-publicist-237804">rebel against Catholic doctrine</a> in all his scientific glory. But Sobel goes where no biographer has gone before in capturing the gentle sides of Galileo by introducing readers to Maria Celeste and spotlighting her warm letters to her father, full of questions about astronomy and her own supple insights into it.</p>
+<p><strong><a href="https://www.penguinrandomhouse.com/books/227866/the-invention-of-nature-by-andrea-wulf/"><em>The Invention of Nature</em>: <em>Alexander von Humboldt’s New World</em></a></strong> <strong>by Andrea Wulf</strong></p>
+<p><img alt="" src="../images/inventionnature-breaker.png" /></p>
+<p><em>Penguin Random House</em></p>
+<p>The title of Wulf’s book about 19th-century Prussian explorer and writer Alexander von Humboldt is the giveaway to its originality and timeliness. Today we take for granted the veracity of ecology, the interrelationship among species, as a key trait of life and survival. But it was Humboldt, a bold adventurer, who cast <a href="https://nautil.us/as-mountains-rise-biodiversity-blooms-1205605">this Earthly principle</a> into the world. It  seeded the evolutionary biology of Charles Darwin and environmental philosophy of Henry David Thoreau. And what a character. “Fascinated by scientific instruments, measurements and observations, he was driven by a sense of wonder,” Wulf writes. “He could be vain, but would also give his last money to a struggling young scientist.”</p>
+<p><strong><em><a href="https://press.princeton.edu/books/paperback/9780691026060/charles-darwin?srsltid=AfmBOopZmwPlZopAU-2LkCxn8_E7MPSuG-5LjyKqd72ooP2UDZELNHH-">Charles Darwin: Voyaging</a></em> and <em><a href="https://www.penguin.co.uk/books/367647/charles-darwin-volume-2-by-janet-browne/9780712668378">Charles Darwin: The Power of Place</a></em> by Janet Browne</strong></p>
+<p><img alt="" src="../images/darwins-breaker.png" /></p>
+<p><em>Princeton University Press and Penguin Random House</em></p>
+<p>Speaking of perhaps the most world-shattering scientist of all time, you can certainly read Darwin’s <em>The Voyage of the Beagle</em>, <em>On the Origin of Species</em>, and <em>The Descent of Man</em> on their own. And we all should. Once you settle into the rhythms of the Victorian prose, you become immersed in Darwin’s lucent observations, so <a href="https://nautil.us/why-darwin-admired-the-humble-earthworm-361515">uncanny and exciting</a>, and the hours of the <a href="https://nautil.us/darwin-was-a-slacker-and-you-should-be-too-236532">modern day slip by</a>. But if you want to put it all in perspective, truly understand how Darwin got to the insights he did, who and what experiences influenced him, and what the cultural and social impact of his science was and is, then it’s time for this utterly magnificent two-volume biography by Browne, a British historian of science.</p>
+<p><strong><em><a href="https://www.harpercollins.com/products/the-professor-and-the-madman-simon-winchester?variant=41005285769250">The Professor and the Madman: A Tale of Murder, Insanity, and the Making of the Oxford English Dictionary</a></em> by Simon Winchester</strong></p>
+<p><img alt="" src="../images/professormadmen-breaker.png" /></p>
+<p><em>HarperCollins Publishers</em></p>
+<p>The science of lexicography is fascinating. And not just because it’s about how words make the cut for a dictionary. It’s also about <a href="https://nautil.us/i-was-made-of-language-989146">how words get infused with meaning</a> and who infuses them. There’s no more amazing tale of lexicography than this 19th-century origin story of the Oxford English Dictionary. Winchester recreates the relationship between OED director James Murray and William Chester Minor, a Civil War surgeon who submitted more than 10,000 quotations with possible new entries for the dictionary, sent from his incarceration in an asylum for the criminally insane. How a “madman” understood language so deeply is a remarkable neurological story on its own. But ultimately a look into the enigmatic depths of humanity.</p>
+<p><strong><em><a href="https://www.simonandschuster.com/books/Einstein/Walter-Isaacson/9780743264747">Einstein: His Life and Universe</a></em> by Walter Isaacson</strong></p>
+<p><img alt="" src="../images/einstein-breaker.png" /></p>
+<p><em>Simon &amp; Schuster</em></p>
+<p>Isaacson’s achievement is to make you feel you know Einstein and understand his breakthroughs as if you were reading a novel not a textbook. You experience Einstein’s emotions over his theories and equations. When his calculations for the <a href="https://nautil.us/einsteins-other-theory-of-everything-823245">theory of relativity</a> proved to be correct, “I was beside myself with joyous excitement,” he wrote to a friend. And who doesn’t like <a href="https://nautil.us/when-einstein-tilted-at-windmills-236253">personal touches about an icon</a>? By 1907 Einstein had “devised a revolutionary quantum theory of light,” Isaacson writes, “upended the concept of space and time, and produced what would become science’s best-known equation.” That year, tired of his drudge work in a patent office, he thought about becoming an electric-device salesman. His wife Mileva Maric told a friend, “My husband often spends his free time at home just playing with the boy,” his first son, Hans.</p>
+<p><strong><em><a href="https://www.hachettebookgroup.com/titles/graham-farmelo/the-strangest-man/9780465019922/?lens=basic-books">The Strangest Man: The Hidden Life of Paul Dirac, Mystic of the Atom</a></em> by Graham Farmelo</strong></p>
+<p><img alt="" src="../images/strangestman-breaker.png" /></p>
+<p><em>Hachette Book Group</em></p>
+<p>Venturing into the mind of Dirac, “one of the pre-eminent pioneers of quantum mechanics,” just in the wake of Einstein, is a startling and compelling experience. What lurks behind the facade of the expressionless man? Farmelo peels back the onion layers one story at a time. <a href="https://nautil.us/when-reality-came-undone-796994">Revolutionary physicist Niels Bohr</a>, who called Dirac “a complete logical genius”—Dirac would work out the equation for the behavior of electrons and <a href="https://nautil.us/the-joy-of-condensed-matter-238136">predict antimatter</a>—recalls visiting an art gallery with Dirac to look at impressionistic paintings. Looking at a boat sketched with a few lines, Dirac remarked, “This boat looks as if it was not finished.” Of another painting, the mathematically precise Dirac said, “I like that because the degree of inaccuracy is the same all over.” Of all the people who had visited his institute, Bohr said, Dirac was “the strangest man.”</p>
+<p><strong><em><a href="https://www.penguinrandomhouse.com/books/60762/genius-by-james-gleick/">Genius: The Life and Science of Richard Feynman</a></em> by James Gleick</strong></p>
+<p><img alt="" src="../images/genius-breaker.png" /></p>
+<p><strong>Penguin Random House</strong></p>
+<p>Ladies and gentlemen, Richard Feynman. The charismatic and <a href="https://nautil.us/what-impossible-meant-to-richard-feynman-238358">preternaturally confident</a> Nobel laureate in physics is the flipside of the emotionally distant Dirac, Feynman’s scientific hero. Feynman, the prodigal protege, would later work out one of Dirac’s recondite hypotheses on a blackboard. (<a href="https://nautil.us/the-day-feynman-worked-out-black_hole-radiation-on-my-blackboard-237372">He would do the same</a> with a Hawking thesis about black-hole radiation.) Like all good biographies, <em>Genius</em> gets beneath the myth to meet the man. If you only know Feynman by his wiseacre reputation and his surprisingly popular collection of lectures and talks, <em>Surely You’re Joking, Mr. Feynman!</em>, you will be moved most of all by his tender love and care for his first wife Arline, who died at 25 of tuberculosis, and her lifelong presence in his memory.</p>
+<p><strong><em><a href="https://us.macmillan.com/books/9780805074581/afeelingfortheorganism10thaniversaryedition/">A Feeling for the Organism: The Life and Work of Barbara McClintock</a></em> by Evelyn Fox Keller</strong></p>
+<p><img alt="" src="../images/feelingoforganism-breaker.png" /></p>
+<p><em>Macmillan Publishers</em></p>
+<p>Barbara McClintock, who won the 1983 Nobel Prize in Physiology or Medicine for her discovery that genetic elements can change positions on a chromosome, which causes genes to be active or inactive, just seemed like the coolest person to know. She died at age 90 in 1992. When Keller, herself a scientist, first ventured to Cold Spring Harbor to interview McClintock in 1978 about her work and women in science, McClintock said she couldn’t see how she was interesting or representative of women. She never married, had kids, or had any interest in “decorating the torso.” She was <a href="https://nautil.us/the-prizefighters-543303">a born rebel</a> and remained one throughout her career, you learn from her own words in Keller’s book. In her Nobel acceptance speech, McClintock said that being an outcast didn’t create personal difficulties, it “proved to be a delight. It allowed complete freedom to continue investigations without interruption.”</p>
+<p><strong><em><a href="https://www.hup.harvard.edu/books/9780674919198">Vera Rubin: A Life</a></em> by Jacqueline Mitton and Simon Mitton</strong></p>
+<p><img alt="" src="../images/alife-breaker.png" /></p>
+<p><em>Harvard University Press</em></p>
+<p>An astrophysicist renowned for confirming the presence of dark matter in the rotation of galaxies in the 1970s, Rubin led a very different personal life than McClintock. For one thing, she had four kids, which she raised at the same time she did her research, wrote papers, and taught university courses. <a href="https://nautil.us/the-woman-behind-the-worlds-biggest-camera-1219688">She also spoke out</a> against the discrimination and condescension that she and her women colleagues faced in science. But as authors Jacqueline Mitton and Simon Mitton underscore throughout their lucid narrative, Rubin too remained an independent scientist fearlessly committed to her vision. When it came to her research, they write, “Vera was at heart a loner.”</p>
+<p><strong><em><a href="https://www.penguinrandomhouse.com/books/168191/the-immortal-life-of-henrietta-lacks-by-rebecca-skloot/">The Immortal Life of Henrietta Lacks</a></em> by Rebecca Skloot</strong></p>
+<p><img alt="" src="../images/immortallife-breaker.png" /></p>
+<p><em>Penguin Random House</em></p>
+<p>This biography is focused not on a scientist but on the practice of science, <a href="https://nautil.us/the-misguided-history-of-racial-medicine-263508">its racism</a> in this case, and the divorce of medical research from decency and humanity. The life that author Skloot brings back to life is Lacks, daughter of a Virginia tobacco farmer, who died in 1951 from cervical cancer. Cells sliced from her cervix without her or her family’s knowledge have been grown in labs ever since for research by medical institutions. The tremendous success of Skloot’s moving narrative has spurred institutional change in consent laws and <a href="https://nautil.us/why-the-ethical-rules-of-human-subjects-research-need-a-fresh-look-236653">bioethical practices</a> in the medical industry. With this extraordinary biography, the past, present, and future, really have been enjoined. To the benefit of us all. <img alt="" src="../images/nautilus-favicon-14_163.png" /></p>
+<p><em>Lead image: fran_kie / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

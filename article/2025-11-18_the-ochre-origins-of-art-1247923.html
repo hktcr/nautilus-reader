@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ochre Origins of Art | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Ochre Origins of Art</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-11-18
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-6EJ3</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Ochre is a ferrous rock—clay tinged with oxidised iron, one of the commonest metals on Earth. Iron is everywhere. It leaches into soils and run-off. It is held in solution to gather in lake and sea sediments. Pressed down by more sediments, across the galactic span of geological time, it forms mudstone and siltstone—ochre. In situ, ochre can display a <a href="https://nautil.us/early-humans-made-animated-art-234819/">spectacular range</a> of tones and patterns—rusty cliff stripes sharp as a blade, or juicy stains that vary so dramatically that exposed rocks look like giant layer cakes.</p>
+<p>A very long time ago, far off on the horizon of human history, it was found that you could take a lump of ochre and grind it to a colored powder. You could mix the powder with liquid—saliva or water or urine—and create a substance that could then be applied to almost any surface. The color ranged from yellow to orange to brown. It was a pleasing effect and people went some distance to retrieve the rocks, sifting through rubble for just the right tone. They swapped them and traded them, and in this way the colors began to travel farther. They were valued. Sometimes the ochre contained flakes of mica or pyrites, adding sparkle to the paint. For that they would trek a little farther, ask for a little more in exchange.</p>
+<p>Exactly when it began, and how ochre was first used, is not known. A collection of <em>Homo erectus</em> bones in Kenya from 285,000 years ago was found alongside five kilograms of gathered ochre. <a href="https://nautil.us/our-neanderthal-complex-235115/">Neanderthals</a> made pigment from ochre as early as 250,000 years ago. At Blombos Cave in South Africa, two 100,000-year-old ochre “toolkits” were identified: grindstones and hammerstones, antlers, the scapula of a seal—all with traces of ochre on them. Microscopic scrutiny of the traces has captured moments and actions. The ochre grit reveals tiny marks, percussive action and knapping. The stone was sourced from some way away; it was laid on a slab of quartzite and crushed, and the powder placed in abalone shells and stirred, quite gently, to a paste.</p>
+<blockquote>
+<p>Iron somehow conjured to life again the beasts that lived in the imagination.</p>
+</blockquote>
+<p>From the same site, from the same sea cave come more clues, 30,000 years later. Now there is evidence of the application of ochre. A stone was found with lines drawn on it—marks on a rock, a fragment. That’s all. It took seven years of analyzing those marks to work out exactly how they were made, that they were deliberate. The lines are understood to be the first example of “art,” a cross-hatching, an abstract image-making. The marks were not painted on but made by an ochre crayon. Liquid pigment was hard to store and transport, but by adding oil to the powder, you could keep it as a stick, for ease of use. More forethought, more gathering and processing.</p>
+<p>At some point, another discovery. If heat is applied to the ochre powder, it changes color. At around 572 degrees Fahrenheit, the ochre dehydrates and the iron in it oxidizes and changes from yellow to red—the red of raw meat, the red of blood. In their pioneering study of color and evolutionary linguistics, Brent Berlin and Paul Kay found that the development of color terms in most languages followed a common sequence—words for black and white were first, but the next was invariably “<a href="https://nautil.us/why-red-means-red-in-almost-every-language-235557/">red</a>.” The majority of ochre used in prehistory was red.</p>
+<p>On the island of Sulawesi 45,000 years ago a warty pig was painted on rock, in Australia a kangaroo, in northeastern Brazil deer and jaguar and capybara, in the European caves at El Castillo, Chauvet, Lascaux, and Altamira, bulls and bison and horses—those astonishing forms, all of them depicted in ochre. Iron—in its reds and browns and yellows—somehow conjured to life again the beasts that lived in the <a href="https://nautil.us/why-were-drawn-into-darkness-237571/">imagination</a> as food or threat or both.</p>
+<p>Ochre altered forever our relationship with the Earth. The dead rock underfoot yielded something miraculous, something striking and powerful, something that with conscious intervention could be transformed, and then be used itself for transformative effect. Some cosmic shift took place in that action—nothing was the same again. Change had always been external, day and night, weather and seasons, rivers and tides, life and death. Now with the use of its own material, the Earth could be subtly remade and modified and abstractions created. Dirt was made precious, stones did tricks, rock became transcendent. Beneath our feet—it became apparent—lay a cache of treasure which we have been digging into ever since, with increasing sophistication, increasing wonder, and increasing greed. <img alt="" src="../images/nautilus-favicon-14_789.png" /></p>
+<p><em>Read Philip Marsden's “3 Greatest Revelations” while writing his new book <a href="https://nautil.us/rocks-are-alive-1248437/">here</a>.</em></p>
+<p><em>Excerpted from</em> <a href="https://www.penguinrandomhouse.com/books/790524/under-a-metal-sky-by-philip-marsden/">Under a Metal Sky A Journey Through Minerals, Greed, and Wonder</a><em>. Reprinted by permission of Counterpoint Press, an imprint of Catapult Book Group.</em></p>
+<p><em>Lead image: Dante Petrone / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

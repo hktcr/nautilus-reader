@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Weeding and Fruit Fly Data: What Nautilus Editor Katherine Courage Is Tuning Into | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Book Weeding and Fruit Fly Data: What Nautilus Editor Katherine Courage Is Tuning Into</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-W6EM</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>When a friend shares a new book, podcast, article, or museum exhibit they enjoyed, it’s a moment of delight and connection. In our crew of editors here at <em>Nautilus</em>, we often share these among ourselves, and the ensuing conversations almost always spark new ideas and other avenues of exploration. But why keep these to ourselves, we thought! We want to share them with you, too.</p>
+<p>In that spirit, here, very casually, are 8 things I’ve recently taken in:</p>
+<p><strong>1. I’m a softie for a good story</strong> about sediment. Layer on Cold War-era science, and I’m more than sold. So <a href="https://www.vox.com/unexplainable/459406/camp-century-greenland-ice-sheet-sediment-research-climate-change">this recent podcast episode</a> of <em>Unexplainable</em> from <em>Vox</em> about a mid-century outpost in Greenland and the science its early ice cores spawned had me hooked. Bits of Greenland rock from the base of the cores promised to reveal important information about how the Earth’s climate had wobbled in the geologically recent past. But the plot thickened when these important sediment samples went missing. (The dive into ice core science also made me think back to the beautiful cover story “<a href="https://nautil.us/the-great-forgetting-253223/">The Great Forgetting</a>” about what we lose when ice-bound records melt away.)</p>
+<p><strong>2. I first learned the word “tempestology”</strong> while editing <a href="https://nautil.us/the-secret-messages-in-ancient-storms-312906/">this fantastic piece about paleotempestology</a>—the study of old storms (oops, here we are, back to sediment already!). So, looking through episodes of the podcast <em>Ologies</em> to listen to while I was under the weather recently, I was delighted to see <a href="https://www.alieward.com/ologies/tempestology">one (two, in fact) on tempestology</a>. The focus of these episodes is on the wide-ranging landscape of hurricane science, which extends to cyclonic storms the world over. And I’ve never heard such a vivid (and gut-flipping) description about what it’s like to be a scientist flying on a research plane through an actual hurricane.</p>
+<p><strong>3. In more local airspace,</strong> I tend to think the relationship one has with fruit flies is personal. (Especially if you’re an occasional incidental <em>Drosophila melanogaster</em> population host, a particular hazard as a kitchen compost bin owner.) But we ought to tip our hearts’ scales toward the side of, if not love, at least appreciation. The role fruit flies play as essential model organisms has enabled countless medical, genetic, and evolutionary scientific breakthroughs over the decades. So, many have been shocked that the current United States administration would stop funding FlyBase, the largest centralized repository for <em>Drosophila</em> data that has been around for some 780 fruit fly generations—or about 33 human years. The story’s been covered in bits and pieces since the announcement this spring, but <a href="https://www.nbcnews.com/science/science-news/trumps-harvard-cuts-threaten-giant-biomedical-research-community-datab-rcna230610">a deeper dive in an article</a> by NBC News reveals the extent of the cuts. (People are now trying to crowdfund to keep this global scientific effort going.)</p>
+<p><strong>4. I misunderstood the title</strong> of a recent episode of the podcast <em>99% Invisible</em> called “<a href="https://99percentinvisible.org/episode/weeding-is-fundamental/">Weeding is Fundamental</a>.” As a fair-weather gardener, I was intrigued. But it turned out the weeding the podcast explored is a type I need almost as much: book weeding. It’s a tale of a San Francisco earthquake, old card catalogs, architectural accidents, and books gone missing. And an explanation of the process libraries use to assess which books they remove from their collections. (It also brought to mind another California library disaster, narrated so elegantly by Susan Orlean in her <em>Library Book</em>.) As a bonus segment of the episode, it features an interview with a real life, self-proclaimed “harmless drudge”: a <em>Merriam-Webster</em> lexicographer who explains why lexicography “is an extreme sport.” My mind was further blown by an explanation of why it was once so very useful to have an entire dictionary of words spelled backward.</p>
+<p><strong>5. I confess, my old red <em>Merriam-Webster</em></strong> is now used mostly to give extra height to my computer monitor. But I still keep it as a totem. As a journalist and editor, I have endless appreciation for fact-checkers. I’ve worked with some stellar ones over the years who have sent me deeper into my reporting notes and research papers than I ever expected to go. Getting things right is the eternal goal. And fact-checkers review—<em>word by painstaking word</em>—story drafts to help make that happen. So I loved reading “<a href="https://www.newyorker.com/magazine/2025/09/01/the-history-of-the-new-yorkers-vaunted-fact-checking-department">The History of The New Yorker’s Vaunted Fact-Checking Department</a>” (published in <em>The New Yorker</em>), which as a little self-promotion goes, I’d say is very fairly earned.</p>
+<p><strong>6. I’ve also been reading abou</strong>t the ancient Bronze Age underwater city of Pavlopetri, just off the coast of a southern Greek island. I learned about it while editing a <a href="https://nautil.us/how-ai-is-helping-archaeologists-make-discoveries-1238095/">story</a> we published recently about using AI to search through aerial photographs for traces of ancient structures. Pavlopetri was discovered by contemporary researchers in the 1960s. It’s thought to have been built about 5,000 years ago, but sea level rise and earthquakes submerged the town some 3,000 years ago. So, unlike many dry archeological sites, it wasn’t built over, leaving more of the original city planning and structural design intact. It’s a UNESCO Underwater Heritage site now, but I read that you can still take guided tours.</p>
+<p><strong>7. Much farther above sea level</strong> and closer to home, I went on a run last weekend in Rocky Mountain National Park. While admiring the varied peaks rising above the flash-gold of the aspen trees, it reminded me of a <a href="https://www.nationalgeographic.com/adventure/article/jut-measurement-mountains">recent article</a> in <em>National Geographic</em> about a new way to measure mountains. Kai Xu, a Ph.D. computer science student, has proposed a formula to calculate a summit’s “jut” based on its steepness and its height above its surroundings—rather than simply its height above a distant sea level. It makes good sense. Though I’ll still keep a small point of pride in summiting Colorado’s tallest peak this summer, Mt. Elbert (14,440 feet), even though it has a relatively paltry jut of just 1,412 feet. (More jut-peeping can be had on Xu’s <a href="https://peakjut.com/">website</a>.)</p>
+<p><strong>8. But small things, too,</strong> can be impactful. <a href="https://www.penguinrandomhouse.com/books/174116/because-a-little-bug-went-ka-choo-by-rosetta-stone/"><em>Because a Little Bug Went Ka-choo</em></a> by Theodore Geisel (writing under the pen name Rosetta Stone) scuttled into our household quite by accident. Which is fitting for the topic. As the parent of young children, it was a fun way to start talking about the big idea of the butterfly effect. We’ll have discussions about chaotic systems soon enough. Maybe next time we reread <em>Fox in Socks</em>. <img alt="" src="../images/nautilus-favicon-14_917.png" /></p>
+<p><em>Enjoying</em><a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430">newsletter</a></em>.</p>
+<p><em>Lead image: Natalya Kosarevich / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

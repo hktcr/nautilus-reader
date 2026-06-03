@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop Music Is Getting Darker | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Pop Music Is Getting Darker</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-12-11
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-KX9Y</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Beneath the sugary hooks of today’s biggest pop hits, there’s often a distinctly dark undercurrent. Billie Eilish’s “Bad Guy,” about a swaggering antihero who seduces a dad, Eminem and Rihanna’s “Love the Way You Lie” about a toxic, violent relationship, and Taylor Swift’s “Bad Blood” about a vengeful feud, all topped the charts over the past couple of decades.</p>
+<p>It may be more than a momentary trend. A new study shows that, over the past 50 years, the lyrics of the hit songs in the United States have taken a gloomy turn: They’ve gotten a lot more stressed and more negative. They’ve also gotten less complex. This trend may mirror <a href="https://bmjopen.bmj.com/content/bmjopen/10/10/e037679.full.pdf">growing</a> rates of depression and anxiety in the U.S., and increasing negativity in <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0276367&amp;utm_source=upworthy.com&amp;utm_medium=amazon&amp;utm_campaign=https%3A%2F%2Fwww.amazon.com%2FUpworthy-GOOD-PEOPLE-Stories-Humanity%2Fdp%2F1426223463">news</a>, but it could also reflect general shifts in the way we use language and the evolution of other societal norms, the authors of the study report. They published their <a href="https://dx.doi.org/10.1038/s41598-025-28327-5">findings</a> today in <em>Scientific Reports</em>.</p>
+<p>The study is part of a growing body of research that aims to track how patterns of cultural consumption can provide insights into the psychological states of individuals or even entire populations. Music is a particularly apt cultural form for this kind of analysis, the scientists argue, because it is one of the most widely appreciated, with average listening time reported to be as high as 21 hours per week. They also suggest that music has a shorter production cycle than movies or books, which means it is better able to reflect year-to-year shifts in moods, while the lyrics of many songs often express specific emotional content, which make them easy to analyze.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/when-you-listen-to-music-youre-never-alone-235834/"><strong>When You Listen to Music, You’re Never Alone</strong></a><strong>”</strong></p>
+<p>The scientists, from Vienna and Lisbon, analyzed the top 100 Billboard English-language songs in the U.S. every week for the period stretching from 1973 to 2023, which adds up to more than 20,000 unique songs. For each of the songs, they measured how often words related to worry, stress, tension cropped up, the tunes’ overall positive or negative sentiment, and the complexity of their lyrics—how simple or repetitive they were.</p>
+<p>The results suggest a general trend of simpler and more negative lyrics in popular songs over the past five decades, with a rise in stress-related words. The authors also tracked the changes in lyrics against fluctuations in real median household incomes across the  U.S., but weren’t able to find any correlation with stress, sentiment, or complexity. So financial abundance doesn’t seem to drive the emotional tone of hit lyrics.</p>
+<p>To gauge how societal shocks might influence the trend, the scientists looked at what happened to song lyrics around the tumbling of the Twin Towers on Sept. 11, 2001, and the start of the COVID-19 pandemic in 2020. Surprisingly, lyrics got less stressed and negative during the pandemic, but more complex, which the authors took to mean that during times of upheaval, people may use music as a form of escapism or stress release. Previous <a href="https://www.academia.edu/7606797/Van_den_Tol_A_J_M_and_Edwards_J_2013_Exploring_a_rationale_for_choosing_to_listen_to_sad_music_when_feeling_sad_Psychology_of_Music_DOI_10_1177_0305735611430433">research</a> had suggested that people often choose to listen to darker or more contemplative music following traumatic events, in order to better process their grief.</p>
+<p>The findings suggest that music can act as a kind of thermometer for the larger cultural mood. It both shapes and reflects the collective spirit. <img alt="" src="../images/nautilus-favicon-14_680.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: ATRANG / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

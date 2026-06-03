@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Richard Feynman Found the Root of the Challenger Disaster | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Richard Feynman Found the Root of the Challenger Disaster</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-28
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-6SVQ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>On this day 40 years ago, the nation watched with excitement as NASA prepared to launch the first civilian into space: Christa McAuliffe, a teacher from New Hampshire, trained for months to join six astronauts aboard NASA’s Space Shuttle Challenger. She planned to <a href="https://challenger.org/programs/free-lesson-library/christas-lost-lessons-3/">film</a> a series of science lessons aboard the spacecraft, including two that would be aired on PBS.</p>
+<p>But just over a minute after the Challenger took off from Kennedy Space Center in Florida, millions of viewers around the country—including children in schools—watched the spacecraft explode on their television screens. And hundreds of people gathered near the launch site saw the tragedy unfold right before them, including the crew’s families. The accident killed the entire Challenger team onboard.</p>
+<p>Days after the tragedy, President Ronald Reagan <a href="https://www.reaganlibrary.gov/archives/speech/executive-order-12546-presidential-commission-space-shuttle-challenger-accident">established</a> a commission to investigate the accident. This group of prominent experts included retired astronaut Neil Armstrong, then-active astronaut Sally Ride, and <a href="https://nautil.us/what-would-richard-feynman-make-of-ai-today-1262875/">physicist Richard Feynman</a>. He had reached scientific stardom in the mid 20th century for his role in the Manhattan Project and his work visualizing the complexities of quantum mechanics, and in 1965, he <a href="https://www.nobelprize.org/prizes/physics/1965/feynman/facts/">won</a> the Nobel Prize in Physics.</p>
+<p><img alt="" src="../images/Richard_Feynman_1959_BREAKER.png" /></p>
+<p><strong>PHYSICIST TURNED DETECTIVE</strong>: Richard Feynman played a key role in both the Manhattan Project and the investigation into the Challenger tragedy. <em>Photo courtesy of Wikimedia Commons.</em></p>
+<p>Feynman was <a href="https://authors.library.caltech.edu/records/p4sj0-wgp33">invited</a> to the commission by NASA’s Acting Director William Graham, his former student at the California Institute of Technology. “When I heard it would be in Washington, my immediate reaction was not to do it,” he later <a href="https://authors.library.caltech.edu/records/p4sj0-wgp33">wrote</a> for <em>Physics Today</em>. “I have a principle of not going anywhere near Washington or having anything to do with government.”</p>
+<p>Despite his initial reluctance to join the commission, it was Feynman who ultimately cracked the mystery behind the Challenger disaster.</p>
+<p>Not long after joining the commission, the famed physicist met with members of NASA’s Jet Propulsion Laboratory to learn more about the space shuttle. He quickly <a href="https://calteches.library.caltech.edu/3570/1/Feynman.pdf">formed a theory</a> on the system’s fatal flaw: Rubber rings known as O-rings that sealed the joints of the shuttle’s solid rocket boosters had been scorched by hot gas multiple times, causing erosion.</p>
+<p>Feynman later concluded that some of these rings failed to expand, allowing sizzling gas to escape one of the solid rocket boosters and burn a hole in an external fuel tank that contained hydrogen—prompting the massive explosion. In fact, these rings were never intended to be used to cover expanding gaps, he found.</p>
+<p>During the official investigation, Feynman <a href="https://calteches.library.caltech.edu/3570/1/Feynman.pdf">said</a> he felt frustrated by the slow pace and “time-consuming” public meetings and briefings “of so little use.” He did his own research and met privately with NASA officials, and even created his own report that he released publicly.</p>
+<p>In his <a href="https://www.nasa.gov/history/rogersrep/v2appf.htm">report</a>, he noted that NASA management had estimated a 1 in 100,000 chance of catastrophe with the space shuttle, while engineers put it at around 1 in 100. Based on the fact that the shuttle had launched plenty of times without incident, he explained that “obvious weaknesses are accepted again and again, sometimes without a sufficiently serious attempt to remedy them, or to delay a flight because of their continued presence.”</p>
+<p>And NASA had assembled the space shuttle’s main engine all at once without testing individual parts separately, he pointed out. This makes it harder to determine individual issues.</p>
+<p><strong>Read more: “</strong><a href="https://nautil.us/what-impossible-meant-to-richard-feynman-238358/"><strong>What Impossible Meant to Richard Feynman</strong></a><strong>”</strong></p>
+<p>Feynman also criticized the model used to gauge the safety of the O-rings, and noted that NASA was aware they had been eroding.</p>
+<p>Most famously, he found that the rubber can’t expand in temperatures at or below 32 degrees Fahrenheit—on the unusually chilly day of the Challenger launch, morning temperatures dipped to the 20s. Engineers from the company who made the solid rocket boosters had <a href="https://calhoun.nps.edu/server/api/core/bitstreams/ef47936c-bdf6-4d57-bc9c-73ab4653f446/content">warned</a> NASA the day before the launch about the compounding risks of frigid temperatures and O-ring erosion.</p>
+<p>To demonstrate this tragic oversight, Feynman <a href="https://www.nasa.gov/history/rogersrep/v4part4.htm">dropped</a> a sample of the O-ring rubber in a glass of ice water. The rubber grew rigid in the glass, proving Feynman’s point. “I believe that has some significance for our problem,” he <a href="https://www.nasa.gov/history/rogersrep/v4part4.htm">said</a> at a February 1986 hearing of the Challenger commission.</p>
+<p>For more than two years after the Challenger explosion, NASA put a pause on sending astronauts into space as they redesigned the space shuttle. The agency successfully blasted off space shuttle missions over the following decades, and the spacecraft was used to deliver components of the International Space Station. But in February 2003, Space Shuttle Columbia <a href="https://www.nasa.gov/remembering-columbia-sts-107/">broke apart</a> when reentering Earth’s atmosphere. Space shuttle missions began again in 2005, but NASA concluded the program in 2011.</p>
+<p>Astronauts continue to honor the crews of the Challenger and Columbia missions. In 2017 and 2018, educators-turned-astronauts Ricky Arnold and Joe Acaba <a href="https://www.nasa.gov/stem-content/christa-mcauliffes-lost-lessons/">performed</a> lessons designed by McAuliffe during their time on the International Space Station—ensuring that her work still reached children around the country. <img alt="" src="../images/nautilus-favicon-14_496.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: NASA</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

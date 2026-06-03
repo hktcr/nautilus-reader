@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Build a Trustworthy Robot | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How to Build a Trustworthy Robot</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-05-07
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-7LZ6</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Paro the seal has large dark eyes, long whiskers, and soft antibacterial fur. It’s a robot, but for the elderly dementia patients who use it, it’s more like a cuddly, attentive nurse. Paro can hold a basic conversation using scripted responses, detect emotional tone through voice and facial recognition in the moment, remind users to drink water and take medication, and report worrisome changes to human caregivers.</p>
+<p>But what if Paro could also build a model of its companions over time, learning that, for example, Sally, who is 96, gets anxious in the evenings, that she hasn’t mentioned her daughter in two weeks, and that she responds better to jokes than to reassurance? What if Paro could learn that Sally resists reminders unless they’re delivered after a favorite song? In other words, what if the robot could actively collaborate with the patient?</p>
+<p>This is what a team of researchers <a href="https://www.science.org/doi/abs/10.1126/scirobotics.aea1822">recently proposed</a> in the journal <em>Science Robotics</em>. Robots should be designed to learn with us, they argue, in our hospitals, homes, and warehouses, adapting to human partners and even other robots over time. They should be able to adjust not only to new partners, but also to new roles and cultural environments. They should be, basically, a bit more human-like.</p>
+<p>I spoke with Sharmita Dey, a researcher at the Institute of Robotics and Intelligent Systems at ETH Zurich in Switzerland about why we need such robots, what it would mean for a robot to trust a human, what risks they might present, and how to protect such robots against bias and bad actors.</p>
+<p><strong>Why have we built solitary robots instead of collaborative ones until now?</strong></p>
+<p>The solitary robots are the starting point. An individual robot by itself has to have some capabilities. And it looked like solitary robots could solve the problem of interaction with the real world. It’s not that these individual robots have failed, but the more they’re deployed, the more we understand their real-world shortcomings.</p>
+<p><strong>Why is it so important to have collaborative robots that learn with us?</strong></p>
+<p>Collaborative robots are needed because the ultimate goal of robotics is to ease human effort. We can keep on building very smart individual autonomous robots, but if they’re not able to seamlessly collaborate or seamlessly work with humans—to understand the social context, to anticipate what a human wants to do, and to communicate effectively with a human—then these robots aren’t very useful for us. Most real-world settings, such as rehabilitation, or other forms of human assistance, rely on interaction and collaboration.</p>
+<p><strong>What are the biggest design challenges right now?</strong></p>
+<p>Teaching the robots to learn norms across cultures and contexts, teaching them to generalize to unseen human behaviors, and balancing the adaptations versus safety constraints. But it’s also very difficult to get data on collaboration or interaction in real-world settings. The collection of such data is quite tedious. For large language models, we get a lot of data from the Internet, but physical interaction is something that’s much more complicated to assess.</p>
+<p><strong>Read more: “<a href="https://nautil.us/how-human-is-human-1270990">How Human Is Human?</a>”</strong></p>
+<p><strong>What kinds of tasks would these robots be most useful for?</strong></p>
+<p>Constructive ones, such as rehabilitation, elderly care, and companionship.</p>
+<p><strong>What would these robots look like? Would they be human-like in their appearance?</strong></p>
+<p>I’m advocating for functional equivalence. The closer they are in physical appearance, the better humans would interact with them.</p>
+<p><strong>You write in your paper about the importance of “trust” for collaborative robots—teaching these machines how to trust humans and assess a human’s level of trustworthiness. Can you tell me more about how that would work?</strong></p>
+<p>It means building a history of interactions. Robots must remember the successes, the failures, and the user’s preferences. Trust isn’t a static property. It’s an emergent function of interaction history.</p>
+<p><strong>Should we worry that humans could begin to attribute feelings and intentions to these robots in the same way some have with chatbots?</strong></p>
+<p>Yes, especially in old age where people need companions. Companion robots are already conceived for that. People could start attributing emotions to these robots. But whether this is good or bad is something that’s difficult to comment on at the moment. I’d say that it’s good for people who are lonely. It can be bad though if they attribute emotions to a machine and the expectation doesn’t match reality. I’d say that attributing feelings to robots is neither completely negative nor completely positive.</p>
+<p><strong>How do you protect against unforeseen risks? For example, chatbots seem like the linguistic equivalent of the collaborative robot. They learn from interactions with humans, only they lack a physical form. I don’t think most people anticipated that chatbots were going to lead people into delusional thinking, encouraging them to do things like attempt murder or jump off a building.</strong></p>
+<p>A lot of people are speaking about the risks of AI, but I’d say that AI is what we create AI to be. So are robots. So the objective function we give to the robots is what the robot would do. Of course, sometimes, there is no control, especially in a reinforcement learning environment. The robot learns from its interactions with the environment. We don’t have control over the experiences it has and learns from. I think we could have a lot of safety constraints there. I’d say human supervision over what the robot is learning or what kind of data it is actually consuming is needed to deploy a robot safely into the physical world.</p>
+<p><strong>How do you prevent bias from creeping into reinforcement learning contexts, or shaping the social norms that the robots learn?</strong></p>
+<p>It’s not fully under our control, of course, but at the same time, we could supervise the kinds of data that are fed into the robot. We would start out teaching the robot through controlled experiences, and only then allow it to deploy in the wild and retrain the model on that. Basically, humans should still be in the loop. Keeping humans in the loop on training and optimization could prevent a lot of these problems. Of course, it won’t completely mitigate it, but it would help.</p>
+<p><strong>You mentioned keeping humans in the loop, but humans are fallible. How do you protect against bad actors using these kinds of collaborative robots for social ills, or teaching the robots to manipulate humans?</strong></p>
+<p>Different scholars have different positions on whether to make the code for these robots open source, or accessible to everybody. Keeping them gated could prevent some bad actors from using such models for unintended purposes. I’m a supporter of open-source work, but it’s probably important to have restricted access to some of the models.</p>
+<p><strong>If something does go wrong in an interaction between a human and a collaborative robot, how do you know who is to blame?</strong></p>
+<p>The first assumption would be that the robot has been unable to follow or anticipate the human needs, because the robot is still learning. At least for the beginning, because humans can socialize and collaborate with new partners with some social common sense—which robots lack. <img alt="" src="../images/nautilus-favicon-14_107.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: © FSL - Presentazione Foca Robot</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Making Art with Pythons and Lionfish | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Making Art with Pythons and Lionfish</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-US7X</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Some of the most destructive forces in nature are beautiful to behold: A lionfish that drifts like a jeweled fan through the water, a python that glides with muscular grace through the grass, a carp that flashes silver as it leaps from a river.  </p>
+<p>These creatures can unravel entire ecosystems.</p>
+<p>They are <a href="https://nautil.us/the-starlings-curious-odyssey-1202795/">invasive species</a>. Carried across oceans by global trade, released by human carelessness, or deliberately introduced for industry, they multiply in habitats that are not prepared for them. Then they devour resources and displace existing animals. <a href="https://www.bco-dmo.org/dataset/655342?utm_source=.com">Studies show</a> lionfish can reduce native reef fish populations by nearly 80 percent in a matter of weeks. Burmese pythons in Florida are responsible for decimating populations of some small mammals by more than 90 percent. Carp crowd waterways so densely that boats struggle to pass. These losses ripple outward: Food webs collapse, ecosystems suffocate. By conservative estimates, invasive species now <a href="https://www.nature.com/articles/s41597-020-00586-z?utm_source=.com">cost the global economy</a> hundreds of billions of dollars <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10249565/">annually</a> and <a href="https://www.sciencedirect.com/science/article/pii/S0048969721063968?utm_source=.com">contribute</a> to more than half of all documented extinctions.</p>
+<blockquote>
+<p>"The beauty is edged with menace."</p>
+</blockquote>
+<p>But one artist is turning these animals into works of art to make the dangers more visible. <a href="https://www.laurashape.com/">Laura Shape</a> takes the skins of invasive species, which are usually discarded after they are trapped or hunted, and uses them as raw material for shimmering textural paintings. Shape works with a group called <a href="https://www.inversaleathers.com/">INVERSA</a>, which processes the skins into leather and other pliable materials like fabric and decorative panels. Several of Shape’s pieces are currently featured in <em>Under the Sea</em>, a virtual show supported by UNESCO. She also aims to place her works in public spaces—such as hotels, airports, and hospitals—in regions affected by ecological disruption, so that the art lives where the problem is most urgent.</p>
+<p>“The material is the message,” says Shape. She makes lionfish hides glow like stained glass and weaves python skins into sculptures that ripple like rivers. “When I use invasive fish skin or python leather, I’m forcing the ecosystem into the artwork. You can’t separate them.” Her point is not metaphorical but ecological. These materials are literally pieces of the problem, recast as forms that demand attention.  </p>
+<p>And the attention matters. <a href="https://www.nature.com/articles/s44185-025-00097-3?utm_source=.com">Research</a> in conservation psychology shows that emotional connection and beauty can inspire environmental action more effectively than data alone. A painting made from lionfish leather catches the eye—but it also carries the memory of a predator that empties reefs. A sculpture stitched from carp hides may appear meditative, like flowing water, until the viewer recalls how carp suffocate rivers. Shape tells me: “I want people to feel both awe and discomfort. That’s what makes it real.”</p>
+<p><img alt="" src="../images/Goldiee_BREAKER.png" /></p>
+<p><strong>CAPTIVATING:</strong>Laura Shape painted on a canvas made of python skin for this work, titled <em>Beautiful Stranger</em>. The eye-catching pastels shimmer.  <em>Credit: Laura Shape.</em></p>
+<p>Science still offers the primary means for controlling invasive species: monitoring, removal, prevention, and habitat restoration. Yet art can play a role that science alone cannot. It creates intimacy. It brings the crisis into living rooms and galleries, into the hands of collectors who now hold a fragment of the ecological imbalance.</p>
+<p>Some critics counter that aestheticizing invaders risks glorifying them. But the best of this art resists that trap. It highlights the paradox rather than erasing it. The objects are beautiful, but the beauty is edged with menace. They are reminders of what happens when ecosystems lose balance—and of what humans can do, however imperfectly, to repair. “Every invasive species tells two stories,” Shape says. “The story of collapse, and the story of resilience. My job is to bring those together—to make people look, and then to make them care.”</p>
+<p><a href="https://nautil.us/i-heard-the-wild-donkey-bray-714635/">Invasive species</a> test the resilience of the natural world and of human imagination. They expose how fragile the ecological balance is, how swiftly beauty can tip into destruction. But they also remind us that what is broken may be reimagined. When an invader’s body becomes a painting or sculpture, it is not simply decoration. It is an invitation to see differently: to confront the damage we have wrought, and to imagine repair woven from its very fibers. <img alt="" src="../images/nautilus-favicon-14_912.png" /></p>
+<p><strong><em>More from</em></strong> <strong>Nautilus</strong> <strong><em>about invasive species:</em></strong></p>
+<p><strong>“</strong><a href="https://nautil.us/the-starlings-curious-odyssey-1202795/"><strong>The Starlings’ Curious Odyssey</strong></a><strong>"</strong> A legacy of the most hated bird in America</p>
+<p><strong>“</strong><a href="https://nautil.us/i-heard-the-wild-donkey-bray-714635/"><strong>I Heard the Wild Donkey Bray</strong></a><strong>”</strong> On the trail of a new understanding of invasive species</p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a><em>.</em></p>
+<p><em>Lead image: Laura Shape</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

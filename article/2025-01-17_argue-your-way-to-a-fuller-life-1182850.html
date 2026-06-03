@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argue Your Way to a Fuller Life - Nautilus | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Argue Your Way to a Fuller Life - Nautilus</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-01-17
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-CDIZ</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Agnes Callard wasn't happy with her answer to one of my interview questions. I asked what she thought of a remark by evolutionary biologist Richard Dawkins that existential "why" questions should never be asked because they're unanswerable. Only "how" questions were proper in science. That evening, the University of Chicago philosopher put the question to her family at their recurring “Chautauqua.”</p>
+<p>Callard's three kids, ages 11, 16 and 21, plus her husband and ex-husband—who all live together—took part in the discussion. They traded ideas on science and metaphysics, the meaning of life and ethics, what is empirical and what isn't. When one of her kids started talking about Wittgenstein, I couldn’t help feeling my own family conversations were sorely lacking. (Callard sent me a recording of the 25-minute discussion. You can listen to a 3-minute clip below.)</p>
+<p>The intensity of the Callard's dinner discussion epitomizes the philosopher herself. In our conversation about her new book <a href="https://wwnorton.com/books/open-socrates"><em>Open Socrates: The Case for a Philosophical Life</em></a>, she was as provocative as she was insightful.</p>
+<p>Callard discovered Socrates in high school, and by the time she was a senior in college, <a href="https://nautil.us/meet-my-pal-the-ancient-philosopher-1169561/">she was obsessed</a>. “I didn’t just want to <em>interpret</em> Socrates,” she writes. “I wanted to <em>be</em> Socrates.” She started hanging out on the front steps of the Art Institute of Chicago and would walk up to strangers and ask if they wanted to have a philosophical discussion. At first, they were intrigued, but then they just wanted to get away from her. “I’ve kind of spent my whole life since then trying to figure out how to do that but not make people run away from me,” she said with a laugh.</p>
+<p>Our discussion about “rational love” and “philosophical dissatisfaction” in a marriage are representative of Callard’s prescription, via Socrates, for a meaningful life. Which, Callard believes, can only come about through conversation—and especially argument—with other people.</p>
+<p><img alt="" src="../images/u4QWlN5Y-Paulson_BREAKER.png" /></p>
+<p><strong>LET’S TALK:</strong> Agnes Callard was a disciple of Socrates even when she was young. In college she would walk up to strangers and ask if they wanted to have a philosophical discussion. At first, they were intrigued, but then, she said with a laugh, they just wanted to get away from her. <em>Photo by Arnold Brooks.</em></p>
+<p><strong>You recount a time in Leo Tolstoy’s life when he was going through a personal crisis. By his early 50s he was world famous and in a good marriage but was so unhappy that he was thinking about suicide. What happened?</strong></p>
+<p>He comes to realize he was looking away from some questions his whole life. "What can life mean in the face of eventual death?" "Why am I doing any of the things I'm doing?" "What does it matter whether or not I raise my children well?" They're questions about the meaning of life. He can't stop thinking about them. But at the same time, he finds them <a href="https://nautil.us/the-astrophysicist-who-loves-the-things-we-cannot-know-436828/">unanswerable</a> and concludes the only real solution is suicide. But he also says he's too much of a coward to commit suicide.</p>
+<p><strong>You say this is a cop-out and dub it “the Tolstoy problem.”</strong></p>
+<p>The reason why I think his move is a cop-out is because the questions <em>are</em> answerable. We have this fear that if we took a close look at the underpinnings of our lives, we would suddenly realize that it was all a sham. So, we don't look closely. Tolstoy’s story is a vivid illustration of how that strategy just doesn't work. Many people have moments in life where the questions break through to the surface.</p>
+<p><strong>I once had a contentious interview with <a href="https://nautil.us/ingenious-richard-dawkins-236161/">Richard Dawkins</a> who said there are no big “why” questions. There are only “how” questions such as "How did the universe begin or how did birds evolve wings to fly?" I pushed back, suggesting it's worth asking existential questions like "Why are we here?" Even if they can’t be answered. How would you respond to Dawkins?</strong></p>
+<p>My reasoning goes the other way. We need to answer these questions. There's a dialogue where Socrates is challenged by a Richard Dawkins kind-of-guy named Meno, who basically says, "I don't think we can make progress on these questions." Socratesgives an elaborate answer to explain why he thinks it does make sense to inquire into these questions.He’s saying I'm going to be a better person if I have the courage to try to make progress on this project—on which the value of human life hangs—without an advance guarantee that I'm going to succeed. Socrates puts it in a simple way: The unexamined life is not worth living.</p>
+<blockquote>
+<p>“This is exhausting” is a response I get a lot.</p>
+</blockquote>
+<p><strong>You call these “untimely questions.” Most of us don’t want to think about the deeper meaning of our lives. We've got our careers, our children, our daily pursuits. As you say, “You put one foot in front of another, over and over again, right up to the moment when your journey is cut off by death.” By contrast, Socrates never stopped asking these questions. What did he do that was different?</strong></p>
+<p>Socrates discovered you can inquire into deeper questions about life by calling into question someone else's answers. There's a certain kind of thinking you can't do by yourself because you have blind spots. You have a whole self-justifying, rationalizing edifice that supports all your mistakes. It’s often very easy for other people to see your mistakes but incredibly hard for you to see them.</p>
+<p><strong>But there are other models that value interiority for probing a difficult question. I might go off by myself for deep reflection, or a writer might work this out on the printed page. That’s the opposite of what Socrates did.</strong></p>
+<p>As an academic philosopher, I give a lot of talks. Before I do, I'm thinking to myself, "What objections are the audience going to come up with?" But every time I give a talk, I get questions that surprise me. How did I not ask myself that? And the answer is, I was very invested in thinking that I was right about an idea. Other people are the ones who can help me see when I'm wrong.</p>
+<p><strong>And this is especially the case with ethics, right?</strong></p>
+<p>Right. Socrates believes you can't really think about ethics except in relation to other people. What you’re holding onto, in trying to be good, only comes from conversations with people. That’s all you’ve got. Deep down inside yourself, you don’t know what the right thing to do is. Socrates says the greatest favor that you can do for another human being is to refute them. And he thinks, "Yeah, be kind and loving," which is to say, explain to people why their fundamental understanding of their lives is wrong.</p>
+<p><strong>Most people would take offense at being told they’re wrong.</strong></p>
+<p>I've had this experience many times. It happens in my classrooms or when an interviewer says, “Wait a minute.” You could respond defensively, like, “No, here's why I'm right.” But if you set aside that response and take a step back, there are openings, moments when things get interesting.</p>
+<p><strong>You say parents should have philosophical conversations with their children. How should we talk to our kids?</strong></p>
+<p>Your kids give you a chance to learn about how the world looks from someone who hasn't been fully shaped by it. That should be an exciting educational opportunity for parents. I see that as one reason to have kids. My kids are very used to me posing questions to them because I raised them to not know there was any alternative. If someone came to my house and I peppered them with questions, they might wonder, “Why are you doing this?” But once you do it a lot, it starts to come naturally to you.</p>
+<blockquote>
+<p>There is something really wrong with love.</p>
+</blockquote>
+<p><strong>You also say we need to get better at talking about politics. How can we have good political arguments that don’t just focus on defeating your adversary?</strong></p>
+<p>You need to get into the mindset where you're prepared to learn from them. They're the people who can educate you because they have the opposite view. You might say, "Let's identify the fundamental point on which we disagree." It's very striking when you do that because you find it's hard to identify. If you say, “We believe in freedom,” the other side will say, “We believe in freedom too.” You may then discover that your principle, which you thought had a deep, strong, emotional moral intuition, wasn't stable but subject to your moods. The difficulty comes when people have a hard time believing their opponents can argue in good faith. It’s probably not going to help if there are a lot of people watching. People tend to be more performative when there are people watching.</p>
+<p><strong>Sometimes the Socratic approach seems counterintuitive. You write about “rational love,” which sounds like an oxymoron. Isn’t love</strong> <a href="https://nautil.us/love-is-biological-bribery-238429/"><strong>emotional</strong></a> <strong>rather than rational?</strong></p>
+<p>Typically, yes. But I try to make a case for rational love. The thing that led to my intervention in this discourse is that something is really wrong with love. Maybe you have this romantic ideal: Grow up and marry someone and settle down. But the thing you want is not to find the perfect person or the perfect match. That’s a kind of perfection in yourself that you’re seeking. You're aware that you're not the person you should be, but you might be with another person's help. Then the question is, “What’s the thing that could potentially perfect you in a way that would make sense?” And my answer is knowledge, to understand how things work.</p>
+<p><strong>Socrates didn’t care about many things we take for granted in a relationship, like the importance of accepting and admiring your partner. He believed these are “static” qualities. Instead, he thought a successful relationship should be based on “philosophical dissatisfaction.” Can you explain this?</strong></p>
+<p>Here’s one way to think about it. What are the paradigmatic romantic activities—not necessarily sexual but romantic? One example that people give is the long, winding, transformative conversations that you have with someone when you're beginning to become romantically interested. Socrates wants to say, “Yeah, that’s what it's all about.” But you don't need to relegate that to the first three months of the relationship. There's a reason why those conversations were so reliably venturing into philosophical territory. It's because there's something that your soul wants. Inquiry is a fundamentally dissatisfied activity. It isn't contentment. It isn't staring into each other’s eyes for hours and just being happy to do that. No, we were put here to achieve something together.</p>
+<blockquote>
+<p>Explain why their fundamental understanding is wrong.</p>
+</blockquote>
+<p><strong>Socrates was no prude, but you say he thought inquiry rather than sex is what is “truly dangerous, transgressive, and exciting.”</strong></p>
+<p>Right. To have sex with someone is to be vulnerable with that person. But Socrates discovered we have an even deeper form of vulnerability—the fear about the core ideas that make us who we are. The person we are is a construct that could be shattered. In Socratic inquiry, you allow that to happen. It’s very intimate and lends itself to people feeling somewhat violated, upset, jealous. This is the moment when things, as I said, get interesting. But for the interlocutors who haven't fully been trained in this practice, there are going to be a lot of casualties.</p>
+<p><strong>How does this way of thinking figure in your own life? You've been married twice, both times to philosophers. Is your approach to marriage different from most people?</strong></p>
+<p>Yes, I think it is. It's important that my husband can hold me to account for this Socratic view. He reminds me of it all the time. He's like, “We just have to figure this out by talking about it.” So, there's a certain move that's kind of prohibited in my marriage, which is, “This is just the way it is.” We may not be able to talk something through in a given moment, but everything is amenable to discussion. We'll often be talking about a movie, and the disagreement we have about the movie will be like, wait a minute, this means we think differently about this other thing, and we should rethink that. From the outside, it might look very unstable.</p>
+<p><strong>You both seem to like arguing with each other.</strong></p>
+<p>My husband and I have been arguing for the past two days about something. I can't tell you what is—it's private—but it’s been nonstop arguing for two days. We spent yesterday at the Art Institute in Chicago. We were there for hours and we just argued the whole time. We kept trying to look at paintings, but we kept being drawn back into argument. It was very emotionally draining. We weren't angry at each other, but it wasn't pleasant. It was stressful and upsetting. But it also felt like, OK, there are big stakes here. And that does happen pretty regularly for us. We can discover that we're not on the same page and it's deeply upsetting. And then each of us realizes we don't have to justify our view as much as we thought we did through the conversation. We're trying to arrive at a shared view of the situation, but that could take a long time.</p>
+<p><strong>This sounds exhausting. Maybe this constant back and forth arguing works if you're married to another philosopher, but what's wrong with just having a comfortable marriage?</strong></p>
+<p>“This is exhausting” is a response I get a lot from people, not just in terms of marriage, but also just in philosophy. People often ask, "When have I done enough? Can I do it for half an hour or an hour a day? Is that enough?" But when you do more of it, you become more tolerant of it. It's not like philosophers can handle it 100 percent of the time. I certainly can't handle as much as Socrates did. But I try to live up to the standard as much as I can, and then I will always fall short of it. But I’m not just living out my life in accordance with a script that some people handed me.</p>
+<p><em>You can listen to a clip of Callard and her family discussing Richard Dawkins below.</em></p>
+<p><em>Lead image: delcarmat / Shutterstock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

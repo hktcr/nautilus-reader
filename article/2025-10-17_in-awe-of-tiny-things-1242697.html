@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Awe of Tiny Things | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>In Awe of Tiny Things</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-10-17
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-PDKO</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>One of the earliest influences for artist, writer, and filmmaker Michael Benson, he says, was the sci-fi epic <em>2001: A Space Odyssey.</em> Beyond stirring childhood wonder, he says the movie impressed upon his 6-year-old brain that grand subjects such as our role in the universe and our seemingly inexorable need to explore are worthy topics for art, not “just” science or philosophy. Later, it sparked questions for Benson about humanity’s place in space and time, themes he has been exploring through his work for the last quarter century.</p>
+<p>“My game for quite a while now has been to use scientific research methodologies and technologies to investigate the phenomenal world, not as a scientist, but as an artist and an image maker,” says Benson. His latest book, <a href="https://store.abramsbooks.com/products/nanocosmos"><em>Nanocosmos</em></a>, zooms in on minuscule specimens including single-celled organisms like radiolarians and diatoms, as well as insects, microscopic flowers, and snowflakes to highlight the intricacies of the natural world at the microscopic level. In a nod to our planet’s place in a much larger cosmic world, he also includes micrographs of lunar samples gathered during the Apollo program. The book features 300 highly detailed imagesconstructed from scanning electron microscope scans made over the course of six years at the Canadian Museum of Nature. <em>Nanocosmos</em> is both a journey into infinitesimal landscapes on Earth and a meditation on how humans visually explore and represent the physical world<em>.</em></p>
+<blockquote>
+<p>If you massage the bridge of your nose, you are touching a piece of the solar system.</p>
+</blockquote>
+<p>In earlier projects, Benson focused on the universe that surrounds us through exploration of the solar system and deep space phenomena before pointing the lens back at Earth to examine the complex microscopic worlds at our fingertips. He staged a series of large-scale shows of planetary landscape photography  around the world and has also produced films, and authored books, including <em>Space Odyssey: Stanley Kubrick, Arthur C. Clarke, and the Making of a Masterpiece</em>. With director Terrence Malick, Benson worked on visual effects for the film <em>Tree of Life</em>, crafting sequences which drew in part from his first two books, <em>Beyond</em> (2003) and <em>Far Out</em> (2009).</p>
+<p>I recently spoke with Benson about the magic of photography, the intrigue of dung beetles, and humans’ attempts to visualize the universe.</p>
+<p><strong>What is the origin story of this book?</strong></p>
+<p>It's interesting that you use the term origin story, because one of the key sections of the book is an investigation of various single-celled aquatic organisms. There is a kind of synchronicity between the origin of life and the origin story of the book, which attempts to show some of the complexity and fascination of single-celled organisms, latter day evolutionary descendants of the origin story of life on Earth. And a larger origin story for me is my personal fascination with the specific quality of photography and micrography and how it allows the mechanically created image to be used as a tool for personally directed investigations of phenomenal reality.</p>
+<p><img alt="" src="../images/P0Sn6gKl-Neith_BREAKER.png" /></p>
+<p><em>Acrosphaera spinosa fasciculopora</em> radiolarian, Equatorial Pacific;<br />
+Circa 1830 x. 120 microns wide, 0.12 of a millimeter.</p>
+<p><strong>How did you choose your subjects for the book?</strong></p>
+<p>Some of it was just spontaneous. I talk a little bit in the book about how ludicrous it was that I was blundering around in the tropics or on the Adriatic coast with my tweezers and my ethanol vials searching for what intrigued me, while my family was swimming at the beach. Or, in the Caribbean, just looking in rain forests for micro flowers and little things that might jump out. But on the other hand, I had a good idea that radiolarians and diatoms and dinoflagellates would be fascinating. There was plenty of evidence of that, reaching back to German marine biologist <a href="https://nautil.us/flowers-and-the-birth-of-ecology-917041/">Ernst Haeckel</a> in the 19th century.</p>
+<p><strong>A lot of your previous work looked at planets and other objects in the universe. How did you go from the vastness of space down to the very tiniest bits of life on our planet?</strong></p>
+<p>Well, this will sound pretentious probably but taken together I view all the books I’ve done for Abrams Books as a kind of <em>gesamtkunstwerk</em>, which is a German word that means comprehensive artwork that has many facets and synthesizes many genres. Like them, <em>Nanocosmos</em> is also an investigation of space, it’s just at another scale. Because, you know, if you massage the bridge of your nose, you are touching a piece of the solar system. And so all these fantastic subjects that I was privileged to look at are part of the solar system. It's part of this larger phenomenon of spacetime and this miracle of how we are here in the first place to observe it.</p>
+<p><img alt="" src="../images/GmATzBxD-Neith_BREAKER-2.png" /></p>
+<p><em>Clathrosphaera arachnoides</em> radiolarian, equatorial Pacific;<br />
+Circa 700 x. 300 microns wide, 0.3 millimeter.</p>
+<p><strong>Did any of the specimens you imaged surprise you?</strong></p>
+<p>If I were to choose one subject that really blew my mind in a way that I didn't expect, it would be the dung beetles. They roll these gigantic spheres of dung, sometimes for more than a quarter mile, and bury them. They're so perfectly built to push something way bigger than themselves around. They look like the most extraordinary, powerful, living manifestations of the need to move weight around. Not only that, but they're so beautiful. The fact that these bulldozers can take off and fly is just a miracle. In general, insects are just so dazzling in the microscope.</p>
+<p><strong>Do you have a sense of why so many</strong> <a href="https://nautil.us/why-nature-prefers-hexagons-235863/"><strong>patterns and shapes</strong></a> <strong>tend to repeat themselves throughout nature and what that might say about the world around us?</strong></p>
+<p>I'm not sure I entirely agree, by which I mean, nothing else on Earth really looks like a radiolarian, with its polygonal silica shell, irregular polygons perforated by radiating spines. Nothing at a larger scale that I've ever seen looks anything like that. And the same really holds true for dinoflagellates and diatoms. They are very specific solutions to their own ecological niche. But there can be a very mathematical kind of geometrical sense of connection to larger principles when you look at them.</p>
+<p><img alt="" src="../images/ULblolCk-Neith_BREAKER-3.png" /></p>
+<p><em>Onthophagus francoisgenieri</em> dung beetle, Madang Baltabang, Madana, Papua New Guinea; <br />
+Circa 36.6 x. About 6 millimeters wide.</p>
+<p><strong>How does</strong> <strong><em>Nanocosmos</em></strong> <strong>build on past projects?</strong></p>
+<p><em>Nanocosmos</em> is a continuation of looking at how we use images to understand the universe. I mean, there’s a symbiotic relationship between representation and understanding. Photography has always been alchemical in a certain way. It's a form of magic in which physical materials, like chemicals and photographic emulsions, can be used to record other physical materials and chemical reactions, by which I mean the larger physical world. As human beings, we’re a way in which the universe looks at itself. It’s not surprising that we’ve produced more powerful technologies enabling us to do that better, more deeply, with greater magnification. My other books cover such things from the solar system to the Big Bang into the history of human attempts to visualize the universe in graphic form. <em>Nanocosmos</em> links right up with those.</p>
+<p><strong>What was the process for making the images in your book?</strong></p>
+<p>With a lot of the interplanetary material, the pixel count of the raw images taken from the spacecraft wasn't that high. So they had to be tiled and composited to produce higher resolutions. When I finally had access to a scanning electron microscope, and I had practically unlimited resolutions available, I overshot the mark, and I did a lot of scanning. All of that resulted in a mountain of work later where I had to assemble final composite images. There are also a whole series of images where you see insects and plants together but they're not as natural as they may look in the sense that they were put in ethanol, then dried in something called a critical point dryer, which is a way of exchanging liquids for gas at high pressure with minimal damage to the subject. If I didn't smash the subject, then there was another delicate operation, which is mounting the subject on a little sample stub, and putting it in a sputter coater, which coats the samples, and they end up looking like jewelry because they're coated in platinum or gold. Then you put it in the vacuum chamber of the microscope, and there's a whole new set of things to learn and issues when it comes to imaging the subject. It's a labor of love.</p>
+<p><strong>What do you hope people will take away from this work?</strong></p>
+<p>I don't want to prescribe anything. But I'll be satisfied if people come away with a sense of amazement at the complexity of the forms that nature can produce at these extraordinarily tiny scales. And if that helps foster an appreciation of this biosphere that produced us, which we are not treating with the respect that it deserves, I will be satisfied. Perhaps it can contribute to a sense that we really should do a better job at fostering our environment. <img alt="" src="../images/nautilus-favicon-14_900.png" /></p>
+<p><em>Lead image: View from tip down leading wing of</em>  Erythemis simplicicollis <em>dragonfly, Gatineau Park, Quebec. Circa 106 x. Wing is about 3 millimeters wide.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

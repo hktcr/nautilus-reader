@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Coming Psychedelic Holiday | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>The Coming Psychedelic Holiday</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-04-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-5IP8</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Humans had been ingesting various natural hallucinogens and experiencing their mind-bending effects for millennia before 1943. But it wasn’t until spring that year that a chemist working in a laboratory at Basel, Switzerland-based pharmaceutical company Sandoz sampled the first potent synthetic psychedelic, lysergic acid diethylamide, more commonly known as LSD.</p>
+<p>In the intervening years, research into psychedelics—synthetic and otherwise—have blossomed, with scientists studying the potential of such substances to <a href="https://nautil.us/will-psychedelics-replace-antidepressants-470033">treat depression</a>, <a href="https://nautil.us/will-psychedelics-replace-antidepressants-470033">salve post-traumatic stress disorder</a>, <a href="https://nautil.us/can-ecstasy-save-a-marriage-951966">save marriage</a>s, and even <a href="https://nautil.us/can-tripping-save-the-planet-251456">encourage eco-activism</a>. But bridging the gap between traditional, Indigenous uses of hallucinogens to this new ear of psychedelic research required the contributions of a Swiss chemist, Albert Hofmann.</p>
+<p>On April 16, 1943, Hofmann accidentally contacted a bit of LSD—which he first synthesized 5 years prior in 1938—likely absorbing the compound through his fingers. The ensuing experience was intriguing enough to catch the 37-year-old scientist’s attention. “At the end of the synthesis, I got in a very strange psychic situation,” Hofmann told the BBC in a 1986 <a href="https://www.bbc.com/culture/article/20260410-the-bizarre-story-of-the-worlds-first-lsd-trip">interview</a>. “A kind of dreamworld appeared. A feeling of oneness with the world.”</p>
+<p>This initial brush with LSD convinced Hofmann to ingest what he thought was a small amount of the drug three days later, on April 19. In his Sandoz laboratory, he ingested 0.25 mg of LSD, a dose he thought would be so negligible that he planned to increase the dosage incrementally as the experiment wore on. “But this very small does, the first dose of my experiments I planned, was very, very strong,” he recalled. (Hofmann and others would soon realize that LSD is so potent that psychoactive effects start at about 20 micrograms, or 0.02 mg! So that first intentional acid drop was a doozy indeed.)</p>
+<p>As the drug took effect, Hofmann realized that he was better off weathering the coming experience in the comfort of his own home, a short distance from his lab. So, escorted by his lab assistant, the chemist hopped on his bicycle.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-19th-century-trippers-who-probed-the-mind-303265">The 19th-Century Trippers Who Probed the Mind</a>”</strong></p>
+<p>Pedaling through the streets of Basel, Hofmann was overcome with sensations that made him feel nervous, agitated, and fearful that he had poisoned himself. At one point, he mistook a kindly neighbor for an evil witch. By the time he arrived home, his condition warranted calling a doctor, who examined Hofmann and noted his extremely dilated pupils, but could find no physical ailment to report.</p>
+<p>As the researcher navigated the unfamiliar, undulating landscape of his own mind, he began to settle into the world’s first intentional, documented acid trip. “Little by little I could begin to enjoy the unprecedented colors and plays of shapes that persisted behind my closed eyes,” Hofmann later wrote in his 1980 book <a href="https://maps.org/images/pdf/books/lsdmyproblemchild.pdf"><em>LSD – My Problem Child</em></a>. “Kaleidoscopic, fantastic images surged in on me, alternating, variegated, opening and then closing themselves in circles and spirals, exploding in colored fountains, rearranging and hybridizing themselves in constant flux.”</p>
+<p>Later, Hofmann’s wife returned in the evening from a trip with their children to Lucerne. Having been summoned home to care for her husband, she left the kids with her parents and found Hofmann mostly recovered from his psychedelic episode. But after telling her what had happened and sleeping soundly, the experience stuck with Hofmann. “A sensation of well-being and renewed life flowed through me. Breakfast tasted delicious and gave me extraordinary pleasure,” he wrote. “When I later</p>
+<p>walked out into the garden, in which the sun shone now after a spring rain, everything</p>
+<p>glistened and sparkled in a fresh light. The world was as if newly created. All my senses</p>
+<p>vibrated in a condition of highest sensitivity, which persisted for the entire day.”</p>
+<p>Recognizing the extraordinary potential of the compound Hofmann had synthesized and tested, he and his colleagues at Sandoz set to work studying and developing the drug.</p>
+<p>The rest of LSD’s story—its role in the countercultural movement of the 1960s, its controversial use in psychological research and government experimentation, its eventual prohibition, and renewed interest in its therapeutic potential—is psychedelic history. Hofmann’s first insights into the mind-altering effects of LSD are the formal genesis of that history and current excursions into psychedelic research.</p>
+<p>That fateful bike ride through Basel is commemorated by “Bicycle Day,” a holiday of sorts that takes place on April 19 every year that was started by Northern Illinois University psychologist <a href="https://psychedelicalpha.com/news/thomas-b-roberts-psychedelic-directions-where-does-your-mind-alight/">Thomas B. Roberts</a>, who coined the term in 1985.</p>
+<p>Although I would not recommend experimenting with LSD or other psychedelics, much less replicating Hofmann’s perilous ride, it’s still nice to remember the roots of the research that continues to yield interesting insights today. <img alt="" src="../images/nautilus-favicon-14_183.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Tasnuva Elahi; with images by local_doctor and Robert Wilson / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

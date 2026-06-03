@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists Turn Tree Rings into Art | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Artists Turn Tree Rings into Art</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2025-02-21
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-0B9M</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Tree-rings are like time machines. They tell ancient stories about the Earth and its climate, marking wet years, dry years, and periods of growth. Artist Tiffany Shlain and her husband, roboticist Ken Goldberg, decided they would make a perfect canvas for a set of artworks that explore the ways art and science are embedded in nature.  </p>
+<p>Together, they collected giant cross-sections of already harvested trees from salvage yards and used them to create a series of tree-ring sculptures, carving inscriptions in the wood: notes about the human quest for knowledge and historical timelines going back thousands of years. These sculptures are featured in a show they put together for the Getty Museum’s Art and Science Collide program titled <a href="https://www.skirball.org/about/press/2024/skirball-cultural-center-presents-ancient-wisdom-future-ecology-trees-time"><em>Ancient Wisdom for a Future Ecology: Trees, Time, and Technology</em></a>.</p>
+<p><img alt="" src="../images/xGwQoo2w-Gammon_BREAKER.png" /></p>
+<p><strong>ABSTRACT EXPRESSION:</strong>Artist Tiffany Shlain and her husband, roboticist Ken Goldberg, inscribe equations in the shape of a golden spiral on a slab of redwood. <em>Photo by Stefanie Atkins Schwartz</em>.</p>
+<p>One of the most intriguing pieces in the show is titled “Abstract Expression.” A giant slab of redwood shows a series of 39 <a href="https://www.ancientwisdom.art/_files/ugd/e9618a_806888264426484a8658bd3e2b81759b.pdf">equations</a>, which charts the progress in mathematics from Pythagoras to ChatGPT. The timeline takes the shape of a golden spiral, a mathematical relationship found often in natural structures such as the nautilus shell, and associated with great beauty. The properties of the golden spiral, and the golden ratio upon which it is built, have been debated by some of the greatest mathematical minds of all ages, from Pythagoras and Euclid in ancient Greece to present-day scientific figures such as Oxford <a href="https://nautil.us/when-work-is-play-1163461">physicist Roger Penrose</a>.</p>
+<p>Shlain and Goldberg say they wanted to bring to life the idea that both art and math are abstractions—ways of describing the natural world without language. “These symbols can say so much so concisely without any words,” Goldberg says. “So they are like art in that they convey meaning in a visual form. It's a language, but it's a different language than text.”</p>
+<p><img alt="" src="../images/vUm9nDl3-Gammon_BREAKER-2.png" /></p>
+<p><strong>SYMBOLISM:</strong> Equations shown here, from bottom to top, are the Pythagorean theorem, the area of a circle, Heron's law, the quadratic formula, and Galileo's equation of motion. <em>Photo by Stefanie Atkins Schwartz</em></p>
+<p>The shape of the salvaged redwood used in “Abstract Expression” helped Shlain and Goldberg to determine what to inscribe on it. They were studying the piece—the biggest they had collected—when they noticed something. “It had these sharp edges, which none of the other tree rings in the show have,” says Shlain.</p>
+<p>To the artists, the tree's rough angles—created in the salvage process—seemed to echo the basic foundations of math. They started thinking about geometry and the math of straight lines. More than 2,000 years ago, the Greek mathematician Euclid observed the most basic relationships of shapes, lines, and figures in two dimensions. “The shape of the tree ring that came from the salvaged wood informed our thinking around the piece,” Shlain says.  </p>
+<p>The artists left space to add more dates to the timelines at the outer edges of the tree rings, a gesture towards our uncertain future. “These trees live in a deep past that we don't know,” says Shlain, “and they will be alive in a deep future.”</p>
+<p>The exhibition is on display through March 2 at the Skirball Cultural Center in Los Angeles, and will then move onto the San Francisco Bay Area’s di Rosa Center for Contemporary Art.  <img alt="" src="../images/nautilus-favicon-14_1261.png" /></p>
+<p><em>Lead photo courtesy of Ken Goldberg and Tiffany Shlain.</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>

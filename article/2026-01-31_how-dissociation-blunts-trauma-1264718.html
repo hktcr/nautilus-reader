@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Dissociation Blunts Trauma | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Dissociation Blunts Trauma</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-01-31
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-ZNAA</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A few years ago, psychologists began to <a href="https://www.psychologytoday.com/us/blog/abcs-child-psychiatry/202203/the-tiktok-inspired-surge-dissociative-identity-disorder">report</a> a surge in young people presenting with self-diagnosed dissociative identity disorder, a complex mental health condition that features multiple personalities and significant distress and dysfunction. Some clinicians began to worry that these cases could be traced back to TikTok, where a small group of influencers claiming to have the disorder had accumulated large followings. Were their patients’ symptoms real or imagined?</p>
+<p>The phenomenon fed into a larger controversy about <a href="https://nautil.us/when-reality-feels-unreal-787295/">dissociative</a> identity disorder that has brewed for years. Once known as multiple personality disorder, the condition was rebranded in the 1990s to better reflect that it involves a fragmentation of identity resulting from severe trauma in childhood. But some in the mental-health community had continued to question whether the symptoms reflected an authentic response to trauma—and debated how to treat it: Engage the multiple threads of personality, or try to work around them?  </p>
+<p>Today, some neuroscientists have uncovered a <a href="https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/dissociative-identity-disorder-out-of-the-shadows-at-last/8E2884FA8669A9A64790E5C47AD72DC7">signature</a> of dissociative identity disorder in the brain that cannot be faked by actors, which suggests it has real biological effects. And pathological dissociation seems to be more common than we once thought, affecting up to 4 percent of the population, according to some <a href="https://pubmed.ncbi.nlm.nih.gov/35422203/">estimates</a>. But it remains one of the <a href="https://www.nytimes.com/2026/01/30/magazine/dissociative-identity-disorder-mental-health.html">least understood</a> diagnoses in the field of mental health.</p>
+<p>That’s why a trio of U.K. trauma experts—psychologists Helena Crockford and Paul Langthorne and Melanie Goodwin, expert-by-experience—have just published a <a href="https://www.taylorfrancis.com/books/edit/10.4324/9781003625650/working-dissociation-clinical-practice-helena-crockford-melanie-goodwin-paul-langthorne">book</a> of essays and articles about the disorder from more than 100 experts, across professional practice, research, and lived experience. They want to dispel common myths about the condition, to drive home the reality that it’s neither rare nor fictitious, and to help to clarify the impacts it has on memory, identity, and perception. They also aim to provide guidelines for clinicians bewildered about how to treat their patients. I spoke with Crockford about why the disorder is so misunderstood, why the human brain might have evolved such a response to trauma, and what kinds of treatments work best.</p>
+<p><strong>You’ve written that dissociation is as common as other serious mental-health issues, but it’s one of the most misunderstood. Why is that the case?</strong></p>
+<p>American psychoanalyst and traumatologist Elizabeth Howell coined the phrase “a disorder of hiddenness.” Its function is to be hidden. Its purpose is to escape from overwhelming circumstances and abuse. That’s kind of contrary to the myth that dissociation is a flamboyant thing. And in a mental-health context, there are issues of power and authority that could echo interpersonal abuse, so it might take time for people to build up trust to be able to say what they’re experiencing. On another level, these experiences are really hard for people to put into words. Not uncommonly, people think, “Well, this is how it is for everybody,” so they’re not even aware that this isn’t the kind of experience that everybody has.</p>
+<p>American psychiatrist Judith Herman, who’s based in Boston and has been a trauma writer all her career, wrote that there is a kind of ambivalence in society generally about knowing and forgetting about trauma and acknowledging horrendous acts and the worst things that people can do. So there are layers to why it’s under-recognized. And certainly in the U.K., but I think it’s similar in the U.S., it hasn’t been part of core mental-health training. I stumbled across it about 10 years in, and that’s quite a common experience, which is partly why we decided to set forth these guidelines to give professionals something to go on.</p>
+<p><strong>That’s surprising as I feel like dissociation has long been recognized as part of PTSD, which has been so widely studied.</strong></p>
+<p>Dissociation has been in the diagnostic manuals for decades, with really reliable instruments for assessing it. But some aspects of dissociation might be more acknowledged, particularly in the PTSD world, such as depersonalization, derealization, out-of-body experiences. The more compartmentalized forms of dissociation—the altered self-states and amnesia—have been less recognized.</p>
+<p><strong>You describe disassociation as an adaptive mechanism to help people deal with overwhelming trauma. Do we know why the human brain can’t handle certain kinds of trauma, and what would happen to the brain if dissociation were not available as a coping mechanism?</strong></p>
+<p>The kinds of trauma where this is more likely is interpersonal trauma rather than large catastrophes. Jon Allen, a psychologist in the U.S., has defined trauma as the state of being in psychological distress and alone. So it’s a combination of something that overwhelms your capacity to cope and there’s no one to turn to. When a child is scared, they seek reassurance from their attachment figure. But if the attachment figure is the source of the fear, through abuse or neglect, it places the child in an impossible paradox—a kind of paralyzing, disorganizing situation in psychological terms. That’s a vulnerability factor for dissociation. One Minnesota longitudinal <a href="https://innovation.umn.edu/parent-child">study</a> of attachment across decades followed a cohort of mothers and babies from birth through adulthood, and found that a disorganized attachment pattern showed a significant association with dissociation in late adolescence.</p>
+<p><strong>Do we know anything about when this capacity for dissociation might have evolved in humans?</strong></p>
+<p>The parts of the brain that help us integrate a self, draw elements of experience together, and create a narrative that gives a sense of continuity, are more evolutionarily recent. Whereas the fight-or-flight responses are more ancient, including something known as “flop.” These are basic defensive neurobiological biobehavioral systems within us that respond quickly to threat.  </p>
+<p>Flight-and-flight are more active forms of defense. Flop is sort of playing dead, and is associated with the release of endogenous opioids that numb and maybe evolutionarily were associated with not having a painful death, or maybe it was even survival related.</p>
+<p><strong>I was struck by the variability of potential symptoms in dissociative identity disorder. You note that these can be psychological or physical, and can result in the person feeling too much or too little. Why does it show up in so many different ways?</strong></p>
+<p>The way people dissociate and how it looks even within a particular diagnostic category, like Dissociative Identity Disorder, is really individual, so no one person that I’ve met looks the same. Feeling too little would be like depersonalization, out-of-body types of experiences, feeling distant or away or detached from what’s going on, or amnesia, loss of time day-to-day or big gaps for autobiographical memory. Feeling too much is things like intrusions, like trauma flashbacks or partial flashbacks. Some people experience promptings from other parts of themselves or conflict between parts or a lot of noise and argument, a cacophony of voices.  </p>
+<p>On the physiological end of things, dissociation is often associated with chronic fatigue and fibromyalgia. It’s not uncommon for there to be a lot of physical health things and functional neurological symptoms that are medically unexplained, so real physical experiences that have no biological explanation. People often describe their psychological experiences in physical terms, things like, “Oh, I’ve gone to the top of my head,” or, “I’m somewhere at the back of me,” or they can locate it physically in their body.</p>
+<p>The reason it’s so variable is, just think how complex we are as human beings, how many kinds of systems and processes are being integrated together to form a whole sense of self or a sense of continuity. If that becomes fragmented, there’s multiple ways it could present.</p>
+<p><strong>Are certain kinds of people more vulnerable to disassociation than others in terms of personality type?</strong></p>
+<p>I’d be a bit cautious about that. These really thorough longitudinal developmental studies are good places to go because they looked at so many factors and disorganized attachment turned up as being a really key one. If we think of this as a survival response, I think people use the strengths they’ve got. And so, that might be a way that people with similar kinds of difficulties in their backgrounds might present to mental-health services in different ways, different kinds of symptoms. With one client, we were able to recognize that they had been a really imaginative child. We could frame this as a strength: “You drew on what you could do well, and this has really protected you.” But I’d see that as part of an individual story. I wouldn’t make generalizations about it. A lot more research needs to be done, because it’s been a bit hidden.</p>
+<p><strong>Is there a clear line between</strong> <a href="https://nautil.us/the-strange-rise-of-daydreaming-823088/"><strong>daydreaming</strong></a> <strong>and dissociation?</strong></p>
+<p>Dissociation is a whole spectrum of experiences. We all dissociate at times, for relaxation or just to give our minds a rest. We could argue that getting immersed in something imaginative, going to see a movie, paintballing where you're taking on a role, or participating in virtual spaces might come into that category. We need to play and pretend and disconnect a bit from reality as part of normal life and who we are as human beings. So daydreaming would fit into that category. Until it becomes a problem where it’s causing distress or interfering with daily life.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-strange-rise-of-daydreaming-823088/">The Strange Rise of Daydreaming</a>”</strong></p>
+<p><strong>How do you help people who have severe and entrenched dissociation to recover, to restore their sense of self?</strong></p>
+<p>The first thing is accurate identification, including psychiatric diagnosis, identifying the things that a person’s struggling with. That means that mental health professionals need to be aware of how dissociation could present, and what core questions to ask. That should be part of basic mental-health screening and assessment, as much as OCD-type symptoms or psychotic-type symptoms, or depression. The broad guidance isn’t about one kind of treatment over another, although I think psychological treatments are the most important in this field, rather than psychotropic medication, for example.</p>
+<p><strong>Why is that?</strong></p>
+<p>Because this disorder is typically about complex trauma, so there isn’t a medication, other than to treat symptoms for short-term stabilization. Some psychological therapies have been adapted for dissociative presentations that directly target dissociative symptoms. So you really can’t work around them or say, “You know, when you’ve grounded, we can carry on doing the work.” It’s about actually working with someone on their dissociative experiences.</p>
+<p><strong>And how do you do that? How do you directly target those symptoms?</strong></p>
+<p>First, it’s about being curious about them and having conversations about them and them actually being the focus of attention. That hasn’t necessarily happened up until now. So we’d advocate for a trauma-informed treatment framework, in which the first stage is about safety and stabilization. That’s about people being able to manage their day-to-day lives, safely get out of dangerous situations they might be in, and manage issues around risk, self-harm, suicidality, addiction issues, instability in their living circumstances, that kind of thing. So getting safe and stable.</p>
+<p>The second stage is the trauma processing and mourning what’s been lost. And the third stage is rehabilitation, reintegration to life, developing new skills, education, and employment. We need to help them build a life. <img alt="" src="../images/nautilus-favicon-14_482.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Cristina Conti / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>
