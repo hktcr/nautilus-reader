@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How the Western Diet Has Derailed Our Evolution | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How the Western Diet Has Derailed Our Evolution</h1>
+            <div class="meta">
+            Av Nautilus &nbsp;|&nbsp; Publicerad 2024-02-14
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-5E3Q</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>For the microbiologist Justin Sonnenburg, that career-defining moment—the discovery that changed the trajectory of his research, inspiring him to study how diet and native microbes shape our risk for disease—came from a village in the African hinterlands.</p>
+<p>A group of Italian microbiologists had compared the intestinal microbes of young villagers in Burkina Faso with those of children in Florence, Italy. The villagers, who subsisted on a diet of mostly millet and sorghum, harbored far more microbial diversity than the Florentines, who ate a variant of the refined, Western diet. Where the Florentine microbial community was adapted to protein, fats, and simple sugars, the Burkina Faso microbiome was oriented toward degrading the complex plant carbohydrates we call fiber.</p>
+<p>Scientists suspect our intestinal community of microbes, the human microbiota, calibrates our immune and metabolic function, and that its corruption or depletion can increase the risk of chronic diseases, ranging from asthma to obesity. One might think that if we coevolved with our microbes, they’d be more or less the same in healthy humans everywhere. But that’s not what the scientists observed.</p>
+<p><img alt="" src="requests.sessions.Session object at 0x10709ae40" /></p>
+<p><strong>AN INSIDE VIEW :</strong> Microbiologist Justin Sonnenburg (left) is revealing how our refined Western diet may be upsetting ancestral metabolic processes and raising the risk of chronic diseases, from asthma to obesity. Graduate student Will Van Treuren looks on.Photography by Peter van Agtmael/Magnum Photos, from Stanford University’s #nextgreatdiscovery Series</p>
+<p>“It was the most different human microbiota composition we’d ever seen,” Sonnenburg told me. To his mind it carried a profound message: The Western microbiome, the community of microbes scientists thought of as “normal” and “healthy,” the one they used as a baseline against which to compare “diseased” microbiomes, might be considerably different than the community that prevailed during most of human evolution.</p>
+<p>And so Sonnenburg wondered: If the Burkina Faso microbiome represented a kind of ancestral state for humans—the Neolithic in particular, or subsistence farming—and if the transition between that state and modern Florence represented a voyage from an agriculturalist’s existence to 21st-century urban living, then where along the way had the Florentines lost all those microbes?</p>
+<p>Earlier this year I visited Sonnenburg at Stanford University, where he has a lab. By then he thought he had part of the answer. He showed me, on his computer, the results of a multigenerational experiment dreamed up by his wife, Erica, also a microbiologist.</p>
+<p>When the Burkina Faso study was published, in 2010, the question of what specific microbes improved human health remained maddeningly elusive, but evidence was beginning to suggest that diversity itself was important. So despite their relative material poverty, these villagers seemed wealthy in a way that science was just beginning to appreciate.</p>
+<p>Where did that diversity come from? Humans can’t digest soluble fiber, so we enlist microbes to dismantle it for us, sopping up their metabolites. The Burkina Faso microbiota produced about twice as much of these fermentation by-products, called short-chain fatty acids, as the Florentine. That gave a strong indication that fiber, the raw material solely fermented by microbes, was somehow boosting microbial diversity in the Africans.</p>
+<blockquote>
+<p>How did the microbiome of our ancestors look before it was altered by sanitation, antibiotics, and junk food?</p>
+</blockquote>
+<p>Indeed, when Sonnenburg fed mice plenty of fiber, microbes that specialized in breaking it down bloomed, and the ecosystem became more diverse overall. When he fed mice a fiber-poor, sugary, Western-like diet, diversity plummeted. (Fiber-starved mice were also meaner and more difficult to handle.) But the losses weren’t permanent. Even after weeks on this junk food-like diet, an animal’s microbial diversity would mostly recover if it began consuming fiber again.</p>
+<p>This was good news for Americans—our microbial communities might re-diversify if we just ate more whole grains and veggies. But it didn’t support the Sonnenburgs’ suspicion that the Western diet had triggered microbial extinctions. Yet then they saw what happened when pregnant mice went on the no-fiber diet: temporary depletions became permanent losses.</p>
+<p>When we pass through the birth canal, we are slathered in our mother’s microbes, a kind of starter culture for our own community. In this case, though, pups born to mice on American-type diets—no fiber, lots of sugar—failed to acquire the full endowment of their mothers’ microbes. Entire groups of bacteria were lost during transmission. When Sonnenburg put these second-generation mice on a fiber-rich diet, their microbes failed to recover. The mice couldn’t regrow what they’d never inherited. And when these second-generation animals went on a fiberless diet in turn, their offspring inherited even fewer microbes. The microbial die-outs compounded across generations.</p>
+<p>Many who study the microbiome suspect that we are experiencing an extinction spasm within that parallels the extinction crisis gripping the planet. Numerous factors are implicated in these disappearances. Antibiotics, available after World War II, can work like napalm, indiscriminately flattening our internal ecosystems. Modern sanitary amenities, which began in the late 19th century, may limit sharing of disease- and health-promoting microbes alike. Today’s houses in today’s cities seal us away from many of the soil, plant, and animal microbes that rained down on us during our evolution, possibly limiting an important source of novelty.</p>
+<p>But what the Sonnenburgs’ experiment suggests is that by failing to adequately nourish key microbes, the Western diet may also be starving them out of existence. They call this idea “starving the microbial self.” They suspect that these diet-driven extinctions may have fueled, at least in part, the recent rise of non-communicable diseases. The question they and many others are now asking is this: How did the microbiome of our ancestors look before it was altered by sanitation, antibiotics, and junk food? How did that primeval collection of human microbes work? And was it somehow healthier than the one we harbor today?</p>
+<p>The National Institutes of Health’s Human Microbiome Project, the first phase of which finished in 2012, was billed as a “road map” of human microbes. But as Maria Gloria Dominguez-Bello, a microbiologist at New York University who studies remote Amerindian communities, told me, the effort is “really the <em>American</em> microbiome project; it’s not the <em>human</em> microbiome project.”</p>
+<p>So a remarkable and somewhat quixotic effort has begun to catalog and possibly preserve, before they disappear, the microbes of people who live in environments thought to resemble humanity’s past—people whose microbiomes may approximate an ancestral state. Researchers are motoring down rivers in the Amazon, off-roading in the East African savanna, hiking into the mountain villages of Papua New Guinea. They see themselves as rushing to catalog an ecosystem that may soon disappear.</p>
+<p>“It’s really our last chance to harvest a lot of these microbes from around the world,” Rob Knight, a microbiologist at the University of California, San Diego, told me. “We have to do it before it’s too late—and it’s very nearly too late.”</p>
+<p>He and others suspect these populations won’t retain their traditional ways much longer. Antibiotics, thought to deplete microbes, are already used frequently in some communities. And as modernization and acculturation progresses—as these peoples move toward the sanitized, indoor-dwelling, junk food-eating reality that characterizes much life in developed nations today—some human microbes, or perhaps certain configurations of those microbes, may be lost forever.</p>
+<p>For now, scientists are careful to characterize the quest as purely descriptive; they want to know how these human microbiomes affect our bodies. Yet a kind of microbial ark—a storage vault for potentially endangered human microbes—is perhaps implied. Martin Blaser, a microbiologist at New York University and Dominguez-Bello’s husband, argues that because Westernized peoples may have lost important microbes, we may have to repopulate ourselves with microbes derived from more traditional-living populations—from, say, Amazonian Amerindians or African hunter-gatherers.</p>
+<p>That’s certainly a long way off. No one understands much about the dizzying variety documented so far—which microbes are good, which harmful, which irrelevant. One constant, though, is that people living subsistence lifestyles have tremendous diversity compared to westernized populations—up to 50 percent more species than North Americans or Europeans. That includes not only bacteria but eukaryotes—single-cell protists and large, multicellular worms. These organisms, which are often missing in the West, have <a href="https://nautil.us/issue/30/identity/why-scientists-need-to-fail-better">historically been considered pathogens</a>. But some evidence now suggests that they can favorably shape the microbiome, benefiting the host.</p>
+<p><img alt="" src="requests.sessions.Session object at 0x10709ae40" /></p>
+<p><strong>FAMILY GARDEN:</strong> The Sonnenburgs,  to boost their own microbial diversity, took up gardening, got a dog, and began hand-milling grain to make bread. Erica Sonnenburg, a microbiologist, works in the family garden with daughters Claire and Camille.Photography by Peter van Agtmael/Magnum Photos, from Stanford University’s #nextgreatdiscovery Series</p>
+<p>The other constant relates to diet and the soluble fiber that Sonnenburg studies. Whereas North American microbes orient toward degrading fat, simple sugars, and protein, the microbes of subsistence communities so far studied are geared toward fermenting fiber.</p>
+<p>Most study subjects live in the tropics; their microbial communities may reflect tropical environments, not an ancestral human state. Yet even “extinct” microbiomes from higher latitudes—including from a frozen European mummy—are similarly configured to break down plant fiber, adding to the sense that the Western microbiome has diverged from what likely prevailed during human evolution.</p>
+<p>The Sonnenburgs think fiber is so important that they’ve given it a new designation: microbiota-accessible carbohydrates, or MACs. They think that the mismatch between the Westernized, MAC-starved microbiome and the human genome may predispose to Western diseases.</p>
+<p>Scientists studying these communities suspect that while mortality is high from infectious diseases, chronic, non-communicable diseases are far less prevalent. At the same time, researchers since the late 20th century have repeatedly observed that even in the West, people who grow up on farms with livestock, or exposed to certain fecal-oral infections, like Hepatitis A and sundry parasites—environments that, in their relative microbial enrichment, resemble these subsistence communities—have a lower risk of certain Western afflictions, particularly hay fever, asthma, and certain autoimmune disorders.</p>
+<blockquote>
+<p>Many who study the microbiome suspect we are experiencing an extinction within that parallels the extinction gripping the planet.</p>
+</blockquote>
+<p>No one wants to bring back the killers of yore. But the suspicion—and the hope—is that beneficial microbes can be separated from the dangerous ones, and that “good” ones can be restored. Or perhaps we can simply treat the community we already harbor better by feeding it healthier fare.</p>
+<p>The United States Department of Agriculture recommends between 25 and 38 grams of fiber for adults daily; most Americans consume substantially less fiber-rich food, including nuts, whole grains, certain fruits, and vegetables. The guideline stems, in part, from the research of an Irish-born physician named Denis Burkitt. While working in Uganda in the 1960s, Burkitt became convinced that the high-fiber African diet explained the Africans’ relative lack of colon cancer.</p>
+<p>The problem with the fiber hypothesis, however, has always been twofold. People who eat plenty of fiber seem to have a lower risk of many diseases, including heart disease and diabetes. But when scientists have fed fiber to volunteers, they haven’t historically observed much benefit. And this underscores the real mystery: By what mechanism does fiber improve health?</p>
+<p>Soluble fiber is an umbrella term for complex plant sugars—including some polysaccharides, oligosaccharides, and fructans. The molecules consist of simple sugars linked together in long, hard-to-dismantle chains. If you dump a load of fiber—or microbiota-accessible carbohydrates—onto a colonic community of microbes, those that specialize in fermenting it will bloom. And they’ll start churning out short-chain fatty acids, including butyrate, whose smell you might recognize from aged cheese, and acetate, which gives vinegar its sharpness.</p>
+<p>These acids, Sonnenburg thinks, are one of the long-sought mechanisms by which fiber prevents disease. Rodent studies suggest that as they diffuse into circulation, they stimulate the anti-inflammatory arm of the immune system—cells that help you <em>not</em> attack tree pollen and other harmless proteins—preventing allergies and other inflammatory diseases. The calming effect reaches as far as the bone marrow and lungs, where, as a recent <em>Nature Medicine</em> study showed, the acids reduced animals’ vulnerability to asthma.</p>
+<p>As Justin Sonnenburg put it, “We have this unsupervised drug factory in our gut.” The question facing microbiologists today is how to properly tend to that factory.</p>
+<p>Here, studies of populations living more traditional lifestyles may provide clues. In the past, most people likely imbibed many times more fiber than today. If you eat minimally processed plants, which humans have for millions of years, you can’t avoid fiber. Modern hunter-gatherers and horticulturalists certainly eat loads of it. The Hadza of Tanzania, for instance, consume at least 10 times more than Americans, in tubers, baobab fruit, and wild berries. Agriculturalists, like those Burkina Fasans, also eat more fiber than Western populations, in porridges and breads made from unrefined grains.</p>
+<p>Given this constant supply of microbiota-accessible carbohydrates, human microbiomes of the past, the Sonnenburgs argue, likely produced a river of these short-chain fatty acids. That probably changed some with the transition to agriculture, which made diets less diverse. But an even more drastic shift occurred quite recently, with the advent and widespread adoption of refined foods. As a result, westernized populations, the Sonnenburgs think, have lost healthful, fiber-fermenting microbes. And we suffer from a kind of fermentation byproduct deficiency.</p>
+<p><img alt="" src="requests.sessions.Session object at 0x10709ae40" /></p>
+<p><strong>HUNGRY MICROBES:</strong> A healthy gut hosts a number of microenvironments. A fatty diet lacking in fiber causes some of our internal, ancestral microbes to devour a mucus lining, potentially leading to inflammatory bowel disease.Kristen Earle/Sonnenburg Lab</p>
+<p>So why can’t we supplement our diet with short-chain fatty acids? When I visited Sonnenburg, he showed me one reason why: The ecosystem that produces the acids may be as important as the acids themselves. He brought up two cross-sectional images of fecal pellets still in mice intestines. Most microbiome analyses take a tally, from genetic markers, of what microbes are present and in what abundance. That’s equivalent to imagining what a forest looks like from a pile of wood chips, and gives little sense of how the forest was organized. By some ingenious tinkering, though, one of Sonnenburg’s post-docs had developed a way to freeze the ecosystem in place, and then photograph it.</p>
+<p>The resulting picture was unlike any rendition of the microbiome I’d seen before. One animal had eaten plenty of fiber, the other hadn’t. In the fiber-fed ecosystem, similar bacteria clustered with one another, not unlike schools of fish on a reef ecosystem. An undulating structure prevailed across space. But in the non-fiber diet, not only was diversity reduced, the microbes were evenly distributed throughout, like a stew boiled for too long.</p>
+<p>At this point, Sonnenburg sat back in his chair and went quiet, waiting for me to notice something. To one side of both images, microbes were mostly absent—the mucus layer on the lining of the gut. But that layer was twice as thick in the fiber-fed mice than the non-fiber fed. That difference amounted to about 30 nanometers, far less than the width of a human hair. But one day we may look back and shake our heads that Western diseases—from diabetes to colon cancer—stemmed from 30 nanometers of mucus that, somewhere along the way, went missing in the developed world.</p>
+<p>We think of the Western diet—high in unhealthy fats, sugar, and proteins—as overly rich. But what’s missing from the diet may be just as, and perhaps more, important than what’s abundant.</p>
+<p>Years ago, while still a post-doc, Sonnenburg discovered that something very odd occurs when those MAC-loving microbes go hungry. They start eating mucus. “This is the stage where you say, ‘Oh my God. They’re eating me.’ ” Sonnenburg said. “You can see it.”</p>
+<blockquote>
+<p>Our ancestral microbe variety may have faded over time due, simply, to our fiber-poor diet.</p>
+</blockquote>
+<p>We need that mucus. It maintains a necessary distance between us and our microbes. And as it erodes with a poor diet, the lining of the gut becomes irritated. Microbial detritus starts leaking through. One of the more striking discoveries in recent years is that you can see this stuff, called endotoxin, increase in the bloodstream immediately after feeding people a sugary, greasy, fast-food meal. The immune system responds as if under threat, leading to the “simmering inflammation” the Sonnenburgs think drives so many Western diseases.</p>
+<p>We need inflammation to combat infections, or aid tissue repair. But chronic inflammation—a danger signal blaring indefinitely—can lead to all manner of cellular dysfunction, contributing to many degenerative diseases.</p>
+<p>I came away from Sonnenburg’s office with a sense that I’d glimpsed a principle underlying our relationship with microbes. Wringing calories from wild, fibrous fare required a village—microbes specialized in distinct tasks, but each also dependent on its neighbors. The difficulty of the job encouraged cooperation between microbes. When you withheld fiber, though, you removed the need for that close-knit cooperation. The mutually beneficial arrangements began to fray.</p>
+<p>Sonnenburg’s experiments help contextualize what others are finding in peoples who hunt and forage. The Hadza, one of the last remaining hunter-gatherers on Earth, live near Lake Eyasi in Tanzania, a region of east Africa thought to be the birthplace of our species. An analysis of their microbes published last year detailed an immensely diverse community, including a number of microbes new to scientists.</p>
+<p>The Hadza harbor a variety of bacteria called treponema, which are absent in the developed world. They’re spirochetes related to the pathogen that causes syphilis. Every rural, non-westernized group studied so far, including various Amerindian groups, also have treponemas, as do our primate relatives.</p>
+<p>Cecil Lewis, a geneticist at the University of Oklahoma in Norman who studies the microbiomes of native people, including of Amerindian populations, suspects they may belong to an “ancestral microbiome”—a community that accompanied us since before we were human. Maybe anti-syphilis medication wiped them out in the West, Knight speculates. When I asked what they might do, or what their loss might mean, Lewis and others responded that no one really knows.</p>
+<p>Yet the treponemas have genes that help in breaking down complex carbohydrates, suggesting a role in fermentation. And that dovetails with the other striking feature of the Hadza and Amerindian microbiomes. Where we have just a few strains of, say, prevotella bacteria, the Hadza have a kaleidescopic variety. Again, diet is implicated. Breaking down tough, wild plants may require a diverse team of microbes. What happened to Western diversity? It’s possible we’ve inadvertently killed that wealth, or never possessed it at all. But another possibility, as Sonnenburg’s experiments suggest, is that because we haven’t fed those microbes, we’ve lost them. Our ancestral variety may have faded over time due, simply, to our fiber-poor diet.</p>
+<p><img alt="" src="requests.sessions.Session object at 0x10709ae40" /></p>
+<p><strong>HEALTHY FIBER:</strong> In the past, most people likely consumed many times more fiber than today. Modern hunter-gatherers eat loads of it, more than Western populations. The Hadza  of Tanzania consume at least 10 times more than Americans, in baobab fruit, (seen here), tubers, and wild berries.Ingetje Tadros</p>
+<p>Sonnenburg’s mice live in plastic bubbles, cut off from new sources of microbes. Humans do not. One outstanding question is whether, if I began eating wild tubers and baobab fruit, the microbial complexity necessary to ferment the new fare would simply appear, seeded from the environment.</p>
+<p>Trials testing prebiotics, food for the fiber-fermenting bacteria, suggest that you can increase microbial richness with more fiber, and improve metabolic function. But here’s the wrinkle: In studies from Europe, only individuals who already harbored a baseline diversity benefitted from these dietary interventions. Those whose microbial communities were too impoverished didn’t—or couldn’t—respond to the new diet. They seemed to lack the ability.</p>
+<p>The Sonnenburgs point to these studies as evidence that we need the right microbes—their unique alchemical talents—to unlock nutrients from food. Where do we get them? Our particular genes can influence the makeup of our microbiome, perhaps influencing our propensity to develop disease or put on weight by shaping our microbial community. But another reason for lacking a bacterium is more straightforward: We may never have encountered it in the first place.</p>
+<p>Those environments where a relatively prolific sharing of microbes still occurs—daycares, cowsheds, homes with lots of siblings, and homes with dogs—seem to protect against allergies, asthma, some auto-immune diseases, and certain cancers. These observations, often grouped under the rubric of the “hygiene hypothesis,” appear to highlight a phenomenon separate from diet: access to microbial wealth, and possibly to unique microbial heirlooms.</p>
+<p>Consider the spiral-shaped, stomach-dwelling bacterium <em>Helicobacter pylori</em>. For at least a century, <em>H. pylori</em> has been declining in the developed world. Most of our great-great grandparents probably had it; now less than 6 percent of children do. Unlike the microbes that interest Sonnenburg, <em>H. pylori</em> doesn’t eat what we eat. It eats us, its host. And unlike microbes thought to jump aboard from food, water, soil, or other animals, <em>H. pylori</em> only comes from other people—particularly, scientists think, our mothers. It’s a human-adapted microbe that’s passed between generations.</p>
+<p><em>H. pylori</em> is infamous for causing ulcers and gastric cancer, but mounting evidence also suggests that, by subverting the immune system to ensure its own survival, the bacterium may protect against asthma, obesity, and possibly other inflammatory diseases. If there’s an ecosystem restoration project implicit in the study of the ancestral microbiota, <em>H. pylori</em> serves as an important counterpoint to the emphasis on diet. You can eat all the fiber you want (unless your food is contaminated with feces) and you’ll never re-acquire microbes like <em>H. pylori</em>. The only way to restore such microbes may be to deliberately reintroduce them.</p>
+<p>Even that idea is complicated. Years ago, Dominguez-Bello discovered a unique Amerindian strain of <em>H. pylori</em> in an isolated Amazonian tribe, a bacterium whose ancestors had presumably come over the Bering land bridge with the forebears of native Americans some 15,000 years ago. The native strain was disappearing, however. When people of different ancestries mixed in South America, Dominguez-Bello found, imported strains outcompeted native ones. African and European <em>H. pylori</em> strains were driving Amerindian ones extinct.</p>
+<p>Why did that matter? We may fare better with “our” particular microbes. A study on Colombians last year found that when people of primarily native American ancestry harbored imported European or African <em>H. pylori</em> strains, their risk of gastric cancer increased dramatically. The introduced bugs didn’t match the native genotype. And that mismatch seemed to increase the risk of malignancy.</p>
+<p>“This type of thing could be happening in many microbes,” Barbara Schneider, molecular biologist at Vanderbilt University in Nashville, and coauthor on the study, told me. “There’s no reason to think that helicobacter should be unique.”</p>
+<p>We might call this the “family heirloom” problem. Some fraction of our microbes may be uniquely adapted to our particular genetic quirks—to our particular branch of the human family. Once they’re lost, there may be no recovering these microbes. Meaning that, because I was born and grew up in the U.S., “my” helicobacters and treponemas may be gone forever.</p>
+<p>In their recent book, <em>The Good Gut: Taking Control of Your Weight, Your Mood, and Your Long-term Health</em>, the Sonnenburgs argue forcefully that boosting fiber intake is the best way to cultivate a healthier community of microbes. Given the many unknowns, their advocacy surprised me. The science wasn’t settled; what if they were wrong?</p>
+<p>They’d fretted over this scientific uncertainty, they said, but decided that the diet they pushed—really a variant of the Mediterranean diet—would probably not cause harm, and would likely benefit adherents, even if everything they thought about the microbiome was wrong.</p>
+<p>Not long after we spoke, Stephen O’Keefe, a gastroenterologist at the University of Pittsburgh, published what may be the best evidence yet (in people) that supports the Sonnenburgs’ microbiota-accessible carbohydrates hypothesis.</p>
+<p>O’Keefe has long puzzled over the high risk of colon cancer among African-Americans compared to native Africans. Like Burkitt 60 years ago, he suspected that a diet rich in fiber might explain what he quantified as a 65-fold disparity. To prove it, he put 20 rural South Africans on a high-fat, high-meat diet—including hot dogs, hamburgers, and fries; and he put 20 African-Americans on a high fiber African diet, including corn porridge, beans, and fruit. In contrast to earlier studies, however, his team visited the subjects at home, preparing their meals and supervising them.</p>
+<p>Changes occurred quickly. Inflammation of the colon, which increases the risk of cancer, decreased in the African-Americans on the African diet; and it increased in the Africans on the American diet. Production of the fermentation by-product butyrate, thought to prevent colon cancer, increased in those eating African fare, and declined in those eating American-style. And here’s what struck me: In the fiber-poor, meat- and fat-fed microbiome, O’Keefe saw a “loosening” of those tight-knit communities oriented toward fermenting fiber. He’d done in people what Sonnenburg had done in rodents—rattled the ecosystem—and it took just two weeks on an American-type diet. He also demonstrated that regardless of the microbes you may not have inherited, what you feed the microbes you have can make a big difference in how they behave.</p>
+<p>Years ago, impelled in part by their oldest daughter’s constipation problems, the Sonnenburg family revamped its diet. They threw out all processed food-stuffs, and began eating plenty of veggies and whole grains. They bought a dog. Justin Sonnenburg began hand-milling his own wheat berries for bread. He took up gardening. And when he compared his archived microbes from years ago with recent ones, he discovered that his microbial diversity had increased by half. “That’s a huge difference,” he told me, “as big as the difference between Americans and Amerindians.”</p>
+<p>It remains to be seen what detailed analysis will reveal about this diversification—how many came from his dog, from soil, from the sourdough he handles; how many might have been there all along in depressed numbers, and bloomed on a fiber-rich diet. What it showed the Sonnenburgs, however, was that without fully understanding how the microbiome works, you can still push it in a healthier direction.</p>
+<p>“If we wait to the point where we are beyond a shadow of a doubt, with double-blind studies translated to regulations, we’re going to be waiting decades,” Sonnenburg told me. “But right now, all the arrows are pointing in the same direction, toward fiber.”</p>
+<p><em>Moises Velesquez-Manoff is a journalist and author of</em> An Epidemic of Absence: A New Way of Understanding Allergies and Autoimmune Diseases.</p>
+<p>Peter van Agtmael’s photos are from Stanford University’s <a href="http://news.stanford.edu/features/2015/nextgreatdiscovery/">#nextgreatdiscovery Series</a></p>
+<p><img alt="" src="requests.sessions.Session object at 0x10709ae40" /></p>
+<p><em>Illustration by Katherine Diemert</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>
