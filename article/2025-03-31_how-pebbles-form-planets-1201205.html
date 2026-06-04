@@ -228,7 +228,131 @@
 <p>The results will be used in models that try to explain how massive planets like our own arise from mere dust. <img alt="" src="../images/nautilus-favicon-14_1233.png" /></p>
 <p><em>Lead image: University of Duisburg-Essen (UDE)</em></p>
         </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
     </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
 
     <script>
         const MIN_SIZE = 14;
@@ -256,6 +380,85 @@
 
         // Apply on load
         applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
     </script>
 </body>
 </html>
