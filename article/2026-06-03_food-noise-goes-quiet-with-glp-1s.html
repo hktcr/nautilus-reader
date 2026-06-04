@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Noise Goes Quiet with GLP-1s | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Food Noise Goes Quiet with GLP-1s</h1>
+            <div class="meta">
+            Av Kristen French &nbsp;|&nbsp; Publicerad 2026-06-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-TLTH</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>I don’t think about tacos all the time anymore,” Staci Klemmer, 57, <a href="https://www.nytimes.com/2023/06/21/well/eat/ozempic-food-noise.html">told</a> <em>The New York Times</em> a few years ago. “I don’t have cravings anymore. At all. It’s the weirdest thing.”</p>
+<p>Klemmer’s freedom from cravings came after she began taking the GLP-1 weight-loss drug Wegovy. Before she started the drug regimen, she always thought about food—from the moment she woke to the moment she turned in for the night, even when she was full. After her first dose of the medicine, she suffered side effects such as acid reflux, constipation, and fatigue, but the ticker tape of food-related thoughts that had scrolled through her mind shut down. It was a relief. She no longer suffered from what has come to be known as “food noise.”</p>
+<p>Food noise is a new term for an old phenomenon. Consider the insatiable hunger of King Erysichthon, described as a “hurricane of starvation,” in Ovid’s epic poem <em>Metamorphoses</em>. In modern times, psychologists have described incessant thoughts about eating as “food preoccupation.” But food noise seemed to capture something more intrusive, and the phrase caught fire on social media circa 2023. Some videos on the subject of <a href="https://www.tiktok.com/discover/food-noise-explained?lang=en">“food noise explained”</a> now have half a million views on TikTok. The clips feature weight-loss coaches, nutritionists, and people suffering from the phenomenon talking about what it is and how to conquer it. Soon scientists began working up a formal definition and methods of measuring it and <a href="https://www.nature.com/articles/s41387-025-00382-x">investigating</a> its relationship to obesity, dieting, and weight-loss drugs.</p>
+<p><strong>Read more: “<a href="https://nautil.us/how-to-quiet-your-mind-chatter-238149">How to Quiet Your Mind Chatter</a>”</strong></p>
+<p>One team of scientists from the United States recently set out to measure how GLP-1 weight-loss drugs and behavioral interventions influence food noise. The team studied 417 adults enrolled in a behavioral weight-management program provided by WW International, formerly Weight Watchers, evaluating how much food noise they experienced after one month. About a quarter of the participants also got GLP-1 drugs. The group in the GLP-1 plus behavioral intervention group saw much greater reduction in food noise than the group getting the behavioral intervention alone. WW International funded the research, while some of the researchers and authors of the study are former employees of or investors in WW International.</p>
+<p>I spoke with study author Hanim Ecem Diktas, a postdoctoral research fellow at Louisiana State University who doesn’t have any direct relationship with WW International, about what food noise is, where the concept comes from, and what the findings mean.</p>
+<p><strong>What is food noise?</strong></p>
+<p>Our group defines food noise as persistent intrusive thoughts about food that are disruptive to daily life and make healthy behaviors difficult for individuals. The discussion around food noise started in 2023. One group from Penn State defined food noise as food cue reactivity. And then our group and another developed food noise questionnaires, and multiple studies looked at how food noise is relevant to a patient’s experience with GLP-1 medications because that’s how it started. Patients reported anecdotally that when they took the medication, their food noise stopped suddenly. We wanted to quantify that experience and to see whether this is a novel construct or has any overlap with existing constructs like food cravings or food preoccupation.</p>
+<p>We’re still doing randomized controlled trials to understand how different treatments, including bariatric surgery, influence short-term and long-term changes in food noise. We still need more studies to understand the clinical utility of eliminating food noise.</p>
+<p><strong>How does food noise differ from food preoccupation?</strong></p>
+<p>Food preoccupation includes positive and negative feelings. We hypothesize that food noise is a purely negative experience. Constant thinking about food impacts a person’s life in a negative way. It creates a cognitive burden that makes it hard to engage in healthy behaviors.</p>
+<p><strong>Who tends to suffer from food noise?</strong></p>
+<p>We found that participants who are dieting and have a higher body mass index have higher food noise, but we don’t have any causal data. We need more studies to confirm these hypotheses.</p>
+<p><strong>Do we know what’s happening in the brain when someone is experiencing food noise?</strong></p>
+<p>It influences appetite, but it also creates a kind of dysphoria because the thoughts about food are so disruptive.</p>
+<p><strong>Does it overlap with other forms of compulsive or addictive thinking patterns like obsessive-compulsive disorder?</strong></p>
+<p>We don’t know, but we have been seeing in the literature that individuals who take GLP-1s stopped engaging in some other addictive behaviors, such as drinking alcohol, and it disrupted binge-eating disorders. There may be some overlapping mechanisms, but we don’t know yet.</p>
+<p><strong>You found that GLP-1 drugs plus behavioral intervention were far more successful than the behavioral treatment alone at reducing food noise. Did this surprise you?</strong></p>
+<p>Actually, it did not, but I was surprised by the changes in the behavioral group after one month, because for behavioral interventions, we usually see the biggest changes after six months. That shows that even behavioral interventions and structural support for participants can help to decrease food noise. Obviously, we see a bigger difference with GLP-1s, which supports the anecdotal reports.</p>
+<p><strong>Read more: “<a href="https://nautil.us/this-meal-might-bring-you-to-tears-1255467">This Meal Might Bring You to Tears</a>”</strong></p>
+<p><strong>Some of the authors of the research are former employees or shareholders in what’s now called WW International, formerly Weight Watchers, which also helped to fund the research. How has the Weight Watchers program evolved in the era of GLP-1s? Is it adopting them into its program, or is it still primarily behavioral?</strong></p>
+<p>They have an app. They support participants in that way. And then clinical staff can prescribe the drugs to participants who are eligible for them.</p>
+<p><strong>You didn’t feel any pressure to frame results favorably in terms of the behavioral intervention, which was provided by Weight Watchers, and where they clearly have an investment?</strong></p>
+<p>They have investment in both. It’s a weight-loss system. They incorporate the medications as well, so it’s not just behavioral interventions. Nobody is testing drugs alone. The drugs support a lifestyle treatment. But it’s good to see the behavioral impact as well from my perspective, because the frame for food noise has been mostly about the drugs.</p>
+<p><strong>What does the Weight Watchers behavioral intervention look like?</strong></p>
+<p>Weight Watchers has an app that allows participants to track their food intake. They can track macronutrient consumption and energy intake. Participants also had access to digital scales so they could track their weight. And they had specific guidance from the coaches about what to eat and how they were progressing in the program. But this is just one month of follow-up. Their general system is long term. Also, this is an observational trial, with almost 320 participants in the behavioral treatment group, and 92 participants in the plus medication group. We definitely need further studies to understand what is actually going on.</p>
+<p><strong>Where did the food noise concept come from?</strong></p>
+<p>It came from anecdotal reports on social media sites such as TikTok. Doctors started sharing reports from their patients that they suddenly stopped experiencing food noise when they started taking GLP-1s. Then one group created a model to see whether it was simply food cue reactivity, or whether it was a novel construct. But our research group thought it must not be about reactions to food cues, because participants were reporting food noise even without hunger, without external food cues. We wanted to emphasize the part that has a negative impact on an individual’s life. That was our starting point. <img alt="" src="../images/nautilus-favicon-14_1295.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: freshidea / Adobe Stock</em></p>
+        </article>
+    </main>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+    </script>
+</body>
+</html>
