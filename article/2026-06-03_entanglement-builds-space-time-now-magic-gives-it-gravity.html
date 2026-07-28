@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entanglement Builds Space-Time. Now “Magic” Gives It Gravity. | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Entanglement Builds Space-Time. Now “Magic” Gives It Gravity.</h1>
+            <div class="meta">
+            Av Charlie Wood &nbsp;|&nbsp; Publicerad 2026-06-03
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-0DR2</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 1973, John Archibald Wheeler described the relationship between space and matter in two sentences: “Space acts on matter, telling it how to move. In turn, matter reacts back on space, telling it how to curve.” Wheeler’s words serve as a pithy encapsulation of general relativity, Albert Einstein’s theory of gravity.</p>
+<p>Wheeler’s sentences also lay out a challenge that theorists face today: When they build a model of the universe — at least one that works at the quantum level — it’s been difficult to get space and matter to interact in the way that they must.</p>
+<p>Einstein cast gravity not as a force but as the geometric bending of space and time. In a popular analogy, the fabric of space-time is like the flat expanse of a mattress, and a massive object like a star is like a bowling ball sitting on top. The weight of the bowling ball compresses the mattress, forming a dimple — matter tells space-time how to curve.</p>
+<p>In this analogy, a planet is like a smaller ball. If it rolls close enough to the bowling ball, its path will be altered by the dimple in the mattress — space-time tells matter how to move.</p>
+<p>But general relativity has a fatal flaw. When a star dies and collapses, its mass is concentrated into an unimaginably dense point. The dimple in the mattress stretches into a deep depression, one that essentially rips all the way through. Physicists call this arrangement a black hole. If a ball reaches such a rip, it’s no longer guided by the fabric, and the analogy breaks down; scientists need a new theory to understand this and other, similarly extreme situations.</p>
+<p>In the late 1990s, physicists had a stroke of luck. They learned that if they imagined space-time as a collection of purely quantum particles, they could in principle describe a black hole — rip and all — in an entirely new way.</p>
+<p>Theorists have spent the last few decades trying to understand exactly how a space-time constructed from such quantum particles could work. And they’ve made progress: They’ve found that entanglement between particles gives space-time its structure, building an environment where matter can move — and satisfying the conditions of Wheeler’s first statement. But the origin of Wheeler’s second statement remained mysterious; in their models, matter didn’t tell space how to curve. The bowling ball sat atop the mattress without making a dent.</p>
+<p>Until now. Physicists including <a href="https://www.phys.vt.edu/About/people/Faculty/charles-cao.html">Charles Cao</a> at Virginia Tech have recently determined how quantum particles could give space-time its bendiness. In a handful of recent works, multiple teams have identified a feature of quantum mechanics that Cao calls “the fabric softener of space.” It’s a measure of quantumness called “magic.”</p>
+<p>“Without magic, things are a little too simple,” said <a href="https://www.preskill.caltech.edu/">John Preskill</a>, a physicist at the California Institute of Technology who contributed to Cao’s newest paper. “And, you know, quantum space-time isn’t quite that simple.”</p>
+<h2><strong>How To Code a Universe</strong></h2>
+<p>Perspective shifts abound in physics. For instance, there’s more than one way to look at the motion of a pendulum. You might specify its location using the height and the horizontal displacement of the weight hanging at the end of the string. Or you might use the length of the string and its angle instead. The perspectives are equivalent; simple trigonometric equations take you from one perspective to the other.</p>
+<p>Mark Belan/<em>Quanta Magazine</em></p>
+<p>For 50 years, theorists have been chasing a far more profound perspective shift: a new way, beyond Einstein’s curved space-time, to look at the universe.</p>
+<p>In the early 1970s, Jacob Bekenstein and Stephen Hawking took the first step in that direction when they discovered that you could reinterpret a black hole (and anything that had fallen into it) as <a href="https://www.quantamagazine.org/the-1-clue-to-quantum-gravity-sits-on-the-surfaces-of-black-holes-20240925/">a spherical collection of particles</a>. In the late 1990s, Juan Maldacena, Edward Witten, and others extended this insight to a whole universe; they described an exotic, static world as a throng of interacting particles, also arranged in a sphere.</p>
+<p>In both cases, you could replace the 3D region of space-time with particles on the region’s surface. You could consider the surface to be 2D, like a globe flattened into a paper map. Physicists call this <a href="https://www.quantamagazine.org/the-two-faces-of-space-time-20240925/">dual nature of space-time</a> the holographic principle, since it resembles the way a holographic sticker can cram a whole 3D scene onto a flat surface without losing data.</p>
+<p>Without magic, things are a little too simple. And, you know, quantum space-time isn’t quite that simple.</p>
+<p>John Preskill, California Institute of Technology</p>
+<p>Over the last couple of decades, theorists have explored what gives the 3D fabric of space its shape. Entanglement, a quantum property that links particles to one another, seems to serve as space’s connective tissue. Take, for instance, a wormhole, a theoretical bridge connecting two distant regions of space. Holographically, a 3D wormhole is equivalent to two entangled sets of particles. Start snipping the “threads” of entanglement that link one set with the other, and the tunnel connecting the regions gets thinner and thinner. Cut the final thread, and the connection dissolves entirely.</p>
+<p>Cao learned about the link between entanglement and space as a graduate student at Caltech in 2016, most notably through a <a href="https://arxiv.org/abs/1607.03901">paper by Daniel Harlow</a>, a physicist now at the Massachusetts Institute of Technology. “Charles spent a month understanding the paper,” said <a href="https://ecs.syracuse.edu/faculty-staff/jason-pollack">Jason Pollack</a>, then a fellow graduate student, now a physicist at Syracuse University.</p>
+<p>Harlow, building in part on the work of Preskill and others, had identified the type of math required to shift perspectives from 2D to 3D. He needed to encode a space and its matter — stars and planets and electrons — into a bunch of quantum particles. So why not use a quantum error-correcting code?</p>
+<p>Quantum error-correcting codes are crucial to quantum computing because quantum computers work by manipulating “qubits,” quantum versions of bits that can exist in superpositions of 0s and 1s. Qubits are extremely delicate, frequently losing their superposition and therefore their extra information. And so physicists have worked out ways to protect this delicate information through redundancy. By <a href="https://www.quantamagazine.org/how-quantum-computers-will-correct-their-errors-20211116/">spreading out one qubit’s information</a> among many qubits, they can preserve it even if some of the qubits are lost.</p>
+<p>Charles Cao, a physicist at Virginia Tech, calls magic “the fabric softener of space.”</p>
+<p>The same type of redundancy <a href="https://www.quantamagazine.org/how-space-and-time-could-be-a-quantum-error-correcting-code-20190103/">shows up in holography</a>. “When you design codes for quantum computing, you’re doing the same kind of thing that [holography] already did for you,” said <a href="https://www.ias.tsinghua.edu.cn/en/info/1059/1176.htm">Bartek Czech,</a> a physicist at Tsinghua University in China. A single holographic location — a region of space and the matter in it — is not encoded in just one set of quantum particles; rather, it is spread across many sets, due to their entanglement. Harlow and collaborators detailed how this works <a href="https://arxiv.org/abs/1411.7041">in a code in 2014</a>, and he further fleshed out the relationship in the 2016 paper that impressed Cao.</p>
+<p>But these codes, known as “stabilizer codes,” had a shortcoming. They divided the entanglement of the particles into two types: one responsible for space and another responsible for matter. And the divide was unbridgeable. Such a perfect split is a virtue in quantum computing, since you want your encrypted data to stay perfectly isolated from the corrupting influence of the outside world. But in holography, that perfection left no room for the two to interact. “We knew how to build a space-time,” Czech said, but “this space-time was inert. It didn’t do anything.”</p>
+<p>To get space and matter to interact, Cao knew he needed a more sophisticated code. “It was clear that something else beyond entanglement had to be there,” said <a href="https://cos.northeastern.edu/people/ning-bao/">Ning Bao</a>, a physicist at Northeastern University.</p>
+<h2><strong>The Magic Ingredient</strong></h2>
+<p>Cao started by playing around with existing error-correcting codes. In 2020, he and a collaborator, Brad Lackey, <a href="https://arxiv.org/abs/2010.05960">tweaked</a> one such code and found that it allowed space to change — just not in response to matter. It wasn’t gravity, but it was progress. Except that Cao and Lackey didn’t fully understand why the tweak worked.</p>
+<p>M.C. Escher’s 1959 woodcut Circle Limit III has the geometry of a holographic world: A whole universe fits inside a spherical surface. In holography, you can learn about what’s happening in the interior by studying the surface itself.</p>
+<p>The next year, Pollack and his collaborators realized that if you actually tried to create a quantum program that executed the tweaked code on a quantum computer, you’d need to use a particular operation known as a T gate, which rotates a qubit.</p>
+<p>Cao took notice. He had just attended a quantum computing conference where researchers were buzzing about gates like these, in part because they are the key to making quantum computers more powerful than classical computers.</p>
+<p>Researchers had previously thought the key was entanglement. They had worked out a way of running software on a classical computer that would mimic a quantum task. When that quantum task involved entangling qubits, quantum computers had an advantage over classical computers, as the classical program took ages to run. But then physicists discovered a way of speeding things up; it turned out that certain classical algorithms could mimic certain entangling operations even on a laptop.</p>
+<p>In 2004, Alexei Kitaev and Sergey Bravyi, both then at Caltech, brought researchers’ attention to quantum operations known as non-Clifford gates, which include the T gate. When a quantum program uses these operations, the equivalent classical program takes much, much longer to run. Kitaev and Bravyi described the complexity that these operations introduce as “magic.” The more non-Clifford gates you need to produce a quantum state, the more magical that state is.</p>
+<p>After Cao learned about magic and non-Clifford gates, he joined forces with Brian Swingle and Christopher White, both researchers at the University of Maryland. In 2020, they studied collections of particles equivalent to an exotic universe called an anti-de Sitter space. The group found that the particles were <a href="https://arxiv.org/abs/2007.01303">highly magical</a>. What would the role of this magic be, they wondered, for the anti-de Sitter space the particles represented?</p>
+<p>Cao — in partnership with Alioscia Hamma and others and building on <a href="https://arxiv.org/abs/1601.06788">work from Xi Dong</a>, now at the University of California, Santa Barbara — found the answer a few years later. They showed that magic <a href="https://arxiv.org/abs/2403.07056">gave space its springiness</a>. Magic, in other words, is connected to space’s ability to bend. And therefore magic is connected to gravity. “If you have one,” Bao said, “you always have the other.”</p>
+<p>By early 2026, Cao and his collaborators had all the pieces. They knew that magic made space bend. And they knew that quantum codes got their magic from non-Clifford gates. So Cao, Preskill, and others <a href="https://arxiv.org/abs/2603.13475">created</a> a next-generation code to succeed the stabilizer codes Harlow and others had focused on a decade before, when they split encoded space from encoded matter. This new code used lots of non-Clifford gates. The gates made the code magical, letting the entanglement for space and the entanglement for matter affect each other.</p>
+<p>“This is pretty cool, because in quantum gravity, we don’t expect the background is fixed,” said <a href="https://search.asu.edu/profile/3203190">Cynthia Keeler</a>, a physicist at Arizona State University who was not involved in the work. “It should fluctuate.”</p>
+<p>The essential nature of magic especially intrigues physicists like Swingle, who hope to use it on a quantum computer to simulate <a href="https://www.quantamagazine.org/one-labs-quest-to-build-space-time-out-of-quantum-particles-20210907/">how gravity behaves</a> in situations where general relativity fails. “If we need high magic, then we intrinsically need a quantum computer,” Swingle said, “because there’s no other way, in general, to get at that kind of question.”</p>
+<h2><strong>Gravity From Quantumness</strong></h2>
+<p>In principle, entanglement and magic could be enough for future physicists to simulate space on a quantum computer. But Cao’s new code still needs a lot of work.</p>
+<p>During a talk about it at the American Physical Society’s annual summit in Denver, Cao joked that he was the only speaker who wasn’t actually studying quantum gravity. That’s because his code is still extremely general. It doesn’t describe the kind of space in which we live, doesn’t capture the particular reactions Einstein described, and doesn’t include the ticking of time.</p>
+<p>The code is more of a proof of concept of the general shape that a theory of quantum gravity should take. If you want your space to bend, use a magical code. “This gets you a precursor of gravity,” Cao said. “You satisfy one of the necessary conditions. Right now, we are at step 0.5 of 5.”</p>
+<p>But even at this early stage, the research program highlights some surprising features that any theory of quantum gravity should have.</p>
+<p>Einstein and Wheeler thought of space-time as a large, featureless fabric existing with fixed bends and folds — a typical classical object. But now physicists are learning that the two defining features of quantum mechanics, entanglement and magic, correspond to the two defining features of space, its shape and its flexibility. This suggests that space itself is one of the most quantum things imaginable. “All the familiar aspects of gravity are actually a very direct manifestation of something quantum,” Swingle said.</p>
+<p>It also suggests that gravity results from imperfect quantum encoding. Non-magical codes produce inert, gravity-free spaces because they protect their encoded information perfectly. Cao and collaborators have shown that gravity comes from the mixing of the encoded information. So by necessity, the encoding must be approximate, and therefore some aspects of what’s going on in the space-time can’t be perfectly recovered by measuring a subset of the quantum particles in the usual way. This approximation, which would indicate a poorly written code for a quantum computer, is “the reason Newton’s apple fell on him,” Czech said.</p>
+<p>Cao, for his part, finds the feature appealing. Quantum error correction and quantum computing are human pursuits, he said. He sees no reason that gravity should accommodate our prejudice for perfection.</p>
+<p><strong><em>Correction:</em></strong> <em>June 3, 2026</em><em>Charles Cao was a graduate student at Caltech, and he later held a postdoctoral position at the University of Maryland.</em></p>
+<p><em>The article previously called the gates that introduce magic Toffoli gates and conflated them with a simpler gate called the T gate. Toffoli gates and T gates are both a part of a wider category called non-Clifford gates, all of which introduce magic.</em></p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/entanglement-builds-space-time-now-magic-gives-it-gravity-20260603/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/entanglement-builds-space-time-now-magic-gives-it-gravity-20260603/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Life Just Different? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Is Life Just Different?</h1>
+            <div class="meta">
+            Av Philip Ball &nbsp;|&nbsp; Publicerad 2026-07-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-6M7D</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="Qualia: Essays that go where curiosity leads" src="../images/QUALIA-Banner-WITH-SPACER-1-1720x223_1.webp" /><br />
+In 1993, a team led by the planetary scientist Carl Sagan tentatively concluded that there is life on Earth. Not much of a deduction, you might think — except that the researchers confined their evidence to <a href="https://www.nature.com/articles/365715a0">observations made by the Galileo spacecraft</a>, which had flown past our planet three years earlier on a looping journey to Jupiter. So great is the transformative power of life that its presence can be detected just from the light and radio waves our planet emits or reflects into space. Today we scan the cosmos for some of these telltale signatures light-years away.</p>
+<p>Life leaves a mark, yet even now there’s no scientific consensus about what makes living things so different from inorganic substances like the rocks, gases, and oceans that are the sole components of dead worlds. Many scientists cite properties such as replication or metabolism. Others speak in more abstract terms about the way life is out of thermodynamic equilibrium with its surroundings. But some give another kind of answer. Living organisms are different because they do stuff <em>for reasons</em>.</p>
+<p><strong>I</strong>n philosophy, <strong>“qualia”</strong> refers to the subjective qualities of our experience: what it’s like for Alice to see blue or for Bob to feel delighted. Qualia are “the ways things seem to us,” as the late philosopher Daniel Dennett put it. In these essays, our columnists follow their curiosity, and explore important but not necessarily answerable scientific questions.</p>
+<p>It’s not enough to say that life is a nonequilibrium organized state through which there’s a constant flux of matter and energy. That description applies to hurricanes, too. But hurricanes just <em>are</em>. Only living entities have goals: to find food, to reproduce, to survive, sometimes simply to experience good things. (Dog owners will recognize that this is not just a human attribute.)</p>
+<p>One way to express this idea is to say that living organisms have “agency.” It’s a hotly contested term. Some biologists reject it outright, at least for any organisms except humans, because we decide on our actions with conscious deliberation. (Whether we’re truly the only species to do so is another issue.) Others think that agency is a fundamental attribute of all life. Since there’s no agreed-upon definition of the term, to some extent it can mean whatever you want it to mean. But the debate about biological agency touches on fundamental issues in our understanding of what it means to be alive, because agency evokes a notion that biologists and philosophers have always wrestled with: teleology, the apparent purposiveness of life. If we admit agency into biology, do we open the floodgates to ideas about design, vitalism, or cosmic meaning? Or is it just a recognition of what makes life such a special state of matter?</p>
+<p>To me, the notion of agency indeed speaks to our intuitive sense of what makes living things so special: not mere machines pushed around by environment and circumstance. I suspect that aversion to agency betrays a queasiness about confronting life as something more than some kind of genetic program. But there’s danger in the idea, too: It could so easily derail the work of studying the mechanistic explanations of how life works. I’m not looking to either bury or praise agency, but to explore whether it can be a scientifically productive idea.</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_4.webp" /></p>
+<p>To say that living things are goal-directed isn’t really a controversial statement. Biologists ranging from the evolutionary theorist Ernst Mayr to the pioneer of molecular biology Jacques Monod have acknowledged that. Whether it’s a bird building a nest or a white blood cell chasing a bacterium, we can’t watch life at work without supposing that these entities are trying to accomplish something.</p>
+<p>The agency arguments are about what that means. In one view, apparent goal-directedness is just the result of genetic instructions playing themselves out. Organisms are automata directed by their genes, and natural selection favors gene variants that make the organisms behave one way and not another. In this mechanistic, gene-centered view of life, apparent agency is merely the performance of automated routines refined over many generations.</p>
+<p>Is that really all there is to life? It’s far from clear that all organismal behavior can be attributed to particular genes. Think of a hare fleeing from a fox. Sure, its genes are involved in the formation of networks of neurons that enable behaviors that contribute to a state of not being eaten. But are genes responsible somehow for the decision to dart to the left or right, to hide or to run, or even to stand and fight? Genetics might impose behavioral biases (say, making a hare generally risk-averse), but organisms make decisions by integrating a wealth of contextual and contingent information on the fly, including learned experience. In one view, agency is neither more nor less than this ability to set <em>proximal</em> goals — not “Shall I reproduce some day?” but rather, “What action shall I take right now?” — and then act upon oneself and one’s environment to attain them.</p>
+<p>“I understand agency to be the capacity of an entity to act in the world, for reasons [of its own],” said the neuroscientist <a href="https://www.tcd.ie/research/profiles/?profile=KEMITCHE">Kevin Mitchell</a> of Trinity College Dublin, whose 2023 book <a href="https://press.princeton.edu/books/hardcover/9780691226231/free-agents"><em>Free Agents: How Evolution Gave Us Free Will</em></a> presented an argument for how this capacity developed through evolution. “I think all living organisms can act as causal entities,” he said — not as mere vehicles steered by genetic prompts, but as agents that can be meaningfully said to be a genuine cause of change in the world. We wouldn’t say it was your atoms that caused your coffee to get made this morning, nor was it really your genes. It was <em>you</em>, a decision-making agent, who made that happen.</p>
+<p>If we admit agency into biology, do we open the floodgates to ideas about design, vitalism, or cosmic meaning? Or is it just a recognition of what makes life such a special state of matter?</p>
+<p>Mitchell is wary of rigid definitions, however. “People often take [such definitions] as a fixed set of criteria that they then use for demarcating a phenomenon in an all-or-none fashion,” he said — either it is an agent or it isn’t. “I don’t think that’s helpful or appropriate because I don’t think agency is that kind of phenomenon. But if you approach behavior in a more holistic, systems-oriented, ecologically contextualized view, you’ll be investigating agency by default.”</p>
+<p><a href="https://www.bristol.ac.uk/people/person/Samir-Okasha-75779da5-3215-4c45-b741-4e419e183174/">Samir Okasha</a>, a philosopher of biology at the University of Bristol, is hesitant to invoke this sort of agency. He said that it’s important to distinguish between two ideas: that organisms are real agents, or that they merely act as if they are. “Very often,” he said, “agency seems no more than a fancy synonym for phenotypic or behavioral plasticity” — the ability of organisms to show different responses to a given stimulus. “But then the claim that organisms exhibit agency is really just a gloss on something that science has always known, and doesn’t represent a deep philosophical insight.” Even the most gene-centric evolutionary biologist recognizes that many organisms can adapt their behavior to present circumstances and can often be considered to make choices. But without an ability to self-consciously reflect on the options and the likely outcomes of actions, does that rise to the level of true agency?</p>
+<p><a href="https://www.crick.ac.uk/research/find-a-researcher/james-difrisco">James DiFrisco</a>, a philosopher of theoretical biology at the Francis Crick Institute in London, thinks not. Agency, he said, is a psychological concept traditionally used to talk about human behavior. Importing it into biology as a whole risks imputing a kind of cryptic self-awareness to all life. “Agency is a term whose meaning comes from human interpersonal discourse, which takes place in the vocabulary of intentions, beliefs, freedom, deliberation, and personhood,” he said. It’s not clear how to transfer that word to situations where those concepts simply don’t apply.</p>
+<p>But what about the goal-directedness of organisms? This, DiFrisco said, is “something that evolved by natural selection and is therefore a state of adaptation.” In other words, organisms are adapted — genetically predisposed — to achieve things by various means, and the goal is the aspect of fitness the behavior serves. But to say that they themselves devise their goals, he said, is untestable and nonexplanatory, “unless we’re dealing with cognitive subjects that can report on their own mental states.”</p>
+<p>In 2025, DiFrisco and his colleague Richard Gawne published a critique in the <a href="https://pubmed.ncbi.nlm.nih.gov/39658090/"><em>Journal of Evolutionary Biology</em></a> arguing that biological agency is therefore “a concept without a research program.” Either it’s invoking something already familiar in biological science, or it’s conjuring up some almost mystical force that makes organisms do things. This force, they said, is resistant to explanation in terms of causal mechanisms: a vague kind of “holistic power” that doesn’t really explain anything, much as the 18th-century notion of a “vital force” animating living things was really just an empty explanation. Some people, DiFrisco suggested, “are playing on the ambiguity of ‘agency’ to support the idea that biology shows the need for some quasi-spiritual reality.”</p>
+<p>The biologist <a href="https://www.wesleyan.edu/about/directory/profile.html?id=sesultan">Sonia Sultan</a> of Wesleyan University, whose collaborative work on agency is among that critiqued by DiFrisco and Gawne, argues that they misunderstood what was being proposed. “There is nothing supra-materialistic or otherwise spooky in a perspective that takes into account the empirically verifiable developmental and evolutionary agency of organisms, explicitly understood as the physical outcomes of natural processes expressing neither conscious desire nor intentionality,” she said. In other words, she separates biological agency from complex psychology and believes the widespread existence of agency to be a testable hypothesis.</p>
+<p>In 2022 Sultan, along with the biologist <a href="https://biology.indiana.edu/about/faculty/moczek-armin.html">Armin Moczek</a> and the philosopher <a href="https://philosophy.utoronto.ca/directory/denis-walsh/">Denis Walsh</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/34747061/">argued</a> that agency can fill in some “explanatory gaps left by prevailing gene-focused approaches in our understanding of phenotype determination, inheritance, and the origin of novel traits.” In particular, they said that it takes into account how organisms interact with their environment and demands a wider view of inheritance beyond genes. Biological agency, the researchers continued, is thus “the capacity of a [living] system to participate in its own persistence, maintenance, and function by regulating its own structures and activities in response to the conditions it encounters.”</p>
+<p>In support of this perspective, the philosopher <a href="https://www.ias-research.net/people/alvaro_moreno/">Álvaro Moreno</a> of the University of the Basque Country in Spain said that organisms don’t just detect and respond to changes in their environment but “possess the capacity to modify them.” Even Charles Darwin recognized this, which is why admitting agency into the living world isn’t some kind of mystical challenge to Darwinism. The 18th-century French zoologist Jean-Baptiste Lamarck went further. He believed, in the words of the Stanford University historian <a href="https://history.stanford.edu/people/jessica-riskin">Jessica Riskin</a>, <a href="https://www.penguinrandomhouse.com/books/763654/the-power-of-life-by-jessica-riskin/">his latest biographer</a>, that “life at its essence is creative agency” — in contrast to the view then prevailing that the only real agency in the natural world was of divine origin. While Darwin differed from Lamarck about the source of evolutionary change, both placed the ability of organisms to <em>act for themselves</em> at the center of their theories.</p>
+<p>We need a proper theory of agency, of a sort that can indeed furnish some sort of research program.</p>
+<p>These choices made by the organism can feed back into their own evolution. The decision to change diet or move to a new habitat, simply because of an impulse to explore options, can alter the selective pressures a population experiences and thus its evolutionary trajectory. Crucially, for example, no gene is telling the organism, “Go and eat that new plant.” The organism itself takes the initiative. In this sense agency is already invoked in conventional evolutionary theory: It is called “behavioral drive,” whereby new adaptive traits emerge just because a group of organisms chose to do something new. This phenomenon is akin to the so-called Baldwin effect, first identified as “a new factor in evolution” by the 19th-century psychologist Mark Baldwin, in which non-innate behavioral choices, perhaps ones that are socially learned, themselves create new selective pressures that lead to those choices becoming genetically fixed in the population. In other words, if you want to exclude agency from evolution, it’s too late.</p>
+<p>But why do we have to call it that? The behaviors of organisms are already studied and understood from a variety of perspectives. Neuroscientists, for example, look at the decision-making circuits of brains, biophysicists look at the molecular pathways that govern the responses of bacteria to environmental signals such as nutrient concentration or heat, animal behavioralists think about cognitive mechanisms, and so on. Why complicate that research with a fancy label that just muddies the waters? “A lot of work on agency is playing on the ambiguity of the term, which is suggestive that there are higher cognitive processes than we’d expect in simple organisms,” DiFrisco said. When Sultan and colleagues say that agency — the capacity to act in a way that is conducive to an organism’s goal — can be used to predict and explain behavior, DiFrisco and Gawne charge that this makes it circular. The idea that an organism did something “because of its agency,” they argue, resists any further analysis. But Sultan and colleagues disagree with this characterization of how their notion of agency should be applied.</p>
+<p>This aspect of the debate hinges on how we attribute the causes of actions. Is agency itself a causal factor, or is it a higher-level umbrella term for a host of specific and particular reasons that things happen? To put it another way: Agents make decisions — that’s what agency means — but do organisms? For DiFrisco, speaking of organismal decisions “is just a convenient and compact way of referring to the operation of a (multiscale) mechanism” that determines behavior — a mechanism that is perfectly capable of incorporating context and conflicting signals. But for me, the key point here is that the actions can be governed by reasons and goals. The hare is genuinely trying to escape the fox; it doesn’t merely look that way. And the hare did not have that specific goal before the fox appeared. Perhaps it had been trying to forage and to look out for predators. Such “trying to” is the fundamental nature of organisms: Evolution builds entities that try to do things.</p>
+<p>Maybe we can focus this debate by asking what the concept of agency buys us that can’t be obtained without it. “This is a really key question,” Mitchell said. If agency is going to be more than a philosophical stance — if it’s going to be useful for doing science — then first it needs to be “naturalized,” as Mitchell and his colleague Henry Potter have put it: We need a proper theory of agency, of a sort that can indeed furnish some sort of research program.</p>
+<p>At present, nothing like that really exists, but it’s possible to set out some of the issues it would need to confront. For example: How exactly do organisms determine their goals? How are those aims represented (if at all) in the molecular or neural mechanics of the organism? How do organisms integrate information (including information about their own internal state) to come up with a decision about how to act? Can we measure how much agency an entity has — or what kind of agency? “I think developing empirical indicators for measuring different dimensions of agency would be the primary way to go for turning agency into a scientific concept,” Potter said.</p>
+<p>Some researchers have asserted that agents need particular kinds of internal architectures to govern the relationships between senses, cognitive processes, actions, and needs. Moreno, for example, has argued that this organization involves feedback loops that don’t just enable adaptation to the environment but let the system alter that environment — for example, simply by moving from one location to another with a different set of conditions. The theoretical biologist <a href="https://www.med.upenn.edu/apps/faculty/index.php/g275/p51417">Stuart Kauffman</a> has argued that properties like this depend on what he calls “organizational closure,” in which the parts are collectively self-maintaining, each of them supporting the functions of the others. This property, Kauffman says, gives the whole system “causal power” — Mitchell’s ability for an agent to act on its own behalf rather than just being a passive vehicle for lower-level causes. Meanwhile, the neuroscientist <a href="https://www.fil.ion.ucl.ac.uk/~karl/">Karl Friston</a> has argued that <a href="https://www.sciencedirect.com/science/article/pii/S0167876011003618">agency arises in entities that can make predictions</a> about the outcomes of behaviors and then compare those with what actually transpires, and seek to minimize the disparity between the two (none of which demands an ability to reflect on that comparison with conscious self-awareness).</p>
+<p>At this level it can all sound a bit abstract and remote from actual biology. But I’m cautiously optimistic about the prospects of uniting such theoretical ideas with biological mechanisms. It seems unlikely to be coincidental, for example, that organisms that seem to show more agency also have molecular pathways that permit more openness to the influence of context and external information.</p>
+<p>If we can get a clearer idea of what makes an agent, this could help us to understand how collective goals arise — as they did when multicellular organisms first arose long ago — and how they can break down, as in cancer. What’s more, a proper theory of agency might give us a clearer idea of what’s needed to make genuine artificial agents, not just computers and machines programmed with our own goals, but ones that can formulate their own. We might then also get a clearer idea of the potential benefits and dangers such truly agential machines might bring. But perhaps the most compelling argument for recognizing agency is that it might help us understand what makes life so different — not just humans, but <em>life</em> — that it is able to shape an entire planet in a manner visible from outer space.</p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/is-life-just-different-20260708/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/is-life-just-different-20260708/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

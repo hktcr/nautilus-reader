@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What a Picture of a Dog Has to Do with Reason and Logic | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>What a Picture of a Dog Has to Do with Reason and Logic</h1>
+            <div class="meta">
+            Av Kristen French &nbsp;|&nbsp; Publicerad 2026-07-16
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-MPFI</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>If someone asked you to think about the idea of a dog, you’d likely conjure a specific image in your mind: a sleek labrador retriever bounding through the grass, or maybe a French bulldog, its nose smashed in and its butt wagging as it walks through a park on a leather leash. In the 1700s, Scottish philosopher David Hume argued that such pictures are essential to abstract thought. We cannot consider the category dog without thinking about a specific image of a dog, or the category triangle without the image of a specific triangle. This Humean idea persists in some corners of philosophy today, though it’s faced challenges over the centuries.</p>
+<p>The latest challenge comes from Estonian philosophers Uku Tooming and Roomet Jakapi of the University of Tartu. Some people can’t form images in their minds at all, they point out. These individuals, who represent a tiny fraction of the population, have a rare condition known as aphantasia, a term <a href="https://www.sciencedirect.com/science/article/abs/pii/S0028393226000771">coined</a> by neurologist Adam Zeman in 2015. Zeman wasborrowing from Aristotle’s concept of “phantasia,” often translated as imagination, but which refers specifically to the mental faculty that produces images. If asked to visualize a dog, a tree, or a bus, a person with aphantasia draws a blank. No fur and teeth, vibrant leaves, or turning wheels. And yet, people with the condition typically have no problem handling abstract concepts such as justice or algebra.</p>
+<p>In a <a href="https://www.sciencedirect.com/science/article/pii/S0028393226001119">paper</a>published in the journal <em>Neuropsychologia</em>, Tooming and Jakapi argue that aphantasia completely undermines Hume’s argument, and they walk through all of the potential counter-arguments one by one. I spoke with Tooming about what their conclusions tell us about human memory, imagination, and intelligence.</p>
+<p><strong>Why does the idea that pictures are essential to abstract thought persist today?</strong></p>
+<p>It’s not the most popular view, but empiricists and those who support embodied cognition—which holds that our physical bodies and interactions with the world are essential to our thoughts and memories—like this idea that there’s something imagistic, sensory, or quasi perceptual about our thinking. There’s some evidence from neuroscience that when people think about things, the sensory areas of the brain are engaged, but it’s very contested data and aphantasia suggests otherwise. So the people who are very invested in this idea might not have considered how much psychological variety we find in humans.</p>
+<p><strong>Can sensory perception still inform abstract thought, even if there’s no image in the mind?</strong></p>
+<p>Images are like simulations of sensory perceptions. Lawrence Barsalou is one of the embodied cognition theorists, and as far as I understand, he seems to think that even when we’re thinking about abstract matters, sensory simulations and processes are engaged.</p>
+<p><strong>Read more: “<a href="https://nautil.us/my-brain-doesnt-picture-things-407444">My Brain Doesn’t Picture Things</a>”</strong></p>
+<p><strong>What are the arguments of those who continue to defend Hume’s idea that images are essential to abstract thought?</strong></p>
+<p>The most serious challenge is that maybe aphantasics actually have mental imagery but just aren’t conscious of it. They have imagery in their brains, but for some reason they can’t perceive it or aren’t aware of it. You could argue that maybe their introspective mechanism isn’t functioning properly. Maybe the mental imagery is there, but somehow it just doesn’t engage certain higher order areas of the brain. Or maybe they have intact imagery but aren’t able to report it. We don’t try to make really strong claims in the paper, but given the current data, there aren’t many good reasons to think that they do have intact imagery.</p>
+<p>The main ways to test this idea are through behavioral and neural experiments. On the behavioral end of things, one of the main types of research they do is looking at priming effects. You can prime the way in which mental imagery is formed by presenting people with certain stimuli, which then lead them to process it in certain ways. That also affects the way in which their mental images unfold. We report on this recent <a href="https://hal.science/hal-04903071/document">study</a> from last year where they looked at aphantasics and also people with normal imagery. They tested conscious primes and unconscious primes on both sets of participants. It turned out that the severe aphantasic participants didn’t exhibit conscious effects, and they didn’t exhibit unconscious effects either.</p>
+<p>It’s a well-conducted study, but we’re open to the possibility that as more data comes in, maybe this can be disputed. It hasn’t been replicated, so that’s already an issue, unfortunately. So there doesn’t seem to be strong evidence in favor of the idea that some severe aphantasics have intact unconscious imagery, yet.</p>
+<p>On the neural data side of things, it’s quite common to associate mental imagery with this early visual area of activation. But this is somewhat controversial. Some people think that actually what’s crucial for mental imagery is more the higher order areas. But lots of debate has revolved around what’s known as early visual cortex activation. And there are quite a few studies which suggest that when severe aphantasics perform those tasks that are usually associated with mental imagery, early visual areas are activated. That offers preliminary evidence that they actually do have mental imaging. But some more recent studies suggest that the format of the representations that they’re engaged with is different.</p>
+<p><strong>What, if anything, replaces imagery for aphantasics? Do they have some other mental skill or ability, an emphasis on mathematics or language, that helps them to form abstract thoughts?</strong></p>
+<p>It’s maybe not solved entirely, but there are some recent studies on how a variety of processes are involved in similar tasks. A good example is the mental rotation task which is a paradigm task for visual imagery. People are presented with two objects in different orientations, and they’re invited to say whether these objects match or not, if you turn them or rotate them. Oftentimes, peoples’ performance in those tasks is associated with the mental imagery activation. And it looks like aphantasics can perform those tasks. That was one of the reasons why many people thought they might actually have mental imagery.</p>
+<p>But some recent <a href="https://www.sciencedirect.com/science/article/pii/S0010027724001938">studies</a> suggest different kinds of strategies can be used in performing those tasks. It’s kind of murky to me how it works, but it seems like there are sensory motor processes. Basically, you don’t really form a mental image, but you simulate motor processes. You simulate physical engagement with those objects. In a way, it’s kind of imagistic, but not visual. You can perform algebra as well. You could argue that when it comes to mental rotation, your brain basically computes the dimensions and you report the output of the computation without visual imaging.</p>
+<p><strong>If images aren’t required for abstract thought, what are the implications for how the brain operates?</strong></p>
+<p>If we’ve successfully disproven the Humean model, the path is still open at least for certain empiricist views of abstraction. I suspect that actually Locke, the predecessor to Hume, had an empiricist view in mind. In this view, perception is crucial for the earliest layer of thinking, but once you have that perceptual base, you can form an abstract thought that doesn’t require a mental image. So sensory perceptual processes are just a starting point for thinking. Our challenge to the Humean model leaves that kind of conception pretty much untouched, because aphantasics can perceive the world. What can be inferred from our challenge extends only to those views that build a really tight connection between abstract thinking and mental imagery.</p>
+<p><strong>What other philosophies or views closely link abstract thought and imagery and would be challenged by your conclusions?</strong></p>
+<p>One example is Jesse Prinz, a somewhat famous philosopher, very empirically oriented, and actually very much in dialogue with empirical scientists. It’s not a new book anymore, but in <em>Furnishing the Mind: Concepts and Their Perceptual Basis</em>, he basically argues that for abstract thought and concepts, you absolutely need images. A bit more tentative target is Lawrence Barsalou, the embodied mind theorist. Given that his approach also includes motor processes, our challenge would only partially be a problem for him.</p>
+<p><strong>In your paper, you describe Hume’s position on memory versus imagination, which is that memory is fixed and imagination flexible, essentially. But today, some scientists argue that memory isn’t fixed, but rather an imaginative process. Does that have any bearing on your overall argument?</strong></p>
+<p>I’m struggling with this issue, actually. I’m working on memory to some extent myself. If memory is a form of imagining, then would aphantasics be unable to remember? That sounds ridiculous, but there’s a view in the literature that we aren’t committed to, but which has been put forth by Andrea Blomkvist from the University of Glasgow. She claims that the episodic memory is a cognitive system that’s responsible both for remembering and imagining. She presents data that suggests that when it comes to severe aphantasics, they struggle at least in certain forms of remembering as well. Claiming that aphantasics struggle with imagining is much less controversial than claiming that they struggle to remember things. But when it comes to memory, one has to distinguish between different types of memory.</p>
+<p><strong>But imagination isn’t entirely composed of images is it? It can also be verbal and mathematical?</strong></p>
+<p>The safest thing we can say at this point is that when it comes to severe aphantasics, there are some forms of memory that they do struggle with. But that doesn’t speak against them having intact semantic memory, which is a separate memory system. When it comes to memory and the formation of abstract thoughts, I’m not sure of the connection.</p>
+<p><strong>Where would the information for abstractions be stored if not in the memory? Wouldn’t you have to retrieve it from somewhere?</strong></p>
+<p>That’s a feasible view of abstraction. We’re very much open to this kind of pluralistic view of cognition in the sense that maybe the way in which different cognitive capacities are realized is very different across the psychological spectrum. Maybe aphantasics achieve certain things in different ways than, say, hyperphantasics.</p>
+<p><strong>Read more “<a href="https://nautil.us/people-who-cant-picture-sound-in-their-minds-517529">People Who Can’t Picture Sound in Their Minds</a>”</strong></p>
+<p><strong>Yes, I was thinking of blind people, whose brains recruit unused visual areas for other purposes, or whose sense of smell or touch might be enhanced.</strong></p>
+<p>Yes. Hume seemed to think that the same mechanism is at work across all individuals, when it comes to abstraction at least. If anything can be gleaned from our paper, at a minimum, it’s some kind of pluralist understanding of how different cognitive processes are realized.</p>
+<p><strong>If imagery isn’t required for abstract thought, what is required for abstract thought? What are the building blocks?</strong></p>
+<p>If one embraces pluralism, maybe there’s no one single answer. But one view, which I’m not super committed to myself, is the language of thought hypothesis. It goes back to the Middle Ages, actually. Among philosophers, it’s still a popular idea when it comes to abstract thinking. It’s basically grounded in a certain kind of mental language, which is distinct from natural language. Mental language is a bit more universal, and there’s certain innate aspects to it. It’s already abstract in format. Some people aren’t really into this kind of idea at all.</p>
+<p><strong>This idea of mental language makes me think of what a poor job natural or verbal language actually does of expressing thoughts and feelings. Poetry gets a little bit closer, music gets at some things that words cannot, but maybe there’s no one form or expression that captures the abstract nature of it—mathematical, linguistic, musical, or visual.</strong></p>
+<p>Yes, when I talk about the language of thought or this mental language, this applies at a very basic level. It includes certain basic structures. These are mental analogs to actual words.</p>
+<p><strong>Do the findings of your paper change at all how we should think about the relationship between imagination and intelligence?</strong></p>
+<p>A crucial question is what kind of imagination and what kind of intelligence? Current data suggests that those on the aphantasic end of the spectrum tend to be more logically and mathematically capable. The aphantasic part of the spectrum maps onto certain kinds of psychological profiles. There are more people from the autistic spectrum, as well.</p>
+<p><strong>But aren’t there a lot of autistic people who are incredible painters?</strong> <strong>I guess you don’t necessarily need to have mental imagery to paint.</strong></p>
+<p>This has been studied to some extent. There’s at least some anecdotal evidence that there are painters who are self-professed aphantasics. The creative process tends to be oftentimes more dependent on the canvas, what they have in the environment. But there’s also a variety.</p>
+<p><strong>Are there any other historical philosophers who you’re looking at next?</strong></p>
+<p>Most likely we are going to look at Aristotle. Adam Zeman, the guy who coined the term aphantasia, claims that Aristotle was wrong. The reason why he says this is that Aristotle has a famous passage in his <em>De</em> <em>Anima</em> that translates as, “There is no thinking without an image.”</p>
+<p>I’m paraphrasing, but what he meant exactly is somewhat controversial. Zeman saw it as a slogan to be kicked. But there may be certain issues of interpretation, and Aristotle is from a different context. We want to see if you can say that aphantasia is a huge problem for Aristotle as well, or whether Aristotle had something more modest in mind with that claim. <img alt="" src="https://assets.nautil.us/sites/3/nautilus/nautilus-favicon-14.png?fm=png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: artbesouro and Foxy Fox / Adobe Stock</em></p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://nautil.us/what-a-picture-of-a-dog-has-to-do-with-reason-and-logic-1282727/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://nautil.us/what-a-picture-of-a-dog-has-to-do-with-reason-and-logic-1282727/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

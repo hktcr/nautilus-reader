@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Know Simple Fluids Can Flow. Turns Out, Some Can Fracture. | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>We Know Simple Fluids Can Flow. Turns Out, Some Can Fracture.</h1>
+            <div class="meta">
+            Av Rohini Subrahmanyam &nbsp;|&nbsp; Publicerad 2026-07-10
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-EDIE</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><a href="https://drexel.edu/engineering/about/faculty-staff/L/lima-thamires/">Thamires Lima</a>, a research professor in chemical engineering at Drexel University, studies the properties of thick, viscous liquids — think honey or molasses, though in a lab you’re more likely to find polypropylene or crude oil. Using a method called extensional rheology, Lima stretches liquids between metal plates to find the force that makes them flow.</p>
+<p>A few years ago, she was conducting a test as part of a project in collaboration with the oil and gas company Exxon Mobil when she heard a short, sharp crack. “I thought it was the machine,” Lima said. But the crack came from the fluid that the machine was pulling: a gooey, black blend of hydrogen and carbon. Instead of stretching, the fluid had fractured.</p>
+<p>Fractures are known to occur in certain elastic complex fluids, which can act like solids under certain conditions. But Lima was working with a nonelastic simple fluid. Even with almost no elasticity, it snapped apart under stress.</p>
+<p>“Nobody expected that this would be possible in this kind of simple fluid because viscosity usually just rearranges the molecules,” said <a href="https://live-sas-physics.pantheon.sas.upenn.edu/people/arnold-mathijssen">Arnold Mathijssen</a>, a fluid physicist at the University of Pennsylvania. “You don’t expect it to crack. But it does, so I think that’s what’s really surprising.”</p>
+<h2><strong>A Brittle Break</strong></h2>
+<p>Lima stretched the liquid again and again to prove that the unexpected crack wasn’t a one-off. “Every time that she measured it, the material would break,” said <a href="https://drexel.edu/news/experts/alvarez-nicolas">Nicolas J. Alvarez</a>, the professor of chemical engineering at Drexel University whose lab led the research. “It makes a loud pop. I mean, like you just took a rubber band and pulled it and stretched it and it snapped.”</p>
+<p>Thamires Lima, a research professor in chemical engineering at Drexel University, was stretching a liquid in an extensional rheometer when she heard a short, sharp crack.</p>
+<p>Courtesy of Thamires Lima</p>
+<p>Convinced the snap wasn’t a fluke, Lima and Alvarez used high-speed cameras to look at the phenomenon more closely. They realized that <a href="https://journals.aps.org/prl/abstract/10.1103/t2vy-32wr">the break was essentially a “brittle fracture,”</a> the kind you might see when you drop a dish made of glass or porcelain.</p>
+<p>Brittle fractures happen to brittle solids, which have elasticity. Apply some stress to glass or porcelain and it deforms a very tiny bit, and then — if you don’t push it past its breaking point — it springs back to normal once the stress is removed. However, solids are never perfect. In most cases, a brittle solid will have a teeny, tiny defect — a crack at the scale of tens of nanometers. Once the solid is stressed past a critical point, it becomes energetically more favorable for the solid to grow the crack than to elastically store the stress. At that point, the crack grows catastrophically, rapidly breaking the solid apart.</p>
+<p>Some complex fluids, called viscoelastic liquids, also have elasticity. For example, polymer melts — melted versions of the polymers in plastics — are made up of long chains of molecules, which become entangled with one another and increase the material’s elastic component.</p>
+<p>In <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.117.087801">a 2016 <em>Physical Review Letters</em> paper</a>, Alvarez and colleagues showed that complex fluids like melted polystyrene can fracture in the same way that solids sometimes do. “We just thought elasticity was something that was a prerequisite for such solid type of breaking, right?” Alvarez said. As a result, they theorized that elasticity was related to the fracture of liquids as well.</p>
+<p>But the hydrocarbon blend that Lima was working with was a simple fluid. Simple fluids don’t store much elastic energy. And when they are pushed or pulled past their limits, they don’t usually bend or break — they flow.</p>
+<p>Nobody expected that this would be possible in this kind of simple fluid because viscosity usually just rearranges the molecules.</p>
+<p>Arnold Mathijssen, a fluid physicist at the University of Pennsylvania</p>
+<p>So perhaps the old theory about what makes a liquid fracture is wrong. “If there is no elasticity in a problem, then how can you think about initiation or growth of a crack?” said <a href="https://www.icts.res.in/people/brato-chakrabarti">Brato Chakrabarti</a>, a physicist who works on fluid mechanics at the International Center for Theoretical Sciences in Bengaluru, India.</p>
+<p>The cracking of the hydrocarbon blend made the researchers look back at the papers of Daniel D. Joseph, a mechanical engineer at the University of Minnesota. In 1995 and 1998, Joseph suggested that any liquid, regardless of how elastic it is, <a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.51.R1649">could fracture under a sufficient amount of tearing stress</a>.</p>
+<p>Alvarez wonders if the breaking point of a liquid is related not to a property like elasticity, but to something more fundamental to the liquid’s structure. “Maybe, just maybe, the thing that causes [certain] fluids to break … [is] somehow related to this cohesive energy that holds the molecules together,” he said.</p>
+<h2><strong>A Burst Bubble</strong></h2>
+<p>Simple fluids do have a way of relieving stress, no breaking required: They form intermolecular voids (bubbles) in a process called cavitation.</p>
+<p>If the blades of a propeller spin rapidly in a simple fluid, for example, the fluid on one side of the blade can slosh much faster than the fluid on the other, leading to a drop in pressure on that side. This drop can cause the liquid to cavitate. Engineers work to avoid this, because once those bubbles collapse, they generate shock waves that can damage propellers and pumps.</p>
+<p>In his papers in the ’90s, Joseph predicted that cavitation would allow simple fluids to fracture.</p>
+<p>“If you think about what holds a fluid together, it’s cohesiveness, or the intermolecular interactions between the molecules,” Alvarez said. If you pull those molecules apart, you can create a bubble. Usually, viscous liquids stay cohesive when bubbles form, by changing shape around them. But if enough bubbles form in quick succession, they could theoretically crack a liquid like a pane of glass.</p>
+<p>At Drexel, the researchers found that once a crack nucleates inside a simple fluid, it propagates extremely fast, precisely because the fluid is not elastic. “If you can get that nucleation event of the crack to begin, because there is no elasticity in the material, that crack can propagate as fast as physics will allow it,” Alvarez said.</p>
+<p>In previous work on complex fluids, the Drexel researchers found that cracks in melted polystyrene propagate at approximately 0.07 meters per second. In their new study, Lima and colleagues showed that cracks propagate far more rapidly in the simple liquids they studied, reaching velocities of approximately 500 to 1,500 meters per second.</p>
+<p>“That has something to do with the way that the material is able to dissipate energy,” Alvarez said. According to one hypothesis, in a complex fluid, energy is absorbed by the long chains of molecules as they break. But in a simple fluid, “there’s really nothing to slow that crack down,” he said.</p>
+<p>This seems to affect the shape of the crack, which in complex fluids looks like the horn of a trumpet and in simple fluids looks like a crack moving through glass, the researchers found.</p>
+<h2><strong>How To Crack a Liquid</strong></h2>
+<p>Surprisingly, despite their different ways of cracking, both the complex fluids and the simple fluids that researchers tested tended to fracture at the same critical measure of stress: 2 megapascals. The researchers varied the temperature of the hydrocarbon blend —  a simple fluid — to change its viscosity and found that only the least viscous liquid they tested failed to fracture. The team observed that the critical stress level at which liquids fracture is proportional to their viscosity times the strain rate (how quickly they are being pulled or stretched apart and how the diameter of the liquid is changing).</p>
+<p>The machine had a limit — albeit a high one — to how quickly it could move: 500 millimeters per second. “There are very few instruments comparable to ours,” Lima said. Lima thinks that potentially, if they had a machine that could pull on the liquids faster, they could fracture less viscous liquids like honey or even water.</p>
+<p>In the future, Lima wants to use a more transparent liquid so she can capture the crack as it forms. She would also like to try freezing the surface of the liquid as soon as it snaps and to probe it using a high-resolution microscope that scans surfaces at a nanometer scale.</p>
+<p>Alvarez is keen to explore simple fluids in the context of spinning materials into fibers — which can have applications in engineering and medicine. Fractures in fluids could also have implications for inkjet printing, brain injury protection, and soft robotics.</p>
+<p>But Alvarez is most excited to learn what it means for a simple fluid to fracture in the first place. “[It’s] different than what we’ve been thinking about in the literature for a very long time,” he said.</p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/we-know-simple-fluids-can-flow-turns-out-some-can-fracture-20260710/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/we-know-simple-fluids-can-flow-turns-out-some-can-fracture-20260710/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

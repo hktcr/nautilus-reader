@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunting for a New Hallucinogen in the Lilliputian Psychedelic | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Hunting for a New Hallucinogen in the Lilliputian Psychedelic</h1>
+            <div class="meta">
+            Av Kristen French &nbsp;|&nbsp; Publicerad 2026-07-08
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-VG4K</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>A fictional race of humans who stand under 6 inches tall swarms the island of Lilliput in <em>Gulliver’s Travels</em>,an 18th-century satirical novel by Jonathan Swift. That tribe now lends its name to a bizarre psychiatric <a href="https://www.sciencedirect.com/science/article/pii/S0149763421001068">phenomenon</a>: Lilliputian hallucinations. The term was first coined in 1909 by French psychiatrist Raoul Leroy to describe patients who have visions of hordes of vibrant and affable miniature people moving across one’s visual landscape. The Lilliputians inhabit the hallucinator’s actual world, climbing the furniture or dancing across the tabletop, but otherwise respect the general physical laws of the universe.</p>
+<p>Leroy experienced these hallucinations himself, but also helped to show that they’re associated with certain neurological conditions, as well as with alcohol withdrawal. It was later discovered that they can be induced by consumption of mushrooms from a specific genus known as Lanmaoa, which is found all over the world. But why these particular mushrooms or health conditions produced such bizarre visions has eluded experts. Recently, a pair of scientists from the University of Utah determined that Lanmaoa must contain a totally novel psychedelic compound.</p>
+<p>Colin Domnauer, a mushroom expert and Ph.D. student at the University of Utah, and Bryn Dentinger, a mycologist with the Natural History Museum of Utah, built a family tree for the Lanmaoa genus for the first time, and discovered that these mushrooms don’t have any of the genes that produce the two other known psychedelic compounds found in fungi: psilocybin, classically found in magic mushrooms, or ibotenic acid, found in fly agaric red and white mushroom caps. They published their <a href="https://www.tandfonline.com/doi/full/10.1080/00275514.2026.2670968">findings</a> in the journal <em>Mycologia</em>.</p>
+<p>I spoke with Domnauer about what Lanmaoa might tell us about the human mind, the evolutionary purpose of psychedelic compounds, and how he plans to identify the molecule that makes Lilliputians appear in visions.</p>
+<p><strong>The effect this particular mushroom has on people is unusual in the world of psychedelics, right?</strong></p>
+<p>Yes. They’re very unusual. That’s what initially caught my attention. We’d heard of reports for decades about these mushrooms causing hallucinations of little people in the environment, going back all the way to the early 1930s in Papua New Guinea, and then over the ensuing decades in other places around the world. But scientists never really knew if this was a real phenomenon, attributable to a mushroom. They tended to believe that it was cultural folklore. But it sounded very strange and intriguing to me, and the fact that it had been reported from multiple different cultures made it seem more suggestive—that there was something real going on. I wanted to look into it further.</p>
+<p>Now we have a much better understanding of what these people experience on the mushroom. And the main hallmark symptom is something called lilliputian hallucinations, which is a clinically defined syndrome that’s been known about for centuries. Apparently, this mushroom reliably elicits this effect.</p>
+<p><strong>Read more: “<a href="https://nautil.us/the-bad-trip-detective-544328">The Bad Trip Detective</a>”</strong></p>
+<p><strong>Humans can have this hallucination without taking the psychedelic?</strong></p>
+<p>Yes, humans have had this throughout history. There are reports of people having lilliputian hallucinations thousands of years ago, across cultures. It’s something common to the human mind. But scientists still don’t know how it works or how to treat it. Hopefully this mushroom can give us some more insight.</p>
+<p><strong>But you discovered that this mushroom causes these hallucinations by way of a novel compound that hasn’t yet been described by science?</strong></p>
+<p>Yes, we looked for all the known psychoactive compounds that mushrooms make, and this one doesn’t have the chemicals in it or the genes that would be necessary for those compounds. Also, these symptoms are very unique and specific, and we don’t have anything else in the natural world that we know of that causes this so reliably.</p>
+<p><strong>Do you have any hypotheses about what types of compounds might be responsible?</strong></p>
+<p>I really don’t. We don’t understand how this hallucination works in the brain or body, so we can’t really get any insights into what types of compounds might be involved or what pathways in the body. It’s a huge mystery.</p>
+<p><strong>Tell me about the two naturally occurring psychedelic compounds found in mushrooms that are known to science.</strong></p>
+<p>One is <em>Amanita muscaria</em>, or fly agaric [classified as poisonous if ingested raw] found in the classic red mushroom with white dots. In the 1860s, they thought they had isolated the compound that causes the psychoactive effects, but it turned out to be wrong. Then, in 1964, scientists figured it out. The second group is the psilocybin mushrooms, which are, of course, now very well known globally. And psilocybin was isolated in 1958. But since the 1960s, we haven’t discovered any new psychedelic compounds. This would be the third group. Who knows how many other ones are out there.</p>
+<p><strong>How many naturally occurring psychedelics have been recorded in other plants?</strong></p>
+<p>There are some cacti that produce mescaline. That was the first psychedelic that was isolated in the late 19th century. There are maybe a dozen or so naturally occurring psychedelic plants. And there’s a toad that excretes this venom that people smoke.</p>
+<p><strong>Does the fact that it’s most likely an entirely new psychedelic compound suggest to you that there might be others that we don’t know about, that psychedelics could be even more widespread in nature than we thought?</strong></p>
+<p>Yeah, absolutely. It also shows that they can come in different varieties. This compound might not be even closely related to any of the known psychedelic compounds. It might be a whole different type of molecule that works in an entirely different way. That’s the really exciting part about discovering a new psychedelic. It might give us a whole new perspective on how the brain and mind work. We’ve only documented and described like 5 percent of fungi on Earth, so it’s an unexplored kingdom. Already, we have all these amazing discoveries about them. There’s absolutely more out there.</p>
+<p><strong>Do you have any hypotheses about what evolutionary purpose a psychoactive compound like this might have?</strong></p>
+<p>It certainly didn’t evolve for humans to experience these effects because these compounds are millions and tens of millions of years old. But we don’t know what the ecological function of this psychoactive molecule might be because we’re still in the very beginning stages of research, and we don’t even know what the ecological function of something as well-known as psilocybin is. That’s still an active area of research. We want to know, what effects does it have? What benefits does it have for the mushroom? What effects does it have with other organisms in the environment?</p>
+<p><strong>Read more: “<a href="https://nautil.us/what-is-your-brain-doing-on-psychedelics-1242605">What Is Your Brain Doing on Psychedelics?</a>”</strong></p>
+<p><strong>Given the unusual effects this mushroom has on humans, do you think that it might end up having any therapeutic purpose or benefit?</strong></p>
+<p>The direct effect of this mushroom and the hallucination it produces last several days long. That might make it difficult to use in clinical practice. But I’m sure that it has scientific uses. Maybe it will reveal a new mechanism of action, something new about how our brain or perception works. Oftentimes, these natural products reveal some promising bioactivity and then a synthetic chemist can slightly change the compound to make it more effective. Aspirin, for example, is actually a semi-synthetic compound. It was isolated from these willow trees, but they change it slightly to make it more amenable to humans. Maybe something can happen like that here. It can be a template. But it has a unique bioactive function, so clever scientists will figure out some use for it, I'm sure.</p>
+<p>It also expands our understanding of what the mind is capable of, because it’s such a strange phenomenon. People can see these little people that are three-dimensional. They’re inhabiting the exterior world. It’s not like there’s some vague hallucination. It’s very detailed. These little people obey the laws of physics and gravity that we do, like, they seem to be inhabiting the exterior world. It’s a very strange and specific type of perception that can have some deep consequences for how we understand our interaction with the world.</p>
+<p><strong>A recent review paper by a team of Chinese scientists proposed that psychedelics probably evolved not for human use, but to deter grazers and predators and communicate with pollinators. Do you think that’s a reasonable hypothesis for most psychedelics?</strong></p>
+<p>I would agree. The exact use differs on a case-by-case basis. But it certainly has some ecological function that doesn’t involve humans because these things evolved long before we were here. But that doesn’t mean they can’t have some benefit or mutual use with humans today. All life arose out of the same lineage. We’re all different branches of the same tree. There are so many interactions that we can have with other organisms, because we share underlying blueprints and biology.</p>
+<p><strong>How will you go about figuring out what the compound is?</strong></p>
+<p>It’s a challenging process, because a mushroom has hundreds of molecules and compounds in it. We have to make an extract of this mushroom. We basically take the pieces of mushroom and grind it up into a powder and then extract it into a solution. After that, we can test that in animals or in cell cultures to look for bioactive signatures. Then we can split that extract into different parts chemically and test each of those fractions. That can help narrow down the potential compounds involved.</p>
+<p>But it’s a slow, painstaking process, and it could obviously be a lot more complicated if there are synergistic effects. <img alt="" src="https://assets.nautil.us/sites/3/nautilus/nautilus-favicon-14.png?fm=png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Wikimedia commons</em></p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://nautil.us/hunting-for-a-new-hallucinogen-in-the-lilliputian-psychedelic-1282565/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://nautil.us/hunting-for-a-new-hallucinogen-in-the-lilliputian-psychedelic-1282565/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

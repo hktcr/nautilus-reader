@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Many Elementary Particles Are There, Really? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Many Elementary Particles Are There, Really?</h1>
+            <div class="meta">
+            Av Natalie Wolchover &nbsp;|&nbsp; Publicerad 2026-06-15
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-MKGA</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="Qualia: Essays that go where curiosity leads" src="../images/QUALIA-Banner-WITH-SPACER-1-1720x223.webp" /></p>
+<p>Every time I write about particle physics, I encounter a moment of uncertainty about a quantity that, at first glance, ought to be clear. How many kinds of elementary particles should I say there are?</p>
+<p>In experiments at the Large Hadron Collider, physicists smash together beams of protons, breaking them up into all possible elementary bits and pieces. Meanwhile, they have an incredibly accurate set of mathematical equations for describing these building blocks and all the ways they fit together. So, since the known particles of nature can be both empirically observed and theoretically described, you would think they could also be counted. But alas not. I knew that, for reasons we’ll see, the census is not so easy as it seems.</p>
+<p>So I recently emailed a few physicists to ask how each of them personally tallies nature’s fundamental constituents. The first indicator of just how complicated the issue is came in a reply from <a href="https://davidtong.org/">David Tong</a>, the University of Cambridge physicist and textbook author, when we were scheduling a video call: “P.S. I think the true answer to your question is not an integer!”</p>
+<p><strong>I</strong>n philosophy, <strong>“qualia”</strong> refers to the subjective qualities of our experience: what it’s like for Alice to see blue or for Bob to feel delighted. Qualia are “the ways things seem to us,” as the late philosopher Daniel Dennett put it. In these essays, our columnists follow their curiosity, and explore important but not necessarily answerable scientific questions.</p>
+<p>We’ll get to that (it comes from <a href="https://arxiv.org/abs/1107.3987">a mysterious calculation from 2011</a>), but let’s enter this rabbit hole from the top.</p>
+<p>The known elementary particles and their interactions obey a set of equations called <a href="https://www.quantamagazine.org/a-new-map-of-the-standard-model-of-particle-physics-20201022/">the Standard Model of particle physics</a>. The Standard Model is a “quantum field theory,” a mathematical description of reality in which entities called quantum fields permeate the universe. Ripples moving through these fields are what we call elementary particles; some behave like matter, while others impart forces. The quantum fields and associated particles in the Standard Model underlie all known physical phenomena other than gravity, dark matter, and dark energy (all of which take unknown forms at a fundamental level).</p>
+<p>In posters on classroom walls, the Standard Model displays 17 particles. There are 12 matter particles, or fermions: the electron, muon, and tau; three neutrinos; and six quarks. Each of them has a distinct set of sensitivities to various forces. There are also four force-carrying particles, or “bosons”: the photon (which imparts the electromagnetic force), the W and Z bosons (the weak force), and the gluon (the strong force). Finally, there’s the Higgs boson, a so-called scalar particle that’s neither matter nor force; rather, it imbues other particles with mass through its interactions with them.</p>
+<p>Samuel Velasco/<em>Quanta Magazine</em></p>
+<p>It may just be this simple. “I think 17 is the right answer,” <a href="https://www.physics.harvard.edu/people/facpages/franklin">Melissa Franklin</a>, a professor of particle physics at Harvard University, told me.</p>
+<p>But every particle physicist, Franklin included, recognizes that there are caveats.</p>
+<p>From 17, you can keep counting. Where you stop depends on your taste for complexity and mystery. The question of how many particles there are brings us to the edge of what’s known about the most basic levels of stuff.</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_1.webp" /></p>
+<p>There is one glaring problem with 17. To satisfy special relativity, each of the Standard Model’s matter fields supports both a particle and an “antiparticle,” which is identical to the particle except for having the opposite electric charge. This is what we popularly know as antimatter. So instead of 12 matter particles, there are really 24. Likewise, W bosons come in oppositely charged types known as W+ and W−. (This doesn’t happen to the Z bosons, photons, or gluons; they’re electrically neutral.)</p>
+<p>Franklin excludes antiparticles from her census, she said, because mathematically they more or less mirror their particle versions. (Bizarrely, antiparticles are equivalent to particles moving backward in time, and vice versa.) Neither is possible without the other, so they shouldn’t be counted twice.</p>
+<p>But I find that rationale unconvincing. Particles and antiparticles are undeniably distinct, even if they are secret twins. They can’t transform into each other (with the possible exception of neutrinos, which may or may not be their own antiparticles), and far from being functionally equivalent, they play totally different roles in reality. Matter is so dominant in our universe that any antimatter typically encounters matter quickly and annihilates. The reason for the cosmos’s matter-antimatter asymmetry is a major physics mystery.</p>
+<p>Antiparticles bring the total up to 30.</p>
+<p>But the notion that there’s only one gluon is another oversimplification. Really, the strong force is conveyed by eight gluons (and their associated fields), each possessing a distinct blend of charges known as “colors” and “anticolors.” The different gluons are impossible to distinguish experimentally, so Franklin, being an experimentalist, scoffed and shook her head when I asked if all eight should be tallied individually. Yet in the mathematical equations that define the Standard Model, the eight gluons are distinct from one another in the same way that the W and Z bosons differ. For consistency’s sake, we probably have to count all eight. So now we’re at 37.</p>
+<p>From 17, you can keep counting. Where you stop depends on your taste for complexity and mystery.</p>
+<p>Quarks come in colors, too — the three possibilities are dubbed red, green, and blue — and antiquarks have anticolors, called anti-red, anti-green, and anti-blue. (Don’t try too hard to picture anti-red; these aren’t our familiar optical colors, though they combine in a manner that’s analogous mathematically.) The colors reflect how gluons and quarks interact with each other.</p>
+<p>For matter to exist in stable isolation, it must be color-neutral. So, just as red light, green light, and blue light blend to make white, so do red, blue, and green quarks form color-neutral protons and neutrons (the building blocks of atoms).</p>
+<p>So there aren’t six quarks and six antiquarks but rather 36 in total. And that makes 61 elementary particles. But there’s more.</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_2.webp" /></p>
+<p>Matter particles also come in left-handed and right-handed varieties, a quality known as chirality — arguably a crucial distinction. “I insist on left- and right-handed particles,” <a href="https://chrisquigg.com">Chris Quigg</a>, a senior particle theorist at the Fermi National Accelerator Laboratory, told me. “I can’t account for this. Blame my parents.” (Far more idiosyncratically, Quigg leaves the force-carrying particles off his list, as he considers them to be transformations of matter particles rather than particles themselves.)</p>
+<p>Chirality is a quantum version of the handedness that chemists see in molecules or that we see at the ends of our arms. It is not a geometric arrangement like those, but mathematically the two states are mirror images of one another; you can’t rotate one to turn it into the other, any more than you can with left and right hands. The force-carrying particles have an analogous distinction, known as a polarization state. Photons and gluons can be either left- or right-polarized, while the W+, W−, and Z bosons have a third, “longitudinal” polarization state as well. (That extra state has a complicated origin connected to the Higgs field and events during the Big Bang.)</p>
+<p>Not everyone counts these different chiral and polarization states as distinct particle types. Yet it’s logical to do so, because they affect how particles behave and interact. The weak force, for example, affects only left-handed matter particles. For related reasons, neutrinos appear only in a left-handed form in the Standard Model. These are physically distinct states with different roles in nature. Counting each chirality and polarization state separately gets us to 118 particles — from a right-handed, anti-red, anti-charm quark to a green–anti-blue, left-polarized gluon, to a longitudinal W− boson.</p>
+<p>“Now,” Tong said, “comes the weird stuff.”</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_3.webp" /></p>
+<p>Physicists call all the ways that particles can vary “degrees of freedom” — with a different degree of freedom for each state a particle can hold. Color, for example, comprises three degrees of freedom: red, green, and blue. But those differences go beyond the states we have already described. We might consider the tally of all these degrees of freedom as a more precise, mathematical version of the question of how many elementary particles there can be.</p>
+<p>Physicists have long noticed a pattern in the degrees of freedom: The number of them depends on the scale at which you count them. On the scale of our everyday reality, objects are describable with fewer variables than it takes to specify the states of all the microscopic constituents. When you zoom in on, say, a proton, and reveal its constituent quarks with their colors and various other properties, you’ll observe more ways of moving or varying — more degrees of freedom. This is one of the main reasons it’s so difficult to pin down the particle population. The closer you get, the more their categories splinter.</p>
+<p>Furthermore, the beginning of the Big Bang might have abounded with additional, high-energy particles that can’t form in our current, low-energy universe and aren’t part of the Standard Model. For instance, many extensions of the model to the high-energy early universe posit the existence of heavy right-handed neutrinos, but these would never arise now. “As you go down in energy scale,” Tong said, “you’re losing particles as you go, because they’re so heavy,” and therefore only possible at much higher energies. “As you go down in energy scale you lose knowledge of those particles.” If we continue to follow this idea, at very low energies only one particle is left: the photon. Because they’re massless, photons can approach zero energy.</p>
+<p>It’s natural to wonder if a full accounting is possible. How many <em>fundamental</em> degrees of freedom are there, including all of those at the very highest energies and most microscopic distances that we can’t possibly detect? This brings us to the fascinating 2011 calculation Tong told me about, by <a href="https://www.weizmann.ac.il/physics/prof-adam-schwimmer">Adam Schwimmer</a> and <a href="https://scgp.stonybrook.edu/people/faculty/bios/zohar-komargodski">Zohar Komargodski</a>.</p>
+<p>Komargodski, a theoretical physicist at Stony Brook University, walked me through it. I just mentioned the trend in which, as we zoom out in the universe, we’re able to detect fewer effective degrees of freedom. In 1989, the physicist <a href="https://www-thphys.physics.ox.ac.uk/people/JohnCardy/">John Cardy</a> <a href="https://www.sciencedirect.com/science/article/abs/pii/0370269388900548">conjectured</a> that this is an inviolable rule that any quantum field theory must follow. The rule had already been mathematically proved true of quantum field theories with one space and one time dimension, which describe particles moving along lines. But what about theories like the Standard Model, which involves three spatial dimensions plus time (called 3 + 1D)?</p>
+<p>Schwimmer, an emeritus professor of physics at the Weizmann Institute of Science, and Komargodski <a href="https://arxiv.org/abs/1107.3987">proved</a> Cardy’s conjecture. Their “<em>a</em> theorem,” acclaimed among quantum field theorists, says that in 3 + 1D quantum field theories, the number of effective degrees of freedom must always decrease as you zoom out. They showed that this is universally true by exploring how quantum fields must respond to gravity tugging on them in four different places.</p>
+<p>Their proof also yielded a strange conclusion about how many fundamental degrees of freedom there must be in 3 + 1D quantum field theories such as the Standard Model. Quantum fields, the proof showed, cannot have just any number of variations. To the contrary, only specific values are allowed: Scalar fields such as the Higgs field have just one degree of freedom. Matter fields must each have 5.5 degrees of freedom. And force fields each have 62 degrees of freedom. These figures emerge mathematically, without regard to the specific particle states we’ve been discussing to this point. “And nothing else works,” Komargodski said.</p>
+<p>The Route to 995.5</p>
+<p><strong>K</strong>omargodski’s tally started with the quantum fields as they existed before a reshuffling of degrees of freedom in the early moments of the universe, when the Higgs field became energized and imbued particles with mass. Initially, there were four scalar fields (one of which became the present-day Higgs field), 45 fermions (left-handed electrons, muons, tau particles, and their neutrino counterparts; right-handed electrons, muons, and tau particles; and left- and right-handed blue, green, and red quarks of all six types), and 12 force-carrying bosons: eight gluons plus four primordial bosons that subsequently became the W+, W−, Z, and photon. Antimatter isn’t counted separately but rather is included in each fermion field’s 5.5 degrees of freedom. Thus: (4 × 1) + (45 × 5.5) + (12 × 62) = 995.5 degrees of freedom in the Standard Model.</p>
+<p>“One, 5½, 62 — they pop out of the theorem,” he added. “I have no idea why this is what nature chose.”</p>
+<p>Tong explained that fractional degrees of freedom (like that extra half degree possessed by matter fields) are variations that aren’t fully independent from those of other fields. What’s possible with one particle might depend on the state of another. “You kick that way, and suddenly all hell breaks loose, and the field is oscillating all over the place,” he said.</p>
+<p>So assuming the respective number of degrees of freedom for each scalar, matter, and force field in the Standard Model, how many does that make? Komargodski paused our conversation to ask ChatGPT, providing the relevant numbers, and then checked its work. The answer: 995.5. That’s apparently how many degrees of freedom there are in the Standard Model.</p>
+<p>I can’t help but feel flummoxed. And apparently that’s the general reaction.</p>
+<p>“Underlying all of this is the statement that quantum field theory is unbelievably hard and we’re not very good at it,” Tong said. “There’s still a lot we don’t understand.”</p>
+<p>Personally, I find myself to be a maximalist on the question of how many particles there are, even though (or because) it is a path to mystery. But I also see the appeal of 17.</p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/how-many-elementary-particles-are-there-really-20260615/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/how-many-elementary-particles-are-there-really-20260615/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

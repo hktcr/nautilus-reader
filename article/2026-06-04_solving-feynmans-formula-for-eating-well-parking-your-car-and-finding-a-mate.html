@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solving Feynman’s Formula for Eating Well, Parking Your Car, and Finding a Mate | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Solving Feynman’s Formula for Eating Well, Parking Your Car, and Finding a Mate</h1>
+            <div class="meta">
+            Av Kristen French &nbsp;|&nbsp; Publicerad 2026-06-04
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-399X</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>At a Thai restaurant in the late 1970s, physicist Richard Feynman watched his friend Ralph Leighton waffle over whether to order his usual ginger chicken or try something new. Feynman, known for his elegant solutions to complex problems, turned the moment of indecision into a math problem, scribbling out a solution on a piece of scratch paper—but never published on the subject.</p>
+<p>Leighton, though, hung on to the handwritten notes for the next several decades. Then in the early aughts, physicist Michael Gottlieb, who maintains the Feynman Lectures on Physics website, tried to <a href="https://www.feynmanlectures.caltech.edu/info/exercises/Feynmans_restaurant_problem.html">reconstruct</a> what Feynman had written based on the recollections of Leighton, generating significant buzz in the physics community about what the notes actually meant—and whether the math was right.</p>
+<p>When long-time collaborators Brian Christian and Tom Griffiths, who study human decision-making, got wind of the story, they decided to investigate for themselves. They got their hands on a copy of Feynman’s original notes and set out to decipher them. Griffith took them home, and after puzzling over them one night, he had a moment of insight: Feynman’s equations suggested that the more time you have to experiment at a particular restaurant, measured in meals, the more likely you are to experiment. Christian and Griffiths then set out to test whether Feynman’s solution holds up, both mathematically and in human behavior. Their study of 2,520 participants largely confirmed that the math works out in real life—with some important caveats. They recently <a href="https://www.pnas.org/doi/full/10.1073/pnas.2509612123">published</a> the findings in the <em>Proceedings of the National Academy of Sciences</em>.</p>
+<p>I spoke with Christian, a researcher at the Center for Human Compatible AI at the University of California, Berkeley—and also a nonfiction author, poet, and programmer—about how Feynman’s restaurant problem works, what it says about human rationality, and how he uses it in his own life.</p>
+<p><strong>Read more: “<a href="https://nautil.us/what-impossible-meant-to-richard-feynman-238358">What Impossible Meant to Richard Feynman</a>”</strong></p>
+<p><strong>It was fun to see the actual notes from this lunch in the paper. How did you get your hands on them, and why were they so difficult to explain for so long?</strong></p>
+<p>Yes, Ralph Leighton was so kind as to scan Feynman’s notes at as high a resolution as possible. This is actually the clearest image of them that’s existed in 50 years. We were really happy, and he was such a good sport about it. But they’re difficult to decipher for two reasons. One is just the handwriting, the kind of scribbly handwriting that looks like a doctor’s note. But another part of it is that Feynman is simultaneously defining a problem and solving it. That’s what made it such a fun piece of detective work. What you have to unravel to make sense of the notes is: What are these equations even trying to do? What’s the problem that he’s then going forward and solving?</p>
+<p><strong>What compelled you to tackle the Feynman restaurant mystery now?</strong></p>
+<p>We first encountered it 13 years ago. Tom Griffiths, my friend and longtime collaborator, and I were working on a history of these sorts of problems, which are known as “optimal stopping problems” and “explore-exploit” problems. We’d seen on the internet that there was this idea of the Feynman restaurant problem, and it wasn’t exactly known what it was. People had come up with their own reconstructions of what they thought it might have meant. For professional researchers, this is just pure catnip. We reached out to Mike Gottlieb, who ran the website for the Feynman lectures on physics and had made a webpage about the problem. We asked him, “Hey, you know, would it be possible to get a look at the handwriting?”</p>
+<p>And then full credit to my collaborator Tom, who took the notes home overnight and came back and said, “Hey, I think I might know what this is about.” That was the insight that sent us down what has now been a many-years-long process. Once we figured out what the notes meant, we set about actually proving that this is the optimal solution to the problem, extending it to related problems, and ultimately posing the question as cognitive scientists: What do real people do when you put them in the Feynman restaurant problem? Do they do the optimal thing? Do they do something different?</p>
+<p>Doing all of that work and getting it entered into the scientific record always takes longer than you think, but I didn’t reckon it would take until 2026.</p>
+<p><strong>So what is Feynman’s restaurant problem exactly?</strong></p>
+<p>It all starts with a fateful lunch that he was having with his friend Ralph. Ralph was deciding between getting his favorite dish, the ginger chicken, and trying something new, which is this very familiar human sort of dilemma. And Feynman being Feynman turned this into a math problem. If each dish is uniformly distributed between 0 and 100, with 100 being the best, and you’re going to be at this restaurant for <em>n</em> number of nights in a row, how do you decide on which nights you try something new and on which nights you reorder your favorite dish to maximize the total number of points that you’ll earn—a numerical quality score standing in for your dining pleasure.</p>
+<p>Feynman was able to provide the mathematical solution to when a dish is good enough that you should just always eat that forever more. And it depends on how many more nights or how many more lunches you’re going to have in that particular restaurant. If you’re going to be eating at this restaurant for decades, you should set a higher bar for how good something needs to be before you’ll never try anything else.</p>
+<p>If this is your last time eating there ever, you really should just get your favorite thing, because even in the slim chance that you did find something even better, you wouldn’t really get to cash in on it. You’d only be able to eat it once. Naturally, the threshold for how good something has to be that you’ll stop exploring starts really high, and it gets lower as you work your way through whatever period of time you’re going to be eating at this restaurant.</p>
+<p><img alt="" src="../images/French_breaker_2.png" /></p>
+<p><em>Courtesy of Ralph Leighton. Image credit: Richard P. Feynman (estate).</em></p>
+<p><strong>Out of pure curiosity, what did Leighton end up eating that day? Did he have the usual, or something new?</strong></p>
+<p>That’s such a good question, and I don’t remember. We’re going to have to ask Ralph. I know that his favorite dish was the ginger chicken, and he was deciding between that and I think the special of the day. But there’s the cliffhanger of what did he actually order?</p>
+<p><strong>How do you make the solution to the Feynman restaurant problem relevant to real world decision-making? Can you account for differences in appetite for novelty or even the fact that in modern life we have so many more choices in general than we used to? Do these elements change the equation?</strong></p>
+<p>Like any math problem, the Feynman restaurant problem abstracts away some of the messy reality of life. There are ways in which the solution has a certain, “imagine a <a href="https://nautil.us/the-sacred-spherical-cows-of-physics-234898">spherical cow</a>” kind of quality. For example, most of us probably would get bored eating the ginger chicken every single day for a month. The math doesn’t account for the pleasure of novelty itself. And sometimes a kitchen has an off night, or the restaurant gets under new management and it’s not the same. This is another one of the assumptions that Feynman’s restaurant math makes, which is that if the ginger chicken is an 86 out of 100, it’s always gonna be an 86 out 100. You never are in a different mood. The cook is never having an off day. Once you’ve sampled it, it’s precise.</p>
+<p>But these assumptions are double-sided. You can argue very fairly that this is unrealistic about human psychology or just the nature of cooking. On the other hand, that’s part of what makes it such a clean distillation of the fundamental underlying tension, by abstracting those things away. At its core, it does capture this fundamental and very recognizable trade-off that we all make any number of times in a day or in a week.</p>
+<p><strong>You found a bias toward early exploration. Can you tell me more about how this generally plays out, and what it tells us?</strong></p>
+<p>The optimal math says that for any given number of nights remaining, there’s some quality threshold above which you should just keep going back to that restaurant and never explore anything else. What we find in our human participant data is that people are very reluctant to do that even when they get very lucky early on. So even if people are fortunate enough to encounter a really good dish on their first night, they’ll keep exploring at least for a little while.</p>
+<p>There are a number of ways that we could try to make sense of that. You show people all of this data and you say, “This is the distribution of restaurant quality. Here’s however many samples, and we’re gonna familiarize you with it.” And then you put them into the experimental setting. At some level, people are understandably skeptical that we’re even telling them the truth, because psychological research has many decades of history of being a little bit sneaky with how the instructions may or may not map to what’s really being tested. From that perspective, it’s understandable that participants, particularly when they’re extremely lucky, explore a little more, because perhaps at some level they’re thinking, “Wait, you said this went from zero to 100, but what are the odds that I got a 99 my very first time? Maybe there’s something even better out there.” That’s a pretty understandable reaction.</p>
+<p>It’s hard to study humans because they’re often, in effect, solving a more complex version of the problem than the one you’ve given them. We tell them explicitly this is the distribution, but they still want to figure it out for themselves. Human cognition is often solving something that’s more ambiguous and more nuanced than what you’re trying to test.</p>
+<p><img alt="" src="../images/French_breaker-2.png" /></p>
+<p><em>Courtesy of Ralph Leighton. Image credit: Richard P. Feynman (estate).</em></p>
+<p><strong>You also found that people rely on mental shortcuts to get close to the optimal solution. What kinds of mental shortcuts are these?</strong></p>
+<p>Two things, really. One is that the optimal math depends on the number of meals that you have left, but it ignores the number of meals you’ve eaten so far. Humans tend to think in terms of the percentage of total meals they’ve eaten rather than the absolute number remaining. The other thing is that the optimal math is nonlinear, but people are linear. The optimal math might say, “The quality threshold at which you’ll never explore again might be pretty flat at the beginning and then it drops off rapidly as you start to run out of meals.” Instead, humans do this linear thing where every day they lower their standards by basically the same amount. We even show in the paper that the slope of this line is identical across different distributions and across different numbers of nights. So there’s something very essential and very simple about the approach that people are using. But we also show that this linear threshold people are using, which has the same slope in every condition, is nevertheless kind of nudged up or nudged down in ways that are appropriate for that version of the task.</p>
+<p>More to the point, it results in total dining pleasure points that are about 90 percent as good as the optimal solution, despite being radically simpler mathematically. This is an interesting story for a running narrative within cognitive science, which is what’s called resource rationality. If I zoom out a little bit, a lot of people are familiar with this idea from the late 20th century, from people like Daniel Kahneman, that humans are irrational. We do all these silly things, which are widely documented. But a more nuanced picture has started to emerge, starting in the late 1980s through the turn of the century, that’s a bit more redemptive and suggests that while people don’t do the perfect thing, they appear to be making near perfect use of limited resources: finite computing power, finite information, finite time. When you take those constraints into account, people seem to be a lot closer to the optimal version.</p>
+<p>Our work with the Feynman restaurant problem contributes a small but meaningful dose of evidence in favor of that accounting. We show that people do this really simple thing. They don’t do the optimal thing, but nevertheless, the simple thing that they do is surprisingly well-suited to the task and does an impressively good job of getting them most of the value.</p>
+<p><strong>Read more: “<a href="https://nautil.us/what-would-richard-feynman-make-of-ai-today-1262875">What Would Richard Feynman Make of AI Today?</a>”</strong></p>
+<p><strong>You mentioned that this was something you started looking into because it was part of a larger book project. Can you tell me about that?</strong></p>
+<p>Tom and I have been collaborators now for more than 20 years, but back in 2013, we were working on what ultimately became a popular book for a general audience called <em>Algorithms to Live By</em>. The first two chapters are about optimal stopping problems and explore-exploit problems. The Feynman restaurant problem is arguably both. That was what first set us on this path. Little did we know how deep the rabbit hole was gonna go.</p>
+<p><strong>Is the implication that people can optimize their own decision-making by understanding some of these math problems?</strong></p>
+<p>Yes. That’s the thrust of the book, that the sorts of everyday problems that human beings face have a recognizable essential computational structure, and that once you develop the kind of vocabulary to make distinctions between these sorts of problems, you can recognize that. For example, “optimal stopping” includes things like where to park. You’re driving down the street, you see a space—do you take it and commit, or do you keep going, but perhaps lose that option? House hunting has the same structure. You go to an open house, and they expect offers the following Tuesday or whatever. You could argue that dating has the same structure. You’re in a relationship. Do you commit, or do you walk away to see what else is out there, but lose the option to change your mind perhaps?</p>
+<p>There are these fundamental categories of problems that come up again and again in different guises in everyday life. The point is not to robotically apply these principles, but to develop the ability to recognize what sort of situation you’re in, and have a familiarity with how that category of problem tends to look. I find it weirdly helpful in my everyday life. My wife and I, when we’re going out to eat, we’ll literally say, “Should we explore, or should we exploit?” This has become the actual language that we use around the house.</p>
+<p><strong>Can you give me an example of a recent decision that it helped you with?</strong></p>
+<p>I remember when my wife and I were engaged, we were deciding whether I was gonna move in with her or she was gonna move in with me. She was in Oakland. I was in San Francisco, and the explore-exploit math, including Feynman’s own, says that your willingness to explore new things should be a function of how much time you have remaining. We thought, “Okay, if we’re moving to Oakland, then we should really just only do our favorite things in San Francisco, but make sure we try new stuff in Oakland.” Then, at one point, we changed our minds and decided that it would be better if she moved into my apartment than vice versa. And so we did a 180. We said, “We need to only do our favorite stuff in Oakland and only try new things in San Francisco.”</p>
+<p>That mindset of thinking about where you are within the relevant interval that you’re trying to maximize—your behavior should naturally feel different when you’re at the beginning than when you’re at the end.</p>
+<p><strong>I think that’s a perfect stopping point.</strong></p>
+<p>Yes, an optimal stopping point, even! <img alt="" src="../images/nautilus-favicon-14_1301.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: Courtesy of Ralph Leighton. Image credit: Richard P. Feynman (estate).</em></p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://nautil.us/solving-feynmans-formula-for-eating-well-parking-your-car-and-finding-a-mate-1281700/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://nautil.us/solving-feynmans-formula-for-eating-well-parking-your-car-and-finding-a-mate-1281700/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

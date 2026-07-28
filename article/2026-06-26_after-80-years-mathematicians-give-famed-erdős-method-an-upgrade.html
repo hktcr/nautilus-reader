@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After 80 Years, Mathematicians Give Famed ‘Erdős Method’ an Upgrade | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>After 80 Years, Mathematicians Give Famed ‘Erdős Method’ an Upgrade</h1>
+            <div class="meta">
+            Av Leila Sloman &nbsp;|&nbsp; Publicerad 2026-06-26
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-A2A4</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>In 1947, Paul Erdős, the itinerant Hungarian mathematician, introduced what would become one of math’s most powerful tools. He wanted to prove that a certain kind of object existed — in this case, a network made of interconnected nodes. But strangely, his proof didn’t specify how to build it. Instead, he showed that if you consider all networks and select one at random, the chances that you’ll find a network with the property you want is greater than zero. That means that the desired network is out there somewhere, even if you know almost nothing about it.</p>
+<p>Erdős’ approach, known as the probabilistic method, was simple but revolutionary. Before its development, “if I’m telling you that certain objects exist, you would tell me, ‘Show me,’” said <a href="https://people.math.ethz.ch/~sudakovb/">Benny Sudakov</a>, a mathematician at the Swiss Federal Institute of Technology Zurich. “But certain objects are so unusual that it’s hard for us to grasp that they exist at all.”</p>
+<p>Erdős’ technique overcame this difficulty, demonstrating that randomness could be used in ways mathematicians had never imagined. “It was just astounding that you would use randomness,” said <a href="https://cs.nyu.edu/~spencer/">Joel Spencer</a> of New York University. “Now, that’s the baseline.”</p>
+<p>Today, the probabilistic method is used across mathematics and computer science — to figure out if a number is prime, to design better circuits, or to clean up data without introducing biases.</p>
+<p>Researchers have strengthened the technique in various ways. But the original focus of the probabilistic method — the question about networks that Erdős sought to answer — has seen very little progress. For eight decades, mathematicians were unable to significantly improve on the solution that Erdős came up with.</p>
+<p>That’s now finally starting to change.</p>
+<h2><strong>A Voice in the Wilderness</strong></h2>
+<p>Imagine a network of nodes — a graph — in which every pair of nodes is connected by an edge.</p>
+<p>Mark Belan/<em>Quanta Magazine</em></p>
+<p>Now color each edge either red or blue, but with one caveat: Don’t create any large clusters of nodes that are all connected by edges of the same color. These forbidden structures are called monochromatic cliques. Here’s a monochromatic clique consisting of three nodes, which mathematicians call a clique of size 3:</p>
+<p>If your graph has enough nodes, it will be impossible to avoid creating a monochromatic clique, no matter how you color the edges. For instance, if you want to avoid a clique of size 3, your graph can have at most five nodes. A six-node graph will always have one:</p>
+<p>Mathematicians therefore say that the “Ramsey number” for a clique of size 3, denoted <em>R</em>(3), is 6. Ramsey numbers measure how big graphs can get before the forbidden pattern inevitably emerges.</p>
+<p>You can also have Ramsey numbers for red and blue cliques of different sizes. For example, you can color an eight-node graph so that it has no red cliques of size 3 or blue cliques of size 4. But if you add one more node to your graph, you will be forced to create at least one red or blue clique. Therefore, the Ramsey number <em>R</em>(3, 4) is 9.</p>
+<p>As the cliques you want to avoid get bigger, the problem gets more and more difficult to solve. Mathematicians have been able to calculate only a handful of the smallest Ramsey numbers. “It’s very hard to create something that has no structure,” said <a href="https://science.du.edu/about/faculty-directory/paul-horn">Paul Horn</a> of the University of Denver. “Maybe it’s because we’re human and we’re subject to our biases.”</p>
+<p>And so mathematicians have spent decades trying to find better and better approximations of Ramsey numbers. That’s what Erdős was trying to do when he introduced his probabilistic method in 1947. Instead of building clique-free graphs directly, he considered every possible way to color a graph, then showed that at least some nonzero fraction of them must be clique-free.</p>
+<p>Erdős used this argument to prove that, if you forbid red and blue cliques of size <em>k</em>, the Ramsey number <em>R</em>(<em>k</em>) must be bigger than $latex \sqrt{2}^k$. Ramsey numbers for same-size red and blue cliques are called diagonal Ramsey numbers. Erdős could similarly get a lower bound on “off-diagonal” Ramsey numbers <em>R</em>(<em>k</em>, <em>l</em>), in which you forbid red cliques of size <em>k</em> and blue cliques of size <em>l</em>.</p>
+<p>The proof was just a few lines long. But it was completely unexpected.</p>
+<p>At first, mathematicians were loath to follow his lead. They wanted concrete examples. “For many years, Erdős was like a voice in the wilderness,” Spencer said. “He was getting these amazing results using randomness, and people had never done that before.”</p>
+<p>But soon the probabilistic method proved its worth. It’s now one of the most ubiquitous techniques in “discrete” math, the study of objects (like graphs) that are separate rather than continuous. And it has seeped out of math into physics and <a href="https://www.quantamagazine.org/how-randomness-improves-algorithms-20230403/">computer science</a>. “The randomness, I think, just helps us get at something that is otherwise very ethereal,” Horn said.</p>
+<p>More recently, mathematicians have been able to adapt Erdős’ method to get better estimates of Ramsey numbers where the forbidden cliques <a href="https://www.quantamagazine.org/mathematicians-discover-new-way-to-predict-structure-in-graphs-20230622/">differ vastly in size</a>. For instance, in 2025 Horn and three colleagues used an updated version of Erdős’ method to prove a more precise <a href="https://arxiv.org/abs/2510.19718">lower bound for <em>R</em>(3, <em>l</em>)</a>, where <em>l</em> grows arbitrarily large. (That work, in turn, led to <a href="https://arxiv.org/abs/2512.20392">a major breakthrough</a> in graph theory.)</p>
+<p>Paul Erdős figured out how to use randomness to prove that certain mathematical objects exist, even if you don’t know how to construct them. His technique, today known as the probabilistic method, transformed many branches of math and computer science.</p>
+<p>Archives of the Mathematisches Forschungsinstitut Oberwolfach ©Gabriella Bollobas</p>
+<p>But when it came to Ramsey numbers where the forbidden cliques weren’t so different in size — particularly diagonal Ramsey numbers, the object of Erdős’ original interest — the probabilistic method stalled. Say you forbid cliques of size 1,000. Erdős showed that <em>R</em>(1,000) must be bigger than about 2500. Eight decades of effort changed that bound to about 2501. Similarly, from the 1970s onward, progress remained stock-still for off-diagonal Ramsey numbers where the forbidden red and blue cliques are both relatively large.</p>
+<p>Then along came a graduate student with barely any expertise in Ramsey theory.</p>
+<h2><strong>Correlated Coloring</strong></h2>
+<p>Wujie Shen had spent his first few semesters at Tsinghua University focused mainly on geometry and topology. But in the spring of 2024, he came across <a href="https://annals.math.princeton.edu/2024/199-2/p08">a paper on Ramsey numbers</a> that captivated him.</p>
+<p>He knew how Erdős’ method worked: You flip a coin to determine the color of each edge of your graph: Heads, the edge is red; tails, it’s blue. You then calculate the probability that you’ll get a clique-free coloring. But this calculation gets very difficult for larger graphs. Shen wondered whether there was a random model that could produce clique-free colorings more efficiently than Erdős’ approach.</p>
+<p>Given Shen’s training, it’s perhaps no surprise that the model he came up with involved geometry. Typically, graph colorings don’t invoke geometry: All that matters to mathematicians is which nodes are connected by a red edge, and which are connected by a blue one. Whether those nodes sit close together or are scattered throughout space has no significance.</p>
+<p>But Shen wanted to use geometry to help him decide which edges to color red and which to color blue. In particular, he wanted to use the geometry of high-dimensional spheres — that is, sets of points that are equidistant from a single central point.</p>
+<p>These spheres “mess with all our intuitions completely,” said <a href="https://www.its.caltech.edu/~dconlon/">David Conlon</a> of the California Institute of Technology. Many of our assumptions about what a sphere looks like are no longer true in high dimensions: A high-dimensional sphere has a tiny volume and massive surface area, and most of its points lie on the equator. It’s “pretty complicated to work with,” Sudakov said.</p>
+<p>But Shen and two colleagues — <a href="http://staff.ustc.edu.cn/~jiema/">Jie Ma</a>, who was visiting Tsinghua to teach for the fall term, and Ma’s graduate student Shengjie Xie — wanted to try. Their method: First, place nodes one by one onto the surface of a high-dimensional sphere. Choose each node’s position at random — any point on the sphere is fair game, and the placement of each node has no influence over the placement of any other node.</p>
+<p>Once you’ve placed all the nodes, color each edge based on the distance between the nodes. If two points are more than some fixed distance apart (which will happen with a probability of less than 1/2), color the edge connecting them red. If they’re closer together, color the edge blue.</p>
+<p>From left/top: Jie Ma, Wujie Shen, and Shengjie Xie used the strange geometry of high-dimensional spheres to make progress on a problem that had been stalled for decades.</p>
+<p>From left/top: Courtesy of Jie Ma; Courtesy of Wujie Shen; Ziyuan Zhao</p>
+<p>With this approach, the graphs that Ma, Shen, and Xie created were less likely to form a red clique. That’s because to form a large red clique, you need many nodes that are all far away from one another. With only so much space on the sphere, this is unlikely to happen.</p>
+<p>But there’s a catch. By the same token, this method also produces a greater fraction of colorings that have blue cliques than Erdős’ does. “There’s a trade-off that looks like it really helps in one color, but it doesn’t help at all in the other color,” Conlon said. “Why bother?”</p>
+<p>Even so, Ma, Shen, and Xie were hopeful. They tested their method on smaller graphs, and it seemed to work: Among the tens of thousands of bad colorings it generated, there was still a nonzero chance of getting a good clique-free coloring as well. That reassured them that the benefits could outweigh the costs, even for much bigger graphs.</p>
+<p>They then set out to prove it. The key turned out to be the very weird geometry of high-dimensional spheres.</p>
+<p>Ultimately, to show that they could avoid cliques of a particular size, Ma, Shen, and Xie needed to limit the probability that their randomly placed nodes formed clusters that were all far apart, or all close together. They realized that if they drew lines from each node to the sphere’s center, those lines would almost all be perpendicular or close to perpendicular. That doesn’t happen if you randomly place nodes on a familiar two-dimensional sphere: Most nodes will not lie on perpendicular lines. But the team was able to prove that it was true in the much higher dimensions that they were working in.</p>
+<p>That, in turn, restricted how far nodes could be from one another — thereby limiting their chances of forming a monochromatic clique.</p>
+<p>After a year and 40 pages of dense computations, the trio <a href="https://arxiv.org/abs/2507.12926">posted their paper</a> in July 2025. They’d improved Erdős’ lower bound on Ramsey numbers — but only when the forbidden blue cliques are larger than the red ones. When the blue cliques are just as small as the red ones, the benefits of the new approach disappear.</p>
+<p>Still, when you want to avoid red cliques that are, say, half as large as blue ones, Ma, Shen, and Xie managed to nudge Erdős’ growth rate of $latex ((\sqrt{5} + 1)/2)^k$ up to $latex ((\sqrt{5} + 1)/2 + 10^{-21})^k$. While the change is tiny, their proof marks the first improvement for near-diagonal Ramsey numbers in 50 years.</p>
+<p>“It’s lucky, and we feel like all our efforts are rewarded,” Ma said. “But it was tough for a long time.”</p>
+<p>“It’s a bit shocking that a familiar thing works for a familiar problem,” said <a href="https://www.dpmms.cam.ac.uk/~jdrs2/">Julian Sahasrabudhe</a> of the University of Cambridge. Their technique, he said, “was hidden in plain view.”</p>
+<h2><strong>The Probabilistic Playground</strong></h2>
+<p>Ma, Shen, and Xie’s proof has already generated a spate of further progress. In December 2025, Sudakov and two of his graduate students <a href="https://arxiv.org/abs/2512.17718">drastically simplified the team’s coloring model</a>, improving their new bounds even further. Others have since used the model <a href="https://arxiv.org/abs/2601.15183">to estimate Ramsey numbers</a> that involve three colors, not two.</p>
+<p>That’s in keeping with the probabilistic method’s long history. For the past 80 years, mathematicians have been tinkering with Erdős’ randomness-based technique, finding more and more ways to mix in additional structure to boost its power. Inevitably, these new techniques have then proved useful elsewhere. “It’s a very fruitful playground for ideas,” Sudakov said.</p>
+<p>Ma, Shen, and Xie’s work, then, is the latest chapter in this decades-old story. But it’s also the first one in a long time to revisit the near-diagonal Ramsey numbers.</p>
+<p>The team’s new contribution — a geometric approach — might lead to more progress on that stubborn problem. Although the probabilistic method hasn’t been perfected yet, “it’s really very powerful now,” Spencer said. “It’s really changed so much.”</p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/after-80-years-mathematicians-give-famed-erdos-method-an-upgrade-20260626/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/after-80-years-mathematicians-give-famed-erdos-method-an-upgrade-20260626/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will We Ever Find Alien Civilizations? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Will We Ever Find Alien Civilizations?</h1>
+            <div class="meta">
+            Av Janna Levin and Steven Strogatz &nbsp;|&nbsp; Publicerad 2026-07-09
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-2SCV</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>Does intelligent life exist elsewhere in the universe? The question has captivated us for centuries, but despite decades of searching it remains frustratingly unanswered. Every so often a curious signal appears — fossilized structures in a meteorite, say, or an unusual gas in an exoplanet’s atmosphere — and for a moment it seems possible that we are not alone before the excitement gives way to a more mundane explanation.</p>
+<p>So what would it actually take to find life in the cosmos — and how would we know when we saw it?</p>
+<p><a href="https://www.astro.columbia.edu/content/david-kipping">David Kipping</a>, an astronomer at Columbia University, has spent his career finding better ways to answer these questions. His approach is statistical: rather than chasing individual detections, he develops mathematical frameworks for reasoning about where habitable worlds are likely to exist and how confidently we can interpret the signals they produce. In this episode of <em>The Joy of Why</em>, Kipping joins co-host Janna Levin to discuss efforts to frame one of humanity’s oldest existential questions as a tractable scientific problem, why biosignatures have proved so difficult to interpret, and why he believes exomoons may be an overlooked place to search for life.</p>
+<p>Listen on <a href="https://podcasts.apple.com/us/podcast/the-joy-of-why/id1608948873">Apple Podcasts</a>, <a href="https://open.spotify.com/show/2FoxHraQSKwxV2HgUfwLMp">Spotify</a>, <a href="https://tunein.com/podcasts/Science-Podcasts/The-Joy-of-Why-p1653040/">TuneIn</a> or your favorite podcasting app, or you can <a href="https://www.quantamagazine.org/tag/the-joy-of-why">stream it from Quanta</a>.</p>
+<p><a href="/tag/the-joy-of-why">All episodes</a></p>
+<p>Your browser does not support the audio element.</p>
+<h2><strong>Transcript</strong></h2>
+<p>[<em>Music plays</em>]</p>
+<p><strong>JANNA LEVIN:</strong> I’m Janna Levin.</p>
+<p><strong>STEVE STROGATZ:</strong> And I’m Steve Strogatz.</p>
+<p><strong>LEVIN:</strong> And this is <em>The Joy of Why.</em></p>
+<p><strong>STROGATZ:</strong> A podcast from <em>Quanta Magazine</em> where we discuss some of the biggest unanswered questions in math and science today.</p>
+<p><strong>LEVIN:</strong> So Steve, I really have a good topic today.</p>
+<p><strong>STROGATZ:</strong> Hmmm.</p>
+<p><strong>LEVIN:</strong> It’s aliens. First of all, have you ever seen a flying saucer? Let’s just have it out, Steve.</p>
+<p><strong>STROGATZ:</strong> Okay, this is where I have to admit, no. But I would like to talk to you about aliens.</p>
+<p><strong>LEVIN:</strong> Okay, that’s really good because this is serious. I think scientists take very seriously the idea that there’s life out there. Have you ever pondered the question, are we alone?</p>
+<p><strong>STROGATZ:</strong> A little bit. Years and years ago, I read a book by Francis Crick, you know, better known for his work on structure of DNA. But Crick wrote a book called <em>Life Itself,</em> and he was interested in the idea that life on this planet might have been seeded by a process that people were calling directed panspermia, that maybe life had been sent here.</p>
+<p><strong>LEVIN:</strong> Yeah.</p>
+<p><strong>STROGATZ:</strong> But the thing that really sticks with me from Crick’s book was a point that he made, which is about what’s the probability of life starting on a given planet. And he said, “We really don’t know.”</p>
+<p><strong>LEVIN:</strong> Mmm-hmmm.</p>
+<p><strong>STROGATZ:</strong> Like, we just really don’t know. And if the number is sufficiently small, like astronomically improbable, it could be that we’re the only life in the universe. That’s not impossible. You know, you always hear people say, “Oh, there’s so many stars and so many galaxies,” that people just assume that’s a big number, so of course there must be life everywhere. But in my heart, I really don’t know. There might be none or there might be a lot. I don’t know.</p>
+<p><strong>LEVIN:</strong> Yeah. Well, I think that’s exactly the question, that this isn’t just a matter of belief, right? It’s not, I believe in aliens or I don’t. And it’s also no longer beyond quantifiability. We actually have concrete questions we can ask, parameters we can estimate, satellites that search for planets that give us data and intel. And this is kind of a modern and more sophisticated version of something called the Drake equation.</p>
+<p>So I spoke to someone who studies deeply the mathematical underpinnings of making these kinds of assessments, and that is David Kipping, who is a colleague of mine. David is an astronomer at Columbia University, where he studies exoplanets and exomoons, and he’s really focused on developing new statistical methods in particular to detect potentially habitable worlds, which I think is a very intriguing way to get ultimately to the question that I think haunts him, which is, are we alone?</p>
+<p>So, here’s David Kipping.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>LEVIN:</strong> Welcome to <em>The Joy of Why</em>, David. So great to have you here.</p>
+<p><strong>DAVID KIPPING:</strong> It’s a pleasure to finally be on. Yeah, it’s great to be here.</p>
+<p><strong>LEVIN:</strong> I know. It’s so great. Usually we’re in the same building at Columbia, but not today.</p>
+<p><strong>KIPPING:</strong> Yeah, or a bar having a cocktail or something.</p>
+<p><strong>LEVIN:</strong> Right. We should do this there, that’s for sure. I have to say, for a Columbia astronomy lab, you have one of the best names around. So you call your lab the Cool Worlds Lab. Can you help people understand the origin of this name?</p>
+<p><strong>KIPPING:</strong> Right, so when I was applying for faculty jobs way back, I was doing that usual thing of trying to come up with a good name, and my PhD advisor, Gáspár Bakos, he said, “Whatever you do, don’t call the lab “Kipping Lab.” Don’t call it after yourself. Don’t be that guy.”</p>
+<p>And, there was a group in San Diego called the Cool Stars Group, and there’s a big conference called Cool Stars. So Cool Stars, obviously, focusing on these M dwarf stars, these low-mass stars, which it’s really easy to detect planets around them. There’s a lot of interest astrobiologically around these sorts of stars. So there was a huge amount of interest about those, and I thought, “Hey, by extension, it’s the cooler worlds that we also care about.” It’s not the hot Jupiters so much, at least not for me. It’s not the hot Neptunes. It’s the planets that are further out in the temperate zone where life is possible, where moons can be possible, not because of the thermal temperature, but almost the dynamical temperature has cooled down. So everything just gets more interesting when you’re far away from the star. So that was the story behind the name.</p>
+<p><strong>LEVIN:</strong> Yeah, that’s interesting. You’re already raising scientific questions because people are hearing terms like, certain dwarf stars, but also Jupiters and Neptunes. So this idea that planets are replicated, the ones that we see in our solar system, here we are with our eight planets, and then we see similar kinds of planets around other stellar systems. Is that a surprise?</p>
+<p><strong>KIPPING:</strong> If you go back 20, 30 years ago, before I was in the field, I think people didn’t know. There was an expectation. [Carl] Sagan was the eternal optimist, and he wrote about this a lot, and he really did expect, and many others expected there to be lots of planets out there.</p>
+<p>But you can make an anthropic argument that it’s perfectly consistent that the solar system could be the only place that has planets, and it would be perfectly natural that we would happen to be born in the one place where there are planets, ‘cause of course, we couldn’t be born anywhere else. So you could make that argument, but I think it would be surprising, a little bit intuitively, and indeed, once we started finding planets, it reinforced that view.</p>
+<p>But I think what’s really took us aback is just the diversity of worlds. I mean, we really expected the solar system to be a template of what other systems would look like, and it’s not, Janna. It looks radically different from place to place, and that has really blown our minds.</p>
+<p><strong>LEVIN:</strong> So, when Carl Sagan was working, it wasn’t clear that there were other planetary systems. That is quite amazing. When you started entering the field, it was already accepted that there were tons of exoplanets and the search for life was a real scientific pursuit. Would that be fair to say?</p>
+<p><strong>KIPPING:</strong> Yeah, I mean, so I was doing my PhD up to 2011. Kepler launched, 2009. This was a mission that NASA launched which really transformed our understanding of planetary systems because it discovered not only thousands of them – we went from dozens to thousands in the space of a couple of years – but it also probed down to really small worlds.</p>
+<p>So before we were only really sensitive to largely Jupiter mass, Jupiter-size planets, and Kepler pushed us all the way down to Neptunes, super Earths and even some planets comparable to the size of the Earth. So that blew us away. But at the same time, I was thinking, “Hey, if we are able to detect Earth-sized planets, why couldn’t the universe be a little bit more creative and start making Earth-sized moons around Jupiter-sized planets?” And that was, yeah, really where I got into this idea of looking for moons.</p>
+<p>We really expected the solar system to be a template of what other systems would look like, and it’s not. It looks radically different from place to place, and that has really blown our minds.</p>
+<p><strong>LEVIN:</strong> So why is it important that it be Earth-sized? What’s wrong with 40% the size of the Earth for a moon?</p>
+<p><strong>KIPPING:</strong> Nothing’s wrong with that. It’s still fascinating. It’s still wonderful. It might be a challenge for life.</p>
+<p>When you make a world—not necessarily just a planet or a moon—but just a world smaller and smaller, obviously, its surface gravity decreases, its escape velocity decreases, and thus it’s easier for gas, for an atmosphere to leak off through what’s called Jeans escape or even hydrodynamic escape if there’s ultraviolet radiation smashing into the top of the atmosphere.</p>
+<p>So those processes erode away atmospheres, and we think that’s why Mars doesn’t really have a thick atmosphere. The atmosphere of Mars is 0.6%, I think, the density of Earth’s atmosphere, yet it’s further away from the sun, so it should be easier in a thermal sense for it to hold onto an atmosphere. But of course, it’s only 10% the mass of the Earth, so that explains it.</p>
+<p>We think that it probably did have a thick atmosphere in the past because we see all this evidence for liquid water. We see these, riverbeds and river deltas and valleys that have been carved out by water. So it somehow lost it because it essentially wasn’t massive enough.</p>
+<p>So therefore, that could be a problem. If you wanna have a habitable moon, you probably want it to be larger than that of Mars. Otherwise, you might be restricted to things which are beneath the surface. And of course, there is interest in that with Europa, Enceladus, of subsurface life.</p>
+<p>But if something like, like we have, doing agriculture and a civilization, that might be difficult to have if you’re too small.</p>
+<p><strong>LEVIN:</strong> There seem to be a lot of things that went into the reason that the Earth, if it’s not the only planet in our system that evolved life ever, it’s the only one that radiated plentifully as we see now. And the factors, as you’ve already mentioned, this kind of temperate zone, the existence of oceans, and things like plate tectonics—that really surprised me—and maybe even the spin axis of the Earth, which could have been from an early collision. So how much do all of these factors participate in the ability for life to take hold and really radiate?</p>
+<p><strong>KIPPING:</strong> Truthfully, we don’t know. We can speculate about each of these factors, and there’s reasonable speculation about all of those. Plate tectonics, we think that’s probably necessary for a carbon cycle, and we think a carbon cycle is probably essential for having enough carbon left over for life to thrive and to keep going on the surface. Otherwise, you could just deplete it over time.</p>
+<p>And then, you know, you’ve got other factors like the axial tilt, and again, people argue about that. You could think that an axial tilt is essential because if you had the North Pole pointed right at the sun for three months of the year or something, that would seem bad news for life. But on the other hand, we have extremophiles who seem very robust and can thrive in all sorts of environments. So maybe life would be fine without that?</p>
+<p>But maybe it’s us really that we’re talking about. You know, it’s agriculture. It’s a Neolithic revolution. Can you really do farming and have civilizations if your climate is wildly swinging? Like in <em>Game of Thrones</em>, you have these insane winters, right?</p>
+<p><strong>LEVIN:</strong> Winter is coming, yes.</p>
+<p><strong>KIPPING:</strong> The winter is coming. It’d be like that kind of situation where you get these very deep winters and very extreme summers, and maybe that might be difficult to imagine a civilization thriving. It’s difficult to know exactly where these boundaries are.</p>
+<p>But there may be a lot of other parallel tracks to the way life arrived here. Maybe on Titan. Titan’s a very alien moon. It has methane and ethane lakes. Very, very different thing from the Earth. But perhaps there is life there—some form that we can’t really even imagine thriving on the Earth.</p>
+<p><strong>LEVIN:</strong> Yeah. It sort of seems an insane trend to fall into given that we keep getting deposed from being special. And when we think about the kinds of organisms that exist here on Earth, the variety is tremendous.</p>
+<p>Yeah, so you’ve made the transition from just life, which could have been bacterial, to technologically sophisticated life, which sometimes is called intelligent life, but then that has all kinds of philosophical pit holes.</p>
+<p>And so you’ve just given this really interesting set of examples which are technological, space-faring civilizations that are trying to harness the energy and the resources, not only around them, but maybe of the entire galaxy, right? And that historically had a sort of origin in the Drake equation, which might have fallen out of favor, but really structured the conversation for a long time. Can you tell us a little bit about the 1960s astronomer Frank Drake and what he was after in terms of trying to write an equation to predict the probability of the emergence of so-called intelligent life?</p>
+<p><strong>KIPPING:</strong> My understanding of this story, obviously, it’s way before my time, this is back in the ‘60s, was that Frank Drake had organized a meeting to talk about searching for alien signals, radio communications. I think probably inspired by the paper by Morrison and Cocconi, the famous Nature paper which really triggered this thinking about looking for alien transmissions.</p>
+<p>And so he had a little conference, and I believe there was only like seven or eight people at this conference, and it included evolutionary biologists, it included astronomers. Carl Sagan was in attendance at this meeting famously. They called themselves the Order of the Octopus—I do know that. But I think ‘cause there was an octopus expert there, and they were inspired to name themselves the Order of the Octopus after he gave a great talk about octopuses. It would have been a fascinating meeting to have been historically tracked.</p>
+<p>But during that meeting, Frank Drake apparently wrote down the Drake equation for the first time, and the purpose of it was really to organize the meeting. And so it was a way of just like breaking out the problem into these bite-sized pieces. You know, how often does life start? How often does intelligence get going? How often do they communicate? Wasn’t really intended, in my interpretation, to be a calculator, and I think that’s where it’s been abused and why it has been sullied, over the years, because there have been numerous papers where astronomers have just plugged in numbers for the frequency of intelligence. And I mean, how does anyone know these numbers? It’s all just guesswork.</p>
+<p><strong>LEVIN:</strong> Now, you have tried to, in technical papers, reframe the Drake equation in a way where you’ve considered birth and death of civilizations, and again, returning to this possibility that we shouldn’t overestimate. We should entertain the possibility that we are alone in the universe. Can you tell us about this approach and why you think it was worth pursuing, even after everything you just said?</p>
+<p><strong>KIPPING:</strong> Yeah, I prefer the birth-death formalism. It wasn’t just me that’s proposed this. A few of those people have converged on this idea as well. But the attraction of it is that you get rid of a lot of these terms which seem really arbitrary.</p>
+<p>For instance, we talked about these different qualities, like the axis of the Earth has to be tilted within a certain range or something. That’s not actually in the Drake equation, but you could imagine someone adding in more and more parameters like that. The fraction of civilizations that choose to communicate via radio. Well, what about if they choose to communicate via something else? Its utility is questionable, I think.</p>
+<p>And so for me, I was just interested in, you know, all models are wrong, but some models are useful. Make the model as simple as you can get away with. And the simplest model you can possibly imagine is that there is some rate at which these entities, civilizations, intelligence, whatever you wanna call them, emerge, and there’s some rate at which they die.</p>
+<p>And that’s useful to think about that way because then you would expect there to be an equilibrium over a certain amount of time after some settling time. And so you can actually do that kind of calculation of what would be the settling time for given rates? And I think you can make a fairly convincing argument that given the age of the universe and the age of the galaxy right now, you would expect to be in the equilibrium state at this point.</p>
+<p>And so that’s interesting, I think for just dialing it back to the simplest bare bones you can. But it still leaves you ultimately with this question. And so what we argued in this paper, is that the actual number of extant present-day civilizations out there ends up being dominated by purely the ratio of the birth and the death rate. That’s it. So it’s actually just one number, the birth to death ratio. That’s all that matters.</p>
+<p><strong>LEVIN:</strong> It has an outsized influence on the result of the equation.</p>
+<p><strong>KIPPING:</strong> It’s the only thing that matters for the population. It’s exclusively down to that ratio.</p>
+<p>In statistics, we often want priors, right? To predict a distribution, you have to have some distribution that you assume for the birth to death ratio. And so we argued that the most agnostic and least informative prior if you plug it in, it ends up giving you a very bifurcated distribution. So you end up with there either being a very crowded universe or a very lonely universe. It’s very difficult to get it intermediate.</p>
+<p>Aliens is like the Band-Aid explanation. Because it’s too flexible as a hypothesis. It can explain anything you want.</p>
+<p>And I think this intuitively makes sense. There was a physiologist John Haldane about a century ago who pointed this out. He said, “Well, imagine you approached a bench and there was beakers of water, and the beakers of water are almost the same.” They have more or less the same temperature, the same salinity, but there might be slight differences between them. And then you have some random chemical, let’s call it chemical X, and you’re gonna pour it into these 20, 30 beakers, let’s say. And his challenge to the listener was this: What fraction of the time would you expect this random chemical X to dissolve amongst these beakers?</p>
+<p>And he reasoned that you should expect either it to be almost 100% or 100%, or almost 0% or 0%. But it’d be very weird if half of the time this chemical dissolved in the water and half of the time it didn’t, given the water is more or less the same water. It’s more or less the same stuff each time.</p>
+<p>And so by the same extension, there’s all these Earth-like planets out there. You would expect that once the rules are in place, if life is the way it goes, then life will just pop up everywhere. Or it’s incredibly unlikely to get to life, and therefore we would necessarily live in one of those rare places.</p>
+<p>So we kind of argued this bifurcation that you would end up with either a crowded universe or a lonely universe. And then we more provocatively said that we think the crowded universe is, certainly for technology, incompatible with observations. It is a very quiet cosmos out there.</p>
+<p><strong>LEVIN:</strong> The famous question Fermi asked many years ago in the wake of the UFO craze and the Roswell incident and all of these sightings of flying saucers. He said, “Where is everybody?” It did raise a question. And in this statistical distribution that you’re suggesting, wouldn’t we already know if it was crowded?</p>
+<p><strong>KIPPING:</strong> I think we would. I mean, so our claim is that if you’re an optimist for SETI—</p>
+<p><strong>LEVIN:</strong> Search for extraterrestrial intelligence. Just for the rare person who doesn’t know SETI.</p>
+<p><strong>KIPPING:</strong> Correct. Yes. So conventional SETI is listening for radio waves, right? They’ve surveyed now millions of stars—which is still only a tiny fraction of the galaxy, but millions of stars. They’ve done it for seven decades—not continuously, but on and off. So lots of gaps, I’ll grant you, but there’s been a lot of SETI work.</p>
+<p>And certainly the universe is not screaming. It is not full. It is not saturated with radio transmitters. We are absolutely confident that is not the case. So in this framework where you would expect to have either crowded or empty, it more or less rules that out <em>ab initio</em>. It’s done. You can’t possibly have that.</p>
+<p>So therefore, in our thinking, a SETI optimist has to live in this valley where it’s not zero, but it’s not 100%. And they are hoping that basically 10 more years of SETI will push us just over the edge from 55% coverage to, you know, there’ll just be enough that you’ll get over. And we just argue that’s statistically very unlikely that you’d live on that knife edge where we’re just behind the curve.</p>
+<p>So I don’t want to say don’t do SETI, ’cause it’s always a surprise, especially if we’re gonna in different ways rather than radio SETI, looking for laser signals, thinking about other means of communication, even neutrino beams, gravitational waves. But I think looking for simple life is a complete unknown. Like in that dichotomy of crowded or empty, it could be full. Like Mars could have life beneath its surface, Europa, Enceladus. We have no constraint on that. It’s just that for whatever reason, it doesn’t ever get to radio transmitters all over the place.</p>
+<p><strong>LEVIN:</strong> So what’s also interesting is the sort of mathematical techniques that you use to explore these problems theoretically. It’s not simply evaluate this parameter, plug it into the equation. You’re actually thinking more about this in a statistical approach that allows you, in some sense, to transcend some of the details precisely because you can make assessments. It’s sort of fine-tuning, right? It’s either crowded or rare.</p>
+<p>So in a way, you seem to be saying that just statistically using that kind of analysis, technology might be rare, but life could still be plentiful—just simpler life.</p>
+<p><strong>KIPPING:</strong> I mean the idea of SETI pessimism, you might call it, of being down on the odds of this. This actually goes all the way back to Sagan, who was an optimist, but he got into a big debate with Frank Tipler in the 1980s because Tipler pointed out that imagine we have self-replicating probes, right? A machine that can make another version of itself, duplicate itself. Now then, in the 1960s, John Von Neumann, who first imagined that, that seemed kind of fantastical. He was looking at trends in technology and doing a big extrapolation.</p>
+<p>But I think today it seems quite prescient. It seems possible. There was a recent study that estimated a machine now could reproduce 70% of its mass. So we’re 70% of the way there to a self-replicating probe. It’s not that hard to imagine someone launching one of these things.</p>
+<p>And in some extreme versions of this, you could imagine it just propagating across the galaxy—1% the speed of light is plenty—and you could convert the entire galaxy into computer substrate, which the galaxy just becomes a giant data center in space for AI training or something. It does feel very prescient right now, and that clearly has not happened. The galaxy hasn’t been converted into a giant computer substrate because otherwise we wouldn’t be here.</p>
+<p>So Tipler argued that this is the strongest constraint that we have. This requires that less than one in a hundred billion stars ever produces self-replicating probes that just do their own thing. Now, however contrived you think that might be, one in a hundred billion is a really small odds for, like, just someone somewhere has to do it once.</p>
+<p>And so Sagan didn’t like that because Sagan was an optimist, and so he was pushing back saying, you know, there’s all these reasons, like the probe might have finite range. It might be like there’s a zoo hypothesis. Aliens is watching us. It’s like the Star Trek Prime Directive a little bit.</p>
+<p>But, all of those have been studied really in-depth. We could talk about any of them, but they’ve all been thrown aside, largely. And I think the original claim by Tipler that this is really difficult to reconcile with our very existence, that self-replicating machine has never done this. The universe has not woken up. Matter has not transformed into intelligent substrate at this point. Apart from like our brains maybe. And so that, that is kind of a profound constraint on what happens in the universe.</p>
+<p><strong>LEVIN:</strong> Yeah. Okay, so I have to, at this juncture, ask you to address the issue of the UFO files. People are very caught up in this. What do you say when people are arguing, “Well, how do you explain three dots on the horizon from the Apollo mission?” Or, “How do you explain these grainy photos these expert pilots are seeing in their equipment?” What’s the response you have to that?</p>
+<p><strong>KIPPING:</strong> Well, obviously, there’s a lot we can’t explain. You just have to be candid about that. I mean, there’s plenty of observations that James Webb has taken that we can’t explain. We don’t fully understand why galaxies are so fully formed in the early universe as they are, and why there are quasars in the early universe. I mean, there’s always stuff we don’t understand.</p>
+<p><strong>LEVIN:</strong> It’s aliens, David.</p>
+<p><strong>KIPPING:</strong> Yeah. And that’s actually exactly the point that worries me, Janna. That the aliens is like the Band-Aid explanation. It’s God. It’s just saying God did it. Aliens did it. Because it’s too flexible as a hypothesis. It can explain anything you want. Why did your alarm clock not go off this morning? Aliens did it, and so that worries me a bit as a hypothesis, just from the point of like the Popperian standards of how we even talk about falsifiability in science. So the fact we don’t have an explanation is not evidence for aliens. That’s just the first thing we should discount.</p>
+<p>And then the idea of more specific evidence for UFOs, it’s mostly actually personal testimony. But the actual videos we’ve seen—not very convincing. So you know, there’s these three videos the Pentagon released. There’s no range information on any of that. So it’s very difficult to know whether you’re looking at something like right in front of you in the foreground or far away. And the pilot said, “Oh, no, I had a good idea of where it was. I knew where it was.” But it’s not reproducible and of course, science is all about reproducibility. If you can’t reproduce it we just don’t know what to do with that.</p>
+<p>So I think, in a nutshell, my big issue with the UFO claims has been that we can’t even ingest it into science. If I’m going to ingest any scientific claim, I need to know two numbers: the false positive rate of that experiment and its true positive rate. And I’ve proven this in a Bayesian paper, there’s no way to interpret an experiment if you don’t know those two numbers. Because if your false positive rate is 99% and someone says, “I saw a UFO,” it’s almost certainly a false positive. You have to know these numbers in order to make sense of it. There’s no way to even ingest these claims into science as they currently stand.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>STROGATZ:</strong> Oh, that’s a very interesting take, the statistical argument from Bayesian thinking that we can’t even assess these claims properly.</p>
+<p><strong>LEVIN:</strong> That’s very much his expertise. He’s really brought to the fore these kinds of ways of thinking that have allowed him really to make progress instead of saying, “Hey, does this specific one planet right here have life?” Right. It’s easier to talk about the collective, and what trends we might expect and to deduce from there.</p>
+<p>My big issue with the UFO claims has been that we can’t even ingest it into science.</p>
+<p><strong>STROGATZ:</strong> Yeah, I was very interested—I would say captivated—because we are hearing so much these days from what seem like credible, maybe not quite credible? I guess what I’m thinking is the people that were military, you know, that don’t seem like they’re prone to exaggeration.</p>
+<p><strong>LEVIN:</strong> Mmm-hmm.</p>
+<p><strong>STROGATZ:</strong> That saw something they can’t explain.</p>
+<p><strong>LEVIN:</strong> Oh yeah.</p>
+<p><strong>STROGATZ:</strong> And I thought the humility of David’s reaction, that there’s so much that we can’t explain. Why would we leap to the alien idea? Why don’t we just say there’s a lot of things we can’t explain and just live with that?</p>
+<p><strong>LEVIN:</strong> Yeah, I absolutely agree with you. I don’t feel that we should be disparaging people who are coming forward and reporting sightings. We should absolutely be collecting all kinds of data and information on observations citizens and experts are making of unidentified aerial phenomena. That’s respectable, admirable. But the leaping to “this is aliens” is problematic.</p>
+<p><strong>STROGATZ:</strong> I wanted to ask you some things about that because it seems like it’s right in your wheelhouse. I mean, it is so problematic given what we know about cosmic distances. And given our understanding of the speed limit of the universe set by the speed of light.</p>
+<p><strong>LEVIN:</strong> Yeah.</p>
+<p><strong>STROGATZ:</strong> I mean, I was just looking up the numbers to remind myself this morning. Just within our galaxy, the types of numbers we would be talking about. Like, if we imagine that an alien came by spaceship from a planet around some star in our galaxy, that would be on the order of tens of thousands of light years. Even if they were going at the speed of light. We didn’t even have civilization ten thousand years ago.</p>
+<p><strong>LEVIN:</strong> Yeah. We’re talking to David’s point. Either there have to be a huge number of civilizations for that to be viable that we overlap and communicate. Huge number, because you’re traveling, let’s say, 100,000 light-years to cross the galaxy at the speed of light, right? To get all the way across the galaxy.</p>
+<p>So yes, there’s a lot of planets and star systems and moons within that range, but we haven’t had civilizations for hundreds of thousands of years. We’ve had civilization, as you said, really just for a few thousand, and we’ve only had technology for a couple hundred years, right? A couple hundred years, and it’s unclear that our technology is sustainable, that we’ll be able to keep having electricity and energy for everybody on this planet sustainably. So we might only have had a few hundred years of technology total, and that might be it.</p>
+<p>So you’re talking about trying to overlap across these incredibly vast spatial distances in this incredibly long timescales in a bleep, right? An absolute bleep. And then it becomes, well, if we do overlap, then probably there are a whole huge ton of civilizations ’cause then they’re in our backyard, and they came really close, and then by coincidence, they overlapped with us in time. And if we don’t, well, you know, that kind of seems like, yeah, maybe that’s just the odds.</p>
+<p><strong>STROGATZ:</strong> Can I just ask one thing that’s silly? I mean, ’cause there’s always this question of is there biological evidence? Like, do we have the dead alien from the crash?</p>
+<p><strong>LEVIN:</strong> Right.</p>
+<p><strong>STROGATZ:</strong> And then they’re… It’s so perplexing that these civilizations would be good enough to travel at close to the speed of light, or they develop wormhole technology, but they can’t land safely in Kansas.</p>
+<p><strong>LEVIN:</strong> Exactly. Or, where they can’t keep hiding from us very successfully? Well, can’t get enough of aliens. I think we’ve locked that down.</p>
+<p><strong>STROGATZ:</strong> Good. Well, I wanna listen to more.</p>
+<p><strong>LEVIN:</strong> After the break, we’re gonna zoom out to exomoons—and that refers to moons outside of our solar system. So we’re going to discuss what exomoons mean for the search for life in our universe.</p>
+<p>[<em>Music plays</em>]</p>
+<p>Welcome back to <em>The Joy of Why</em>. We’ve been speaking with Columbia University astronomer David Kipping about the probability of life in our universe.</p>
+<p>So you’ve used this sort of deep statistical thinking not just to analyze theoretical concepts like the Drake equation, but really importantly, to actually search for places where life might emerge, and we already mentioned it lightly, but the idea that moons are a really interesting place to consider.</p>
+<p>From our own experience in our system moons are plentiful. There are hundreds of moons in our solar system, which is really kind of amazing. What advantage are the exomoons offering you over an exoplanet in the search for life?</p>
+<p><strong>KIPPING:</strong> Yeah, I’ll give you my sort of four boilerplate reasons why I always say we should look for moons. One is that, of course, as you alluded, they could be habitable themselves. Two is that they could influence the habitability of the planet they orbit. So you might have an Earth-sized planet, and I think an obvious question is, well, does it have a moon-like moon around it as well? Because that seems like it had a big influence on our history. We probably want to know that. So you’ve got those two kind of habitability aspects.</p>
+<p>Then there’s just the pure, like, uniqueness question. Maybe come back down to that more kind of mechanistic astrophysicist view. Just how did we get here? What’s our origin story? Is the Moon like a one-off fluke that just very rarely happens, or is that an inevitable part of terrestrial planet formation, that you end up with these large, almost quasi-binary objects? There’s lots of strange moons, and it’s like Triton goes around backwards around its parent planet. You’ve got Uranus tilted over with its moon system. So there’s lots of curiosities in the solar system that from a singular example, it’s difficult to know, like, really how does this story play out in other environments. So I think just uniqueness is another reason.</p>
+<p>And the fourth one is kind of subtle, and that’s thinking about next generation missions. I mentioned we wanna build a successor to James Webb one day, probably called at the moment the Habitable Worlds Observatory, HWO. But it will hopefully one day take a photo of another Earth. It’ll be a single pixel. It’ll be a single blob of light. They’re like the pale blue dot. And from that pale blue dot, we’ll split the light up into a rainbow, essentially like the prism, like Newton did, and we’ll look for those atmospheric biosignatures that we’re so interested in. And moons here can really screw us over.</p>
+<p>If anyone’s ever seen that famous pale blue dot image that I think it was Voyager 1 took, as it looked back at, sort when it was like the orbit of Neptune. It turned around, it looked back and took a picture of the Earth. It’s this beautiful image if you’ve never seen it before. And in that image, it’s not a pale blue dot, even though Sagan described it as a pale blue dot. It’s a pale blue-gray dot because the Moon’s in there. The Moon’s right, it’s photobombing right along, right? You can’t distinguish it. You can’t separate it. They’re just one smudge of light.</p>
+<p>So when HWO takes these images, it’s gonna be in the same situation. It’s seeing what it thinks is a planet, but it’s really a planet plus however many moons it has. And when we look at moons like Titan. Titan has a methane atmosphere, methane lakes. It’s full of interesting hydrocarbons. You could easily, if you didn’t know that was a separate moon, get confused.</p>
+<p>You could imagine having an ocean world, a terrestrial ocean world, where the water undergoes photolysis, and that means that the H2O splits into hydrogen and oxygen. So you’ve got an oxygen-rich planet. No life involved, just oxygen from UV radiation. That’s it. And then you’ve got Titan mixed in there, which has methane.</p>
+<p>So now, from the astronomer’s perspective, everything looks beautiful. You’ve got methane, you’ve got ozone, you’ve got oxygen. You’d be like, “We’re done. That’s life.” But it’s a confounder. It’s just something we hadn’t thought of. So that’s why I think moons are really important. I don’t know how we could even look for life with HWO unless we resolve the moon problem.</p>
+<p><strong>LEVIN:</strong> So can you catch us up to date as to where we are in terms of actually observing, not just theorizing, but actually observing with the satellite missions exo-moons.</p>
+<p><strong>KIPPING:</strong> So this has been obviously a long quest in my entire career. During my PhD, I came up with one of the methods that we are using today to try and look for these moons, thinking about the dynamical perturbations that a moon would impart upon its parent planet gravitationally. And that’s kind of how we look for planets. We often look for planets by detecting the gravitational influence it has on the star. So we kind of extended that to looking for these moons.</p>
+<p>There’s so much we don’t know about chemistry and geochemistry and other planetary environments that it feels like we are doomed to always be caught out by those things.</p>
+<p>And I think what we know for sure is that Kepler, which as I said, was this transformative mission, had this sensitivity down to about Earth-sized stuff – moons, planets, whatever it. And it really didn’t throw out many candidates. There’s just not a lot there. So out of the 4,000, 5,000 candidate exoplanets, we have just a couple of hints of moons in that entire database. So that already tells you Earth-sized moons are not that normal. I’m not saying they never happen, but they’re certainly not par for the course.</p>
+<p>We did find a couple of interesting candidates that I hinted at there, but they both have been very surprising because they’re so large. They are Neptune-sized or even mini Neptune-sized moons orbiting Jupiter-sized or super-Jupiter-mass planets. So nobody really expected that. I mean, reminds me a bit of hot Jupiters, some of the first exoplanets ever found. They’re Jupiter-like worlds but are about 10 times closer to their star than Mercury is around the sun.</p>
+<p><strong>LEVIN:</strong> Very close.</p>
+<p><strong>KIPPING:</strong> Yeah, scorching temperatures, thousands of degrees Celsius, on their day side. And so it was very surprising. Actually, a lot of people didn’t believe them. They thought, how could you possibly get Jupiter there? Because we think we know how Jupiter formed. It formed from ices. It formed from essentially the same kind of cometary material that you find out in the distant solar system. So that stuff just wouldn’t be stable close to a star. It would boil off, so you can’t make Jupiter-like planets there.</p>
+<p>But we now know they’re definitely real because we’ve just found like so many of them, and it still puzzles us how they got there. We still don’t understand it.</p>
+<p>And so we found these two large moons. 1625b-i And then there’s also Kepler-1708b-i. So the b is the planet, the number plate is the star, and then the -i is the moon. Those are the only two we’ve found. Other teams have seen hints in different observations as well. No one yet has like a crisp, clear slam dunk signal.</p>
+<p>And I think that’s what we really need. The field’s in desperate need of that kind of clear signal. Obviously, a big thing close to the star is the easiest signal you can possibly get. And I think a general story in astronomy is that often the first examples of things we discover are not typical. They’re often very unusual beasts, and the reason we find them first is ’cause they’re so loud. They’re disproportionate. They’re tail-end members of their population. They’re not representative. And so it wouldn’t surprise me if these things turn out to be real, but they’re still requiring follow-up to ultimately figure out what they are. But James Webb has been opening up a lot of doors for that.</p>
+<p><strong>LEVIN:</strong> So the Kepler sample you’re talking about is within few thousand light years. So our galaxy’s over 100,000 light years across. So this is still pretty much, as you’ve said, we’re really only probing our region of the galaxy. How is James Webb Space Telescope changing some of this story?</p>
+<p><strong>KIPPING:</strong> Yeah, so James Webb is not really trying to discover new planets. It’s certainly more than capable of doing so. It’s just that the telescope time is so precious, a better use of its time is to do stuff like look for exomoons. We’ve done that experiment recently. Unfortunately, it came out flat. We looked at this beautiful Jupiter analog planet. It’s really kind of had a similar orbit, a similar star to our own solar system, this Jupiter-sized planet on a nice long orbital period far from its star. We searched it for moons down to about the size of sort of Ganymede, so the largest moons of Jupiter, and we don’t see them. So that’s already, really interesting.</p>
+<p>Another experiment we’ve been doing is actually measuring the oblateness of exoplanets, which has never been done before. But you can actually tell whether the planet is a pure sphere, or slightly ellipsoidal—which of course planets really are. They’re oblate spheroids, because as they rotate, they bulge out at the sides. And so they get these kind of love handles, like the Earth has, you know, slightly wider equator than it does the North-South Pole.</p>
+<p>And Saturn’s actually pretty extreme. That’s actually quite detectable with James Webb. So it’s such an impressive machine. There’s no need to use it to find planets, ’cause it can really characterize the planets, and especially atmospheres.</p>
+<p><strong>LEVIN:</strong> Well, let’s talk about atmospheres. We’ve talked a little bit about technological signatures. We haven’t talked that much about the biosignatures. Would that be a reason why astronomers are obsessed with atmospheres, ’cause they’re looking for biosignatures for the emergence of life?</p>
+<p><strong>KIPPING:</strong> I think we wanna get there. I think a lot of us are dubious James Webb is sensitive enough to detect biosignatures. If you take the Earth, and even if you put the Earth around a very favorable star, so a nearby star, and make it a small star, because the smaller the star is, an Earth-sized planet will block out more of its starlight. And so it’s easier for us then to actually measure these atmospheric signals.</p>
+<p>And even in those very favorable conditions, the signal we’re looking for is that the planet effectively appears different sizes at different wavelengths of light, and the wavelengths of light corresponding to, say, ozone absorption, you see the planet puff up a little bit. And what that’s telling us is that there’s a molecule, ozone in that case, that really likes to absorb that wavelength of light and therefore make the planet appear a little bit larger. So we think that’s how you would potentially detect ozone. It’s just that the telescope isn’t quite sensitive enough, unfortunately, to get most of those biosignatures.</p>
+<p>We think of things like methane, ozone, phosphine, dimethyl sulfide has been proposed recently as well. There was a claim actually of dimethyl sulfide, maybe some your listeners might know in that using James Webb, but it’s really spectacular levels compared to what we have on the Earth, so a lot of people are skeptical it’s remotely possible that could be a biosignature.</p>
+<p>There’s just way too much of it to make sense for certainly an Earth-like biosphere. But there’s a lot of controversy with some of these detections, but I think most of my colleagues think that it’s just beyond the ability of James Webb to detect biosignatures, but that’s fine.</p>
+<p>Probably a more basic question you might ask is, do Earth-like planets even have atmospheres to begin with? Or are they barren rocks? ’Cause the Moon doesn’t have an atmosphere, Mars doesn’t have much of an atmosphere, Mercury doesn’t have an atmosphere.</p>
+<p>And so there’s a huge program right now with James Webb called the Cosmic Shoreline Program, which is to look at a group of planets which are Earth-sized in the habitable zones of their stars. And the question is whether the planets even have atmospheres, because M dwarfs are quite active. They throw out these huge coronal mass ejections, these stellar flares, and so there is a concern that maybe the atmospheres are gone. Maybe these planets can’t even sustain an atmosphere.</p>
+<p>James Webb can answer that question, so that’s what this program’s doing. So it should be able to tell whether Earth-sized habitable zone planets have an atmosphere or not. And that would already be a massive breakthrough.</p>
+<p><strong>LEVIN:</strong> Amazing. So clearly, if they have atmospheres, the prospects for life goes up, loosely speaking, in that Drake equation kind of a way. Some of these biosignatures, though, are confounding. If you could find the atmospheres, and you were to look for some of these signatures, you’ve mentioned certain elements that we’re looking for, certain molecules that we’re looking for in the atmospheres, because the presumption is that these are outgassings of metabolism presumably or something like that. But we don’t even really know that, do we?</p>
+<p><strong>KIPPING:</strong> No, I mean, we just have one example, right? The confounders is a really big problem, and I’ve been thinking about that a lot. And what worries me a lot is that when you look at the history of biosignatures, just very broadly there’s been so many spurious claims.</p>
+<p>I mentioned very briefly the Allan Hills meteor, which was a rock on Mars 4 billion years ago that knocked off, it landed on the Earth, landed in Antarctica, I think in 1984 or something. And they collected it, they studied it, and they found these, like things which looked like little worms under the electron microscope.</p>
+<p>And so that was essentially a biosignature. It’s not a gas, but it is a biosignature. It’s a signature of biology. And it turned out that even though it looked like life, other geochemists and scientists were able to show that you can make structures like that without biology involved whatsoever, just basically through water and high pressure water in particular. And so that really killed the momentum behind that claim.</p>
+<p>Another example, if we go really far back, would be Martian canals. Seems silly now, but Percival Lowell—he thought there was canals on Mars ’cause he thought that was a biosignature. He saw these lines on Mars, and he thought, “I know what causes that. It’s a canal system.” So often we are tripped by what we don’t know. It’s not Percival Lowell’s fault that he didn’t know about those psychological biases ’cause nobody had published on them yet.</p>
+<p>And a very recent example was DMS, dimethyl sulfide. Dimethyl sulfide was claimed, as we mentioned earlier, in the, in an exoplanet atmosphere recently, K2-18b. Cambridge University did a huge press release talking about this being, you know, a historic moment in the search for life. But we now know that DMS is on comets in the solar system. Unless you think there’s living creatures on all the comets, it seems difficult to believe that this is an unambiguous biosignature anymore. So just time after time after time, it’s like Groundhog Day, Janna. You just keep waking up, we hear these claims of life, and then we all know what’s gonna happen. Happens every time. It just dissolves.</p>
+<p>So I’ve been thinking about this really hard recently. And yeah, I do kind of make the case that I think the current approach we’re using just will never work, and we do need to really rethink how we do this.</p>
+<p><strong>LEVIN:</strong> And have you made progress in suggesting a way that we should do this differently?</p>
+<p><strong>KIPPING:</strong> Yeah. So my tentative suggestion is to do what I call A/B testing, which in YouTube landscape is something we’re very familiar with. Like, you have two thumbnails, and you challenge them against each other and see which one gets the most clicks. And so the way we do it here is you’d have two samples of planets, for example, and you have some reason to believe this is the condition for this experiment to work. You have reasons to believe that the occurrence rate of life is different. It can’t be the same. If they’re the same, this doesn’t work. There has to be a difference in the life occurrence rate. But the confounder rate—how often natural geochemistry or whatever it is producing ozone or whatever signature you’re looking for—that has to be the same.</p>
+<p>So the confounder rate’s the same between the two samples, but the life rate is different. And so really then you’re doing a differential measurement. Any difference you observe in biosignatures between those two populations, therefore, in a differential sense, has to be due to life.</p>
+<p>It doesn’t tell you how much life there is in an absolute sense. You still don’t know, but you know that that excess must be driven by life. So that statistically is very clean. It resolves a lot of these problems and these unknowns. But you might reasonably question whether it’s even possible to set up such an experiment, and that’s what I’m thinking about now.</p>
+<p>It is perfectly consistent with everything we know about the universe that we are alone. There’s nothing we know about the universe that rules that out.</p>
+<p><strong>LEVIN:</strong> Amazing, so again you’re kind of returning to those statistician’s roots, right? That the observations aren’t going to be one moon with one obvious signal. It’s more large samples, and large statistics.</p>
+<p><strong>KIPPING:</strong> Yeah, I’m skeptical it would be a slam dunk in the same way maybe we’ve had with other fields. To quote Donald Rumsfeld, it’s the “unknown unknowns” that get you, right? And so there’s so much we don’t know about chemistry and geochemistry and other planetary environments that it feels like we are doomed to always be caught out by those things.</p>
+<p>I think the only exception to this I can imagine is actually a really strong information-rich SETI signal. So if it was like a laser beam with a video transmission encoded within it, there’s just no plausible natural confounder to that. You just can’t imagine it. It just seems impossible.</p>
+<p>But with biosignatures, those gases are very information weak. Really, all you measure is that gas is there and an abundance maybe, if you’re lucky. And that’s about it. So it’s that informatics perspective, I think, that really endangers biosignatures. They just don’t carry a lot of information to begin with.</p>
+<p><strong>LEVIN:</strong> So, how do you place yourself in the optimism-pessimism spectrum? Are you searching for life scientifically because you believe that this is a viable result within your scientific lifetime? Or are you more, “I’m interested in planets and moons from the aspect of astronomy, regardless of the discovery of life?”</p>
+<p><strong>KIPPING:</strong> I’d say I’m hoping and I’m more interested in the idea of life. That is a great dichotomous split I think that you just gave there, and I think a lot of astronomers are driven by how does the universe work or are we alone? And those are like two very basic drivers to a lot of astrophysicists in different ways. I mean, I’m interested in both, but I’d say I’m probably more driven by the latter.</p>
+<p>However, am I an optimist or a pessimist? I’d honestly try to be, it’s a little bit of a cop-out, but agnostic and forcefully agnostic because I’m so terrified of experimenter’s bias. And we’ve seen this so many times in history of scientists even claiming life, claiming this comet is an interstellar ship, claiming this little rock on Mars is a face, claiming this fossil from the Allan Hills meteor—Bill Clinton stood on the White House lawn and talked about that as evidence for life on Mars, and now nobody believes it.</p>
+<p>So many times we’ve got caught up in that excitement of optimism, and I think the lesson for me has always been like just try and remain sober. Just try and look at it objectively and require those high standards of evidence that we apply in all other aspects of our science. It is not different when we look for life. So I try to remain objective, and I think honestly, it is perfectly consistent with everything we know about the universe that we are alone. There’s nothing we know about the universe that rules that out. It is within the realms of possibility.</p>
+<p><strong>LEVIN:</strong> Well, given that we’re alive and we’re here and we have the luxury of looking deep into the sky, what is it about this exploration that makes this the way you wanna spend this precious life that we have?</p>
+<p><strong>KIPPING:</strong> For me, it’s very much just curiosity-driven. It’s just these are the things I’ve always wondered about life in the universe, what else might be out there. I’ve always dreamed of visiting other stars and seeing their planets. It’s just that pure very simple curiosity-driven fascination with what’s out there. And I think if you don’t have that life can feel a bit empty, at least for me.</p>
+<p>Like, I always get a little bit depressed when we’re asked sometimes as scientists to defend the technologies or industrial applications of searching the universe for gravitational waves or something. Sure, there is many side benefits, and we can list those off. But in a very pure sense, the reason for doing it is the same reason why we do poetry. It’s the same reason why we do art. It’s that, what is the point of being on this Earth if our sole interest is bread on the table, feeding myself, going to sleep, waking up the next day, going back to work, and that’s your whole life? It’s just this pure machine-like process.</p>
+<p>We’re more than that, I believe. And I think looking out and wondering about the universe, it enriches our soul, enriches our human nature. I would hate to live in a world where we didn’t ask these questions. And I think it’s a real privilege, certainly, that I’ve had a career where I’ve been able to dwell on some of these questions and think about them so much.</p>
+<p><strong>LEVIN:</strong> Such a pleasure to talk to you and to share your stories and your insights and your ideas about the future of discovering whether or not we’re alone. This is really a delight. Thank you so much.</p>
+<p><strong>KIPPING:</strong> It’s always a pleasure, Janna.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>STROGATZ:</strong> Well, I want to agree with that. I have often tried to make that argument myself about enriching our soul. But there’s very natural reaction to have to that, which is we fund—or at least we used to fund science—but we don’t really fund poetry. You know, why should the taxpayer invest in science if it’s another form of poetry?</p>
+<p><strong>LEVIN:</strong> Yeah. And what do you think the answer to that question is?</p>
+<p><strong>STROGATZ:</strong> I think it’s much more than poetry. It’s at least it’s very different from poetry. It’s partly poetry. It’s many things. I mean, it’s a really serious question, especially in the age of artificial intelligence, where so many of the things that we’re doing, we have to ask why are we doing them. I don’t know. Yes, part of it is for soul enrichment, part of it is for helping future technology or helping, you know, new medicine or improve the quality of life of all of us. I want all of it. I don’t know. What do you think?</p>
+<p><strong>LEVIN:</strong> Well, I would say, that it obviously really resonates with me what David’s saying, but for a reason that I think is also transformative for humanity. If you think about the shift with Copernicus from thinking we’re at the center of the universe to understanding and comprehending that we are not, that has untold implications, consequences, ramifications for the entire paradigm of civilization, and what we’re doing here and how we handle each other.</p>
+<p>And so I think it can both be the dreaming blue skies approach and have implications for the future of humanity. I think Earthrise is a very good example of that. Looking back at the Earth as it rose over the moon in the Apollo missions initiated environmental movements. It really gave people a strong sense of connectivity on the Earth and kind of the limitations and evils of tribalism. So it changed culture, right? It changed civilization. So I think we can do both those things.</p>
+<p><strong>STROGATZ:</strong> Hmm, I like your answer a lot, that it gives, that this cosmic perspective as someone like Carl Sagan might have called it, maybe he even used that phrase, gives us a kind of humility and maybe makes us better people. You know, and if, as you say, like when we’re talking about alien civilizations, that our whole civilization is a blip in time, each of our individual lives is an even shorter blip in time, and why not be as good as we can be for that blip?</p>
+<p>You know? I mean, this, here we’re getting into theology and ethics and all of that, but maybe science, which is often seen as somehow separate from all of that, is really a very good teacher about how to live ethically.</p>
+<p><strong>LEVIN:</strong> I think it is. Yes, And I think about how to cooperate internationally, how to transcend belief systems and trappings of nation and faith and, and to instead view ourselves as one species playing out on this one place. Together. Well, on that note, man, yeah, I, I need to go meditate.</p>
+<p><strong>STROGATZ:</strong> Okay. Ommm.</p>
+<p><strong>LEVIN:</strong> Yeah, exactly. I need some universal transcendence, yeah.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>STROGATZ:</strong> If you’re enjoying <em>The Joy of Why</em> and you’re not already subscribed, hit the subscribe or follow button wherever you’re listening. You can also leave a review for the show. It helps people find this podcast. Find articles, newsletters, videos and more at quantamagazine.org.</p>
+<p><em>The Joy of Why</em> is a podcast from <em>Quanta Magazine</em>, an editorially independent publication supported by the Simons Foundation. Funding decisions by the Simons Foundation have no influence on the selection of topics, guests, or other editorial decisions in this podcast or in <em>Quanta Magazine</em>.</p>
+<p><em>The Joy of Why</em> is produced by PRX Productions. The production team is Caitlin Faulds, Jade Abdul-Malik, Genevieve Sponsler, and Merritt Jacob. The executive producer of PRX Productions is Jocelyn Gonzales. Edwin Ochoa is our project manager.</p>
+<p>From <em>Quanta Magazine</em>, Simon Frantz and Samir Patel provided editorial guidance with support from Samuel Velasco, Simone Barr, and Michael Kanyongolo. Samir Patel is <em>Quanta’s</em> editor-in-chief.</p>
+<p>The episode art is by Chanelle Nibbelink and our logo is by Jaki King and Kristina Armitage. Special thanks to Garth Avery at the Cornell Broadcast Studio.</p>
+<p>I’m your host, Janna Levin. If you have any questions or comments, please email us at <a href="/cdn-cgi/l/email-protection">[email protected]</a>. Thanks for listening!</p>
+<p>[<em>Music fades</em>]</p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/will-we-ever-find-alien-civilizations-20260709/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/will-we-ever-find-alien-civilizations-20260709/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

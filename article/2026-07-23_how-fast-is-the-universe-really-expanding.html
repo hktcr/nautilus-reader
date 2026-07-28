@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Fast Is the Universe Really Expanding? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How Fast Is the Universe Really Expanding?</h1>
+            <div class="meta">
+            Av Steven Strogatz and Janna Levin &nbsp;|&nbsp; Publicerad 2026-07-23
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-5AOY</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>One of the biggest mysteries in cosmology seems to keep getting bigger. Astronomers have known since the 1930s that the universe is expanding, but in the 1990s, the discovery that this expansion is accelerating rather than slowing down came as a huge shock to the field. Something had to be driving that acceleration, and dark energy was proposed as the cause. What began as a seismic shock in cosmology eventually <a href="https://www.nobelprize.org/prizes/physics/2011/summary/">led to a Nobel prize</a>.</p>
+<p>But this story has a sequel, and it comes with another major plot twist. The two main methods for estimating the universe’s present-day expansion rate are producing significantly different answers. As a result, how fast the universe is really expanding has become a matter of considerable debate — with no small amount of angst — and the discrepancy has become known as the Hubble tension. Perhaps most surprising of all is that one of the loudest voices raising concern is <a href="https://physics-astronomy.jhu.edu/directory/adam-riess/">Adam Riess</a>, the astrophysicist whose Nobel Prize-winning work helped ignite the acceleration debate in the first place.</p>
+<p>Riess joined co-host Steven Strogatz on <em>The Joy of Why</em> to explain how we got to this point, what the Hubble tension might be telling us, and what may happen next.</p>
+<p>Listen on <a href="https://podcasts.apple.com/us/podcast/the-joy-of-why/id1608948873">Apple Podcasts</a>, <a href="https://open.spotify.com/show/2FoxHraQSKwxV2HgUfwLMp">Spotify</a>, <a href="https://tunein.com/podcasts/Science-Podcasts/The-Joy-of-Why-p1653040/">TuneIn</a> or your favorite podcasting app, or you can <a href="https://www.quantamagazine.org/tag/the-joy-of-why">stream it from Quanta</a>.</p>
+<p><a href="/tag/the-joy-of-why">All episodes</a></p>
+<p>Your browser does not support the audio element.</p>
+<h2><strong>Transcript</strong></h2>
+<p>[<em>Music plays</em>]</p>
+<p><strong>STEVE STROGATZ:</strong> I’m Steve Strogatz.</p>
+<p><strong>JANNA LEVIN:</strong> And I’m Janna Levin.</p>
+<p><strong>STROGATZ:</strong> And this is <em>The Joy of Why</em>.</p>
+<p><strong>LEVIN:</strong> A podcast from <em>Quanta Magazine</em>, where we explore some of the biggest unanswered questions in math and science today.</p>
+<p><strong>STROGATZ:</strong> Well, great to see you, Janna. How’s it going?</p>
+<p><strong>LEVIN:</strong> Hi, Steve. Yeah, great to see you. I’m excited to hear what you have to talk about today.</p>
+<p><strong>STROGATZ:</strong> Yeah, good, because I could barely contain myself. This was an especially fun conversation I had with Adam Riess, who I guess is someone you would know from the circuit.</p>
+<p><strong>LEVIN:</strong> Yeah. Definitely. I was speaking with him not too long ago.</p>
+<p><strong>STROGATZ:</strong> Uh-huh. Well, right, I would think that in the astrophysical world you would have crossed paths, so I’m not super-surprised to hear it. But actually, I myself had not spoken to Adam or seen him for many, many decades. It turns out he was a, uh, a student when I was just beginning as a professor.</p>
+<p><strong>LEVIN:</strong> Oh, wow. In your class?</p>
+<p><strong>STROGATZ:</strong> He was literally one of my students at MIT in my first job.</p>
+<p><strong>LEVIN:</strong> Wow, how amazing to think these young kids in your class, one of them’s gonna be a Nobel prize winner.</p>
+<p><strong>STROGATZ:</strong> Well, exactly. Yeah, very memorable student. Really a great guy. But, I would actually like to pick your astrophysics brain if we could for a second because one of the things that I talked to Adam about is the issue of the universe expanding and also its expansion accelerating.</p>
+<p><strong>LEVIN:</strong> Right.</p>
+<p><strong>STROGATZ:</strong> You know, like you were there back in 1998 when we got the news about the acceleration. Do you, um, remember anything about that time? Like what it felt like in your community?</p>
+<p><strong>LEVIN:</strong> Oh, yeah. Well, I was at Berkeley, and that’s where Adam was. And also Saul Perlmutter, the other group, right? These were two different groups working. So I absolutely remember, I was at the Center for Particle Astrophysics, and Saul was kind of up in the hill in Berkeley, and he was coming down with these results, and I was like, “Come on, man.” Then there was a lot of discussion, honestly, about how there’s huge sensitivity to the temperature of the supernova, you know, very high power.</p>
+<p><strong>STROGATZ:</strong> And so the reason you’re bringing up this thing about the power and the sensitivity is that the results were so shocking that everybody wanted to be very, very careful.</p>
+<p><strong>LEVIN:</strong> Very, very careful. And this is outside my field, this is very observational. I’m more on the theoretical side. But, I remember so well, though, just being in the room while those conversations were happening between the observers, and they were really being interrogated by the theorists who were very interested in data. You know, the theorists right on the cusp of data. It was really interesting times, no question.</p>
+<p><strong>STROGATZ:</strong> That’s exactly where we’re gonna go. So, for our listeners who may not know about Adam, in addition to having been a student at MIT, soon afterward, he shared a Nobel Prize for his work on the discovery of the accelerating expansion of the universe. That was in 2011. But since then, as we’re gonna hear, there have been quite a few plot twists in the story. As new data have come in, he’s had to revisit some of his findings and the findings of other people in the field. So if you’re ready, Janna, should we go cosmic?</p>
+<p><strong>LEVIN:</strong> Let’s do it. It’s a really interesting moment in cosmology, for sure.</p>
+<p><strong>STROGATZ:</strong> Fantastic. Okay. Well, here we go.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>STROGATZ:</strong> Adam Riess is a professor of astronomy and physics at the Johns Hopkins University and a senior member of the science staff at the Space Telescope Science Institute. Among his many honors, Adam is the co-winner of the 2011 Nobel Prize in physics for his part in the discovery of the accelerating expansion of the universe. Welcome to <em>The Joy of Why</em>, Adam.</p>
+<p><strong>ADAM RIESS:</strong> Thank you for having me.</p>
+<p><strong>STROGATZ:</strong> Oh, well I am so excited to see you I think it’s something like, I’m guessing about 35 years from the time. When you were an undergraduate in a class that I was teaching in the math department at MIT, it was a course in complex analysis, but I’m wondering, as a couple of old men now, can you tell me what you remember from that experience?</p>
+<p><strong>RIESS:</strong> Sure, of course. MIT was very impactful to me. You know, being a student there felt like a big jump, and so each of those courses felt like, you know, Job’s trials. And I remember that class was a sea of tranquility in the midst of other things that were super tough and rough.</p>
+<p>I think it was because of you, to be honest. I remember vividly sitting in that class. You were a young professor. And I remember one day sitting there puzzled and getting ready to raise my hand, and you said, “Adam, you look bothered by this concept. Is there something about it that bothers you?”</p>
+<p>And I was amazed. No professor, first of all had ever said my name, let alone actually gauged the expression on my face and cared that something was disturbing me. And, you know, we got right into it. And, so that course was great. I’d like to say that I spent the rest of my career focused on that material, but I moved over towards physics.</p>
+<p><strong>STROGATZ:</strong> Well, thank you for sharing that memory. I have to say, I do sometimes look at students’ expressions on their face and I can see something. You had a very animated face. You still do.</p>
+<p>I mean, I think I’ve taught a few thousand students now so I don’t remember all my students, but I do remember the ones that win Nobel prizes and I think you might be the only one. So it’s really very—I’m very proud of you. I’m thrilled to be able to talk to you now. Anyway, it’s great.</p>
+<p>So you say you moved into physics after, or I guess you were already probably pretty intensely interested in physics at that point?</p>
+<p>I was fascinated by the discovery that the universe is expanding. I just think that’s amazing. As a kid, it’s not what I would’ve expected.</p>
+<p><strong>RIESS:</strong> Sure, I was. You know, at MIT, everything is numbers instead of names. So I was course eight, and I was taking the required courses in math, which was course 18. That course was 1804, not the year. Although sometimes we feel that old, I know. But, but, you know, really my passion was physics. It was really understanding the physical world.</p>
+<p><strong>STROGATZ:</strong> And so very quickly that interest led you into subfield or adjacent field of astrophysics, and into the study of very spectacular objects in the universe, called supernovas or supernovae — if we want to be in Latin about it. So I have to admit, I’m not an astrophysicist. You probably realize that, and I need some of the basics explained here. So what are supernovas and then why are they interesting objects to study?</p>
+<p><strong>RIESS:</strong> Right. I’ll take the second — why they’re interesting objects to study — and I’ll jump back and say, what is the question or what is the point? And so to me, when I went from physics to astrophysics and first learned what it is that we know about the universe, I was fascinated by the discovery that the universe is expanding. I just think that’s amazing. It’s, as a kid, it’s not what I would’ve expected.</p>
+<p>I would’ve expected, the universe is just the thing that’s always been there. It’s like the bedrock, you know, it’s eternal, it’s unchanging. And so that was amazing to learn and then to further learn that we still don’t understand that much about the universe. And so by watching it expand, by measuring it expand, by seeing its expansion history, we can deconstruct the nature of the universe.</p>
+<p>We can figure out how old it is, we could figure out what its ultimate fate is. We could figure out what it’s composed of. And so those are all really, to me, the questions that I wanted to have answered. It just turns out the means to do that is to have reliable tracers of the expanding universe. So objects in the universe that act like test particles that we could watch.</p>
+<p>And it just so happens when I started graduate school that exploding stars, supernovae, became some of the best tracers right at that time. Because they’re so luminous, you could see them far away. So you could see far into the history, the past. But also, and this is the most important point, which I’m sure we’ll talk about, to measure the expansion of the universe, you need to measure two aspects of your tracer. You need to measure what’s called the red shift, which is essentially, the stretching of the wavelengths of light emitted by that tracer because of expansion.</p>
+<p>So it’s a direct measure of the expansion of the universe, but then the other that you have to measure is how far away those supernovae are, which is telling you how far back in time you are looking so that you’re essentially tracking the expansion history of the universe the same way you would, you know, if you were to mark the height of a growing child on a door frame. Right, you would wanna mark their height and you’d wanna mark the time when they were at that height. And so those two quantities are how we chart the expansion of the universe. And those are observationally challenging.</p>
+<p><strong>STROGATZ:</strong> Well, that’s fascinating. So you’ve already anchored us in really fundamental questions here that although I was pitching it as, “Oh, you like astrophysics.” Maybe I was mistakenly emphasizing astro, like, you’re curious about supernovae as things in themselves. Like they are a tool for you. Sure they’re cool objects, but you’re using them because you wanna ask really big questions: How fast is the universe expanding? How do we know it’s expanding? That kind of thing.</p>
+<p><strong>RIESS:</strong> Right. This is sort of the dichotomy that we sometimes call astrophysics versus cosmology. Cosmology, the study of the structure, the shape, future, the past of the universe, as a whole entity, is really fascinating to me. And, you know, as a result, you have to study all the astrophysics and the physics and the math and the nitty gritties because, you know, you need to tease out that information.</p>
+<p>It so happens, in my case, I tended to study various classes of stars exploding, pulsating as those critical tracers.</p>
+<p><strong>STROGATZ:</strong> So this question about the universe expanding and the — what you refer to as tracers — the exploding stars, and then estimating how far away they are using the redshift to tell us about how fast they’re receding. It’s really gorgeous thinking, I have to say.</p>
+<p>I would love you to give us a little tutorial about how it is that people can estimate how far away galaxies are because it’s not an obvious thing and you have a lot of different techniques, whether using trigonometry — very near and dear to my heart —  or your concept of standard candles. Just give me a little basics of the cosmic ladder.</p>
+<p><strong>RIESS:</strong> This is actually the meat and potatoes of what I do. I should have said, when we look at these tracers, we need to measure their red shifts and distances. And the redshift is the easy part. You just take a spectrum and you recognize certain colors or lines which have moved to a redder location. And it’s trivial.</p>
+<p>The hard part is the distances. This is many have called the biggest challenge in all of cosmology is to figure out how far away things are. And, it’s a really fundamental problem. It goes back to, you know, almost being a little kid. You look out at the sky and everything looks very two dimensional, right? And you have no sense of depth. The depth perception is completely absent. And so, we’re in awe, but we’d be in more awe if we just understood how far away things were, how far back in time.</p>
+<p>So how do you lick that problem? And as you said, we start out with the things we know, which is geometry. And so we measure parallaxes when we can. And so just like we have two eyes and we get a vantage point from each of them on nearby objects, and the changing perspective or angle of something nearby, relative to far away, allows our brain and eye to do the geometry and estimate how far away something is.</p>
+<p>The problem is that space objects become very, very far away so that angle either becomes very tiny or you need a much bigger baseline, a separation between the two perspectives. And the best one, the biggest one we get is when the Earth goes around the sun and we could view a nearby star relative to a distant star, let’s say in January when we’re on one side of the sun and in July when we’re on the other.</p>
+<p>And if you’re lucky, you might be able to tease out the little change in angle of that nearby star. And so you can gauge the distance to some of the nearest stars. And we do this with space satellites and things like that. The problem is we’re after deeper waters. This is only a technique we can apply within the Milky Way galaxy.</p>
+<p>I remember making a gorgeous color image and putting it on my wall as the first supernova I ever observed. I’ll never forget its name and number and distance and everything.</p>
+<p>To be able to measure the distance to galaxies — which are thousands, millions, billions of times further away than anything in the Milky Way — that parallax angle would become imperceptibly small. So we have to switch to a completely different method.</p>
+<p>And the method we use most commonly is what ship captains know to use at night, which is the brightness of a lighthouse, right? So, you know, if you’re a ship captain at night, you wanna make sure you’re far enough away from a rocky shore. So you look at a lighthouse and you look for it to be faint, telling you that it’s far away that the light attenuates or dilutes as one over distance squared. That’s geometry too, of course, but it requires some understanding of what it is you’re looking at. That it’s a truly luminous object, a lighthouse, not a little pen light. And then you can gauge distances.</p>
+<p>And so that method astronomers call “standard candles,” the lighthouses. And they look for objects in space that can serve that role. And as I started graduate school, there was great recognition that a certain class of exploding stars, called Type IA supernovae could serve as outstanding lighthouses. They were very homogeneous, very uniform. They had small differences. But they gave you what was a pretty standard light source that was maybe 4 or 5 billion solar luminosity in total output for a few weeks. So that allows you to see very deep into space.</p>
+<p><strong>STROGATZ:</strong> So let me just underscore that last thing you said, because your whole subject is so mind blowing that you rattle off these things that, you know, you’re so used to by now. If the listener didn’t catch that, Adam just said that this one star exploding is about equivalent in brightness to about a billion stars shining normally like our sun. Okay. One star is as bright as a billion. That is a big boom.</p>
+<p><strong>RIESS:</strong> Yes, it really is. You know, it’s really because stars have a lot of fuel and they’ll spend billions of years putting that output at a kind of normal sun-like rate. But they have a lot of energy in reserve. And during an explosion event a fair fraction of the total available energy of the sun, instead of trickling out over billions of years, trickles out over hours, days, weeks, all the rest of it.</p>
+<p>So, it is a big boom. It’s sort of like, you know, the difference between driving a car with a gas tank, little bit of gas at a time, versus lighting the gas tank on fire. It’s just all of the fuel just goes up.</p>
+<p><strong>STROGATZ:</strong> Wow. That’s amazing. And then also this idea of standard candles. I love the basic physics that goes into explaining these Type I supernovae. Whenever they blow up, they will blow up with about the same amount of energy. You said it’s not perfect, but it’s pretty darn close. So if you could just tell us a little about the theory that gives us confidence that’s true, ’cause that’s a really pretty thing too.</p>
+<p><strong>RIESS:</strong> So I would say throughout the last century of cosmology, cosmologists looked for the best standard candle they could find. So, you look at a distant galaxy and every galaxy looks different than every other galaxy because a galaxy is a crowd of stars and there’s no such thing as a standard crowd, right? Those are different numbers. So those are not gonna be good standard candles, right? So what you need are actually individual objects that are the same kind of object just located in different places in different galaxies. Stars work, but they’re too dim.</p>
+<p>But this one kind of supernova, which there’s still some debate about this, but generally the general principle is it’s the center, the core of an old star called a white dwarf star, which is holding itself up against its crushing gravity by a kind of quantum mechanical pressure called electron degeneracy pressure. And this is something that the great Indian astrophysicist, Chandrasekhar first showed was stable only at a certain critical mass known as Chandrasekhar’s limit. So it’s 1.4 times the mass of our sun.</p>
+<p>And so that means that if a star exceeds that limit — if it’s sitting there at  Chandrasekhar’s limit, and let’s say it has a friend, another star orbiting it, and material gets transferred from one star onto the other — if it gets close to or even exceeds Chandrasekhar’s limit, then you will get runaway thermonuclear explosion because this electronic degeneracy pressure is no longer strong enough to hold back gravity. And it will compress and crush the star, giving you the property necessary for fusion and basically doing thermonuclear fusion over all remaining fuel.</p>
+<p>So as I said, there’s some debate about exactly the details, but this is the general broad-brush picture that gives you a fairly uniform explosion, far more uniform than anything else we know on a kind of macroscopic scale.</p>
+<p><strong>STROGATZ:</strong> If I followed you correctly there, and correct me if this is too crude, it’s almost like saying rather than standard candle, it’s a standard hydrogen bomb.</p>
+<p><strong>RIESS:</strong> Correct.</p>
+<p><strong>STROGATZ:</strong> Because it sounds like that’s what you just said, that we know the amount of material in the star. It’s gonna be 1.4 solar masses approximately. And it’s gonna completely blow up through this thermonuclear, which is fancy talk for hydrogen bomb. Maybe I’m a little bit off.</p>
+<p><strong>RIESS:</strong> Yeah. With the one substitution of it’s carbon and oxygen instead of hydrogen, but yes.</p>
+<p>The question in the 1990s was: Is the universe heavy enough to stop its expansion or is it light enough for the universe to expand forever?</p>
+<p><strong>STROGATZ:</strong> Okay, good. Great. So it’s not a hydrogen bomb, it’s a carbon oxygen bomb, but still it’s fusion, right?</p>
+<p><strong>RIESS:</strong> It’s fusion. And while some details about how the other star maybe donates the material or how fast the star is rotating can perturb a little bit the amount of energy you get out. And in fact that small variation, that was my thesis project, was to figure out how to account for the small variation.</p>
+<p>That if you think of a kind of a standard light bulb, like a 60-watt light bulb — I don’t know if kids still know. But you could imagine some are 58 and some are 62, ’cause the factory doesn’t make them all the same. And that could fool you into misestimating the distance a little bit. ’Cause you may be seeing one that looks a little fainter, ’cause it was 58 watts, but instead you’re, you think, oh, it’s further away, but it isn’t.</p>
+<p>How do you figure out from here which ones are intrinsically bright or intrinsically faint, given a little bit of distribution? And one of the things that was discovered in the early 1990s and became part of my thesis was the ones that are more powerful, rise more slowly and fall more slowly, to reach their peak than the ones that are more dim.</p>
+<p>And another confounding effect, we sometimes have to look at a supernova through a galaxy that has dust in it and that dust can obscure the light. So going back to my analogy of a lighthouse, it would be like looking at a lighthouse on a foggy night, right? It could make the lighthouse look dimmer and fool you into thinking it was further away than it really was.</p>
+<p>But the dust in galaxies also shifts the colors of the supernova light. And so if you could simultaneously measure the light curve shape that tells you whether it’s a bright or dim light bulb, and the colors that tell you how much dust is in the way, you could tease out these competing effects and get back to what you wanted, which was to figure out how far away the supernova was. And that was the subject of my doctoral thesis when I moved to Harvard, in the early 1990s.</p>
+<p><strong>STROGATZ:</strong> Well, I appreciate your going through that because this is such a bit of Sherlock Holmes work that you don’t have complete evidence. You have to do a lot of reasoning like they’re the use of the different colors. Or you didn’t use the phrase light curve yet, but you sort of hinted at this idea that the brightness — it’s not just one flash, like I said, a boom. But maybe you should tell us a little more about that, that when you’re looking at a supernova, what are you really measuring?</p>
+<p><strong>RIESS:</strong> I should point out that a supernova is incredibly rare like this. So it’s not like, you know, you could expect to see one on any given night when you look out at the sky.</p>
+<p>There is one in a galaxy like ours about once a century. And so, you know, if you wanna find a supernova, you just pick a nearby galaxy and you stare at it, you’re very unlikely to find a supernova.</p>
+<p>The breakthrough came in the 1990s, when astronomers began to build telescopes that had wide angles, and they had detectors that they could cover the focal plane with, so that you could take a single image that might contain hundreds of thousands of galaxies in one frame.</p>
+<p>Then you take another image, maybe a month later. And by math, you’re sure that one of those galaxies will have had a supernova over that month. Because you’ve just bought so many lottery tickets that you’re bound to win the lottery. And in the 1990s we learned to collect such images, digitally subtract one from another and find a new point of light. And then the supernova, it’s what we call its light curve. It usually takes about two or three weeks to go from explosion, when you don’t see it at all, to reach its maximum output, which is the sort of standard candle, if you will. The distance indicator.</p>
+<p>And then it will fade over the course of months. After a few months, it’ll be about 100 times fainter. And so what’s also so fascinating in this field is not only is it kind of mind blowing, but it has this kind of fire drill aspect to it where everything has to be done very fast and timely because these things are fading away.  You can’t say, “Uh, we’ll put that observation off a couple of weeks and come back and figure out what we wanna do.” No, you have to be, like, figuring out exactly what measurements you wanna make before the supernova fades away.</p>
+<p><strong>STROGATZ:</strong> Can you give us what it was like when you were first doing this kind of thing? Like, are you just looking at a stream of numbers? I assume you are, you’re not, there’s nothing visual here?</p>
+<p><strong>RIESS:</strong> It is actually very visual. Yeah, you get these elegant images of, if you’ve seen or can picture in your mind’s eye, a beautiful spiral-looking galaxy. And then you will see this extremely bright knot on it that may be as bright as the entire galaxy. It just looks like somebody turned on a spotlight in one spot, and it’s just bloomed over the whole area.</p>
+<p>Now, as you place the galaxy further and further away, and as we talk about the accelerating universe, we look so far back that this whole image shrinks to just a few pixels, so that you’re saying, “Okay, that pixel looks a little brighter than that pixel.” But when they’re nearby, they’re some of the most beautiful objects you could see with a telescope.</p>
+<p><strong>STROGATZ:</strong> Huh, really? I’m so surprised.</p>
+<p><strong>RIESS:</strong> It’s one of the great joys of working in astrophysics and cosmology. The subject’s fascinating and the pictures are pretty cool too.</p>
+<p><strong>STROGATZ:</strong> So tell me about that joy. Can you remember back when you first encountered this? Like, was your heart beating? Did you think this is like a holy experience, like religious almost, or what?</p>
+<p><strong>RIESS:</strong> I wouldn’t say religious, but I would say like a lot of us starting out in research, right? You sit down with your advisor and he — in this case, Bob Kirschner — he sort of knows everything and is wise and. He’s like, “All right, let’s study these Type IA supernovae. We need to find one.” And you’re like, okay. And you’re kind of on an Easter egg hunt at that point. And then, you know, some information comes in and you turn the telescope there and you take this picture and you see this beautiful spiral-looking-like snowflake. And then there’s that bright spot and you take a spectrum, and the spectrum reveals the chemical composition of that supernova that tells you, yes, it is a Type IA.</p>
+<p>I ran the calculations after doing the analysis and I came out with a crazy result that ultimately showed the universe was accelerating, not decelerating.</p>
+<p>It turns out Type IA’s produce a lot of silicon and sulfur in their explosions. And so you look for the signature of silicon and sulfur and I remember making a gorgeous color image and putting it on my wall as the first supernova I ever observed. And, yeah, I’ll never forget its name and number and distance and everything. But then there were many more after that.</p>
+<p><strong>STROGATZ:</strong> Oh, I like it. This is like your first love. You never forget your first love.</p>
+<p><strong>RIESS:</strong> Oh, for sure. Yes.</p>
+<p><strong>STROGATZ:</strong> Well, now that we have a little background about how to measure distances, take us to the late 90s. We know that the universe is expanding. We knew that for a long time at that point, but what didn’t we know? What did you end up discovering?</p>
+<p><strong>RIESS:</strong> So, if you can understand that we could measure how far away objects are and how much the light has been redshifted, then that maps to really telling us how much the universe has expanded up to different points in its history. And so that allows us to tell the expansion rate of the universe. It’s a historic number called the Hubble Constant, since Hubble was the first to measure that. And so that’s great.</p>
+<p>But then your question might be, you know, is that rate speeding up? Is it slowing down? What is the ultimate fate of the universe depends on how this story is changing.</p>
+<p>And so there’s a great trick that cosmologists can use to answer that, to figure out how it’s changing. We can look further out to look further back in time and make essentially the same set of measurements, not measuring now how fast the universe is expanding today, but using distant objects to tell us how fast it was expanding in the past, and then ideally how much that expansion is changing.</p>
+<p>Now, the prevailing wisdom, I would say, up and through the 1990s was that the expansion of the universe would be slowing down because after the Big Bang, you would have the attraction of the gravity of all the objects in the universe — the mass of the universe itself would act like a brake — and it would slow the expansion.</p>
+<p>Just like if I toss a ball into the air, the gravitational pull to the Earth will cause it to decelerate. And if I measure that deceleration, I could essentially weigh the Earth. And I can also, if I carefully measure that, figure out whether that ball will land on the Earth or maybe it was thrown with escape velocity and that there isn’t enough mass to pull it back and it will leave. And so the question in the 1990s was: Is the universe heavy enough to stop its expansion or is it light enough for the universe to expand forever?</p>
+<p>And the way to answer this was to see how much the expansion was now slowing down. And so after developing the techniques to measure how fast the universe is expanding with these supernovae, two teams of astronomers — a team I was on called the High Z supernova team, and a competing team called the Supernova Cosmology Project — were the first to look for and find ultra distant Type IA supernovae, which exploded eight to 10 billion years ago. So looking now halfway, two-thirds of the way, through the history of the universe to measure the change in the expansion rate.</p>
+<p>And as I said, we thought it would be slowing down. And circa 1997, 1998 when we first got our large collection of data, and I was very fortunate to be picked to lead the analysis of the first large tranche of data, I ran the calculations after doing the analysis and I came out with a crazy results that ultimately showed the universe was accelerating, not decelerating.</p>
+<p><strong>STROGATZ:</strong> It’s insane. I mean, you must have thought, wait a second, it’s accelerating?</p>
+<p><strong>RIESS:</strong> Sure. And in fact, I was sure that I did something wrong because having taken your math class right, I was very familiar with making mistakes, you know, this is what you do as a student is you try to do things and you get the wrong answer over and over and over. And then you try to find your mistake.</p>
+<p>And so yeah, it was very worrisome for a while. So I did a lot of cross checks — because it’s always better to find your own mistake. Then finally willing to share with the team and let them find the mistake. And then, you know, everybody cross-checked everything we could and we could not find the mistake. And then we started getting comfortable with the possibility that it was real, that this was the signal on the sky and that there was a deep physics reason why this was.</p>
+<p>And that is that in Einstein’s theory of general relativity, gravity has another option. It has another kind of gear. You know, in Newton’s theory, it’s only attractive. It only pulls stuff together, right? In Einstein’s theory, the gravity of empty space can be repulsive. Something he called the cosmological constant, and even invoked at one point to try to keep the universe in balance when he thought it wasn’t expanding.</p>
+<p>The interpretation we came to was that apparently Einstein was onto something, and that introducing [dark energy] gave a good fit to the data.</p>
+<p>And it’s always been around. Physicists later interpreted this as the energy of the vacuum of space, or what we now call dark energy, and it can go the other way. And so the interpretation we came to was that apparently Einstein was onto something, and that introducing this term gave a good fit to the data. Leaving it out gave a bad fit to the data.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>LEVIN:</strong> Yeah, it’s quite amazing. It was like Einstein couldn’t make a mistake ’cause he famously called the cosmological constant his greatest blunder, for the reason Adam said. He originally put it into his equation to try to make the universe not expand, right? But it’s very precariously balanced. And so if the balance isn’t perfect, it doesn’t make the universe static. It actually accelerates the expansion.</p>
+<p><strong>STROGATZ:</strong> Well, I’m wondering, the cosmological constant was something maybe people who knew history of science would remember, but it wasn’t part of standard general relativity coursework or anything, right? Wasn’t it sort of obscure in the ‘90s, or was it always there as like we need to think about it?</p>
+<p><strong>LEVIN:</strong> I think that’s a good question. It was probably there for theorists who would try anything. So essentially, people were thinking about the cosmological constant more in the context of things like inflation in the early universe, but then the idea was it would evaporate away, and it would decay into all the particles that made up the primordial soup, and it had no business hanging around today.</p>
+<p><strong>STROGATZ:</strong> That’s really interesting to think about that, that these inflationary scenarios had sort of softened people up to starting to think again about the cosmological constant.</p>
+<p><strong>LEVIN:</strong> Yeah. And I think it’s really interesting the Nobel prize was for the accelerated expansion. It doesn’t mention dark energy or a cosmological constant. That’s not what they got the Nobel prize for.</p>
+<p>They got it for the observations of the supernovae, which is really interesting, and the accelerated expansion. And I think that’s consistent with the Nobel philosophy that they award prizes for verified results. Now, we don’t know anything about dark energy, so there’s no Nobel prize for that. The best we can do is give it this proxy name. Other than calling it dark energy and musing that maybe it’s the energy of empty space, maybe it’s not.</p>
+<p>So, it remains to be an award to be doled out one day if somebody actually discovers what the dark energy is.</p>
+<p><strong>STROGATZ:</strong> That’s a really good point, that the Nobel… I mean, when we talk about Einstein and general relativity, famously he didn’t get a Nobel prize for either special or general relativity, right?</p>
+<p>His Nobel prize — I’m just chuckling because was so sure it was coming that he could promise it to his wife. Do you not know this story?</p>
+<p><strong>LEVIN:</strong> Really, I do not know this.</p>
+<p><strong>STROGATZ:</strong> He promised the money from his Nobel prize to come to his first wife, knowing when he got divorced that she would need some money.</p>
+<p><strong>LEVIN:</strong> That’s amazing.</p>
+<p><strong>STROGATZ:</strong> But he didn’t get it for relativity. He got it for you know, his explanation of the photoelectric effect.</p>
+<p><strong>LEVIN:</strong> Mmm-hmm, yeah, incredible.</p>
+<p><strong>STROGATZ:</strong> But it’s an interesting, sort of aesthetic or criterion that the Nobel Commission uses that they want, as you say, verifiable experimental or observationally solid physics.</p>
+<p><strong>LEVIN:</strong> And I think that’s appropriate. That’s how it should be.</p>
+<p><strong>STROGATZ:</strong> Well, alright. In connection with plot twists in our story, you know, if the cosmological constant was the first twist, it turns out, as we’re gonna hear after the break, that there is another plot twist coming.</p>
+<p><strong>LEVIN:</strong> Great. Suspense.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>STROGATZ:</strong> Welcome back to <em>The Joy of Why</em>. We’re speaking with Johns Hopkins astrophysicist Adam Riess about the accelerating expansion of the universe.</p>
+<p>So you mentioned the cosmological constant. It’s often going back to Einstein himself. In his notation, he used the Greek letter lambda to insert what some people, dismissively or sarcastically, will call a fudge factor. But it was something that was allowed by the equations of general relativity. As you say, Einstein wanted it at first because he couldn’t believe at the time that the universe was expanding.</p>
+<p>We, for now, treat each of those — dark matter, dark energy — in their most vanilla form because we haven’t yet found any sprinkles on them, but we’re looking.</p>
+<p><strong>RIESS:</strong> Right, you have to understand Einstein, he asked experimentalists, astronomers of the day, what is the universe doing? And they told him that the motions of things were very, very small.</p>
+<p>And the reason they did was because at that time, it was before the discovery even that galaxies were outside the Milky Way. And so astronomers thought of the universe as the Milky Way itself. And when he asked about what the Milky Way was doing — was it expanding, contracting — they were like, the motions are pretty modest, doesn’t seem like it’s expanding or contracting. And this would’ve been confusing to him because, if you had a collection of masses and it was static and you let go. Right? They would fall together.</p>
+<p>And so what was keeping it static? And so he saw, as you said in his equations, that there was an option for something to counterbalance the attractive gravity. And so he took it and set it to his, you know, as we would say, boundary condition that the universe be static.</p>
+<p>There were two problems, of course: One was the universe is expanding, and so that’s not the right boundary condition. The other is it’s an unstable equilibrium. It’s like taking a marble and putting it on top of a basketball. Yes, in principle it could sit there, but if you push it off, if there’s a slight difference, it’ll run away in one direction or the other. And so when he saw the universe was expanding, when Hubble and others showed it, he famously said this was the biggest blunder of his career, was to introduce this concept. And yet there’s no getting rid of it.</p>
+<p>Like a lot of mathematics and physics, it’s allowed to be in the equations unless you have some knowledge that it can’t exist. And so here we were some, oh, 80 years later saying, actually it looks like the universe is accelerating, which would be as if that repulsive type gravity actually was now winning over the attractive gravity of matter.</p>
+<p><strong>STROGATZ:</strong> There’s that funny saying I’ve heard, I’m not sure who to attribute it to, that what is not forbidden is compulsory. You know, like in something like this where the lambda term, the cosmological constant, was not forbidden by the equations. It was permitted by them. And in fact, now we think there is something like that. As you say, the modern term is often dark energy. But, we could go down a big rabbit hole of asking ourselves, what is this dark energy?</p>
+<p>But I think I would like to go in a different direction to talk about the Lambda Cold Dark Matter model, the Lambda CDM model, because I mean, I realize that you’re gonna want to tell us, there may be some tweaks needed to it, or maybe more than tweaks, but why don’t we first make the case that this is a really interesting, powerful, standard model. Tell us what this model is and what makes it compelling. What are some of its great successes?</p>
+<p><strong>RIESS:</strong> Sure. When we build what we call a model of the universe to first order, we’re talking about what it’s made of. What’s the recipe, if you wanted to make one. And so what is the stuff. Then we also usually talk about the laws of physics as part of that.</p>
+<p>But in the case of the universe, what people are familiar with the elements in the periodic table of elements. That’s the small stuff that’s like 4% of the universe. And the rest is dark. Dark meaning it doesn’t emit light. And so we can’t see it directly. We have to infer it by its gravity. And so from the 1930s to the 1970s and later astronomers came to understand that there was a lot of matter in the universe that had attractive gravity, but was dark, was not emitting light, called dark matter.</p>
+<p>It makes galaxies spin much faster than the luminous matter would indicate otherwise. Stars would just zing away from their galaxies. It makes galaxies orbit other galaxies and clusters, which again, they would just fly away if there wasn’t the extra gravitational glue. There’s bending of light called lensing. All of these techniques allow us to figure out that the universe is about 25% dark matter and about… maybe 26%… and about 4% normal matter. So 30% there and then.</p>
+<p>With our results in the 1990s and then quickly followed up by observations of the cosmic microwave background radiation showed the other 70% is this dark energy. So we get a sort of full universe that explains what we see, but 96% of it is dark.</p>
+<p>And to be clear, when we talk about it, we talk about its sort of gravitational action, but what we don’t talk about really, or can yet, is the microphysics, the details. Dark matter, we think it’s a particle, but we don’t know the nature of the particle. We don’t know if it’s stable, if it has other interactions.</p>
+<p>For dark energy, we sort of generally wave our hands and say it’s the energy of the vacuum. But, people who do quantum mechanical calculations try to estimate how much that should be, and they get an answer that’s 120 orders of magnitude off from what we get. So what we have is a very good, I’m gonna say just-so-story, you know, a phenomenological model grounded on lots of strong physics concepts. But it’s still a model. It’s not the physics itself. It’s not a description of those items themselves. We, for now, treat each of those — dark matter, dark energy — in their most vanilla form because we haven’t yet found any sprinkles on them, but we’re looking.</p>
+<p>People should understand this model is very successful. It explains a lot… But we’ve begun to see some hints of cracks in the model as well which we’re still wrestling with.</p>
+<p><strong>STROGATZ:</strong> Vanilla form, I see what you mean. You were describing some of the parameters that go into the model. That is, without saying what dark energy is, we can estimate what its contribution is to the budget, the energy budget of the universe. There’s the amount of dark matter, the amount of luminous matter. And there’s a few other parameters that go into this standard model. But the advocates for it, which I think is the consensus, that it’s our best model — though it is a model, right — that it explains a lot of things.</p>
+<p><strong>RIESS:</strong> It absolutely does. So it explains many things. It explains why the universe is expanding. It explains why we have the particular chemical abundances of light elements. It explains the cosmic microwave background radiation that we see, the fluctuations in it that we see. The particular spectrum of fluctuations that we see. And then it predicts an expansion history of the universe, including a phase early on when it is decelerating and dominated by attractive gravity, which allows structures to form like clusters of galaxies and planets and all of that good stuff. And then a later phase when it would accelerate, when it’s dominated by this dark energy as the matter is diluted by the expansion of space.</p>
+<p>So it explains a lot of what we see, and it should because it is developed as we look at the universe and we have added to it or changed it to match what we see. And so I would say up until the early 2000s, maybe even 2010, it fit everything really.</p>
+<p>But because we have these deep questions, we’re not just looking for a model, we’re looking for the physics. People continue to do more precise experiments because the nature of science has always been that you have a model and it’s the best approximation for reality. But inevitably it has some shortcomings, which maybe you haven’t seen yet or understood.</p>
+<p>In the case of Lambda-CDM as we call it, the shortcomings are partly theoretical that we don’t understand these dark parts. But observationally, it was excellent. And then as the 2010s went on, people did try to do more and more precise experiments to test this model, because we want to tease out is dark energy really a constant or is it something that varies over time?</p>
+<p>There’s some precedent in the universe for there was an episode shortly after the Big Bang we call inflation that also would’ve been dark energy, a different dark energy that would’ve appeared and disappeared over time. We’re wondering, is our dark energy today disappearing or getting stronger? We would like to know that. We would like to know more about the nature of dark matter, and so therefore, while we do theory, we also do better experiments to try to tell us more.</p>
+<p><strong>STROGATZ:</strong> I think it’s super interesting to appreciate the successes and the gaps together. Right, because the rest of the story that we want to tell here is one of discrepancies but they only become really impressive, at least to me, when you understand, like, what you expect in terms of how good the theory is. Up until now, the model has been good to within 1%, as you say, by tuning parameters that you can’t otherwise estimate. But still with that tuning, you can account for lots of different things to within 1%.</p>
+<p><strong>RIESS:</strong> People should understand this model is very successful. It explains a lot. It’s been the standard model for about 25 years. And it has survived through many dramatic advances in the precision of experiments. But as I think we’ll talk about as well, we’ve begun to see some hints of cracks in the model as well which we’re still wrestling with I would say.</p>
+<p><strong>STROGATZ:</strong> So let’s go there now, because this is the, and I find this compelling in your own biography, like it’s what a true scientist you are. If you don’t mind me heaping some praise on you here that the year that you mentioned, you said 2010s, people started noticing this is you and other people started noticing and you’re going to Sweden, you’re getting the Nobel prize, you’re still a kid, you’re just 41 years old or something, and you’re not satisfied. You’re not ready to just become an administrator. You want to keep doing science.</p>
+<p><strong>RIESS:</strong> Yeah, well, science is fun, right? So I was 41 and, you know, a lot of people said, “Oh, what are you gonna do now, you know?” And I looked at the other Nobel laureates and, unfortunately the average age has evolved up to about your seventies. So the average person is like, well, I’ve already done my academic career, I’m emeritus. So this is like a victory lap I’m gonna do and go give talks and things like that. But I was 41 and it was too, not just too soon, it was completely unappealing to me to do that and to stop what I was actually doing.</p>
+<p>I mean, I was in the middle of using the Hubble Space Telescope, how cool is that, to look at for distant, exploding stars and pulsating stars and mapping the expansion history of the universe. I decided that the only way forward after that trip to Stockholm was to try to push out as much as I could all those speaking things and try to really focus on the science because, you know, once you stop it’s hard to go back.</p>
+<p><strong>STROGATZ:</strong> Well, okay, so this is where the plot thickens. You start making these improved measurements. And then, so, tell us what you found and where tension enters our drama here.</p>
+<p><strong>RIESS:</strong> So, we have a new model, Lambda-CDM, and it has these parts — dark matter, dark energy — that’s all great. And the question became, what is the nature of this dark energy? And so as a physicist, we say, “Okay, let’s find a number or a property of it that we can measure and it will tell us something about it.” And so in the way that dark energy produces gravity, what matters is what’s called its equation of state, the ratio of its pressure to its energy density. And this number is called W. And so if it’s a cosmological constant, then W will be minus one for all time.</p>
+<p>And if it’s some kind of field in space — think of a field you know of, the electric field, the magnetic field — this would be a different field, but it would’ve energy and its energy would act like dark energy, then it might not be minus one, it might be some other number. And there’s been a lot of effort in space missions built to try to study this W number.</p>
+<p>And I saw one of the better ways to do this would be to measure the Hubble Constant, the actual present expansion rate of the universe, and compare that to the predicted value it should have following both this model Lambda-CDM and this exquisite cosmic microwave background data, that was coming from new space satellites like WMAP and Planck, flown by NASA and ESA. And I began a new project, called SHOES to leverage the Hubble Space Telescope and try to improve the measurement from 10% precision, which had been before to try to reach 1% precision.</p>
+<p>I think one of the fun things in science is the adventure and the mystery of it, that this is the process. Every, everybody in the past who called something a standard model eventually had to revise it.</p>
+<p>And at first it was going really well [laughs]. We were getting measurements that were smaller and smaller uncertainties, and they were matching the cosmic microwave background to the most part. And then, a funny thing happened. It was about a little more than 10 years ago, it was 2013, and Planck, the new cosmic microwave background experiment from the European Space Agency, very state-of-the-art, came out with a pretty large adjustment of the predicted value of the Hubble Constant.</p>
+<p>Our measurements typically had been in the low 70s in these arcane units that astronomers use, kilometers per second per mega parsec, which is a very strange number, but it’s the inverse of time. And so if you inverted it, it actually tells you the approximate age of the universe.</p>
+<p>And so the classic number from local measurements had always been in the low 70s — 70 to 75. And we were honing in on around 73 plus or minus two. And that all looked okay with the previous cosmic microwave background data. But when better cosmic microwave background data came out, it was suddenly, “Oh no, it’s gotta be more like 67, plus or minus 0.5.”</p>
+<p>Now, this might sound like a small difference. Again, back to your statement earlier, this is a good model, right? We’re trying to thread a needle from the other side of the universe. You know, we’re starting at the moment of the Big Bang and asking how fast the universe will be expanding some 13 to 14 billion years later. And we’re like, we’re off by 8 or 9%. That’s pretty good predictive work, I would say in almost any other field.</p>
+<p>But we’re rigorous about this. And our error bars are small and their error bars are small. And the only thing connecting them is the theory, the model, tells us how to explain the trajectory of the universe from the Big Bang to the present time.</p>
+<p>And something has to give either the cosmic microwave background measurement is wrong or the local measurement is wrong, or the story that connects them is not quite right. We’ve all been doing deep dives over the last decade, redoing the measurements very carefully. I’ve been using the James Webb Space Telescope now instead of the Hubble Space Telescope, but getting the same answer. People have been doing a lot of work on the cosmic microwave background side, getting the same answer.</p>
+<p>The community has poured over this and scrutinized over it. And so it’s gotten a name called the Hubble tension, which is, as it sounds, it’s a tension between what you think the Hubble constant should be based on the model and the early universe and what it actually appears to be. And it has surpassed what we call five sigma, which, in physics talk means the discrepancy is five times larger than the error bar on the experiment, which is the point at which we say, “Hey, something’s going on.” And so it’s been a lot of fun, I would say, to try to figure out what that something is.</p>
+<p><strong>STROGATZ:</strong> Fantastic summary. That’s perfect. You’ve talked a lot about the cosmic microwave background, which we’ve been assuming is standard knowledge. I want to clarify. We’re taking a baby picture of the universe. Like you talked earlier about the door jam…</p>
+<p><strong>RIESS:</strong> Right, right.</p>
+<p><strong>STROGATZ:</strong> So I know at age 66, I’m 6’ 1”. Now imagine when I was in the hospital, and I’m not even one day old. I’m in the baby crib. If you had looked at me as that little baby and then you said, “Yeah, but I can tell how tall Steven is gonna be when he’s 66 because I have this great model and I’m gonna predict his height and I can predict his height to within 8 or 9% when he’s 66 from this one-day-old baby.” That’s what the cosmologists are trying to compare. The people doing the baby are the Lambda-CDM people. And you’re doing…</p>
+<p><strong>RIESS:</strong> Right. I’m measuring the door jam right now and the model said, in this case, “Hey, Steve was supposed to be 6 foot 1,” and we’re coming out with, he is more like seven foot tall and you’re, which, you know, might be fun, but you’re like, that doesn’t, that, that is really would be truly unexpected for you to be seven feet tall.</p>
+<p>And you might say, “Hey, maybe somebody took that baby picture of you wrong or they were using the wrong tape measure or something.” And that’s the stuff we sort of know how to do, that we know how to double-check experiments, do it with different telescopes, have different groups of people do it, different tools, different tracers. So that work has gone on for a decade and nobody has found the problem with the measurements. And so then you start to wonder, is it the growth chart, the story that we tell the model.</p>
+<p>And on the one hand you say, that should be pretty easy to play with. You told me this dark stuff is so vanilla that you don’t know what dark energy and dark matter are. Can’t you just turn some knobs, some features on those that change it, give yourself an extra couple growth spurts during your teenage years, and suddenly you’re seven feet tall? And the problem is it’s a fairly over-constrained problem that we do have a lot of data at other junctures along the way. And so it’s a wrestle both from the theory to come up with ideas that can do it, and from the observations to find out if there’s anything amiss with the observations. And so, that is one that I’ve been wrestling with a lot.</p>
+<p>The problem is that science is not history. You actually have to do the work, you have to do the experiments, you have to have the critical thoughts. That’s what makes science so much fun.</p>
+<p><strong>STROGATZ:</strong> I’m sure there are some listeners who are thinking they’ve heard about dark energy, dark matter. It seems like these are big question marks. Maybe the scientists don’t really know what they’re doing. You know, they’re using words, but it’s just to cover up their ignorance. And also these, as you pointed out, in many ways, there’s dust, there’s, these measurements are difficult, these objects are very far away. How — you know if I’m gonna be skeptical — how do you know that there aren’t errors in this whole story, systematic errors?</p>
+<p><strong>RIESS:</strong> The best way we know is that, first of all, we build in lots of redundancy. This is one of the things I love about science is I could sit there in my laboratory with my data and do some calculations and say, “Behold there’s dark energy,” right?</p>
+<p>But I have to publish those results and other people check them. Meanwhile, somebody on the other side of the planet can analyze that same pile of data and they may come to a different conclusion. And if everybody’s coming to a different conclusion, we haven’t discovered anything. And so the important element of independent verification done by many people in all kinds of places over the planet with different backgrounds and whatnot. Then we come in with other telescopes. So I’ve talked about, we use ground-based telescopes. We see the same with the Hubble Space Telescope. We see the same with the James Webb Space Telescope. And so the sheer redundancy and cross-checking in this, when people get an alternative answer, we also have to run that down too and say, “Why did they get a different answer?”</p>
+<p><strong>STROGATZ:</strong> It’s a really tough problem. I think given how good the model is and, also given that we can’t just go around adjusting things without wrecking something else that already works. It’s not easy.</p>
+<p><strong>RIESS:</strong> Correct, that is the big challenge. However, having said that, if this is a hint of a crack in Lambda-CDM, there have been other hints as well, so this is not the only experiment.</p>
+<p>So more recently, there are results from the DESI experiment, which is measuring the three-dimensional positions of galaxies over the whole universe and, compared to the cosmic microwave background, suggests that dark energy doesn’t look like the cosmological constant. Looks like there’s some change going on there. There is the way we measure the clumpiness of matter in the nearby universe that, again, based on the way the universe looked shortly after the Big Bang in the model, we thought it would look clumpier than it does. Instead, it looks smoother. So there are these hints which on the one hand could be cracks and if, you know, a really clever person eventually puts them all together might change the story.</p>
+<p>These could be the loose thread on the sweater that you pull on and might unravel the sweater, or you just pluck it off and you’re like, “Okay, that was not that big a deal.” I think we don’t know, but I think one of the fun things in science is the adventure and the mystery of it, that this is the process. Every, everybody in the past who called something a standard model eventually had to revise it.</p>
+<p><strong>STROGATZ:</strong> Good point.</p>
+<p><strong>RIESS:</strong> I could give you historical examples of where both were the truth in the situation. The problem is that science is not history. You actually have to do the work, you have to do the experiments, you have to have the critical thoughts. That’s what makes science so much fun.</p>
+<p><strong>STROGATZ:</strong> It is really interesting, and I like your comment too, although I’d be tempted to push back. I mean, yes, science isn’t history, but we do have really interesting examples from history of science where sometimes a little tweak to a model was enough, and sometimes you needed a conceptual overhaul like Newton’s model for gravity to Einstein’s general relativity.</p>
+<p>The cavalry is coming. In this case, it’s many great observatories, which I’m very excited are coming online.</p>
+<p><strong>RIESS:</strong>  You know, Steve, that is my favorite example of all time, is, and I’ll just tell for the listeners who may not be familiar, back in the 1800s, what astronomers did was they tracked the positions of planets religiously, and they worked out their orbits. And in the early part of the 1800s, they noticed that the outermost planet they knew at the time, Uranus, was misbehaving.</p>
+<p>It was traveling too fast, and it was traveling too slow, and there was a speculation by scientists that there was another planet, which became Neptune, that was further out and it was pulling on Uranus, that they couldn’t see it. So they calculated with pure math where it should be and then looked for it with a telescope and found it, okay?</p>
+<p>So that was great. So Newton’s theory was fine. It was just some missing stuff. And then later in the century, Mercury was the one that was misbehaving, the innermost planet. It travels in an elliptical orbit, and that orbit is not supposed to precess or rotate itself at the rate that it was, and people struggled with that. They came up with the same idea: “Oh, look, it’s gotta be a missing planet. We’ve seen this movie before.” And they imagined a planet called Vulcan that was between Mercury and the Sun. They looked for it. They couldn’t find it. Fifty years later, Einstein changes gravity and shows that Mercury will precess in general relativity, his theory of gravity.</p>
+<p>And as you say, what looks like kind of a small little observational crack or, you know, loose thread on a sweater unravels the thing. And so that’s why it’s hard to tell. Is this a Neptune or is this a, you know, general relativity? I really don’t know.</p>
+<p><strong>STROGATZ:</strong> Perfect examples. Yeah. I’m glad you brought up the Uranus, Neptune thing because you see both types of things. Big conceptual overhaul needed or maybe just something’s missing and it’s not a big overhaul. So we don’t really know.</p>
+<p>Okay. So as you say, it’s an adventure, this great enterprise we’re in — science — and always progressing. There’s something else coming along the Nancy Grace Roman Space Telescope.</p>
+<p><strong>RIESS:</strong>  Yeah, the cavalry is coming. In this case, it’s many great observatories, which I’m very excited are coming online. There’s the Vera Rubin telescope, which is the biggest full view telescope that is on the ground, very powerful, just started observing a few months ago. There is the Euclid, the European Space Agency mission, which recently launched, and then there is the Nancy Grace Roman being launched by NASA in September of this year, which is kind of a Hubble Space Telescope on steroids.</p>
+<p>It can collect in a single image about 100 times the field of view of Hubble, and it operates very quickly too. So it’s going to have a kind of collecting power that’s about 1,000 times faster than Hubble. And so with this large amount of data, we hope to tease out more information about the recent expansion history of the universe, if dark energy is changing and any other sort of hints we can get.</p>
+<p>Yeah, so we’ll learn things about exoplanets and galaxies, all kinds of things, but this really should be a quantum leap in terms of our data capability and, as long as I’ve been in this field, data has really been crucial to making the kinds of breakthroughs that we have.</p>
+<p><strong>STROGATZ:</strong> If we could just close on an emotional point, our show is called <em>The Joy of Why.</em> Is there something that brings you particular joy? Is it what data can tell you or, what’s the fun in this for you being a physicist and an astrophysicist?</p>
+<p><strong>RIESS:</strong> To me it’s the mystery, and then it’s the potential to answer mystery. You know, when I was a kid, if I wanted to know, how old is the universe and what’s its fate, I would’ve thought you’re gonna ask a philosopher or rabbi, I don’t know. But these aren’t the kinds of things that mortal people answer.</p>
+<p>And the fact that with science and with these capabilities that we could address really profound, big questions and do it in a kind of methodical way and get real answers. Yes, we end up with new questions. It doesn’t all come as one answer, like the famous number 42 in <em>Hitchhiker’s Guide</em>. It ends up being a kind of a riddle, but I like that.</p>
+<p><strong>STROGATZ:</strong> The other thing that occurs to me is an old Woody Allen movie where there’s a little boy, and he’s depressed but he says, “The universe is expanding.” And the mother says, “What is it to you? Brooklyn’s not expanding.” My question is something like, are your parents alive? Did they get to witness all of this stuff that happened to you with the expanding universe?</p>
+<p>The fact that somehow nature’s put out just enough of a popcorn trail for us to follow, who doesn’t wanna follow that popcorn trail and see where it leads?</p>
+<p><strong>RIESS:</strong>  They got to witness some of it. My mom is still around. She saw me win the Nobel prize. But, um, I would say that they thought these were profound things. When I was a kid, my dad would take me outside and we’d look up at the stars. And he was not a physicist, but he knew a few things, and he would say, “Isn’t it amazing when you look at the stars that the light has been traveling to us for millions of years, and so what you’re seeing is not actually the way they are now, it’s the way they were millions of years ago?”</p>
+<p>This just kind of blew my mind. And he would say, “In fact, the stars might not even be there anymore, and we won’t know about that for millions of years.” And just this idea there’s information that’s traveling to us, the story’s changed along the way, we’re still seeing this old story. How could that be? Could I catch up to that light?</p>
+<p>These are profound things that raise a feeling of awe in me and I think a lot of people. And so, you know, back to that kid in the Woody Allen movie, I mean, there’s kind of two perspectives there, right? The people who have awe and are curious, and more power to them. I’m that kind of person, too. And then the people who are like, “Hey, it’s not expanding in Brooklyn. Get back to work.” And I get that, too. I mean, we still need to eat, and we still need to do a lot of other things. But to those who have that awe gene or that curious gene, right, you know, once you look up and you know what’s out there, and you know the questions, you’re hooked.</p>
+<p>And, you know, the fact that somehow nature’s put out just enough of a popcorn trail for us to follow, who doesn’t wanna follow that popcorn trail and see where it leads?</p>
+<p><strong>STROGATZ:</strong> Oh. I love it. Thank you so much for talking to us. This has been really great. A real pleasure to have you on <em>The Joy of Why</em>.</p>
+<p><strong>RIESS:</strong> My pleasure. And thanks for, uh, asking me what bothered me back in that class 35 years ago.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>LEVIN:</strong> Hmm. One thing in particular about Adam is that he hasn’t stopped. It’s not as though he won his Nobel prize, and now he’s satisfied, and he leaves it to the next generation. And I have seen this with many Nobel prize winners, actually. They continue for the rest of their lives to really have that childlike curiosity. It’s unyielding. And you hear it. It’s infectious.</p>
+<p><strong>STROGATZ:</strong> It’s a very uplifting story. I think it’s an almost paradigm example of how science works, in the case of Adam where we have new data coming in that’s challenging some of what we used to think. I have to say in this discussion with Adam, I hadn’t realized how good this Lambda-CDM model really is.</p>
+<p><strong>LEVIN:</strong> It’s very resilient, and it’s very hard to change it. It’s not like you can get away with messing with it. If that’s what you mean by a strong model, exactly right.</p>
+<p><strong>STROGATZ:</strong> That’s what I mean. I mean, it’s rigid. He calls it, I think at one point, overdetermined.</p>
+<p><strong>LEVIN:</strong> And that’s also so impressive. So a lot of times people will say, “Well, you, you know nothing about the universe ’cause 95% of it is dark. Some of it’s in the dark matter, and some of it’s in the dark energy, and you don’t know what either of those things are.” But I think what people don’t appreciate, it’s only because of how precise the observations are.</p>
+<p>It’s only because we’re in an era of absolute precision cosmology that we’re able to look at the negative space and determine that actually we’re only 5%, you know? We’re just a little bit. We’re just a little residue. It’s amazing.</p>
+<p><strong>STROGATZ:</strong> It’s another humbling thought, right? So as one speck of residue to another, let me sign off and say thank you, Janna, for sharing your thoughts.</p>
+<p><strong>LEVIN:</strong> We’ll see you next time.</p>
+<p><strong>STROGATZ:</strong> Bye bye.</p>
+<p><strong>LEVIN:</strong> Bye.</p>
+<p>[<em>Music plays</em>]</p>
+<p><strong>LEVIN:</strong> If you’re enjoying <em>The Joy of Why</em> and you’re not already subscribed, hit the subscribe or follow button wherever you’re listening. You can also leave a review for the show. It helps people find this podcast. Find articles, newsletters, videos and more at quantamagazine.org.</p>
+<p><strong>STROGATZ:</strong> <em>The Joy of Why</em> is a podcast from <em>Quanta Magazine</em>, an editorially independent publication supported by the Simons Foundation. Funding decisions by the Simons Foundation have no influence on the selection of topics, guests, or other editorial decisions in this podcast or in <em>Quanta Magazine</em>.</p>
+<p><em>The Joy of Why</em> is produced by PRX Productions. The production team is Caitlin Faulds, Jade Abdul-Malik, Genevieve Sponsler, and Merritt Jacob. The executive producer of PRX Productions is Jocelyn Gonzales. Edwin Ochoa is our project manager.</p>
+<p>From <em>Quanta Magazine</em>, Simon Frantz and Samir Patel provided editorial guidance with support from Samuel Velasco, Simone Barr, and Michael Kanyongolo. Samir Patel is <em>Quanta’s</em> editor-in-chief.  The episode art is by Chanelle Nibbelink, and our logo is by Jaki King and Kristina Armitage.</p>
+<p>Special thanks to Garth Avery at the Cornell Broadcast Studio. I’m your host, Steve Strogatz. If you have any questions or comments, please email us at <a href="/cdn-cgi/l/email-protection">[email protected]</a>.</p>
+<p>[<em>Music fades</em>]</p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/how-fast-is-the-universe-really-expanding-20260723/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/how-fast-is-the-universe-really-expanding-20260723/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

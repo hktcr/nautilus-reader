@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Am I Left-Handed? | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>Why Am I Left-Handed?</h1>
+            <div class="meta">
+            Av Natalie Wolchover &nbsp;|&nbsp; Publicerad 2026-07-13
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: Q-2MZC</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p><img alt="Qualia: Essays that go where curiosity leads" src="../images/QUALIA-Banner-WITH-SPACER-1-1720x223_2.webp" /></p>
+<p>When I was first learning to write, my letters and words ran from right to left, reversed as if in a mirror. Being left-handed, I was imitating the hand strokes of my right-handed teachers instead of reversing their strokes to replicate the letters. I gradually got the hang of writing in the correct direction, but it still feels natural for me to mirror-write. I have a mirror-written childhood diary. Leonardo da Vinci, another lefty, did that too.</p>
+<p>Being left-handed is mostly no big deal. It <em>is</em> annoying how ink smudges under my hand. And I did once have to jump out of the way of a circular saw that I was holding backward; indeed, left-handers have more accidents while operating machinery. That aside, overall, I enjoy being left-handed. It grants entry into a smug little club, whose members — 10% of the human population — carry the secret knowledge that we are overrepresented among U.S. presidents, famous artists and musicians, and top athletes.</p>
+<p>But our difference hasn’t always been welcome. My 91-year-old Texan grandmother remembers starting out left-handed (she, too, has examples of mirror-writing from early childhood) before being forced to switch, a common practice in much of the world until about the 1970s. The deep-seated disdain for left hands runs through our very language. “Left” comes from Old English <em>lyft</em>, meaning weak, foolish, worthless, or useless, while “right” means correct or proper. In other languages, the word for “left” can also mean awkward, unlucky, clumsy, suspicious, or sinister.</p>
+<p><strong>I</strong>n philosophy, <strong>“qualia”</strong> refers to the subjective qualities of our experience: what it’s like for Alice to see blue or for Bob to feel delighted. Qualia are “the ways things seem to us,” as the late philosopher Daniel Dennett put it. In these essays, our columnists follow their curiosity, and explore important but not necessarily answerable scientific questions.</p>
+<p>In college, I decided to spend a semester in Ghana, unaware that left-handedness is still stigmatized across much of Africa. Upon arrival, I kept accidentally offending people by eating or paying with my left hand, because, traditionally, the left is reserved for dirty tasks and the right for social interactions. When my Twi language instructor, Professor <a href="https://www.ug.edu.gh/linguistics/people/agyekum">Kofi Agyekum</a>, demonstrated how ceremonial robes are draped around the left shoulder and arm, leaving a chief’s right arm bare and free, I asked what happens if the chief is left-handed. “Oh no, no, we don’t go in for that,” he said.</p>
+<p>Fortunately, our brains are plastic. My grandma developed beautiful handwriting as a right-hander. I easily changed my habits in Ghana. And as a kid I learned to use scissors right-handed. Today, given a choice, I don’t think I’d be able to cut with my left.</p>
+<p>That we can fully retrain our hands (and brains) reinforces how little it matters which hand naturally dominates. And that’s part of what makes the circumstance so mysterious. If it makes no material difference, then why am I left-handed? Or perhaps more pertinently: Why are 90% of people right-handed?</p>
+<p>An astronomical amount of research has gone into trying to find out. Geneticists, developmental biologists, behavioral and cognitive psychologists, neuroscientists, and evolutionary biologists all seek explanations. No one has put all the pieces together yet, but over the last few years, some major new clues have emerged.</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_5.webp" /></p>
+<p>First, some key facts. Crucially, left-handers aren’t mirror-image people. My heart is on the left where it belongs, and my liver is on the right. Whatever causes left-handedness isn’t related to situs inversus, a much rarer condition where a person’s internal organs mirror the usual arrangement.</p>
+<p>My brain might be more or less normal, too. Or maybe not. I probably process language in the left hemisphere of my brain the way almost all right-handers do, but there’s a 20% to 30% chance that I process language on the right or that I split the task between the sides. That’s one puzzle about left-handedness: As a group we have more diverse patterns of brain hemisphere specialization.</p>
+<p>Left-handedness does not seem to be purely genetic. Two left-handed parents have a left-handed child only 25% to 30% of the time. If one identical twin is left-handed, there’s only a 20% to 30% chance the other is too. This suggests a genetic component alongside some developmental randomness.</p>
+<p>Also, the rightward bias of human handedness is unique. Some other mammals can be right-footed or left-pawed, but there’s no statistical imbalance toward left or right across the species, except for our extreme 10-90 split.</p>
+<p>Is there a theory of left-handedness that fits all these facts?</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_6.webp" /></p>
+<p>Scientists (and I) long assumed that handedness must originate in the brain. After all, my left hand is more dexterous than my right because of the more richly interconnected neurons that map to it, on the right side of my motor cortex. It’s a reasonable guess that the causal arrow leads from brain to hand. In fact, remarkably, it seems to be just the opposite. Our hands sculpt asymmetry in our brains.</p>
+<p>Left-handed people carry the secret knowledge that we are overrepresented among U.S. presidents, famous artists and musicians, and top athletes.</p>
+<p>Ultrasound studies indicate that a fetus’s dominant hand is decided before its brain even connects to its limbs. We start flailing one arm around much more than the other starting about 10 weeks post-conception, as a fishlike fetus the size of a kidney bean. The movements are entirely reflexive, yet the arm that flails more predicts future handedness with a high level of accuracy.</p>
+<p>A <a href="https://elifesciences.org/articles/22784">2017 study in <em>eLife</em></a> reported evidence that this asymmetry originates in the spinal cord. The authors analyzed tissue from fetuses between 8 and 12 weeks post-conception (the window when arm-movement asymmetries become detectable) and found extreme differences in gene expression, or the building of new proteins based on genetic instructions, between the left and right sides of the spinal cord. This asymmetric expression could rig up motor circuitry, such as an abundance of neurons with long, signal-carrying fibers, that leads to more involuntary movement on one side than the other. Only after this does the brain get involved, as sensory feedback reaches the developing motor cortex, strengthening the neural representation of that limb.</p>
+<p>That could explain how handedness happens. However, it doesn’t account for why the right side wins nine times out of 10, or why there is the occasional veer to left.</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_7.webp" /></p>
+<p>Researchers in the 1970s talked about a mythical left-handedness gene, but none exists. The genetic connection is more diffuse. Recent large-scale studies have identified variants of about 40 genes that each slightly elevate the chances of left-handedness. The more of these gene variants a person has, the more likely they are to be a southpaw.</p>
+<p>The big surprise is that most are tubulin genes, which form some of the structural components of cells. “I don’t think I had this [gene family] on my list 10 years ago, to be honest,” said <a href="https://scholar.google.com/citations?user=E0IRSXQAAAAJ&amp;hl=de">Sebastian Ocklenburg</a>, a behavioral psychologist who co-authored both the 2017 <em>eLife</em> paper and <a href="https://www.cell.com/trends/genetics/fulltext/S0168-9525(25)00006-X">a 2025 review paper in <em>Trends in Genetics</em></a> on the tubulin findings. Some of these same genes are also linked to neurological disorders including schizophrenia, dyslexia, and autism. People with these conditions are more likely than the general population to be left-handed or mixed-handed.</p>
+<p>So what might be going on?</p>
+<p>Tubulin genes encode proteins that form “microtubules,” long filaments that act both as the skeletons of cells and as highway networks within them. It’s possible that some process involving microtubules unfolds in the neural progenitor cells that give rise to neurons of the spinal cord in a way that functionally “leans right.”</p>
+<p>We know that proteins attach to the surfaces of microtubules and move along them to transport molecular cargo from place to place inside cells, and thus that the structure of microtubules helps determine where many molecules accumulate within cells. So perhaps a certain signaling molecule preferentially accumulates more on one side of a neural progenitor cell than the other. When the cell divides, one daughter cell might then inherit slightly more of the signaling molecule than the other. Over many rounds of cell division, the imbalance could create a discrepancy between the left and right sides of the developing spinal cord. Feedback loops would amplify the difference, strengthening gene expression on one side of the spinal cord and suppressing it on the other. Two different modes of neural development result in an asymmetry — structurally favoring the right most of the time.</p>
+<p>The gene variants associated with left-handedness might cause proteins to lock onto the microtubules in a slightly different way, so that more of the relevant signaling molecules accumulate on the opposite side of a neural progenitor cell. Or perhaps the initial rightward bias is so weak (and further weakened by the gene variants) that sometimes chance fluctuations give the left side the upper hand.</p>
+<p>This fits the observation that handedness is somewhat heritable, heavily biased to the right, and also quite random. The details remain mysterious, but this provides at least a plausible origin story for handedness. And yet this is only one aspect of the causal explanation I’m looking for. Why would evolution build in a bias?</p>
+<p><img alt="" src="../images/QUALIA-Separator-2_8.webp" /></p>
+<p>A coin flip during fetal development lands on one side 90% of the time. This suggests that right-handedness is advantageous for some reason, but if so — and here I feel a slight sense of defensiveness kicking in — why are the left-leaning tubulin gene variants still around? <a href="https://www.reading.ac.uk/ecology/staff/chris-venditti">Chris Venditti</a>, an evolutionary biologist at the University of Reading, isn’t a lefty, but he points out that the proportion of left-handers has been consistent across time and continents. “Usually in evolution when that happens there’s a reason for it,” he told me.</p>
+<p>In <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3003771">an April 2026 study in <em>PLOS Biology</em></a>, Venditti and co-authors <a href="https://www.thomaspuschel.com/">Thomas Püschel</a> and <a href="https://www.anthro.ox.ac.uk/people/rachel-hurwitz">Rachel Hurwitz</a> of the University of Oxford looked at any and all data on the handedness preferences of primates, such as which hand a baboon uses to reach into a tube to retrieve food. They found that many individual primates have hand preferences, and that these preferences are stronger in species with bigger brains. But across species, left- and right-favoring individuals usually balance out. Only humans exhibit an extreme population-wide bias.</p>
+<p>If one identical twin is left-handed, there’s only a 20% to 30% chance the other is too.</p>
+<p>By analyzing evolutionary relationships among species, the authors concluded that our strong preference to use one hand over the other (before any species-wide rightward bias emerged) began roughly 7 million years ago, around the time our ancestors became bipedal and developed big brains. We had to stand upright before we could start deploying our hands asymmetrically, and it was more efficient for our growing brains to distribute key functions to different sides, only devoting resources for fine motor skills to one hand (while remaining plastic enough to wire up the other hand if necessary). But then, the authors estimate, sometime after the emergence of the genus <em>Homo</em>, 2.8 million years ago, evolution coded a preference for right over left.</p>
+<p>Of the various speculative theories for the emergence of this extreme preference, one that seems plausible to me points to our unprecedented capacity for violence.</p>
+<p>In 1996, psychologists proposed the “fighting” hypothesis, which posits that left-handers persist at low levels in the population because, so long as they are relatively rare, they have an advantage in hand-to-hand combat; their opponents are likely to be unfamiliar with left-handed attacks. It’s not a bad theory; indeed, the element of surprise probably accounts for lefties’ success in sports. But that doesn’t explain why right-handedness prevailed in the first place.</p>
+<p>Then, in 2023, psychologists <a href="https://www.mdpi.com/2073-8994/15/4/940">advanced the “modified fighting” hypothesis</a>, which says righties have a more basic advantage dictated by the position of the heart on the left side of the body. Since they wield weapons in their right hands, their most effective and potentially fatal blows can be delivered to the left side of their opponents, where the heart is. At the same time, right-handed attackers lead with their right — protecting the more vulnerable side. In 2026, the scientists behind the modified fighting hypothesis <a href="https://www.tandfonline.com/doi/epdf/10.1080/1357650X.2026.2638523?needAccess=true">supported their case</a> with a review of the literature on sharp-force injury. They found that people are stabbed significantly more often on their left sides, and these attacks are more often fatal.</p>
+<p>This would, the hypothesis goes, offer a general survival benefit to the gene variants that favor right-handedness, while still allowing just some left-handers to benefit from their surprise combat advantage, “particularly in fights that do not involve sharp weapons,” the authors noted.</p>
+<p>According to Venditti, this aligns well with his finding that right-handedness is unique to the genus <em>Homo</em>. “Humans are pretty violent creatures,” he said. “In most animals, fighting is not to kill your opponent. That’s not what anyone involved in the fight wants.”</p>
+<p>On the other hand, it’s unclear whether subtle combat dynamics could fully explain the consistency and persistence of the 10-90 left-right split.</p>
+<p>I can’t help wondering if the stigma of the kind I experienced in Ghana and my grandmother faced as a child played any role. Perhaps a small surplus of right-handers emerged early in hominin evolution because of the modified fighting hypothesis, and this fueled cultural norms that reinforced the genetic disparity over many thousands of years. Some scholars I spoke to dismissed the stigma as a recent phenomenon — a “flash in the pan” on evolutionary timescales, in Venditti’s estimation. But to me, the widespread linguistic association of “right” and “left” with good and bad suggests that the stigma may be older and more profound. Ocklenburg further pointed out that the socially mandated division of labor between hands still observed in Ghana and many other places today — right for eating, left for hygiene — would have offered a major survival benefit in helping people avoid spreading germs and contaminating food. “It’s seen as discrimination, but it’s actually a genius way to keep people from poisoning themselves and dying,” he said, noting that the taboo has surely saved countless lives.</p>
+<p>There may never be a certain, or simple, answer to the question of why I am left-handed. Or why humanity is so right-handed. Or why left-handed people are overrepresented in some fields and slightly more likely to have certain health conditions. But as I’ve followed the clues through developmental biology, genetics, evolution, and culture, I now see that our peculiar handedness is inextricable from our humanity.</p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://www.quantamagazine.org/why-am-i-left-handed-20260713/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://www.quantamagazine.org/why-am-i-left-handed-20260713/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>

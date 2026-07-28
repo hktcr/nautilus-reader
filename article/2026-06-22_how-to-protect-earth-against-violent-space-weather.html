@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Protect Earth Against Violent Space Weather | Nautilus Läsare</title>
+    <!-- Hämta snyggt seriff-typsnitt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222;
+            --link-color: #d1563e;
+            --meta-color: #666;
+            --toolbar-bg: rgba(252, 252, 252, 0.95);
+            --toolbar-border: #eaeaea;
+            --base-font-size: 18px; /* Standardstorlek */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e0e0e0;
+                --meta-color: #aaa;
+                --toolbar-bg: rgba(18, 18, 18, 0.95);
+                --toolbar-border: #333;
+            }
+        }
+        
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            font-size: var(--base-font-size);
+            transition: font-size 0.3s ease;
+        }
+
+        /* Toolbar för inställningar */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--toolbar-bg);
+            border-bottom: 1px solid var(--toolbar-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .toolbar a, .toolbar button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        
+        .toolbar a:hover, .toolbar button:hover {
+            color: var(--link-color);
+        }
+
+        .controls button {
+            font-size: 1.2rem;
+            padding: 0 5px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 740px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--toolbar-border);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.5em;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.5px;
+        }
+
+        .author-meta {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h2, .content h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        
+        .content h2 { font-size: 1.6em; }
+        .content h3 { font-size: 1.3em; }
+
+        .content p {
+            margin-bottom: 1.5em;
+        }
+        
+        /* Drop cap styling */
+        .content > p:first-of-type::first-letter {
+            font-size: 4em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--link-color);
+        }
+
+        .content a {
+            color: var(--link-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--link-color);
+        }
+        
+        .content a:hover {
+            border-bottom-style: solid;
+        }
+
+        .content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 2em auto;
+            border-radius: 4px;
+        }
+        
+        .content blockquote {
+            border-left: 4px solid var(--link-color);
+            margin: 2em 0 2em 1em;
+            padding-left: 1.5em;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--meta-color);
+        }
+    </style>
+
+    <script>
+        const PWD_KEY = 'nautilus_auth';
+        if (sessionStorage.getItem(PWD_KEY) !== '123456787654321') {
+            const pwd = prompt('Nautilus Läsare är låst. Ange lösenord:');
+            if (pwd === '123456787654321') {
+                sessionStorage.setItem(PWD_KEY, pwd);
+            } else {
+                document.documentElement.innerHTML = '<body style="background:#111; color:#fff; text-align:center; padding-top:20vh; font-family:sans-serif;"><h1>Åtkomst nekad</h1></body>';
+                throw new Error("Åtkomst nekad");
+            }
+        }
+    </script>
+    
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <a href="/">← Bibliotek</a>
+        </div>
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
+            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        </div>
+        <div class="toolbar-group controls">
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <button onclick="changeFontSize(-1)">A-</button>
+            <button onclick="changeFontSize(1)">A+</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <h1>How to Protect Earth Against Violent Space Weather</h1>
+            <div class="meta">
+            Av Kristen French &nbsp;|&nbsp; Publicerad 2026-06-22
+            
+            &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-D5VW</span>
+            
+        </div>
+        </header>
+
+        <article class="content">
+            <p>The weather in space can be pretty dramatic, and we’re not very good at forecasting it. A single solar flare can release <a href="https://arxiv.org/pdf/1807.01271">more</a> energy in a few minutes than human civilization has produced in a million years, but unlike a hurricane that you can see on a satellite, it’s largely invisible to us on Earth. Our planet has a force field that protects it from the sun’s moods called the magnetosphere, which is shaped by Earth’s magnetic field. The magnetosphere, however, is vulnerable to interference.  </p>
+<p>The largest solar storm in centuries, the 1859 Carrington Event, was caused by a massive explosion of plasma from the sun. The blast was the size of thousands of Earths and the charged particles it unleashed traveled at <a href="https://arxiv.org/pdf/1608.07702">millions of miles per hour</a>. Back then, it merely took out telegraph systems, but today, a Carrington-level event could cause two years of power outages, upend supply chains and financial markets, destroy satellites, and take down the Internet. More recently, in May of 2024, a smaller solar storm was powerful enough to hobble GPS systems that farmers use to guide tractors that plant and harvest crops, which ended up costing American farmers $500 million.</p>
+<p>Scientists have tried to invent solutions to these cosmic disruptions over the years to little avail. But recently Boston University researcher Brian Walsh hit upon a novel idea he’s calling the StormWall. Walsh has been studying space weather for decades, and not long ago, he was sitting outside watching clouds drift by. He thought, “People seed clouds, maybe we could seed something like that in space.” Walsh started doing a little bit of back-of-the-envelope math, and suddenly it seemed feasible that we could potentially use chemical seeding to build an Earth shield against space weather. He ran off and found a modeler to help him put his StormWall concept together. They published their <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025SW004846">results</a> in the journal <em>Space Weather.</em><br />
+I spoke with Walsh about the worst-case space-storm scenario, how a storm wall in space is similar to one on Earth, and why it would be very difficult for anyone to use his idea for nefarious purposes.</p>
+<p><strong>How is a space storm similar or different from a storm on Earth?</strong></p>
+<p>The list of similarities is shorter. A similarity is that space storms don’t occur all the time, and most of the time you’ve got nominal weather. But every now and then you get some large disturbance in space.  </p>
+<p>The differences are many. One difference is the way these space storms manifest is a lot more wide-impacting. The largest terrestrial storm on Earth, in the United States, in terms of its financial impact, was Hurricane Katrina. That cost close to $60 billion, and mostly impacted areas in the southern and southeastern United States around New Orleans and Louisiana.  </p>
+<p>On Earth, people model the 100-year storm, a storm of a size that would come once every 100 years, but it only impacts a small spatial region. In space, a 100-year storm is modeled to impact everyone across the planet, because space is interconnected and charged particles can zip around the planet in 20 minutes or so. The cost estimate for that is about a hundred times more than the cost of something like Katrina. It’s closer to $2 to $3 trillion. And the problem is, it’s just widespread. Lots of satellites zip around Earth very quickly, all of them would be impacted if there was a large 100-year geomagnetic storm.  </p>
+<p>Our ability to predict them is far worse in space because we have a lot fewer sensors at this point. On Earth, lots of people have temperature sensors. Every airport has a weather station on it. Some people have their own weather stations at their homes that they contribute to. But in space, we have very few probes to measure things and plug into a global model, and we’re not very good at it right now. Prediction is really hard.</p>
+<p><strong>That was my next question: How good are we at predicting these cosmic upsets?</strong></p>
+<p>Not so good. With a space storm, it’s a little bit different in that the majority of the energy comes from the sun. And so, if everyone’s looking at the sun, you can predict to some extent when something’s going to happen. If you look at the sun, you see a big explosion. Well, we roughly know how long it takes to go from the sun to the Earth. And people start making predictions of one, how big and how nasty it’ll be, and two, when it’s going to get here. It’s usually a couple of days, but right now it’s plus or minus eight hours. That’s about as good as we can do. There was supposed to be a big one last week and nothing happened. It’s hard to know if you see an explosion on the sun, is it going to come and hit Earth or is it going to miss us? Because on the sun, the storm is big and bright, but right after it leaves the sun’s surface, it becomes almost invisible to us.</p>
+<p><strong>Do we know after the fact why a particular storm might’ve missed us? Like the one that missed us last week?</strong></p>
+<p>Not usually. You’d need a probe to measure where it went. And we don’t have many probes except for things that orbit Earth right now. If it missed us by a lot, you wouldn’t know. Or maybe it just fizzled out and never made it, we’re not going to know.</p>
+<p><strong>Read more: “<a href="https://nautil.us/new-eyes-on-space-weather-1238886">New Eyes on Space Weather</a>”</strong></p>
+<p><strong>What’s the worst-case space-storm scenario?</strong></p>
+<p>It’s hard to know exactly. The worst case is a storm that people study a lot called the Carrington Storm. This happened a little over 100 years ago, and it’s the biggest one that we’ve measured, so that’s the biggest one we think can happen. We’d expect it would knock out a large number of satellites, and beyond that, some of the bigger impacts that we think would occur is that it would drive currents into our power grid. It would knock out a lot of our power grid over very wide regions.</p>
+<p>Those are really hard to get back online. I’ve worked with people in FEMA before about how to do this, and their response is usually that they’re good at doing things when the disaster is spatially located to the distance of a tank of gas. You could imagine if a city lost power, you could drive a truck with supplies of water, of medicine, to deliver things and get back out. But once the area where your power is out starts to become greater than what you could transport with a tank of gas, it gets difficult to bring supplies in because you wouldn’t be able to refuel. These large geomagnetic storms that can impact all local times around the planet, that could be a really big impact.</p>
+<p><strong>Your idea for defending against space storms was inspired by natural phenomena. Can you tell me about your thought process?</strong></p>
+<p>We’re going to dive into the physics a little bit here. We live in this magnetic bubble called the magnetosphere, and most of the time, most people don’t think about it at all. But if you were a sailor a couple hundred years ago, you’d be pretty aware of that because it’s what tells your compass to go in what direction. And if you’re outside our magnetic bubble, outside the magnetosphere, your compass will go any direction because there’s no uniform magnetic field. So this is part one.</p>
+<p>Part two is, we have plasma inside this magnetic bubble, and plasma is neutral. In this room I’ve got neutral air, but if you get higher and higher, the light from the sun gets more and more intense, and it breaks up those particles. They become charged positively and negatively, and they follow certain drift paths. They follow these highways in space based upon magnetic fields. At times, parts of our atmosphere get ripped off and pulled and pushed all the way to the edge of our magnetic bubble. When this happens, it weakens Earth’s magnetic field slightly, and that weakening is what scientists call “geo effective.”</p>
+<p>If there’s a big storm coming from the sun, maybe it’s carrying lots and lots of energy, but if some of this plasma, some of this material got ripped off the atmosphere and pressed up against our magnetic field, even if it has lots of energy, not all of it gets in— maybe only 10 percent gets in. We’ve seen that happen before naturally, and that’s pretty good. But 10 percent can still be catastrophic for how we operate and how our satellites operate here on Earth. What we want is to get it down to 1 percent. And nature has never done that. We’ve seen nature bring it down a couple of notches, but we’ve never seen nature take it down another factor of 10.</p>
+<p>But we did see that if you get mass from our atmosphere and push it up there against the edge of our magnetic field, it can impact the energy transfer. If it can do it a little bit, maybe we could help it. We could encourage it to do it a little bit more.</p>
+<p><strong>You called your idea StormWall. What does it have in common with an actual storm wall?</strong></p>
+<p>It’s amazing how well this works. Let’s go back in time. There’s some debate about which was the first, but one of the very first storm walls that was built was in Egypt. The Nile was flooding. People didn’t like it because it would come and damage their villages. They started building up with rocks and sand and things. That energy, instead of flooding the river, goes around. That’s basically what we’re doing. We’re moving mass from Earth to a place where it can get to the edge of our magnetic field. And when this energy comes from the sun rather than entering, it goes around and it just gets swept down too.</p>
+<p>That part of the analogy is good. Where we start to deviate from this terrestrial-based analogy is what happens next. On Earth, if you put this big pile of sand around your city, it could be there for a while. It could be there for years. That’s not going to happen in this case. You get to use it once; then it leaves the system, and it’s a self-cleaning system. That’s both good and bad. It’s good because maybe you’re worried about this material building up. If you look over at the geoengineering communities, there’s a lot of people who worry about this. Some people say the climate is changing. One solution could be to seed the atmosphere with certain chemicals, and that could change how UV light comes through. On the other side of it, people say, “No, don’t do that because there’s unintended consequences. This material could come down in the atmosphere. It could impact airplanes. It could impact my air quality.”</p>
+<p>But that’s not going to happen with the storm wall in space because it leaves the system in like 6 hours. It’s on these natural drift paths, these natural highways of plasma in space. It just goes away. While it’s challenging in that you’d have to keep replenishing it if you wanted to keep using it, it doesn’t have the risk of sticking around and causing unintended consequences here on earth.</p>
+<p><strong>There are no potential unintended consequences?</strong></p>
+<p>Of course, scientists are always reluctant to say never, which can be a weakness, so I’m going to skirt around that question of never. But based on the simulations, we haven’t seen any potential for unintended consequences. We looked at the impact on satellite drag, but didn’t see an impact there. We looked at the precipitation of it down into our atmosphere. We haven’t seen an impact there. We looked at causing waves that would enhance our radiation belts that could hurt satellites. We didn’t see an impact there either. So the places you would look to cause harm in space, we’ve checked all those and it doesn’t cause harm.</p>
+<p><strong>You say you might be the first to propose geo-engineering space. Why?</strong></p>
+<p>Space is really big. And for lack of a better vocabulary, there’s a lot of space in space. The sun is vast. The energy from the sun is tremendous. How could you ever think of stopping it? But if you do a little bit of math—and we started with some back-of-the-envelope calculations—and if we squint it just right, it looked like we might be able to. Then we ran off and did some serious math and some real numerical simulations. And it looks really great. It will take a lot of material. I’m sitting near a window across the street from a large road, and sometimes I see gas tankers driving by, and it would take about 15 of those carrying material, to put it into perspective. Looking at our current launch capabilities, we think we can do it. One country could do it, one company could do it.</p>
+<p>Right now, there are companies building very expensive data centers in space. It’s an interesting time in that up until now, the largest stakeholders in space were governments. And it’s turning different now where some of the stakeholders that have the largest assets in space are commercial companies. I like to think things that conserve the common good are things that should be supported by countries, but that’s just a philosophical view. There’s no rule that says that that happens. A company could implement this, certainly.</p>
+<p><strong>Are there any risks that your SpaceWall could be used for harm?</strong></p>
+<p>Oftentimes physicists come up with ideas that open our physical understanding, but once the physics is described, it’s hard to control what it gets used for. I don’t want to put this on the same level as the Manhattan Project, but I know a lot of the physicists that worked on that when they were doing things, they got excited about basic particle physics. And once they started seeing the development and the destruction, they were appalled at what they had unleashed. We had thought about that a little bit with StormWall: What could go wrong, and what penalties could be felt?</p>
+<p>One of the conversations I had about this was with somebody who worked at a venture capital firm. He got very excited. He said, “Great, we’ll build this, and we’ll charge a subscription and only the countries that pay the subscription can get protected.” There was a lot of excitement at first, and then I tempered it a little bit, and there was a lot less excitement. Because there’s no way to limit it to one country. If it protects Earth, it protects the planet Earth. It doesn’t protect one sliver of it. I don’t think there’s a way to do that because of the way space works.</p>
+<p>That’s a beautiful thing about this solution as well, at least as it currently sits. I can’t think of a way that somebody could use it to protect somebody and not others. If it helps, it helps everyone. <img alt="" src="../images/nautilus-favicon-14_1346.png" /></p>
+<p><em>Enjoying</em> <a href="https://nautil.us/">Nautilus</a><em>? Subscribe to our free</em> <a href="https://nautil.us/newsletter/?_sp=c43011db-6fcf-42f2-a38c-e033b87a4a1d.1759265717430"><em>newsletter</em></a>.</p>
+<p><em>Lead image: NASA's Scientific Visualization Studio / Wikimedia Commons</em></p>
+
+            
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <section class="source-list" id="kallforteckning">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+                <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
+                    <li>Originalartikel: <a href="https://nautil.us/how-to-protect-earth-against-violent-space-weather-1282146/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://nautil.us/how-to-protect-earth-against-violent-space-weather-1282146/</a></li>
+                </ul>
+            </section>
+            
+        </article>
+
+        <!-- Bildgalleri -->
+        <section class="gallery-section" id="gallery-section" style="display:none;">
+            <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </section>
+    </main>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(event, -1)">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(event, 1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <style>
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .gallery-thumb:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            margin: 0;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover { opacity: 1; }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 15px;
+            border-radius: 8px;
+            opacity: 0.6;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-prev { left: 15px; }
+        .lightbox-next { right: 15px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+    </style>
+
+    <script>
+        const MIN_SIZE = 14;
+        const MAX_SIZE = 40;
+        let currentSize = localStorage.getItem('nautilusFontSize') 
+            ? parseInt(localStorage.getItem('nautilusFontSize')) 
+            : 18;
+
+        function applyFontSize() {
+            document.body.style.setProperty('--base-font-size', currentSize + 'px');
+            localStorage.setItem('nautilusFontSize', currentSize);
+        }
+
+        function changeFontSize(step) {
+            currentSize += step * 2;
+            if (currentSize < MIN_SIZE) currentSize = MIN_SIZE;
+            if (currentSize > MAX_SIZE) currentSize = MAX_SIZE;
+            applyFontSize();
+        }
+
+        function resetFontSize() {
+            currentSize = 18;
+            applyFontSize();
+        }
+
+        // Apply on load
+        applyFontSize();
+
+        // --- Lightbox & Gallery ---
+        let galleryImages = [];
+        let currentLightboxIndex = 0;
+
+        function buildGallery() {
+            const contentImgs = document.querySelectorAll('.content img');
+            if (contentImgs.length === 0) return;
+
+            const gallerySection = document.getElementById('gallery-section');
+            const galleryGrid = document.getElementById('gallery-grid');
+            gallerySection.style.display = 'block';
+
+            contentImgs.forEach((img, i) => {
+                galleryImages.push(img.src);
+
+                const thumb = document.createElement('div');
+                thumb.className = 'gallery-thumb';
+                thumb.onclick = () => openLightbox(i);
+
+                const thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumbImg.alt = img.alt || 'Bild ' + (i + 1);
+                thumbImg.loading = 'lazy';
+
+                thumb.appendChild(thumbImg);
+                galleryGrid.appendChild(thumb);
+
+                // Also make inline images clickable
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => {
+                    e.preventDefault();
+                    openLightbox(i);
+                };
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            
+            img.src = galleryImages[index];
+            counter.textContent = (index + 1) + ' / ' + galleryImages.length;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateLightbox(e, direction) {
+            e.stopPropagation();
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+
+            const img = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            img.src = galleryImages[currentLightboxIndex];
+            counter.textContent = (currentLightboxIndex + 1) + ' / ' + galleryImages.length;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+            if (e.key === 'ArrowRight') navigateLightbox(e, 1);
+            if (e.key === 'ArrowLeft') navigateLightbox(e, -1);
+        });
+
+        // Build gallery on page load
+        document.addEventListener('DOMContentLoaded', buildGallery);
+    </script>
+</body>
+</html>
