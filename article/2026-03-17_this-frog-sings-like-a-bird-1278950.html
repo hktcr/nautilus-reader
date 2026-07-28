@@ -192,14 +192,14 @@
         <div class="toolbar-group">
             <a href="/">← Bibliotek</a>
         </div>
-        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem;">
-            <input type="text" id="articleSearch" placeholder="Sök i biblioteket..." style="padding: 0.3rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;" onkeypress="if(event.key === 'Enter' && this.value.trim() !== '') window.location.href='../index.html?q=' + encodeURIComponent(this.value.trim())">
+        <div class="toolbar-center" style="flex: 1; display: flex; justify-content: center; padding: 0 1rem; position: relative;">
+            <input type="text" id="articleSearch" placeholder="Search in article..." style="padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid var(--meta-color); background: var(--bg-color); color: var(--text-color); font-family: var(--font-ui); font-size: 0.85rem; width: 100%; max-width: 400px; outline: none; transition: border-color 0.2s;">
         </div>
         <div class="toolbar-group controls">
-            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXTSTORLEK</span>
+            <span style="font-size: 0.8rem; color: var(--meta-color);">TEXT SIZE</span>
             <button onclick="changeFontSize(-1)">A-</button>
             <button onclick="changeFontSize(1)">A+</button>
-            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Återställ</button>
+            <button onclick="resetFontSize()" style="font-size: 0.9rem;">Reset</button>
         </div>
     </div>
 
@@ -207,7 +207,7 @@
         <header>
             <h1>This Frog Sings Like a Bird</h1>
             <div class="meta">
-            Av Nautilus &nbsp;|&nbsp; Publicerad 2026-03-17
+            By Nautilus &nbsp;|&nbsp; Published 2026-03-17
             
             &nbsp;|&nbsp; <span style="font-family: monospace; opacity: 0.7;">ID: N-FE3D</span>
             
@@ -228,10 +228,10 @@
 
             
             <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
-            <section class="source-list" id="kallforteckning">
-                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">Källförteckning</h3>
+            <section class="source-list" id="references">
+                <h3 style="font-family: var(--font-ui); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--meta-color); margin-bottom: 1rem;">References</h3>
                 <ul style="list-style-type: none; padding: 0; font-size: 0.9rem;">
-                    <li>Originalartikel: <a href="https://nautil.us/this-frog-sings-like-a-bird-1278950/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://nautil.us/this-frog-sings-like-a-bird-1278950/</a></li>
+                    <li>Original Article: <a href="https://nautil.us/this-frog-sings-like-a-bird-1278950/" target="_blank" style="color: var(--accent-color); text-decoration: none;">https://nautil.us/this-frog-sings-like-a-bird-1278950/</a></li>
                 </ul>
             </section>
             
@@ -240,7 +240,7 @@
         <!-- Bildgalleri -->
         <section class="gallery-section" id="gallery-section" style="display:none;">
             <hr style="border: none; border-top: 1px solid var(--toolbar-border); margin: 3rem 0 2rem;">
-            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Bildgalleri</h2>
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; color: var(--meta-color); margin-bottom: 1.5rem;">📷 Image Gallery</h2>
             <div class="gallery-grid" id="gallery-grid"></div>
         </section>
     </main>
@@ -360,9 +360,209 @@
             font-size: 0.85rem;
             letter-spacing: 2px;
         }
-    </style>
 
+        /* Search Popup Styles */
+        .search-popup {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 400px;
+            max-height: 500px;
+            background: var(--bg-color);
+            border: 1px solid var(--toolbar-border);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            overflow-y: auto;
+            z-index: 2000;
+            text-align: left;
+        }
+        @media (max-width: 640px) {
+            .search-popup {
+                width: 90vw;
+                right: -5vw;
+            }
+        }
+        .search-popup.active {
+            display: block;
+        }
+        .search-hit {
+            padding: 1rem;
+            border-bottom: 1px solid var(--toolbar-border);
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-family: var(--font-body);
+        }
+        .search-hit:last-child {
+            border-bottom: none;
+        }
+        .search-hit:hover {
+            background: rgba(128,128,128,0.05);
+        }
+        .search-highlight {
+            background: rgba(255, 200, 0, 0.4);
+            color: inherit;
+            font-weight: 600;
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .search-highlight {
+                background: rgba(255, 200, 0, 0.3);
+            }
+        }
+        .active-highlight {
+            background: rgba(255, 140, 0, 0.6) !important;
+            animation: pulse-bg 2s infinite;
+        }
+        @keyframes pulse-bg {
+            0% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(255, 140, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 140, 0, 0); }
+        }
+    </style>
+    
     <script>
+        // Article local search functionality
+        let originalContentHTML = '';
+        
+        function initSearch() {
+            const contentElement = document.querySelector('.content');
+            if(!contentElement) return;
+            
+            originalContentHTML = contentElement.innerHTML;
+            const searchInput = document.getElementById('articleSearch');
+            
+            const popup = document.createElement('div');
+            popup.className = 'search-popup';
+            popup.id = 'searchPopup';
+            document.querySelector('.toolbar-center').appendChild(popup);
+
+            let searchTimeout;
+            
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const term = e.target.value.trim().toLowerCase();
+                    if (term.length < 3) {
+                        popup.classList.remove('active');
+                        contentElement.innerHTML = originalContentHTML; 
+                        return;
+                    }
+                    performSearch(term, popup, contentElement);
+                }, 300);
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.toolbar-center')) {
+                    popup.classList.remove('active');
+                }
+            });
+            
+            searchInput.addEventListener('focus', () => {
+                if (searchInput.value.trim().length >= 3 && popup.innerHTML !== '') {
+                    popup.classList.add('active');
+                }
+            });
+        }
+
+        function performSearch(term, popup, contentElement) {
+            contentElement.innerHTML = originalContentHTML;
+            
+            const walker = document.createTreeWalker(contentElement, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+            
+            let hitCount = 0;
+            const nodesToReplace = [];
+
+            while (node = walker.nextNode()) {
+                const parent = node.parentNode;
+                if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE') continue;
+                
+                const text = node.nodeValue;
+                if (regex.test(text)) {
+                    nodesToReplace.push({node, text});
+                }
+            }
+            
+            popup.innerHTML = '';
+            
+            if (nodesToReplace.length === 0) {
+                popup.innerHTML = '<div style="padding: 1rem; color: var(--meta-color); font-size: 0.9rem; text-align: center;">No matches found</div>';
+                popup.classList.add('active');
+                return;
+            }
+
+            const header = document.createElement('div');
+            header.style.padding = '0.8rem 1rem';
+            header.style.borderBottom = '1px solid var(--toolbar-border)';
+            header.style.fontSize = '0.8rem';
+            header.style.color = 'var(--meta-color)';
+            header.style.fontFamily = 'var(--font-ui)';
+            header.style.fontWeight = '600';
+            
+            let totalMatches = 0;
+            const hitElements = [];
+
+            nodesToReplace.forEach(({node, text}) => {
+                const matches = [...text.matchAll(regex)];
+                totalMatches += matches.length;
+                
+                let localHitCount = 0;
+                const parentSpan = document.createElement('span');
+                parentSpan.innerHTML = text.replace(regex, match => {
+                    const id = `hit-${hitCount + localHitCount}`;
+                    localHitCount++;
+                    return `<mark class="search-highlight" id="${id}">${match}</mark>`;
+                });
+                node.parentNode.replaceChild(parentSpan, node);
+                
+                let localIndex = 0;
+                matches.forEach(match => {
+                    const index = match.index;
+                    let start = Math.max(0, index - 60);
+                    let end = Math.min(text.length, index + term.length + 60);
+                    
+                    let prefix = text.substring(start, index);
+                    let matchedText = text.substring(index, index + term.length);
+                    let suffix = text.substring(index + term.length, end);
+                    
+                    if (start > 0) prefix = '...' + prefix;
+                    if (end < text.length) suffix = suffix + '...';
+                    
+                    const hitDiv = document.createElement('div');
+                    hitDiv.className = 'search-hit';
+                    hitDiv.innerHTML = `${prefix}<mark class="search-highlight">${matchedText}</mark>${suffix}`;
+                    
+                    const currentHitId = `hit-${hitCount + localIndex}`;
+                    localIndex++;
+                    
+                    hitDiv.addEventListener('click', () => {
+                        const targetEl = document.getElementById(currentHitId);
+                        if (targetEl) {
+                            document.querySelectorAll('.active-highlight').forEach(el => el.classList.remove('active-highlight'));
+                            targetEl.classList.add('active-highlight');
+                            const y = targetEl.getBoundingClientRect().top + window.scrollY - 150;
+                            window.scrollTo({top: y, behavior: 'smooth'});
+                            popup.classList.remove('active');
+                        }
+                    });
+                    
+                    hitElements.push(hitDiv);
+                });
+                hitCount += localHitCount;
+            });
+            
+            header.textContent = `${totalMatches} match${totalMatches !== 1 ? 'es' : ''} found`;
+            popup.appendChild(header);
+            hitElements.forEach(el => popup.appendChild(el));
+            
+            popup.classList.add('active');
+        }
+
         const MIN_SIZE = 14;
         const MAX_SIZE = 40;
         let currentSize = localStorage.getItem('nautilusFontSize') 
